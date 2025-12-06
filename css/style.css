@@ -1,4 +1,4 @@
-/* SANATAN OS - Performance Optimized */
+/* SANATAN OS - Ultra-Fast Performance */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
 * {
@@ -8,12 +8,10 @@
 }
 
 body {
-    /* Solid color is faster than gradient */
     background: #0d0b1e;
     min-height: 100vh;
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Poppins', -apple-system, sans-serif;
     color: #fff;
-    /* Prevent overscroll bounce */
     overscroll-behavior: none;
 }
 
@@ -28,7 +26,7 @@ body {
     padding-bottom: 80px;
 }
 
-/* BASE TILE - GPU Accelerated */
+/* TILE - Ultra Fast Animation */
 .tile {
     height: 110px;
     position: relative;
@@ -39,88 +37,77 @@ body {
     cursor: pointer;
     text-decoration: none;
     color: inherit;
-
-    /* GPU ACCELERATION */
     transform: translateZ(0);
-    will-change: transform, opacity;
-    backface-visibility: hidden;
 
-    /* ENTRANCE ANIMATION - Pure CSS */
+    /* ULTRA FAST: 150ms fade only */
     opacity: 0;
-    animation: tileEnter 0.25s ease-out forwards;
+    animation: fadeIn 0.15s ease-out forwards;
 }
 
-/* Staggered entrance delays */
+/* 20ms stagger - very snappy */
 .grid-container>*:nth-child(1) {
     animation-delay: 0ms;
 }
 
 .grid-container>*:nth-child(2) {
-    animation-delay: 30ms;
+    animation-delay: 20ms;
 }
 
 .grid-container>*:nth-child(3) {
-    animation-delay: 60ms;
+    animation-delay: 40ms;
 }
 
 .grid-container>*:nth-child(4) {
-    animation-delay: 90ms;
+    animation-delay: 60ms;
 }
 
 .grid-container>*:nth-child(5) {
-    animation-delay: 120ms;
+    animation-delay: 80ms;
 }
 
 .grid-container>*:nth-child(6) {
-    animation-delay: 150ms;
+    animation-delay: 100ms;
 }
 
 .grid-container>*:nth-child(7) {
-    animation-delay: 180ms;
+    animation-delay: 120ms;
 }
 
 .grid-container>*:nth-child(8) {
-    animation-delay: 210ms;
+    animation-delay: 140ms;
 }
 
 .grid-container>*:nth-child(9) {
-    animation-delay: 240ms;
+    animation-delay: 160ms;
 }
 
 .grid-container>*:nth-child(10) {
-    animation-delay: 270ms;
+    animation-delay: 180ms;
 }
 
 .grid-container>*:nth-child(11) {
-    animation-delay: 300ms;
+    animation-delay: 200ms;
 }
 
 .grid-container>*:nth-child(12) {
-    animation-delay: 330ms;
+    animation-delay: 220ms;
 }
 
-@keyframes tileEnter {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.95) translateZ(0);
-    }
-
+/* Simple fade - fastest possible */
+@keyframes fadeIn {
     to {
         opacity: 1;
-        transform: translateY(0) scale(1) translateZ(0);
     }
 }
 
-/* TAP EFFECT - Hardware accelerated */
+/* TAP */
 .tile:active {
     transform: scale(0.96) translateZ(0);
-    transition: transform 0.1s ease;
 }
 
-/* TILE SIZES */
+/* SIZES */
 .tile-wide {
     grid-column: span 2;
-    height: 110px;
 }
 
 .tile-large {
@@ -196,7 +183,7 @@ body {
     border-radius: 2px;
 }
 
-/* COLORS - Solid, no gradients for performance */
+/* COLORS - Solid */
 .saffron {
     background: #f57c00;
 }
@@ -229,7 +216,7 @@ body {
     background: rgba(40, 35, 60, 0.95);
 }
 
-/* LIVE TILE - GPU Accelerated */
+/* LIVE TILE */
 .live-tile {
     perspective: 1000px;
 }
@@ -238,42 +225,27 @@ body {
     position: absolute;
     inset: 0;
     backface-visibility: hidden;
-    transform: translateZ(0);
-    will-change: transform;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: transform 0.4s ease;
 }
 
 .face-front {
-    transform: rotateX(0deg) translateZ(0);
-    transition: transform 0.5s ease;
+    transform: rotateX(0);
 }
 
 .face-back {
-    transform: rotateX(180deg) translateZ(0);
-    transition: transform 0.5s ease;
+    transform: rotateX(180deg);
 }
 
 .live-tile.flipped .face-front {
-    transform: rotateX(-180deg) translateZ(0);
+    transform: rotateX(-180deg);
 }
 
 .live-tile.flipped .face-back {
-    transform: rotateX(0deg) translateZ(0);
-}
-
-/* REDUCE MOTION - Accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .tile {
-        animation: none;
-        opacity: 1;
-    }
-
-    .tile-face {
-        transition: none;
-    }
+    transform: rotateX(0);
 }
 
 /* RESPONSIVE */
@@ -294,5 +266,13 @@ body {
 
     .tile i {
         font-size: 22px;
+    }
+}
+
+/* NO ANIMATION - for slow devices */
+@media (prefers-reduced-motion: reduce) {
+    .tile {
+        animation: none;
+        opacity: 1;
     }
 }
