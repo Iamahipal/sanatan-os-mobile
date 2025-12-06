@@ -6,6 +6,7 @@
     --glass-bg: rgba(255, 255, 255, 0.08);
     --glass-border: rgba(255, 255, 255, 0.15);
     --deity-color: #ffd700;
+    --safe-top: env(safe-area-inset-top, 0px);
 }
 
 * {
@@ -50,12 +51,14 @@ body.page-enter {
     position: relative;
 }
 
-/* Header */
+/* Header - Safe Area for Notch */
 .app-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     padding: 12px 16px;
+    padding-top: max(20px, var(--safe-top));
+    min-height: 70px;
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -76,6 +79,7 @@ body.page-enter {
     transition: all 0.2s;
     cursor: pointer;
     padding: 8px;
+    margin-bottom: 4px;
 }
 
 .back-btn:hover,
@@ -89,17 +93,19 @@ body.page-enter {
     gap: 4px;
 }
 
+/* Deity Selector - Centered, Larger */
 .deity-selector {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 25px;
-    padding: 8px 20px;
+    padding: 10px 24px;
     color: var(--accent-gold);
     font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     cursor: pointer;
     outline: none;
     transition: all 0.3s;
+    margin-bottom: 4px;
 }
 
 .deity-selector:focus {
@@ -110,6 +116,7 @@ body.page-enter {
 .deity-selector option {
     background: #1a1a3e;
     color: var(--text-color);
+    font-size: 16px;
 }
 
 .hidden {
@@ -119,7 +126,7 @@ body.page-enter {
 /* Level Badge */
 .level-badge {
     position: absolute;
-    top: 70px;
+    top: calc(70px + max(10px, var(--safe-top)));
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -143,60 +150,52 @@ body.page-enter {
     letter-spacing: 1px;
 }
 
-/* Main Canvas - Grid Slots */
+/* Main Canvas - Container for floating names */
 .japa-canvas {
     flex: 1;
     position: relative;
     cursor: pointer;
     overflow: hidden;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 5px;
-    padding: 10px;
-    padding-top: 50px;
+    margin-top: 40px;
+    /* Space for level badge */
+    touch-action: manipulation;
+    /* Prevents zoom on double-tap */
 }
 
-.grid-slot {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 50px;
-}
-
-/* Floating Mantra */
+/* Floating Mantra - Positioned absolutely by JS */
 .floating-mantra {
+    position: absolute;
     font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 20px;
     color: var(--deity-color);
     pointer-events: none;
-    animation: fadeGlow 4s ease-out forwards;
+    animation: fadeGlow 3.5s ease-out forwards;
     white-space: nowrap;
     text-shadow:
         0 0 8px currentColor,
         0 0 16px currentColor,
         0 0 32px currentColor;
+    transition: opacity 0.15s;
 }
 
 @keyframes fadeGlow {
     0% {
         opacity: 0;
-        transform: scale(0.7);
+        transform: scale(0.6) translateY(0);
     }
 
-    10% {
+    8% {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) translateY(0);
     }
 
-    80% {
-        opacity: 0.9;
-        transform: translateY(-10px);
+    85% {
+        opacity: 0.85;
+        transform: scale(1) translateY(-15px);
     }
 
     100% {
         opacity: 0;
-        transform: translateY(-20px) scale(0.9);
+        transform: scale(0.9) translateY(-25px);
     }
 }
 
@@ -243,7 +242,7 @@ body.page-enter {
     align-items: center;
     gap: 10px;
     padding: 30px 50px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     border: 2px solid var(--accent-gold);
     border-radius: 20px;
     backdrop-filter: blur(10px);
@@ -350,10 +349,6 @@ body.page-enter {
         3px 3px 6px rgba(0, 0, 0, 0.6),
         inset -3px -3px 6px rgba(0, 0, 0, 0.4),
         inset 2px 2px 4px rgba(255, 255, 255, 0.15);
-    /* Subtle texture lines */
-    background-image:
-        radial-gradient(circle at 25% 25%, #d4a064 0%, #8b5a2b 40%, #5d4037 100%),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 0, 0, 0.1) 2px, rgba(0, 0, 0, 0.1) 4px);
 }
 
 .bead.active {
@@ -512,19 +507,21 @@ body.page-enter {
 
 .toggle-btn {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 10px;
     color: var(--text-color);
     cursor: pointer;
     transition: all 0.2s;
+    font-size: 1rem;
 }
 
 .toggle-btn.active {
     background: var(--accent-gold);
     color: #000;
     border-color: var(--accent-gold);
+    font-weight: 500;
 }
 
 .danger-btn {
@@ -536,6 +533,7 @@ body.page-enter {
     color: #e74c3c;
     cursor: pointer;
     transition: all 0.2s;
+    font-size: 1rem;
 }
 
 .danger-btn:hover {

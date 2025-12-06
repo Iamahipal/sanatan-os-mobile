@@ -33,43 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const tapSound = document.getElementById('tap-sound');
     const bellSound = document.getElementById('bell-sound');
 
-    // === Deity Data (7 Deities) ===
+    // === Deity Data ===
     const DEITIES = {
-        radha: {
-            text_hi: 'श्री राधा',
-            text_en: 'Shree Radha',
-            color: '#ffd700'
-        },
-        krishna: {
-            text_hi: 'श्री कृष्ण',
-            text_en: 'Shree Krishna',
-            color: '#00e5ff'
-        },
-        ram: {
-            text_hi: 'श्री राम',
-            text_en: 'Shree Ram',
-            color: '#ff9800'
-        },
-        shiva: {
-            text_hi: 'ॐ नमः शिवाय',
-            text_en: 'Om Namah Shivaya',
-            color: '#ffffff'
-        },
-        hanuman: {
-            text_hi: 'ॐ हनुमते नमः',
-            text_en: 'Om Hanumate Namah',
-            color: '#ff5722'
-        },
-        ganesha: {
-            text_hi: 'ॐ गं गणपतये नमः',
-            text_en: 'Om Gan Ganapataye Namah',
-            color: '#ffeb3b'
-        },
-        durga: {
-            text_hi: 'जय माता दी',
-            text_en: 'Jai Mata Di',
-            color: '#e91e63'
-        }
+        radha: { text_hi: 'श्री राधा', text_en: 'Shree Radha', color: '#ffd700' },
+        krishna: { text_hi: 'श्री कृष्ण', text_en: 'Shree Krishna', color: '#00e5ff' },
+        ram: { text_hi: 'श्री राम', text_en: 'Shree Ram', color: '#ff9800' },
+        shiva: { text_hi: 'ॐ नमः शिवाय', text_en: 'Om Namah Shivaya', color: '#ffffff' },
+        hanuman: { text_hi: 'ॐ हनुमते नमः', text_en: 'Om Hanumate Namah', color: '#ff5722' },
+        ganesha: { text_hi: 'ॐ गं गणपतये नमः', text_en: 'Om Gan Ganapataye Namah', color: '#ffeb3b' },
+        durga: { text_hi: 'जय माता दी', text_en: 'Jai Mata Di', color: '#e91e63' }
     };
 
     // === Levels ===
@@ -84,7 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Constants ===
     const TOTAL_BEADS = 108;
     const BEAD_COUNT = 54;
-    const GRID_SLOTS = 20;
+    const GRID_COLS = 4;
+    const GRID_ROWS = 5;
+    const TOTAL_SLOTS = GRID_COLS * GRID_ROWS;
 
     // === State ===
     let state = {
@@ -99,10 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
         isMuted: false
     };
 
-    // Grid slot tracking
-    let gridSlots = [];
-    let slotIndex = 0;
+    // === Invisible Grid System ===
+    let availableSlots = [];
+    let occupiedSlots = {}; // slotId -> { element, timeoutId }
     let malaRotation = 0;
+    let lastTapTime = 0; // Debounce
 
     // === Initialize ===
     loadState();
@@ -113,9 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLevelBadge();
     checkStreak();
 
-    // === Event Listeners ===
-    canvas.addEventListener('click', handleTap);
-    canvas.addEventListener('touchstart', handleTap, { passive: true });
+    // === SINGLE Event Listener - pointerdown only (fixes double count) ===
+    canvas.addEventListener('pointerdown', handleTap, { passive: false });
 
     deitySelector.addEventListener('change', (e) => {
         state.currentDeity = e.target.value;
@@ -123,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveState();
     });
 
-    // Settings
+    // Settings Modal
     settingsBtn.addEventListener('click', () => settingsModal.classList.add('active'));
     closeSettings.addEventListener('click', () => settingsModal.classList.remove('active'));
     settingsModal.addEventListener('click', (e) => {
@@ -136,77 +110,72 @@ document.addEventListener('DOMContentLoaded', () => {
     soundOffBtn.addEventListener('click', () => setSound(true));
     resetData.addEventListener('click', resetAllData);
 
-    // Stats
+    // Stats Modal
     statsBtn.addEventListener('click', openStats);
     closeStats.addEventListener('click', () => statsModal.classList.remove('active'));
     statsModal.addEventListener('click', (e) => {
         if (e.target === statsModal) statsModal.classList.remove('active');
     });
 
-    // === Grid Slot System ===
+    // === Invisible Grid System ===
     function initGridSlots() {
-        gridSlots = [];
-        for (let i = 0; i < GRID_SLOTS; i++) {
-            const slot = document.createElement('div');
-            slot.className = 'grid-slot';
-            slot.dataset.index = i;
-            canvas.appendChild(slot);
-            gridSlots.push({ element: slot, filled: false });
+        availableSlots = [];
+        for (let i = 0; i < TOTAL_SLOTS; i++) {
+            availableSlots.push(i);
         }
-        shuffleSlots();
+        shuffleArray(availableSlots);
     }
 
-    function shuffleSlots() {
-        // Fisher-Yates shuffle for random order
-        for (let i = gridSlots.length - 1; i > 0; i--) {
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [gridSlots[i], gridSlots[j]] = [gridSlots[j], gridSlots[i]];
-        }
-        slotIndex = 0;
-    }
-
-    function getNextEmptySlot() {
-        // Find next empty slot
-        for (let i = 0; i < gridSlots.length; i++) {
-            const idx = (slotIndex + i) % gridSlots.length;
-            if (!gridSlots[idx].filled) {
-                slotIndex = idx + 1;
-                return gridSlots[idx];
-            }
-        }
-        // All full - clear oldest and reshuffle
-        clearOldestMantra();
-        shuffleSlots();
-        return gridSlots[0];
-    }
-
-    function clearOldestMantra() {
-        const oldestSlot = gridSlots.find(s => s.filled);
-        if (oldestSlot && oldestSlot.element.firstChild) {
-            oldestSlot.element.firstChild.style.opacity = '0';
-            setTimeout(() => {
-                if (oldestSlot.element.firstChild) {
-                    oldestSlot.element.firstChild.remove();
-                }
-                oldestSlot.filled = false;
-            }, 200);
+            [arr[i], arr[j]] = [arr[j], arr[i]];
         }
     }
 
-    // === Core Functions ===
+    function getSlotPosition(slotId) {
+        const row = Math.floor(slotId / GRID_COLS);
+        const col = slotId % GRID_COLS;
+
+        // Calculate percentage positions with padding
+        const cellWidth = 100 / GRID_COLS;
+        const cellHeight = 100 / GRID_ROWS;
+
+        // Add some variation within the cell
+        const offsetX = (Math.random() * 0.4 + 0.3) * cellWidth;
+        const offsetY = (Math.random() * 0.4 + 0.3) * cellHeight;
+
+        const left = col * cellWidth + offsetX;
+        const top = row * cellHeight + offsetY;
+
+        return { left: `${left}%`, top: `${top}%` };
+    }
+
+    // === Core Tap Handler with Debounce ===
     function handleTap(e) {
         e.preventDefault();
 
+        // Debounce - prevent double taps (50ms threshold)
+        const now = Date.now();
+        if (now - lastTapTime < 50) return;
+        lastTapTime = now;
+
+        // Increment counts (exactly 1)
         state.beadCount++;
         state.totalLifetimeCount++;
         updateDailyStats();
 
+        // Rotate mala
         rotateMala();
-        spawnMantraInSlot();
-        playTapSound();
 
+        // Spawn mantra in grid slot
+        spawnMantraInSlot();
+
+        // Sound & Haptics
+        playTapSound();
         if (navigator.vibrate) navigator.vibrate(8);
 
+        // Check mala completion
         if (state.beadCount >= TOTAL_BEADS) {
             completeMala();
         }
@@ -217,25 +186,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function spawnMantraInSlot() {
-        const slot = getNextEmptySlot();
+        // If no slots available, free the oldest one
+        if (availableSlots.length === 0) {
+            freeOldestSlot();
+        }
+
+        // Get next available slot
+        const slotId = availableSlots.pop();
+        const position = getSlotPosition(slotId);
+
         const deity = DEITIES[state.currentDeity];
         const text = state.language === 'hi' ? deity.text_hi : deity.text_en;
 
+        // Create element
         const el = document.createElement('div');
         el.className = 'floating-mantra';
         el.textContent = text;
         el.style.color = deity.color;
+        el.style.left = position.left;
+        el.style.top = position.top;
 
-        slot.element.appendChild(el);
-        slot.filled = true;
+        // Random slight size variation
+        el.style.fontSize = `${16 + Math.random() * 6}px`;
 
-        // Remove after animation
-        setTimeout(() => {
-            if (el.parentNode) el.remove();
-            slot.filled = false;
-        }, 4000);
+        canvas.appendChild(el);
+
+        // Track this slot and schedule freeing
+        const timeoutId = setTimeout(() => {
+            freeSlot(slotId, el);
+        }, 3500);
+
+        occupiedSlots[slotId] = { element: el, timeoutId };
     }
 
+    function freeSlot(slotId, element) {
+        if (element && element.parentNode) {
+            element.remove();
+        }
+        delete occupiedSlots[slotId];
+        availableSlots.push(slotId);
+    }
+
+    function freeOldestSlot() {
+        // Find the first occupied slot
+        const slotIds = Object.keys(occupiedSlots);
+        if (slotIds.length > 0) {
+            const oldestId = parseInt(slotIds[0]);
+            const slot = occupiedSlots[oldestId];
+
+            clearTimeout(slot.timeoutId);
+            if (slot.element) {
+                slot.element.style.opacity = '0';
+                setTimeout(() => {
+                    if (slot.element && slot.element.parentNode) {
+                        slot.element.remove();
+                    }
+                }, 150);
+            }
+            delete occupiedSlots[oldestId];
+            availableSlots.push(oldestId);
+        }
+    }
+
+    // === Mala Functions ===
     function createMalaBeads() {
         malaContainer.innerHTML = '';
         const radius = 270;
@@ -284,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
         divineFlash.classList.add('active');
         setTimeout(() => divineFlash.classList.remove('active'), 1200);
 
-        // Mala Complete celebration message
+        // Mala Complete message
         completeCount.textContent = `(${state.malaCount})`;
         malaComplete.classList.add('active');
         setTimeout(() => malaComplete.classList.remove('active'), 2000);
@@ -293,23 +306,30 @@ document.addEventListener('DOMContentLoaded', () => {
         malaCountEl.classList.add('pulse');
         setTimeout(() => malaCountEl.classList.remove('pulse'), 400);
 
-        // Clear all mantras
+        // Clear ALL mantras immediately
         clearAllMantras();
     }
 
     function clearAllMantras() {
-        gridSlots.forEach(slot => {
-            if (slot.element.firstChild) {
-                slot.element.firstChild.style.opacity = '0';
+        // Clear all timeouts and elements
+        Object.keys(occupiedSlots).forEach(slotId => {
+            const slot = occupiedSlots[slotId];
+            clearTimeout(slot.timeoutId);
+            if (slot.element) {
+                slot.element.style.opacity = '0';
             }
         });
+
         setTimeout(() => {
-            gridSlots.forEach(slot => {
-                slot.element.innerHTML = '';
-                slot.filled = false;
+            Object.keys(occupiedSlots).forEach(slotId => {
+                const slot = occupiedSlots[slotId];
+                if (slot.element && slot.element.parentNode) {
+                    slot.element.remove();
+                }
             });
-            shuffleSlots();
-        }, 300);
+            occupiedSlots = {};
+            initGridSlots(); // Reset all slots
+        }, 200);
     }
 
     function playTapSound() {
@@ -393,9 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const today = new Date();
         const todayStr = today.toISOString().split('T')[0];
 
-        if (state.lastActiveDate === todayStr) {
-            return; // Already counted today
-        }
+        if (state.lastActiveDate === todayStr) return;
 
         const yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1);
