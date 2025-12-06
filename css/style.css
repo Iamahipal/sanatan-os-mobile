@@ -1,23 +1,43 @@
-/* General Styling */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+/* ============================================
+   SANATAN OS - LIQUID GLASS (AKASHA UI)
+   A Glassmorphism Spiritual Experience
+   ============================================ */
 
-html,
-body {
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Core Colors */
+    --bg-deep: #0f0c29;
+    --bg-mid: #302b63;
+    --bg-light: #24243e;
+
+    /* Accent Colors */
+    --saffron: #ff4b1f;
+    --gold: #ffd700;
+    --violet: #8b5cf6;
+    --teal: #14b8a6;
+    --rose: #f43f5e;
+
+    /* Glass Properties */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-bg-hover: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: 16px;
+
+    /* Text */
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+
+    /* Spacing */
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --gap: 16px;
+}
+
+* {
     margin: 0;
     padding: 0;
-    background-color: #111122;
-    /* Fixed background color */
-    height: 100%;
-    /* Changed to 100% for better mobile support */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    font-family: 'Poppins', sans-serif;
-    overflow-y: auto;
-    overflow-x: hidden;
-    /* overscroll-behavior-y: none; REMOVED to fix stuck scrolling */
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
 }
 
 /* Hide Scrollbar */
@@ -29,457 +49,460 @@ html {
     scrollbar-width: none;
 }
 
-/* Grid Layout */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: auto;
-    gap: 8px;
-    width: 100%;
-    max-width: 100%;
-    /* Full width for mobile */
-    padding: 10px;
-    /* Reduced padding */
-    box-sizing: border-box;
-    padding-bottom: 60px;
-    padding-top: 10px;
-    /* Reduced top padding */
-}
-
-/* Standard Tile */
-.tile {
-    background-color: rgba(255, 255, 255, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1/1;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+/* ============================================
+   ANIMATED AURORA BACKGROUND
+   ============================================ */
+body {
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: var(--bg-deep);
+    color: var(--text-primary);
     position: relative;
-    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border-radius: 2px;
 }
 
-.tile:active {
-    transform: scale(0.96);
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-}
-
-/* Tile Content Positioning */
-.tile-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-/* Text inside tiles - Smaller Font */
-.tile span {
-    color: white;
-    font-size: 11px;
-    /* Reduced from 12px */
-    font-weight: 500;
-    position: absolute;
-    bottom: 8px;
-    left: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-/* Icons styling */
-.tile i {
-    font-size: 32px;
-    color: white;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-/* Smaller icons for small tiles */
-.tile.small i {
-    font-size: 20px;
-    /* Reduced from 32px */
-}
-
-/* Adjusted position for tiles with text */
-.tile:not(.small) .tile-content:has(span) i {
-    transform: translate(-50%, -60%);
-}
-
-/* Large Tile */
-.large {
-    grid-column: span 3;
-    aspect-ratio: 3/1;
-}
-
-/* Medium Tile */
-.medium {
-    grid-column: span 2;
-    aspect-ratio: 2/1;
-}
-
-/* Small Tile Group */
-.small-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 8px;
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1/1;
-}
-
-.small {
-    aspect-ratio: 1/1;
-}
-
-/* Live Tile Animation (Flip/Slide) */
-.live-tile {
-    perspective: 1000px;
-}
-
-.tile-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.face-front {
-    transform: rotateX(0deg);
-}
-
-.face-back {
-    transform: rotateX(180deg);
-    background: inherit;
-    /* Inherit gradient */
-}
-
-.live-tile.flipped .face-front {
-    transform: rotateX(-180deg);
-}
-
-.live-tile.flipped .face-back {
-    transform: rotateX(0deg);
-}
-
-/* App List View Styles */
-.app-list-container {
-    display: none;
-    width: 100%;
-    height: 100vh;
-    background-color: #111122;
-    color: white;
-    position: relative;
-    overflow-y: auto;
-    font-family: 'Poppins', sans-serif;
-    padding-left: 0;
-    padding-bottom: 80px;
-    /* Ensure bottom content is visible */
-}
-
-.app-list-container.active {
-    display: block;
-}
-
-/* Search Bar - Always Visible */
-.search-bar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: #111122;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.search-bar .search-icon {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 10px;
-    color: #aaa;
-}
-
-.search-bar input {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    color: white;
-    font-size: 16px;
-    flex-grow: 1;
-    outline: none;
-    padding: 8px 12px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.search-bar input:focus {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: #e67e22;
-}
-
-/* Grouped App List Layout */
-.app-group {
-    display: flex;
-    padding: 10px 15px;
-    align-items: flex-start;
-}
-
-.group-header {
-    color: #e67e22;
-    font-size: 20px;
-    font-weight: 600;
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    text-align: center;
-    border: 2px solid #e67e22;
-    border-radius: 0;
-    /* Square */
-    margin-right: 20px;
-    flex-shrink: 0;
-}
-
-.group-items {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.app-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.app-item:last-child {
-    border-bottom: none;
-}
-
-.app-icon {
-    width: 45px;
-    height: 45px;
-    margin-right: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2px;
-    color: white;
-    font-size: 20px;
-}
-
-.app-name {
-    font-size: 18px;
-    font-weight: 300;
-    color: white;
-}
-
-/* Modern Gradients */
-.saffron {
-    background: linear-gradient(135deg, #ff9900 0%, #d35400 100%) !important;
-}
-
-.crimson {
-    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
-}
-
-.teal {
-    background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%) !important;
-}
-
-.yellow {
-    background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%) !important;
-}
-
-.purple {
-    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%) !important;
-}
-
-.blue {
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
-}
-
-.green {
-    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
-}
-
-.dark-grey {
-    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%) !important;
-}
-
-.dark-orange {
-    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%) !important;
-}
-
-/* Badge */
-.tile-badge {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 2px 6px;
-    font-size: 9px;
-    font-weight: 700;
-    border-radius: 2px;
-    backdrop-filter: blur(2px);
-}
-
-/* Selection mode styles */
-.tile.selected {
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9);
-    z-index: 10;
-    transform: scale(1.02);
-}
-
-.tile.floating {
-    animation: floatEffect 3s infinite ease-in-out;
-}
-
-.tile.floating:nth-child(3n+1) {
-    animation-delay: 0.2s;
-}
-
-.tile.floating:nth-child(3n+2) {
-    animation-delay: 0.5s;
-}
-
-.tile.floating:nth-child(3n+3) {
-    animation-delay: 0.8s;
-}
-
-@keyframes floatEffect {
-    0% {
-        transform: translate(0, 0);
-    }
-
-    25% {
-        transform: translate(-3px, 2px);
-    }
-
-    50% {
-        transform: translate(2px, -2px);
-    }
-
-    75% {
-        transform: translate(1px, 3px);
-    }
-
-    100% {
-        transform: translate(0, 0);
-    }
-}
-
-/* Tile action buttons */
-.tile-actions {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 20;
+/* Aurora Blobs */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(255, 75, 31, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 70% 70%, rgba(20, 184, 166, 0.1) 0%, transparent 45%);
+    animation: auroraFloat 20s ease-in-out infinite;
+    z-index: 0;
     pointer-events: none;
 }
 
-.tile-action-btn {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 12px;
-    cursor: pointer;
-    pointer-events: auto;
+@keyframes auroraFloat {
+
+    0%,
+    100% {
+        transform: translate(0%, 0%) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(2%, -2%) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1%, 2%) rotate(-1deg);
+    }
+
+    75% {
+        transform: translate(-2%, -1%) rotate(0.5deg);
+    }
 }
 
-.unpin-btn {
-    top: -10px;
-    left: -10px;
-}
-
-.info-btn {
-    top: -10px;
-    right: -10px;
-}
-
-.resize-btn {
-    bottom: -10px;
-    right: -10px;
-}
-
-/* Resize transitions */
-.tile.resizing {
-    transition: grid-column 0.3s ease-out, grid-row 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out;
-}
-
-/* Selection Overlay */
-.selection-overlay {
+/* Secondary Aurora Layer */
+body::after {
+    content: '';
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(3px);
-    z-index: 5;
-    display: none;
+    background:
+        radial-gradient(ellipse at bottom right, rgba(255, 75, 31, 0.1) 0%, transparent 60%),
+        radial-gradient(ellipse at top left, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+    animation: auroraFloat 25s ease-in-out infinite reverse;
+    z-index: 0;
+    pointer-events: none;
 }
 
-.selection-overlay.active {
-    display: block;
+/* ============================================
+   MAIN CONTAINER
+   ============================================ */
+.app-wrapper {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    /* Space for dock */
 }
 
-/* Animation for tile removal */
-@keyframes removeTile {
+/* Header */
+.glass-header {
+    padding: 20px 20px 10px;
+    text-align: center;
+}
+
+.app-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--saffron) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+/* ============================================
+   GLASS TILE GRID
+   ============================================ */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap);
+    padding: var(--gap);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   GLASS TILE - The Core Component
+   ============================================ */
+.tile {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow:
+        0 4px 30px rgba(0, 0, 0, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+}
+
+.tile:hover,
+.tile:active {
+    background: var(--glass-bg-hover);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 30px rgba(255, 215, 0, 0.1);
+}
+
+/* Tile Sizes */
+.tile.large {
+    grid-column: span 3;
+    aspect-ratio: 3/1;
+}
+
+.tile.medium {
+    grid-column: span 2;
+    aspect-ratio: 2/1;
+}
+
+.tile.small {
+    grid-column: span 1;
+    aspect-ratio: 1/1;
+}
+
+/* Hero Tile - More Prominent */
+.tile.hero {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* ============================================
+   TILE CONTENT
+   ============================================ */
+.tile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+/* Gradient Icons */
+.tile-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+}
+
+.tile.large .tile-icon {
+    font-size: 3rem;
+}
+
+.tile.small .tile-icon {
+    font-size: 1.8rem;
+}
+
+/* Icon with Gradient (for FontAwesome) */
+.tile i {
+    font-size: 28px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--saffron) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+}
+
+/* Tile Label */
+.tile-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+}
+
+.tile.large .tile-label {
+    font-size: 0.9rem;
+}
+
+/* Tile Badge */
+.tile-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 75, 31, 0.8);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   TILE COLOR ACCENTS (Subtle Glow)
+   ============================================ */
+.tile.accent-saffron::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold));
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.tile.accent-violet::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--violet), #a78bfa);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.tile.accent-teal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--teal), #34d399);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.tile.accent-rose::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--rose), #fb7185);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* ============================================
+   QUOTE TILE (Special)
+   ============================================ */
+.tile.quote {
+    justify-content: flex-start;
+    text-align: left;
+    padding: 20px;
+}
+
+.quote-icon {
+    font-size: 1.5rem;
+    opacity: 0.5;
+    margin-bottom: 8px;
+}
+
+.quote-text {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.quote-label {
+    font-size: 0.7rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: auto;
+}
+
+/* ============================================
+   2x2 SMALL GRID INSIDE
+   ============================================ */
+.small-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 0;
+}
+
+.small-grid .tile {
+    aspect-ratio: 1/1;
+}
+
+.small-grid .tile-icon {
+    font-size: 1.5rem;
+}
+
+/* ============================================
+   FLOATING GLASS DOCK
+   ============================================ */
+.glass-dock {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 12px 24px;
+    display: flex;
+    gap: 32px;
+    z-index: 100;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.dock-item:hover,
+.dock-item.active {
+    color: var(--gold);
+    transform: translateY(-2px);
+}
+
+.dock-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+}
+
+.dock-item span {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
     from {
-        opacity: 1;
-        transform: scale(1);
+        opacity: 0;
+        transform: translateY(20px);
     }
 
     to {
-        opacity: 0;
-        transform: scale(0.8);
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.tile.removing {
-    animation: removeTile 0.3s ease-out forwards;
+.tile {
+    animation: fadeInUp 0.5s ease-out;
+    animation-fill-mode: both;
 }
 
-/* Responsive Fix */
-@media screen and (max-width: 600px) {
+.tile:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.tile:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.tile:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.tile:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.tile:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.tile:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.tile:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.tile:nth-child(8) {
+    animation-delay: 0.4s;
+}
+
+.tile:nth-child(9) {
+    animation-delay: 0.45s;
+}
+
+.tile:nth-child(10) {
+    animation-delay: 0.5s;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 400px) {
     .grid-container {
-        gap: 8px;
+        gap: 12px;
+        padding: 12px;
     }
 
-    .tile i {
-        font-size: 28px;
+    .tile {
+        border-radius: 20px;
     }
 
-    .tile.small i {
-        font-size: 20px;
+    .tile-icon {
+        font-size: 2rem;
+    }
+
+    .tile-label {
+        font-size: 0.65rem;
     }
 }
