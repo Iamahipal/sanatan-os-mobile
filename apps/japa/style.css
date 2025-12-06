@@ -5,6 +5,7 @@
     --text-color: #f0f0f0;
     --glass-bg: rgba(255, 255, 255, 0.08);
     --glass-border: rgba(255, 255, 255, 0.15);
+    --deity-color: #ffd700;
 }
 
 * {
@@ -15,7 +16,7 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Windows Phone Turnstile Animation */
+/* Turnstile Animation */
 @keyframes turnstileIn {
     from {
         transform: perspective(1200px) rotateY(30deg) scale(0.9);
@@ -49,7 +50,7 @@ body.page-enter {
     position: relative;
 }
 
-/* Glassmorphism Header */
+/* Header */
 .app-header {
     display: flex;
     justify-content: space-between;
@@ -72,7 +73,7 @@ body.page-enter {
     color: var(--text-color);
     text-decoration: none;
     opacity: 0.8;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: all 0.2s;
     cursor: pointer;
     padding: 8px;
 }
@@ -85,10 +86,10 @@ body.page-enter {
 
 .header-right {
     display: flex;
-    gap: 8px;
+    gap: 4px;
 }
 
-.mantra-selector {
+.deity-selector {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 25px;
@@ -101,12 +102,12 @@ body.page-enter {
     transition: all 0.3s;
 }
 
-.mantra-selector:focus {
+.deity-selector:focus {
     border-color: var(--accent-gold);
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
-.mantra-selector option {
+.deity-selector option {
     background: #1a1a3e;
     color: var(--text-color);
 }
@@ -142,49 +143,139 @@ body.page-enter {
     letter-spacing: 1px;
 }
 
-/* Main Tap Canvas */
+/* Main Canvas - Grid Slots */
 .japa-canvas {
     flex: 1;
     position: relative;
     cursor: pointer;
     overflow: hidden;
-    min-height: 300px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 5px;
+    padding: 10px;
+    padding-top: 50px;
 }
 
-/* Floating Mantra Text */
+.grid-slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+}
+
+/* Floating Mantra */
 .floating-mantra {
-    position: absolute;
     font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 22px;
+    font-size: 20px;
+    color: var(--deity-color);
     pointer-events: none;
-    animation: floatUp 3s ease-out forwards;
+    animation: fadeGlow 4s ease-out forwards;
     white-space: nowrap;
     text-shadow:
-        0 0 10px currentColor,
-        0 0 20px currentColor,
-        0 0 40px currentColor;
+        0 0 8px currentColor,
+        0 0 16px currentColor,
+        0 0 32px currentColor;
 }
 
-@keyframes floatUp {
+@keyframes fadeGlow {
     0% {
         opacity: 0;
-        transform: scale(0.5) translateY(0);
+        transform: scale(0.7);
     }
 
-    15% {
+    10% {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: scale(1);
     }
 
-    85% {
-        opacity: 0.8;
-        transform: scale(1) translateY(-30px);
+    80% {
+        opacity: 0.9;
+        transform: translateY(-10px);
     }
 
     100% {
         opacity: 0;
-        transform: scale(0.8) translateY(-50px);
+        transform: translateY(-20px) scale(0.9);
     }
+}
+
+/* Mala Complete Celebration */
+.mala-complete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 150;
+    opacity: 0;
+}
+
+.mala-complete.active {
+    animation: celebrationPulse 2s ease-out forwards;
+}
+
+@keyframes celebrationPulse {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.complete-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 30px 50px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--accent-gold);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.complete-icon {
+    font-size: 3rem;
+    animation: iconBounce 0.5s ease-out;
+}
+
+@keyframes iconBounce {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+}
+
+.complete-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+    text-shadow: 0 0 20px var(--accent-gold);
+}
+
+.complete-count {
+    font-size: 1.2rem;
+    opacity: 0.8;
 }
 
 /* Mala Section */
@@ -203,7 +294,7 @@ body.page-enter {
     align-items: center;
     gap: 30px;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     padding: 10px 30px;
     border-radius: 30px;
     backdrop-filter: blur(10px);
@@ -236,7 +327,7 @@ body.page-enter {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* Rotating Mala Container */
+/* Rotating Mala - 3D Rudraksha Beads */
 .mala-container {
     position: absolute;
     width: 600px;
@@ -245,24 +336,47 @@ body.page-enter {
     left: 50%;
     transform: translateX(-50%);
     border-radius: 50%;
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .bead {
     position: absolute;
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #c49a6c, #6b4423);
+    /* 3D Rudraksha Look */
+    background: radial-gradient(circle at 25% 25%, #d4a064 0%, #8b5a2b 40%, #5d4037 100%);
     box-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.5),
-        inset -2px -2px 4px rgba(0, 0, 0, 0.3),
-        inset 2px 2px 4px rgba(255, 255, 255, 0.2);
+        3px 3px 6px rgba(0, 0, 0, 0.6),
+        inset -3px -3px 6px rgba(0, 0, 0, 0.4),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.15);
+    /* Subtle texture lines */
+    background-image:
+        radial-gradient(circle at 25% 25%, #d4a064 0%, #8b5a2b 40%, #5d4037 100%),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 0, 0, 0.1) 2px, rgba(0, 0, 0, 0.1) 4px);
 }
 
 .bead.active {
-    background: radial-gradient(circle at 30% 30%, var(--accent-gold), #b8860b);
-    box-shadow: 0 0 20px var(--accent-gold);
+    background: radial-gradient(circle at 25% 25%, #ffe066 0%, var(--accent-gold) 50%, #b8860b 100%);
+    box-shadow:
+        0 0 25px var(--accent-gold),
+        0 0 50px rgba(255, 215, 0, 0.5),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.3);
+    animation: beadPulse 0.3s ease-out;
+}
+
+@keyframes beadPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Divine Flash */
@@ -272,14 +386,14 @@ body.page-enter {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, #fff 0%, rgba(255, 215, 0, 0.8) 50%, transparent 100%);
+    background: radial-gradient(circle, #fff 0%, rgba(255, 215, 0, 0.9) 40%, transparent 100%);
     opacity: 0;
     pointer-events: none;
     z-index: 100;
 }
 
 .divine-flash.active {
-    animation: flashPulse 1s ease-out forwards;
+    animation: flashPulse 1.2s ease-out forwards;
 }
 
 @keyframes flashPulse {
@@ -292,7 +406,10 @@ body.page-enter {
     }
 }
 
-/* Counter Pulse */
+.pulse {
+    animation: counterPulse 0.4s ease-out;
+}
+
 @keyframes counterPulse {
 
     0%,
@@ -305,19 +422,15 @@ body.page-enter {
     }
 }
 
-.pulse {
-    animation: counterPulse 0.4s ease-out;
-}
-
-/* Stats Modal */
+/* Modal Overlay */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
     display: none;
     justify-content: center;
     align-items: center;
@@ -369,12 +482,68 @@ body.page-enter {
     font-size: 28px;
     cursor: pointer;
     opacity: 0.7;
+    line-height: 1;
 }
 
 .close-btn:hover {
     opacity: 1;
 }
 
+/* Settings Modal */
+.settings-modal {
+    max-width: 350px;
+}
+
+.settings-group {
+    margin-bottom: 20px;
+}
+
+.setting-label {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 10px;
+}
+
+.toggle-container {
+    display: flex;
+    gap: 10px;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toggle-btn.active {
+    background: var(--accent-gold);
+    color: #000;
+    border-color: var(--accent-gold);
+}
+
+.danger-btn {
+    width: 100%;
+    padding: 12px;
+    background: rgba(231, 76, 60, 0.2);
+    border: 1px solid #e74c3c;
+    border-radius: 10px;
+    color: #e74c3c;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.danger-btn:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+/* Stats */
 .stats-summary {
     display: flex;
     gap: 15px;

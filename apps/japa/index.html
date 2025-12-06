@@ -21,34 +21,31 @@
                 </svg>
             </a>
 
-            <!-- Mantra Selector -->
-            <select id="mantra-selector" class="mantra-selector">
+            <!-- Deity Selector -->
+            <select id="deity-selector" class="deity-selector">
                 <option value="radha">श्री राधा</option>
                 <option value="krishna">श्री कृष्ण</option>
                 <option value="ram">श्री राम</option>
                 <option value="shiva">ॐ नमः शिवाय</option>
                 <option value="hanuman">ॐ हनुमते नमः</option>
+                <option value="ganesha">ॐ गं गणपतये नमः</option>
+                <option value="durga">जय माता दी</option>
             </select>
 
             <div class="header-right">
+                <button id="settings-btn" class="icon-btn" aria-label="Settings">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                        </path>
+                    </svg>
+                </button>
                 <button id="stats-btn" class="icon-btn" aria-label="View Stats">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="20" x2="18" y2="10"></line>
                         <line x1="12" y1="20" x2="12" y2="4"></line>
                         <line x1="6" y1="20" x2="6" y2="14"></line>
-                    </svg>
-                </button>
-                <button id="mute-btn" class="icon-btn" aria-label="Toggle Sound">
-                    <svg id="sound-on" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                    </svg>
-                    <svg id="sound-off" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2">
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                        <line x1="23" y1="9" x2="17" y2="15"></line>
-                        <line x1="17" y1="9" x2="23" y2="15"></line>
                     </svg>
                 </button>
             </div>
@@ -57,15 +54,24 @@
         <!-- Level Badge -->
         <div id="level-badge" class="level-badge">
             <span class="level-icon">🙏</span>
-            <span id="level-text" class="level-text">Sadhak</span>
+            <span id="level-text" class="level-text">Aarambh</span>
         </div>
 
-        <!-- Main Tap Canvas (for floating names) -->
+        <!-- Main Tap Canvas -->
         <main id="japa-canvas" class="japa-canvas">
-            <!-- Floating mantras appear here -->
+            <!-- Grid slots filled by JS -->
         </main>
 
-        <!-- Rotating Mala at Bottom -->
+        <!-- Mala Complete Celebration -->
+        <div id="mala-complete" class="mala-complete">
+            <div class="complete-content">
+                <span class="complete-icon">🙏</span>
+                <span class="complete-text">Mala Complete!</span>
+                <span id="complete-count" class="complete-count">(1)</span>
+            </div>
+        </div>
+
+        <!-- Mala Section -->
         <div class="mala-section">
             <div class="counter-display">
                 <div class="counter-item">
@@ -85,6 +91,33 @@
 
         <!-- Divine Flash -->
         <div id="divine-flash" class="divine-flash"></div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-content settings-modal">
+            <div class="modal-header">
+                <h2>⚙️ Settings</h2>
+                <button id="close-settings" class="close-btn">&times;</button>
+            </div>
+            <div class="settings-group">
+                <label class="setting-label">Language</label>
+                <div class="toggle-container">
+                    <button id="lang-hi" class="toggle-btn active">हिंदी</button>
+                    <button id="lang-en" class="toggle-btn">English</button>
+                </div>
+            </div>
+            <div class="settings-group">
+                <label class="setting-label">Sound</label>
+                <div class="toggle-container">
+                    <button id="sound-on-btn" class="toggle-btn active">On</button>
+                    <button id="sound-off-btn" class="toggle-btn">Off</button>
+                </div>
+            </div>
+            <div class="settings-group">
+                <button id="reset-data" class="danger-btn">Reset All Data</button>
+            </div>
+        </div>
     </div>
 
     <!-- Stats Modal -->
