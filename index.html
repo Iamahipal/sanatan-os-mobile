@@ -3,94 +3,146 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#0d0b1e">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sanatan OS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="css/style.css?v=9">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0F0C29">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="grid-container">
-        <!-- Row 1: Gita AI (3 cols) -->
-        <div class="tile tile-large saffron live-tile" id="gitaTile">
-            <div class="tile-face face-front">
-                <i class="fa-solid fa-om"></i>
-                <span class="tile-label">Gita AI</span>
-            </div>
-            <div class="tile-face face-back">
-                <span class="tile-label">Sanatan OS</span>
-            </div>
-        </div>
-
-        <!-- Row 2: Darshan + Panchang + Sangha -->
-        <div class="tile tile-small">
-            <span class="badge">LIVE</span>
-            <i class="fa-solid fa-video"></i>
-            <span class="tile-label">Darshan</span>
-        </div>
-        <div class="tile tile-small">
-            <i class="fa-solid fa-calendar-alt"></i>
-            <span class="tile-label">Panchang</span>
-        </div>
-        <div class="tile tile-small">
-            <i class="fa-solid fa-spa"></i>
-            <span class="tile-label">Sangha</span>
-        </div>
-
-        <!-- Row 3: Bal Krishna (2 cols) + Naam Japa -->
-        <div class="tile tile-medium">
-            <span class="emoji">🦚</span>
-            <span class="tile-label">Bal Krishna</span>
-        </div>
-        <a href="apps/japa/index.html" class="tile tile-small">
-            <span class="emoji">📿</span>
-            <span class="tile-label">Naam Japa</span>
-        </a>
-
-        <!-- Row 4: Small Grid + Mantras + Temples -->
-        <div class="small-grid">
-            <div class="tile"><i class="fa-solid fa-heart"></i></div>
-            <div class="tile"><i class="fa-solid fa-cog"></i></div>
-            <div class="tile"><i class="fa-solid fa-share-alt"></i></div>
-            <div class="tile"><i class="fa-solid fa-info-circle"></i></div>
-        </div>
-        <div class="tile tile-small">
-            <i class="fa-solid fa-music"></i>
-            <span class="tile-label">Mantras</span>
-        </div>
-        <div class="tile tile-small">
-            <i class="fa-solid fa-location-dot"></i>
-            <span class="tile-label">Temples</span>
-        </div>
-
-        <!-- Row 5-6: Daily Wisdom Quote (3 cols, 2 rows) -->
-        <div class="tile tile-quote">
-            <i class="fa-solid fa-quote-left quote-icon"></i>
-            <p class="quote-text">"You have the right to work, but for the work's sake only."</p>
-            <span class="tile-label">Daily Wisdom</span>
-        </div>
-
-        <!-- Row 7: Shastras + Worship + Events -->
-        <div class="tile tile-small">
-            <i class="fa-solid fa-book"></i>
-            <span class="tile-label">Shastras</span>
-        </div>
-        <div class="tile tile-small">
-            <i class="fa-solid fa-hands-praying"></i>
-            <span class="tile-label">Worship</span>
-        </div>
-        <div class="tile tile-small">
-            <i class="fa-solid fa-calendar-check"></i>
-            <span class="tile-label">Events</span>
-        </div>
+    <!-- Living Prana Background -->
+    <div class="prana-bg">
+        <div class="blob-1"></div>
+        <div class="blob-2"></div>
+        <div class="blob-3"></div>
+        <div class="blob-4"></div>
     </div>
 
-    <script src="js/main.js" defer></script>
+    <!-- Main Grid - No Header -->
+    <main class="grid-container">
+        <!-- Hero - Gita AI -->
+        <div class="tile large hero">
+            <div class="tile-content">
+                <span class="tile-icon">🕉️</span>
+                <span class="tile-label">Gita AI</span>
+            </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="tile small">
+            <div class="tile-badge">LIVE</div>
+            <div class="tile-content">
+                <i class="fa-solid fa-video"></i>
+                <span class="tile-label">Darshan</span>
+            </div>
+        </div>
+
+        <div class="tile small">
+            <div class="tile-content">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span class="tile-label">Panchang</span>
+            </div>
+        </div>
+
+        <div class="tile small">
+            <div class="tile-content">
+                <i class="fa-solid fa-spa"></i>
+                <span class="tile-label">Sangha</span>
+            </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="tile medium">
+            <div class="tile-content">
+                <span class="tile-icon">🦚</span>
+                <span class="tile-label">Bal Krishna</span>
+            </div>
+        </div>
+
+        <a href="apps/japa/index.html" class="tile small">
+            <div class="tile-content">
+                <span class="tile-icon">📿</span>
+                <span class="tile-label">Naam Japa</span>
+            </div>
+        </a>
+
+        <!-- Row 4 - Mini Grid + Others -->
+        <div class="small-grid">
+            <div class="tile small">
+                <div class="tile-content">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+            </div>
+            <div class="tile small">
+                <div class="tile-content">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+            </div>
+            <div class="tile small">
+                <div class="tile-content">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </div>
+            </div>
+            <div class="tile small">
+                <div class="tile-content">
+                    <i class="fa-solid fa-circle-info"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="tile small">
+            <div class="tile-content">
+                <i class="fa-solid fa-music"></i>
+                <span class="tile-label">Mantras</span>
+            </div>
+        </div>
+
+        <div class="tile small">
+            <div class="tile-content">
+                <i class="fa-solid fa-location-dot"></i>
+                <span class="tile-label">Temples</span>
+            </div>
+        </div>
+
+        <!-- Quote -->
+        <div class="tile quote">
+            <span class="quote-icon">❝</span>
+            <p class="quote-text">"You have the right to work, but for the work's sake only."</p>
+            <span class="quote-label">Daily Wisdom</span>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="tile small">
+            <div class="tile-content">
+                <i class="fa-solid fa-book-open"></i>
+                <span class="tile-label">Shastras</span>
+            </div>
+        </div>
+
+        <div class="tile small">
+            <div class="tile-content">
+                <i class="fa-solid fa-hands-praying"></i>
+                <span class="tile-label">Worship</span>
+            </div>
+        </div>
+
+        <div class="tile small">
+            <div class="tile-content">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span class="tile-label">Events</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
 </body>
 
 </html>
