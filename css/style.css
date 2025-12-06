@@ -1,32 +1,18 @@
 /* ============================================
-   SANATAN OS - STRICT METRO GRID
-   Fixed 110px Rows | 10px Gap | No Auto Sizing
+   SANATAN OS - NUCLEAR HEIGHT FIX
+   Explicit pixel heights on every tile
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
-
-/* ============================================
-   CSS VARIABLES - STRICT DIMENSIONS
-   ============================================ */
-:root {
-    --row-height: 110px;
-    --gap: 10px;
-}
 
 html,
 body {
     margin: 0;
     padding: 0;
     background-color: #111122;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    min-height: 100vh;
     font-family: 'Poppins', sans-serif;
-    overflow-y: auto;
     overflow-x: hidden;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
 }
 
 ::-webkit-scrollbar {
@@ -38,41 +24,47 @@ html {
 }
 
 /* ============================================
-   GRID CONTAINER - STRICT FIXED DIMENSIONS
+   GRID CONTAINER
    ============================================ */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* CRITICAL: Fixed row height - NO auto sizing */
-    grid-auto-rows: var(--row-height);
-    /* STRICT: 10px Metro-standard gap */
-    gap: var(--gap);
+    gap: 10px;
     width: 100%;
     max-width: 480px;
+    margin: 0 auto;
     padding: 15px;
     box-sizing: border-box;
-    padding-bottom: 60px;
 }
 
 /* ============================================
-   TILE BASE - FILLS GRID CELL EXACTLY
+   ALL TILES - EXPLICIT 110px HEIGHT
    ============================================ */
 .tile {
-    /* FILL the grid cell completely */
+    /* NUCLEAR: Force exact height */
+    height: 110px !important;
+    min-height: 110px !important;
+    max-height: 110px !important;
+
+    /* Layout */
     width: 100%;
-    height: 100%;
-    /* NO margin - gap handles spacing */
     margin: 0;
-    /* Content handling */
+    padding: 0;
+
+    /* Flex centering */
     display: flex;
     justify-content: center;
     align-items: center;
+
+    /* Prevent overflow */
     overflow: hidden;
     position: relative;
+
     /* Visual */
     background-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
+
     /* Interaction */
     transition: transform 0.15s ease;
     text-decoration: none;
@@ -84,61 +76,49 @@ html {
 }
 
 /* ============================================
-   TILE SIZES - EXPLICIT SPANS
+   TILE SPANS - WIDTH ONLY, HEIGHT IS FIXED
    ============================================ */
 
-/* SMALL: 1 column × 1 row = 110px height */
+/* SMALL: 1 column - height stays 110px */
 .small {
     grid-column: span 1;
-    grid-row: span 1;
 }
 
-/* MEDIUM: 2 columns × 1 row = 110px height (SAME as small!) */
+/* MEDIUM: 2 columns - height stays 110px (SAME AS SMALL!) */
 .medium {
     grid-column: span 2;
-    grid-row: span 1;
+    /* Height is already 110px from .tile class */
 }
 
-/* LARGE: 3 columns × 1 row = 110px height */
+/* LARGE: 3 columns - height stays 110px */
 .large {
     grid-column: span 3;
-    grid-row: span 1;
-}
-
-/* TALL: 1 column × 2 rows = (110px × 2) + 10px = 230px height */
-.tall {
-    grid-column: span 1;
-    grid-row: span 2;
-    /* Grid will auto-calculate: height = (row-height * 2) + gap */
-}
-
-/* BIG SQUARE: 2 columns × 2 rows = 230px × calculated width */
-.big-square {
-    grid-column: span 2;
-    grid-row: span 2;
 }
 
 /* ============================================
-   SMALL-GRID (2×2 mini tiles within 1 grid cell)
+   SMALL-GRID (2x2 within one grid cell)
    ============================================ */
 .small-grid {
+    grid-column: span 1;
+    height: 110px !important;
+    min-height: 110px !important;
+    max-height: 110px !important;
+
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 6px;
-    width: 100%;
-    height: 100%;
-    /* Takes up 1 column × 1 row = 110px */
-    grid-column: span 1;
-    grid-row: span 1;
+    gap: 5px;
 }
 
 .small-grid .tile {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
     border-radius: 3px;
 }
 
 .small-grid .tile i {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 /* ============================================
@@ -156,7 +136,7 @@ html {
     box-sizing: border-box;
 }
 
-/* Text label - bottom left */
+/* Text label */
 .tile span {
     color: white;
     font-size: 11px;
@@ -169,20 +149,14 @@ html {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Icon - centered */
+/* Icon */
 .tile i {
-    font-size: 28px;
+    font-size: 26px;
     color: white;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -55%);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-.tile.small i,
-.small-grid .tile i {
-    font-size: 20px;
 }
 
 /* ============================================
@@ -259,11 +233,6 @@ html {
     background: linear-gradient(135deg, #e67e22, #d35400) !important;
 }
 
-/* Alias for tile-purple class used in HTML */
-.tile-purple {
-    background: linear-gradient(135deg, #9b59b6, #8e44ad) !important;
-}
-
 /* ============================================
    BADGE
    ============================================ */
@@ -280,120 +249,23 @@ html {
 }
 
 /* ============================================
-   APP LIST VIEW
-   ============================================ */
-.app-list-container {
-    display: none;
-    width: 100%;
-    height: 100vh;
-    background-color: #111122;
-    color: white;
-    position: relative;
-    overflow-y: auto;
-    font-family: 'Poppins', sans-serif;
-    padding-bottom: 80px;
-}
-
-.app-list-container.active {
-    display: block;
-}
-
-.search-bar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: #111122;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.search-bar .search-icon {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 10px;
-    color: #aaa;
-}
-
-.search-bar input {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    color: white;
-    font-size: 16px;
-    flex-grow: 1;
-    outline: none;
-    padding: 8px 12px;
-}
-
-.app-group {
-    display: flex;
-    padding: 10px 15px;
-    align-items: flex-start;
-}
-
-.group-header {
-    color: #e67e22;
-    font-size: 20px;
-    font-weight: 600;
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    text-align: center;
-    border: 2px solid #e67e22;
-    margin-right: 20px;
-}
-
-.group-items {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.app-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.app-item:last-child {
-    border-bottom: none;
-}
-
-.app-icon {
-    width: 45px;
-    height: 45px;
-    margin-right: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2px;
-    color: white;
-    font-size: 20px;
-}
-
-.app-name {
-    font-size: 18px;
-    font-weight: 300;
-    color: white;
-}
-
-/* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 400px) {
-    :root {
-        --row-height: 100px;
-        --gap: 8px;
+    .tile {
+        height: 100px !important;
+        min-height: 100px !important;
+        max-height: 100px !important;
+    }
+
+    .small-grid {
+        height: 100px !important;
+        min-height: 100px !important;
+        max-height: 100px !important;
     }
 
     .tile i {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .tile span {
