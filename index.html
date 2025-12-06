@@ -23,7 +23,7 @@
             <span class="tile-label">Gita AI</span>
         </div>
 
-        <!-- Row 2: Darshan + Panchang + Sangha (3 small tiles) -->
+        <!-- Row 2: Darshan + Panchang + Sangha -->
         <div class="tile small">
             <span class="tile-badge">LIVE</span>
             <i class="fa-solid fa-video"></i>
@@ -40,7 +40,7 @@
             <span class="tile-label">Sangha</span>
         </div>
 
-        <!-- Row 3: Bal Krishna (Medium: 2 cols) + Naam Japa (1 col) = SAME ROW, SAME HEIGHT -->
+        <!-- Row 3: Bal Krishna (Medium: 2 cols) + Naam Japa (1 col) -->
         <div class="tile medium">
             <span class="tile-icon">🦚</span>
             <span class="tile-label">Bal Krishna</span>
@@ -51,12 +51,12 @@
             <span class="tile-label">Naam Japa</span>
         </a>
 
-        <!-- Row 4: Mini Grid (1 col) + Mantras (1 col) + Temples (1 col) -->
+        <!-- Row 4: Mini Grid + Mantras + Temples -->
         <div class="mini-grid">
             <div class="tile">
                 <i class="fa-solid fa-heart"></i>
             </div>
-            <div class="tile">
+            <div class="tile" data-action="open-settings">
                 <i class="fa-solid fa-gear"></i>
             </div>
             <div class="tile">
@@ -84,7 +84,7 @@
             <span class="quote-label">Daily Wisdom</span>
         </div>
 
-        <!-- Row 6: Shastras + Worship + Events (3 small tiles) -->
+        <!-- Row 6: Shastras + Worship + Events -->
         <div class="tile small">
             <i class="fa-solid fa-book-open"></i>
             <span class="tile-label">Shastras</span>
@@ -101,6 +101,85 @@
         </div>
     </main>
 
+    <!-- Settings Modal -->
+    <div class="settings-modal" id="settings-modal">
+        <div class="settings-panel">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <button class="settings-close" id="settings-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Appearance Section -->
+            <div class="settings-section">
+                <h3>Appearance</h3>
+
+                <div class="settings-row">
+                    <span class="settings-label">Theme</span>
+                    <div class="theme-options">
+                        <button class="theme-btn active" data-theme="indigo" title="Indigo"></button>
+                        <button class="theme-btn" data-theme="white" title="Light"></button>
+                        <button class="theme-btn" data-theme="saffron" title="Saffron"></button>
+                    </div>
+                </div>
+
+                <div class="settings-row" style="flex-direction: column; align-items: stretch;">
+                    <span class="settings-label" style="margin-bottom: 12px;">Wallpaper</span>
+                    <div class="wallpaper-grid">
+                        <button class="wallpaper-btn active" data-wallpaper="default" title="Default"></button>
+                        <button class="wallpaper-btn" data-wallpaper="cosmic" title="Cosmic"></button>
+                        <button class="wallpaper-btn" data-wallpaper="forest" title="Forest"></button>
+                    </div>
+                    <label class="upload-btn">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload Custom Photo
+                        <input type="file" id="wallpaper-upload" accept="image/*" hidden>
+                    </label>
+                </div>
+
+                <div class="settings-row">
+                    <span class="settings-label">Glass Blur</span>
+                    <div class="slider-container">
+                        <input type="range" class="slider" id="blur-slider" min="0" max="24" value="0">
+                        <span class="slider-value" id="blur-value">0px</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Display Section -->
+            <div class="settings-section">
+                <h3>Display</h3>
+
+                <div class="settings-row">
+                    <span class="settings-label">Text Size</span>
+                    <div class="toggle-group">
+                        <button class="toggle-btn text-size-btn" data-size="small">S</button>
+                        <button class="toggle-btn text-size-btn active" data-size="medium">M</button>
+                        <button class="toggle-btn text-size-btn" data-size="large">L</button>
+                    </div>
+                </div>
+
+                <div class="settings-row">
+                    <span class="settings-label">Grid Spacing</span>
+                    <div class="toggle-group">
+                        <button class="toggle-btn grid-gap-btn" data-gap="tight">Tight</button>
+                        <button class="toggle-btn grid-gap-btn active" data-gap="normal">Normal</button>
+                        <button class="toggle-btn grid-gap-btn" data-gap="airy">Airy</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Section -->
+            <div class="settings-section">
+                <h3>System</h3>
+                <button class="reset-btn" id="reset-settings">
+                    <i class="fa-solid fa-trash"></i> Reset All Data
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/settings.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');

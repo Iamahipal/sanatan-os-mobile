@@ -1,5 +1,5 @@
 /* ============================================
-   SANATAN OS - FINAL FIX
+   SANATAN OS - WITH SETTINGS SYSTEM
    3-Column Grid | Fixed Heights | 60fps
    ============================================ */
 
@@ -15,6 +15,8 @@
     --row-height: 100px;
     --gap: 6px;
     --radius: 14px;
+    --glass-blur: 0px;
+    --base-font-size: 16px;
 }
 
 *,
@@ -36,6 +38,7 @@ body {
 
 body {
     font-family: 'Outfit', sans-serif;
+    font-size: var(--base-font-size);
     min-height: 100vh;
     min-height: 100dvh;
     color: var(--text-primary);
@@ -56,7 +59,7 @@ body {
 }
 
 /* ============================================
-   3-COLUMN GRID - FIXED ROW HEIGHT
+   3-COLUMN GRID
    ============================================ */
 .grid-container {
     display: grid;
@@ -147,29 +150,25 @@ body {
 }
 
 /* ============================================
-   TILE SIZES - ALL HAVE FIXED HEIGHT
+   TILE SIZES
    ============================================ */
-
-/* Small: 1 column, 1 row = 100px */
 .tile.small {
     grid-column: span 1;
     grid-row: span 1;
 }
 
-/* Medium: 2 columns, 1 row = 100px (SAME as small!) */
 .tile.medium {
     grid-column: span 2;
     grid-row: span 1;
 }
 
-/* Large: 3 columns, 1 row = 100px */
 .tile.large {
     grid-column: span 3;
     grid-row: span 1;
 }
 
 /* ============================================
-   ICON - ABSOLUTE CENTER
+   ICON - CENTER
    ============================================ */
 .tile-icon {
     position: absolute;
@@ -200,7 +199,7 @@ body {
 }
 
 /* ============================================
-   LABEL - ABSOLUTE BOTTOM-LEFT
+   LABEL - BOTTOM-LEFT
    ============================================ */
 .tile-label {
     position: absolute;
@@ -236,9 +235,7 @@ body {
     color: #fff;
 }
 
-/* ============================================
-   HERO
-   ============================================ */
+/* HERO */
 .tile.hero {
     background: rgba(40, 35, 70, 0.9);
     border-color: rgba(255, 153, 51, 0.2);
@@ -278,7 +275,7 @@ body {
 }
 
 /* ============================================
-   MINI GRID (2x2)
+   MINI GRID
    ============================================ */
 .mini-grid {
     display: grid;
@@ -293,6 +290,268 @@ body {
 
 .mini-grid .tile i {
     font-size: 16px;
+}
+
+/* ============================================
+   SETTINGS MODAL
+   ============================================ */
+.settings-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.settings-modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.settings-panel {
+    background: linear-gradient(180deg, #1a1635 0%, #0f0c29 100%);
+    border-radius: 24px 24px 0 0;
+    width: 100%;
+    max-width: 480px;
+    max-height: 85vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+}
+
+.settings-modal.open .settings-panel {
+    transform: translateY(0);
+}
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    background: inherit;
+    z-index: 10;
+}
+
+.settings-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.settings-close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--text-primary);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-section {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.settings-section h3 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-bottom: 16px;
+}
+
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.settings-row:last-child {
+    margin-bottom: 0;
+}
+
+.settings-label {
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+/* Theme Buttons */
+.theme-options {
+    display: flex;
+    gap: 12px;
+}
+
+.theme-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.theme-btn:active {
+    transform: scale(0.9);
+}
+
+.theme-btn.active {
+    border-color: var(--gold);
+}
+
+.theme-btn[data-theme="indigo"] {
+    background: linear-gradient(135deg, #0f0c29, #302b63);
+}
+
+.theme-btn[data-theme="white"] {
+    background: linear-gradient(135deg, #f0f0f5, #d0d0e0);
+}
+
+.theme-btn[data-theme="saffron"] {
+    background: linear-gradient(135deg, #1a0f05, #4a2515);
+}
+
+/* Wallpaper Grid */
+.wallpaper-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.wallpaper-btn {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.wallpaper-btn:active {
+    transform: scale(0.95);
+}
+
+.wallpaper-btn.active {
+    border-color: var(--gold);
+}
+
+.wallpaper-btn[data-wallpaper="default"] {
+    background: linear-gradient(135deg, #0f0c29, #241b4a);
+}
+
+.wallpaper-btn[data-wallpaper="cosmic"] {
+    background: linear-gradient(135deg, #0c0c1e, #2d1b4e);
+}
+
+.wallpaper-btn[data-wallpaper="forest"] {
+    background: linear-gradient(135deg, #0a1a0a, #1a3a2a);
+}
+
+.upload-btn {
+    width: 100%;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.upload-btn:active {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Slider */
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.slider {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--gold);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider-value {
+    font-size: 12px;
+    color: var(--text-muted);
+    min-width: 36px;
+    text-align: right;
+}
+
+/* Toggle Button Group */
+.toggle-group {
+    display: flex;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.toggle-btn {
+    padding: 8px 14px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.toggle-btn.active {
+    background: var(--gold);
+    color: #000;
+}
+
+/* Reset Button */
+.reset-btn {
+    width: 100%;
+    padding: 14px;
+    background: rgba(229, 57, 53, 0.2);
+    border: 1px solid rgba(229, 57, 53, 0.4);
+    border-radius: 12px;
+    color: #ff6b6b;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.reset-btn:active {
+    background: rgba(229, 57, 53, 0.3);
 }
 
 /* ============================================
