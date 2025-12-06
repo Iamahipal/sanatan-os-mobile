@@ -1,5 +1,17 @@
-/* General Styling */
+/* ============================================
+   SANATAN OS - STRICT METRO GRID
+   Fixed 110px Rows | 10px Gap | No Auto Sizing
+   ============================================ */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+/* ============================================
+   CSS VARIABLES - STRICT DIMENSIONS
+   ============================================ */
+:root {
+    --row-height: 110px;
+    --gap: 10px;
+}
 
 html,
 body {
@@ -26,45 +38,112 @@ html {
 }
 
 /* ============================================
-   GRID LAYOUT - FIXED ROW HEIGHT
+   GRID CONTAINER - STRICT FIXED DIMENSIONS
    ============================================ */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    /* CRITICAL FIX: Fixed row height, not auto */
-    grid-auto-rows: 110px;
-    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    /* CRITICAL: Fixed row height - NO auto sizing */
+    grid-auto-rows: var(--row-height);
+    /* STRICT: 10px Metro-standard gap */
+    gap: var(--gap);
     width: 100%;
-    max-width: 100%;
-    padding: 10px;
+    max-width: 480px;
+    padding: 15px;
     box-sizing: border-box;
     padding-bottom: 60px;
-    padding-top: 10px;
 }
 
 /* ============================================
-   STANDARD TILE - NO ASPECT-RATIO
+   TILE BASE - FILLS GRID CELL EXACTLY
    ============================================ */
 .tile {
-    background-color: rgba(255, 255, 255, 0.1);
+    /* FILL the grid cell completely */
+    width: 100%;
+    height: 100%;
+    /* NO margin - gap handles spacing */
+    margin: 0;
+    /* Content handling */
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    width: 100%;
-    /* Uses grid row height, not aspect-ratio */
-    height: 100%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     position: relative;
-    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border-radius: 2px;
+    /* Visual */
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    /* Interaction */
+    transition: transform 0.15s ease;
+    text-decoration: none;
+    color: inherit;
 }
 
 .tile:active {
     transform: scale(0.96);
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 }
 
+/* ============================================
+   TILE SIZES - EXPLICIT SPANS
+   ============================================ */
+
+/* SMALL: 1 column × 1 row = 110px height */
+.small {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+/* MEDIUM: 2 columns × 1 row = 110px height (SAME as small!) */
+.medium {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+/* LARGE: 3 columns × 1 row = 110px height */
+.large {
+    grid-column: span 3;
+    grid-row: span 1;
+}
+
+/* TALL: 1 column × 2 rows = (110px × 2) + 10px = 230px height */
+.tall {
+    grid-column: span 1;
+    grid-row: span 2;
+    /* Grid will auto-calculate: height = (row-height * 2) + gap */
+}
+
+/* BIG SQUARE: 2 columns × 2 rows = 230px × calculated width */
+.big-square {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+/* ============================================
+   SMALL-GRID (2×2 mini tiles within 1 grid cell)
+   ============================================ */
+.small-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 6px;
+    width: 100%;
+    height: 100%;
+    /* Takes up 1 column × 1 row = 110px */
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.small-grid .tile {
+    border-radius: 3px;
+}
+
+.small-grid .tile i {
+    font-size: 18px;
+}
+
+/* ============================================
+   TILE CONTENT
+   ============================================ */
 .tile-content {
     width: 100%;
     height: 100%;
@@ -77,6 +156,7 @@ html {
     box-sizing: border-box;
 }
 
+/* Text label - bottom left */
 .tile span {
     color: white;
     font-size: 11px;
@@ -89,56 +169,25 @@ html {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+/* Icon - centered */
 .tile i {
-    font-size: 32px;
+    font-size: 28px;
     color: white;
-    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -55%);
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-.tile.small i {
+.tile.small i,
+.small-grid .tile i {
     font-size: 20px;
 }
 
-.tile:not(.small) .tile-content:has(span) i {
-    transform: translate(-50%, -60%);
-}
-
 /* ============================================
-   TILE SIZES - NO ASPECT-RATIO
-   All tiles same height per row
+   LIVE TILE ANIMATION
    ============================================ */
-.large {
-    grid-column: span 3;
-    grid-row: span 1;
-    /* NO aspect-ratio - uses grid-auto-rows */
-}
-
-.medium {
-    grid-column: span 2;
-    grid-row: span 1;
-    /* CRITICAL FIX: NO aspect-ratio - same height as small tiles */
-}
-
-.small-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 8px;
-    width: 100%;
-    height: 100%;
-}
-
-.small {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-/* Live Tile Animation */
 .live-tile {
     perspective: 1000px;
 }
@@ -171,7 +220,68 @@ html {
     transform: rotateX(0deg);
 }
 
-/* App List View */
+/* ============================================
+   COLOR GRADIENTS
+   ============================================ */
+.saffron {
+    background: linear-gradient(135deg, #ff9900, #d35400) !important;
+}
+
+.crimson {
+    background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+}
+
+.teal {
+    background: linear-gradient(135deg, #1abc9c, #16a085) !important;
+}
+
+.yellow {
+    background: linear-gradient(135deg, #f1c40f, #f39c12) !important;
+}
+
+.purple {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad) !important;
+}
+
+.blue {
+    background: linear-gradient(135deg, #3498db, #2980b9) !important;
+}
+
+.green {
+    background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
+}
+
+.dark-grey {
+    background: linear-gradient(135deg, #34495e, #2c3e50) !important;
+}
+
+.dark-orange {
+    background: linear-gradient(135deg, #e67e22, #d35400) !important;
+}
+
+/* Alias for tile-purple class used in HTML */
+.tile-purple {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad) !important;
+}
+
+/* ============================================
+   BADGE
+   ============================================ */
+.tile-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 2px 6px;
+    font-size: 9px;
+    font-weight: 700;
+    color: white;
+    border-radius: 2px;
+}
+
+/* ============================================
+   APP LIST VIEW
+   ============================================ */
 .app-list-container {
     display: none;
     width: 100%;
@@ -181,7 +291,6 @@ html {
     position: relative;
     overflow-y: auto;
     font-family: 'Poppins', sans-serif;
-    padding-left: 0;
     padding-bottom: 80px;
 }
 
@@ -219,12 +328,6 @@ html {
     flex-grow: 1;
     outline: none;
     padding: 8px 12px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.search-bar input:focus {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: #e67e22;
 }
 
 .app-group {
@@ -243,14 +346,12 @@ html {
     text-align: center;
     border: 2px solid #e67e22;
     margin-right: 20px;
-    flex-shrink: 0;
 }
 
 .group-items {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .app-item {
@@ -282,74 +383,20 @@ html {
     color: white;
 }
 
-/* Gradients */
-.saffron {
-    background: linear-gradient(135deg, #ff9900, #d35400) !important;
-}
-
-.crimson {
-    background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
-}
-
-.teal {
-    background: linear-gradient(135deg, #1abc9c, #16a085) !important;
-}
-
-.yellow {
-    background: linear-gradient(135deg, #f1c40f, #f39c12) !important;
-}
-
-.purple {
-    background: linear-gradient(135deg, #9b59b6, #8e44ad) !important;
-}
-
-.blue {
-    background: linear-gradient(135deg, #3498db, #2980b9) !important;
-}
-
-.green {
-    background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
-}
-
-.dark-grey {
-    background: linear-gradient(135deg, #34495e, #2c3e50) !important;
-}
-
-.dark-orange {
-    background: linear-gradient(135deg, #e67e22, #d35400) !important;
-}
-
-/* Badge */
-.tile-badge {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 2px 6px;
-    font-size: 9px;
-    font-weight: 700;
-    border-radius: 2px;
-    backdrop-filter: blur(2px);
-}
-
-/* Selection mode */
-.tile.selected {
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9);
-    z-index: 10;
-    transform: scale(1.02);
-}
-
-/* Responsive */
-@media screen and (max-width: 600px) {
-    .grid-container {
-        gap: 8px;
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 400px) {
+    :root {
+        --row-height: 100px;
+        --gap: 8px;
     }
 
     .tile i {
-        font-size: 28px;
+        font-size: 24px;
     }
 
-    .tile.small i {
-        font-size: 20px;
+    .tile span {
+        font-size: 10px;
     }
 }
