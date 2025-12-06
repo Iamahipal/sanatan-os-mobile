@@ -4,92 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Radha Japa</title>
+    <title>Naam Japa</title>
     <link rel="stylesheet" href="style.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Poppins:wght@400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Poppins:wght@300;400;600&family=Tiro+Devanagari+Sanskrit&display=swap"
         rel="stylesheet">
 </head>
 
-<body>
+<body class="page-enter">
     <div class="app-container">
-        <!-- Header / Controls -->
+        <!-- Header -->
         <header class="app-header">
-            <a href="../../index.html" id="back-btn" class="icon-btn back-btn" aria-label="Back to OS"
-                style="display:flex; align-items:center; text-decoration: none; color: inherit;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
+            <a href="../../index.html" class="back-btn" aria-label="Back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7" />
                 </svg>
-                <span style="margin-left: 5px; font-weight: 600;">Back</span>
             </a>
 
-            <div class="header-controls">
-                <button id="mute-btn" class="icon-btn" aria-label="Toggle Mute">
-                    <!-- Speaker Icon (Unmuted by default) -->
-                    <svg id="icon-sound-on" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                    </svg>
-                    <!-- Muted Icon (Hidden by default) -->
-                    <svg id="icon-sound-off" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                        <line x1="23" y1="9" x2="17" y2="15"></line>
-                        <line x1="17" y1="9" x2="23" y2="15"></line>
-                    </svg>
-                </button>
-                <button id="history-btn" class="icon-btn" aria-label="View History">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="20" x2="18" y2="10"></line>
-                        <line x1="12" y1="20" x2="12" y2="4"></line>
-                        <line x1="6" y1="20" x2="6" y2="14"></line>
-                    </svg>
-                </button>
-            </div>
+            <!-- Mantra Selector -->
+            <select id="mantra-selector" class="mantra-selector">
+                <option value="श्री राधा">श्री राधा</option>
+                <option value="श्री कृष्ण">श्री कृष्ण</option>
+                <option value="श्री राम">श्री राम</option>
+                <option value="ॐ नमः शिवाय">ॐ नमः शिवाय</option>
+                <option value="हरे कृष्ण">हरे कृष्ण</option>
+            </select>
+
+            <button id="mute-btn" class="icon-btn" aria-label="Toggle Sound">
+                <svg id="sound-on" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+                <svg id="sound-off" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+            </button>
         </header>
 
-        <div class="mala-counter-display">
-            <span class="label">Today</span>
-            <span id="today-malas" class="count">0</span>
-        </div>
-
-        <!-- Main Interaction Area -->
-        <main id="japa-area" class="japa-area">
-            <!-- Center Display -->
-            <div class="center-display">
-                <h1 id="mantra-text" class="mantra">Radha</h1>
-                <div class="bead-counter">
-                    <span id="current-bead">0</span> / 108
-                </div>
-            </div>
-
-            <!-- The Mala (Beads) -->
-            <div id="mala-container" class="mala-container">
-                <!-- Beads will be generated by JS -->
-            </div>
+        <!-- Main Tap Canvas -->
+        <main id="japa-canvas" class="japa-canvas">
+            <!-- Floating mantras will be generated here -->
         </main>
 
-        <!-- Flower Shower Container -->
-        <div id="flower-container" class="flower-container"></div>
-    </div>
+        <!-- Bottom Counter Bar -->
+        <footer class="counter-bar">
+            <div class="counter-item">
+                <span class="counter-label">Bead</span>
+                <span id="bead-count" class="counter-value">0</span>
+            </div>
+            <div class="counter-divider">|</div>
+            <div class="counter-item">
+                <span class="counter-label">Mala</span>
+                <span id="mala-count" class="counter-value">0</span>
+            </div>
+        </footer>
 
-    <!-- History Drawer -->
-    <div id="history-drawer" class="history-drawer">
-        <div class="drawer-header">
-            <h2>Your Journey</h2>
-            <button id="close-drawer-btn" class="icon-btn">&times;</button>
-        </div>
-        <div class="drawer-content">
-            <ul id="history-list">
-                <!-- History items injected here -->
-            </ul>
-        </div>
+        <!-- Divine Flash Overlay -->
+        <div id="divine-flash" class="divine-flash"></div>
     </div>
 
     <!-- Audio Elements -->
+    <audio id="tap-sound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"
+        preload="auto"></audio>
     <audio id="bell-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-temple-bell-ring-578.mp3"
         preload="auto"></audio>
 
