@@ -1,6 +1,6 @@
 /* ============================================
-   SANATAN OS - MODULAR GRID SYSTEM
-   Base: 110px row | 10px gap | 2 columns
+   SANATAN OS - EXPLICIT HEIGHT SYSTEM
+   Every tile gets height: 110px directly
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
@@ -13,8 +13,7 @@
 
 html,
 body {
-    background: #0078d4;
-    /* Windows Blue for reference */
+    background: linear-gradient(180deg, #0d0b1e 0%, #1a1333 50%, #0d0b1e 100%);
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
     color: white;
@@ -29,87 +28,120 @@ html {
 }
 
 /* ============================================
-   GRID CONTAINER - STRICT 2-COLUMN LAYOUT
+   GRID CONTAINER - 2 COLUMNS
    ============================================ */
 .grid-container {
     display: grid;
-    /* 2 COLUMNS - Windows Phone standard */
     grid-template-columns: 1fr 1fr;
-    /* HARD CONSTRAINT: Every row is exactly 110px */
-    grid-auto-rows: 110px;
-    /* TIGHT UNIFORM SPACING */
     gap: 10px;
 
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
     padding: 15px;
-    padding-top: max(15px, env(safe-area-inset-top));
     padding-bottom: 80px;
 }
 
 /* ============================================
-   TILE BASE - ALL TILES
+   ALL TILES - EXPLICIT 110px HEIGHT
+   THIS IS THE KEY FIX
    ============================================ */
-.tile {
-    /* Positioning context for absolute children */
-    position: relative;
+.tile,
+.tile-small,
+.tile-wide,
+a.tile {
+    /* EXPLICIT HEIGHT - NOT FROM GRID */
+    height: 110px !important;
+    min-height: 110px !important;
+    max-height: 110px !important;
 
-    /* Visual styling */
+    /* Visual */
     background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.12) 0%,
-            rgba(255, 255, 255, 0.05) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 4px;
+            rgba(30, 25, 55, 0.9) 0%,
+            rgba(20, 18, 40, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
 
-    /* CRITICAL: Content cannot stretch the tile */
+    /* Positioning context */
+    position: relative;
     overflow: hidden;
 
     /* Interaction */
     cursor: pointer;
-    transition: transform 0.15s ease, opacity 0.15s ease;
+    transition: transform 0.15s ease;
     text-decoration: none;
     color: inherit;
+    display: block;
 }
 
 .tile:active {
     transform: scale(0.96);
-    opacity: 0.9;
 }
 
 /* ============================================
-   TILE SPANS - MODULAR MATH
+   TILE SPANS - WIDTH ONLY
    ============================================ */
 
-/* SMALL (1x1): Default - 1 column, 1 row = 110px height */
-.tile-small,
-.tile {
+/* Small: 1 column */
+.tile-small {
     grid-column: span 1;
-    grid-row: span 1;
-    /* Height = 110px (from grid-auto-rows) */
 }
 
-/* WIDE (2x1): 2 columns, 1 row = SAME 110px height as small! */
+/* Wide: 2 columns - SAME 110px HEIGHT! */
 .tile-wide {
     grid-column: span 2;
-    grid-row: span 1;
-    /* Height = 110px (EXACTLY same as small tile) */
+    /* Height is already 110px from above! */
 }
 
-/* LARGE (2x2): 2 columns, 2 rows = (110px * 2) + 10px gap = 230px height */
+/* Large: 2 columns, 2 rows = 230px */
 .tile-large {
     grid-column: span 2;
-    grid-row: span 2;
-    /* Height = 230px (calculated by grid) */
+    height: 230px !important;
+    min-height: 230px !important;
+    max-height: 230px !important;
 }
 
 /* ============================================
-   TILE CONTENT - ABSOLUTE POSITIONING
+   SMALL-GRID (2x2 mini tiles)
+   ============================================ */
+.small-grid {
+    grid-column: span 1;
+    height: 110px !important;
+    min-height: 110px !important;
+    max-height: 110px !important;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+
+    background: transparent;
+    border: none;
+}
+
+.small-grid .tile {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-grid .tile i {
+    font-size: 16px;
+    position: static;
+    transform: none;
+}
+
+/* ============================================
+   CONTENT POSITIONING - ABSOLUTE
    ============================================ */
 
-/* Icon: Center X/Y */
+/* Icon: Center */
 .tile i,
-.tile .tile-icon {
+.emoji-icon {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -120,21 +152,12 @@ html {
 
 .tile-wide i,
 .tile-large i {
-    font-size: 36px;
+    font-size: 32px;
 }
 
-/* Emoji icons */
-.tile .emoji-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    font-size: 2rem;
-}
-
-/* Label: Bottom 10px, Left 12px */
-.tile span,
-.tile .tile-label {
+/* Label: Bottom-left */
+.tile>span:last-child,
+.tile-label {
     position: absolute;
     bottom: 10px;
     left: 12px;
@@ -143,46 +166,6 @@ html {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: white;
-    white-space: nowrap;
-}
-
-/* Tile content wrapper (optional, for complex layouts) */
-.tile-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* ============================================
-   SMALL-GRID (2x2 mini tiles in one cell)
-   ============================================ */
-.small-grid {
-    grid-column: span 1;
-    grid-row: span 1;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 4px;
-
-    background: transparent;
-    border: none;
-    overflow: visible;
-}
-
-.small-grid .tile {
-    border-radius: 3px;
-}
-
-.small-grid .tile i {
-    font-size: 16px;
-    transform: translate(-50%, -50%);
 }
 
 /* ============================================
@@ -202,7 +185,7 @@ html {
 }
 
 /* ============================================
-   LIVE TILE ANIMATION
+   LIVE TILE
    ============================================ */
 .live-tile {
     perspective: 1000px;
@@ -210,13 +193,12 @@ html {
 
 .tile-face {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
     transition: transform 0.8s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .face-front {
@@ -237,71 +219,75 @@ html {
 }
 
 /* ============================================
-   COLOR THEMES - SOLID METRO COLORS
+   COLORS
    ============================================ */
 .saffron {
-    background: #ff9800 !important;
+    background: linear-gradient(135deg, #ff9800, #e65100) !important;
 }
 
 .crimson {
-    background: #e53935 !important;
+    background: linear-gradient(135deg, #e53935, #b71c1c) !important;
 }
 
 .teal {
-    background: #009688 !important;
+    background: linear-gradient(135deg, #009688, #00695c) !important;
 }
 
 .yellow {
-    background: #ffc107 !important;
+    background: linear-gradient(135deg, #ffc107, #ff8f00) !important;
 }
 
 .purple {
-    background: #9c27b0 !important;
+    background: linear-gradient(135deg, #9c27b0, #6a1b9a) !important;
 }
 
 .blue {
-    background: #2196f3 !important;
+    background: linear-gradient(135deg, #2196f3, #1565c0) !important;
 }
 
 .green {
-    background: #4caf50 !important;
+    background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
 }
 
 .dark-grey {
-    background: rgba(255, 255, 255, 0.1) !important;
+    background: linear-gradient(135deg, rgba(40, 35, 60, 0.9), rgba(30, 25, 50, 0.95)) !important;
 }
 
 .dark-orange {
-    background: #ff5722 !important;
+    background: linear-gradient(135deg, #ff5722, #d84315) !important;
 }
 
-.metro-blue {
-    background: #0078d4 !important;
-}
-
-/* Dark glass for contrast */
 .glass-dark {
-    background: linear-gradient(135deg,
-            rgba(20, 20, 40, 0.85) 0%,
-            rgba(10, 10, 25, 0.9) 100%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, rgba(25, 20, 45, 0.95), rgba(15, 12, 30, 0.98)) !important;
 }
 
 /* ============================================
-   RESPONSIVE - SMALLER SCREENS
+   RESPONSIVE
    ============================================ */
 @media (max-width: 360px) {
-    .grid-container {
-        grid-auto-rows: 95px;
-        gap: 8px;
-        padding: 10px;
+
+    .tile,
+    .tile-small,
+    .tile-wide,
+    a.tile {
+        height: 95px !important;
+        min-height: 95px !important;
+        max-height: 95px !important;
+    }
+
+    .tile-large {
+        height: 200px !important;
+        min-height: 200px !important;
+        max-height: 200px !important;
+    }
+
+    .small-grid {
+        height: 95px !important;
+        min-height: 95px !important;
+        max-height: 95px !important;
     }
 
     .tile i {
         font-size: 24px;
-    }
-
-    .tile span {
-        font-size: 10px;
     }
 }
