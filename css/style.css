@@ -1,8 +1,4 @@
-/* ============================================
-   SANATAN OS - EXPLICIT HEIGHT SYSTEM
-   Every tile gets height: 110px directly
-   ============================================ */
-
+/* SANATAN OS - Clean Minimal CSS */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 * {
@@ -11,167 +7,108 @@
     box-sizing: border-box;
 }
 
-html,
 body {
-    background: linear-gradient(180deg, #0d0b1e 0%, #1a1333 50%, #0d0b1e 100%);
+    background: linear-gradient(180deg, #0d0b1e, #1a1333, #0d0b1e);
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
-    color: white;
+    color: #fff;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
-
-html {
-    scrollbar-width: none;
-}
-
-/* ============================================
-   GRID CONTAINER - 2 COLUMNS
-   ============================================ */
+/* GRID: 2 columns, 10px gap */
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-
-    width: 100%;
     max-width: 400px;
     margin: 0 auto;
     padding: 15px;
     padding-bottom: 80px;
 }
 
-/* ============================================
-   ALL TILES - EXPLICIT 110px HEIGHT
-   THIS IS THE KEY FIX
-   ============================================ */
-.tile,
-.tile-small,
-.tile-wide,
-a.tile {
-    /* EXPLICIT HEIGHT - NOT FROM GRID */
-    height: 110px !important;
-    min-height: 110px !important;
-    max-height: 110px !important;
-
-    /* Visual */
-    background: linear-gradient(135deg,
-            rgba(30, 25, 55, 0.9) 0%,
-            rgba(20, 18, 40, 0.95) 100%);
+/* BASE TILE: 110px height */
+.tile {
+    height: 110px;
+    position: relative;
+    background: rgba(30, 25, 55, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
-
-    /* Positioning context */
-    position: relative;
     overflow: hidden;
-
-    /* Interaction */
     cursor: pointer;
-    transition: transform 0.15s ease;
     text-decoration: none;
     color: inherit;
-    display: block;
 }
 
 .tile:active {
     transform: scale(0.96);
 }
 
-/* ============================================
-   TILE SPANS - WIDTH ONLY
-   ============================================ */
-
-/* Small: 1 column */
-.tile-small {
-    grid-column: span 1;
-}
-
-/* Wide: 2 columns - SAME 110px HEIGHT! */
+/* TILE SIZES */
 .tile-wide {
     grid-column: span 2;
-    /* Height is already 110px from above! */
+    height: 110px;
 }
 
-/* Large: 2 columns, 2 rows = 230px */
 .tile-large {
     grid-column: span 2;
-    height: 230px !important;
-    min-height: 230px !important;
-    max-height: 230px !important;
+    height: 230px;
 }
 
-/* ============================================
-   SMALL-GRID (2x2 mini tiles)
-   ============================================ */
+/* SMALL GRID (2x2 mini tiles) */
 .small-grid {
-    grid-column: span 1;
-    height: 110px !important;
-    min-height: 110px !important;
-    max-height: 110px !important;
-
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 4px;
-
+    height: 110px;
     background: transparent;
     border: none;
 }
 
 .small-grid .tile {
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
+    height: auto;
     border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* ICON: Centered */
+.tile i {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+}
+
 .small-grid .tile i {
-    font-size: 16px;
     position: static;
     transform: none;
+    font-size: 16px;
 }
 
-/* ============================================
-   CONTENT POSITIONING - ABSOLUTE
-   ============================================ */
-
-/* Icon: Center */
-.tile i,
-.emoji-icon {
+/* EMOJI: Centered */
+.emoji {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
-    transform: translate(-50%, -60%);
-    font-size: 28px;
-    color: white;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
 }
 
-.tile-wide i,
-.tile-large i {
-    font-size: 32px;
-}
-
-/* Label: Bottom-left */
-.tile>span:last-child,
-.tile-label {
+/* LABEL: Bottom-left */
+.tile>span:last-of-type {
     position: absolute;
     bottom: 10px;
     left: 12px;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: white;
+    letter-spacing: 1px;
 }
 
-/* ============================================
-   BADGE
-   ============================================ */
-.tile-badge {
+/* BADGE */
+.badge {
     position: absolute;
     top: 8px;
     right: 8px;
@@ -179,35 +116,64 @@ a.tile {
     padding: 2px 6px;
     font-size: 8px;
     font-weight: 700;
-    color: white;
     border-radius: 2px;
-    text-transform: uppercase;
 }
 
-/* ============================================
-   LIVE TILE
-   ============================================ */
+/* COLORS */
+.saffron {
+    background: linear-gradient(135deg, #ff9800, #e65100);
+}
+
+.crimson {
+    background: linear-gradient(135deg, #e53935, #b71c1c);
+}
+
+.teal {
+    background: linear-gradient(135deg, #009688, #00695c);
+}
+
+.purple {
+    background: linear-gradient(135deg, #9c27b0, #6a1b9a);
+}
+
+.blue {
+    background: linear-gradient(135deg, #2196f3, #1565c0);
+}
+
+.green {
+    background: linear-gradient(135deg, #4caf50, #2e7d32);
+}
+
+.orange {
+    background: linear-gradient(135deg, #ff5722, #d84315);
+}
+
+.grey {
+    background: rgba(40, 35, 60, 0.9);
+}
+
+/* LIVE TILE */
 .live-tile {
     perspective: 1000px;
 }
 
 .tile-face {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     backface-visibility: hidden;
-    transition: transform 0.8s ease;
+    transition: transform 0.8s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .face-front {
-    transform: rotateX(0deg);
+    transform: rotateX(0);
 }
 
 .face-back {
     transform: rotateX(180deg);
-    background: inherit;
 }
 
 .live-tile.flipped .face-front {
@@ -215,76 +181,25 @@ a.tile {
 }
 
 .live-tile.flipped .face-back {
-    transform: rotateX(0deg);
+    transform: rotateX(0);
 }
 
-/* ============================================
-   COLORS
-   ============================================ */
-.saffron {
-    background: linear-gradient(135deg, #ff9800, #e65100) !important;
-}
-
-.crimson {
-    background: linear-gradient(135deg, #e53935, #b71c1c) !important;
-}
-
-.teal {
-    background: linear-gradient(135deg, #009688, #00695c) !important;
-}
-
-.yellow {
-    background: linear-gradient(135deg, #ffc107, #ff8f00) !important;
-}
-
-.purple {
-    background: linear-gradient(135deg, #9c27b0, #6a1b9a) !important;
-}
-
-.blue {
-    background: linear-gradient(135deg, #2196f3, #1565c0) !important;
-}
-
-.green {
-    background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
-}
-
-.dark-grey {
-    background: linear-gradient(135deg, rgba(40, 35, 60, 0.9), rgba(30, 25, 50, 0.95)) !important;
-}
-
-.dark-orange {
-    background: linear-gradient(135deg, #ff5722, #d84315) !important;
-}
-
-.glass-dark {
-    background: linear-gradient(135deg, rgba(25, 20, 45, 0.95), rgba(15, 12, 30, 0.98)) !important;
-}
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
+/* RESPONSIVE */
 @media (max-width: 360px) {
+    .tile {
+        height: 95px;
+    }
 
-    .tile,
-    .tile-small,
-    .tile-wide,
-    a.tile {
-        height: 95px !important;
-        min-height: 95px !important;
-        max-height: 95px !important;
+    .tile-wide {
+        height: 95px;
     }
 
     .tile-large {
-        height: 200px !important;
-        min-height: 200px !important;
-        max-height: 200px !important;
+        height: 200px;
     }
 
     .small-grid {
-        height: 95px !important;
-        min-height: 95px !important;
-        max-height: 95px !important;
+        height: 95px;
     }
 
     .tile i {
