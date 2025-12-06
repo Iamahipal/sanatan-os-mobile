@@ -1,0 +1,123 @@
+body {
+    background-color: #111122;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 20px 0;
+    /* Vertical padding only, horizontal handled by container */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    max-width: 800px;
+    /* Limit width on desktop */
+    margin-bottom: 20px;
+    padding: 0 12px;
+    /* Match container margin */
+    box-sizing: border-box;
+}
+
+h1 {
+    font-weight: 100;
+    /* Very thin */
+    margin: 0;
+    margin-left: 12px;
+    /* Specific margin requested */
+    font-size: 2rem;
+    /* Adjust as needed */
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 units wide */
+    gap: 8px;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 12px;
+    /* Margins so tiles don't touch edge */
+    box-sizing: border-box;
+}
+
+.tile {
+    position: relative;
+    /* For absolute positioning of text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+    /* No border-radius for sharp edges */
+}
+
+.tile:hover,
+.tile:active {
+    transform: scale(0.98);
+}
+
+/* Tile Content */
+.tile h2 {
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    /* Optional: Metro often uses uppercase or sentence case, sticking to request */
+}
+
+.tile-icon {
+    font-size: 32px;
+    /* Centered by flex on .tile */
+}
+
+/* Tile Sizes (Unit = 1fr) */
+/* Assuming a base unit height. Metro tiles are usually square-ish. 
+   Let's define a base height or aspect ratio. 
+   If width is variable (responsive), height should probably match or be fixed.
+   Standard Metro: Small (1x1), Medium (2x2), Wide (4x2).
+   Let's use aspect-ratio or fixed height for simplicity.
+   On mobile, 1fr might be around (Screen - 24 - 24)/4.
+   Let's set a min-height or use padding-bottom hack if we want perfect squares.
+   For now, let's set a fixed height that looks good on mobile (~80-90px per unit).
+*/
+
+.tile-small {
+    grid-column: span 1;
+    aspect-ratio: 1 / 1;
+}
+
+.tile-medium {
+    grid-column: span 2;
+    aspect-ratio: 2 / 2;
+    /* Square 2x2 */
+}
+
+.tile-wide {
+    grid-column: span 4;
+    aspect-ratio: 4 / 2;
+    /* 2 units high */
+}
+
+/* Colors */
+.saffron {
+    background-color: #FF9933;
+}
+
+.crimson {
+    background-color: #DC143C;
+}
+
+.teal {
+    background-color: #008080;
+}
+
+.yellow {
+    background-color: #FFD700;
+    color: #111;
+    /* Dark text for yellow background */
+}
