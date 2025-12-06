@@ -1,5 +1,5 @@
-/* SANATAN OS - Clean Minimal CSS */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+/* SANATAN OS - Performance Optimized */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
 * {
     margin: 0;
@@ -8,13 +8,16 @@
 }
 
 body {
-    background: linear-gradient(180deg, #0d0b1e, #1a1333, #0d0b1e);
+    /* Solid color is faster than gradient */
+    background: #0d0b1e;
     min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
     color: #fff;
+    /* Prevent overscroll bounce */
+    overscroll-behavior: none;
 }
 
-/* GRID: 2 columns, 10px gap */
+/* GRID */
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -25,21 +28,93 @@ body {
     padding-bottom: 80px;
 }
 
-/* BASE TILE: 110px height */
+/* BASE TILE - GPU Accelerated */
 .tile {
     height: 110px;
     position: relative;
-    background: rgba(30, 25, 55, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
+    background: rgba(30, 25, 55, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
     overflow: hidden;
     cursor: pointer;
     text-decoration: none;
     color: inherit;
+
+    /* GPU ACCELERATION */
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+
+    /* ENTRANCE ANIMATION - Pure CSS */
+    opacity: 0;
+    animation: tileEnter 0.25s ease-out forwards;
 }
 
+/* Staggered entrance delays */
+.grid-container>*:nth-child(1) {
+    animation-delay: 0ms;
+}
+
+.grid-container>*:nth-child(2) {
+    animation-delay: 30ms;
+}
+
+.grid-container>*:nth-child(3) {
+    animation-delay: 60ms;
+}
+
+.grid-container>*:nth-child(4) {
+    animation-delay: 90ms;
+}
+
+.grid-container>*:nth-child(5) {
+    animation-delay: 120ms;
+}
+
+.grid-container>*:nth-child(6) {
+    animation-delay: 150ms;
+}
+
+.grid-container>*:nth-child(7) {
+    animation-delay: 180ms;
+}
+
+.grid-container>*:nth-child(8) {
+    animation-delay: 210ms;
+}
+
+.grid-container>*:nth-child(9) {
+    animation-delay: 240ms;
+}
+
+.grid-container>*:nth-child(10) {
+    animation-delay: 270ms;
+}
+
+.grid-container>*:nth-child(11) {
+    animation-delay: 300ms;
+}
+
+.grid-container>*:nth-child(12) {
+    animation-delay: 330ms;
+}
+
+@keyframes tileEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95) translateZ(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1) translateZ(0);
+    }
+}
+
+/* TAP EFFECT - Hardware accelerated */
 .tile:active {
-    transform: scale(0.96);
+    transform: scale(0.96) translateZ(0);
+    transition: transform 0.1s ease;
 }
 
 /* TILE SIZES */
@@ -53,7 +128,7 @@ body {
     height: 230px;
 }
 
-/* SMALL GRID (2x2 mini tiles) */
+/* SMALL GRID */
 .small-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -70,15 +145,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: none;
+    opacity: 1;
 }
 
-/* ICON: Centered */
+/* ICON */
 .tile i {
     position: absolute;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 28px;
+    font-size: 26px;
 }
 
 .small-grid .tile i {
@@ -87,16 +164,16 @@ body {
     font-size: 16px;
 }
 
-/* EMOJI: Centered */
+/* EMOJI */
 .emoji {
     position: absolute;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
-/* LABEL: Bottom-left */
+/* LABEL */
 .tile>span:last-of-type {
     position: absolute;
     bottom: 10px;
@@ -104,7 +181,7 @@ body {
     font-size: 10px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
 }
 
 /* BADGE */
@@ -115,44 +192,44 @@ body {
     background: #e53935;
     padding: 2px 6px;
     font-size: 8px;
-    font-weight: 700;
+    font-weight: 600;
     border-radius: 2px;
 }
 
-/* COLORS */
+/* COLORS - Solid, no gradients for performance */
 .saffron {
-    background: linear-gradient(135deg, #ff9800, #e65100);
+    background: #f57c00;
 }
 
 .crimson {
-    background: linear-gradient(135deg, #e53935, #b71c1c);
+    background: #c62828;
 }
 
 .teal {
-    background: linear-gradient(135deg, #009688, #00695c);
+    background: #00796b;
 }
 
 .purple {
-    background: linear-gradient(135deg, #9c27b0, #6a1b9a);
+    background: #7b1fa2;
 }
 
 .blue {
-    background: linear-gradient(135deg, #2196f3, #1565c0);
+    background: #1565c0;
 }
 
 .green {
-    background: linear-gradient(135deg, #4caf50, #2e7d32);
+    background: #2e7d32;
 }
 
 .orange {
-    background: linear-gradient(135deg, #ff5722, #d84315);
+    background: #d84315;
 }
 
 .grey {
-    background: rgba(40, 35, 60, 0.9);
+    background: rgba(40, 35, 60, 0.95);
 }
 
-/* LIVE TILE */
+/* LIVE TILE - GPU Accelerated */
 .live-tile {
     perspective: 1000px;
 }
@@ -161,7 +238,8 @@ body {
     position: absolute;
     inset: 0;
     backface-visibility: hidden;
-    transition: transform 0.8s;
+    transform: translateZ(0);
+    will-change: transform;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -169,27 +247,39 @@ body {
 }
 
 .face-front {
-    transform: rotateX(0);
+    transform: rotateX(0deg) translateZ(0);
+    transition: transform 0.5s ease;
 }
 
 .face-back {
-    transform: rotateX(180deg);
+    transform: rotateX(180deg) translateZ(0);
+    transition: transform 0.5s ease;
 }
 
 .live-tile.flipped .face-front {
-    transform: rotateX(-180deg);
+    transform: rotateX(-180deg) translateZ(0);
 }
 
 .live-tile.flipped .face-back {
-    transform: rotateX(0);
+    transform: rotateX(0deg) translateZ(0);
+}
+
+/* REDUCE MOTION - Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .tile {
+        animation: none;
+        opacity: 1;
+    }
+
+    .tile-face {
+        transition: none;
+    }
 }
 
 /* RESPONSIVE */
 @media (max-width: 360px) {
-    .tile {
-        height: 95px;
-    }
 
+    .tile,
     .tile-wide {
         height: 95px;
     }
@@ -203,6 +293,6 @@ body {
     }
 
     .tile i {
-        font-size: 24px;
+        font-size: 22px;
     }
 }
