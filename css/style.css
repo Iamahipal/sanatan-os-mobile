@@ -1,9 +1,9 @@
 /* ============================================
-   SANATAN OS - CANVA DESIGN MATCH
-   Strict Grid: 120px rows, 8px gap
+   SANATAN OS - MODULAR GRID SYSTEM
+   Base: 110px row | 10px gap | 2 columns
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 * {
     margin: 0;
@@ -13,10 +13,10 @@
 
 html,
 body {
-    background: linear-gradient(180deg, #0d0b1e 0%, #1a1333 50%, #0d0b1e 100%);
+    background: #0078d4;
+    /* Windows Blue for reference */
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
-    overflow-x: hidden;
     color: white;
 }
 
@@ -29,92 +29,138 @@ html {
 }
 
 /* ============================================
-   GRID CONTAINER - STRICT DIMENSIONS
+   GRID CONTAINER - STRICT 2-COLUMN LAYOUT
    ============================================ */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* STRICT: Every row is exactly 120px */
-    grid-auto-rows: 120px;
-    /* STRICT: Tight 8px gap to match Canva */
-    gap: 8px;
+    /* 2 COLUMNS - Windows Phone standard */
+    grid-template-columns: 1fr 1fr;
+    /* HARD CONSTRAINT: Every row is exactly 110px */
+    grid-auto-rows: 110px;
+    /* TIGHT UNIFORM SPACING */
+    gap: 10px;
 
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
     padding: 15px;
-    /* Safe area for notch */
     padding-top: max(15px, env(safe-area-inset-top));
-    padding-bottom: 60px;
+    padding-bottom: 80px;
 }
 
 /* ============================================
-   TILE BASE - GLASSMORPHISM
+   TILE BASE - ALL TILES
    ============================================ */
 .tile {
-    /* Glass effect */
-    background: linear-gradient(135deg,
-            rgba(30, 25, 55, 0.9) 0%,
-            rgba(20, 18, 40, 0.95) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-
-    /* Layout */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* Positioning context for absolute children */
     position: relative;
-    overflow: hidden;
 
-    /* NO height property - uses grid-auto-rows */
+    /* Visual styling */
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+
+    /* CRITICAL: Content cannot stretch the tile */
+    overflow: hidden;
 
     /* Interaction */
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.15s ease, opacity 0.15s ease;
     text-decoration: none;
     color: inherit;
 }
 
 .tile:active {
     transform: scale(0.96);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0.9;
 }
 
 /* ============================================
-   TILE SPANS - COLUMN WIDTHS ONLY
-   Height is controlled by grid-auto-rows
+   TILE SPANS - MODULAR MATH
    ============================================ */
 
-/* Default tile: 1 column */
+/* SMALL (1x1): Default - 1 column, 1 row = 110px height */
+.tile-small,
 .tile {
     grid-column: span 1;
     grid-row: span 1;
+    /* Height = 110px (from grid-auto-rows) */
 }
 
-/* Small: explicit 1x1 */
-.small {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-/* Medium: 2 columns, 1 row (SAME HEIGHT as small!) */
-.medium {
+/* WIDE (2x1): 2 columns, 1 row = SAME 110px height as small! */
+.tile-wide {
     grid-column: span 2;
     grid-row: span 1;
+    /* Height = 110px (EXACTLY same as small tile) */
 }
 
-/* Large: 3 columns, 1 row */
-.large {
-    grid-column: span 3;
-    grid-row: span 1;
+/* LARGE (2x2): 2 columns, 2 rows = (110px * 2) + 10px gap = 230px height */
+.tile-large {
+    grid-column: span 2;
+    grid-row: span 2;
+    /* Height = 230px (calculated by grid) */
 }
 
 /* ============================================
-   SMALL-GRID (2x2 mini tiles within 1 cell)
+   TILE CONTENT - ABSOLUTE POSITIONING
+   ============================================ */
+
+/* Icon: Center X/Y */
+.tile i,
+.tile .tile-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    font-size: 28px;
+    color: white;
+}
+
+.tile-wide i,
+.tile-large i {
+    font-size: 36px;
+}
+
+/* Emoji icons */
+.tile .emoji-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    font-size: 2rem;
+}
+
+/* Label: Bottom 10px, Left 12px */
+.tile span,
+.tile .tile-label {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+    white-space: nowrap;
+}
+
+/* Tile content wrapper (optional, for complex layouts) */
+.tile-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ============================================
+   SMALL-GRID (2x2 mini tiles in one cell)
    ============================================ */
 .small-grid {
     grid-column: span 1;
@@ -123,63 +169,36 @@ html {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 6px;
-    padding: 0;
+    gap: 4px;
+
     background: transparent;
     border: none;
-    box-shadow: none;
+    overflow: visible;
 }
 
 .small-grid .tile {
-    border-radius: 12px;
-    background: linear-gradient(135deg,
-            rgba(35, 30, 60, 0.9) 0%,
-            rgba(25, 22, 45, 0.95) 100%);
+    border-radius: 3px;
 }
 
 .small-grid .tile i {
-    font-size: 18px;
+    font-size: 16px;
+    transform: translate(-50%, -50%);
 }
 
 /* ============================================
-   TILE CONTENT
+   BADGE
    ============================================ */
-.tile-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 12px;
-}
-
-/* Icon */
-.tile i {
-    font-size: 28px;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 8px;
-}
-
-.tile.medium i,
-.tile.large i {
-    font-size: 32px;
-}
-
-/* Label */
-.tile span {
-    font-size: 10px;
-    font-weight: 500;
+.tile-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #e53935;
+    padding: 2px 6px;
+    font-size: 8px;
+    font-weight: 700;
+    color: white;
+    border-radius: 2px;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: rgba(255, 255, 255, 0.7);
-    text-align: center;
-}
-
-.tile.medium span,
-.tile.large span {
-    font-size: 11px;
 }
 
 /* ============================================
@@ -194,7 +213,7 @@ html {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition: transform 0.8s ease;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -218,68 +237,63 @@ html {
 }
 
 /* ============================================
-   BADGE
-   ============================================ */
-.tile-badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #e53935;
-    padding: 3px 8px;
-    font-size: 8px;
-    font-weight: 700;
-    color: white;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* ============================================
-   COLOR ACCENTS (subtle gradient overlays)
+   COLOR THEMES - SOLID METRO COLORS
    ============================================ */
 .saffron {
-    background: linear-gradient(135deg, rgba(255, 140, 50, 0.15), rgba(255, 100, 30, 0.1)), linear-gradient(135deg, rgba(30, 25, 55, 0.9), rgba(20, 18, 40, 0.95)) !important;
+    background: #ff9800 !important;
 }
 
 .crimson {
-    background: linear-gradient(135deg, rgba(220, 60, 60, 0.15), rgba(180, 40, 40, 0.1)), linear-gradient(135deg, rgba(30, 25, 55, 0.9), rgba(20, 18, 40, 0.95)) !important;
+    background: #e53935 !important;
 }
 
 .teal {
-    background: linear-gradient(135deg, rgba(26, 188, 156, 0.12), rgba(22, 160, 133, 0.08)), linear-gradient(135deg, rgba(30, 25, 55, 0.9), rgba(20, 18, 40, 0.95)) !important;
+    background: #009688 !important;
 }
 
 .yellow {
-    background: linear-gradient(135deg, rgba(241, 196, 15, 0.15), rgba(243, 156, 18, 0.1)), linear-gradient(135deg, rgba(30, 25, 55, 0.9), rgba(20, 18, 40, 0.95)) !important;
+    background: #ffc107 !important;
 }
 
 .purple {
-    background: linear-gradient(135deg, rgba(155, 89, 182, 0.15), rgba(142, 68, 173, 0.1)), linear-gradient(135deg, rgba(30, 25, 55, 0.9), rgba(20, 18, 40, 0.95)) !important;
+    background: #9c27b0 !important;
 }
 
 .blue {
-    background: linear-gradient(135deg, rgba(52, 152, 219, 0.12), rgba(41, 128, 185, 0.08)), linear-gradient(135deg, rgba(30, 25, 55, 0.9), rgba(20, 18, 40, 0.95)) !important;
+    background: #2196f3 !important;
 }
 
 .green {
-    background: linear-gradient(135deg, rgba(46, 204, 113, 0.12), rgba(39, 174, 96, 0.08)), linear-gradient(135deg, rgba(30, 25, 55, 0.9), rgba(20, 18, 40, 0.95)) !important;
+    background: #4caf50 !important;
 }
 
 .dark-grey {
-    background: linear-gradient(135deg, rgba(52, 73, 94, 0.2), rgba(44, 62, 80, 0.15)), linear-gradient(135deg, rgba(30, 25, 55, 0.9), rgba(20, 18, 40, 0.95)) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
 }
 
 .dark-orange {
-    background: linear-gradient(135deg, rgba(230, 126, 34, 0.15), rgba(211, 84, 0, 0.1)), linear-gradient(135deg, rgba(30, 25, 55, 0.9), rgba(20, 18, 40, 0.95)) !important;
+    background: #ff5722 !important;
+}
+
+.metro-blue {
+    background: #0078d4 !important;
+}
+
+/* Dark glass for contrast */
+.glass-dark {
+    background: linear-gradient(135deg,
+            rgba(20, 20, 40, 0.85) 0%,
+            rgba(10, 10, 25, 0.9) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE - SMALLER SCREENS
    ============================================ */
-@media (max-width: 380px) {
+@media (max-width: 360px) {
     .grid-container {
-        grid-auto-rows: 100px;
-        gap: 6px;
+        grid-auto-rows: 95px;
+        gap: 8px;
         padding: 10px;
     }
 
@@ -288,12 +302,6 @@ html {
     }
 
     .tile span {
-        font-size: 9px;
-        letter-spacing: 1px;
-    }
-
-    .tile-badge {
-        font-size: 7px;
-        padding: 2px 6px;
+        font-size: 10px;
     }
 }

@@ -5,114 +5,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sanatan OS</title>
-    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/style.css?v=5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
-        rel="stylesheet">
     <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
     <div class="grid-container">
-        <!-- Row 1: Gita AI (Large - 3 cols) -->
-        <div class="tile large saffron live-tile" id="gitaTile">
+        <!-- Row 1: Gita AI (LARGE - 2x2) -->
+        <div class="tile tile-large saffron live-tile" id="gitaTile">
             <div class="tile-face face-front">
-                <div class="tile-content">
-                    <i class="fa-solid fa-om"></i>
-                    <span>Gita AI</span>
-                </div>
+                <i class="fa-solid fa-om"></i>
+                <span>Gita AI</span>
             </div>
             <div class="tile-face face-back">
-                <div class="tile-content">
-                    <span style="font-size: 16px; font-weight: 300;">Sanatan OS</span>
-                </div>
+                <span style="font-size: 14px; font-weight: 300; position: static;">Sanatan OS</span>
             </div>
         </div>
 
-        <!-- Row 2: 3 small tiles -->
-        <div class="tile small crimson">
-            <div class="tile-content">
-                <div class="tile-badge">LIVE</div>
-                <i class="fa-solid fa-video"></i>
-                <span>Darshan</span>
-            </div>
+        <!-- Row 3: Darshan + Panchang (2 small tiles) -->
+        <div class="tile tile-small crimson">
+            <div class="tile-badge">LIVE</div>
+            <i class="fa-solid fa-video"></i>
+            <span>Darshan</span>
         </div>
-        <div class="tile small teal">
-            <div class="tile-content">
-                <i class="fa-solid fa-calendar-alt"></i>
-                <span>Panchang</span>
-            </div>
-        </div>
-        <div class="tile small green">
-            <div class="tile-content">
-                <i class="fa-solid fa-users"></i>
-                <span>Sangha</span>
-            </div>
+        <div class="tile tile-small teal">
+            <i class="fa-solid fa-calendar-alt"></i>
+            <span>Panchang</span>
         </div>
 
-        <!-- Row 3: Bal Krishna (Medium - 2 cols) + Japa (Small - 1 col) -->
-        <div class="tile medium yellow">
-            <div class="tile-content">
-                <span style="font-size: 2.5rem;">🦚</span>
-                <span style="color: #2c3e50;">Bal Krishna</span>
-            </div>
+        <!-- Row 4: Bal Krishna (WIDE - 2x1) -->
+        <div class="tile tile-wide glass-dark">
+            <span class="emoji-icon">🦚</span>
+            <span>Bal Krishna</span>
         </div>
-        <a href="apps/japa/index.html" class="tile small purple">
-            <div class="tile-content">
-                <span style="font-size: 2rem;">📿</span>
-                <span>Naam Japa</span>
-            </div>
+
+        <!-- Row 5: Japa + Calendar (2 small tiles) -->
+        <a href="apps/japa/index.html" class="tile tile-small purple">
+            <span class="emoji-icon">📿</span>
+            <span>Naam Japa</span>
         </a>
+        <div class="tile tile-small blue">
+            <i class="fa-solid fa-users"></i>
+            <span>Sangha</span>
+        </div>
 
-        <!-- Row 4: Small Grid (1 col) + Mantras + Temples -->
+        <!-- Row 6: Small Grid (1x1) + Mantras -->
         <div class="small-grid">
             <div class="tile dark-grey"><i class="fa-solid fa-heart"></i></div>
             <div class="tile dark-grey"><i class="fa-solid fa-cog"></i></div>
             <div class="tile dark-grey"><i class="fa-solid fa-share-alt"></i></div>
             <div class="tile dark-grey"><i class="fa-solid fa-info-circle"></i></div>
         </div>
-        <div class="tile small blue">
-            <div class="tile-content">
-                <i class="fa-solid fa-music"></i>
-                <span>Mantras</span>
-            </div>
-        </div>
-        <div class="tile small green">
-            <div class="tile-content">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>Temples</span>
-            </div>
+        <div class="tile tile-small green">
+            <i class="fa-solid fa-music"></i>
+            <span>Mantras</span>
         </div>
 
-        <!-- Row 5: Daily Wisdom (Large - 3 cols) -->
-        <div class="tile large dark-orange">
-            <div class="tile-content">
-                <p
-                    style="font-family: Georgia, serif; font-size: 13px; font-style: italic; text-align: center; padding: 0 20px; color: rgba(255,255,255,0.9);">
-                    "You have the right to work, but for the work's sake only."
-                </p>
-                <span>Daily Wisdom</span>
-            </div>
+        <!-- Row 7: Temples + Events -->
+        <div class="tile tile-small blue">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Temples</span>
+        </div>
+        <div class="tile tile-small teal">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Events</span>
         </div>
 
-        <!-- Row 6: 3 small tiles -->
-        <div class="tile small blue">
-            <div class="tile-content">
-                <i class="fa-solid fa-book"></i>
-                <span>Scriptures</span>
-            </div>
+        <!-- Row 8: Daily Wisdom (WIDE - 2x1) -->
+        <div class="tile tile-wide dark-orange">
+            <i class="fa-solid fa-quote-left"
+                style="font-size: 16px; opacity: 0.5; top: 40%; transform: translate(-50%, -50%);"></i>
+            <span>Daily Wisdom</span>
         </div>
-        <div class="tile small purple">
-            <div class="tile-content">
-                <i class="fa-solid fa-hands-praying"></i>
-                <span>Worship</span>
-            </div>
+
+        <!-- Row 9: Scriptures + Worship -->
+        <div class="tile tile-small purple">
+            <i class="fa-solid fa-book"></i>
+            <span>Scriptures</span>
         </div>
-        <div class="tile small teal">
-            <div class="tile-content">
-                <i class="fa-solid fa-calendar-check"></i>
-                <span>Events</span>
-            </div>
+        <div class="tile tile-small crimson">
+            <i class="fa-solid fa-hands-praying"></i>
+            <span>Worship</span>
         </div>
     </div>
 
