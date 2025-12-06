@@ -1,0 +1,20 @@
+{
+  "name": "Sanatan OS",
+  "short_name": "Sanatan OS",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#111122",
+  "theme_color": "#111122",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

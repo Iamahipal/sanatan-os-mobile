@@ -1,0 +1,485 @@
+/* General Styling */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #111122;
+    /* Fixed background color */
+    height: 100%;
+    /* Changed to 100% for better mobile support */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: 'Poppins', sans-serif;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* overscroll-behavior-y: none; REMOVED to fix stuck scrolling */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hide Scrollbar */
+::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    scrollbar-width: none;
+}
+
+/* Grid Layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    /* Full width for mobile */
+    padding: 10px;
+    /* Reduced padding */
+    box-sizing: border-box;
+    padding-bottom: 60px;
+    padding-top: 10px;
+    /* Reduced top padding */
+}
+
+/* Standard Tile */
+.tile {
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 2px;
+}
+
+.tile:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Tile Content Positioning */
+.tile-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Text inside tiles - Smaller Font */
+.tile span {
+    color: white;
+    font-size: 11px;
+    /* Reduced from 12px */
+    font-weight: 500;
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Icons styling */
+.tile i {
+    font-size: 32px;
+    color: white;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Smaller icons for small tiles */
+.tile.small i {
+    font-size: 20px;
+    /* Reduced from 32px */
+}
+
+/* Adjusted position for tiles with text */
+.tile:not(.small) .tile-content:has(span) i {
+    transform: translate(-50%, -60%);
+}
+
+/* Large Tile */
+.large {
+    grid-column: span 3;
+    aspect-ratio: 3/1;
+}
+
+/* Medium Tile */
+.medium {
+    grid-column: span 2;
+    aspect-ratio: 2/1;
+}
+
+/* Small Tile Group */
+.small-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1;
+}
+
+.small {
+    aspect-ratio: 1/1;
+}
+
+/* Live Tile Animation (Flip/Slide) */
+.live-tile {
+    perspective: 1000px;
+}
+
+.tile-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.face-front {
+    transform: rotateX(0deg);
+}
+
+.face-back {
+    transform: rotateX(180deg);
+    background: inherit;
+    /* Inherit gradient */
+}
+
+.live-tile.flipped .face-front {
+    transform: rotateX(-180deg);
+}
+
+.live-tile.flipped .face-back {
+    transform: rotateX(0deg);
+}
+
+/* App List View Styles */
+.app-list-container {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    background-color: #111122;
+    color: white;
+    position: relative;
+    overflow-y: auto;
+    font-family: 'Poppins', sans-serif;
+    padding-left: 0;
+    padding-bottom: 80px;
+    /* Ensure bottom content is visible */
+}
+
+.app-list-container.active {
+    display: block;
+}
+
+/* Search Bar - Always Visible */
+.search-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #111122;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.search-bar .search-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    color: #aaa;
+}
+
+.search-bar input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    flex-grow: 1;
+    outline: none;
+    padding: 8px 12px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.search-bar input:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: #e67e22;
+}
+
+/* Grouped App List Layout */
+.app-group {
+    display: flex;
+    padding: 10px 15px;
+    align-items: flex-start;
+}
+
+.group-header {
+    color: #e67e22;
+    font-size: 20px;
+    font-weight: 600;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    border: 2px solid #e67e22;
+    border-radius: 0;
+    /* Square */
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.group-items {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.app-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.app-item:last-child {
+    border-bottom: none;
+}
+
+.app-icon {
+    width: 45px;
+    height: 45px;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    color: white;
+    font-size: 20px;
+}
+
+.app-name {
+    font-size: 18px;
+    font-weight: 300;
+    color: white;
+}
+
+/* Modern Gradients */
+.saffron {
+    background: linear-gradient(135deg, #ff9900 0%, #d35400 100%) !important;
+}
+
+.crimson {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+}
+
+.teal {
+    background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%) !important;
+}
+
+.yellow {
+    background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%) !important;
+}
+
+.purple {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%) !important;
+}
+
+.blue {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+}
+
+.green {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
+}
+
+.dark-grey {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%) !important;
+}
+
+.dark-orange {
+    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%) !important;
+}
+
+/* Badge */
+.tile-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 2px 6px;
+    font-size: 9px;
+    font-weight: 700;
+    border-radius: 2px;
+    backdrop-filter: blur(2px);
+}
+
+/* Selection mode styles */
+.tile.selected {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9);
+    z-index: 10;
+    transform: scale(1.02);
+}
+
+.tile.floating {
+    animation: floatEffect 3s infinite ease-in-out;
+}
+
+.tile.floating:nth-child(3n+1) {
+    animation-delay: 0.2s;
+}
+
+.tile.floating:nth-child(3n+2) {
+    animation-delay: 0.5s;
+}
+
+.tile.floating:nth-child(3n+3) {
+    animation-delay: 0.8s;
+}
+
+@keyframes floatEffect {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-3px, 2px);
+    }
+
+    50% {
+        transform: translate(2px, -2px);
+    }
+
+    75% {
+        transform: translate(1px, 3px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* Tile action buttons */
+.tile-actions {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.tile-action-btn {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.unpin-btn {
+    top: -10px;
+    left: -10px;
+}
+
+.info-btn {
+    top: -10px;
+    right: -10px;
+}
+
+.resize-btn {
+    bottom: -10px;
+    right: -10px;
+}
+
+/* Resize transitions */
+.tile.resizing {
+    transition: grid-column 0.3s ease-out, grid-row 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out;
+}
+
+/* Selection Overlay */
+.selection-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 5;
+    display: none;
+}
+
+.selection-overlay.active {
+    display: block;
+}
+
+/* Animation for tile removal */
+@keyframes removeTile {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+.tile.removing {
+    animation: removeTile 0.3s ease-out forwards;
+}
+
+/* Responsive Fix */
+@media screen and (max-width: 600px) {
+    .grid-container {
+        gap: 8px;
+    }
+
+    .tile i {
+        font-size: 28px;
+    }
+
+    .tile.small i {
+        font-size: 20px;
+    }
+}
