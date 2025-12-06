@@ -18,7 +18,7 @@
 
     /* FIXED DIMENSIONS - NO AUTO SIZING */
     --row-height: 100px;
-    --gap: 8px;
+    --gap: 6px;
     --radius: 14px;
 }
 
@@ -50,19 +50,12 @@ body {
     min-height: 100vh;
     min-height: 100dvh;
     color: var(--text-primary);
-
-    /* FIXED GRADIENT - NO MOVEMENT */
-    background: linear-gradient(160deg,
-            #0f0c29 0%,
-            #1a1635 30%,
-            #241b4a 60%,
-            #1a2040 100%);
+    background: linear-gradient(160deg, #0f0c29 0%, #1a1635 30%, #241b4a 60%, #1a2040 100%);
     background-attachment: fixed;
 }
 
 /* ============================================
-   TURNSTILE ANIMATION
-   ONLY transform + opacity (GPU Layer)
+   TURNSTILE ANIMATION (transform + opacity ONLY)
    ============================================ */
 @keyframes turnstile {
     from {
@@ -77,64 +70,43 @@ body {
 }
 
 /* ============================================
-   GRID CONTAINER
-   SAFE AREA PADDING FOR NOTCH
+   GRID CONTAINER - SAFE AREA AWARE
    ============================================ */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-
-    /* FIXED ROW HEIGHT - NO AUTO/REFLOW */
     grid-auto-rows: var(--row-height);
-
     gap: var(--gap);
-
-    /* SAFE AREA: Respects notch/dynamic island */
     padding-top: calc(max(48px, env(safe-area-inset-top, 48px)) + 8px);
     padding-left: var(--gap);
     padding-right: var(--gap);
     padding-bottom: calc(max(40px, env(safe-area-inset-bottom, 40px)) + 40px);
-
     max-width: 400px;
     margin: 0 auto;
 }
 
 /* ============================================
    TILE - ZERO BLUR GLASS
-   Uses solid semi-transparent BG instead
    ============================================ */
 .tile {
     position: relative;
-
-    /* ZERO BLUR - Just semi-transparent BG */
     background: var(--tile-bg);
     border: 1px solid var(--tile-border);
     border-radius: var(--radius);
-
-    /* LIGHT SHADOW ONLY */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-
-    /* GPU COMPOSITING LAYER */
     will-change: transform, opacity;
     transform: translateZ(0);
     backface-visibility: hidden;
-
-    /* TURNSTILE ENTRY */
     animation: turnstile 0.3s cubic-bezier(0.22, 1, 0.36, 1) backwards;
-
-    /* INTERACTION */
     cursor: pointer;
     text-decoration: none;
     color: inherit;
     overflow: hidden;
-
-    /* Prevent text selection lag */
     -webkit-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
 }
 
-/* TAP FEEDBACK - transform only */
 .tile:active {
     transform: scale(0.96) translateZ(0);
 }
@@ -151,56 +123,62 @@ body {
 }
 
 .tile:nth-child(3) {
-    animation-delay: 0.06s;
+    animation-delay: 0.04s;
 }
 
 .tile:nth-child(4) {
-    animation-delay: 0.09s;
+    animation-delay: 0.06s;
 }
 
 .tile:nth-child(5) {
-    animation-delay: 0.12s;
+    animation-delay: 0.08s;
 }
 
 .tile:nth-child(6) {
-    animation-delay: 0.15s;
+    animation-delay: 0.10s;
 }
 
 .tile:nth-child(7) {
-    animation-delay: 0.18s;
+    animation-delay: 0.12s;
 }
 
 .tile:nth-child(8) {
-    animation-delay: 0.21s;
+    animation-delay: 0.14s;
 }
 
 .tile:nth-child(9) {
-    animation-delay: 0.24s;
+    animation-delay: 0.16s;
 }
 
 .tile:nth-child(10) {
-    animation-delay: 0.27s;
+    animation-delay: 0.18s;
 }
 
 .tile:nth-child(11) {
-    animation-delay: 0.30s;
+    animation-delay: 0.20s;
 }
 
 .tile:nth-child(12) {
-    animation-delay: 0.33s;
+    animation-delay: 0.22s;
 }
 
 /* ============================================
-   TILE SIZES - STRICT FIXED
+   TILE SIZES - STRICT FIXED HEIGHT
    ============================================ */
 .tile.small {
     grid-column: span 1;
     grid-row: span 1;
+    height: var(--row-height);
+    min-height: var(--row-height);
+    max-height: var(--row-height);
 }
 
 .tile.wide {
     grid-column: span 2;
     grid-row: span 1;
+    height: var(--row-height);
+    min-height: var(--row-height);
+    max-height: var(--row-height);
 }
 
 /* ============================================
@@ -239,14 +217,11 @@ body {
     position: absolute;
     bottom: 10px;
     left: 12px;
-
     font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.6px;
     color: var(--text-muted);
-
-    /* Prevent wrapping/reflow */
     white-space: nowrap;
 }
 
@@ -287,6 +262,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: var(--row-height);
+    min-height: var(--row-height);
+    max-height: var(--row-height);
 }
 
 .quote-icon {
@@ -313,21 +291,27 @@ body {
 }
 
 /* ============================================
-   MINI GRID
+   MINI GRID - FIXED HEIGHT
    ============================================ */
 .mini-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 6px;
+    gap: 4px;
+    height: var(--row-height);
+    min-height: var(--row-height);
+    max-height: var(--row-height);
 }
 
 .mini-grid .tile {
     border-radius: 10px;
+    height: auto;
+    min-height: 0;
+    max-height: none;
 }
 
 .mini-grid .tile i {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 /* ============================================
@@ -336,7 +320,7 @@ body {
 @media (max-width: 360px) {
     :root {
         --row-height: 90px;
-        --gap: 6px;
+        --gap: 5px;
     }
 
     .tile-icon {
@@ -352,7 +336,6 @@ body {
     }
 }
 
-/* Skip animations for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .tile {
         animation: none;
