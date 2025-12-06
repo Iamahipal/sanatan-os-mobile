@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // === DOM Elements ===
     const canvas = document.getElementById('japa-canvas');
     const beadCountEl = document.getElementById('bead-count');
@@ -35,22 +35,22 @@
 
     // === Deity Data ===
     const DEITIES = {
-        radha: { text_hi: 'αñ╢αÑìαñ░αÑÇ αñ░αñ╛αñºαñ╛', text_en: 'Shree Radha', color: '#ffd700' },
-        krishna: { text_hi: 'αñ╢αÑìαñ░αÑÇ αñòαÑâαñ╖αÑìαñú', text_en: 'Shree Krishna', color: '#00e5ff' },
-        ram: { text_hi: 'αñ╢αÑìαñ░αÑÇ αñ░αñ╛αñ«', text_en: 'Shree Ram', color: '#ff9800' },
-        shiva: { text_hi: 'αÑÉ αñ¿αñ«αñâ αñ╢αñ┐αñ╡αñ╛αñ»', text_en: 'Om Namah Shivaya', color: '#ffffff' },
-        hanuman: { text_hi: 'αÑÉ αñ╣αñ¿αÑüαñ«αññαÑç αñ¿αñ«αñâ', text_en: 'Om Hanumate Namah', color: '#ff5722' },
-        ganesha: { text_hi: 'αÑÉ αñùαñé αñùαñúαñ¬αññαñ»αÑç αñ¿αñ«αñâ', text_en: 'Om Gan Ganapataye Namah', color: '#ffeb3b' },
-        durga: { text_hi: 'αñ£αñ» αñ«αñ╛αññαñ╛ αñªαÑÇ', text_en: 'Jai Mata Di', color: '#e91e63' }
+        radha: { text_hi: 'श्री राधा', text_en: 'Shree Radha', color: '#ffd700' },
+        krishna: { text_hi: 'श्री कृष्ण', text_en: 'Shree Krishna', color: '#00e5ff' },
+        ram: { text_hi: 'श्री राम', text_en: 'Shree Ram', color: '#ff9800' },
+        shiva: { text_hi: 'ॐ नमः शिवाय', text_en: 'Om Namah Shivaya', color: '#ffffff' },
+        hanuman: { text_hi: 'ॐ हनुमते नमः', text_en: 'Om Hanumate Namah', color: '#ff5722' },
+        ganesha: { text_hi: 'ॐ गं गणपतये नमः', text_en: 'Om Gan Ganapataye Namah', color: '#ffeb3b' },
+        durga: { text_hi: 'जय माता दी', text_en: 'Jai Mata Di', color: '#e91e63' }
     };
 
     // === Levels ===
     const LEVELS = [
-        { name: 'Aarambh', icon: '≡ƒÖÅ', min: 0 },
-        { name: 'Sadhak', icon: '≡ƒÖç', min: 108 },
-        { name: 'Bhakta', icon: '≡ƒô┐', min: 1008 },
-        { name: 'Rakshak', icon: '≡ƒ¢í∩╕Å', min: 10008 },
-        { name: 'Siddha', icon: 'Γ£¿', min: 100008 }
+        { name: 'Aarambh', icon: '🙏', min: 0 },
+        { name: 'Sadhak', icon: '🙇', min: 108 },
+        { name: 'Bhakta', icon: '📿', min: 1008 },
+        { name: 'Rakshak', icon: '🛡️', min: 10008 },
+        { name: 'Siddha', icon: '✨', min: 100008 }
     ];
 
     // === Constants ===
