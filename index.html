@@ -10,162 +10,130 @@
     <meta name="theme-color" content="#0f0c29">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="app-wrapper">
-        <!-- Glass Header -->
-        <header class="glass-header">
-            <h1 class="app-title">SANATAN OS</h1>
-        </header>
+    <!-- Floating Title (No Header Box) -->
+    <h1 class="app-title">SANATAN OS</h1>
 
-        <!-- Main Grid -->
-        <main class="grid-container">
-            <!-- Hero Tile - Gita AI -->
-            <div class="tile large hero accent-saffron">
-                <div class="tile-content">
-                    <span class="tile-icon">🕉️</span>
-                    <span class="tile-label">Gita AI</span>
-                </div>
+    <!-- Main Grid -->
+    <main class="grid-container">
+        <!-- Hero - Gita AI -->
+        <div class="tile large hero">
+            <div class="tile-content">
+                <span class="tile-icon">🕉️</span>
+                <span class="tile-label">Gita AI</span>
             </div>
+        </div>
 
-            <!-- Row 2 -->
-            <div class="tile small accent-rose">
-                <div class="tile-badge">LIVE</div>
-                <div class="tile-content">
-                    <i class="fa-solid fa-video"></i>
-                    <span class="tile-label">Darshan</span>
-                </div>
+        <!-- Row 2 -->
+        <div class="tile small glass-crimson">
+            <div class="tile-badge">LIVE</div>
+            <div class="tile-content">
+                <i class="fa-solid fa-video"></i>
+                <span class="tile-label">Darshan</span>
             </div>
+        </div>
 
-            <div class="tile small accent-teal">
-                <div class="tile-content">
-                    <i class="fa-solid fa-calendar"></i>
-                    <span class="tile-label">Panchang</span>
-                </div>
+        <div class="tile small glass-teal">
+            <div class="tile-content">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span class="tile-label">Panchang</span>
             </div>
+        </div>
 
-            <div class="tile small accent-violet">
-                <div class="tile-content">
-                    <i class="fa-solid fa-users"></i>
-                    <span class="tile-label">Sangha</span>
-                </div>
+        <div class="tile small glass-violet">
+            <div class="tile-content">
+                <i class="fa-solid fa-spa"></i>
+                <span class="tile-label">Sangha</span>
             </div>
+        </div>
 
-            <!-- Row 3 - Medium + Small -->
-            <div class="tile medium">
-                <div class="tile-content">
-                    <span class="tile-icon">👶</span>
-                    <span class="tile-label">Bal Vihar</span>
-                </div>
+        <!-- Row 3 -->
+        <div class="tile medium glass-gold">
+            <div class="tile-content">
+                <span class="tile-icon">🦚</span>
+                <span class="tile-label">Bal Krishna</span>
             </div>
+        </div>
 
-            <a href="apps/japa/index.html" class="tile small accent-saffron">
-                <div class="tile-content">
-                    <span class="tile-icon">📿</span>
-                    <span class="tile-label">Naam Japa</span>
-                </div>
-            </a>
-
-            <!-- Row 4 - Small Grid + Medium Tiles -->
-            <div class="small-grid">
-                <div class="tile small">
-                    <div class="tile-content">
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
-                </div>
-                <div class="tile small">
-                    <div class="tile-content">
-                        <i class="fa-solid fa-gear"></i>
-                    </div>
-                </div>
-                <div class="tile small">
-                    <div class="tile-content">
-                        <i class="fa-solid fa-share-nodes"></i>
-                    </div>
-                </div>
-                <div class="tile small">
-                    <div class="tile-content">
-                        <i class="fa-solid fa-info"></i>
-                    </div>
-                </div>
+        <a href="apps/japa/index.html" class="tile small glass-violet">
+            <div class="tile-content">
+                <span class="tile-icon">📿</span>
+                <span class="tile-label">Naam Japa</span>
             </div>
-
-            <div class="tile small accent-violet">
-                <div class="tile-content">
-                    <i class="fa-solid fa-music"></i>
-                    <span class="tile-label">Mantras</span>
-                </div>
-            </div>
-
-            <div class="tile small accent-teal">
-                <div class="tile-content">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span class="tile-label">Temples</span>
-                </div>
-            </div>
-
-            <!-- Quote Tile -->
-            <div class="tile large quote">
-                <span class="quote-icon">❝</span>
-                <p class="quote-text">"You have the right to work, but for the work's sake only."</p>
-                <span class="quote-label">Daily Wisdom</span>
-            </div>
-
-            <!-- Bottom Row -->
-            <div class="tile small accent-saffron">
-                <div class="tile-content">
-                    <i class="fa-solid fa-book"></i>
-                    <span class="tile-label">Shastras</span>
-                </div>
-            </div>
-
-            <div class="tile small accent-rose">
-                <div class="tile-content">
-                    <i class="fa-solid fa-hands-praying"></i>
-                    <span class="tile-label">Worship</span>
-                </div>
-            </div>
-
-            <div class="tile small accent-teal">
-                <div class="tile-content">
-                    <i class="fa-solid fa-calendar-check"></i>
-                    <span class="tile-label">Events</span>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Floating Glass Dock -->
-    <nav class="glass-dock">
-        <a href="#" class="dock-item active">
-            <svg viewBox="0 0 24 24">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
-            <span>Home</span>
         </a>
-        <a href="apps/japa/index.html" class="dock-item">
-            <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" />
-                <circle cx="12" cy="12" r="3" />
-            </svg>
-            <span>Japa</span>
-        </a>
-        <a href="#" class="dock-item">
-            <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="3" />
-                <path
-                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-            </svg>
-            <span>Settings</span>
-        </a>
-    </nav>
+
+        <!-- Row 4 - Small Grid + Others -->
+        <div class="small-grid">
+            <div class="tile small glass-dark">
+                <div class="tile-content">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+            </div>
+            <div class="tile small glass-dark">
+                <div class="tile-content">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+            </div>
+            <div class="tile small glass-dark">
+                <div class="tile-content">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </div>
+            </div>
+            <div class="tile small glass-dark">
+                <div class="tile-content">
+                    <i class="fa-solid fa-circle-info"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="tile small glass-blue">
+            <div class="tile-content">
+                <i class="fa-solid fa-music"></i>
+                <span class="tile-label">Mantras</span>
+            </div>
+        </div>
+
+        <div class="tile small glass-teal">
+            <div class="tile-content">
+                <i class="fa-solid fa-location-dot"></i>
+                <span class="tile-label">Temples</span>
+            </div>
+        </div>
+
+        <!-- Quote Tile -->
+        <div class="tile quote">
+            <span class="quote-icon">❝</span>
+            <p class="quote-text">"You have the right to work, but for the work's sake only."</p>
+            <span class="quote-label">Daily Wisdom</span>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="tile small glass-saffron">
+            <div class="tile-content">
+                <i class="fa-solid fa-book-open"></i>
+                <span class="tile-label">Shastras</span>
+            </div>
+        </div>
+
+        <div class="tile small glass-rose">
+            <div class="tile-content">
+                <i class="fa-solid fa-hands-praying"></i>
+                <span class="tile-label">Worship</span>
+            </div>
+        </div>
+
+        <div class="tile small glass-teal">
+            <div class="tile-content">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span class="tile-label">Events</span>
+            </div>
+        </div>
+    </main>
 
     <script>
-        // Register Service Worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
         }

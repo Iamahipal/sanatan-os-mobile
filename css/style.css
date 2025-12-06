@@ -1,37 +1,36 @@
 /* ============================================
-   SANATAN OS - LIQUID GLASS (AKASHA UI)
-   A Glassmorphism Spiritual Experience
+   SANATAN OS - TRUE LIQUID GLASS
+   The Akasha (अाकाश) Experience
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&display=swap');
 
 :root {
-    /* Core Colors */
+    /* Core Cosmic Colors */
     --bg-deep: #0f0c29;
     --bg-mid: #302b63;
     --bg-light: #24243e;
 
-    /* Accent Colors */
-    --saffron: #ff4b1f;
-    --gold: #ffd700;
-    --violet: #8b5cf6;
-    --teal: #14b8a6;
-    --rose: #f43f5e;
+    /* Accent Colors (Used in Gradients with Opacity) */
+    --saffron: 255, 152, 0;
+    --gold: 255, 215, 0;
+    --violet: 139, 92, 246;
+    --teal: 22, 160, 133;
+    --rose: 244, 63, 94;
+    --crimson: 220, 38, 38;
+    --blue: 59, 130, 246;
 
     /* Glass Properties */
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-bg-hover: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-blur: 16px;
+    --glass-blur: 20px;
+    --glass-border: rgba(255, 255, 255, 0.12);
 
     /* Text */
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-secondary: rgba(255, 255, 255, 0.75);
 
     /* Spacing */
-    --radius-lg: 24px;
-    --radius-md: 16px;
-    --gap: 16px;
+    --radius: 20px;
+    --gap: 14px;
 }
 
 * {
@@ -40,7 +39,6 @@
     box-sizing: border-box;
 }
 
-/* Hide Scrollbar */
 ::-webkit-scrollbar {
     display: none;
 }
@@ -50,18 +48,18 @@ html {
 }
 
 /* ============================================
-   ANIMATED AURORA BACKGROUND
+   LIVING AURORA BACKGROUND
    ============================================ */
 body {
     font-family: 'Outfit', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
-    background: var(--bg-deep);
+    background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-mid) 50%, var(--bg-light) 100%);
     color: var(--text-primary);
     position: relative;
 }
 
-/* Aurora Blobs */
+/* Aurora Layer 1 */
 body::before {
     content: '';
     position: fixed;
@@ -70,36 +68,15 @@ body::before {
     width: 200%;
     height: 200%;
     background:
-        radial-gradient(circle at 20% 80%, rgba(255, 75, 31, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 70% 70%, rgba(20, 184, 166, 0.1) 0%, transparent 45%);
-    animation: auroraFloat 20s ease-in-out infinite;
+        radial-gradient(circle at 15% 85%, rgba(255, 152, 0, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(139, 92, 246, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+    animation: auroraFlow 25s ease-in-out infinite;
     z-index: 0;
     pointer-events: none;
 }
 
-@keyframes auroraFloat {
-
-    0%,
-    100% {
-        transform: translate(0%, 0%) rotate(0deg);
-    }
-
-    25% {
-        transform: translate(2%, -2%) rotate(1deg);
-    }
-
-    50% {
-        transform: translate(-1%, 2%) rotate(-1deg);
-    }
-
-    75% {
-        transform: translate(-2%, -1%) rotate(0.5deg);
-    }
-}
-
-/* Secondary Aurora Layer */
+/* Aurora Layer 2 */
 body::after {
     content: '';
     position: fixed;
@@ -108,66 +85,70 @@ body::after {
     width: 100%;
     height: 100%;
     background:
-        radial-gradient(ellipse at bottom right, rgba(255, 75, 31, 0.1) 0%, transparent 60%),
-        radial-gradient(ellipse at top left, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
-    animation: auroraFloat 25s ease-in-out infinite reverse;
+        radial-gradient(ellipse at 20% 100%, rgba(22, 160, 133, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 0%, rgba(244, 63, 94, 0.08) 0%, transparent 40%);
+    animation: auroraFlow 30s ease-in-out infinite reverse;
     z-index: 0;
     pointer-events: none;
 }
 
+@keyframes auroraFlow {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+
+    33% {
+        transform: translate(2%, -3%) rotate(1deg) scale(1.02);
+    }
+
+    66% {
+        transform: translate(-2%, 2%) rotate(-1deg) scale(0.98);
+    }
+}
+
 /* ============================================
-   MAIN CONTAINER
+   FLOATING TITLE (No Header Box)
    ============================================ */
-.app-wrapper {
+.app-title {
     position: relative;
     z-index: 1;
-    min-height: 100vh;
-    padding-bottom: 100px;
-    /* Space for dock */
-}
-
-/* Header */
-.glass-header {
-    padding: 20px 20px 10px;
     text-align: center;
-}
-
-.app-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--saffron) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-    letter-spacing: 2px;
+    padding: 30px 20px 20px;
+    font-size: 1.8rem;
+    font-weight: 200;
+    letter-spacing: 6px;
+    color: var(--text-primary);
+    text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
 }
 
 /* ============================================
-   GLASS TILE GRID
+   MAIN GRID
    ============================================ */
 .grid-container {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--gap);
-    padding: var(--gap);
-    max-width: 500px;
+    padding: 0 var(--gap) 40px;
+    max-width: 480px;
     margin: 0 auto;
 }
 
 /* ============================================
-   GLASS TILE - The Core Component
+   TRUE GLASS TILE - Translucent Colored
    ============================================ */
 .tile {
-    background: var(--glass-bg);
+    position: relative;
+    border-radius: var(--radius);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
     border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
     box-shadow:
-        0 4px 30px rgba(0, 0, 0, 0.1),
-        inset 0 1px 1px rgba(255, 255, 255, 0.05);
-    position: relative;
+        0 8px 32px rgba(0, 0, 0, 0.25),
+        inset 0 1px 1px rgba(255, 255, 255, 0.08);
     overflow: hidden;
     aspect-ratio: 1/1;
     display: flex;
@@ -175,23 +156,23 @@ body::after {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
+    animation: tileFloat 0.6s ease-out both;
 }
 
 .tile:hover,
 .tile:active {
-    background: var(--glass-bg-hover);
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-6px) scale(1.03);
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.2),
-        0 0 30px rgba(255, 215, 0, 0.1);
+        0 20px 50px rgba(0, 0, 0, 0.35),
+        0 0 40px rgba(255, 215, 0, 0.15);
 }
 
 /* Tile Sizes */
 .tile.large {
     grid-column: span 3;
-    aspect-ratio: 3/1;
+    aspect-ratio: 3/1.2;
 }
 
 .tile.medium {
@@ -201,13 +182,84 @@ body::after {
 
 .tile.small {
     grid-column: span 1;
-    aspect-ratio: 1/1;
 }
 
-/* Hero Tile - More Prominent */
+/* ============================================
+   TRANSLUCENT COLOR GRADIENTS (The Soul)
+   ============================================ */
+.tile.glass-saffron {
+    background: linear-gradient(135deg,
+            rgba(var(--saffron), 0.55) 0%,
+            rgba(var(--saffron), 0.25) 100%);
+}
+
+.tile.glass-gold {
+    background: linear-gradient(135deg,
+            rgba(var(--gold), 0.5) 0%,
+            rgba(var(--gold), 0.2) 100%);
+}
+
+.tile.glass-violet {
+    background: linear-gradient(135deg,
+            rgba(var(--violet), 0.55) 0%,
+            rgba(var(--violet), 0.25) 100%);
+}
+
+.tile.glass-teal {
+    background: linear-gradient(135deg,
+            rgba(var(--teal), 0.55) 0%,
+            rgba(var(--teal), 0.25) 100%);
+}
+
+.tile.glass-rose {
+    background: linear-gradient(135deg,
+            rgba(var(--rose), 0.55) 0%,
+            rgba(var(--rose), 0.25) 100%);
+}
+
+.tile.glass-crimson {
+    background: linear-gradient(135deg,
+            rgba(var(--crimson), 0.55) 0%,
+            rgba(var(--crimson), 0.25) 100%);
+}
+
+.tile.glass-blue {
+    background: linear-gradient(135deg,
+            rgba(var(--blue), 0.5) 0%,
+            rgba(var(--blue), 0.25) 100%);
+}
+
+.tile.glass-dark {
+    background: linear-gradient(135deg,
+            rgba(60, 60, 80, 0.6) 0%,
+            rgba(40, 40, 60, 0.4) 100%);
+}
+
+/* ============================================
+   HERO TILE - Gita AI (Pulsing Glow)
+   ============================================ */
 .tile.hero {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    background: linear-gradient(135deg,
+            rgba(var(--saffron), 0.6) 0%,
+            rgba(var(--gold), 0.35) 100%);
+    animation: tileFloat 0.6s ease-out both, heroGlow 3s ease-in-out infinite;
+}
+
+@keyframes heroGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.25),
+            0 0 30px rgba(255, 152, 0, 0.2);
+    }
+
+    50% {
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.25),
+            0 0 60px rgba(255, 152, 0, 0.35),
+            0 0 80px rgba(255, 215, 0, 0.15);
+    }
 }
 
 /* ============================================
@@ -220,149 +272,110 @@ body::after {
     justify-content: center;
     gap: 8px;
     padding: 16px;
-    width: 100%;
-    height: 100%;
     text-align: center;
 }
 
-/* Gradient Icons */
+/* Icons */
 .tile-icon {
-    font-size: 2.5rem;
-    line-height: 1;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+    font-size: 2.2rem;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
 }
 
 .tile.large .tile-icon {
-    font-size: 3rem;
+    font-size: 2.8rem;
 }
 
 .tile.small .tile-icon {
     font-size: 1.8rem;
 }
 
-/* Icon with Gradient (for FontAwesome) */
+/* FontAwesome Icons - White with Glow */
 .tile i {
-    font-size: 28px;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--saffron) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+    font-size: 26px;
+    color: #fff;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
 }
 
-/* Tile Label */
+.tile.small i {
+    font-size: 22px;
+}
+
+.tile.large i {
+    font-size: 32px;
+}
+
+/* Labels */
 .tile-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 500;
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    margin-top: 4px;
 }
 
 .tile.large .tile-label {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
-/* Tile Badge */
+/* Badge */
 .tile-badge {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: rgba(255, 75, 31, 0.8);
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 0.6rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.55rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
+    backdrop-filter: blur(8px);
 }
 
 /* ============================================
-   TILE COLOR ACCENTS (Subtle Glow)
-   ============================================ */
-.tile.accent-saffron::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--saffron), var(--gold));
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-
-.tile.accent-violet::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--violet), #a78bfa);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-
-.tile.accent-teal::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--teal), #34d399);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-
-.tile.accent-rose::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--rose), #fb7185);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-
-/* ============================================
-   QUOTE TILE (Special)
+   QUOTE TILE
    ============================================ */
 .tile.quote {
-    justify-content: flex-start;
+    grid-column: span 3;
+    aspect-ratio: 3/1;
+    padding: 20px 24px;
+    align-items: flex-start;
     text-align: left;
-    padding: 20px;
+    background: linear-gradient(135deg,
+            rgba(var(--saffron), 0.45) 0%,
+            rgba(var(--gold), 0.2) 100%);
 }
 
 .quote-icon {
-    font-size: 1.5rem;
-    opacity: 0.5;
-    margin-bottom: 8px;
+    font-size: 1.4rem;
+    opacity: 0.6;
+    margin-bottom: 6px;
 }
 
 .quote-text {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-style: italic;
+    font-weight: 300;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .quote-label {
-    font-size: 0.7rem;
-    color: var(--gold);
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: rgba(255, 215, 0, 0.8);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     margin-top: auto;
 }
 
 /* ============================================
-   2x2 SMALL GRID INSIDE
+   2x2 SMALL GRID
    ============================================ */
 .small-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    padding: 0;
 }
 
 .small-grid .tile {
@@ -370,79 +383,22 @@ body::after {
 }
 
 .small-grid .tile-icon {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 /* ============================================
-   FLOATING GLASS DOCK
+   ENTRY ANIMATION
    ============================================ */
-.glass-dock {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 30px;
-    padding: 12px 24px;
-    display: flex;
-    gap: 32px;
-    z-index: 100;
-    box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.3),
-        inset 0 1px 1px rgba(255, 255, 255, 0.1);
-}
-
-.dock-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: all 0.2s;
-}
-
-.dock-item:hover,
-.dock-item.active {
-    color: var(--gold);
-    transform: translateY(-2px);
-}
-
-.dock-item svg {
-    width: 24px;
-    height: 24px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2;
-}
-
-.dock-item span {
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* ============================================
-   ANIMATIONS
-   ============================================ */
-@keyframes fadeInUp {
+@keyframes tileFloat {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px) scale(0.95);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
-}
-
-.tile {
-    animation: fadeInUp 0.5s ease-out;
-    animation-fill-mode: both;
 }
 
 .tile:nth-child(1) {
@@ -485,24 +441,37 @@ body::after {
     animation-delay: 0.5s;
 }
 
+.tile:nth-child(11) {
+    animation-delay: 0.55s;
+}
+
+.tile:nth-child(12) {
+    animation-delay: 0.6s;
+}
+
 /* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 400px) {
+    .app-title {
+        font-size: 1.5rem;
+        letter-spacing: 4px;
+    }
+
     .grid-container {
-        gap: 12px;
-        padding: 12px;
+        gap: 10px;
+        padding: 0 10px 30px;
     }
 
     .tile {
-        border-radius: 20px;
+        border-radius: 16px;
     }
 
     .tile-icon {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .tile-label {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
     }
 }
