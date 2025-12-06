@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sanatan OS</title>
-    <!-- CACHE BUST: v3 forces fresh CSS -->
-    <link rel="stylesheet" href="css/style.css?v=3">
+    <link rel="stylesheet" href="css/style.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
         rel="stylesheet">
@@ -14,9 +13,8 @@
 </head>
 
 <body>
-    <!-- Tile Grid Container -->
     <div class="grid-container">
-        <!-- Row 1: Gita AI (Large) - spans 3 cols -->
+        <!-- Row 1: Gita AI (Large - 3 cols) -->
         <div class="tile large saffron live-tile" id="gitaTile">
             <div class="tile-face face-front">
                 <div class="tile-content">
@@ -25,9 +23,8 @@
                 </div>
             </div>
             <div class="tile-face face-back">
-                <div class="tile-content" style="align-items: flex-start; padding-left: 20px; text-align: left;">
-                    <h1 style="font-weight: 300; font-size: 24px; margin: 0; color: white;">Sanatan OS</h1>
-                    <p style="font-size: 12px; margin: 5px 0 0 0; opacity: 0.9; color: white;">Dharma is the path...</p>
+                <div class="tile-content">
+                    <span style="font-size: 16px; font-weight: 300;">Sanatan OS</span>
                 </div>
             </div>
         </div>
@@ -37,7 +34,7 @@
             <div class="tile-content">
                 <div class="tile-badge">LIVE</div>
                 <i class="fa-solid fa-video"></i>
-                <span>Live Darshan</span>
+                <span>Darshan</span>
             </div>
         </div>
         <div class="tile small teal">
@@ -49,60 +46,49 @@
         <div class="tile small green">
             <div class="tile-content">
                 <i class="fa-solid fa-users"></i>
-                <span>Community</span>
+                <span>Sangha</span>
             </div>
         </div>
 
-        <!-- Row 3: Bal Vihar (Medium - 2 cols) + Radha Japa (Small - 1 col) -->
+        <!-- Row 3: Bal Krishna (Medium - 2 cols) + Japa (Small - 1 col) -->
         <div class="tile medium yellow">
             <div class="tile-content">
-                <i class="fa-solid fa-child" style="color: #2c3e50;"></i>
-                <span style="color: #2c3e50;">Bal Vihar</span>
+                <span style="font-size: 2.5rem;">🦚</span>
+                <span style="color: #2c3e50;">Bal Krishna</span>
             </div>
         </div>
         <a href="apps/japa/index.html" class="tile small purple">
             <div class="tile-content">
-                <span
-                    style="font-size: 2rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);">📿</span>
-                <span>Radha Japa</span>
+                <span style="font-size: 2rem;">📿</span>
+                <span>Naam Japa</span>
             </div>
         </a>
 
-        <!-- Row 4: Small Grid (1 col) + 2 small tiles -->
+        <!-- Row 4: Small Grid (1 col) + Mantras + Temples -->
         <div class="small-grid">
-            <div class="tile dark-grey">
-                <i class="fa-solid fa-heart"></i>
-            </div>
-            <div class="tile dark-grey">
-                <i class="fa-solid fa-cog"></i>
-            </div>
-            <div class="tile dark-grey">
-                <i class="fa-solid fa-share-alt"></i>
-            </div>
-            <div class="tile dark-grey">
-                <i class="fa-solid fa-info-circle"></i>
-            </div>
+            <div class="tile dark-grey"><i class="fa-solid fa-heart"></i></div>
+            <div class="tile dark-grey"><i class="fa-solid fa-cog"></i></div>
+            <div class="tile dark-grey"><i class="fa-solid fa-share-alt"></i></div>
+            <div class="tile dark-grey"><i class="fa-solid fa-info-circle"></i></div>
         </div>
         <div class="tile small blue">
             <div class="tile-content">
                 <i class="fa-solid fa-music"></i>
-                <span>Mantra</span>
+                <span>Mantras</span>
             </div>
         </div>
         <div class="tile small green">
             <div class="tile-content">
-                <i class="fa-solid fa-map-marker-alt"></i>
+                <i class="fa-solid fa-location-dot"></i>
                 <span>Temples</span>
             </div>
         </div>
 
         <!-- Row 5: Daily Wisdom (Large - 3 cols) -->
         <div class="tile large dark-orange">
-            <div class="tile-content" style="justify-content: center;">
-                <i class="fa-solid fa-quote-left"
-                    style="font-size: 18px; opacity: 0.4; position: absolute; top: 12px; left: 12px; transform: none;"></i>
+            <div class="tile-content">
                 <p
-                    style="font-family: 'Georgia', serif; font-size: 14px; line-height: 1.4; text-align: center; margin: 0; padding: 0 25px; font-style: italic; color: white;">
+                    style="font-family: Georgia, serif; font-size: 13px; font-style: italic; text-align: center; padding: 0 20px; color: rgba(255,255,255,0.9);">
                     "You have the right to work, but for the work's sake only."
                 </p>
                 <span>Daily Wisdom</span>
@@ -131,11 +117,6 @@
     </div>
 
     <script src="js/main.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-    </script>
 </body>
 
 </html>
