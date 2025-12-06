@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sanatan-os-v1';
+const CACHE_NAME = 'sanatan-os-v2';
 const urlsToCache = [
   '/',
   '/index.html',
