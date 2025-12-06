@@ -19,7 +19,8 @@ body {
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 8px;
+    /* Metro tight spacing */
     max-width: 400px;
     margin: 0 auto;
     padding: 15px;
@@ -32,7 +33,8 @@ body {
     position: relative;
     background: rgba(30, 25, 55, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
+    border-radius: 0;
+    /* Metro square tiles */
     overflow: hidden;
     cursor: pointer;
     text-decoration: none;
@@ -128,7 +130,8 @@ body {
 
 .small-grid .tile {
     height: auto;
-    border-radius: 8px;
+    border-radius: 0;
+    /* Metro square */
     display: flex;
     justify-content: center;
     align-items: center;
