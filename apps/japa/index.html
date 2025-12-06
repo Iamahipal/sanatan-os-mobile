@@ -13,7 +13,7 @@
 
 <body class="page-enter">
     <div class="app-container">
-        <!-- Header -->
+        <!-- Glassmorphism Header -->
         <header class="app-header">
             <a href="../../index.html" class="back-btn" aria-label="Back">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -23,51 +23,95 @@
 
             <!-- Mantra Selector -->
             <select id="mantra-selector" class="mantra-selector">
-                <option value="श्री राधा">श्री राधा</option>
-                <option value="श्री कृष्ण">श्री कृष्ण</option>
-                <option value="श्री राम">श्री राम</option>
-                <option value="ॐ नमः शिवाय">ॐ नमः शिवाय</option>
-                <option value="हरे कृष्ण">हरे कृष्ण</option>
+                <option value="radha">श्री राधा</option>
+                <option value="krishna">श्री कृष्ण</option>
+                <option value="ram">श्री राम</option>
+                <option value="shiva">ॐ नमः शिवाय</option>
+                <option value="hanuman">ॐ हनुमते नमः</option>
             </select>
 
-            <button id="mute-btn" class="icon-btn" aria-label="Toggle Sound">
-                <svg id="sound-on" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                </svg>
-                <svg id="sound-off" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <line x1="23" y1="9" x2="17" y2="15"></line>
-                    <line x1="17" y1="9" x2="23" y2="15"></line>
-                </svg>
-            </button>
+            <div class="header-right">
+                <button id="stats-btn" class="icon-btn" aria-label="View Stats">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                </button>
+                <button id="mute-btn" class="icon-btn" aria-label="Toggle Sound">
+                    <svg id="sound-on" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                    <svg id="sound-off" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                </button>
+            </div>
         </header>
 
-        <!-- Main Tap Canvas -->
+        <!-- Level Badge -->
+        <div id="level-badge" class="level-badge">
+            <span class="level-icon">🙏</span>
+            <span id="level-text" class="level-text">Sadhak</span>
+        </div>
+
+        <!-- Main Tap Canvas (for floating names) -->
         <main id="japa-canvas" class="japa-canvas">
-            <!-- Floating mantras will be generated here -->
+            <!-- Floating mantras appear here -->
         </main>
 
-        <!-- Bottom Counter Bar -->
-        <footer class="counter-bar">
-            <div class="counter-item">
-                <span class="counter-label">Bead</span>
-                <span id="bead-count" class="counter-value">0</span>
+        <!-- Rotating Mala at Bottom -->
+        <div class="mala-section">
+            <div class="counter-display">
+                <div class="counter-item">
+                    <span class="counter-label">BEAD</span>
+                    <span id="bead-count" class="counter-value">0</span>
+                </div>
+                <div class="counter-divider"></div>
+                <div class="counter-item">
+                    <span class="counter-label">MALA</span>
+                    <span id="mala-count" class="counter-value">0</span>
+                </div>
             </div>
-            <div class="counter-divider">|</div>
-            <div class="counter-item">
-                <span class="counter-label">Mala</span>
-                <span id="mala-count" class="counter-value">0</span>
+            <div id="mala-container" class="mala-container">
+                <!-- Beads generated by JS -->
             </div>
-        </footer>
+        </div>
 
-        <!-- Divine Flash Overlay -->
+        <!-- Divine Flash -->
         <div id="divine-flash" class="divine-flash"></div>
     </div>
 
-    <!-- Audio Elements -->
+    <!-- Stats Modal -->
+    <div id="stats-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📊 Your Sadhana</h2>
+                <button id="close-stats" class="close-btn">&times;</button>
+            </div>
+            <div class="stats-summary">
+                <div class="stat-box">
+                    <span class="stat-value" id="total-count">0</span>
+                    <span class="stat-label">Total Names</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value" id="streak-count">0</span>
+                    <span class="stat-label">Day Streak 🔥</span>
+                </div>
+            </div>
+            <h3>Last 7 Days</h3>
+            <div id="chart-container" class="chart-container">
+                <!-- CSS bar chart -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio -->
     <audio id="tap-sound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"
         preload="auto"></audio>
     <audio id="bell-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-temple-bell-ring-578.mp3"
