@@ -1,337 +1,394 @@
 /* ============================================
-   SANATAN OS - PHYSICS OPTIMIZED
-   Strict 2-Column Grid + Turnstile Animation
+   SANATAN OS - DEFECT-FREE REWRITE
+   Strict Layout Engine + 60fps Performance
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
 
+/* ============================================
+   CSS VARIABLES
+   ============================================ */
 :root {
-    --bg-deep: #0f0c29;
-    --bg-mid: #302b63;
-    --bg-light: #24243e;
-    --glass-bg: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.12);
+    --bg-base: #0f0c29;
+    --glass-bg: rgba(255, 255, 255, 0.07);
+    --glass-border: rgba(255, 255, 255, 0.1);
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.8);
-    --radius: 16px;
-    --gap: 10px;
+    --text-secondary: rgba(255, 255, 255, 0.75);
+    --gold: #ffd700;
+
+    /* STRICT DIMENSIONS */
+    --tile-height: 100px;
+    --tile-radius: 14px;
+    --grid-gap: 8px;
+    --blur-amount: 10px;
 }
 
-* {
+/* ============================================
+   RESET
+   ============================================ */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
 ::-webkit-scrollbar {
     display: none;
 }
 
-html {
-    scrollbar-width: none;
-}
-
 /* ============================================
-   FIXED GRADIENT BACKGROUND (Battery Saver)
+   FIXED GRADIENT BACKGROUND (NO ANIMATION)
    ============================================ */
 body {
     font-family: 'Outfit', sans-serif;
     min-height: 100vh;
-    overflow-x: hidden;
-    color: var(--text-primary);
+    min-height: 100dvh;
     background:
-        radial-gradient(ellipse at 30% 10%, rgba(106, 5, 114, 0.25) 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 90%, rgba(0, 168, 150, 0.15) 0%, transparent 50%),
-        linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        radial-gradient(ellipse at 20% 0%, rgba(106, 5, 114, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(0, 150, 136, 0.2) 0%, transparent 50%),
+        linear-gradient(to bottom, #0f0c29 0%, #1a1a2e 50%, #16213e 100%);
     background-attachment: fixed;
+    color: var(--text-primary);
+    overflow-x: hidden;
 }
 
 /* ============================================
-   TURNSTILE ANIMATION (Rolodex Flip)
+   TURNSTILE ANIMATION (SNAPPY PIVOT)
    ============================================ */
 @keyframes turnstile {
     0% {
-        transform: perspective(600px) rotateX(90deg);
+        transform: perspective(800px) rotateY(-70deg);
+        transform-origin: left center;
         opacity: 0;
     }
 
     100% {
-        transform: perspective(600px) rotateX(0deg);
+        transform: perspective(800px) rotateY(0deg);
+        transform-origin: left center;
         opacity: 1;
     }
 }
 
 /* ============================================
-   STRICT 2-COLUMN GRID
+   GRID CONTAINER - SAFE AREA AWARE
    ============================================ */
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 110px;
-    gap: var(--gap);
-    padding: max(60px, env(safe-area-inset-top)) 12px 80px;
-    max-width: 420px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: var(--tile-height);
+    gap: var(--grid-gap);
+
+    /* NOTCH FIX: Dynamic top padding */
+    padding-top: max(50px, env(safe-area-inset-top, 50px));
+    padding-left: var(--grid-gap);
+    padding-right: var(--grid-gap);
+    padding-bottom: max(80px, env(safe-area-inset-bottom, 80px));
+
+    max-width: 400px;
     margin: 0 auto;
 }
 
 /* ============================================
-   TILE - GPU OPTIMIZED GLASS
+   TILE - GPU ACCELERATED GLASS
    ============================================ */
 .tile {
     position: relative;
+
+    /* GLASS EFFECT (OPTIMIZED) */
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(var(--blur-amount));
+    -webkit-backdrop-filter: blur(var(--blur-amount));
     border: 1px solid var(--glass-border);
-    border-radius: var(--radius);
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        0 4px 16px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
+    border-radius: var(--tile-radius);
+
+    /* MINIMAL SHADOW */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+    /* GPU ACCELERATION */
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    /* TURNSTILE ANIMATION */
+    animation: turnstile 0.35s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+
+    /* INTERACTION */
     cursor: pointer;
     text-decoration: none;
     color: inherit;
-
-    /* GPU Acceleration */
-    will-change: transform, opacity;
-    transform-origin: center top;
-
-    /* Turnstile Animation */
-    animation: turnstile 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    overflow: hidden;
 }
 
 .tile:active {
-    transform: scale(0.96);
+    transform: scale(0.97) translateZ(0);
+    transition: transform 0.1s ease;
 }
 
-/* Staggered Animation Delays (0.05s increments) */
+/* ============================================
+   STAGGER DELAYS (0.04s INCREMENT)
+   ============================================ */
 .tile:nth-child(1) {
     animation-delay: 0.00s;
 }
 
 .tile:nth-child(2) {
-    animation-delay: 0.05s;
+    animation-delay: 0.04s;
 }
 
 .tile:nth-child(3) {
-    animation-delay: 0.10s;
+    animation-delay: 0.08s;
 }
 
 .tile:nth-child(4) {
-    animation-delay: 0.15s;
+    animation-delay: 0.12s;
 }
 
 .tile:nth-child(5) {
-    animation-delay: 0.20s;
+    animation-delay: 0.16s;
 }
 
 .tile:nth-child(6) {
-    animation-delay: 0.25s;
+    animation-delay: 0.20s;
 }
 
 .tile:nth-child(7) {
-    animation-delay: 0.30s;
+    animation-delay: 0.24s;
 }
 
 .tile:nth-child(8) {
-    animation-delay: 0.35s;
+    animation-delay: 0.28s;
 }
 
 .tile:nth-child(9) {
-    animation-delay: 0.40s;
+    animation-delay: 0.32s;
 }
 
 .tile:nth-child(10) {
-    animation-delay: 0.45s;
+    animation-delay: 0.36s;
 }
 
 .tile:nth-child(11) {
-    animation-delay: 0.50s;
+    animation-delay: 0.40s;
 }
 
 .tile:nth-child(12) {
-    animation-delay: 0.55s;
+    animation-delay: 0.44s;
+}
+
+.tile:nth-child(13) {
+    animation-delay: 0.48s;
+}
+
+.tile:nth-child(14) {
+    animation-delay: 0.52s;
 }
 
 /* ============================================
-   TILE SIZING
+   TILE SIZES (STRICT FIXED HEIGHT)
    ============================================ */
 .tile.small {
     grid-column: span 1;
     grid-row: span 1;
+    /* Height = 1 * var(--tile-height) = 100px */
 }
 
 .tile.wide {
     grid-column: span 2;
     grid-row: span 1;
+    /* Height = 1 * var(--tile-height) = 100px (SAME AS NEIGHBORS) */
+}
+
+.tile.tall {
+    grid-column: span 1;
+    grid-row: span 2;
+    /* Height = 2 * var(--tile-height) + gap = 208px */
 }
 
 .tile.large {
     grid-column: span 2;
     grid-row: span 2;
+    /* Height = 2 * var(--tile-height) + gap = 208px */
 }
 
 /* ============================================
-   ABSOLUTE CONTENT POSITIONING
+   ICON - DEAD CENTER (ABSOLUTE)
    ============================================ */
-
-/* Icon - Centered */
 .tile-icon {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 28px;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+    font-size: 30px;
+    line-height: 1;
+    pointer-events: none;
 }
 
-.tile.wide .tile-icon,
-.tile.large .tile-icon {
-    font-size: 36px;
-    transform: translate(-50%, -60%);
+.tile.wide .tile-icon {
+    font-size: 34px;
 }
 
-/* FontAwesome Icons - Centered */
-.tile i {
+/* FontAwesome Icons */
+.tile i.fa-solid,
+.tile i.fa-regular {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 28px;
+    font-size: 26px;
     color: #fff;
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.25));
+    pointer-events: none;
 }
 
-.tile.wide i {
-    font-size: 32px;
-    transform: translate(-50%, -60%);
+.tile.wide i.fa-solid,
+.tile.wide i.fa-regular {
+    font-size: 30px;
 }
 
-/* Label - Bottom Left (Windows Phone Standard) */
+/* ============================================
+   LABEL - BOTTOM-LEFT ANCHOR (ABSOLUTE)
+   ============================================ */
 .tile-label {
     position: absolute;
     bottom: 10px;
     left: 12px;
-    width: calc(100% - 24px);
-    font-size: 13px;
-    font-weight: 600;
+    right: 12px;
+
+    font-size: 12px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
     color: var(--text-secondary);
-    text-align: left;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
 }
 
 .tile.wide .tile-label {
-    font-size: 14px;
-    bottom: 12px;
-    left: 16px;
+    font-size: 13px;
+    left: 14px;
 }
 
-/* Badge */
+/* ============================================
+   BADGE
+   ============================================ */
 .tile-badge {
     position: absolute;
     top: 8px;
     right: 8px;
-    background: rgba(255, 60, 60, 0.8);
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 9px;
+
+    background: #e53935;
+    padding: 2px 6px;
+    border-radius: 3px;
+
+    font-size: 8px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    color: #fff;
 }
 
 /* ============================================
-   HERO TILE - Subtle Accent
+   HERO TILE ACCENT
    ============================================ */
 .tile.hero {
-    border-color: rgba(255, 153, 51, 0.2);
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 4px 16px rgba(0, 0, 0, 0.25),
-        0 0 30px rgba(255, 153, 51, 0.08);
+    border-color: rgba(255, 153, 51, 0.25);
 }
 
 /* ============================================
-   QUOTE TILE - Daily Wisdom
+   QUOTE TILE
    ============================================ */
 .tile.quote {
-    grid-column: span 2;
-    grid-row: span 1;
-    padding: 14px 18px;
+    padding: 12px 14px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
 }
 
-.tile.quote .quote-icon {
-    font-size: 16px;
+.quote-icon {
+    font-size: 14px;
     opacity: 0.4;
     margin-bottom: 4px;
 }
 
-.tile.quote .quote-text {
-    font-size: 13px;
+.quote-text {
+    font-size: 12px;
     font-style: italic;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--text-secondary);
-    line-height: 1.5;
-    margin-bottom: 6px;
+    line-height: 1.4;
 }
 
-.tile.quote .quote-label {
-    font-size: 10px;
+.quote-label {
+    margin-top: 6px;
+    font-size: 9px;
     font-weight: 600;
-    color: #ffd700;
+    color: var(--gold);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
 }
 
 /* ============================================
-   MINI GRID (2x2 Icon Tiles)
+   MINI GRID (NESTED 2x2)
    ============================================ */
 .mini-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    grid-template-rows: 1fr 1fr;
+    gap: 6px;
+    /* Takes full grid cell */
 }
 
 .mini-grid .tile {
-    border-radius: 12px;
-    min-height: 50px;
+    border-radius: 10px;
+    min-height: 0;
 }
 
-.mini-grid .tile i {
-    font-size: 20px;
+.mini-grid .tile i.fa-solid {
+    font-size: 18px;
 }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE (SMALLER SCREENS)
    ============================================ */
-@media (max-width: 380px) {
-    .grid-container {
-        grid-auto-rows: 100px;
-        padding: max(50px, env(safe-area-inset-top)) 10px 70px;
-    }
-
-    .tile {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+@media (max-width: 360px) {
+    :root {
+        --tile-height: 90px;
+        --grid-gap: 6px;
+        --blur-amount: 6px;
     }
 
     .tile-icon {
-        font-size: 24px;
+        font-size: 26px;
     }
 
-    .tile i {
-        font-size: 24px;
+    .tile i.fa-solid {
+        font-size: 22px;
     }
 
     .tile-label {
-        font-size: 11px;
+        font-size: 10px;
         bottom: 8px;
         left: 10px;
+    }
+}
+
+/* Reduce blur on lower-end devices */
+@media (prefers-reduced-motion: reduce) {
+    .tile {
+        animation: none;
+        opacity: 1;
+        transform: none;
     }
 }
