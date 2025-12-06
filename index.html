@@ -3,186 +3,266 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sanatan OS</title>
-    <meta name="description" content="Sanatan OS - Your spiritual companion">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0f0c29">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
-    <main class="grid-container">
-        <!-- Row 1: Gita AI (Large - spans 3 cols) -->
-        <div class="tile large hero">
-            <span class="tile-icon">🕉️</span>
-            <span class="tile-label">Gita AI</span>
-        </div>
-
-        <!-- Row 2: Darshan + Panchang + Sangha -->
-        <div class="tile small">
-            <span class="tile-badge">LIVE</span>
-            <i class="fa-solid fa-video"></i>
-            <span class="tile-label">Darshan</span>
-        </div>
-
-        <div class="tile small">
-            <i class="fa-solid fa-calendar-days"></i>
-            <span class="tile-label">Panchang</span>
-        </div>
-
-        <div class="tile small">
-            <i class="fa-solid fa-spa"></i>
-            <span class="tile-label">Sangha</span>
-        </div>
-
-        <!-- Row 3: Bal Krishna (Medium: 2 cols) + Naam Japa (1 col) -->
-        <div class="tile medium">
-            <span class="tile-icon">🦚</span>
-            <span class="tile-label">Bal Krishna</span>
-        </div>
-
-        <a href="apps/japa/index.html" class="tile small">
-            <span class="tile-icon">📿</span>
-            <span class="tile-label">Naam Japa</span>
-        </a>
-
-        <!-- Row 4: Mini Grid + Mantras + Temples -->
-        <div class="mini-grid">
-            <div class="tile">
-                <i class="fa-solid fa-heart"></i>
+    <!-- App List View Container -->
+    <div class="app-list-container" id="appListView">
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <div class="search-icon">
+                <i class="fa-solid fa-search"></i>
             </div>
-            <div class="tile" data-action="open-settings">
-                <i class="fa-solid fa-gear"></i>
-            </div>
-            <div class="tile">
-                <i class="fa-solid fa-share-nodes"></i>
-            </div>
-            <div class="tile">
-                <i class="fa-solid fa-circle-info"></i>
-            </div>
+            <input type="text" id="searchApps" placeholder="Search apps...">
         </div>
 
-        <div class="tile small">
-            <i class="fa-solid fa-music"></i>
-            <span class="tile-label">Mantras</span>
-        </div>
-
-        <div class="tile small">
-            <i class="fa-solid fa-location-dot"></i>
-            <span class="tile-label">Temples</span>
-        </div>
-
-        <!-- Row 5: Quote (Large - spans 3 cols) -->
-        <div class="tile large quote">
-            <span class="quote-icon">❝</span>
-            <p class="quote-text">"You have the right to work, but for the work's sake only."</p>
-            <span class="quote-label">Daily Wisdom</span>
-        </div>
-
-        <!-- Row 6: Shastras + Worship + Events -->
-        <div class="tile small">
-            <i class="fa-solid fa-book-open"></i>
-            <span class="tile-label">Shastras</span>
-        </div>
-
-        <div class="tile small">
-            <i class="fa-solid fa-hands-praying"></i>
-            <span class="tile-label">Worship</span>
-        </div>
-
-        <div class="tile small">
-            <i class="fa-solid fa-calendar-check"></i>
-            <span class="tile-label">Events</span>
-        </div>
-    </main>
-
-    <!-- Settings Modal -->
-    <div class="settings-modal" id="settings-modal">
-        <div class="settings-panel">
-            <div class="settings-header">
-                <h2>Settings</h2>
-                <button class="settings-close" id="settings-close">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <!-- Appearance Section -->
-            <div class="settings-section">
-                <h3>Appearance</h3>
-
-                <div class="settings-row">
-                    <span class="settings-label">Theme</span>
-                    <div class="theme-options">
-                        <button class="theme-btn active" data-theme="indigo" title="Indigo"></button>
-                        <button class="theme-btn" data-theme="white" title="Light"></button>
-                        <button class="theme-btn" data-theme="saffron" title="Saffron"></button>
-                    </div>
-                </div>
-
-                <div class="settings-row" style="flex-direction: column; align-items: stretch;">
-                    <span class="settings-label" style="margin-bottom: 12px;">Wallpaper</span>
-                    <div class="wallpaper-grid">
-                        <button class="wallpaper-btn active" data-wallpaper="default" title="Default"></button>
-                        <button class="wallpaper-btn" data-wallpaper="cosmic" title="Cosmic"></button>
-                        <button class="wallpaper-btn" data-wallpaper="forest" title="Forest"></button>
-                    </div>
-                    <label class="upload-btn">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload Custom Photo
-                        <input type="file" id="wallpaper-upload" accept="image/*" hidden>
-                    </label>
-                </div>
-
-                <div class="settings-row">
-                    <span class="settings-label">Glass Blur</span>
-                    <div class="slider-container">
-                        <input type="range" class="slider" id="blur-slider" min="0" max="24" value="0">
-                        <span class="slider-value" id="blur-value">0px</span>
-                    </div>
+        <!-- App List Items (Grouped) -->
+        <div class="app-group">
+            <div class="group-header">b</div>
+            <div class="group-items">
+                <div class="app-item">
+                    <div class="app-icon saffron"><i class="fa-solid fa-child"></i></div>
+                    <div class="app-name">Bal Vihar</div>
                 </div>
             </div>
+        </div>
 
-            <!-- Display Section -->
-            <div class="settings-section">
-                <h3>Display</h3>
-
-                <div class="settings-row">
-                    <span class="settings-label">Text Size</span>
-                    <div class="toggle-group">
-                        <button class="toggle-btn text-size-btn" data-size="small">S</button>
-                        <button class="toggle-btn text-size-btn active" data-size="medium">M</button>
-                        <button class="toggle-btn text-size-btn" data-size="large">L</button>
-                    </div>
-                </div>
-
-                <div class="settings-row">
-                    <span class="settings-label">Grid Spacing</span>
-                    <div class="toggle-group">
-                        <button class="toggle-btn grid-gap-btn" data-gap="tight">Tight</button>
-                        <button class="toggle-btn grid-gap-btn active" data-gap="normal">Normal</button>
-                        <button class="toggle-btn grid-gap-btn" data-gap="airy">Airy</button>
-                    </div>
+        <div class="app-group">
+            <div class="group-header">c</div>
+            <div class="group-items">
+                <div class="app-item">
+                    <div class="app-icon teal"><i class="fa-solid fa-users"></i></div>
+                    <div class="app-name">Community</div>
                 </div>
             </div>
+        </div>
 
-            <!-- System Section -->
-            <div class="settings-section">
-                <h3>System</h3>
-                <button class="reset-btn" id="reset-settings">
-                    <i class="fa-solid fa-trash"></i> Reset All Data
-                </button>
+        <div class="app-group">
+            <div class="group-header">d</div>
+            <div class="group-items">
+                <div class="app-item">
+                    <div class="app-icon dark-orange"><i class="fa-solid fa-book-open"></i></div>
+                    <div class="app-name">Daily Wisdom</div>
+                </div>
+                <div class="app-item">
+                    <div class="app-icon dark-grey"><i class="fa-solid fa-heart"></i></div>
+                    <div class="app-name">Donation</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-group">
+            <div class="group-header">g</div>
+            <div class="group-items">
+                <div class="app-item">
+                    <div class="app-icon saffron"><i class="fa-solid fa-om"></i></div>
+                    <div class="app-name">Gita AI</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-group">
+            <div class="group-header">j</div>
+            <div class="group-items">
+                <div class="app-item">
+                    <div class="app-icon purple"><i class="fa-solid fa-stopwatch"></i></div>
+                    <div class="app-name">Japa Counter</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-group">
+            <div class="group-header">l</div>
+            <div class="group-items">
+                <div class="app-item">
+                    <div class="app-icon crimson"><i class="fa-solid fa-video"></i></div>
+                    <div class="app-name">Live Darshan</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-group">
+            <div class="group-header">m</div>
+            <div class="group-items">
+                <div class="app-item">
+                    <div class="app-icon blue"><i class="fa-solid fa-music"></i></div>
+                    <div class="app-name">Mantra Player</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-group">
+            <div class="group-header">p</div>
+            <div class="group-items">
+                <div class="app-item">
+                    <div class="app-icon teal"><i class="fa-solid fa-calendar-alt"></i></div>
+                    <div class="app-name">Panchang</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-group">
+            <div class="group-header">s</div>
+            <div class="group-items">
+                <div class="app-item">
+                    <div class="app-icon dark-grey"><i class="fa-solid fa-cog"></i></div>
+                    <div class="app-name">Settings</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-group">
+            <div class="group-header">t</div>
+            <div class="group-items">
+                <div class="app-item">
+                    <div class="app-icon green"><i class="fa-solid fa-map-marker-alt"></i></div>
+                    <div class="app-name">Temple Map</div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="js/settings.js"></script>
+    <!-- Tile Grid Container -->
+    <div class="grid-container">
+        <!-- Row 1: Gita AI (Large Live Tile) -->
+        <div class="tile large saffron live-tile" id="gitaTile">
+            <div class="tile-face face-front">
+                <div class="tile-content">
+                    <i class="fa-solid fa-om"></i>
+                    <span>Gita AI</span>
+                </div>
+            </div>
+            <div class="tile-face face-back">
+                <div class="tile-content" style="align-items: flex-start; padding-left: 20px; text-align: left;">
+                    <h1 style="font-weight: 300; font-size: 24px; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                        Sanatan OS</h1>
+                    <p
+                        style="font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 12px; margin: 5px 0 0 0; opacity: 0.9;">
+                        Dharma is the only path...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2: Live Darshan, Panchang, Community -->
+        <div class="tile crimson">
+            <div class="tile-content">
+                <div class="tile-badge">LIVE</div>
+                <i class="fa-solid fa-video"></i>
+                <span>Live Darshan</span>
+            </div>
+        </div>
+        <div class="tile teal">
+            <div class="tile-content">
+                <i class="fa-solid fa-calendar-alt"></i>
+                <span>Panchang</span>
+            </div>
+        </div>
+        <div class="tile green">
+            <div class="tile-content">
+                <i class="fa-solid fa-users"></i>
+                <span>Community</span>
+            </div>
+        </div>
+
+        <!-- Row 3: Bal Vihar (Medium) + Japa Counter -->
+        <div class="tile medium yellow">
+            <div class="tile-content">
+                <i class="fa-solid fa-child" style="color: #2c3e50;"></i>
+                <span style="color: #2c3e50;">Bal Vihar</span>
+            </div>
+        </div>
+        <a href="apps/japa/index.html" class="tile tile-small tile-purple"
+            style="text-decoration: none; display: flex;">
+            <div class="tile-content">
+                <span style="font-size: 2rem;">📿</span>
+                <span>Radha Japa</span>
+            </div>
+        </a>
+
+        <!-- Row 4: Small Grid + Mantra Player + Temple Map -->
+        <div class="small-grid">
+            <div class="tile small dark-grey">
+                <div class="tile-content">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+            </div>
+            <div class="tile small dark-grey">
+                <div class="tile-content">
+                    <i class="fa-solid fa-cog"></i>
+                </div>
+            </div>
+            <div class="tile small dark-grey">
+                <div class="tile-content">
+                    <i class="fa-solid fa-share-alt"></i>
+                </div>
+            </div>
+            <div class="tile small dark-grey">
+                <div class="tile-content">
+                    <i class="fa-solid fa-info-circle"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="tile blue">
+            <div class="tile-content">
+                <i class="fa-solid fa-music"></i>
+                <span>Mantra Player</span>
+            </div>
+        </div>
+
+        <div class="tile green">
+            <div class="tile-content">
+                <i class="fa-solid fa-map-marker-alt"></i>
+                <span>Temple Map</span>
+            </div>
+        </div>
+
+        <!-- Row 5: Daily Wisdom (Large) -->
+        <div class="tile large dark-orange">
+            <div class="tile-content" style="justify-content: center;">
+                <i class="fa-solid fa-quote-left"
+                    style="font-size: 20px; opacity: 0.4; position: absolute; top: 15px; left: 15px; transform: none;"></i>
+                <p
+                    style="font-family: 'Georgia', serif; font-size: 15px; line-height: 1.4; text-align: center; margin: 0; padding: 0 30px; font-style: italic;">
+                    "You have the right to work, but for the work's sake only."</p>
+                <span>Daily Wisdom</span>
+            </div>
+        </div>
+
+        <!-- Row 6: New Placeholder Tiles -->
+        <div class="tile blue">
+            <div class="tile-content">
+                <i class="fa-solid fa-book"></i>
+                <span>Scriptures</span>
+            </div>
+        </div>
+        <div class="tile purple">
+            <div class="tile-content">
+                <i class="fa-solid fa-hands-praying"></i>
+                <span>Worship</span>
+            </div>
+        </div>
+        <div class="tile teal">
+            <div class="tile-content">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Events</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
         }
     </script>
 </body>

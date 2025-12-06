@@ -1,12 +1,13 @@
 :root {
-    --bg-color: #0d0d1a;
-    --accent-gold: #ffd700;
-    --accent-saffron: #ff6b35;
-    --text-color: #f0f0f0;
-    --glass-bg: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.15);
-    --deity-color: #ffd700;
-    --safe-top: env(safe-area-inset-top, 0px);
+    --bg-color: #1a1a2e;
+    --accent-color: #ffd700;
+    /* Gold */
+    --text-color: #e0e0e0;
+    --bead-color-1: #8b4513;
+    /* SaddleBrown */
+    --bead-color-2: #cd853f;
+    /* Peru */
+    --pulse-color: rgba(255, 215, 0, 0.6);
 }
 
 * {
@@ -14,599 +15,258 @@
     margin: 0;
     padding: 0;
     user-select: none;
+    /* Prevent text selection on rapid tapping */
     -webkit-tap-highlight-color: transparent;
-}
-
-/* Turnstile Animation */
-@keyframes turnstileIn {
-    from {
-        transform: perspective(1200px) rotateY(30deg) scale(0.9);
-        opacity: 0;
-    }
-
-    to {
-        transform: perspective(1200px) rotateY(0deg) scale(1);
-        opacity: 1;
-    }
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: radial-gradient(ellipse at bottom, #1a1a3e 0%, var(--bg-color) 100%);
+    background-color: var(--bg-color);
     color: var(--text-color);
     height: 100vh;
-    height: 100dvh;
     overflow: hidden;
-}
-
-body.page-enter {
-    animation: turnstileIn 0.5s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .app-container {
     width: 100%;
     height: 100%;
+    position: relative;
     display: flex;
     flex-direction: column;
-    position: relative;
 }
 
-/* Header - Safe Area for Notch */
+/* Header */
 .app-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    padding: 12px 16px;
-    padding-top: max(20px, var(--safe-top));
-    min-height: 70px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-    z-index: 20;
-}
-
-.back-btn,
-.icon-btn {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    color: var(--text-color);
-    text-decoration: none;
-    opacity: 0.8;
-    transition: all 0.2s;
-    cursor: pointer;
-    padding: 8px;
-    margin-bottom: 4px;
+    padding: 20px;
+    z-index: 10;
 }
 
-.back-btn:hover,
-.icon-btn:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-.header-right {
+.header-controls {
     display: flex;
-    gap: 4px;
-}
-
-/* Deity Selector - Centered, Larger */
-.deity-selector {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 25px;
-    padding: 10px 24px;
-    color: var(--accent-gold);
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 1.1rem;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.3s;
-    margin-bottom: 4px;
-}
-
-.deity-selector:focus {
-    border-color: var(--accent-gold);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-}
-
-.deity-selector option {
-    background: #1a1a3e;
-    color: var(--text-color);
-    font-size: 16px;
+    gap: 15px;
 }
 
 .hidden {
     display: none !important;
 }
 
-/* Level Badge */
-.level-badge {
-    position: absolute;
-    top: calc(70px + max(10px, var(--safe-top)));
-    left: 50%;
-    transform: translateX(-50%);
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.icon-btn:hover {
+    opacity: 1;
+}
+
+.mala-counter-display {
+    text-align: center;
     display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 16px;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    font-size: 0.85rem;
-    z-index: 15;
+    flex-direction: column;
 }
 
-.level-icon {
-    font-size: 1.1rem;
-}
-
-.level-text {
-    color: var(--accent-gold);
-    font-weight: 500;
+.mala-counter-display .label {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-/* Main Canvas - Container for floating names */
-.japa-canvas {
-    flex: 1;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    margin-top: 40px;
-    /* Space for level badge */
-    touch-action: manipulation;
-    /* Prevents zoom on double-tap */
-}
-
-/* Floating Mantra - Positioned absolutely by JS */
-.floating-mantra {
-    position: absolute;
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    color: var(--deity-color);
-    pointer-events: none;
-    animation: fadeGlow 3.5s ease-out forwards;
-    white-space: nowrap;
-    text-shadow:
-        0 0 8px currentColor,
-        0 0 16px currentColor,
-        0 0 32px currentColor;
-    transition: opacity 0.15s;
-}
-
-@keyframes fadeGlow {
-    0% {
-        opacity: 0;
-        transform: scale(0.6) translateY(0);
-    }
-
-    8% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-
-    85% {
-        opacity: 0.85;
-        transform: scale(1) translateY(-15px);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(0.9) translateY(-25px);
-    }
-}
-
-/* Mala Complete Celebration */
-.mala-complete {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
-    z-index: 150;
-    opacity: 0;
-}
-
-.mala-complete.active {
-    animation: celebrationPulse 2s ease-out forwards;
-}
-
-@keyframes celebrationPulse {
-    0% {
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    80% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-.complete-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 30px 50px;
-    background: rgba(0, 0, 0, 0.85);
-    border: 2px solid var(--accent-gold);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-}
-
-.complete-icon {
-    font-size: 3rem;
-    animation: iconBounce 0.5s ease-out;
-}
-
-@keyframes iconBounce {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.3);
-    }
-}
-
-.complete-text {
+.mala-counter-display .count {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--accent-gold);
-    text-shadow: 0 0 20px var(--accent-gold);
+    color: var(--accent-color);
 }
 
-.complete-count {
+/* Main Area */
+.japa-area {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* Align mala to bottom */
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Center Display */
+.center-display {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+    pointer-events: none;
+    /* Let clicks pass through to japa-area */
+}
+
+.mantra {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 4rem;
+    color: var(--accent-color);
+    text-shadow: 0 0 20px var(--pulse-color);
+    margin-bottom: 10px;
+    transition: transform 0.1s ease-out;
+}
+
+.bead-counter {
     font-size: 1.2rem;
     opacity: 0.8;
 }
 
-/* Mala Section */
-.mala-section {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-}
-
-.counter-display {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px 30px;
-    border-radius: 30px;
-    backdrop-filter: blur(10px);
-}
-
-.counter-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.counter-label {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    opacity: 0.6;
-}
-
-.counter-value {
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--accent-gold);
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-    line-height: 1;
-}
-
-.counter-divider {
-    width: 1px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* Rotating Mala - 3D Rudraksha Beads */
+/* Mala Container */
 .mala-container {
     position: absolute;
-    width: 600px;
-    height: 600px;
-    bottom: -420px;
+    width: 800px;
+    /* Large enough to curve gently */
+    height: 800px;
+    border-radius: 50%;
+    bottom: -600px;
+    /* Push most of it off screen */
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 50%;
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
 }
 
 .bead {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    /* 3D Rudraksha Look */
-    background: radial-gradient(circle at 25% 25%, #d4a064 0%, #8b5a2b 40%, #5d4037 100%);
-    box-shadow:
-        3px 3px 6px rgba(0, 0, 0, 0.6),
-        inset -3px -3px 6px rgba(0, 0, 0, 0.4),
-        inset 2px 2px 4px rgba(255, 255, 255, 0.15);
+    background: radial-gradient(circle at 30% 30%, var(--bead-color-2), var(--bead-color-1));
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    /* Positioning will be done in JS */
 }
 
+/* Active Bead Indicator (Optional visual cue) */
 .bead.active {
-    background: radial-gradient(circle at 25% 25%, #ffe066 0%, var(--accent-gold) 50%, #b8860b 100%);
-    box-shadow:
-        0 0 25px var(--accent-gold),
-        0 0 50px rgba(255, 215, 0, 0.5),
-        inset -2px -2px 4px rgba(0, 0, 0, 0.3);
-    animation: beadPulse 0.3s ease-out;
+    box-shadow: 0 0 15px var(--accent-color);
 }
 
-@keyframes beadPulse {
+/* Animations */
+@keyframes pulse-text {
     0% {
         transform: scale(1);
+        text-shadow: 0 0 20px var(--pulse-color);
     }
 
     50% {
-        transform: scale(1.2);
+        transform: scale(1.1);
+        text-shadow: 0 0 30px var(--pulse-color);
     }
 
     100% {
         transform: scale(1);
+        text-shadow: 0 0 20px var(--pulse-color);
     }
 }
 
-/* Divine Flash */
-.divine-flash {
-    position: fixed;
+.pulse-anim {
+    animation: pulse-text 0.3s ease-out;
+}
+
+/* Flower Shower */
+.flower-container {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, #fff 0%, rgba(255, 215, 0, 0.9) 40%, transparent 100%);
-    opacity: 0;
     pointer-events: none;
-    z-index: 100;
+    overflow: hidden;
+    z-index: 20;
 }
 
-.divine-flash.active {
-    animation: flashPulse 1.2s ease-out forwards;
+.flower {
+    position: absolute;
+    font-size: 24px;
+    animation: fall linear forwards;
 }
 
-@keyframes flashPulse {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-.pulse {
-    animation: counterPulse 0.4s ease-out;
-}
-
-@keyframes counterPulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.4);
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
     }
 }
 
-/* Modal Overlay */
-.modal-overlay {
+/* History Drawer */
+.history-drawer {
     position: fixed;
-    top: 0;
+    bottom: -100%;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 200;
-}
-
-.modal-overlay.active {
-    display: flex;
-}
-
-.modal-content {
-    background: linear-gradient(135deg, #1a1a3e 0%, #0d0d1a 100%);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    width: 90%;
-    max-width: 400px;
-    padding: 24px;
-    animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.modal-header h2 {
-    font-size: 1.3rem;
-    color: var(--accent-gold);
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    color: var(--text-color);
-    font-size: 28px;
-    cursor: pointer;
-    opacity: 0.7;
-    line-height: 1;
-}
-
-.close-btn:hover {
-    opacity: 1;
-}
-
-/* Settings Modal */
-.settings-modal {
-    max-width: 350px;
-}
-
-.settings-group {
-    margin-bottom: 20px;
-}
-
-.setting-label {
-    display: block;
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-bottom: 10px;
-}
-
-.toggle-container {
-    display: flex;
-    gap: 10px;
-}
-
-.toggle-btn {
-    flex: 1;
-    padding: 12px;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 10px;
-    color: var(--text-color);
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 1rem;
-}
-
-.toggle-btn.active {
-    background: var(--accent-gold);
-    color: #000;
-    border-color: var(--accent-gold);
-    font-weight: 500;
-}
-
-.danger-btn {
-    width: 100%;
-    padding: 12px;
-    background: rgba(231, 76, 60, 0.2);
-    border: 1px solid #e74c3c;
-    border-radius: 10px;
-    color: #e74c3c;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 1rem;
-}
-
-.danger-btn:hover {
-    background: #e74c3c;
-    color: white;
-}
-
-/* Stats */
-.stats-summary {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
-.stat-box {
-    flex: 1;
-    background: var(--glass-bg);
-    border-radius: 12px;
-    padding: 15px;
-    text-align: center;
-}
-
-.stat-value {
-    display: block;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--accent-gold);
-}
-
-.stat-label {
-    font-size: 0.75rem;
-    opacity: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.modal-content h3 {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-bottom: 15px;
-    font-weight: 400;
-}
-
-.chart-container {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    height: 120px;
-    gap: 8px;
-}
-
-.chart-bar {
-    flex: 1;
+    height: 60%;
+    background-color: #161625;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+    transition: bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
     display: flex;
     flex-direction: column;
+}
+
+.history-drawer.open {
+    bottom: 0;
+}
+
+.drawer-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.bar {
-    width: 100%;
-    background: linear-gradient(to top, var(--accent-gold), var(--accent-saffron));
-    border-radius: 4px 4px 0 0;
-    min-height: 4px;
-    transition: height 0.5s ease-out;
+.drawer-header h2 {
+    font-size: 1.5rem;
+    color: var(--accent-color);
 }
 
-.bar-label {
-    font-size: 0.65rem;
-    opacity: 0.6;
+.drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
 }
 
-.bar-value {
-    font-size: 0.7rem;
-    color: var(--accent-gold);
+#history-list {
+    list-style: none;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 1.1rem;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-item .date {
+    opacity: 0.8;
+}
+
+.history-item .count {
+    font-weight: 600;
+}
+
+.gold-text {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
