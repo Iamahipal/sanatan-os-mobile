@@ -80,6 +80,26 @@
 }
 
 /* ===== LUCIDE ICONS - Modern SVG Icons ===== */
+/* ALL icons inside buttons = no pointer events, let clicks pass through */
+.header-btn i,
+.header-btn svg,
+.menu-btn i,
+.menu-btn svg,
+.name-selector-btn i,
+.name-selector-btn svg,
+.close-btn i,
+.close-btn svg,
+.accordion-header i,
+.accordion-header svg,
+.name-option i,
+.name-option svg,
+.sound-option i,
+.sound-option svg,
+.reset-btn i,
+.reset-btn svg {
+    pointer-events: none;
+}
+
 .header-btn i,
 .menu-btn i {
     width: 20px;
