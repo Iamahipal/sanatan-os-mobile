@@ -570,16 +570,65 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         }
 
-        if (Notification.permission === 'granted') {
+        if (!('serviceWorker' in navigator)) {
+            reminderStatus.textContent = '❌ Service Worker not supported';
+            return false;
+        }
+
+        // Request notification permission
+        let permission = Notification.permission;
+        if (permission !== 'granted' && permission !== 'denied') {
+            permission = await Notification.requestPermission();
+        }
+
+        if (permission !== 'granted') {
+            reminderStatus.textContent = '❌ Notification permission denied';
+            return false;
+        }
+
+        // Register for push notifications
+        try {
+            const registration = await navigator.serviceWorker.ready;
+
+            // Check if already subscribed
+            let subscription = await registration.pushManager.getSubscription();
+
+            if (!subscription) {
+                // Subscribe to push (using a public VAPID key - we'll generate one)
+                // For now, we'll use a demo key - in production, generate your own
+                const vapidPublicKey = 'BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8U';
+
+                subscription = await registration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
+                });
+
+                console.log('Push subscription:', JSON.stringify(subscription));
+                // In production, send this subscription to your server
+            }
+
+            reminderStatus.textContent = '✅ Notifications enabled!';
+            return true;
+        } catch (err) {
+            console.error('Push subscription failed:', err);
+            // Fall back to regular notifications
+            reminderStatus.textContent = '⚠️ Push not available, using local notifications';
             return true;
         }
+    }
 
-        if (Notification.permission !== 'denied') {
-            const permission = await Notification.requestPermission();
-            return permission === 'granted';
+    // Helper function to convert VAPID key
+    function urlBase64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
         }
-
-        return false;
+        return outputArray;
     }
 
     let reminderInterval = null;
