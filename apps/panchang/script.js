@@ -269,38 +269,40 @@ document.addEventListener('DOMContentLoaded', () => {
             `${hoursToTime(gulikaStart)} - ${hoursToTime(gulikaStart + slotDuration)}`;
     }
 
-    // === CHOGHADIYA ===
-    function renderChoghadiya(period) {
-        if (!choghadiyaGrid) return;
+    // === CHOGHADIYA TIME WHEEL ===
+    let currentChogPeriod = 'day';
+    let wheelUpdateInterval = null;
 
+    const CHOG_DATA = {
+        day: [
+            { name: 'उद्वेग', type: 'udveg', english: 'Anxiety', good: false },
+            { name: 'चल', type: 'chal', english: 'Movement', good: true },
+            { name: 'लाभ', type: 'labh', english: 'Gain', good: true },
+            { name: 'अमृत', type: 'amrit', english: 'Nectar', good: true },
+            { name: 'काल', type: 'kaal', english: 'Death', good: false },
+            { name: 'शुभ', type: 'shubh', english: 'Auspicious', good: true },
+            { name: 'रोग', type: 'rog', english: 'Disease', good: false },
+            { name: 'उद्वेग', type: 'udveg', english: 'Anxiety', good: false }
+        ],
+        night: [
+            { name: 'शुभ', type: 'shubh', english: 'Auspicious', good: true },
+            { name: 'अमृत', type: 'amrit', english: 'Nectar', good: true },
+            { name: 'चल', type: 'chal', english: 'Movement', good: true },
+            { name: 'रोग', type: 'rog', english: 'Disease', good: false },
+            { name: 'काल', type: 'kaal', english: 'Death', good: false },
+            { name: 'लाभ', type: 'labh', english: 'Gain', good: true },
+            { name: 'उद्वेग', type: 'udveg', english: 'Anxiety', good: false },
+            { name: 'शुभ', type: 'shubh', english: 'Auspicious', good: true }
+        ]
+    };
+
+    function getChoghadiyaSlots(period) {
         const sunrise = currentPanchang.sunTimes.sunrise;
         const sunset = currentPanchang.sunTimes.sunset;
         const dayDuration = sunset - sunrise;
         const nightDuration = 24 - dayDuration;
 
-        const dayChogs = [
-            { name: 'उद्वेग', type: 'udveg' },
-            { name: 'चल', type: 'chal' },
-            { name: 'लाभ', type: 'labh' },
-            { name: 'अमृत', type: 'amrit' },
-            { name: 'काल', type: 'kaal' },
-            { name: 'शुभ', type: 'shubh' },
-            { name: 'रोग', type: 'rog' },
-            { name: 'उद्वेग', type: 'udveg' }
-        ];
-
-        const nightChogs = [
-            { name: 'शुभ', type: 'shubh' },
-            { name: 'अमृत', type: 'amrit' },
-            { name: 'चल', type: 'chal' },
-            { name: 'रोग', type: 'rog' },
-            { name: 'काल', type: 'kaal' },
-            { name: 'लाभ', type: 'labh' },
-            { name: 'उद्वेग', type: 'udveg' },
-            { name: 'शुभ', type: 'shubh' }
-        ];
-
-        const chogs = period === 'day' ? dayChogs : nightChogs;
+        const chogs = CHOG_DATA[period];
         const duration = period === 'day' ? dayDuration / 8 : nightDuration / 8;
         const start = period === 'day' ? sunrise : sunset;
 
@@ -308,12 +310,166 @@ document.addEventListener('DOMContentLoaded', () => {
         const dayOfWeek = currentDate.getDay();
         const rotated = [...chogs.slice(dayOfWeek % 7), ...chogs.slice(0, dayOfWeek % 7)];
 
-        choghadiyaGrid.innerHTML = rotated.map((chog, i) => `
+        return rotated.map((chog, i) => ({
+            ...chog,
+            startHour: start + i * duration,
+            endHour: start + (i + 1) * duration
+        }));
+    }
+
+    function drawWheelSegments(period) {
+        const segmentsEl = document.getElementById('chog-segments');
+        if (!segmentsEl) return;
+
+        const slots = getChoghadiyaSlots(period);
+        const anglePerSlot = 360 / 8;
+
+        let html = '';
+        slots.forEach((slot, i) => {
+            const startAngle = i * anglePerSlot;
+            const endAngle = (i + 1) * anglePerSlot;
+            const path = describeArc(100, 100, 72, startAngle, endAngle - 1);
+
+            html += `<path d="${path}" class="segment-${slot.type}" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>`;
+        });
+
+        segmentsEl.innerHTML = html;
+    }
+
+    function describeArc(x, y, radius, startAngle, endAngle) {
+        const start = polarToCartesian(x, y, radius, endAngle);
+        const end = polarToCartesian(x, y, radius, startAngle);
+        const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+
+        return [
+            "M", x, y,
+            "L", start.x, start.y,
+            "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y,
+            "Z"
+        ].join(" ");
+    }
+
+    function polarToCartesian(cx, cy, radius, angleDeg) {
+        const rad = (angleDeg - 90) * Math.PI / 180;
+        return {
+            x: cx + radius * Math.cos(rad),
+            y: cy + radius * Math.sin(rad)
+        };
+    }
+
+    function updateTimeWheel() {
+        const now = new Date();
+        const currentHour = now.getHours() + now.getMinutes() / 60;
+
+        const sunrise = currentPanchang.sunTimes.sunrise;
+        const sunset = currentPanchang.sunTimes.sunset;
+
+        // Determine if day or night
+        const isDay = currentHour >= sunrise && currentHour < sunset;
+        const period = isDay ? 'day' : 'night';
+
+        const slots = getChoghadiyaSlots(period);
+
+        // Find current slot
+        let currentSlot = null;
+        let currentIndex = 0;
+        slots.forEach((slot, i) => {
+            const slotStart = slot.startHour;
+            const slotEnd = slot.endHour;
+
+            if (currentHour >= slotStart && currentHour < slotEnd) {
+                currentSlot = slot;
+                currentIndex = i;
+            }
+        });
+
+        if (!currentSlot) {
+            // Default to first slot if not found
+            currentSlot = slots[0];
+        }
+
+        // Update center display
+        const nameEl = document.getElementById('current-chog-name');
+        const countdownEl = document.getElementById('current-chog-countdown');
+        const badgeEl = document.getElementById('current-chog-badge');
+
+        if (nameEl) nameEl.textContent = currentSlot.name;
+
+        // Calculate remaining time
+        const remainingHours = currentSlot.endHour - currentHour;
+        const remainingMinutes = Math.floor(remainingHours * 60);
+        if (countdownEl) countdownEl.textContent = `${remainingMinutes} min left`;
+
+        if (badgeEl) {
+            badgeEl.textContent = currentSlot.good ? 'Good' : 'Caution';
+            badgeEl.className = `current-chog-badge ${currentSlot.good ? 'good' : 'bad'}`;
+        }
+
+        // Update sun indicator position
+        const sunIndicator = document.getElementById('sun-indicator');
+        if (sunIndicator) {
+            const periodStart = period === 'day' ? sunrise : sunset;
+            const periodDuration = period === 'day' ? (sunset - sunrise) : (24 - (sunset - sunrise));
+            const progress = (currentHour - periodStart) / periodDuration;
+            const angle = progress * 360;
+            sunIndicator.setAttribute('transform', `rotate(${angle} 100 100)`);
+        }
+
+        // Check for Rahu Kalam alert
+        updateRahuKalamAlert(currentHour);
+    }
+
+    function updateRahuKalamAlert(currentHour) {
+        const alertEl = document.getElementById('time-alert');
+        const alertText = document.getElementById('alert-text');
+        if (!alertEl || !alertText) return;
+
+        const rahuStart = parseFloat(currentPanchang.rahuKalam.startTime.split(':')[0]) +
+            parseFloat(currentPanchang.rahuKalam.startTime.split(':')[1]) / 60;
+        const rahuEnd = parseFloat(currentPanchang.rahuKalam.endTime.split(':')[0]) +
+            parseFloat(currentPanchang.rahuKalam.endTime.split(':')[1]) / 60;
+
+        // Show alert 15 min before Rahu Kalam or during
+        const minsToRahu = (rahuStart - currentHour) * 60;
+
+        if (currentHour >= rahuStart && currentHour < rahuEnd) {
+            alertEl.style.display = 'flex';
+            const remaining = Math.floor((rahuEnd - currentHour) * 60);
+            alertText.textContent = `⚠️ Rahu Kalam active! ${remaining} min remaining`;
+        } else if (minsToRahu > 0 && minsToRahu <= 15) {
+            alertEl.style.display = 'flex';
+            alertText.textContent = `Rahu Kalam starts in ${Math.floor(minsToRahu)} minutes`;
+        } else {
+            alertEl.style.display = 'none';
+        }
+
+        lucide.createIcons();
+    }
+
+    function renderChoghadiya(period) {
+        currentChogPeriod = period;
+
+        // Draw wheel segments
+        drawWheelSegments(period);
+
+        // Update wheel display
+        updateTimeWheel();
+
+        // Render grid fallback
+        if (!choghadiyaGrid) return;
+
+        const slots = getChoghadiyaSlots(period);
+
+        choghadiyaGrid.innerHTML = slots.map((chog, i) => `
             <div class="chog-card ${chog.type}">
                 <span class="chog-name">${chog.name}</span>
-                <span class="chog-time">${hoursToTime(start + i * duration)}</span>
+                <span class="chog-time">${hoursToTime(chog.startHour)}</span>
             </div>
         `).join('');
+
+        // Start auto-update
+        if (wheelUpdateInterval) clearInterval(wheelUpdateInterval);
+        wheelUpdateInterval = setInterval(updateTimeWheel, 60000); // Update every minute
     }
 
     // === TARA BALA ===

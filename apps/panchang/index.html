@@ -170,13 +170,63 @@
             </div>
         </section>
 
-        <!-- Choghadiya -->
+        <!-- Choghadiya Time Wheel -->
         <section class="choghadiya-section">
-            <h2 class="section-title">🕐 चौघड़िया</h2>
+            <h2 class="section-title"><i data-lucide="clock" class="section-icon"></i> चौघड़िया Time Wheel</h2>
+
+            <!-- Circular Time Compass -->
+            <div class="time-wheel-container">
+                <div class="time-wheel">
+                    <svg viewBox="0 0 200 200" class="wheel-svg">
+                        <!-- Background circle -->
+                        <circle cx="100" cy="100" r="90" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.1)"
+                            stroke-width="1" />
+
+                        <!-- 8 Segments (drawn dynamically by JS) -->
+                        <g id="chog-segments"></g>
+
+                        <!-- Inner circle -->
+                        <circle cx="100" cy="100" r="55" fill="rgba(10,6,18,0.95)" stroke="rgba(255,255,255,0.1)"
+                            stroke-width="1" />
+
+                        <!-- Sun indicator (moving hand) -->
+                        <g id="sun-indicator" transform="rotate(0 100 100)">
+                            <line x1="100" y1="100" x2="100" y2="20" stroke="url(#sunGradient)" stroke-width="3"
+                                stroke-linecap="round" />
+                            <circle cx="100" cy="20" r="8" fill="#ff9500" />
+                        </g>
+
+                        <!-- Gradient definitions -->
+                        <defs>
+                            <linearGradient id="sunGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" stop-color="rgba(255,149,0,0.3)" />
+                                <stop offset="100%" stop-color="#ff9500" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+
+                    <!-- Center info -->
+                    <div class="wheel-center">
+                        <div id="current-chog-name" class="current-chog-name">शुभ</div>
+                        <div id="current-chog-countdown" class="current-chog-countdown">42 min left</div>
+                        <div id="current-chog-badge" class="current-chog-badge good">Good</div>
+                    </div>
+                </div>
+
+                <!-- Alert bar -->
+                <div id="time-alert" class="time-alert" style="display: none;">
+                    <i data-lucide="alert-triangle"></i>
+                    <span id="alert-text">Rahu Kalam starts in 15 minutes</span>
+                </div>
+            </div>
+
+            <!-- Day/Night Toggle -->
             <div class="choghadiya-tabs">
                 <button class="chog-tab active" data-period="day">दिन (Day)</button>
                 <button class="chog-tab" data-period="night">रात्रि (Night)</button>
             </div>
+
+            <!-- Grid fallback for details -->
             <div id="choghadiya-grid" class="choghadiya-grid">
                 <!-- Populated by JS -->
             </div>
