@@ -381,10 +381,51 @@ body {
     grid-column: 1 / -1;
 }
 
-.card-icon {
-    font-size: 1.3rem;
-    margin-bottom: 8px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+/* Icon Wrappers - Lucide Style */
+.card-icon-wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+}
+
+.card-icon-wrap i {
+    width: 22px;
+    height: 22px;
+}
+
+.moon-icon {
+    background: rgba(240, 193, 75, 0.15);
+    color: var(--accent-gold);
+}
+
+.star-icon {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+}
+
+.yoga-icon {
+    background: rgba(168, 85, 247, 0.15);
+    color: var(--accent-purple);
+}
+
+.karana-icon {
+    background: rgba(236, 72, 153, 0.15);
+    color: #ec4899;
+}
+
+.day-icon {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+}
+
+.section-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--accent-gold);
 }
 
 .card-label {

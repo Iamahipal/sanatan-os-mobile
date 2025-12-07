@@ -6,13 +6,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     // === CONSTANTS ===
     const WEEKDAYS = {
-        0: { name: 'रविवार', english: 'Sunday', deity: 'Lord Surya', color: '#FF6B35' },
-        1: { name: 'सोमवार', english: 'Monday', deity: 'Lord Chandra', color: '#FFFFFF' },
-        2: { name: 'मंगलवार', english: 'Tuesday', deity: 'Lord Hanuman', color: '#FF0000' },
-        3: { name: 'बुधवार', english: 'Wednesday', deity: 'Lord Ganesha', color: '#4CAF50' },
-        4: { name: 'गुरुवार', english: 'Thursday', deity: 'Lord Vishnu', color: '#FFD700' },
-        5: { name: 'शुक्रवार', english: 'Friday', deity: 'Goddess Lakshmi', color: '#FFFFFF' },
-        6: { name: 'शनिवार', english: 'Saturday', deity: 'Lord Shani', color: '#000080' }
+        0: { name: 'रविवार', english: 'Sunday', deity: 'Lord Surya', color: 'linear-gradient(135deg, #FF6B35, #FF8F5E)', colorName: 'Orange (नारंगी)' },
+        1: { name: 'सोमवार', english: 'Monday', deity: 'Lord Chandra', color: 'linear-gradient(135deg, #E8E8E8, #FFFFFF)', colorName: 'White (सफ़ेद)' },
+        2: { name: 'मंगलवार', english: 'Tuesday', deity: 'Lord Hanuman', color: 'linear-gradient(135deg, #FF0000, #FF4444)', colorName: 'Red (लाल)' },
+        3: { name: 'बुधवार', english: 'Wednesday', deity: 'Lord Ganesha', color: 'linear-gradient(135deg, #4CAF50, #66BB6A)', colorName: 'Green (हरा)' },
+        4: { name: 'गुरुवार', english: 'Thursday', deity: 'Lord Vishnu', color: 'linear-gradient(135deg, #FFD700, #FFEB3B)', colorName: 'Yellow (पीला)' },
+        5: { name: 'शुक्रवार', english: 'Friday', deity: 'Goddess Lakshmi', color: 'linear-gradient(135deg, #E0E0E0, #FFFFFF)', colorName: 'White (सफ़ेद)' },
+        6: { name: 'शनिवार', english: 'Saturday', deity: 'Lord Shani', color: 'linear-gradient(135deg, #1A237E, #3949AB)', colorName: 'Blue (नीला)' }
     };
 
     const TITHIS = [
@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Auspicious color
         document.getElementById('auspicious-color').style.background = dayData.color;
-        document.getElementById('color-name').textContent = dayData.english;
+        document.getElementById('color-name').textContent = dayData.colorName;
 
         // Sun/Moon timings
         const sunTimes = calculateSunTimes(currentDate, location.lat, location.lon);
