@@ -28,28 +28,198 @@ document.addEventListener('DOMContentLoaded', () => {
         8: 'Best day of the cycle! Ideal for all important activities.'
     };
 
-    // === FESTIVALS DATA ===
-    const FESTIVALS = {
-        '2024-12-07': [{ name: 'शुक्ल पञ्चमी', type: 'Tithi', icon: '🌙' }],
-        '2024-12-11': [{ name: 'मोक्षदा एकादशी', type: 'Ekadashi', icon: '🕉️' }],
-        '2024-12-15': [{ name: 'पूर्णिमा', type: 'Purnima', icon: '🌕' }],
-        '2024-12-25': [{ name: 'क्रिसमस', type: 'Holiday', icon: '🎄' }],
-        '2024-12-26': [{ name: 'मार्गशीर्ष अमावस्या', type: 'Amavasya', icon: '🌑' }],
-        '2025-01-01': [{ name: 'नव वर्ष', type: 'Holiday', icon: '🎉' }],
-        '2025-01-14': [{ name: 'मकर संक्रांति', type: 'Festival', icon: '🪁' }],
-        '2025-01-26': [{ name: 'गणतंत्र दिवस', type: 'Holiday', icon: '🇮🇳' }],
-        '2025-02-26': [{ name: 'महाशिवरात्रि', type: 'Festival', icon: '🔱' }],
-        '2025-03-14': [{ name: 'होली', type: 'Festival', icon: '🎨' }],
-        '2025-04-06': [{ name: 'राम नवमी', type: 'Festival', icon: '🏹' }],
-        '2025-04-14': [{ name: 'बैसाखी', type: 'Festival', icon: '🌾' }],
-        '2025-08-15': [{ name: 'स्वतंत्रता दिवस', type: 'Holiday', icon: '🇮🇳' }],
-        '2025-08-16': [{ name: 'जन्माष्टमी', type: 'Festival', icon: '🙏' }],
-        '2025-10-02': [{ name: 'गांधी जयंती', type: 'Holiday', icon: '🕊️' }],
-        '2025-10-20': [{ name: 'दशहरा', type: 'Festival', icon: '🏹' }],
-        '2025-10-29': [{ name: 'करवा चौथ', type: 'Vrat', icon: '🌙' }],
-        '2025-11-01': [{ name: 'दीपावली', type: 'Festival', icon: '🪔' }],
-        '2025-12-07': [{ name: 'कार्तिक पूर्णिमा', type: 'Purnima', icon: '🌕' }],
-        '2025-12-08': [{ name: 'कृष्ण प्रतिपदा', type: 'Tithi', icon: '🌙' }]
+
+    // === REGIONAL FESTIVAL PACKS ===
+    const REGIONAL_FESTIVALS = {
+        // Common to all regions
+        common: {
+            '2025-01-14': [{ name: 'मकर संक्रांति', type: 'Festival', icon: '🪁', naivedya: 'Til Gul, Khichdi' }],
+            '2025-01-26': [{ name: 'गणतंत्र दिवस', type: 'Holiday', icon: '🇮🇳' }],
+            '2025-02-26': [{ name: 'महाशिवरात्रि', type: 'Festival', icon: '🔱', naivedya: 'Bel Patra, Milk' }],
+            '2025-03-14': [{ name: 'होली', type: 'Festival', icon: '🎨', naivedya: 'Gujiya, Thandai' }],
+            '2025-04-06': [{ name: 'राम नवमी', type: 'Festival', icon: '🏹', naivedya: 'Panakam, Kosambari' }],
+            '2025-08-15': [{ name: 'स्वतंत्रता दिवस', type: 'Holiday', icon: '🇮🇳' }],
+            '2025-08-16': [{ name: 'जन्माष्टमी', type: 'Festival', icon: '🎂', naivedya: 'Makhan Mishri, Panchamrit' }],
+            '2025-10-02': [{ name: 'गांधी जयंती', type: 'Holiday', icon: '🕊️' }],
+            '2025-10-20': [{ name: 'दशहरा', type: 'Festival', icon: '🏹', naivedya: 'Jalebi, Fafda' }],
+            '2025-11-01': [{ name: 'दीपावली', type: 'Festival', icon: '🪔', naivedya: 'Mithai, Dry Fruits' }]
+        },
+
+        // Maharashtra Pack
+        maharashtra: {
+            '2025-08-19': [{
+                name: 'नारळी पौर्णिमा',
+                nameEn: 'Narali Purnima',
+                type: 'Festival',
+                icon: '🥥',
+                naivedya: 'Nariyal Rice, Narali Bhat',
+                ritual: 'समुद्राला नारळ अर्पण करा',
+                description: 'Coconut Day - Offering to the Sea God Varuna'
+            }],
+            '2025-08-27': [{
+                name: 'गणेश चतुर्थी',
+                type: 'Festival',
+                icon: '🐘',
+                naivedya: 'Modak, Puran Poli',
+                ritual: 'गणपती बाप्पा मोरया',
+                description: '10-day Ganesh festival begins'
+            }],
+            '2025-09-06': [{
+                name: 'गणेश विसर्जन',
+                type: 'Festival',
+                icon: '🌊',
+                ritual: 'गणपती बाप्पा मोरया, पुढच्या वर्षी लवकर या'
+            }],
+            '2025-03-13': [{
+                name: 'होळी / शिमगा',
+                nameEn: 'Shimga',
+                type: 'Festival',
+                icon: '🔥',
+                naivedya: 'Puran Poli, Karanji',
+                ritual: 'होळीची पूजा',
+                description: 'Holika Dahan - Konkan style'
+            }],
+            '2025-10-01': [{
+                name: 'नवरात्र प्रारंभ',
+                type: 'Festival',
+                icon: '🙏',
+                naivedya: 'Sabudana Khichdi'
+            }],
+            '2025-09-17': [{
+                name: 'अनंत चतुर्दशी',
+                type: 'Festival',
+                icon: '🧵',
+                naivedya: 'Chana Dal Varan',
+                ritual: 'अनंत धागा बांधणे'
+            }],
+            '2025-04-08': [{
+                name: 'गुढी पाडवा',
+                type: 'New Year',
+                icon: '🎊',
+                naivedya: 'Shrikhand Puri, Kadhi',
+                ritual: 'गुढी उभारणे',
+                description: 'Marathi New Year'
+            }]
+        },
+
+        // Tamil Nadu Pack
+        tamil: {
+            '2025-01-14': [{
+                name: 'पोंगल',
+                nameEn: 'Thai Pongal',
+                type: 'Festival',
+                icon: '🍚',
+                naivedya: 'Pongal Rice, Sakkarai Pongal',
+                ritual: 'पोंगलो पोंगल!',
+                description: 'Harvest festival - 4 day celebration'
+            }],
+            '2025-01-15': [{
+                name: 'मट्टु पोंगल',
+                nameEn: 'Mattu Pongal',
+                type: 'Festival',
+                icon: '🐄',
+                description: 'Worship of cattle'
+            }],
+            '2025-02-11': [{
+                name: 'थाई पूसम',
+                nameEn: 'Thai Poosam',
+                type: 'Festival',
+                icon: '🔱',
+                naivedya: 'Paal Koozh, Panchamirtam',
+                ritual: 'कावड़ी अट्टम',
+                description: 'Lord Murugan worship'
+            }],
+            '2025-04-14': [{
+                name: 'तमिल पुथांडु',
+                nameEn: 'Tamil New Year',
+                type: 'New Year',
+                icon: '🎊',
+                naivedya: 'Maanga Pachadi',
+                description: 'Tamil New Year (Chithirai 1)'
+            }],
+            '2025-08-26': [{
+                name: 'विनायक चतुर्थी',
+                type: 'Festival',
+                icon: '🐘',
+                naivedya: 'Kozhukattai, Sundal'
+            }],
+            '2025-10-29': [{
+                name: 'कार्तिगै दीपम',
+                nameEn: 'Karthigai Deepam',
+                type: 'Festival',
+                icon: '🪔',
+                description: 'Festival of Lights at Thiruvannamalai'
+            }]
+        },
+
+        // Bengal Pack
+        bengal: {
+            '2025-10-01': [{
+                name: 'महालया',
+                nameEn: 'Mahalaya',
+                type: 'Festival',
+                icon: '🙏',
+                description: 'Devi Paksha begins - Mahishasura Mardini'
+            }],
+            '2025-10-07': [{
+                name: 'दुर्गा षष्ठी',
+                type: 'Festival',
+                icon: '🔔',
+                ritual: 'बोधन, कल्पारम्भ'
+            }],
+            '2025-10-08': [{
+                name: 'महा सप्तमी',
+                type: 'Festival',
+                icon: '🌺',
+                naivedya: 'Khichuri, Labra',
+                ritual: 'नबपत्रिका स्नान'
+            }],
+            '2025-10-09': [{
+                name: 'महा अष्टमी',
+                type: 'Festival',
+                icon: '⚔️',
+                naivedya: 'Bhog - Khichuri, Beguni',
+                ritual: 'कुमारी पूजा, संध्या आरती'
+            }],
+            '2025-10-10': [{
+                name: 'महा नवमी',
+                type: 'Festival',
+                icon: '🎭',
+                naivedya: 'Bhog, Payesh',
+                ritual: 'महा आरती'
+            }],
+            '2025-10-11': [{
+                name: 'विजया दशमी',
+                type: 'Festival',
+                icon: '👋',
+                naivedya: 'Rosogolla, Sandesh',
+                ritual: 'सिंदूर खेला, विसर्जन',
+                description: 'Durga Visarjan - Shubho Bijoya!'
+            }],
+            '2025-10-20': [{
+                name: 'लक्ष्मी पूजा',
+                type: 'Festival',
+                icon: '🦉',
+                naivedya: 'Luchi, Cholar Dal'
+            }],
+            '2025-11-01': [{
+                name: 'काली पूजा',
+                nameEn: 'Kali Puja',
+                type: 'Festival',
+                icon: '🖤',
+                naivedya: 'Luchi, Mangsho',
+                ritual: 'रात्रि पूजा',
+                description: 'Celebrated with Diwali in Bengal'
+            }],
+            '2025-04-14': [{
+                name: 'पोइला बोइशाख',
+                nameEn: 'Poila Boishakh',
+                type: 'New Year',
+                icon: '🎊',
+                naivedya: 'Maach Bhaat, Mishti',
+                description: 'Bengali New Year'
+            }]
+        }
     };
 
     // === STATE ===
@@ -57,6 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let location = { lat: 28.6139, lon: 77.2090, city: 'New Delhi' };
     let birthNakshatra = null;
     let currentPanchang = null;
+    let selectedRegion = 'common'; // common, maharashtra, tamil, bengal
+
 
     // === DOM ELEMENTS ===
     const prevDayBtn = document.getElementById('prev-day');
@@ -81,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function init() {
         loadSettings();
         populateNakshatraSelect();
+        setupRegionTabs();
         updateDisplay();
         setupEventListeners();
         lucide.createIcons();
@@ -516,11 +689,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // === EVENTS ===
+    function getEventsForDate(dateKey) {
+        // Merge common + selected region events
+        const commonEvents = REGIONAL_FESTIVALS.common[dateKey] || [];
+        const regionalEvents = selectedRegion !== 'common'
+            ? (REGIONAL_FESTIVALS[selectedRegion][dateKey] || [])
+            : [];
+
+        return [...commonEvents, ...regionalEvents];
+    }
+
     function renderEvents() {
         if (!eventsList) return;
 
         const dateKey = getDateKey(currentDate);
-        const events = FESTIVALS[dateKey];
+        const events = getEventsForDate(dateKey);
 
         if (!events || events.length === 0) {
             eventsList.innerHTML = `
@@ -534,12 +717,55 @@ document.addEventListener('DOMContentLoaded', () => {
         eventsList.innerHTML = events.map(event => `
             <div class="event-card">
                 <span class="event-icon">${event.icon}</span>
-                <div class="event-info">
-                    <span class="event-name">${event.name}</span>
-                    <span class="event-type">${event.type}</span>
+                <div class="event-content">
+                    <div class="event-header">
+                        <div>
+                            <span class="event-name">${event.name}</span>
+                            ${event.nameEn ? `<span class="event-name-en">${event.nameEn}</span>` : ''}
+                        </div>
+                        <span class="event-type">${event.type}</span>
+                    </div>
+                    ${event.description ? `<p class="event-desc">${event.description}</p>` : ''}
+                    ${event.naivedya ? `
+                        <div class="event-naivedya">
+                            <i data-lucide="utensils"></i>
+                            <span>नैवेद्य: ${event.naivedya}</span>
+                        </div>
+                    ` : ''}
+                    ${event.ritual ? `<p class="event-ritual">"${event.ritual}"</p>` : ''}
                 </div>
             </div>
         `).join('');
+
+        lucide.createIcons();
+    }
+
+    function loadRegionSetting() {
+        const saved = localStorage.getItem('panchang_region');
+        if (saved) {
+            selectedRegion = saved;
+        }
+    }
+
+    function saveRegionSetting() {
+        localStorage.setItem('panchang_region', selectedRegion);
+    }
+
+    function setupRegionTabs() {
+        loadRegionSetting();
+
+        // Set active tab
+        document.querySelectorAll('.region-tab').forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.region === selectedRegion);
+
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.region-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                selectedRegion = tab.dataset.region;
+                saveRegionSetting();
+                renderEvents();
+            });
+        });
     }
 
     // === LOCATION ===

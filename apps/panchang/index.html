@@ -343,7 +343,28 @@
 
         <!-- Today's Events -->
         <section class="events-section">
-            <h2 class="section-title">🎉 आज के उत्सव</h2>
+            <h2 class="section-title"><i data-lucide="calendar-heart" class="section-icon"></i> आज के उत्सव</h2>
+
+            <!-- Region Selector -->
+            <div class="region-tabs">
+                <button class="region-tab active" data-region="common">
+                    <span class="region-icon">🕉️</span>
+                    <span>All India</span>
+                </button>
+                <button class="region-tab" data-region="maharashtra">
+                    <span class="region-icon">🥥</span>
+                    <span>Maharashtra</span>
+                </button>
+                <button class="region-tab" data-region="tamil">
+                    <span class="region-icon">🍚</span>
+                    <span>Tamil Nadu</span>
+                </button>
+                <button class="region-tab" data-region="bengal">
+                    <span class="region-icon">🌺</span>
+                    <span>Bengal</span>
+                </button>
+            </div>
+
             <div id="events-list" class="events-list">
                 <!-- Populated by JS -->
             </div>

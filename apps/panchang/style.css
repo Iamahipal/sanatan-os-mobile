@@ -831,10 +831,52 @@ body {
     padding: 0 16px 16px;
 }
 
+/* Region Tabs */
+.region-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.region-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.region-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.region-tab .region-icon {
+    font-size: 1rem;
+}
+
+.region-tab.active {
+    background: var(--accent-gold);
+    border-color: var(--accent-gold);
+    color: #000;
+    font-weight: 600;
+}
+
 .events-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .event-card {
@@ -843,22 +885,76 @@ body {
     border-radius: 14px;
     padding: 14px;
     display: flex;
-    align-items: center;
     gap: 12px;
 }
 
 .event-icon {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.event-content {
+    flex: 1;
+}
+
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
 }
 
 .event-name {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 500;
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+
+.event-name-en {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-family: 'Outfit', sans-serif;
 }
 
 .event-type {
+    font-size: 0.6rem;
+    color: #000;
+    background: var(--accent-gold);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.event-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.event-naivedya {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 8px;
     font-size: 0.7rem;
-    color: var(--text-dim);
+    color: var(--shubh-green);
+}
+
+.event-naivedya i {
+    width: 14px;
+    height: 14px;
+}
+
+.event-ritual {
+    font-size: 0.7rem;
+    color: var(--accent-orange);
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    margin-top: 6px;
+    font-style: italic;
 }
 
 .no-events {
