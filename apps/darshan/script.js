@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Featured cards
+        // Featured cards - direct to player
         featuredGrid.addEventListener('click', (e) => {
             const card = e.target.closest('.featured-card');
             if (card) {
@@ -321,12 +321,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Temple cards
+        // Temple cards - open info modal first
         templesGrid.addEventListener('click', (e) => {
             const card = e.target.closest('.temple-card');
             if (card) {
                 const temple = JSON.parse(card.dataset.temple);
-                openPlayer(temple);
+                openTempleInfo(temple);
             }
         });
 
@@ -337,8 +337,141 @@ document.addEventListener('DOMContentLoaded', () => {
                 closePlayerModal();
             }
         });
+
+        // Temple info modal
+        setupInfoModal();
+    }
+
+    // === TEMPLE INFO MODAL ===
+    let currentInfoTemple = null;
+    const infoModal = document.getElementById('temple-info-modal');
+    const closeInfo = document.getElementById('close-info');
+
+    function getEnrichedData(temple) {
+        // Map temple name to enriched data key
+        const keyMap = {
+            'Somnath': 'somnath',
+            'Kashi Vishwanath': 'kashivishwanath',
+            'Mahakaleshwar': 'mahakaleshwar',
+            'Mallikarjuna': 'srisailam',
+            'Tirupati Balaji': 'tirupati',
+            'Vaishno Devi': 'vaishnodevi',
+            'Kamakhya': 'kamakhya',
+            'Jagannath Puri': 'jagannathpuri',
+            'Badrinath': 'badrinathkedarnath',
+            'Kedarnath': 'badrinathkedarnath',
+            'Srirangam': 'srirangam',
+            'Guruvayur': 'guruvayur',
+            'Padmanabhaswamy': 'padmanabhaswamy',
+            'Kalighat': 'kalighat',
+            'Ambaji': 'ambaji'
+        };
+
+        const key = keyMap[temple.name];
+        if (key && typeof TEMPLE_ENRICHED_DATA !== 'undefined') {
+            return TEMPLE_ENRICHED_DATA[key];
+        }
+        return null;
+    }
+
+    function openTempleInfo(temple) {
+        currentInfoTemple = temple;
+        const enriched = getEnrichedData(temple);
+
+        // Set basic info
+        document.getElementById('info-icon').textContent = temple.icon;
+        document.getElementById('info-temple-name').textContent = temple.name;
+        document.getElementById('info-temple-location').textContent = temple.location;
+
+        // Set badges
+        const badgesEl = document.getElementById('info-badges');
+        let badges = [];
+        if (temple.category === 'jyotirlinga') badges.push('<span class="info-badge jyotirlinga">🔱 Jyotirlinga</span>');
+        if (temple.category === 'shaktipeetha') badges.push('<span class="info-badge shaktipeetha">🔴 Shakti Peetha</span>');
+        if (temple.category === 'chardham') badges.push('<span class="info-badge chardham">🛕 Char Dham</span>');
+        if (temple.hasLive) badges.push('<span class="info-badge live">🔴 Live</span>');
+        badgesEl.innerHTML = badges.join('');
+
+        // Fill enriched data if available
+        if (enriched) {
+            document.getElementById('info-significance').textContent = enriched.significance || '-';
+            document.getElementById('info-history').textContent = enriched.history || '-';
+            document.getElementById('info-dynasty').textContent = enriched.dynasty || '-';
+            document.getElementById('info-scripture').textContent = enriched.scripture || '-';
+            document.getElementById('info-legend').textContent = enriched.legend || '-';
+
+            // Rituals
+            const rituals = enriched.rituals || [];
+            document.getElementById('info-rituals').innerHTML = rituals.length > 0
+                ? rituals.map(r => `<span class="ritual-tag">${r}</span>`).join('')
+                : '-';
+        } else {
+            document.getElementById('info-significance').textContent = temple.subtitle || 'A sacred pilgrimage site.';
+            document.getElementById('info-history').textContent = 'Historical data coming soon.';
+            document.getElementById('info-dynasty').textContent = '-';
+            document.getElementById('info-scripture').textContent = 'Scriptural references coming soon.';
+            document.getElementById('info-legend').textContent = '-';
+            document.getElementById('info-rituals').textContent = '-';
+        }
+
+        // Action buttons
+        const watchBtn = document.getElementById('watch-live-btn');
+        const channelBtn = document.getElementById('view-channel-btn');
+
+        watchBtn.disabled = !temple.hasLive;
+        watchBtn.onclick = () => {
+            closeInfoModal();
+            openPlayer(temple);
+        };
+
+        channelBtn.onclick = () => {
+            if (temple.youtube) {
+                window.open(`https://www.youtube.com/${temple.youtube}`, '_blank');
+            }
+        };
+        channelBtn.disabled = !temple.youtube;
+
+        // Show modal
+        infoModal.classList.add('active');
+        lucide.createIcons();
+
+        // Reset to About tab
+        document.querySelectorAll('.info-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.info-tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelector('.info-tab[data-tab="about"]').classList.add('active');
+        document.getElementById('tab-about').classList.add('active');
+    }
+
+    function closeInfoModal() {
+        infoModal.classList.remove('active');
+        currentInfoTemple = null;
+    }
+
+    function setupInfoModal() {
+        if (closeInfo) {
+            closeInfo.addEventListener('click', closeInfoModal);
+        }
+
+        if (infoModal) {
+            infoModal.addEventListener('click', (e) => {
+                if (e.target === infoModal) {
+                    closeInfoModal();
+                }
+            });
+        }
+
+        // Tab switching
+        document.querySelectorAll('.info-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.info-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.info-tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active');
+            });
+        });
     }
 
     // === START ===
     init();
 });
+

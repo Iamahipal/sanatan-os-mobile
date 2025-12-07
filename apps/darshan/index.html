@@ -83,10 +83,84 @@
         </div>
     </div>
 
+    <!-- Temple Info Modal -->
+    <div id="temple-info-modal" class="modal-overlay">
+        <div class="info-modal-content">
+            <div class="info-modal-header">
+                <div class="info-temple-icon" id="info-icon">🕉️</div>
+                <div class="info-temple-title">
+                    <h3 id="info-temple-name">Temple Name</h3>
+                    <p id="info-temple-location">Location</p>
+                </div>
+                <button id="close-info" class="close-info-btn">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <!-- Badges -->
+            <div class="info-badges" id="info-badges">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Tabs -->
+            <div class="info-tabs">
+                <button class="info-tab active" data-tab="about">About</button>
+                <button class="info-tab" data-tab="history">History</button>
+                <button class="info-tab" data-tab="scripture">Scripture</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="info-tab-content active" id="tab-about">
+                <div class="info-section">
+                    <h4><i data-lucide="info"></i> Overview</h4>
+                    <p id="info-significance">-</p>
+                </div>
+                <div class="info-section" id="ritual-section">
+                    <h4><i data-lucide="calendar-heart"></i> Rituals</h4>
+                    <div id="info-rituals" class="ritual-list">-</div>
+                </div>
+            </div>
+
+            <div class="info-tab-content" id="tab-history">
+                <div class="info-section">
+                    <h4><i data-lucide="landmark"></i> Historical Background</h4>
+                    <p id="info-history">-</p>
+                </div>
+                <div class="info-section">
+                    <h4><i data-lucide="crown"></i> Patronage</h4>
+                    <p id="info-dynasty">-</p>
+                </div>
+            </div>
+
+            <div class="info-tab-content" id="tab-scripture">
+                <div class="info-section">
+                    <h4><i data-lucide="book-open"></i> Sacred Texts</h4>
+                    <p id="info-scripture">-</p>
+                </div>
+                <div class="info-section">
+                    <h4><i data-lucide="sparkles"></i> Legend</h4>
+                    <p id="info-legend">-</p>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="info-actions">
+                <button id="watch-live-btn" class="info-action-btn primary">
+                    <i data-lucide="play"></i> Watch Live
+                </button>
+                <button id="view-channel-btn" class="info-action-btn secondary">
+                    <i data-lucide="youtube"></i> YouTube
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
     </script>
+    <script src="temple-data.js"></script>
     <script src="script.js"></script>
 </body>
 

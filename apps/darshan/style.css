@@ -541,3 +541,236 @@ body {
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
+/* Temple Info Modal */
+.info-modal-content {
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    background: linear-gradient(180deg, rgba(30, 30, 60, 0.98), rgba(15, 15, 35, 0.99));
+    border-radius: 24px 24px 0 0;
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.info-temple-icon {
+    font-size: 2.5rem;
+}
+
+.info-temple-title {
+    flex: 1;
+}
+
+.info-temple-title h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.info-temple-title p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.close-info-btn {
+    width: 36px;
+    height: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.close-info-btn i {
+    width: 18px;
+    height: 18px;
+}
+
+.info-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 20px;
+}
+
+.info-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    font-size: 0.65rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.info-badge.jyotirlinga {
+    background: rgba(255, 107, 53, 0.2);
+    color: #ff6b35;
+}
+
+.info-badge.shaktipeetha {
+    background: rgba(236, 72, 153, 0.2);
+    color: #ec4899;
+}
+
+.info-badge.chardham {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.info-badge.unesco {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.info-badge.live {
+    background: rgba(255, 59, 59, 0.2);
+    color: var(--live-red);
+}
+
+.info-tabs {
+    display: flex;
+    padding: 0 20px;
+    gap: 6px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.info-tab {
+    flex: 1;
+    padding: 12px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.info-tab.active {
+    color: var(--accent);
+}
+
+.info-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+}
+
+.info-tab-content {
+    display: none;
+    padding: 16px 20px;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.info-tab-content.active {
+    display: block;
+}
+
+.info-section {
+    margin-bottom: 16px;
+}
+
+.info-section:last-child {
+    margin-bottom: 0;
+}
+
+.info-section h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.info-section h4 i {
+    width: 14px;
+    height: 14px;
+}
+
+.info-section p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.ritual-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.ritual-tag {
+    padding: 4px 10px;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 8px;
+    font-size: 0.7rem;
+    color: #22c55e;
+}
+
+.info-actions {
+    display: flex;
+    gap: 12px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.info-action-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    border: none;
+}
+
+.info-action-btn i {
+    width: 18px;
+    height: 18px;
+}
+
+.info-action-btn.primary {
+    background: var(--accent);
+    color: white;
+}
+
+.info-action-btn.secondary {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    color: var(--text);
+}
+
+.info-action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
