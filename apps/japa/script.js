@@ -403,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (state.totalLifetimeCount >= level.min) currentLevel = level;
         }
         levelText.textContent = currentLevel.name;
-        levelBadge.querySelector('.level-icon').textContent = currentLevel.icon;
+        // Note: Lucide icons are SVG, no need to update textContent
     }
 
     function updateDailyStats() {
