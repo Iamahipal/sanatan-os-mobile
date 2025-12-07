@@ -9,41 +9,31 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Tiro+Devanagari+Sanskrit&display=swap"
         rel="stylesheet">
+    <!-- Lucide Icons - Modern SVG icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="page-enter" data-theme="radha">
     <div class="app-container">
-        <!-- Proper Header Bar -->
+        <!-- Header Bar -->
         <header class="app-header">
-            <!-- Back Button (for non-gesture users) -->
             <a href="../../index.html" class="header-btn back-btn" aria-label="Back">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
-                </svg>
+                <i data-lucide="chevron-left"></i>
             </a>
 
-            <!-- Name Selector (centered) -->
             <button id="name-selector-btn" class="name-selector-btn">
                 <span id="selected-name" class="selected-name">श्री राधा</span>
-                <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2.5">
-                    <path d="M6 9l6 6 6-6" />
-                </svg>
+                <i data-lucide="chevron-down" class="dropdown-icon"></i>
             </button>
 
-            <!-- 3 Dots Menu -->
             <button id="settings-btn" class="header-btn menu-btn" aria-label="Menu">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <circle cx="12" cy="5" r="2" />
-                    <circle cx="12" cy="12" r="2" />
-                    <circle cx="12" cy="19" r="2" />
-                </svg>
+                <i data-lucide="more-vertical"></i>
             </button>
         </header>
 
         <!-- Level Badge -->
         <div id="level-badge" class="level-badge">
-            <span class="level-icon">🙏</span>
+            <i data-lucide="sparkles" class="level-icon-svg"></i>
             <span id="level-text" class="level-text">Aarambh</span>
         </div>
 
@@ -53,7 +43,7 @@
         <!-- Mala Complete Celebration -->
         <div id="mala-complete" class="mala-complete">
             <div class="complete-content">
-                <span class="complete-icon">🙏</span>
+                <i data-lucide="check-circle-2" class="complete-icon-svg"></i>
                 <span class="complete-text">Mala Complete!</span>
                 <span id="complete-count" class="complete-count">(1)</span>
             </div>
@@ -84,59 +74,60 @@
         <div class="modal-content name-modal">
             <div class="modal-header">
                 <h2>Select Name</h2>
-                <button class="close-btn" data-close="name-modal">&times;</button>
+                <button class="close-btn" data-close="name-modal">
+                    <i data-lucide="x"></i>
+                </button>
             </div>
             <div class="name-list">
                 <button class="name-option active" data-deity="radha">
                     <span class="name-text">श्री राधा</span>
-                    <span class="check-icon">✓</span>
+                    <i data-lucide="check" class="check-icon-svg"></i>
                 </button>
                 <button class="name-option" data-deity="krishna">
                     <span class="name-text">श्री कृष्ण</span>
-                    <span class="check-icon">✓</span>
+                    <i data-lucide="check" class="check-icon-svg"></i>
                 </button>
                 <button class="name-option" data-deity="ram">
                     <span class="name-text">श्री राम</span>
-                    <span class="check-icon">✓</span>
+                    <i data-lucide="check" class="check-icon-svg"></i>
                 </button>
                 <button class="name-option" data-deity="shiva">
                     <span class="name-text">ॐ नमः शिवाय</span>
-                    <span class="check-icon">✓</span>
+                    <i data-lucide="check" class="check-icon-svg"></i>
                 </button>
                 <button class="name-option" data-deity="hanuman">
                     <span class="name-text">ॐ हनुमते नमः</span>
-                    <span class="check-icon">✓</span>
+                    <i data-lucide="check" class="check-icon-svg"></i>
                 </button>
                 <button class="name-option" data-deity="ganesha">
                     <span class="name-text">ॐ गं गणपतये नमः</span>
-                    <span class="check-icon">✓</span>
+                    <i data-lucide="check" class="check-icon-svg"></i>
                 </button>
                 <button class="name-option" data-deity="durga">
                     <span class="name-text">जय माता दी</span>
-                    <span class="check-icon">✓</span>
+                    <i data-lucide="check" class="check-icon-svg"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Settings Modal (No Theme - Auto with Deity) -->
+    <!-- Settings Modal -->
     <div id="settings-modal" class="modal-overlay">
         <div class="modal-content settings-modal">
             <div class="modal-header">
                 <h2>Settings</h2>
-                <button class="close-btn" data-close="settings-modal">&times;</button>
+                <button class="close-btn" data-close="settings-modal">
+                    <i data-lucide="x"></i>
+                </button>
             </div>
 
             <div class="accordion">
                 <!-- History -->
                 <div class="accordion-item">
                     <button class="accordion-header" data-section="history">
-                        <span class="accordion-icon">📊</span>
+                        <i data-lucide="bar-chart-3" class="accordion-icon-svg"></i>
                         <span>Your Sadhana</span>
-                        <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M6 9l6 6 6-6" />
-                        </svg>
+                        <i data-lucide="chevron-down" class="arrow-icon-svg"></i>
                     </button>
                     <div class="accordion-content" id="history-content">
                         <div class="stats-row">
@@ -146,7 +137,7 @@
                             </div>
                             <div class="stat-card">
                                 <span class="stat-number" id="streak-count">0</span>
-                                <span class="stat-label">Day Streak 🔥</span>
+                                <span class="stat-label">Day Streak</span>
                             </div>
                         </div>
                         <div class="chart-section">
@@ -159,12 +150,9 @@
                 <!-- Language -->
                 <div class="accordion-item">
                     <button class="accordion-header" data-section="language">
-                        <span class="accordion-icon">🌐</span>
+                        <i data-lucide="globe" class="accordion-icon-svg"></i>
                         <span>Language</span>
-                        <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M6 9l6 6 6-6" />
-                        </svg>
+                        <i data-lucide="chevron-down" class="arrow-icon-svg"></i>
                     </button>
                     <div class="accordion-content collapsed" id="language-content">
                         <div class="option-row">
@@ -177,12 +165,9 @@
                 <!-- Sound -->
                 <div class="accordion-item">
                     <button class="accordion-header" data-section="sound">
-                        <span class="accordion-icon">🔔</span>
+                        <i data-lucide="volume-2" class="accordion-icon-svg"></i>
                         <span>Sound</span>
-                        <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M6 9l6 6 6-6" />
-                        </svg>
+                        <i data-lucide="chevron-down" class="arrow-icon-svg"></i>
                     </button>
                     <div class="accordion-content collapsed" id="sound-content">
                         <div class="option-row">
@@ -190,10 +175,18 @@
                             <button id="sound-off-btn" class="option-btn">Off</button>
                         </div>
                         <div class="sound-options">
-                            <button class="sound-option active" data-sound="bell">🔔 Bell</button>
-                            <button class="sound-option" data-sound="conch">🐚 Shankh</button>
-                            <button class="sound-option" data-sound="bowl">🎵 Bowl</button>
-                            <button class="sound-option" data-sound="chime">✨ Chime</button>
+                            <button class="sound-option active" data-sound="bell">
+                                <i data-lucide="bell" class="sound-icon-svg"></i> Bell
+                            </button>
+                            <button class="sound-option" data-sound="conch">
+                                <i data-lucide="waves" class="sound-icon-svg"></i> Shankh
+                            </button>
+                            <button class="sound-option" data-sound="bowl">
+                                <i data-lucide="disc" class="sound-icon-svg"></i> Bowl
+                            </button>
+                            <button class="sound-option" data-sound="chime">
+                                <i data-lucide="sparkles" class="sound-icon-svg"></i> Chime
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -201,28 +194,30 @@
                 <!-- Guide -->
                 <div class="accordion-item">
                     <button class="accordion-header" data-section="guide">
-                        <span class="accordion-icon">📖</span>
+                        <i data-lucide="book-open" class="accordion-icon-svg"></i>
                         <span>Sadhak Levels</span>
-                        <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M6 9l6 6 6-6" />
-                        </svg>
+                        <i data-lucide="chevron-down" class="arrow-icon-svg"></i>
                     </button>
                     <div class="accordion-content collapsed" id="guide-content">
                         <div class="level-list">
-                            <div class="level-item"><span>🙏</span>
+                            <div class="level-item">
+                                <i data-lucide="sunrise" class="level-list-icon"></i>
                                 <div><strong>Aarambh</strong><small>Beginning (0+)</small></div>
                             </div>
-                            <div class="level-item"><span>🙇</span>
+                            <div class="level-item">
+                                <i data-lucide="user" class="level-list-icon"></i>
                                 <div><strong>Sadhak</strong><small>Practitioner (108+)</small></div>
                             </div>
-                            <div class="level-item"><span>📿</span>
+                            <div class="level-item">
+                                <i data-lucide="heart" class="level-list-icon"></i>
                                 <div><strong>Bhakta</strong><small>Devotee (1,008+)</small></div>
                             </div>
-                            <div class="level-item"><span>🛡️</span>
+                            <div class="level-item">
+                                <i data-lucide="shield" class="level-list-icon"></i>
                                 <div><strong>Rakshak</strong><small>Protector (10,008+)</small></div>
                             </div>
-                            <div class="level-item"><span>✨</span>
+                            <div class="level-item">
+                                <i data-lucide="star" class="level-list-icon"></i>
                                 <div><strong>Siddha</strong><small>Master (100,008+)</small></div>
                             </div>
                         </div>
@@ -230,7 +225,10 @@
                 </div>
             </div>
 
-            <button id="reset-data" class="reset-btn">Reset All Data</button>
+            <button id="reset-data" class="reset-btn">
+                <i data-lucide="trash-2" class="reset-icon-svg"></i>
+                Reset All Data
+            </button>
         </div>
     </div>
 
@@ -245,6 +243,10 @@
         preload="auto"></audio>
 
     <script src="script.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>

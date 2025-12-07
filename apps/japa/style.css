@@ -79,6 +79,100 @@
     -webkit-touch-callout: none;
 }
 
+/* ===== LUCIDE ICONS - Modern SVG Icons ===== */
+.header-btn i,
+.menu-btn i {
+    width: 20px;
+    height: 20px;
+    stroke: var(--text);
+    stroke-width: 2;
+}
+
+.dropdown-icon {
+    width: 14px;
+    height: 14px;
+    stroke: var(--accent);
+    opacity: 0.6;
+}
+
+.level-icon-svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--accent);
+    stroke-width: 2;
+}
+
+.complete-icon-svg {
+    width: 48px;
+    height: 48px;
+    stroke: var(--accent);
+    stroke-width: 1.5;
+}
+
+.close-btn i {
+    width: 20px;
+    height: 20px;
+    stroke: var(--text-muted);
+    stroke-width: 2;
+}
+
+.check-icon-svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.name-option.active .check-icon-svg {
+    opacity: 1;
+}
+
+.accordion-icon-svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--accent);
+    stroke-width: 2;
+    flex-shrink: 0;
+}
+
+.arrow-icon-svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--text-muted);
+    stroke-width: 2;
+    margin-left: auto;
+    transition: transform 0.2s;
+}
+
+.accordion-header.open .arrow-icon-svg {
+    transform: rotate(180deg);
+}
+
+.sound-icon-svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+.level-list-icon {
+    width: 20px;
+    height: 20px;
+    stroke: var(--accent);
+    stroke-width: 2;
+    flex-shrink: 0;
+}
+
+.reset-icon-svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 2;
+    margin-right: 8px;
+}
+
 body {
     font-family: 'Outfit', sans-serif;
     background: var(--bg-gradient);
