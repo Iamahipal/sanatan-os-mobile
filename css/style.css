@@ -19,8 +19,8 @@
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.8);
 
-    --radius: 28px;
-    --gap: 6px;
+    --radius: 14px;
+    --gap: 8px;
 }
 
 * {
@@ -267,57 +267,69 @@ body {
 }
 
 /* ============================================
-   TILE CONTENT
+   TILE CONTENT - Windows Phone Style
+   Icon centered, Label bottom-left
    ============================================ */
 .tile-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 16px;
-    text-align: center;
+    padding: 12px;
 }
 
+/* Label positioned bottom-left */
+.tile-label {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+/* Standard icon sizes */
 .tile-icon {
-    font-size: 2.4rem;
+    font-size: 2rem;
     filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
 }
 
 .tile.large .tile-icon {
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
 .tile.small .tile-icon {
-    font-size: 1.9rem;
+    font-size: 1.6rem;
 }
 
-/* FontAwesome Icons - White Glow */
+/* FontAwesome Icons - Standard size */
 .tile i {
-    font-size: 26px;
+    font-size: 24px;
     color: #fff;
     filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.35));
 }
 
 .tile.small i {
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .tile.large i {
-    font-size: 32px;
+    font-size: 28px;
 }
 
-/* Labels */
-.tile-label {
-    font-size: 0.72rem;
-    font-weight: 400;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 1.8px;
-}
-
-.tile.large .tile-label {
-    font-size: 0.9rem;
+/* Labels - Same style for all tile sizes */
+.tile.large .tile-label,
+.tile.medium .tile-label,
+.tile.small .tile-label {
+    font-size: 0.65rem;
+    font-weight: 500;
 }
 
 /* Badge */
