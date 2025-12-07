@@ -138,10 +138,25 @@
         </div>
     </main>
 
+    <!-- Subtle click sound -->
+    <audio id="click-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-modern-technology-select-3124.mp3"
+        preload="auto"></audio>
+
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
         }
+
+        // Play subtle click sound on tile tap
+        const clickSound = document.getElementById('click-sound');
+        clickSound.volume = 0.15; // Very subtle
+
+        document.querySelectorAll('.tile').forEach(tile => {
+            tile.addEventListener('click', () => {
+                clickSound.currentTime = 0;
+                clickSound.play().catch(() => { });
+            });
+        });
     </script>
 </body>
 
