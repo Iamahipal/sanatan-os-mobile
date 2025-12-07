@@ -20,7 +20,7 @@
     --text-secondary: rgba(255, 255, 255, 0.8);
 
     --radius: 28px;
-    --gap: 18px;
+    --gap: 6px;
 }
 
 * {
@@ -177,7 +177,8 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--gap);
-    padding: 40px var(--gap) 50px;
+    /* Fixed: Use safe-area for consistent top padding on reload */
+    padding: max(40px, calc(env(safe-area-inset-top) + 20px)) var(--gap) 50px;
     max-width: 480px;
     margin: 0 auto;
 }
@@ -203,9 +204,14 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Smoother transitions - GPU accelerated */
+    transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.3s ease;
     text-decoration: none;
-    animation: tileReveal 0.7s ease-out both;
+    /* Windows Phone style entrance animation - smooth & fast */
+    animation: tileReveal 0.4s cubic-bezier(0.2, 0, 0, 1) both;
+    /* GPU acceleration for smooth animations */
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 
 .tile:hover,
@@ -225,9 +231,8 @@ body {
 
 .tile.medium {
     grid-column: span 2;
-    /* Adjusted ratio: (2 columns + 1 gap) / 1 column height */
-    /* Formula: 2 + (gap / column_width) ≈ 2.15 for 18px gap */
-    aspect-ratio: 2.15 / 1;
+    /* Adjusted ratio for 6px gap: 2 + (gap / column_width) ≈ 2.05 */
+    aspect-ratio: 2.05 / 1;
 }
 
 .tile.small {
@@ -392,12 +397,12 @@ body {
 @keyframes tileReveal {
     from {
         opacity: 0;
-        transform: translateY(40px) scale(0.9);
+        transform: translate3d(0, 30px, 0) scale(0.95);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
     }
 }
 
