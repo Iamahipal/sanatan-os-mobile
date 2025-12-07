@@ -201,6 +201,29 @@
                     </div>
                 </div>
 
+                <!-- Reminder -->
+                <div class="accordion-item">
+                    <button class="accordion-header" data-section="reminder">
+                        <i data-lucide="bell-ring" class="accordion-icon-svg"></i>
+                        <span>Daily Reminder</span>
+                        <i data-lucide="chevron-down" class="arrow-icon-svg"></i>
+                    </button>
+                    <div class="accordion-content collapsed" id="reminder-content">
+                        <p class="reminder-desc">Get a daily notification to remind you to do your Naam Jap.</p>
+                        <div class="reminder-toggle-row">
+                            <span>Enable Reminder</span>
+                            <button id="reminder-toggle-btn" class="toggle-btn">
+                                <span class="toggle-slider"></span>
+                            </button>
+                        </div>
+                        <div class="reminder-time-row" id="reminder-time-section">
+                            <label for="reminder-time">Reminder Time:</label>
+                            <input type="time" id="reminder-time" class="time-picker" value="06:00">
+                        </div>
+                        <p class="reminder-status" id="reminder-status"></p>
+                    </div>
+                </div>
+
                 <!-- Guide -->
                 <div class="accordion-item">
                     <button class="accordion-header" data-section="guide">

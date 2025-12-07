@@ -886,6 +886,103 @@ body.page-enter {
     background: rgba(255, 255, 255, 0.1);
 }
 
+/* Reminder Section */
+.reminder-desc {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-bottom: 14px;
+    line-height: 1.4;
+}
+
+.reminder-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.reminder-toggle-row span {
+    font-size: 0.85rem;
+}
+
+/* iOS-style Toggle Button */
+.toggle-btn {
+    position: relative;
+    width: 50px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.toggle-btn.active {
+    background: var(--accent);
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-btn.active .toggle-slider {
+    transform: translateX(22px);
+}
+
+/* Time Picker */
+.reminder-time-row {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid var(--glass-border);
+    margin-top: 10px;
+}
+
+.reminder-time-row.visible {
+    display: flex;
+}
+
+.reminder-time-row label {
+    font-size: 0.85rem;
+}
+
+.time-picker {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--text);
+    font-size: 1rem;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+}
+
+.time-picker::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* Reminder Status */
+.reminder-status {
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-top: 8px;
+    opacity: 0.8;
+}
+
+.reminder-status:empty {
+    display: none;
+}
+
 /* Guide Section */
 .guide-intro {
     font-size: 0.75rem;

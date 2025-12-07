@@ -40,6 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Reset
     const resetData = document.getElementById('reset-data');
 
+    // Reminder
+    const reminderToggleBtn = document.getElementById('reminder-toggle-btn');
+    const reminderTimeSection = document.getElementById('reminder-time-section');
+    const reminderTimeInput = document.getElementById('reminder-time');
+    const reminderStatus = document.getElementById('reminder-status');
+
     // Close buttons
     document.querySelectorAll('.close-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -94,7 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
         dailyStats: {},
         lastActiveDate: null,
         isMuted: false,
-        soundType: 'bell'
+        soundType: 'bell',
+        reminderEnabled: false,
+        reminderTime: '06:00'
     };
 
     let availableSlots = [];
@@ -177,6 +185,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset
     resetData.addEventListener('click', resetAllData);
+
+    // Reminder
+    initReminder();
+    reminderToggleBtn.addEventListener('click', toggleReminder);
+    reminderTimeInput.addEventListener('change', updateReminderTime);
 
     // === Grid System ===
     function initGridSlots() {
@@ -491,5 +504,124 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function saveState() {
         localStorage.setItem('naamjapa_premium', JSON.stringify(state));
+    }
+
+    // === Reminder System ===
+    function initReminder() {
+        // Restore UI from state
+        if (state.reminderEnabled) {
+            reminderToggleBtn.classList.add('active');
+            reminderTimeSection.classList.add('visible');
+        }
+        reminderTimeInput.value = state.reminderTime;
+        updateReminderStatus();
+
+        // Start checking for reminder time
+        if (state.reminderEnabled) {
+            startReminderCheck();
+        }
+    }
+
+    function toggleReminder() {
+        if (!state.reminderEnabled) {
+            // Enabling - request notification permission first
+            requestNotificationPermission().then(granted => {
+                if (granted) {
+                    state.reminderEnabled = true;
+                    reminderToggleBtn.classList.add('active');
+                    reminderTimeSection.classList.add('visible');
+                    updateReminderStatus();
+                    startReminderCheck();
+                    saveState();
+                } else {
+                    reminderStatus.textContent = '❌ Notification permission denied';
+                }
+            });
+        } else {
+            // Disabling
+            state.reminderEnabled = false;
+            reminderToggleBtn.classList.remove('active');
+            reminderTimeSection.classList.remove('visible');
+            updateReminderStatus();
+            saveState();
+        }
+    }
+
+    function updateReminderTime() {
+        state.reminderTime = reminderTimeInput.value;
+        updateReminderStatus();
+        saveState();
+    }
+
+    function updateReminderStatus() {
+        if (state.reminderEnabled) {
+            const [hours, mins] = state.reminderTime.split(':');
+            const period = hours >= 12 ? 'PM' : 'AM';
+            const displayHours = hours % 12 || 12;
+            reminderStatus.textContent = `⏰ Reminder set for ${displayHours}:${mins} ${period} daily`;
+        } else {
+            reminderStatus.textContent = '';
+        }
+    }
+
+    async function requestNotificationPermission() {
+        if (!('Notification' in window)) {
+            reminderStatus.textContent = '❌ Notifications not supported';
+            return false;
+        }
+
+        if (Notification.permission === 'granted') {
+            return true;
+        }
+
+        if (Notification.permission !== 'denied') {
+            const permission = await Notification.requestPermission();
+            return permission === 'granted';
+        }
+
+        return false;
+    }
+
+    let reminderInterval = null;
+    let lastNotifiedDate = null;
+
+    function startReminderCheck() {
+        // Check every minute
+        if (reminderInterval) clearInterval(reminderInterval);
+        reminderInterval = setInterval(checkReminderTime, 60000);
+        // Also check immediately
+        checkReminderTime();
+    }
+
+    function checkReminderTime() {
+        if (!state.reminderEnabled) return;
+
+        const now = new Date();
+        const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const today = now.toISOString().split('T')[0];
+
+        // Only notify once per day at the set time
+        if (currentTime === state.reminderTime && lastNotifiedDate !== today) {
+            lastNotifiedDate = today;
+            showReminderNotification();
+        }
+    }
+
+    function showReminderNotification() {
+        if (Notification.permission === 'granted') {
+            const notification = new Notification('🙏 Naam Jap Reminder', {
+                body: 'Time for your daily Naam Jap sadhana!',
+                icon: '../../icons/icon-192.png',
+                badge: '../../icons/icon-192.png',
+                vibrate: [200, 100, 200],
+                tag: 'naamjap-reminder',
+                requireInteraction: true
+            });
+
+            notification.onclick = () => {
+                window.focus();
+                notification.close();
+            };
+        }
     }
 });
