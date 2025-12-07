@@ -1,6 +1,6 @@
 /**
- * Panchang App - Vedic Calendar
- * Complete Panchang calculations and display
+ * Panchang App - Next Generation
+ * Using VedicEphemeris for NASA-grade calculations
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,60 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
         6: { name: 'शनिवार', english: 'Saturday', deity: 'Lord Shani', color: 'linear-gradient(135deg, #1A237E, #3949AB)', colorName: 'Blue (नीला)' }
     };
 
-    const TITHIS = [
-        'प्रतिपदा', 'द्वितीया', 'तृतीया', 'चतुर्थी', 'पञ्चमी',
-        'षष्ठी', 'सप्तमी', 'अष्टमी', 'नवमी', 'दशमी',
-        'एकादशी', 'द्वादशी', 'त्रयोदशी', 'चतुर्दशी', 'पूर्णिमा/अमावस्या'
-    ];
-
-    const NAKSHATRAS = [
-        'अश्विनी', 'भरणी', 'कृत्तिका', 'रोहिणी', 'मृगशिरा', 'आर्द्रा', 'पुनर्वसु',
-        'पुष्य', 'आश्लेषा', 'मघा', 'पूर्वाफाल्गुनी', 'उत्तराफाल्गुनी', 'हस्त', 'चित्रा',
-        'स्वाति', 'विशाखा', 'अनुराधा', 'ज्येष्ठा', 'मूल', 'पूर्वाषाढ़ा', 'उत्तराषाढ़ा',
-        'श्रवण', 'धनिष्ठा', 'शतभिषा', 'पूर्वाभाद्रपद', 'उत्तराभाद्रपद', 'रेवती'
-    ];
-
-    const YOGAS = [
-        'विष्कुम्भ', 'प्रीति', 'आयुष्मान', 'सौभाग्य', 'शोभन', 'अतिगण्ड', 'सुकर्मा',
-        'धृति', 'शूल', 'गण्ड', 'वृद्धि', 'ध्रुव', 'व्याघात', 'हर्षण', 'वज्र',
-        'सिद्धि', 'व्यतीपात', 'वरीयान', 'परिघ', 'शिव', 'सिद्ध', 'साध्य',
-        'शुभ', 'शुक्ल', 'ब्रह्म', 'इन्द्र', 'वैधृति'
-    ];
-
-    const KARANAS = [
-        'बव', 'बालव', 'कौलव', 'तैतिल', 'गर', 'वणिज', 'विष्टि',
-        'शकुनि', 'चतुष्पद', 'नाग', 'किंस्तुघ्न'
-    ];
-
-    const HINDU_MONTHS = [
-        'चैत्र', 'वैशाख', 'ज्येष्ठ', 'आषाढ़', 'श्रावण', 'भाद्रपद',
-        'आश्विन', 'कार्तिक', 'मार्गशीर्ष', 'पौष', 'माघ', 'फाल्गुन'
-    ];
-
-    const CHOGHADIYA_DAY = [
-        { name: 'उद्वेग', type: 'udveg', good: false },
-        { name: 'चल', type: 'chal', good: true },
-        { name: 'लाभ', type: 'labh', good: true },
-        { name: 'अमृत', type: 'amrit', good: true },
-        { name: 'काल', type: 'kaal', good: false },
-        { name: 'शुभ', type: 'shubh', good: true },
-        { name: 'रोग', type: 'rog', good: false },
-        { name: 'उद्वेग', type: 'udveg', good: false }
-    ];
-
-    const CHOGHADIYA_NIGHT = [
-        { name: 'शुभ', type: 'shubh', good: true },
-        { name: 'अमृत', type: 'amrit', good: true },
-        { name: 'चल', type: 'chal', good: true },
-        { name: 'रोग', type: 'rog', good: false },
-        { name: 'काल', type: 'kaal', good: false },
-        { name: 'लाभ', type: 'labh', good: true },
-        { name: 'उद्वेग', type: 'udveg', good: false },
-        { name: 'शुभ', type: 'shubh', good: true }
-    ];
-
-    // Rahu Kalam order for each day (Sunday=0 to Saturday=6)
-    const RAHU_KALAM_ORDER = [8, 2, 7, 5, 6, 4, 3]; // Which 1.5hr slot is Rahu Kalam
+    // Tara Bala descriptions
+    const TARA_DESCRIPTIONS = {
+        0: 'Caution advised today. Take extra care with health and avoid risky activities.',
+        1: 'Excellent day for financial matters, investments, and new beginnings.',
+        2: 'Challenging energy today. Postpone important decisions if possible.',
+        3: 'Safe and stable day. Good for routine activities and family matters.',
+        4: 'Minor obstacles may arise. Practice patience and persistence.',
+        5: 'Great day for achievements, learning, and spiritual practices.',
+        6: 'Avoid major undertakings. Focus on rest and introspection.',
+        7: 'Friendly energy supports social activities and collaborations.',
+        8: 'Best day of the cycle! Ideal for all important activities.'
+    };
 
     // === FESTIVALS DATA ===
     const FESTIVALS = {
@@ -89,12 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
         '2025-10-02': [{ name: 'गांधी जयंती', type: 'Holiday', icon: '🕊️' }],
         '2025-10-20': [{ name: 'दशहरा', type: 'Festival', icon: '🏹' }],
         '2025-10-29': [{ name: 'करवा चौथ', type: 'Vrat', icon: '🌙' }],
-        '2025-11-01': [{ name: 'दीपावली', type: 'Festival', icon: '🪔' }]
+        '2025-11-01': [{ name: 'दीपावली', type: 'Festival', icon: '🪔' }],
+        '2025-12-07': [{ name: 'कार्तिक पूर्णिमा', type: 'Purnima', icon: '🌕' }],
+        '2025-12-08': [{ name: 'कृष्ण प्रतिपदा', type: 'Tithi', icon: '🌙' }]
     };
 
     // === STATE ===
     let currentDate = new Date();
-    let location = { lat: 28.6139, lon: 77.2090, city: 'New Delhi' }; // Default
+    let location = { lat: 28.6139, lon: 77.2090, city: 'New Delhi' };
+    let birthNakshatra = null;
+    let currentPanchang = null;
 
     // === DOM ELEMENTS ===
     const prevDayBtn = document.getElementById('prev-day');
@@ -108,15 +70,63 @@ document.addEventListener('DOMContentLoaded', () => {
     const choghadiyaGrid = document.getElementById('choghadiya-grid');
     const eventsList = document.getElementById('events-list');
 
+    // Tara Bala elements
+    const birthNakshatraSelect = document.getElementById('birth-nakshatra');
+    const saveNakshatraBtn = document.getElementById('save-nakshatra');
+    const changeNakshatraBtn = document.getElementById('change-nakshatra');
+    const taraSetup = document.getElementById('tara-setup');
+    const taraResult = document.getElementById('tara-result');
+
     // === INITIALIZE ===
     function init() {
-        loadLocation();
+        loadSettings();
+        populateNakshatraSelect();
         updateDisplay();
         setupEventListeners();
         lucide.createIcons();
     }
 
-    // === DATE CALCULATIONS ===
+    // === SETTINGS ===
+    function loadSettings() {
+        const savedLocation = localStorage.getItem('panchang_location');
+        if (savedLocation) {
+            location = JSON.parse(savedLocation);
+        }
+
+        const savedNakshatra = localStorage.getItem('panchang_birth_nakshatra');
+        if (savedNakshatra) {
+            birthNakshatra = parseInt(savedNakshatra, 10);
+        }
+    }
+
+    function saveLocation() {
+        localStorage.setItem('panchang_location', JSON.stringify(location));
+    }
+
+    function saveBirthNakshatra(index) {
+        birthNakshatra = index;
+        localStorage.setItem('panchang_birth_nakshatra', index.toString());
+    }
+
+    // === POPULATE NAKSHATRA SELECT ===
+    function populateNakshatraSelect() {
+        if (!birthNakshatraSelect) return;
+
+        VedicEphemeris.NAKSHATRAS.forEach((name, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = `${name} (${VedicEphemeris.NAKSHATRAS_EN[index]})`;
+            birthNakshatraSelect.appendChild(option);
+        });
+
+        // Show appropriate view
+        if (birthNakshatra !== null) {
+            taraSetup.style.display = 'none';
+            taraResult.style.display = 'block';
+        }
+    }
+
+    // === DATE FORMATTING ===
     function formatDate(date) {
         const options = { day: 'numeric', month: 'long', year: 'numeric' };
         return date.toLocaleDateString('en-IN', options);
@@ -126,215 +136,33 @@ document.addEventListener('DOMContentLoaded', () => {
         return date.toISOString().split('T')[0];
     }
 
-    // === PANCHANG CALCULATIONS ===
-    function calculateTithi(date) {
-        // Simplified Tithi calculation based on lunar phase
-        const lunation = getLunation(date);
-        const tithiIndex = Math.floor(lunation * 30) % 15;
-        const paksha = lunation < 0.5 ? 'शुक्ल' : 'कृष्ण';
-        return {
-            name: TITHIS[tithiIndex],
-            paksha: paksha,
-            fullName: `${paksha} ${TITHIS[tithiIndex]}`
-        };
-    }
-
-    function getLunation(date) {
-        // Calculate approximate moon phase (0-1)
-        const knownNewMoon = new Date('2024-01-11T11:57:00Z').getTime();
-        const lunarCycle = 29.53058867 * 24 * 60 * 60 * 1000;
-        const diff = date.getTime() - knownNewMoon;
-        return (diff % lunarCycle) / lunarCycle;
-    }
-
-    function calculateNakshatra(date) {
-        // Simplified calculation
-        const dayOfYear = getDayOfYear(date);
-        const index = (dayOfYear * 27 / 365) % 27;
-        return NAKSHATRAS[Math.floor(index)];
-    }
-
-    function calculateYoga(date) {
-        const dayOfYear = getDayOfYear(date);
-        const index = (dayOfYear * 27 / 365 + 7) % 27;
-        return YOGAS[Math.floor(index)];
-    }
-
-    function calculateKarana(date) {
-        const dayOfYear = getDayOfYear(date);
-        const index = (dayOfYear * 2) % 11;
-        return KARANAS[index];
-    }
-
-    function getDayOfYear(date) {
-        const start = new Date(date.getFullYear(), 0, 0);
-        const diff = date - start;
-        return Math.floor(diff / (1000 * 60 * 60 * 24));
-    }
-
     function getHinduMonth(date) {
-        // Approximate Hindu month calculation
         const month = (date.getMonth() + 9) % 12;
-        return HINDU_MONTHS[month];
-    }
-
-    function getVikramSamvat(date) {
-        // Vikram Samvat is ahead of Gregorian by ~57 years
-        return date.getFullYear() + 57;
-    }
-
-    // === SUN/MOON CALCULATIONS ===
-    function calculateSunTimes(date, lat, lon) {
-        // Simplified sunrise/sunset calculation
-        const dayOfYear = getDayOfYear(date);
-        const decl = 23.45 * Math.sin((360 / 365) * (dayOfYear - 81) * Math.PI / 180);
-        const hourAngle = Math.acos(-Math.tan(lat * Math.PI / 180) * Math.tan(decl * Math.PI / 180)) * 180 / Math.PI;
-
-        const sunrise = 12 - hourAngle / 15;
-        const sunset = 12 + hourAngle / 15;
-
-        return {
-            sunrise: formatTime(sunrise),
-            sunset: formatTime(sunset),
-            sunriseHours: sunrise,
-            sunsetHours: sunset
-        };
-    }
-
-    function formatTime(hours) {
-        const h = Math.floor(hours);
-        const m = Math.floor((hours - h) * 60);
-        return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-    }
-
-    // === MUHURAT CALCULATIONS ===
-    function calculateMuhurats(sunTimes) {
-        const sunrise = sunTimes.sunriseHours;
-        const sunset = sunTimes.sunsetHours;
-        const dayDuration = sunset - sunrise;
-        const nightDuration = 24 - dayDuration;
-
-        // Brahma Muhurat: 1hr 36min before sunrise
-        const brahmaMuhuratStart = sunrise - 1.6;
-        const brahmaMuhuratEnd = sunrise - 0.8;
-
-        // Abhijit Muhurat: Middle of day (11:36 AM to 12:24 PM approx)
-        const midday = (sunrise + sunset) / 2;
-        const abhijitStart = midday - 0.4;
-        const abhijitEnd = midday + 0.4;
-
-        // Godhuli: Around sunset
-        const godhuliStart = sunset - 0.4;
-        const godhuliEnd = sunset;
-
-        // Rahu Kalam calculation
-        const dayOfWeek = currentDate.getDay();
-        const slot = RAHU_KALAM_ORDER[dayOfWeek];
-        const slotDuration = dayDuration / 8;
-        const rahuStart = sunrise + (slot - 1) * slotDuration;
-        const rahuEnd = rahuStart + slotDuration;
-
-        // Yamagandam (different slot order)
-        const yamaSlot = (slot + 4) % 8 || 8;
-        const yamaStart = sunrise + (yamaSlot - 1) * slotDuration;
-        const yamaEnd = yamaStart + slotDuration;
-
-        // Gulika Kalam (different slot order)
-        const gulikaSlot = (slot + 2) % 8 || 8;
-        const gulikaStart = sunrise + (gulikaSlot - 1) * slotDuration;
-        const gulikaEnd = gulikaStart + slotDuration;
-
-        return {
-            brahmaMuhurat: `${formatTime(brahmaMuhuratStart)} - ${formatTime(brahmaMuhuratEnd)}`,
-            abhijitMuhurat: `${formatTime(abhijitStart)} - ${formatTime(abhijitEnd)}`,
-            godhuliMuhurat: `${formatTime(godhuliStart)} - ${formatTime(godhuliEnd)}`,
-            rahuKalam: `${formatTime(rahuStart)} - ${formatTime(rahuEnd)}`,
-            yamagandam: `${formatTime(yamaStart)} - ${formatTime(yamaEnd)}`,
-            gulikaKalam: `${formatTime(gulikaStart)} - ${formatTime(gulikaEnd)}`
-        };
-    }
-
-    // === CHOGHADIYA CALCULATION ===
-    function calculateChoghadiya(sunTimes, period) {
-        const sunrise = sunTimes.sunriseHours;
-        const sunset = sunTimes.sunsetHours;
-        const dayDuration = sunset - sunrise;
-        const nightDuration = 24 - dayDuration;
-
-        const chogs = period === 'day' ? CHOGHADIYA_DAY : CHOGHADIYA_NIGHT;
-        const duration = period === 'day' ? dayDuration / 8 : nightDuration / 8;
-        const start = period === 'day' ? sunrise : sunset;
-
-        // Rotate based on day of week
-        const dayOfWeek = currentDate.getDay();
-        const rotatedChogs = [...chogs.slice(dayOfWeek), ...chogs.slice(0, dayOfWeek)];
-
-        return rotatedChogs.map((chog, i) => ({
-            ...chog,
-            startTime: formatTime(start + i * duration),
-            endTime: formatTime(start + (i + 1) * duration)
-        }));
-    }
-
-    // === MOON PHASE UPDATE ===
-    function updateMoonPhase(lunation) {
-        const shadow = document.getElementById('moon-shadow');
-        const moonPercent = document.getElementById('moon-percent');
-
-        // Calculate illumination percentage
-        let illumination;
-        if (lunation <= 0.5) {
-            illumination = lunation * 2 * 100;
-        } else {
-            illumination = (1 - lunation) * 2 * 100;
-        }
-
-        // Adjust shadow based on phase
-        if (lunation <= 0.25) {
-            // Waxing crescent
-            shadow.style.width = `${100 - lunation * 400}%`;
-            shadow.style.right = '0';
-            shadow.style.left = 'auto';
-        } else if (lunation <= 0.5) {
-            // Waxing gibbous
-            shadow.style.width = `${(0.5 - lunation) * 200}%`;
-            shadow.style.right = '0';
-            shadow.style.left = 'auto';
-        } else if (lunation <= 0.75) {
-            // Waning gibbous
-            shadow.style.width = `${(lunation - 0.5) * 200}%`;
-            shadow.style.left = '0';
-            shadow.style.right = 'auto';
-        } else {
-            // Waning crescent
-            shadow.style.width = `${100 - (1 - lunation) * 400}%`;
-            shadow.style.left = '0';
-            shadow.style.right = 'auto';
-        }
-
-        moonPercent.textContent = `${Math.round(illumination)}% Illuminated`;
+        return VedicEphemeris.HINDU_MONTHS[month];
     }
 
     // === UPDATE DISPLAY ===
     function updateDisplay() {
+        // Get complete Panchang using ephemeris
+        currentPanchang = VedicEphemeris.getPanchang(currentDate, location.lat, location.lon);
+
         // Date display
         gregorianDateEl.textContent = formatDate(currentDate);
 
         // Hindu date
         const hinduMonth = getHinduMonth(currentDate);
-        const tithi = calculateTithi(currentDate);
-        hinduDateEl.textContent = `${hinduMonth} ${tithi.fullName}`;
+        hinduDateEl.textContent = `${hinduMonth} ${currentPanchang.tithi.fullName}`;
 
         // Moon phase
-        const lunation = getLunation(currentDate);
-        updateMoonPhase(lunation);
-        document.getElementById('tithi-name').textContent = tithi.fullName;
+        updateMoonPhase(currentPanchang.moonIllumination, currentPanchang.tithi.index);
+        document.getElementById('tithi-name').textContent = currentPanchang.tithi.fullName;
+        document.getElementById('moon-percent').textContent = `${currentPanchang.moonIllumination}% Illuminated`;
 
         // Panchang elements
-        document.getElementById('tithi-value').textContent = tithi.fullName;
-        document.getElementById('nakshatra-value').textContent = calculateNakshatra(currentDate);
-        document.getElementById('yoga-value').textContent = calculateYoga(currentDate);
-        document.getElementById('karana-value').textContent = calculateKarana(currentDate);
+        document.getElementById('tithi-value').textContent = currentPanchang.tithi.fullName;
+        document.getElementById('nakshatra-value').textContent = currentPanchang.nakshatra.name;
+        document.getElementById('yoga-value').textContent = currentPanchang.yoga.name;
+        document.getElementById('karana-value').textContent = currentPanchang.karana.name;
 
         // Day
         const dayData = WEEKDAYS[currentDate.getDay()];
@@ -346,26 +174,22 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('color-name').textContent = dayData.colorName;
 
         // Sun/Moon timings
-        const sunTimes = calculateSunTimes(currentDate, location.lat, location.lon);
-        document.getElementById('sunrise').textContent = sunTimes.sunrise;
-        document.getElementById('sunset').textContent = sunTimes.sunset;
+        document.getElementById('sunrise').textContent = currentPanchang.sunTimes.sunriseTime;
+        document.getElementById('sunset').textContent = currentPanchang.sunTimes.sunsetTime;
 
-        // Moonrise/set (approximation)
-        const moonriseOffset = lunation * 24;
-        document.getElementById('moonrise').textContent = formatTime((6 + moonriseOffset) % 24);
-        document.getElementById('moonset').textContent = formatTime((18 + moonriseOffset) % 24);
+        // Moonrise/set (approximation based on tithi)
+        const lunation = currentPanchang.tithi.angle / 360;
+        document.getElementById('moonrise').textContent = hoursToTime((6 + lunation * 24) % 24);
+        document.getElementById('moonset').textContent = hoursToTime((18 + lunation * 24) % 24);
 
         // Muhurats
-        const muhurats = calculateMuhurats(sunTimes);
-        document.getElementById('brahma-muhurat').textContent = muhurats.brahmaMuhurat;
-        document.getElementById('abhijit-muhurat').textContent = muhurats.abhijitMuhurat;
-        document.getElementById('godhuli-muhurat').textContent = muhurats.godhuliMuhurat;
-        document.getElementById('rahu-kalam').textContent = muhurats.rahuKalam;
-        document.getElementById('yamagandam').textContent = muhurats.yamagandam;
-        document.getElementById('gulika-kalam').textContent = muhurats.gulikaKalam;
+        updateMuhurats();
 
         // Choghadiya
-        renderChoghadiya(sunTimes, 'day');
+        renderChoghadiya('day');
+
+        // Tara Bala
+        updateTaraBala();
 
         // Events
         renderEvents();
@@ -373,20 +197,172 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
     }
 
-    // === RENDER CHOGHADIYA ===
-    function renderChoghadiya(sunTimes, period) {
-        const chogs = calculateChoghadiya(sunTimes, period);
+    function hoursToTime(hours) {
+        if (hours < 0) hours += 24;
+        if (hours >= 24) hours -= 24;
+        const h = Math.floor(hours);
+        const m = Math.floor((hours - h) * 60);
+        return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+    }
 
-        choghadiyaGrid.innerHTML = chogs.map(chog => `
+    // === MOON PHASE ===
+    function updateMoonPhase(illumination, tithiIndex) {
+        const shadow = document.getElementById('moon-shadow');
+        if (!shadow) return;
+
+        const isWaxing = tithiIndex < 15;
+
+        if (isWaxing) {
+            // Waxing: shadow on right
+            shadow.style.width = `${100 - illumination}%`;
+            shadow.style.right = '0';
+            shadow.style.left = 'auto';
+        } else {
+            // Waning: shadow on left
+            shadow.style.width = `${100 - illumination}%`;
+            shadow.style.left = '0';
+            shadow.style.right = 'auto';
+        }
+    }
+
+    // === MUHURATS ===
+    function updateMuhurats() {
+        const sunrise = currentPanchang.sunTimes.sunrise;
+        const sunset = currentPanchang.sunTimes.sunset;
+        const dayDuration = sunset - sunrise;
+
+        // Brahma Muhurat: 1hr 36min before sunrise
+        const brahmaStart = sunrise - 1.6;
+        const brahmaEnd = sunrise - 0.8;
+        document.getElementById('brahma-muhurat').textContent =
+            `${hoursToTime(brahmaStart)} - ${hoursToTime(brahmaEnd)}`;
+
+        // Abhijit Muhurat: Middle of day
+        const midday = (sunrise + sunset) / 2;
+        const abhijitStart = midday - 0.4;
+        const abhijitEnd = midday + 0.4;
+        document.getElementById('abhijit-muhurat').textContent =
+            `${hoursToTime(abhijitStart)} - ${hoursToTime(abhijitEnd)}`;
+
+        // Godhuli: Around sunset
+        const godhuliStart = sunset - 0.4;
+        document.getElementById('godhuli-muhurat').textContent =
+            `${hoursToTime(godhuliStart)} - ${hoursToTime(sunset)}`;
+
+        // Rahu Kalam
+        document.getElementById('rahu-kalam').textContent =
+            `${currentPanchang.rahuKalam.startTime} - ${currentPanchang.rahuKalam.endTime}`;
+
+        // Yamagandam (different slot)
+        const rahuSlots = [8, 2, 7, 5, 6, 4, 3];
+        const dayOfWeek = currentDate.getDay();
+        const slotDuration = dayDuration / 8;
+        const yamaSlot = (rahuSlots[dayOfWeek] + 4) % 8 || 8;
+        const yamaStart = sunrise + (yamaSlot - 1) * slotDuration;
+        document.getElementById('yamagandam').textContent =
+            `${hoursToTime(yamaStart)} - ${hoursToTime(yamaStart + slotDuration)}`;
+
+        // Gulika Kalam
+        const gulikaSlot = (rahuSlots[dayOfWeek] + 2) % 8 || 8;
+        const gulikaStart = sunrise + (gulikaSlot - 1) * slotDuration;
+        document.getElementById('gulika-kalam').textContent =
+            `${hoursToTime(gulikaStart)} - ${hoursToTime(gulikaStart + slotDuration)}`;
+    }
+
+    // === CHOGHADIYA ===
+    function renderChoghadiya(period) {
+        if (!choghadiyaGrid) return;
+
+        const sunrise = currentPanchang.sunTimes.sunrise;
+        const sunset = currentPanchang.sunTimes.sunset;
+        const dayDuration = sunset - sunrise;
+        const nightDuration = 24 - dayDuration;
+
+        const dayChogs = [
+            { name: 'उद्वेग', type: 'udveg' },
+            { name: 'चल', type: 'chal' },
+            { name: 'लाभ', type: 'labh' },
+            { name: 'अमृत', type: 'amrit' },
+            { name: 'काल', type: 'kaal' },
+            { name: 'शुभ', type: 'shubh' },
+            { name: 'रोग', type: 'rog' },
+            { name: 'उद्वेग', type: 'udveg' }
+        ];
+
+        const nightChogs = [
+            { name: 'शुभ', type: 'shubh' },
+            { name: 'अमृत', type: 'amrit' },
+            { name: 'चल', type: 'chal' },
+            { name: 'रोग', type: 'rog' },
+            { name: 'काल', type: 'kaal' },
+            { name: 'लाभ', type: 'labh' },
+            { name: 'उद्वेग', type: 'udveg' },
+            { name: 'शुभ', type: 'shubh' }
+        ];
+
+        const chogs = period === 'day' ? dayChogs : nightChogs;
+        const duration = period === 'day' ? dayDuration / 8 : nightDuration / 8;
+        const start = period === 'day' ? sunrise : sunset;
+
+        // Rotate based on day
+        const dayOfWeek = currentDate.getDay();
+        const rotated = [...chogs.slice(dayOfWeek % 7), ...chogs.slice(0, dayOfWeek % 7)];
+
+        choghadiyaGrid.innerHTML = rotated.map((chog, i) => `
             <div class="chog-card ${chog.type}">
                 <span class="chog-name">${chog.name}</span>
-                <span class="chog-time">${chog.startTime}</span>
+                <span class="chog-time">${hoursToTime(start + i * duration)}</span>
             </div>
         `).join('');
     }
 
-    // === RENDER EVENTS ===
+    // === TARA BALA ===
+    function updateTaraBala() {
+        if (birthNakshatra === null) {
+            if (taraSetup) taraSetup.style.display = 'block';
+            if (taraResult) taraResult.style.display = 'none';
+            return;
+        }
+
+        if (taraSetup) taraSetup.style.display = 'none';
+        if (taraResult) taraResult.style.display = 'block';
+
+        const taraBala = VedicEphemeris.calculateTaraBala(
+            birthNakshatra,
+            currentPanchang.nakshatra.index
+        );
+
+        const meter = document.getElementById('tara-meter');
+        const icon = document.getElementById('tara-icon');
+        const name = document.getElementById('tara-name');
+        const english = document.getElementById('tara-english');
+        const badge = document.getElementById('tara-badge');
+        const desc = document.getElementById('tara-desc');
+
+        if (meter) {
+            meter.className = `tara-meter ${taraBala.good ? 'good' : 'bad'}`;
+        }
+        if (icon) {
+            icon.textContent = taraBala.good ? '✨' : '⚠️';
+        }
+        if (name) {
+            name.textContent = taraBala.name;
+        }
+        if (english) {
+            english.textContent = taraBala.english;
+        }
+        if (badge) {
+            badge.textContent = taraBala.good ? 'Good' : 'Caution';
+        }
+        if (desc) {
+            desc.textContent = TARA_DESCRIPTIONS[taraBala.index];
+        }
+    }
+
+    // === EVENTS ===
     function renderEvents() {
+        if (!eventsList) return;
+
         const dateKey = getDateKey(currentDate);
         const events = FESTIVALS[dateKey];
 
@@ -411,17 +387,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // === LOCATION ===
-    function loadLocation() {
-        const saved = localStorage.getItem('panchang_location');
-        if (saved) {
-            location = JSON.parse(saved);
-        }
-    }
-
-    function saveLocation() {
-        localStorage.setItem('panchang_location', JSON.stringify(location));
-    }
-
     function getAutoLocation() {
         if (!navigator.geolocation) {
             alert('Geolocation not supported');
@@ -446,43 +411,72 @@ document.addEventListener('DOMContentLoaded', () => {
     // === EVENT LISTENERS ===
     function setupEventListeners() {
         // Date navigation
-        prevDayBtn.addEventListener('click', () => {
-            currentDate.setDate(currentDate.getDate() - 1);
-            updateDisplay();
-        });
+        if (prevDayBtn) {
+            prevDayBtn.addEventListener('click', () => {
+                currentDate.setDate(currentDate.getDate() - 1);
+                updateDisplay();
+            });
+        }
 
-        nextDayBtn.addEventListener('click', () => {
-            currentDate.setDate(currentDate.getDate() + 1);
-            updateDisplay();
-        });
+        if (nextDayBtn) {
+            nextDayBtn.addEventListener('click', () => {
+                currentDate.setDate(currentDate.getDate() + 1);
+                updateDisplay();
+            });
+        }
 
         // Location modal
-        locationBtn.addEventListener('click', () => {
-            locationModal.classList.add('active');
-            lucide.createIcons();
-        });
+        if (locationBtn) {
+            locationBtn.addEventListener('click', () => {
+                locationModal.classList.add('active');
+                lucide.createIcons();
+            });
+        }
 
-        closeLocationBtn.addEventListener('click', () => {
-            locationModal.classList.remove('active');
-        });
-
-        locationModal.addEventListener('click', (e) => {
-            if (e.target === locationModal) {
+        if (closeLocationBtn) {
+            closeLocationBtn.addEventListener('click', () => {
                 locationModal.classList.remove('active');
-            }
-        });
+            });
+        }
 
-        autoLocationBtn.addEventListener('click', getAutoLocation);
+        if (locationModal) {
+            locationModal.addEventListener('click', (e) => {
+                if (e.target === locationModal) {
+                    locationModal.classList.remove('active');
+                }
+            });
+        }
+
+        if (autoLocationBtn) {
+            autoLocationBtn.addEventListener('click', getAutoLocation);
+        }
 
         // Choghadiya tabs
         document.querySelectorAll('.chog-tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 document.querySelectorAll('.chog-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
-                const sunTimes = calculateSunTimes(currentDate, location.lat, location.lon);
-                renderChoghadiya(sunTimes, tab.dataset.period);
+                renderChoghadiya(tab.dataset.period);
             });
         });
+
+        // Tara Bala
+        if (saveNakshatraBtn) {
+            saveNakshatraBtn.addEventListener('click', () => {
+                const selected = birthNakshatraSelect.value;
+                if (selected !== '') {
+                    saveBirthNakshatra(parseInt(selected, 10));
+                    updateTaraBala();
+                }
+            });
+        }
+
+        if (changeNakshatraBtn) {
+            changeNakshatraBtn.addEventListener('click', () => {
+                taraSetup.style.display = 'block';
+                taraResult.style.display = 'none';
+            });
+        }
     }
 
     // === START ===

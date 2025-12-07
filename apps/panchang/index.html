@@ -10,6 +10,7 @@
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="lib/ephemeris.js"></script>
 </head>
 
 <body>
@@ -178,6 +179,32 @@
             </div>
             <div id="choghadiya-grid" class="choghadiya-grid">
                 <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Tara Bala - Personal Luck -->
+        <section class="tara-section">
+            <h2 class="section-title"><i data-lucide="sparkles" class="section-icon"></i> तारा बल (Your Daily Luck)</h2>
+            <div id="tara-container" class="tara-container">
+                <div class="tara-setup" id="tara-setup">
+                    <p class="tara-intro">Enter your birth star to see your personalized daily luck</p>
+                    <select id="birth-nakshatra" class="nakshatra-select">
+                        <option value="">Select Your Birth Star...</option>
+                    </select>
+                    <button id="save-nakshatra" class="save-nakshatra-btn">Save My Star</button>
+                </div>
+                <div class="tara-result" id="tara-result" style="display: none;">
+                    <div class="tara-meter" id="tara-meter">
+                        <div class="tara-icon" id="tara-icon"></div>
+                        <div class="tara-info">
+                            <span class="tara-name" id="tara-name">सम्पत्</span>
+                            <span class="tara-english" id="tara-english">Wealth & Prosperity</span>
+                        </div>
+                        <div class="tara-badge" id="tara-badge">Good</div>
+                    </div>
+                    <p class="tara-desc" id="tara-desc">Today favors financial growth and new opportunities.</p>
+                    <button id="change-nakshatra" class="change-star-btn">Change Birth Star</button>
+                </div>
             </div>
         </section>
 
