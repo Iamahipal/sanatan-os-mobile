@@ -19,16 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Settings
     const settingsBtn = document.getElementById('settings-btn');
     const settingsModal = document.getElementById('settings-modal');
-
-    // Close buttons
-    document.querySelectorAll('.close-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const modalId = btn.dataset.close;
-            document.getElementById(modalId).classList.remove('active');
-        });
-    });
-
-    // Accordion headers
     const accordionHeaders = document.querySelectorAll('.accordion-header');
 
     // Language
@@ -40,9 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const soundOffBtn = document.getElementById('sound-off-btn');
     const soundOptions = document.querySelectorAll('.sound-option');
 
-    // Theme
-    const themeBtns = document.querySelectorAll('.theme-btn');
-
     // Stats
     const totalCountEl = document.getElementById('total-count');
     const streakCountEl = document.getElementById('streak-count');
@@ -50,6 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset
     const resetData = document.getElementById('reset-data');
+
+    // Close buttons
+    document.querySelectorAll('.close-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modalId = btn.dataset.close;
+            document.getElementById(modalId).classList.remove('active');
+        });
+    });
 
     // Audio
     const sounds = {
@@ -59,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chime: document.getElementById('chime-sound')
     };
 
-    // === Deity Data ===
+    // === Deity Data (7 deities = 7 themes) ===
     const DEITIES = {
         radha: { text_hi: 'श्री राधा', text_en: 'Shree Radha', color: '#ff69b4' },
         krishna: { text_hi: 'श्री कृष्ण', text_en: 'Shree Krishna', color: '#ffd700' },
@@ -97,8 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dailyStats: {},
         lastActiveDate: null,
         isMuted: false,
-        soundType: 'bell',
-        theme: 'radha'
+        soundType: 'bell'
     };
 
     let availableSlots = [];
@@ -114,16 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
     updateUI();
     updateLevelBadge();
     checkStreak();
-    applyTheme(state.theme);
+    applyTheme(state.currentDeity); // Theme = Deity
 
     // === Event Listeners ===
     canvas.addEventListener('pointerdown', handleTap, { passive: false });
 
     // Name selector
-    nameSelectorBtn.addEventListener('click', () => {
-        nameModal.classList.add('active');
-    });
-
+    nameSelectorBtn.addEventListener('click', () => nameModal.classList.add('active'));
     nameModal.addEventListener('click', (e) => {
         if (e.target === nameModal) nameModal.classList.remove('active');
     });
@@ -132,8 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
         option.addEventListener('click', () => {
             const deity = option.dataset.deity;
             state.currentDeity = deity;
+            applyTheme(deity); // Auto-switch theme
             updateSelectedName();
-            updateDeityColor();
+            updateUI();
             saveState();
             nameModal.classList.remove('active');
         });
@@ -145,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderChart();
         settingsModal.classList.add('active');
     });
-
     settingsModal.addEventListener('click', (e) => {
         if (e.target === settingsModal) settingsModal.classList.remove('active');
     });
@@ -157,15 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const content = document.getElementById(`${section}-content`);
             const isOpen = !content.classList.contains('collapsed');
 
-            // Close all other sections
-            document.querySelectorAll('.accordion-content').forEach(c => {
-                c.classList.add('collapsed');
-            });
-            document.querySelectorAll('.accordion-header').forEach(h => {
-                h.classList.remove('open');
-            });
+            document.querySelectorAll('.accordion-content').forEach(c => c.classList.add('collapsed'));
+            document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('open'));
 
-            // Toggle current section
             if (!isOpen) {
                 content.classList.remove('collapsed');
                 header.classList.add('open');
@@ -177,23 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
     langHi.addEventListener('click', () => setLanguage('hi'));
     langEn.addEventListener('click', () => setLanguage('en'));
 
-    // Sound on/off
+    // Sound
     soundOnBtn.addEventListener('click', () => setSound(false));
     soundOffBtn.addEventListener('click', () => setSound(true));
-
-    // Sound type
-    soundOptions.forEach(option => {
-        option.addEventListener('click', () => {
-            state.soundType = option.dataset.sound;
+    soundOptions.forEach(opt => {
+        opt.addEventListener('click', () => {
+            state.soundType = opt.dataset.sound;
             updateSoundUI();
             saveState();
-        });
-    });
-
-    // Theme
-    themeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            setTheme(btn.dataset.theme);
         });
     });
 
@@ -203,9 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Grid System ===
     function initGridSlots() {
         availableSlots = [];
-        for (let i = 0; i < TOTAL_SLOTS; i++) {
-            availableSlots.push(i);
-        }
+        for (let i = 0; i < TOTAL_SLOTS; i++) availableSlots.push(i);
         shuffleArray(availableSlots);
     }
 
@@ -221,9 +195,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const col = slotId % GRID_COLS;
         const cellWidth = 100 / GRID_COLS;
         const cellHeight = 100 / GRID_ROWS;
-        const offsetX = (Math.random() * 0.4 + 0.3) * cellWidth;
-        const offsetY = (Math.random() * 0.4 + 0.3) * cellHeight;
-        return { left: `${col * cellWidth + offsetX}%`, top: `${row * cellHeight + offsetY}%` };
+
+        // Add padding to keep text inside screen (5% from edges)
+        const paddingX = 8;
+        const paddingY = 5;
+        const offsetX = paddingX + (Math.random() * 0.3 + 0.2) * (cellWidth - paddingX * 2);
+        const offsetY = paddingY + (Math.random() * 0.3 + 0.2) * (cellHeight - paddingY * 2);
+
+        const left = Math.min(Math.max(col * cellWidth + offsetX, 5), 85); // Clamp 5-85%
+        const top = Math.min(Math.max(row * cellHeight + offsetY, 3), 90); // Clamp 3-90%
+
+        return { left: `${left}%`, top: `${top}%` };
     }
 
     // === Core Tap Handler ===
@@ -264,10 +246,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const el = document.createElement('div');
         el.className = 'floating-mantra';
         el.textContent = text;
-        el.style.color = deity.color;
         el.style.left = position.left;
         el.style.top = position.top;
-        el.style.fontSize = `${16 + Math.random() * 6}px`;
 
         canvas.appendChild(el);
 
@@ -374,31 +354,18 @@ document.addEventListener('DOMContentLoaded', () => {
         saveState();
     }
 
-    function setTheme(theme) {
-        state.theme = theme;
-        applyTheme(theme);
-        updateUI();
-        saveState();
-    }
-
-    function applyTheme(theme) {
-        document.body.dataset.theme = theme;
+    function applyTheme(deity) {
+        document.body.dataset.theme = deity;
     }
 
     function updateUI() {
-        // Language
         langHi.classList.toggle('active', state.language === 'hi');
         langEn.classList.toggle('active', state.language === 'en');
-
-        // Sound
         soundOnBtn.classList.toggle('active', !state.isMuted);
         soundOffBtn.classList.toggle('active', state.isMuted);
         updateSoundUI();
 
-        // Theme
-        themeBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.theme === state.theme));
-
-        // Name options
+        // Update name options
         nameOptions.forEach(opt => {
             const deity = opt.dataset.deity;
             const d = DEITIES[deity];
@@ -416,10 +383,6 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedNameEl.textContent = state.language === 'hi' ? deity.text_hi : deity.text_en;
     }
 
-    function updateDeityColor() {
-        document.documentElement.style.setProperty('--deity-color', DEITIES[state.currentDeity].color);
-    }
-
     function resetAllData() {
         if (confirm('Are you sure? This will delete all your Japa history.')) {
             localStorage.removeItem('naamjapa_premium');
@@ -432,7 +395,6 @@ document.addEventListener('DOMContentLoaded', () => {
         beadCountEl.textContent = state.beadCount;
         malaCountEl.textContent = state.malaCount;
         updateSelectedName();
-        updateDeityColor();
     }
 
     function updateLevelBadge() {
