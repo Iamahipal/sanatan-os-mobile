@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Live Darshan - Sacred Temples</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <a href="../../index.html" class="header-btn back-btn" aria-label="Back">
+                <i data-lucide="chevron-left"></i>
+            </a>
+            <h1 class="header-title">🙏 Live Darshan</h1>
+            <button id="search-btn" class="header-btn" aria-label="Search">
+                <i data-lucide="search"></i>
+            </button>
+        </header>
+
+        <!-- Search Bar (Hidden by default) -->
+        <div id="search-bar" class="search-bar hidden">
+            <input type="text" id="search-input" placeholder="Search temples..." autocomplete="off">
+            <button id="clear-search" class="clear-btn">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+
+        <!-- Featured Live Section -->
+        <section id="featured-section" class="featured-section">
+            <h2 class="section-title">
+                <span class="live-dot"></span> Live Now
+            </h2>
+            <div id="featured-grid" class="featured-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Category Tabs -->
+        <div class="category-tabs-container">
+            <div id="category-tabs" class="category-tabs">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- Temple Grid -->
+        <section id="temples-section" class="temples-section">
+            <h2 id="category-title" class="section-title">All Temples</h2>
+            <div id="temples-grid" class="temples-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Video Player Modal -->
+        <div id="player-modal" class="modal-overlay">
+            <div class="player-modal-content">
+                <div class="player-header">
+                    <h3 id="player-title">Temple Name</h3>
+                    <button id="close-player" class="close-player-btn">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="player-container">
+                    <iframe id="youtube-player" src="" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="player-actions">
+                    <a id="subscribe-btn" href="" target="_blank" class="action-btn subscribe-btn">
+                        <i data-lucide="bell"></i> Subscribe
+                    </a>
+                    <a id="youtube-btn" href="" target="_blank" class="action-btn youtube-btn">
+                        <i data-lucide="youtube"></i> Open YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
