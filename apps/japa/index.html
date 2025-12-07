@@ -130,17 +130,27 @@
                         <i data-lucide="chevron-down" class="arrow-icon-svg"></i>
                     </button>
                     <div class="accordion-content" id="history-content">
-                        <div class="stats-row">
+                        <!-- Top Stats Row -->
+                        <div class="stats-grid">
                             <div class="stat-card">
-                                <span class="stat-number" id="total-count">0</span>
-                                <span class="stat-label">Total Names</span>
+                                <span class="stat-number" id="total-naams">0</span>
+                                <span class="stat-label">Total Naams</span>
                             </div>
                             <div class="stat-card">
+                                <span class="stat-number" id="total-malas">0</span>
+                                <span class="stat-label">Total Malas</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number" id="best-day">0</span>
+                                <span class="stat-label">Best Day</span>
+                            </div>
+                            <div class="stat-card streak-card">
                                 <span class="stat-number" id="streak-count">0</span>
-                                <span class="stat-label">Day Streak</span>
+                                <span class="stat-label">Day Streak 🔥</span>
                             </div>
                         </div>
-                        <div class="chart-section">
+                        <!-- Taller Chart -->
+                        <div class="chart-section tall-chart">
                             <span class="chart-title">Last 7 Days</span>
                             <div id="chart-container" class="chart-container"></div>
                         </div>
@@ -199,26 +209,48 @@
                         <i data-lucide="chevron-down" class="arrow-icon-svg"></i>
                     </button>
                     <div class="accordion-content collapsed" id="guide-content">
+                        <p class="guide-intro">Your level is based on consistent daily practice. Keep your streak alive!
+                        </p>
                         <div class="level-list">
                             <div class="level-item">
                                 <i data-lucide="sunrise" class="level-list-icon"></i>
-                                <div><strong>Aarambh</strong><small>Beginning (0+)</small></div>
+                                <div>
+                                    <strong>Aarambh</strong>
+                                    <small>1 Mala (108) daily</small>
+                                    <span class="level-time">~5-10 mins</span>
+                                </div>
                             </div>
                             <div class="level-item">
                                 <i data-lucide="user" class="level-list-icon"></i>
-                                <div><strong>Sadhak</strong><small>Practitioner (108+)</small></div>
+                                <div>
+                                    <strong>Sadhak</strong>
+                                    <small>11 Malas (1,188) daily</small>
+                                    <span class="level-time">~1-2 hours</span>
+                                </div>
                             </div>
                             <div class="level-item">
                                 <i data-lucide="heart" class="level-list-icon"></i>
-                                <div><strong>Bhakta</strong><small>Devotee (1,008+)</small></div>
+                                <div>
+                                    <strong>Bhakta</strong>
+                                    <small>21 Malas (2,268) daily</small>
+                                    <span class="level-time">~3-4 hours</span>
+                                </div>
                             </div>
                             <div class="level-item">
                                 <i data-lucide="shield" class="level-list-icon"></i>
-                                <div><strong>Rakshak</strong><small>Protector (10,008+)</small></div>
+                                <div>
+                                    <strong>Rakshak</strong>
+                                    <small>54 Malas (5,832) daily</small>
+                                    <span class="level-time">~8 hours (dedicated)</span>
+                                </div>
                             </div>
                             <div class="level-item">
                                 <i data-lucide="star" class="level-list-icon"></i>
-                                <div><strong>Siddha</strong><small>Master (100,008+)</small></div>
+                                <div>
+                                    <strong>Siddha</strong>
+                                    <small>108 Malas (11,664) daily</small>
+                                    <span class="level-time">~16 hours (Sant level)</span>
+                                </div>
                             </div>
                         </div>
                     </div>

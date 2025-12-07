@@ -741,45 +741,57 @@ body.page-enter {
     display: none;
 }
 
-/* Stats */
-.stats-row {
-    display: flex;
-    gap: 10px;
+/* Stats Grid - 2x2 layout */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
     margin-bottom: 14px;
 }
 
 .stat-card {
-    flex: 1;
     background: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    padding: 12px;
+    border-radius: 12px;
+    padding: 14px 10px;
     text-align: center;
+}
+
+.stat-card.streak-card {
+    background: linear-gradient(135deg, rgba(255, 100, 0, 0.2), rgba(255, 50, 0, 0.1));
+    border: 1px solid rgba(255, 100, 0, 0.3);
 }
 
 .stat-number {
     display: block;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: var(--accent);
+    line-height: 1.2;
 }
 
 .stat-label {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     opacity: 0.6;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
+/* Taller Chart */
 .chart-section {
     background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 12px;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.chart-section.tall-chart .chart-container {
+    height: 100px;
 }
 
 .chart-title {
     font-size: 0.7rem;
     opacity: 0.6;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .chart-container {
@@ -795,14 +807,15 @@ body.page-enter {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
 }
 
 .bar {
     width: 100%;
     background: linear-gradient(to top, var(--accent), var(--accent-secondary));
-    border-radius: 3px 3px 0 0;
-    min-height: 3px;
+    border-radius: 4px 4px 0 0;
+    min-height: 4px;
+    transition: height 0.3s ease;
 }
 
 .bar-label {
@@ -811,8 +824,9 @@ body.page-enter {
 }
 
 .bar-value {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     color: var(--accent);
+    font-weight: 500;
 }
 
 /* Options */
@@ -863,46 +877,60 @@ body.page-enter {
     border-color: var(--accent);
 }
 
-/* Level List */
+/* Guide Section */
+.guide-intro {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-bottom: 14px;
+    line-height: 1.4;
+}
+
+/* Level List - Enhanced */
 .level-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
 }
 
 .level-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--glass-border);
-}
-
-.level-item:last-child {
-    border-bottom: none;
-}
-
-.level-item span:first-child {
-    font-size: 1.2rem;
+    gap: 12px;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 .level-item div {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .level-item strong {
     color: var(--accent);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .level-item small {
     font-size: 0.7rem;
-    opacity: 0.6;
+    opacity: 0.7;
+    margin-top: 2px;
+}
+
+.level-time {
+    font-size: 0.6rem;
+    opacity: 0.5;
+    margin-top: 3px;
+    font-style: italic;
 }
 
 /* Reset Button */
 .reset-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     margin-top: 16px;
     padding: 12px;

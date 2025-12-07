@@ -30,8 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const soundOffBtn = document.getElementById('sound-off-btn');
     const soundOptions = document.querySelectorAll('.sound-option');
 
-    // Stats
-    const totalCountEl = document.getElementById('total-count');
+    // Stats - Enhanced
+    const totalNaamsEl = document.getElementById('total-naams');
+    const totalMalasEl = document.getElementById('total-malas');
+    const bestDayEl = document.getElementById('best-day');
     const streakCountEl = document.getElementById('streak-count');
     const chartContainer = document.getElementById('chart-container');
 
@@ -431,7 +433,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === Stats ===
     function updateStats() {
-        totalCountEl.textContent = state.totalLifetimeCount.toLocaleString();
+        // Total Naams
+        totalNaamsEl.textContent = state.totalLifetimeCount.toLocaleString();
+
+        // Total Malas (108 per mala)
+        const totalMalas = Math.floor(state.totalLifetimeCount / 108);
+        totalMalasEl.textContent = totalMalas.toLocaleString();
+
+        // Best Day - find max from daily stats
+        const dailyCounts = Object.values(state.dailyStats);
+        const bestDay = dailyCounts.length > 0 ? Math.max(...dailyCounts) : 0;
+        bestDayEl.textContent = bestDay.toLocaleString();
+
+        // Day Streak
         streakCountEl.textContent = state.currentStreak;
     }
 
