@@ -633,6 +633,190 @@ document.addEventListener('DOMContentLoaded', () => {
                 taraResult.style.display = 'none';
             });
         }
+
+        // Sankalpa Generator
+        setupSankalpaListeners();
+    }
+
+    // === SANKALPA GENERATOR ===
+    const RITUS = ['वसन्त', 'ग्रीष्म', 'वर्षा', 'शरद्', 'हेमन्त', 'शिशिर'];
+    const AYANAS = { uttarayana: 'उत्तरायण', dakshinayana: 'दक्षिणायन' };
+
+    let sankalpaUser = {
+        name: '',
+        gotra: '',
+        tradition: 'north'
+    };
+
+    function loadSankalpaSettings() {
+        const saved = localStorage.getItem('panchang_sankalpa_user');
+        if (saved) {
+            sankalpaUser = JSON.parse(saved);
+        }
+    }
+
+    function saveSankalpaSettings() {
+        localStorage.setItem('panchang_sankalpa_user', JSON.stringify(sankalpaUser));
+    }
+
+    function getAyana(date) {
+        // Uttarayana: Jan 14 - Jul 16, Dakshinayana: Jul 17 - Jan 13
+        const month = date.getMonth();
+        const day = date.getDate();
+
+        if ((month === 0 && day >= 14) || (month > 0 && month < 6) || (month === 6 && day <= 16)) {
+            return 'uttarayana';
+        }
+        return 'dakshinayana';
+    }
+
+    function getRitu(date) {
+        // 6 Ritus based on Hindu months
+        // Vasant (Chaitra-Vaishakh), Grishma (Jyeshtha-Ashadha), etc.
+        const month = date.getMonth();
+        const rituIndex = Math.floor(((month + 9) % 12) / 2);
+        return RITUS[rituIndex];
+    }
+
+    function generateSankalpaText() {
+        loadSankalpaSettings();
+
+        const samvatsara = currentPanchang.samvatsara;
+        const ayana = getAyana(currentDate);
+        const ritu = getRitu(currentDate);
+        const masa = getHinduMonth(currentDate);
+        const paksha = currentPanchang.tithi.paksha;
+        const tithi = currentPanchang.tithi.name;
+        const nakshatra = currentPanchang.nakshatra.name;
+        const vara = WEEKDAYS[currentDate.getDay()].name;
+
+        // Build Sankalpa text
+        const text = `॥ श्री गणेशाय नमः ॥
+
+अद्य ब्रह्मणः द्वितीय परार्धे, श्वेतवराहकल्पे, वैवस्वतमन्वन्तरे, 
+अष्टाविंशतितमे कलियुगे, प्रथम चरणे, 
+${samvatsara.name} नाम संवत्सरे, ${AYANAS[ayana]}े, ${ritu} ऋतौ, 
+${masa} मासे, ${paksha} पक्षे, ${tithi} तिथौ, 
+${vara} वासरे, ${nakshatra} नक्षत्रे,
+
+${sankalpaUser.gotra || '(गोत्र)'} गोत्रः ${sankalpaUser.name || '(नाम)'} अहं...
+
+[पूजा/कर्म का उद्देश्य यहाँ बोलें]`;
+
+        return {
+            text,
+            samvatsara: samvatsara.name,
+            ayana: AYANAS[ayana],
+            ritu: ritu,
+            masa: masa,
+            paksha: paksha,
+            tithi: tithi
+        };
+    }
+
+    function displaySankalpa() {
+        const data = generateSankalpaText();
+
+        const textEl = document.getElementById('sankalpa-text');
+        if (textEl) textEl.textContent = data.text;
+
+        // Update breakdown
+        document.getElementById('sk-samvatsara').textContent = data.samvatsara;
+        document.getElementById('sk-ayana').textContent = data.ayana;
+        document.getElementById('sk-ritu').textContent = data.ritu;
+        document.getElementById('sk-masa').textContent = data.masa;
+        document.getElementById('sk-paksha').textContent = data.paksha;
+        document.getElementById('sk-tithi').textContent = data.tithi;
+
+        // Show result
+        document.getElementById('sankalpa-setup').style.display = 'none';
+        document.getElementById('sankalpa-result').style.display = 'block';
+
+        lucide.createIcons();
+    }
+
+    function speakSankalpa() {
+        const textEl = document.getElementById('sankalpa-text');
+        if (!textEl) return;
+
+        if ('speechSynthesis' in window) {
+            speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(textEl.textContent);
+            utterance.lang = 'hi-IN';
+            utterance.rate = 0.8;
+            speechSynthesis.speak(utterance);
+        } else {
+            alert('Speech synthesis not supported in this browser');
+        }
+    }
+
+    function copySankalpa() {
+        const textEl = document.getElementById('sankalpa-text');
+        if (!textEl) return;
+
+        navigator.clipboard.writeText(textEl.textContent).then(() => {
+            const copyBtn = document.getElementById('copy-sankalpa');
+            if (copyBtn) {
+                copyBtn.innerHTML = '<i data-lucide="check"></i>';
+                lucide.createIcons();
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i data-lucide="copy"></i>';
+                    lucide.createIcons();
+                }, 2000);
+            }
+        });
+    }
+
+    function setupSankalpaListeners() {
+        loadSankalpaSettings();
+
+        // Pre-fill inputs if saved
+        const nameInput = document.getElementById('user-name');
+        const gotraInput = document.getElementById('user-gotra');
+
+        if (nameInput && sankalpaUser.name) nameInput.value = sankalpaUser.name;
+        if (gotraInput && sankalpaUser.gotra) gotraInput.value = sankalpaUser.gotra;
+
+        // Tradition toggle
+        document.querySelectorAll('.tradition-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tradition-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                sankalpaUser.tradition = btn.dataset.tradition;
+            });
+        });
+
+        // Generate button
+        const generateBtn = document.getElementById('generate-sankalpa');
+        if (generateBtn) {
+            generateBtn.addEventListener('click', () => {
+                sankalpaUser.name = nameInput?.value || '';
+                sankalpaUser.gotra = gotraInput?.value || '';
+                saveSankalpaSettings();
+                displaySankalpa();
+            });
+        }
+
+        // Edit button
+        const editBtn = document.getElementById('edit-sankalpa');
+        if (editBtn) {
+            editBtn.addEventListener('click', () => {
+                document.getElementById('sankalpa-setup').style.display = 'block';
+                document.getElementById('sankalpa-result').style.display = 'none';
+            });
+        }
+
+        // Speak button
+        const speakBtn = document.getElementById('speak-sankalpa');
+        if (speakBtn) {
+            speakBtn.addEventListener('click', speakSankalpa);
+        }
+
+        // Copy button
+        const copyBtn = document.getElementById('copy-sankalpa');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', copySankalpa);
+        }
     }
 
     // === START ===

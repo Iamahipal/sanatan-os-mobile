@@ -258,6 +258,89 @@
             </div>
         </section>
 
+        <!-- Sankalpa Generator -->
+        <section class="sankalpa-section">
+            <h2 class="section-title"><i data-lucide="scroll-text" class="section-icon"></i> संकल्प Generator</h2>
+            <div class="sankalpa-container">
+                <!-- Setup Form -->
+                <div class="sankalpa-setup" id="sankalpa-setup">
+                    <p class="sankalpa-intro">Generate your personalized Sankalpa (ritual vow) for today's date</p>
+
+                    <div class="input-group">
+                        <label>Your Name (Sanskrit)</label>
+                        <input type="text" id="user-name" placeholder="e.g., राम शर्मा or Ram Sharma"
+                            class="sankalpa-input">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Gotra (गोत्र)</label>
+                        <input type="text" id="user-gotra" placeholder="e.g., भारद्वाज or Bharadwaj"
+                            class="sankalpa-input">
+                    </div>
+
+                    <div class="tradition-toggle">
+                        <span>Tradition:</span>
+                        <div class="toggle-btns">
+                            <button class="tradition-btn active" data-tradition="north">North Indian</button>
+                            <button class="tradition-btn" data-tradition="south">South Indian</button>
+                        </div>
+                    </div>
+
+                    <button id="generate-sankalpa" class="generate-btn">
+                        <i data-lucide="wand-2"></i> Generate Sankalpa
+                    </button>
+                </div>
+
+                <!-- Generated Sankalpa -->
+                <div class="sankalpa-result" id="sankalpa-result" style="display: none;">
+                    <div class="sankalpa-header">
+                        <span class="sankalpa-label">Today's Sankalpa</span>
+                        <div class="sankalpa-actions">
+                            <button id="speak-sankalpa" class="action-btn" title="Listen">
+                                <i data-lucide="volume-2"></i>
+                            </button>
+                            <button id="copy-sankalpa" class="action-btn" title="Copy">
+                                <i data-lucide="copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sankalpa-text" id="sankalpa-text">
+                        <!-- Generated text here -->
+                    </div>
+
+                    <div class="sankalpa-breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">संवत्सर</span>
+                            <span class="breakdown-value" id="sk-samvatsara">-</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">अयन</span>
+                            <span class="breakdown-value" id="sk-ayana">-</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">ऋतु</span>
+                            <span class="breakdown-value" id="sk-ritu">-</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">मास</span>
+                            <span class="breakdown-value" id="sk-masa">-</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">पक्ष</span>
+                            <span class="breakdown-value" id="sk-paksha">-</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">तिथि</span>
+                            <span class="breakdown-value" id="sk-tithi">-</span>
+                        </div>
+                    </div>
+
+                    <button id="edit-sankalpa" class="edit-btn">Edit Details</button>
+                </div>
+            </div>
+        </section>
+
         <!-- Today's Events -->
         <section class="events-section">
             <h2 class="section-title">🎉 आज के उत्सव</h2>
