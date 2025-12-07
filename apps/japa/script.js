@@ -19,26 +19,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const langEn = document.getElementById('lang-en');
     const soundOnBtn = document.getElementById('sound-on-btn');
     const soundOffBtn = document.getElementById('sound-off-btn');
+    const soundTypeSelect = document.getElementById('sound-type');
     const resetData = document.getElementById('reset-data');
+    const themeBtns = document.querySelectorAll('.theme-btn');
 
-    // Stats
-    const statsBtn = document.getElementById('stats-btn');
-    const statsModal = document.getElementById('stats-modal');
-    const closeStats = document.getElementById('close-stats');
+    // Collapsible sections
+    const sadhanaToggle = document.getElementById('sadhana-toggle');
+    const sadhanaContent = document.getElementById('sadhana-content');
+    const guideToggle = document.getElementById('guide-toggle');
+    const guideContent = document.getElementById('guide-content');
+
+    // Stats (now in settings)
     const totalCountEl = document.getElementById('total-count');
     const streakCountEl = document.getElementById('streak-count');
     const chartContainer = document.getElementById('chart-container');
 
-    // Audio
-    const tapSound = document.getElementById('tap-sound');
-    const bellSound = document.getElementById('bell-sound');
+    // Audio - Multiple sounds
+    const sounds = {
+        bell: document.getElementById('bell-sound'),
+        conch: document.getElementById('conch-sound'),
+        bowl: document.getElementById('bowl-sound'),
+        chime: document.getElementById('chime-sound')
+    };
 
     // === Deity Data ===
     const DEITIES = {
-        radha: { text_hi: 'श्री राधा', text_en: 'Shree Radha', color: '#ffd700' },
-        krishna: { text_hi: 'श्री कृष्ण', text_en: 'Shree Krishna', color: '#00e5ff' },
+        radha: { text_hi: 'श्री राधा', text_en: 'Shree Radha', color: '#ff69b4' },
+        krishna: { text_hi: 'श्री कृष्ण', text_en: 'Shree Krishna', color: '#ffd700' },
         ram: { text_hi: 'श्री राम', text_en: 'Shree Ram', color: '#ff9800' },
-        shiva: { text_hi: 'ॐ नमः शिवाय', text_en: 'Om Namah Shivaya', color: '#ffffff' },
+        shiva: { text_hi: 'ॐ नमः शिवाय', text_en: 'Om Namah Shivaya', color: '#e0e0e0' },
         hanuman: { text_hi: 'ॐ हनुमते नमः', text_en: 'Om Hanumate Namah', color: '#ff5722' },
         ganesha: { text_hi: 'ॐ गं गणपतये नमः', text_en: 'Om Gan Ganapataye Namah', color: '#ffeb3b' },
         durga: { text_hi: 'जय माता दी', text_en: 'Jai Mata Di', color: '#e91e63' }
@@ -70,14 +79,16 @@ document.addEventListener('DOMContentLoaded', () => {
         currentStreak: 0,
         dailyStats: {},
         lastActiveDate: null,
-        isMuted: false
+        isMuted: false,
+        soundType: 'bell',
+        theme: 'radha'
     };
 
     // === Invisible Grid System ===
     let availableSlots = [];
-    let occupiedSlots = {}; // slotId -> { element, timeoutId }
+    let occupiedSlots = {};
     let malaRotation = 0;
-    let lastTapTime = 0; // Debounce
+    let lastTapTime = 0;
 
     // === Initialize ===
     loadState();
@@ -87,8 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSettingsUI();
     updateLevelBadge();
     checkStreak();
+    applyTheme(state.theme);
+    updateStats();
 
-    // === SINGLE Event Listener - pointerdown only (fixes double count) ===
+    // === Event Listeners ===
     canvas.addEventListener('pointerdown', handleTap, { passive: false });
 
     deitySelector.addEventListener('change', (e) => {
@@ -98,26 +111,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Settings Modal
-    settingsBtn.addEventListener('click', () => settingsModal.classList.add('active'));
+    settingsBtn.addEventListener('click', () => {
+        updateStats();
+        renderChart();
+        settingsModal.classList.add('active');
+    });
     closeSettings.addEventListener('click', () => settingsModal.classList.remove('active'));
     settingsModal.addEventListener('click', (e) => {
         if (e.target === settingsModal) settingsModal.classList.remove('active');
     });
 
-    langHi.addEventListener('click', () => setLanguage('hi'));
-    langEn.addEventListener('click', () => setLanguage('en'));
-    soundOnBtn.addEventListener('click', () => setSound(false));
-    soundOffBtn.addEventListener('click', () => setSound(true));
-    resetData.addEventListener('click', resetAllData);
-
-    // Stats Modal
-    statsBtn.addEventListener('click', openStats);
-    closeStats.addEventListener('click', () => statsModal.classList.remove('active'));
-    statsModal.addEventListener('click', (e) => {
-        if (e.target === statsModal) statsModal.classList.remove('active');
+    // Collapsible sections
+    sadhanaToggle.addEventListener('click', () => {
+        sadhanaContent.classList.toggle('collapsed');
+        sadhanaToggle.querySelector('.expand-icon').style.transform =
+            sadhanaContent.classList.contains('collapsed') ? 'rotate(-90deg)' : '';
     });
 
-    // === Invisible Grid System ===
+    guideToggle.addEventListener('click', () => {
+        guideContent.classList.toggle('collapsed');
+        guideToggle.querySelector('.expand-icon').style.transform =
+            guideContent.classList.contains('collapsed') ? 'rotate(-90deg)' : '';
+    });
+
+    // Language
+    langHi.addEventListener('click', () => setLanguage('hi'));
+    langEn.addEventListener('click', () => setLanguage('en'));
+
+    // Sound
+    soundOnBtn.addEventListener('click', () => setSound(false));
+    soundOffBtn.addEventListener('click', () => setSound(true));
+    soundTypeSelect.addEventListener('change', (e) => {
+        state.soundType = e.target.value;
+        saveState();
+    });
+
+    // Theme buttons
+    themeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const theme = btn.dataset.theme;
+            setTheme(theme);
+        });
+    });
+
+    // Reset
+    resetData.addEventListener('click', resetAllData);
+
+    // === Grid System ===
     function initGridSlots() {
         availableSlots = [];
         for (let i = 0; i < TOTAL_SLOTS; i++) {
@@ -136,43 +176,36 @@ document.addEventListener('DOMContentLoaded', () => {
     function getSlotPosition(slotId) {
         const row = Math.floor(slotId / GRID_COLS);
         const col = slotId % GRID_COLS;
-
-        // Calculate percentage positions with padding
         const cellWidth = 100 / GRID_COLS;
         const cellHeight = 100 / GRID_ROWS;
-
-        // Add some variation within the cell
         const offsetX = (Math.random() * 0.4 + 0.3) * cellWidth;
         const offsetY = (Math.random() * 0.4 + 0.3) * cellHeight;
-
         const left = col * cellWidth + offsetX;
         const top = row * cellHeight + offsetY;
-
         return { left: `${left}%`, top: `${top}%` };
     }
 
-    // === Core Tap Handler with Debounce ===
+    // === Core Tap Handler ===
     function handleTap(e) {
         e.preventDefault();
 
-        // Debounce - prevent double taps (50ms threshold)
+        // Debounce
         const now = Date.now();
         if (now - lastTapTime < 50) return;
         lastTapTime = now;
 
-        // Increment counts (exactly 1)
+        // Increment counts
         state.beadCount++;
         state.totalLifetimeCount++;
         updateDailyStats();
 
-        // Rotate mala
+        // Rotate mala (NO yellow bead during normal taps)
         rotateMala();
 
-        // Spawn mantra in grid slot
+        // Spawn mantra
         spawnMantraInSlot();
 
-        // Sound & Haptics
-        playTapSound();
+        // Haptics only (NO sound on regular taps)
         if (navigator.vibrate) navigator.vibrate(8);
 
         // Check mala completion
@@ -186,32 +219,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function spawnMantraInSlot() {
-        // If no slots available, free the oldest one
         if (availableSlots.length === 0) {
             freeOldestSlot();
         }
 
-        // Get next available slot
         const slotId = availableSlots.pop();
         const position = getSlotPosition(slotId);
 
         const deity = DEITIES[state.currentDeity];
         const text = state.language === 'hi' ? deity.text_hi : deity.text_en;
 
-        // Create element
         const el = document.createElement('div');
         el.className = 'floating-mantra';
         el.textContent = text;
         el.style.color = deity.color;
         el.style.left = position.left;
         el.style.top = position.top;
-
-        // Random slight size variation
         el.style.fontSize = `${16 + Math.random() * 6}px`;
 
         canvas.appendChild(el);
 
-        // Track this slot and schedule freeing
         const timeoutId = setTimeout(() => {
             freeSlot(slotId, el);
         }, 3500);
@@ -228,7 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function freeOldestSlot() {
-        // Find the first occupied slot
         const slotIds = Object.keys(occupiedSlots);
         if (slotIds.length > 0) {
             const oldestId = parseInt(slotIds[0]);
@@ -274,24 +300,33 @@ document.addEventListener('DOMContentLoaded', () => {
         malaRotation += (360 / TOTAL_BEADS);
         malaContainer.style.transform = `translateX(-50%) rotate(${malaRotation}deg)`;
 
+        // Remove all active states - NO yellow bead during normal taps
         const beads = malaContainer.querySelectorAll('.bead');
-        beads.forEach(b => b.classList.remove('active'));
-        const activeIdx = state.beadCount % BEAD_COUNT;
-        if (beads[activeIdx]) beads[activeIdx].classList.add('active');
+        beads.forEach(b => b.classList.remove('complete-bead'));
     }
 
     function completeMala() {
         state.beadCount = 0;
         state.malaCount++;
 
-        // Bell sound
-        if (!state.isMuted && bellSound) {
-            bellSound.currentTime = 0;
-            bellSound.play().catch(() => { });
+        // Play selected sound ONLY on mala complete
+        if (!state.isMuted) {
+            const sound = sounds[state.soundType];
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play().catch(() => { });
+            }
         }
 
-        // Haptic
+        // Strong haptic
         if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
+
+        // Show yellow bead ONLY at mala complete
+        const beads = malaContainer.querySelectorAll('.bead');
+        if (beads[0]) {
+            beads[0].classList.add('complete-bead');
+            setTimeout(() => beads[0].classList.remove('complete-bead'), 1000);
+        }
 
         // Divine flash
         divineFlash.classList.add('active');
@@ -306,12 +341,11 @@ document.addEventListener('DOMContentLoaded', () => {
         malaCountEl.classList.add('pulse');
         setTimeout(() => malaCountEl.classList.remove('pulse'), 400);
 
-        // Clear ALL mantras immediately
+        // Clear all mantras
         clearAllMantras();
     }
 
     function clearAllMantras() {
-        // Clear all timeouts and elements
         Object.keys(occupiedSlots).forEach(slotId => {
             const slot = occupiedSlots[slotId];
             clearTimeout(slot.timeoutId);
@@ -328,16 +362,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             occupiedSlots = {};
-            initGridSlots(); // Reset all slots
+            initGridSlots();
         }, 200);
-    }
-
-    function playTapSound() {
-        if (!state.isMuted && tapSound) {
-            const clone = tapSound.cloneNode();
-            clone.volume = 0.15;
-            clone.play().catch(() => { });
-        }
     }
 
     // === Settings ===
@@ -354,11 +380,28 @@ document.addEventListener('DOMContentLoaded', () => {
         saveState();
     }
 
+    function setTheme(theme) {
+        state.theme = theme;
+        applyTheme(theme);
+        updateSettingsUI();
+        saveState();
+    }
+
+    function applyTheme(theme) {
+        document.body.dataset.theme = theme;
+    }
+
     function updateSettingsUI() {
         langHi.classList.toggle('active', state.language === 'hi');
         langEn.classList.toggle('active', state.language === 'en');
         soundOnBtn.classList.toggle('active', !state.isMuted);
         soundOffBtn.classList.toggle('active', state.isMuted);
+        soundTypeSelect.value = state.soundType;
+
+        // Update theme buttons
+        themeBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.theme === state.theme);
+        });
     }
 
     function updateDeitySelector() {
@@ -426,12 +469,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // === Stats Modal ===
-    function openStats() {
+    // === Stats ===
+    function updateStats() {
         totalCountEl.textContent = state.totalLifetimeCount.toLocaleString();
         streakCountEl.textContent = state.currentStreak;
-        renderChart();
-        statsModal.classList.add('active');
     }
 
     function renderChart() {
@@ -442,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
         days.forEach(day => {
             const bar = document.createElement('div');
             bar.className = 'chart-bar';
-            const height = Math.max((day.count / maxCount) * 100, 4);
+            const height = Math.max((day.count / maxCount) * 60, 4);
 
             bar.innerHTML = `
                 <span class="bar-value">${day.count}</span>

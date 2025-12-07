@@ -1,12 +1,63 @@
 :root {
     --bg-color: #0d0d1a;
+    --bg-gradient: radial-gradient(ellipse at bottom, #1a1a3e 0%, #0d0d1a 100%);
     --accent-gold: #ffd700;
-    --accent-saffron: #ff6b35;
+    --accent-secondary: #ff6b35;
     --text-color: #f0f0f0;
     --glass-bg: rgba(255, 255, 255, 0.08);
     --glass-border: rgba(255, 255, 255, 0.15);
     --deity-color: #ffd700;
     --safe-top: env(safe-area-inset-top, 0px);
+}
+
+/* ===== THEME: RADHA (Most Beautiful) ===== */
+[data-theme="radha"] {
+    --bg-color: #1a0a1f;
+    --bg-gradient: radial-gradient(ellipse at bottom, #2d1b3d 0%, #1a0a1f 50%, #0d0510 100%);
+    --accent-gold: #ff69b4;
+    --accent-secondary: #ffd700;
+    --glass-bg: rgba(255, 105, 180, 0.08);
+    --glass-border: rgba(255, 182, 193, 0.2);
+}
+
+/* ===== THEME: KRISHNA ===== */
+[data-theme="krishna"] {
+    --bg-color: #0a0a1a;
+    --bg-gradient: radial-gradient(ellipse at bottom, #1a1a4e 0%, #0a0a1a 100%);
+    --accent-gold: #ffd700;
+    --accent-secondary: #00e5ff;
+    --glass-bg: rgba(255, 215, 0, 0.06);
+    --glass-border: rgba(255, 215, 0, 0.15);
+}
+
+/* ===== THEME: SHIVA ===== */
+[data-theme="shiva"] {
+    --bg-color: #0a0a0a;
+    --bg-gradient: radial-gradient(ellipse at bottom, #1a1a1a 0%, #0a0a0a 100%);
+    --accent-gold: #e0e0e0;
+    --accent-secondary: #87ceeb;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.12);
+}
+
+/* ===== THEME: SHAKTI ===== */
+[data-theme="shakti"] {
+    --bg-color: #1a0a1a;
+    --bg-gradient: radial-gradient(ellipse at bottom, #3d1a3d 0%, #1a0a1a 100%);
+    --accent-gold: #ff1493;
+    --accent-secondary: #ff6347;
+    --glass-bg: rgba(255, 20, 147, 0.08);
+    --glass-border: rgba(255, 20, 147, 0.2);
+}
+
+/* ===== THEME: SURYA ===== */
+[data-theme="surya"] {
+    --bg-color: #1a0f05;
+    --bg-gradient: radial-gradient(ellipse at bottom, #3d2510 0%, #1a0f05 100%);
+    --accent-gold: #ffa500;
+    --accent-secondary: #ffcc00;
+    --glass-bg: rgba(255, 165, 0, 0.08);
+    --glass-border: rgba(255, 165, 0, 0.2);
 }
 
 * {
@@ -17,7 +68,6 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Turnstile Animation */
 @keyframes turnstileIn {
     from {
         transform: perspective(1200px) rotateY(30deg) scale(0.9);
@@ -32,7 +82,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: radial-gradient(ellipse at bottom, #1a1a3e 0%, var(--bg-color) 100%);
+    background: var(--bg-gradient);
     color: var(--text-color);
     height: 100vh;
     height: 100dvh;
@@ -51,11 +101,11 @@ body.page-enter {
     position: relative;
 }
 
-/* Header - Safe Area for Notch */
+/* Header */
 .app-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     padding: 12px 16px;
     padding-top: max(20px, var(--safe-top));
     min-height: 70px;
@@ -79,7 +129,6 @@ body.page-enter {
     transition: all 0.2s;
     cursor: pointer;
     padding: 8px;
-    margin-bottom: 4px;
 }
 
 .back-btn:hover,
@@ -88,12 +137,7 @@ body.page-enter {
     transform: scale(1.1);
 }
 
-.header-right {
-    display: flex;
-    gap: 4px;
-}
-
-/* Deity Selector - Centered, Larger */
+/* Deity Selector */
 .deity-selector {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -105,7 +149,6 @@ body.page-enter {
     cursor: pointer;
     outline: none;
     transition: all 0.3s;
-    margin-bottom: 4px;
 }
 
 .deity-selector:focus {
@@ -117,10 +160,6 @@ body.page-enter {
     background: #1a1a3e;
     color: var(--text-color);
     font-size: 16px;
-}
-
-.hidden {
-    display: none !important;
 }
 
 /* Level Badge */
@@ -150,19 +189,17 @@ body.page-enter {
     letter-spacing: 1px;
 }
 
-/* Main Canvas - Container for floating names */
+/* Main Canvas */
 .japa-canvas {
     flex: 1;
     position: relative;
     cursor: pointer;
     overflow: hidden;
     margin-top: 40px;
-    /* Space for level badge */
     touch-action: manipulation;
-    /* Prevents zoom on double-tap */
 }
 
-/* Floating Mantra - Positioned absolutely by JS */
+/* Floating Mantra */
 .floating-mantra {
     position: absolute;
     font-family: 'Tiro Devanagari Sanskrit', serif;
@@ -199,7 +236,7 @@ body.page-enter {
     }
 }
 
-/* Mala Complete Celebration */
+/* Mala Complete */
 .mala-complete {
     position: fixed;
     top: 0;
@@ -284,6 +321,7 @@ body.page-enter {
     overflow: hidden;
 }
 
+/* FIXED WIDTH Counter Display */
 .counter-display {
     position: absolute;
     top: 20px;
@@ -297,12 +335,16 @@ body.page-enter {
     padding: 10px 30px;
     border-radius: 30px;
     backdrop-filter: blur(10px);
+    /* FIXED WIDTH - prevents dynamic sizing */
+    min-width: 200px;
 }
 
 .counter-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* Fixed width for each counter item */
+    min-width: 60px;
 }
 
 .counter-label {
@@ -318,6 +360,10 @@ body.page-enter {
     color: var(--accent-gold);
     text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
     line-height: 1;
+    /* Fixed width & tabular numbers for consistent sizing */
+    min-width: 50px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
 }
 
 .counter-divider {
@@ -326,7 +372,7 @@ body.page-enter {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* Rotating Mala - 3D Rudraksha Beads */
+/* Mala Container */
 .mala-container {
     position: absolute;
     width: 600px;
@@ -343,7 +389,6 @@ body.page-enter {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    /* 3D Rudraksha Look */
     background: radial-gradient(circle at 25% 25%, #d4a064 0%, #8b5a2b 40%, #5d4037 100%);
     box-shadow:
         3px 3px 6px rgba(0, 0, 0, 0.6),
@@ -351,7 +396,8 @@ body.page-enter {
         inset 2px 2px 4px rgba(255, 255, 255, 0.15);
 }
 
-.bead.active {
+/* Yellow bead - ONLY shown on mala complete */
+.bead.complete-bead {
     background: radial-gradient(circle at 25% 25%, #ffe066 0%, var(--accent-gold) 50%, #b8860b 100%);
     box-shadow:
         0 0 25px var(--accent-gold),
@@ -417,7 +463,7 @@ body.page-enter {
     }
 }
 
-/* Modal Overlay */
+/* Modal */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -430,6 +476,7 @@ body.page-enter {
     justify-content: center;
     align-items: center;
     z-index: 200;
+    padding: 20px;
 }
 
 .modal-overlay.active {
@@ -440,8 +487,10 @@ body.page-enter {
     background: linear-gradient(135deg, #1a1a3e 0%, #0d0d1a 100%);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
-    width: 90%;
+    width: 100%;
     max-width: 400px;
+    max-height: 85vh;
+    overflow-y: auto;
     padding: 24px;
     animation: slideUp 0.3s ease-out;
 }
@@ -484,9 +533,9 @@ body.page-enter {
     opacity: 1;
 }
 
-/* Settings Modal */
+/* Settings */
 .settings-modal {
-    max-width: 350px;
+    max-width: 380px;
 }
 
 .settings-group {
@@ -524,6 +573,218 @@ body.page-enter {
     font-weight: 500;
 }
 
+/* Theme Grid */
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.theme-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 8px;
+    background: var(--glass-bg);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.75rem;
+}
+
+.theme-btn.active {
+    border-color: var(--accent-gold);
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.theme-preview {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.radha-preview {
+    background: linear-gradient(135deg, #ff69b4, #ffd700);
+}
+
+.krishna-preview {
+    background: linear-gradient(135deg, #1a1a4e, #ffd700);
+}
+
+.shiva-preview {
+    background: linear-gradient(135deg, #1a1a1a, #e0e0e0);
+}
+
+.shakti-preview {
+    background: linear-gradient(135deg, #3d1a3d, #ff1493);
+}
+
+.surya-preview {
+    background: linear-gradient(135deg, #3d2510, #ffa500);
+}
+
+/* Sound Selector */
+.sound-selector {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.sound-selector option {
+    background: #1a1a3e;
+    color: var(--text-color);
+}
+
+/* Collapsible Sections */
+.settings-section {
+    margin-bottom: 15px;
+    background: var(--glass-bg);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.section-header:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.expand-icon {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    transition: transform 0.2s;
+}
+
+.section-content {
+    padding: 0 16px 16px;
+}
+
+.section-content.collapsed {
+    display: none;
+}
+
+.section-content h4 {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin: 15px 0 10px;
+    font-weight: 400;
+}
+
+/* Guide Items */
+.guide-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.guide-item:last-child {
+    border-bottom: none;
+}
+
+.guide-icon {
+    font-size: 1.5rem;
+}
+
+.guide-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.guide-text strong {
+    color: var(--accent-gold);
+    font-size: 0.95rem;
+}
+
+.guide-text span {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Stats in Settings */
+.stats-summary {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.stat-box {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.chart-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 80px;
+    gap: 6px;
+}
+
+.chart-bar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.bar {
+    width: 100%;
+    background: linear-gradient(to top, var(--accent-gold), var(--accent-secondary));
+    border-radius: 4px 4px 0 0;
+    min-height: 4px;
+    transition: height 0.5s ease-out;
+}
+
+.bar-label {
+    font-size: 0.6rem;
+    opacity: 0.6;
+}
+
+.bar-value {
+    font-size: 0.65rem;
+    color: var(--accent-gold);
+}
+
+/* Danger Button */
 .danger-btn {
     width: 100%;
     padding: 12px;
@@ -539,74 +800,4 @@ body.page-enter {
 .danger-btn:hover {
     background: #e74c3c;
     color: white;
-}
-
-/* Stats */
-.stats-summary {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
-.stat-box {
-    flex: 1;
-    background: var(--glass-bg);
-    border-radius: 12px;
-    padding: 15px;
-    text-align: center;
-}
-
-.stat-value {
-    display: block;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--accent-gold);
-}
-
-.stat-label {
-    font-size: 0.75rem;
-    opacity: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.modal-content h3 {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-bottom: 15px;
-    font-weight: 400;
-}
-
-.chart-container {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    height: 120px;
-    gap: 8px;
-}
-
-.chart-bar {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-.bar {
-    width: 100%;
-    background: linear-gradient(to top, var(--accent-gold), var(--accent-saffron));
-    border-radius: 4px 4px 0 0;
-    min-height: 4px;
-    transition: height 0.5s ease-out;
-}
-
-.bar-label {
-    font-size: 0.65rem;
-    opacity: 0.6;
-}
-
-.bar-value {
-    font-size: 0.7rem;
-    color: var(--accent-gold);
 }
