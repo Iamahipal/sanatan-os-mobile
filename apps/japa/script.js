@@ -607,7 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Get FCM token
             const fcmToken = await messaging.getToken({
-                vapidKey: 'YOUR_VAPID_KEY_HERE', // We'll get this from Firebase Console
+                vapidKey: 'BJMOkIPRrC2PEwqO__cjoBT1zObmuzOXuJLPyAK1DjqFSHvMAE1RTf3vjMNpJ6zetEjfcxST0O3IxxjJTkTzYo0',
                 serviceWorkerRegistration: registration
             });
 
