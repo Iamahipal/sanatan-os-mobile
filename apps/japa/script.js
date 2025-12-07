@@ -570,11 +570,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         }
 
-        if (!('serviceWorker' in navigator)) {
-            reminderStatus.textContent = '❌ Service Worker not supported';
-            return false;
-        }
-
         // Request notification permission
         let permission = Notification.permission;
         if (permission !== 'granted' && permission !== 'denied') {
@@ -586,49 +581,66 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         }
 
-        // Register for push notifications
+        // Initialize Firebase and get FCM token
         try {
-            const registration = await navigator.serviceWorker.ready;
+            // Firebase config
+            const firebaseConfig = {
+                apiKey: "AIzaSyCbpJn70aedORd6dycc88jxSqM178U91ig",
+                authDomain: "sanatan-os-push.firebaseapp.com",
+                projectId: "sanatan-os-push",
+                storageBucket: "sanatan-os-push.firebasestorage.app",
+                messagingSenderId: "840881978014",
+                appId: "1:840881978014:web:a3d8d5d30f274ecc719ae7b"
+            };
 
-            // Check if already subscribed
-            let subscription = await registration.pushManager.getSubscription();
-
-            if (!subscription) {
-                // Subscribe to push (using a public VAPID key - we'll generate one)
-                // For now, we'll use a demo key - in production, generate your own
-                const vapidPublicKey = 'BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8U';
-
-                subscription = await registration.pushManager.subscribe({
-                    userVisibleOnly: true,
-                    applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
-                });
-
-                console.log('Push subscription:', JSON.stringify(subscription));
-                // In production, send this subscription to your server
+            // Initialize Firebase (if not already)
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
             }
 
-            reminderStatus.textContent = '✅ Notifications enabled!';
-            return true;
-        } catch (err) {
-            console.error('Push subscription failed:', err);
-            // Fall back to regular notifications
-            reminderStatus.textContent = '⚠️ Push not available, using local notifications';
-            return true;
-        }
-    }
+            // Register Firebase messaging service worker
+            const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+            console.log('Firebase SW registered:', registration);
 
-    // Helper function to convert VAPID key
-    function urlBase64ToUint8Array(base64String) {
-        const padding = '='.repeat((4 - base64String.length % 4) % 4);
-        const base64 = (base64String + padding)
-            .replace(/-/g, '+')
-            .replace(/_/g, '/');
-        const rawData = window.atob(base64);
-        const outputArray = new Uint8Array(rawData.length);
-        for (let i = 0; i < rawData.length; ++i) {
-            outputArray[i] = rawData.charCodeAt(i);
+            // Get messaging instance
+            const messaging = firebase.messaging();
+
+            // Get FCM token
+            const fcmToken = await messaging.getToken({
+                vapidKey: 'YOUR_VAPID_KEY_HERE', // We'll get this from Firebase Console
+                serviceWorkerRegistration: registration
+            });
+
+            if (fcmToken) {
+                console.log('FCM Token:', fcmToken);
+                // Save token to state for later use
+                state.fcmToken = fcmToken;
+                saveState();
+
+                reminderStatus.textContent = '✅ Push notifications enabled!';
+
+                // Listen for foreground messages
+                messaging.onMessage((payload) => {
+                    console.log('Foreground message received:', payload);
+                    // Show notification manually for foreground
+                    if (Notification.permission === 'granted') {
+                        new Notification(payload.notification?.title || '🙏 Naam Jap', {
+                            body: payload.notification?.body || 'Time for Japa!',
+                            icon: '/icons/icon-192.png'
+                        });
+                    }
+                });
+
+                return true;
+            } else {
+                reminderStatus.textContent = '⚠️ Could not get push token';
+                return true; // Still allow local notifications
+            }
+        } catch (err) {
+            console.error('Firebase messaging setup failed:', err);
+            reminderStatus.textContent = '⚠️ Push setup failed, using local notifications';
+            return true; // Fall back to local notifications
         }
-        return outputArray;
     }
 
     let reminderInterval = null;
