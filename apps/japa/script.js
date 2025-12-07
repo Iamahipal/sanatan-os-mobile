@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('japa-canvas');
     const beadCountEl = document.getElementById('bead-count');
     const malaCountEl = document.getElementById('mala-count');
-    const deitySelector = document.getElementById('deity-selector');
     const levelText = document.getElementById('level-text');
     const levelBadge = document.getElementById('level-badge');
     const divineFlash = document.getElementById('divine-flash');
@@ -11,30 +10,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const malaComplete = document.getElementById('mala-complete');
     const completeCount = document.getElementById('complete-count');
 
+    // Name Selector
+    const nameSelectorBtn = document.getElementById('name-selector-btn');
+    const selectedNameEl = document.getElementById('selected-name');
+    const nameModal = document.getElementById('name-modal');
+    const nameOptions = document.querySelectorAll('.name-option');
+
     // Settings
     const settingsBtn = document.getElementById('settings-btn');
     const settingsModal = document.getElementById('settings-modal');
-    const closeSettings = document.getElementById('close-settings');
+
+    // Close buttons
+    document.querySelectorAll('.close-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modalId = btn.dataset.close;
+            document.getElementById(modalId).classList.remove('active');
+        });
+    });
+
+    // Accordion headers
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+    // Language
     const langHi = document.getElementById('lang-hi');
     const langEn = document.getElementById('lang-en');
+
+    // Sound
     const soundOnBtn = document.getElementById('sound-on-btn');
     const soundOffBtn = document.getElementById('sound-off-btn');
-    const soundTypeSelect = document.getElementById('sound-type');
-    const resetData = document.getElementById('reset-data');
+    const soundOptions = document.querySelectorAll('.sound-option');
+
+    // Theme
     const themeBtns = document.querySelectorAll('.theme-btn');
 
-    // Collapsible sections
-    const sadhanaToggle = document.getElementById('sadhana-toggle');
-    const sadhanaContent = document.getElementById('sadhana-content');
-    const guideToggle = document.getElementById('guide-toggle');
-    const guideContent = document.getElementById('guide-content');
-
-    // Stats (now in settings)
+    // Stats
     const totalCountEl = document.getElementById('total-count');
     const streakCountEl = document.getElementById('streak-count');
     const chartContainer = document.getElementById('chart-container');
 
-    // Audio - Multiple sounds
+    // Reset
+    const resetData = document.getElementById('reset-data');
+
+    // Audio
     const sounds = {
         bell: document.getElementById('bell-sound'),
         conch: document.getElementById('conch-sound'),
@@ -84,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         theme: 'radha'
     };
 
-    // === Invisible Grid System ===
     let availableSlots = [];
     let occupiedSlots = {};
     let malaRotation = 0;
@@ -95,62 +111,89 @@ document.addEventListener('DOMContentLoaded', () => {
     initGridSlots();
     createMalaBeads();
     updateDisplay();
-    updateSettingsUI();
+    updateUI();
     updateLevelBadge();
     checkStreak();
     applyTheme(state.theme);
-    updateStats();
 
     // === Event Listeners ===
     canvas.addEventListener('pointerdown', handleTap, { passive: false });
 
-    deitySelector.addEventListener('change', (e) => {
-        state.currentDeity = e.target.value;
-        updateDeityColor();
-        saveState();
+    // Name selector
+    nameSelectorBtn.addEventListener('click', () => {
+        nameModal.classList.add('active');
     });
 
-    // Settings Modal
+    nameModal.addEventListener('click', (e) => {
+        if (e.target === nameModal) nameModal.classList.remove('active');
+    });
+
+    nameOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const deity = option.dataset.deity;
+            state.currentDeity = deity;
+            updateSelectedName();
+            updateDeityColor();
+            saveState();
+            nameModal.classList.remove('active');
+        });
+    });
+
+    // Settings
     settingsBtn.addEventListener('click', () => {
         updateStats();
         renderChart();
         settingsModal.classList.add('active');
     });
-    closeSettings.addEventListener('click', () => settingsModal.classList.remove('active'));
+
     settingsModal.addEventListener('click', (e) => {
         if (e.target === settingsModal) settingsModal.classList.remove('active');
     });
 
-    // Collapsible sections
-    sadhanaToggle.addEventListener('click', () => {
-        sadhanaContent.classList.toggle('collapsed');
-        sadhanaToggle.querySelector('.expand-icon').style.transform =
-            sadhanaContent.classList.contains('collapsed') ? 'rotate(-90deg)' : '';
-    });
+    // Accordion
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const section = header.dataset.section;
+            const content = document.getElementById(`${section}-content`);
+            const isOpen = !content.classList.contains('collapsed');
 
-    guideToggle.addEventListener('click', () => {
-        guideContent.classList.toggle('collapsed');
-        guideToggle.querySelector('.expand-icon').style.transform =
-            guideContent.classList.contains('collapsed') ? 'rotate(-90deg)' : '';
+            // Close all other sections
+            document.querySelectorAll('.accordion-content').forEach(c => {
+                c.classList.add('collapsed');
+            });
+            document.querySelectorAll('.accordion-header').forEach(h => {
+                h.classList.remove('open');
+            });
+
+            // Toggle current section
+            if (!isOpen) {
+                content.classList.remove('collapsed');
+                header.classList.add('open');
+            }
+        });
     });
 
     // Language
     langHi.addEventListener('click', () => setLanguage('hi'));
     langEn.addEventListener('click', () => setLanguage('en'));
 
-    // Sound
+    // Sound on/off
     soundOnBtn.addEventListener('click', () => setSound(false));
     soundOffBtn.addEventListener('click', () => setSound(true));
-    soundTypeSelect.addEventListener('change', (e) => {
-        state.soundType = e.target.value;
-        saveState();
+
+    // Sound type
+    soundOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            state.soundType = option.dataset.sound;
+            updateSoundUI();
+            saveState();
+        });
     });
 
-    // Theme buttons
+    // Theme
     themeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            const theme = btn.dataset.theme;
-            setTheme(theme);
+            setTheme(btn.dataset.theme);
         });
     });
 
@@ -180,35 +223,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const cellHeight = 100 / GRID_ROWS;
         const offsetX = (Math.random() * 0.4 + 0.3) * cellWidth;
         const offsetY = (Math.random() * 0.4 + 0.3) * cellHeight;
-        const left = col * cellWidth + offsetX;
-        const top = row * cellHeight + offsetY;
-        return { left: `${left}%`, top: `${top}%` };
+        return { left: `${col * cellWidth + offsetX}%`, top: `${row * cellHeight + offsetY}%` };
     }
 
     // === Core Tap Handler ===
     function handleTap(e) {
         e.preventDefault();
 
-        // Debounce
         const now = Date.now();
         if (now - lastTapTime < 50) return;
         lastTapTime = now;
 
-        // Increment counts
         state.beadCount++;
         state.totalLifetimeCount++;
         updateDailyStats();
 
-        // Rotate mala (NO yellow bead during normal taps)
         rotateMala();
-
-        // Spawn mantra
         spawnMantraInSlot();
 
-        // Haptics only (NO sound on regular taps)
         if (navigator.vibrate) navigator.vibrate(8);
 
-        // Check mala completion
         if (state.beadCount >= TOTAL_BEADS) {
             completeMala();
         }
@@ -219,9 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function spawnMantraInSlot() {
-        if (availableSlots.length === 0) {
-            freeOldestSlot();
-        }
+        if (availableSlots.length === 0) freeOldestSlot();
 
         const slotId = availableSlots.pop();
         const position = getSlotPosition(slotId);
@@ -239,17 +271,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         canvas.appendChild(el);
 
-        const timeoutId = setTimeout(() => {
-            freeSlot(slotId, el);
-        }, 3500);
-
+        const timeoutId = setTimeout(() => freeSlot(slotId, el), 3500);
         occupiedSlots[slotId] = { element: el, timeoutId };
     }
 
     function freeSlot(slotId, element) {
-        if (element && element.parentNode) {
-            element.remove();
-        }
+        if (element?.parentNode) element.remove();
         delete occupiedSlots[slotId];
         availableSlots.push(slotId);
     }
@@ -259,15 +286,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (slotIds.length > 0) {
             const oldestId = parseInt(slotIds[0]);
             const slot = occupiedSlots[oldestId];
-
             clearTimeout(slot.timeoutId);
             if (slot.element) {
                 slot.element.style.opacity = '0';
-                setTimeout(() => {
-                    if (slot.element && slot.element.parentNode) {
-                        slot.element.remove();
-                    }
-                }, 150);
+                setTimeout(() => slot.element?.remove(), 150);
             }
             delete occupiedSlots[oldestId];
             availableSlots.push(oldestId);
@@ -282,16 +304,10 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < BEAD_COUNT; i++) {
             const bead = document.createElement('div');
             bead.className = 'bead';
-
             const angleDeg = (i * (360 / BEAD_COUNT)) - 90;
             const angleRad = angleDeg * (Math.PI / 180);
-
-            const x = 300 + radius * Math.cos(angleRad) - 15;
-            const y = 300 + radius * Math.sin(angleRad) - 15;
-
-            bead.style.left = `${x}px`;
-            bead.style.top = `${y}px`;
-
+            bead.style.left = `${300 + radius * Math.cos(angleRad) - 15}px`;
+            bead.style.top = `${300 + radius * Math.sin(angleRad) - 15}px`;
             malaContainer.appendChild(bead);
         }
     }
@@ -299,68 +315,46 @@ document.addEventListener('DOMContentLoaded', () => {
     function rotateMala() {
         malaRotation += (360 / TOTAL_BEADS);
         malaContainer.style.transform = `translateX(-50%) rotate(${malaRotation}deg)`;
-
-        // Remove all active states - NO yellow bead during normal taps
-        const beads = malaContainer.querySelectorAll('.bead');
-        beads.forEach(b => b.classList.remove('complete-bead'));
+        malaContainer.querySelectorAll('.bead').forEach(b => b.classList.remove('complete-bead'));
     }
 
     function completeMala() {
         state.beadCount = 0;
         state.malaCount++;
 
-        // Play selected sound ONLY on mala complete
-        if (!state.isMuted) {
-            const sound = sounds[state.soundType];
-            if (sound) {
-                sound.currentTime = 0;
-                sound.play().catch(() => { });
-            }
+        if (!state.isMuted && sounds[state.soundType]) {
+            sounds[state.soundType].currentTime = 0;
+            sounds[state.soundType].play().catch(() => { });
         }
 
-        // Strong haptic
         if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
 
-        // Show yellow bead ONLY at mala complete
         const beads = malaContainer.querySelectorAll('.bead');
         if (beads[0]) {
             beads[0].classList.add('complete-bead');
             setTimeout(() => beads[0].classList.remove('complete-bead'), 1000);
         }
 
-        // Divine flash
         divineFlash.classList.add('active');
-        setTimeout(() => divineFlash.classList.remove('active'), 1200);
+        setTimeout(() => divineFlash.classList.remove('active'), 1000);
 
-        // Mala Complete message
         completeCount.textContent = `(${state.malaCount})`;
         malaComplete.classList.add('active');
         setTimeout(() => malaComplete.classList.remove('active'), 2000);
 
-        // Counter pulse
         malaCountEl.classList.add('pulse');
         setTimeout(() => malaCountEl.classList.remove('pulse'), 400);
 
-        // Clear all mantras
         clearAllMantras();
     }
 
     function clearAllMantras() {
         Object.keys(occupiedSlots).forEach(slotId => {
-            const slot = occupiedSlots[slotId];
-            clearTimeout(slot.timeoutId);
-            if (slot.element) {
-                slot.element.style.opacity = '0';
-            }
+            clearTimeout(occupiedSlots[slotId].timeoutId);
+            if (occupiedSlots[slotId].element) occupiedSlots[slotId].element.style.opacity = '0';
         });
-
         setTimeout(() => {
-            Object.keys(occupiedSlots).forEach(slotId => {
-                const slot = occupiedSlots[slotId];
-                if (slot.element && slot.element.parentNode) {
-                    slot.element.remove();
-                }
-            });
+            Object.values(occupiedSlots).forEach(s => s.element?.remove());
             occupiedSlots = {};
             initGridSlots();
         }, 200);
@@ -369,21 +363,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Settings ===
     function setLanguage(lang) {
         state.language = lang;
-        updateSettingsUI();
-        updateDeitySelector();
+        updateUI();
+        updateSelectedName();
         saveState();
     }
 
     function setSound(muted) {
         state.isMuted = muted;
-        updateSettingsUI();
+        updateUI();
         saveState();
     }
 
     function setTheme(theme) {
         state.theme = theme;
         applyTheme(theme);
-        updateSettingsUI();
+        updateUI();
         saveState();
     }
 
@@ -391,30 +385,39 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.dataset.theme = theme;
     }
 
-    function updateSettingsUI() {
+    function updateUI() {
+        // Language
         langHi.classList.toggle('active', state.language === 'hi');
         langEn.classList.toggle('active', state.language === 'en');
+
+        // Sound
         soundOnBtn.classList.toggle('active', !state.isMuted);
         soundOffBtn.classList.toggle('active', state.isMuted);
-        soundTypeSelect.value = state.soundType;
+        updateSoundUI();
 
-        // Update theme buttons
-        themeBtns.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.theme === state.theme);
+        // Theme
+        themeBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.theme === state.theme));
+
+        // Name options
+        nameOptions.forEach(opt => {
+            const deity = opt.dataset.deity;
+            const d = DEITIES[deity];
+            opt.querySelector('.name-text').textContent = state.language === 'hi' ? d.text_hi : d.text_en;
+            opt.classList.toggle('active', deity === state.currentDeity);
         });
     }
 
-    function updateDeitySelector() {
-        const options = deitySelector.options;
-        for (let opt of options) {
-            const deity = DEITIES[opt.value];
-            opt.textContent = state.language === 'hi' ? deity.text_hi : deity.text_en;
-        }
+    function updateSoundUI() {
+        soundOptions.forEach(opt => opt.classList.toggle('active', opt.dataset.sound === state.soundType));
+    }
+
+    function updateSelectedName() {
+        const deity = DEITIES[state.currentDeity];
+        selectedNameEl.textContent = state.language === 'hi' ? deity.text_hi : deity.text_en;
     }
 
     function updateDeityColor() {
-        const deity = DEITIES[state.currentDeity];
-        document.documentElement.style.setProperty('--deity-color', deity.color);
+        document.documentElement.style.setProperty('--deity-color', DEITIES[state.currentDeity].color);
     }
 
     function resetAllData() {
@@ -428,16 +431,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateDisplay() {
         beadCountEl.textContent = state.beadCount;
         malaCountEl.textContent = state.malaCount;
-        deitySelector.value = state.currentDeity;
+        updateSelectedName();
         updateDeityColor();
     }
 
     function updateLevelBadge() {
         let currentLevel = LEVELS[0];
         for (const level of LEVELS) {
-            if (state.totalLifetimeCount >= level.min) {
-                currentLevel = level;
-            }
+            if (state.totalLifetimeCount >= level.min) currentLevel = level;
         }
         levelText.textContent = currentLevel.name;
         levelBadge.querySelector('.level-icon').textContent = currentLevel.icon;
@@ -445,9 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateDailyStats() {
         const today = new Date().toISOString().split('T')[0];
-        if (!state.dailyStats[today]) {
-            state.dailyStats[today] = 0;
-        }
+        if (!state.dailyStats[today]) state.dailyStats[today] = 0;
         state.dailyStats[today]++;
         state.lastActiveDate = today;
     }
@@ -455,7 +454,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkStreak() {
         const today = new Date();
         const todayStr = today.toISOString().split('T')[0];
-
         if (state.lastActiveDate === todayStr) return;
 
         const yesterday = new Date(today);
@@ -483,8 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
         days.forEach(day => {
             const bar = document.createElement('div');
             bar.className = 'chart-bar';
-            const height = Math.max((day.count / maxCount) * 60, 4);
-
+            const height = Math.max((day.count / maxCount) * 50, 3);
             bar.innerHTML = `
                 <span class="bar-value">${day.count}</span>
                 <div class="bar" style="height: ${height}px;"></div>
@@ -497,12 +494,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function getLast7Days() {
         const result = [];
         const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
         for (let i = 6; i >= 0; i--) {
             const date = new Date();
             date.setDate(date.getDate() - i);
             const dateStr = date.toISOString().split('T')[0];
-
             result.push({
                 date: dateStr,
                 label: i === 0 ? 'Today' : dayNames[date.getDay()],
@@ -515,11 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Persistence ===
     function loadState() {
         const stored = localStorage.getItem('naamjapa_premium');
-        if (stored) {
-            const parsed = JSON.parse(stored);
-            state = { ...state, ...parsed };
-        }
-        updateDeitySelector();
+        if (stored) state = { ...state, ...JSON.parse(stored) };
     }
 
     function saveState() {
