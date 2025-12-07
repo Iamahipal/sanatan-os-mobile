@@ -225,7 +225,9 @@ body {
 
 .tile.medium {
     grid-column: span 2;
-    aspect-ratio: 2/1;
+    /* Adjusted ratio: (2 columns + 1 gap) / 1 column height */
+    /* Formula: 2 + (gap / column_width) ≈ 2.15 for 18px gap */
+    aspect-ratio: 2.15 / 1;
 }
 
 .tile.small {
