@@ -1,0 +1,1098 @@
+/**
+ * Sadhana Guru - Digital Accountability App
+ * Fire-themed spiritual design
+ */
+
+/* ===== CSS VARIABLES ===== */
+:root {
+    /* Fire Palette */
+    --fire-orange: #FF9800;
+    --fire-red: #EF5350;
+    --fire-yellow: #FFEB3B;
+    --ember-glow: #FF5722;
+
+    /* Sacred Gold */
+    --gold: #FFD700;
+    --gold-muted: rgba(255, 215, 0, 0.7);
+
+    /* Nature */
+    --leaf-green: #4CAF50;
+    --bark-brown: #795548;
+    --earth: #5D4037;
+
+    /* Backgrounds */
+    --bg-deep: #0a0612;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --bg-card-hover: rgba(255, 255, 255, 0.08);
+
+    /* Text */
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+
+    /* Borders */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-gold: rgba(255, 215, 0, 0.3);
+
+    /* Safe areas */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Outfit', -apple-system, sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+}
+
+/* ===== APP CONTAINER ===== */
+.app-container {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+}
+
+@media (min-width: 481px) {
+    body {
+        background: #050308;
+    }
+
+    .app-container {
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+        border-left: 1px solid var(--border-color);
+        border-right: 1px solid var(--border-color);
+    }
+}
+
+/* ===== SCREENS ===== */
+.screen {
+    display: none;
+    min-height: 100vh;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== INVOCATION SCREEN ===== */
+.invocation-screen {
+    background: linear-gradient(180deg,
+            #1a0a0a 0%,
+            var(--bg-deep) 50%,
+            #0a0612 100%);
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 24px;
+}
+
+/* Fire Background Particles */
+.fire-background {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    pointer-events: none;
+}
+
+.fire-particle {
+    position: absolute;
+    bottom: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--fire-orange);
+    border-radius: 50%;
+    animation: fireRise 3s ease-out infinite;
+    opacity: 0;
+}
+
+.fire-particle:nth-child(1) {
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.fire-particle:nth-child(2) {
+    left: 40%;
+    animation-delay: 0.5s;
+}
+
+.fire-particle:nth-child(3) {
+    left: 50%;
+    animation-delay: 1s;
+}
+
+.fire-particle:nth-child(4) {
+    left: 60%;
+    animation-delay: 1.5s;
+}
+
+.fire-particle:nth-child(5) {
+    left: 80%;
+    animation-delay: 2s;
+}
+
+@keyframes fireRise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-200px) scale(0);
+        opacity: 0;
+    }
+}
+
+.invocation-content {
+    text-align: center;
+    z-index: 10;
+}
+
+.sacred-symbol {
+    font-size: 4rem;
+    margin-bottom: 16px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.invocation-title {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 2.5rem;
+    color: var(--fire-orange);
+    margin-bottom: 8px;
+    text-shadow: 0 0 30px rgba(255, 152, 0, 0.5);
+}
+
+.invocation-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.invocation-text {
+    margin-bottom: 32px;
+}
+
+.invocation-text p {
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.witness-icons {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.witness {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: var(--gold-muted);
+}
+
+.solemn-text {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.solemn-text strong {
+    color: var(--fire-orange);
+}
+
+.quote-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.quote-box p {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 8px;
+}
+
+.quote-box span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.proceed-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--fire-orange), var(--fire-red));
+    border: none;
+    border-radius: 16px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.proceed-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 152, 0, 0.4);
+}
+
+.proceed-btn i {
+    width: 24px;
+    height: 24px;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.back-link i {
+    width: 16px;
+    height: 16px;
+}
+
+/* ===== HEADER ===== */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 12px;
+    background: rgba(10, 6, 18, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-center {
+    text-align: center;
+}
+
+.header-title {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: var(--fire-orange);
+}
+
+.header-subtitle {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.header-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.header-btn.invisible {
+    visibility: hidden;
+}
+
+.header-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== SANKALPA SCREEN ===== */
+.sankalpa-screen {
+    background: var(--bg-deep);
+}
+
+.sankalpa-content {
+    flex: 1;
+    padding: 20px 16px 100px;
+    overflow-y: auto;
+}
+
+.scroll-container {
+    background: linear-gradient(180deg,
+            rgba(139, 90, 43, 0.1) 0%,
+            var(--bg-card) 100%);
+    border: 1px solid var(--border-gold);
+    border-radius: 20px;
+    padding: 24px 20px;
+    margin-bottom: 20px;
+}
+
+.scroll-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.scroll-ornament {
+    font-size: 1.2rem;
+    color: var(--gold);
+}
+
+.scroll-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 3px;
+}
+
+.vow-text {
+    margin-bottom: 24px;
+}
+
+.vow-intro {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.vow-intro strong {
+    color: var(--fire-orange);
+}
+
+.vow-list {
+    padding-left: 20px;
+}
+
+.vow-list li {
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.vow-list strong {
+    color: var(--gold);
+}
+
+/* Signature Pad */
+.signature-section {
+    margin-bottom: 20px;
+}
+
+.signature-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.signature-label i {
+    width: 16px;
+    height: 16px;
+    color: var(--fire-orange);
+}
+
+.signature-pad-container {
+    position: relative;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px dashed var(--border-gold);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.signature-pad {
+    width: 100%;
+    height: 120px;
+    cursor: crosshair;
+}
+
+.clear-signature {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    background: var(--bg-card);
+    border: none;
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.clear-signature i {
+    width: 16px;
+    height: 16px;
+}
+
+/* Timestamp */
+.timestamp-section {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.timestamp-item {
+    flex: 1;
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+}
+
+.ts-label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.ts-value {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+/* Agni Witness */
+.agni-witness {
+    text-align: center;
+}
+
+.agni-flame {
+    position: relative;
+    width: 60px;
+    height: 80px;
+    margin: 0 auto 12px;
+}
+
+.flame-core {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 40px;
+    background: linear-gradient(180deg, var(--fire-yellow), var(--fire-orange));
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: flicker 0.5s ease-in-out infinite alternate;
+}
+
+.flame-outer {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 60px;
+    background: linear-gradient(180deg, var(--fire-orange), var(--fire-red));
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0.6;
+    animation: flicker 0.7s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes flicker {
+    0% {
+        transform: translateX(-50%) scale(1) rotate(-2deg);
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1.05) rotate(2deg);
+    }
+}
+
+.agni-text {
+    font-size: 0.8rem;
+    color: var(--fire-orange);
+    font-weight: 500;
+}
+
+/* Take Vow Button */
+.take-vow-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--gold), #B8860B);
+    border: none;
+    border-radius: 14px;
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.take-vow-btn:disabled {
+    background: var(--bg-card);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.take-vow-btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+.take-vow-btn i {
+    width: 22px;
+    height: 22px;
+}
+
+/* ===== DASHBOARD SCREEN ===== */
+.dashboard-screen {
+    background: var(--bg-deep);
+}
+
+.dashboard-main {
+    flex: 1;
+    padding: 16px;
+    padding-bottom: 100px;
+    overflow-y: auto;
+}
+
+/* Tree Section */
+.tree-section {
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.tree-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 16px;
+}
+
+.tree-roots {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 30px;
+    border-bottom: 3px solid var(--earth);
+    border-left: 2px solid var(--earth);
+    border-right: 2px solid var(--earth);
+    border-radius: 0 0 50% 50%;
+}
+
+.root-label {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.tree-trunk {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 70px;
+    background: linear-gradient(90deg, var(--bark-brown), #8D6E63, var(--bark-brown));
+    border-radius: 4px;
+}
+
+.tree-canopy {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 100px;
+}
+
+.branch {
+    position: absolute;
+    background: var(--bark-brown);
+    border-radius: 3px;
+}
+
+.branch-1 {
+    width: 40px;
+    height: 6px;
+    top: 60px;
+    left: 40px;
+    transform: rotate(-30deg);
+}
+
+.branch-2 {
+    width: 35px;
+    height: 5px;
+    top: 40px;
+    right: 35px;
+    transform: rotate(25deg);
+}
+
+.branch-3 {
+    width: 30px;
+    height: 5px;
+    top: 20px;
+    left: 50px;
+    transform: rotate(-15deg);
+}
+
+.leaf-cluster {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 80px;
+    background: radial-gradient(ellipse, var(--leaf-green), transparent 70%);
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+.tree-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.tree-stats .stat {
+    text-align: center;
+}
+
+.tree-stats .stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--fire-orange);
+}
+
+.tree-stats .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+/* Sadhana Section */
+.sadhana-section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.section-title i {
+    width: 18px;
+    height: 18px;
+    color: var(--fire-orange);
+}
+
+.sadhana-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sadhana-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 14px;
+    transition: all 0.2s;
+}
+
+.sadhana-item.completed {
+    background: rgba(76, 175, 80, 0.1);
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.sadhana-icon {
+    font-size: 1.5rem;
+}
+
+.sadhana-info {
+    flex: 1;
+}
+
+.sadhana-info h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.sadhana-item.completed .sadhana-info h4 {
+    color: var(--leaf-green);
+}
+
+.sadhana-info p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.verify-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card-hover);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.verify-btn:hover {
+    border-color: var(--leaf-green);
+    color: var(--leaf-green);
+}
+
+.sadhana-item.completed .verify-btn {
+    background: var(--leaf-green);
+    border-color: var(--leaf-green);
+    color: white;
+}
+
+.verify-btn i {
+    width: 18px;
+    height: 18px;
+}
+
+/* Antaryami Section */
+.antaryami-section {
+    margin-bottom: 20px;
+    display: none;
+}
+
+.antaryami-section.active {
+    display: block;
+}
+
+.antaryami-card {
+    background: linear-gradient(135deg,
+            rgba(103, 58, 183, 0.15),
+            rgba(63, 81, 181, 0.1));
+    border: 1px solid rgba(103, 58, 183, 0.3);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.antaryami-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+    color: #9575CD;
+    font-weight: 500;
+}
+
+.eye-icon {
+    font-size: 1.2rem;
+}
+
+.antaryami-question {
+    font-size: 1rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.truth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.truth-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.truth-btn.yes {
+    background: var(--leaf-green);
+    color: white;
+}
+
+.truth-btn.no {
+    background: var(--fire-red);
+    color: white;
+}
+
+.truth-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+/* Quote Section */
+.quote-section {
+    margin-bottom: 20px;
+}
+
+.daily-quote {
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+}
+
+.quote-text {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.quote-source {
+    font-size: 0.8rem;
+    color: var(--gold-muted);
+}
+
+/* Bottom Nav */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 16px calc(10px + var(--safe-bottom));
+    background: rgba(10, 6, 18, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-color);
+    z-index: 100;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    cursor: pointer;
+}
+
+.nav-item.active {
+    color: var(--fire-orange);
+}
+
+.nav-item i {
+    width: 22px;
+    height: 22px;
+}
+
+/* ===== CONFESSION MODAL ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    background: var(--bg-deep);
+    border: 1px solid var(--fire-red);
+    border-radius: 20px;
+    padding: 24px;
+}
+
+.confession-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.confession-icon {
+    font-size: 1.5rem;
+}
+
+.confession-header h3 {
+    font-size: 1.1rem;
+    color: var(--fire-orange);
+}
+
+.confession-intro {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.confession-input {
+    width: 100%;
+    min-height: 100px;
+    padding: 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: none;
+    margin-bottom: 8px;
+}
+
+.confession-input:focus {
+    outline: none;
+    border-color: var(--fire-orange);
+}
+
+.confession-counter {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.prayaschita-penalty {
+    background: rgba(239, 83, 80, 0.1);
+    border: 1px solid rgba(239, 83, 80, 0.3);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 16px;
+}
+
+.prayaschita-penalty p {
+    font-size: 0.8rem;
+    color: var(--fire-red);
+    margin-bottom: 8px;
+}
+
+.penalty-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.penalty-item {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.accept-penalty-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--fire-red), #B71C1C);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.accept-penalty-btn:disabled {
+    background: var(--bg-card);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 2px;
+}

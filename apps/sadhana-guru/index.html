@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0612">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Sadhana Guru - Your Digital Accountability</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- State 1: Invocation Screen (Before Sankalpa) -->
+        <div class="screen invocation-screen active" id="invocationScreen">
+            <div class="fire-background">
+                <div class="fire-particle"></div>
+                <div class="fire-particle"></div>
+                <div class="fire-particle"></div>
+                <div class="fire-particle"></div>
+                <div class="fire-particle"></div>
+            </div>
+
+            <div class="invocation-content">
+                <div class="sacred-symbol">🕉️</div>
+                <h1 class="invocation-title">साधना गुरु</h1>
+                <p class="invocation-subtitle">The Path of Truth</p>
+
+                <div class="invocation-text">
+                    <p>Before the witness of</p>
+                    <div class="witness-icons">
+                        <span class="witness">🔥 Agni</span>
+                        <span class="witness">💨 Vayu</span>
+                        <span class="witness">👁️ Antaryami</span>
+                    </div>
+                    <p class="solemn-text">Proceed only if you seek <strong>Satya</strong> (Truth) over comfort.</p>
+                </div>
+
+                <div class="quote-box">
+                    <p>"सत्यमेव जयते"</p>
+                    <span>Truth alone triumphs — Mundaka Upanishad</span>
+                </div>
+
+                <button class="proceed-btn" id="proceedToSankalpa">
+                    <i data-lucide="flame"></i>
+                    I Seek the Path of Truth
+                </button>
+
+                <a href="../../index.html" class="back-link">
+                    <i data-lucide="arrow-left"></i>
+                    Return Home
+                </a>
+            </div>
+        </div>
+
+        <!-- State 2: Sankalpa Patra (Digital Vow) -->
+        <div class="screen sankalpa-screen" id="sankalpaScreen">
+            <header class="app-header">
+                <button class="header-btn" id="backToInvocation">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">संकल्प पत्र</h1>
+                    <span class="header-subtitle">Sacred Digital Vow</span>
+                </div>
+                <div class="header-btn invisible"></div>
+            </header>
+
+            <div class="sankalpa-content">
+                <div class="scroll-container">
+                    <div class="scroll-header">
+                        <span class="scroll-ornament">☙</span>
+                        <span class="scroll-title">SACRED VOW</span>
+                        <span class="scroll-ornament">❧</span>
+                    </div>
+
+                    <div class="vow-text">
+                        <p class="vow-intro">I, entering this path of <strong>Sadhana</strong>:</p>
+
+                        <ol class="vow-list">
+                            <li>Accept that <strong>Truth (Satya)</strong> is the foundation of all spiritual progress.
+                            </li>
+                            <li>Understand that falsifying progress poisons my own <strong>Karma</strong>.</li>
+                            <li>Surrender to corrective measures (<strong>Prayaschita</strong>) when I falter.</li>
+                            <li>Invoke <strong>Ishwara</strong> as the ultimate witness to this vow.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Signature Area -->
+                    <div class="signature-section">
+                        <label class="signature-label">
+                            <i data-lucide="pen-tool"></i>
+                            Sign Your Name (with your finger)
+                        </label>
+                        <div class="signature-pad-container">
+                            <canvas id="signaturePad" class="signature-pad"></canvas>
+                            <button class="clear-signature" id="clearSignature">
+                                <i data-lucide="eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Date & Muhurta -->
+                    <div class="timestamp-section">
+                        <div class="timestamp-item">
+                            <span class="ts-label">Date</span>
+                            <span class="ts-value" id="currentDate"></span>
+                        </div>
+                        <div class="timestamp-item">
+                            <span class="ts-label">Muhurta</span>
+                            <span class="ts-value" id="currentMuhurta"></span>
+                        </div>
+                    </div>
+
+                    <!-- Fire Animation Container -->
+                    <div class="agni-witness">
+                        <div class="agni-flame" id="agniFlame">
+                            <div class="flame-core"></div>
+                            <div class="flame-outer"></div>
+                        </div>
+                        <p class="agni-text">Witnessed by Agni</p>
+                    </div>
+                </div>
+
+                <button class="take-vow-btn" id="takeVowBtn" disabled>
+                    <i data-lucide="check-circle"></i>
+                    Seal My Vow
+                </button>
+            </div>
+        </div>
+
+        <!-- State 3: Main Dashboard (After Vow) -->
+        <div class="screen dashboard-screen" id="dashboardScreen">
+            <header class="app-header">
+                <a href="../../index.html" class="header-btn">
+                    <i data-lucide="chevron-left"></i>
+                </a>
+                <div class="header-center">
+                    <h1 class="header-title">साधना गुरु</h1>
+                    <span class="header-subtitle">Day <span id="dayCount">1</span></span>
+                </div>
+                <button class="header-btn" id="settingsBtn">
+                    <i data-lucide="settings"></i>
+                </button>
+            </header>
+
+            <main class="dashboard-main">
+                <!-- Karmic Tree Section -->
+                <section class="tree-section">
+                    <div class="tree-container" id="karmicTree">
+                        <div class="tree-roots">
+                            <span class="root-label">सत्य (Truth)</span>
+                        </div>
+                        <div class="tree-trunk"></div>
+                        <div class="tree-canopy">
+                            <div class="branch branch-1"></div>
+                            <div class="branch branch-2"></div>
+                            <div class="branch branch-3"></div>
+                            <div class="leaf-cluster" id="leafCluster"></div>
+                        </div>
+                        <div class="tree-fruits" id="treeFruits"></div>
+                    </div>
+                    <div class="tree-stats">
+                        <div class="stat">
+                            <span class="stat-value" id="truthScore">100</span>
+                            <span class="stat-label">Satya Score</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="streakDays">0</span>
+                            <span class="stat-label">Day Streak</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="completedTasks">0</span>
+                            <span class="stat-label">Completed</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Daily Sadhana -->
+                <section class="sadhana-section">
+                    <h3 class="section-title">
+                        <i data-lucide="sun"></i>
+                        Today's Sadhana
+                    </h3>
+
+                    <div class="sadhana-list" id="sadhanaList">
+                        <!-- Brahma Muhurta -->
+                        <div class="sadhana-item" data-id="brahma">
+                            <div class="sadhana-icon">🌅</div>
+                            <div class="sadhana-info">
+                                <h4>Brahma Muhurta Wake-up</h4>
+                                <p>Rise before sunrise (4:30 - 5:30 AM)</p>
+                            </div>
+                            <button class="verify-btn" data-type="time">
+                                <i data-lucide="check"></i>
+                            </button>
+                        </div>
+
+                        <!-- Surya Namaskar -->
+                        <div class="sadhana-item" data-id="surya">
+                            <div class="sadhana-icon">🙏</div>
+                            <div class="sadhana-info">
+                                <h4>Surya Namaskar</h4>
+                                <p>12 rounds minimum</p>
+                            </div>
+                            <button class="verify-btn" data-type="count">
+                                <i data-lucide="check"></i>
+                            </button>
+                        </div>
+
+                        <!-- Meditation -->
+                        <div class="sadhana-item" data-id="dhyana">
+                            <div class="sadhana-icon">🧘</div>
+                            <div class="sadhana-info">
+                                <h4>Dhyana (Meditation)</h4>
+                                <p>20 minutes minimum</p>
+                            </div>
+                            <button class="verify-btn" data-type="timer">
+                                <i data-lucide="check"></i>
+                            </button>
+                        </div>
+
+                        <!-- Japa -->
+                        <div class="sadhana-item" data-id="japa">
+                            <div class="sadhana-icon">📿</div>
+                            <div class="sadhana-info">
+                                <h4>Japa (Mantra)</h4>
+                                <p>108 repetitions</p>
+                            </div>
+                            <button class="verify-btn" data-type="count">
+                                <i data-lucide="check"></i>
+                            </button>
+                        </div>
+
+                        <!-- Digital Fast -->
+                        <div class="sadhana-item" data-id="digital">
+                            <div class="sadhana-icon">📵</div>
+                            <div class="sadhana-info">
+                                <h4>Digital Brahmacharya</h4>
+                                <p>No social media before 10 AM</p>
+                            </div>
+                            <button class="verify-btn" data-type="honor">
+                                <i data-lucide="check"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Antaryami Question -->
+                <section class="antaryami-section" id="antaryamiSection">
+                    <div class="antaryami-card">
+                        <div class="antaryami-header">
+                            <span class="eye-icon">👁️</span>
+                            <span>Antaryami's Question</span>
+                        </div>
+                        <p class="antaryami-question" id="antaryamiQuestion">
+                            When you marked Brahma Muhurta complete, were you truly awake before 5:30 AM?
+                        </p>
+                        <div class="truth-buttons">
+                            <button class="truth-btn yes" id="truthYes">
+                                <i data-lucide="check"></i>
+                                Yes, Truthfully
+                            </button>
+                            <button class="truth-btn no" id="truthNo">
+                                <i data-lucide="x"></i>
+                                I Must Confess
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Daily Quote -->
+                <section class="quote-section">
+                    <div class="daily-quote">
+                        <p class="quote-text" id="dailyQuote">"When your mind dwells on the senses, attachment arises.
+                            From attachment comes desire."</p>
+                        <span class="quote-source">— Bhagavad Gita 2.62</span>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Bottom Nav -->
+            <nav class="bottom-nav">
+                <button class="nav-item active" data-tab="home">
+                    <i data-lucide="home"></i>
+                    <span>Today</span>
+                </button>
+                <button class="nav-item" data-tab="history">
+                    <i data-lucide="calendar"></i>
+                    <span>History</span>
+                </button>
+                <button class="nav-item" data-tab="tree">
+                    <i data-lucide="tree-deciduous"></i>
+                    <span>My Tree</span>
+                </button>
+                <button class="nav-item" data-tab="vow">
+                    <i data-lucide="scroll"></i>
+                    <span>My Vow</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Confession Modal -->
+        <div class="modal confession-modal" id="confessionModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <div class="confession-header">
+                    <span class="confession-icon">🔥</span>
+                    <h3>Prayaschita - Confession</h3>
+                </div>
+                <p class="confession-intro">Honesty heals. Confess your lapse to cleanse your Karma.</p>
+
+                <textarea class="confession-input" id="confessionText"
+                    placeholder="What happened? Be specific and honest... (minimum 50 characters)"></textarea>
+
+                <div class="confession-counter">
+                    <span id="charCount">0</span>/50 characters
+                </div>
+
+                <div class="prayaschita-penalty">
+                    <p>Your Prayaschita:</p>
+                    <div class="penalty-details" id="penaltyDetails">
+                        <span class="penalty-item">🍃 Tree loses 5 leaves</span>
+                        <span class="penalty-item">🙏 10 Surya Namaskars required</span>
+                    </div>
+                </div>
+
+                <button class="accept-penalty-btn" id="acceptPenalty" disabled>
+                    Accept & Atone
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
