@@ -616,15 +616,174 @@ function initBottomNav() {
 }
 
 function showSavedEvents() {
+    const container = document.getElementById('savedList');
+    const emptyState = document.getElementById('noSavedEvents');
+    container.innerHTML = '';
+
     if (state.savedEvents.length === 0) {
-        showToast('No saved events. Tap ❤️ to save!');
+        emptyState.style.display = 'block';
     } else {
-        showToast(`${state.savedEvents.length} events saved`);
+        emptyState.style.display = 'none';
+        state.savedEvents.forEach(eventId => {
+            const event = window.events.find(e => e.id === eventId);
+            if (event) {
+                container.appendChild(createEventCard(event));
+            }
+        });
     }
+
+    // Back button
+    document.getElementById('backFromSaved').onclick = () => showScreen('homeScreen');
+
+    showScreen('savedScreen');
+    lucide.createIcons();
 }
 
 function showProfile() {
-    showToast('Profile coming soon!');
+    // Update stats
+    document.getElementById('statSaved').textContent = state.savedEvents.length;
+    document.getElementById('statFollowing').textContent = state.followedVachaks.length;
+
+    // Get registrations count
+    const registrations = JSON.parse(localStorage.getItem('satsangRegistrations') || '[]');
+    document.getElementById('statRegistered').textContent = registrations.length;
+
+    // Check if user has registered before and use their name
+    if (registrations.length > 0) {
+        document.getElementById('profileName').textContent = registrations[0].name || 'Devotee';
+        document.getElementById('profileEmail').textContent = registrations[0].email || 'Registered devotee';
+    }
+
+    // Init buttons
+    document.getElementById('backFromProfile').onclick = () => showScreen('homeScreen');
+    document.getElementById('volunteerBtn').onclick = showVolunteerModal;
+    document.getElementById('myRegistrations').onclick = showMyRegistrations;
+    document.getElementById('myDonations').onclick = () => showToast('Donation history coming soon!');
+    document.getElementById('notifications').onclick = () => showToast('Notification settings coming soon!');
+    document.getElementById('language').onclick = () => showToast('Language options coming soon!');
+
+    showScreen('profileScreen');
+    lucide.createIcons();
+}
+
+// ===== VOLUNTEER REGISTRATION =====
+function showVolunteerModal() {
+    document.getElementById('volunteerModal').classList.add('active');
+    lucide.createIcons();
+
+    // Reset form
+    document.getElementById('volName').value = '';
+    document.getElementById('volPhone').value = '';
+    document.getElementById('volAge').value = '';
+    document.getElementById('volCity').value = '';
+    document.getElementById('volExperience').value = '';
+    document.querySelectorAll('#skillChips input').forEach(i => i.checked = false);
+
+    // Close handler
+    document.getElementById('closeVolunteer').onclick = () => {
+        document.getElementById('volunteerModal').classList.remove('active');
+    };
+    document.querySelector('.volunteer-modal .modal-backdrop').onclick = () => {
+        document.getElementById('volunteerModal').classList.remove('active');
+    };
+
+    // Submit handler
+    document.getElementById('submitVolunteer').onclick = submitVolunteerForm;
+}
+
+function submitVolunteerForm() {
+    const name = document.getElementById('volName').value.trim();
+    const phone = document.getElementById('volPhone').value.trim();
+    const age = document.getElementById('volAge').value;
+    const city = document.getElementById('volCity').value;
+
+    if (!name) {
+        showToast('Please enter your name');
+        return;
+    }
+    if (!phone) {
+        showToast('Please enter your phone number');
+        return;
+    }
+    if (!age) {
+        showToast('Please enter your age');
+        return;
+    }
+    if (!city) {
+        showToast('Please select your city');
+        return;
+    }
+
+    // Collect skills
+    const skills = [];
+    document.querySelectorAll('#skillChips input:checked').forEach(i => {
+        skills.push(i.value);
+    });
+
+    if (skills.length === 0) {
+        showToast('Please select at least one skill');
+        return;
+    }
+
+    // Collect availability
+    const availability = document.querySelector('input[name="availability"]:checked').value;
+
+    // Save volunteer data
+    const volunteerData = {
+        name,
+        phone,
+        age: parseInt(age),
+        city,
+        skills,
+        availability,
+        experience: document.getElementById('volExperience').value.trim(),
+        registeredAt: new Date().toISOString(),
+        volunteerId: 'VOL-' + Date.now().toString(36).toUpperCase()
+    };
+
+    const volunteers = JSON.parse(localStorage.getItem('satsangVolunteers') || '[]');
+    volunteers.push(volunteerData);
+    localStorage.setItem('satsangVolunteers', JSON.stringify(volunteers));
+
+    // Close modal and show success
+    document.getElementById('volunteerModal').classList.remove('active');
+    showToast('Volunteer registration successful! 🙏');
+}
+
+// ===== MY REGISTRATIONS =====
+function showMyRegistrations() {
+    const registrations = JSON.parse(localStorage.getItem('satsangRegistrations') || '[]');
+    const container = document.getElementById('registrationsList');
+
+    if (registrations.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <p>No registrations yet</p>
+            </div>
+        `;
+    } else {
+        container.innerHTML = registrations.map(reg => {
+            const event = window.events.find(e => e.id === reg.eventId);
+            const eventTitle = event ? event.title : 'Event';
+            return `
+                <div class="registration-item">
+                    <h4>${eventTitle}</h4>
+                    <p>${reg.name} • ${tierLabels[reg.tier] || reg.tier}</p>
+                    <p>ID: ${reg.registrationId}</p>
+                    <span class="reg-badge">${reg.tier === 'attendee' ? 'FREE' : '₹' + tierAmounts[reg.tier]}</span>
+                </div>
+            `;
+        }).join('');
+    }
+
+    document.getElementById('registrationsModal').classList.add('active');
+
+    document.getElementById('closeRegistrations').onclick = () => {
+        document.getElementById('registrationsModal').classList.remove('active');
+    };
+    document.querySelector('.registrations-modal .modal-backdrop').onclick = () => {
+        document.getElementById('registrationsModal').classList.remove('active');
+    };
 }
 
 // ===== HELPERS =====

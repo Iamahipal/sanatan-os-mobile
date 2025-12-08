@@ -628,6 +628,233 @@
                 </button>
             </div>
         </div>
+
+        <!-- Saved Events Screen -->
+        <div class="screen saved-screen" id="savedScreen">
+            <header class="app-header">
+                <button class="header-btn" id="backFromSaved">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">Saved Events</h1>
+                    <span class="header-subtitle">Your bookmarks</span>
+                </div>
+                <button class="header-btn invisible">
+                    <i data-lucide="x"></i>
+                </button>
+            </header>
+            <main class="saved-main" id="savedMain">
+                <div class="empty-state" id="noSavedEvents">
+                    <div class="empty-icon">💝</div>
+                    <h3>No Saved Events</h3>
+                    <p>Tap the ❤️ icon on any event to save it here</p>
+                </div>
+                <div class="saved-list" id="savedList"></div>
+            </main>
+        </div>
+
+        <!-- Profile Screen -->
+        <div class="screen profile-screen" id="profileScreen">
+            <header class="app-header">
+                <button class="header-btn" id="backFromProfile">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">My Profile</h1>
+                    <span class="header-subtitle">Devotee Account</span>
+                </div>
+                <button class="header-btn" id="settingsBtn">
+                    <i data-lucide="settings"></i>
+                </button>
+            </header>
+            <main class="profile-main">
+                <div class="profile-card">
+                    <div class="profile-avatar">🙏</div>
+                    <h2 id="profileName">Devotee</h2>
+                    <p class="profile-email" id="profileEmail">Not logged in</p>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="stat-card">
+                        <span class="stat-num" id="statSaved">0</span>
+                        <span class="stat-label">Saved</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num" id="statRegistered">0</span>
+                        <span class="stat-label">Registered</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num" id="statFollowing">0</span>
+                        <span class="stat-label">Following</span>
+                    </div>
+                </div>
+
+                <div class="profile-menu">
+                    <button class="menu-item" id="myRegistrations">
+                        <i data-lucide="ticket"></i>
+                        <span>My Registrations</span>
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" id="volunteerBtn">
+                        <i data-lucide="hand-helping"></i>
+                        <span>Become a Volunteer</span>
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" id="myDonations">
+                        <i data-lucide="heart-handshake"></i>
+                        <span>My Donations</span>
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" id="notifications">
+                        <i data-lucide="bell"></i>
+                        <span>Notifications</span>
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" id="language">
+                        <i data-lucide="languages"></i>
+                        <span>Language / भाषा</span>
+                        <span class="menu-value">English</span>
+                    </button>
+                </div>
+
+                <p class="app-version">Satsang v2.0 • Made with 🙏 for Bharat</p>
+            </main>
+        </div>
+
+        <!-- Volunteer Registration Modal -->
+        <div class="modal volunteer-modal" id="volunteerModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content volunteer-content">
+                <div class="modal-header">
+                    <h3>🙋 Volunteer Registration</h3>
+                    <button class="close-modal" id="closeVolunteer">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+
+                <p class="modal-intro">Join our Seva team and serve in upcoming events</p>
+
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="volName" placeholder="Enter your full name">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone *</label>
+                        <input type="tel" id="volPhone" placeholder="+91 XXXXX XXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Age *</label>
+                        <input type="number" id="volAge" placeholder="25">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>City *</label>
+                    <select id="volCity">
+                        <option value="">Select your city</option>
+                        <option value="vrindavan">Vrindavan</option>
+                        <option value="haridwar">Haridwar</option>
+                        <option value="varanasi">Varanasi</option>
+                        <option value="ayodhya">Ayodhya</option>
+                        <option value="delhi">Delhi NCR</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Skills & Interests (select multiple)</label>
+                    <div class="skill-chips" id="skillChips">
+                        <label class="skill-chip">
+                            <input type="checkbox" value="crowd">
+                            <span>🚶 Crowd Management</span>
+                        </label>
+                        <label class="skill-chip">
+                            <input type="checkbox" value="food">
+                            <span>🍲 Bhandara Seva</span>
+                        </label>
+                        <label class="skill-chip">
+                            <input type="checkbox" value="tech">
+                            <span>💻 Technical/AV</span>
+                        </label>
+                        <label class="skill-chip">
+                            <input type="checkbox" value="medical">
+                            <span>🏥 Medical Aid</span>
+                        </label>
+                        <label class="skill-chip">
+                            <input type="checkbox" value="transport">
+                            <span>🚗 Transport</span>
+                        </label>
+                        <label class="skill-chip">
+                            <input type="checkbox" value="security">
+                            <span>🛡️ Security</span>
+                        </label>
+                        <label class="skill-chip">
+                            <input type="checkbox" value="registration">
+                            <span>📋 Registration Desk</span>
+                        </label>
+                        <label class="skill-chip">
+                            <input type="checkbox" value="decoration">
+                            <span>🎨 Decoration</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Availability</label>
+                    <div class="availability-options">
+                        <label class="avail-option">
+                            <input type="radio" name="availability" value="weekends" checked>
+                            <span>Weekends Only</span>
+                        </label>
+                        <label class="avail-option">
+                            <input type="radio" name="availability" value="anytime">
+                            <span>Anytime</span>
+                        </label>
+                        <label class="avail-option">
+                            <input type="radio" name="availability" value="specific">
+                            <span>Specific Events</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Previous Seva Experience</label>
+                    <textarea id="volExperience" rows="2"
+                        placeholder="e.g., Volunteered at Ram Katha 2023..."></textarea>
+                </div>
+
+                <button class="submit-volunteer" id="submitVolunteer">
+                    <i data-lucide="hand-helping"></i>
+                    Submit Application
+                </button>
+
+                <p class="volunteer-note">
+                    <i data-lucide="info"></i>
+                    You'll receive duty assignments via SMS/WhatsApp
+                </p>
+            </div>
+        </div>
+
+        <!-- My Registrations Modal -->
+        <div class="modal registrations-modal" id="registrationsModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content registrations-content">
+                <div class="modal-header">
+                    <h3>🎫 My Registrations</h3>
+                    <button class="close-modal" id="closeRegistrations">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="registrations-list" id="registrationsList">
+                    <div class="empty-state">
+                        <p>No registrations yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="js/event-data.js"></script>

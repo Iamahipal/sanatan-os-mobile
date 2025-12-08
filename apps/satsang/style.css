@@ -1765,3 +1765,335 @@ body {
     width: 18px;
     height: 18px;
 }
+
+/* ===== SAVED EVENTS SCREEN ===== */
+.saved-main {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.empty-state h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.saved-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ===== PROFILE SCREEN ===== */
+.profile-main {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.profile-card {
+    text-align: center;
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--purple-light), var(--saffron));
+    border-radius: 50%;
+    font-size: 2.5rem;
+    margin: 0 auto 12px;
+}
+
+.profile-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+}
+
+.profile-email {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 14px 10px;
+    text-align: center;
+}
+
+.stat-card .stat-num {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--saffron);
+}
+
+.stat-card .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.profile-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 30px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: left;
+}
+
+.menu-item:hover {
+    border-color: var(--purple-light);
+}
+
+.menu-item i:first-child {
+    width: 20px;
+    height: 20px;
+    color: var(--saffron);
+}
+
+.menu-item span:first-of-type {
+    flex: 1;
+}
+
+.menu-item i:last-child {
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+}
+
+.menu-value {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.app-version {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ===== VOLUNTEER MODAL ===== */
+.volunteer-content {
+    position: relative;
+    width: 95%;
+    max-width: 420px;
+    max-height: 90vh;
+    background: var(--bg-primary);
+    border: 1px solid var(--teal);
+    border-radius: 24px;
+    padding: 24px;
+    margin: auto;
+    overflow-y: auto;
+}
+
+.modal-intro {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.skill-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-chip {
+    cursor: pointer;
+}
+
+.skill-chip input {
+    display: none;
+}
+
+.skill-chip span {
+    display: inline-block;
+    padding: 8px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.skill-chip input:checked+span {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: white;
+}
+
+.availability-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.avail-option {
+    cursor: pointer;
+}
+
+.avail-option input {
+    display: none;
+}
+
+.avail-option span {
+    display: inline-block;
+    padding: 10px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.avail-option input:checked+span {
+    background: var(--purple-light);
+    border-color: var(--purple-light);
+    color: white;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+}
+
+.form-group textarea:focus {
+    border-color: var(--purple-light);
+}
+
+.submit-volunteer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--teal), #257f7a);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.submit-volunteer i {
+    width: 18px;
+    height: 18px;
+}
+
+.volunteer-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.volunteer-note i {
+    width: 14px;
+    height: 14px;
+}
+
+/* ===== REGISTRATIONS MODAL ===== */
+.registrations-content {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-purple);
+    border-radius: 24px;
+    padding: 24px;
+    margin: auto;
+    overflow-y: auto;
+}
+
+.registrations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.registration-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.registration-item h4 {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.registration-item p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.registration-item .reg-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    background: var(--saffron);
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #000;
+    margin-top: 8px;
+}
