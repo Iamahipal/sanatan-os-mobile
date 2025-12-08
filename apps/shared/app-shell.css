@@ -1,0 +1,143 @@
+/**
+ * SanatanOS - Unified App Shell
+ * Shared styles for consistent header and mobile container
+ */
+
+/* ===== CSS Variables ===== */
+:root {
+    --app-max-width: 480px;
+    --header-height: 56px;
+    --header-bg: rgba(20, 15, 35, 0.95);
+    --header-border: rgba(255, 255, 255, 0.1);
+    --back-btn-size: 40px;
+    --primary-color: #ff9933;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --font-hindi: 'Tiro Devanagari Sanskrit', serif;
+    --font-main: 'Outfit', sans-serif;
+}
+
+/* ===== App Container ===== */
+.app-container {
+    max-width: var(--app-max-width);
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: inherit;
+}
+
+/* Full-width background behind container */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, #1a1025 0%, #0d0a12 100%);
+    z-index: -1;
+}
+
+/* ===== Unified Header ===== */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    padding: 0 12px;
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--header-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* Back Button */
+.header-btn {
+    width: var(--back-btn-size);
+    height: var(--back-btn-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.header-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.header-btn svg,
+.header-btn i {
+    width: 20px;
+    height: 20px;
+    font-size: 18px;
+}
+
+/* Invisible placeholder to balance flex */
+.header-btn.invisible {
+    visibility: hidden;
+}
+
+/* Header Title (Center) */
+.header-center {
+    flex: 1;
+    text-align: center;
+    padding: 0 8px;
+}
+
+.header-title {
+    font-family: var(--font-hindi);
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin: 0;
+    font-weight: 400;
+}
+
+.header-subtitle {
+    font-family: var(--font-main);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
+    display: block;
+}
+
+/* ===== Main Content Area ===== */
+.app-main {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* ===== Utility Classes ===== */
+.text-center {
+    text-align: center;
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+/* ===== Desktop Enhancement ===== */
+@media (min-width: 481px) {
+    body {
+        background: #0a0812;
+    }
+
+    .app-container {
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.05);
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+}
