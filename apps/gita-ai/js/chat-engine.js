@@ -85,11 +85,13 @@
             });
         });
 
-        // Settings modal
-        elements.settingsBtn.addEventListener('click', () => {
-            elements.settingsModal.classList.add('active');
-            elements.apiKeyInput.value = krishnaBrain.apiKey || '';
-        });
+        // Settings modal (optional - only if button exists)
+        if (elements.settingsBtn) {
+            elements.settingsBtn.addEventListener('click', () => {
+                elements.settingsModal.classList.add('active');
+                elements.apiKeyInput.value = krishnaBrain.apiKey || '';
+            });
+        }
 
         elements.closeSettings.addEventListener('click', () => {
             elements.settingsModal.classList.remove('active');

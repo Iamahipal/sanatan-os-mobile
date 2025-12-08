@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Verse Explorer - Krishna Vaani</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Explorer specific styles */
+        .explore-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-box input:focus {
+            outline: none;
+        }
+
+        .search-box svg {
+            color: var(--text-muted);
+            width: 20px;
+            height: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .chapter-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chapter-card:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .chapter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .chapter-number {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chapter-name {
+            font-family: 'Tiro Devanagari Sanskrit', serif;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin: 4px 0;
+        }
+
+        .chapter-name-en {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .chapter-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .verses-list {
+            display: none;
+        }
+
+        .verses-list.active {
+            display: block;
+        }
+
+        .verse-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .verse-ref {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .verse-sanskrit-text {
+            font-family: 'Tiro Devanagari Sanskrit', serif;
+            font-size: 1.1rem;
+            color: var(--accent);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .verse-translation-text {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .verse-explanation {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            padding-left: 12px;
+            border-left: 2px solid var(--primary);
+        }
+
+        .verse-themes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .theme-tag {
+            padding: 4px 10px;
+            background: rgba(255, 153, 51, 0.1);
+            border-radius: 12px;
+            font-size: 0.7rem;
+            color: var(--primary);
+            text-transform: capitalize;
+        }
+
+        .back-to-chapters {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            cursor: pointer;
+        }
+
+        .back-to-chapters svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .back-to-chapters:hover {
+            color: var(--primary);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .daily-wisdom {
+            background: linear-gradient(135deg, rgba(255, 153, 51, 0.15), rgba(255, 215, 0, 0.1));
+            border: 1px solid rgba(255, 153, 51, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .daily-label {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .daily-verse {
+            font-family: 'Tiro Devanagari Sanskrit', serif;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .daily-translation {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .daily-ref {
+            font-size: 0.8rem;
+            color: var(--primary);
+            margin-top: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <a href="index.html" class="header-btn back-btn" aria-label="Back">
+                <i data-lucide="chevron-left"></i>
+            </a>
+            <div class="header-center">
+                <h1 class="header-title">श्लोक संग्रह</h1>
+                <span class="header-subtitle">Verse Explorer</span>
+            </div>
+            <a href="index.html" class="header-btn" aria-label="Chat">
+                <i data-lucide="message-circle"></i>
+            </a>
+        </header>
+
+        <!-- Explorer Content -->
+        <main class="explore-container">
+            <!-- Search -->
+            <div class="search-box">
+                <i data-lucide="search"></i>
+                <input type="text" id="search-input" placeholder="Search verses by keyword...">
+            </div>
+
+            <!-- Daily Wisdom -->
+            <div class="daily-wisdom" id="daily-wisdom">
+                <div class="daily-label">✨ Today's Wisdom</div>
+                <div class="daily-verse" id="daily-verse-text"></div>
+                <div class="daily-translation" id="daily-translation-text"></div>
+                <div class="daily-ref" id="daily-ref-text"></div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-view="chapters">All Chapters</button>
+                <button class="tab" data-view="favorites">❤️ Favorites</button>
+            </div>
+
+            <!-- Chapters List -->
+            <div id="chapters-list" class="chapters-list">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Verses List (hidden initially) -->
+            <div id="verses-list" class="verses-list">
+                <div class="back-to-chapters" id="back-btn">
+                    <i data-lucide="arrow-left"></i>
+                    <span>All Chapters</span>
+                </div>
+                <div id="verses-content">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div id="search-results" style="display: none;">
+                <!-- Populated by JS -->
+            </div>
+        </main>
+    </div>
+
+    <script src="js/gita-data.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // DOM Elements
+        const chaptersListEl = document.getElementById('chapters-list');
+        const versesListEl = document.getElementById('verses-list');
+        const versesContentEl = document.getElementById('verses-content');
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        const backBtn = document.getElementById('back-btn');
+        const tabs = document.querySelectorAll('.tab');
+
+        // Show daily wisdom
+        function showDailyWisdom() {
+            const verse = GITA_DATA.getRandomVerse();
+            if (verse) {
+                document.getElementById('daily-verse-text').textContent = verse.sanskrit.split('\n')[0];
+                document.getElementById('daily-translation-text').textContent = `"${verse.translation}"`;
+                document.getElementById('daily-ref-text').textContent = `— Bhagavad Gita ${verse.ref}`;
+            }
+        }
+
+        // Render chapters list
+        function renderChapters() {
+            const chapters = GITA_DATA.getChapters();
+            chaptersListEl.innerHTML = chapters.map(ch => `
+                <div class="chapter-card" data-chapter="${ch.chapter}">
+                    <div class="chapter-header">
+                        <div>
+                            <div class="chapter-number">Chapter ${ch.chapter}</div>
+                            <div class="chapter-name">${ch.title}</div>
+                            <div class="chapter-name-en">${ch.titleEnglish}</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">${ch.summary}</p>
+                    <div class="chapter-meta">
+                        <span>📖 ${ch.verseCount} verses available</span>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add click handlers
+            document.querySelectorAll('.chapter-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const chNum = parseInt(card.dataset.chapter);
+                    showChapterVerses(chNum);
+                });
+            });
+        }
+
+        // Show verses for a chapter
+        function showChapterVerses(chapterNum) {
+            const chapter = GITA_DATA.chapters.find(c => c.chapter === chapterNum);
+            if (!chapter) return;
+
+            versesContentEl.innerHTML = `
+                <h3 style="margin-bottom: 16px; color: var(--primary);">
+                    Chapter ${chapter.chapter}: ${chapter.titleEnglish}
+                </h3>
+                ${chapter.verses.map(verse => renderVerseCard(verse)).join('')}
+            `;
+
+            chaptersListEl.style.display = 'none';
+            document.getElementById('daily-wisdom').style.display = 'none';
+            versesListEl.classList.add('active');
+            lucide.createIcons();
+        }
+
+        // Render single verse card
+        function renderVerseCard(verse) {
+            return `
+                <div class="verse-item">
+                    <div class="verse-ref">📖 Verse ${verse.ref}</div>
+                    <div class="verse-sanskrit-text">${verse.sanskrit}</div>
+                    <div class="verse-translation-text">"${verse.translation}"</div>
+                    <div class="verse-explanation">${verse.explanation}</div>
+                    <div class="verse-themes">
+                        ${verse.themes.map(t => `<span class="theme-tag">${t}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Back to chapters
+        backBtn.addEventListener('click', () => {
+            versesListEl.classList.remove('active');
+            chaptersListEl.style.display = 'block';
+            document.getElementById('daily-wisdom').style.display = 'block';
+            searchResults.style.display = 'none';
+        });
+
+        // Search functionality
+        let searchTimeout;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            const query = e.target.value.trim();
+
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                chaptersListEl.style.display = 'block';
+                return;
+            }
+
+            searchTimeout = setTimeout(() => {
+                const results = GITA_DATA.search(query);
+
+                if (results.length > 0) {
+                    searchResults.innerHTML = `
+                        <p style="margin-bottom: 16px; color: var(--text-secondary);">
+                            Found ${results.length} verse${results.length > 1 ? 's' : ''} for "${query}"
+                        </p>
+                        ${results.map(v => renderVerseCard(v)).join('')}
+                    `;
+                    searchResults.style.display = 'block';
+                    chaptersListEl.style.display = 'none';
+                    versesListEl.classList.remove('active');
+                    document.getElementById('daily-wisdom').style.display = 'none';
+                } else {
+                    searchResults.innerHTML = `
+                        <div class="empty-state">
+                            <i data-lucide="search-x"></i>
+                            <p>No verses found for "${query}"</p>
+                        </div>
+                    `;
+                    searchResults.style.display = 'block';
+                    chaptersListEl.style.display = 'none';
+                }
+                lucide.createIcons();
+            }, 300);
+        });
+
+        // Tab switching
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const view = tab.dataset.view;
+                if (view === 'chapters') {
+                    renderChapters();
+                } else if (view === 'favorites') {
+                    // TODO: Implement favorites
+                    chaptersListEl.innerHTML = `
+                        <div class="empty-state">
+                            <i data-lucide="heart"></i>
+                            <p>No favorite verses yet</p>
+                            <p style="font-size: 0.85rem; margin-top: 8px;">Tap ❤️ on any verse to add to favorites</p>
+                        </div>
+                    `;
+                    lucide.createIcons();
+                }
+            });
+        });
+
+        // Initialize
+        showDailyWisdom();
+        renderChapters();
+    </script>
+</body>
+
+</html>
