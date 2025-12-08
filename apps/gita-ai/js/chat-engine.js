@@ -31,12 +31,9 @@
 
     // === INITIALIZATION ===
     function init() {
-        // Check if API key exists
-        if (!krishnaBrain.hasApiKey()) {
-            showApiSetupModal();
-        } else {
-            loadExistingChat();
-        }
+        // No API key needed - using Vercel proxy!
+        // Just load existing chat or show welcome
+        loadExistingChat();
 
         // Setup event listeners
         setupEventListeners();

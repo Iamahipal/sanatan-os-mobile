@@ -1,12 +1,12 @@
 /**
  * Gemini Brain - AI Integration for Krishna Vaani
- * Powered by Google Gemini 2.0 Flash
+ * Powered by Google Gemini 2.0 Flash via Vercel Proxy
  */
 
 class GeminiBrain {
     constructor() {
-        this.apiKey = null;
-        this.apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
+        // Use Vercel proxy - no API key needed from users!
+        this.proxyUrl = '/api/krishna';
         this.conversationHistory = [];
         this.maxHistory = 10;
         this.systemPrompt = this.buildSystemPrompt();
@@ -117,28 +117,15 @@ Remember: You are not just answering questions, you are transforming lives with 
         return context;
     }
 
-    // Set API key
-    setApiKey(key) {
-        this.apiKey = key;
-        localStorage.setItem('krishna_vaani_api_key', key);
-    }
-
-    // Load API key from storage
-    loadApiKey() {
-        this.apiKey = localStorage.getItem('krishna_vaani_api_key');
-        return this.apiKey;
-    }
-
-    // Check if API key is set
+    // No API key needed with proxy!
     hasApiKey() {
-        return !!this.loadApiKey();
+        return true; // Always ready
     }
 
-    // Clear API key
-    clearApiKey() {
-        this.apiKey = null;
-        localStorage.removeItem('krishna_vaani_api_key');
-    }
+    // These are kept for compatibility but not needed
+    setApiKey(key) { }
+    loadApiKey() { return 'proxy'; }
+    clearApiKey() { }
 
     // Add message to history
     addToHistory(role, content) {
@@ -232,12 +219,8 @@ Remember: You are not just answering questions, you are transforming lives with 
         return [];
     }
 
-    // Main chat function
+    // Main chat function - uses Vercel proxy
     async chat(userMessage) {
-        if (!this.apiKey) {
-            throw new Error('API key not set. Please provide your Gemini API key.');
-        }
-
         // Add relevant verse context
         const relevantVerses = this.getRelevantVerses(userMessage);
         let enhancedPrompt = userMessage;
@@ -269,7 +252,8 @@ Remember: You are not just answering questions, you are transforming lives with 
         };
 
         try {
-            const response = await fetch(`${this.apiUrl}?key=${this.apiKey}`, {
+            // Call Vercel proxy (no API key needed!)
+            const response = await fetch(this.proxyUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -279,9 +263,6 @@ Remember: You are not just answering questions, you are transforming lives with 
 
             if (!response.ok) {
                 const error = await response.json();
-                if (response.status === 400) {
-                    throw new Error('Invalid API key. Please check your Gemini API key.');
-                }
                 throw new Error(error.error?.message || 'Failed to get response from Krishna');
             }
 
@@ -299,7 +280,7 @@ Remember: You are not just answering questions, you are transforming lives with 
 
             return this.formatResponse(krishnaResponse);
         } catch (error) {
-            console.error('Gemini API Error:', error);
+            console.error('API Error:', error);
             throw error;
         }
     }
