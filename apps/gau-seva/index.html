@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0d1117">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Gau Seva - Protect Sacred Cows</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <a href="../../index.html" class="header-btn">
+                <i data-lucide="chevron-left"></i>
+            </a>
+            <div class="header-center">
+                <h1 class="header-title">गौ सेवा</h1>
+                <span class="header-subtitle">Protect Sacred Cows</span>
+            </div>
+            <button class="header-btn" id="menuBtn">
+                <i data-lucide="menu"></i>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-icon">🐄</div>
+                <h2 class="hero-title">Every Cow Matters</h2>
+                <p class="hero-text">Transform awareness into action. Rescue, protect, and serve our sacred mothers.</p>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <a href="#rescue" class="action-btn emergency">
+                        <i data-lucide="phone-call"></i>
+                        <span>Report Emergency</span>
+                    </a>
+                    <a href="#donate" class="action-btn donate">
+                        <i data-lucide="heart"></i>
+                        <span>Donate Now</span>
+                    </a>
+                    <a href="#volunteer" class="action-btn volunteer">
+                        <i data-lucide="users"></i>
+                        <span>Volunteer</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Impact Counter -->
+            <section class="impact-section">
+                <h3 class="section-title">
+                    <i data-lucide="trending-up"></i>
+                    Our Impact
+                </h3>
+                <div class="impact-grid">
+                    <div class="impact-card">
+                        <span class="impact-number" data-count="1247">0</span>
+                        <span class="impact-label">Cows Rescued</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-number" data-count="89">0</span>
+                        <span class="impact-label">Gaushalas</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-number" data-count="3500">0</span>
+                        <span class="impact-label">Volunteers</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-number" data-count="45">0</span>
+                        <span class="impact-label">Lakh ₹ Donated</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emergency Rescue Section -->
+            <section class="rescue-section" id="rescue">
+                <h3 class="section-title">
+                    <i data-lucide="alert-triangle"></i>
+                    Emergency Cow Rescue
+                </h3>
+                <div class="rescue-card">
+                    <p class="rescue-text">Found an injured, abandoned, or distressed cow? Report immediately for quick
+                        rescue.</p>
+
+                    <div class="rescue-form">
+                        <!-- Photo Upload -->
+                        <div class="upload-area" id="photoUpload">
+                            <i data-lucide="camera"></i>
+                            <span>Tap to add photo</span>
+                            <input type="file" accept="image/*" capture="environment" id="cowPhoto" hidden>
+                        </div>
+                        <div class="photo-preview" id="photoPreview"></div>
+
+                        <!-- Location -->
+                        <div class="form-group">
+                            <label>
+                                <i data-lucide="map-pin"></i>
+                                Location
+                            </label>
+                            <div class="location-input">
+                                <input type="text" id="locationInput" placeholder="Auto-detecting..." readonly>
+                                <button class="location-btn" id="getLocationBtn">
+                                    <i data-lucide="navigation"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Condition -->
+                        <div class="form-group">
+                            <label>
+                                <i data-lucide="heart-pulse"></i>
+                                Condition
+                            </label>
+                            <div class="condition-chips">
+                                <button class="chip" data-value="injured">🩹 Injured</button>
+                                <button class="chip" data-value="abandoned">😢 Abandoned</button>
+                                <button class="chip" data-value="sick">🤒 Sick</button>
+                                <button class="chip" data-value="stuck">🚧 Stuck/Trapped</button>
+                                <button class="chip" data-value="road">🚗 On Road</button>
+                                <button class="chip" data-value="other">❓ Other</button>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="form-group">
+                            <label>
+                                <i data-lucide="file-text"></i>
+                                Additional Details (Optional)
+                            </label>
+                            <textarea id="description" placeholder="Describe the situation..."></textarea>
+                        </div>
+
+                        <!-- Contact -->
+                        <div class="form-group">
+                            <label>
+                                <i data-lucide="phone"></i>
+                                Your Contact Number
+                            </label>
+                            <input type="tel" id="contactNumber" placeholder="+91 98765 43210">
+                        </div>
+
+                        <!-- Submit -->
+                        <button class="submit-btn" id="submitRescue">
+                            <i data-lucide="send"></i>
+                            Send Rescue Alert
+                        </button>
+
+                        <!-- WhatsApp Alternative -->
+                        <a href="https://wa.me/919876543210?text=🐄 COW RESCUE NEEDED" class="whatsapp-btn"
+                            target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            Direct WhatsApp to Rescue Team
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learn Section -->
+            <section class="learn-section" id="learn">
+                <h3 class="section-title">
+                    <i data-lucide="book-open"></i>
+                    Why Gau Seva Matters
+                </h3>
+
+                <div class="fact-cards">
+                    <!-- A2 Milk -->
+                    <div class="fact-card">
+                        <div class="fact-icon">🥛</div>
+                        <h4>A2 Milk vs A1 Milk</h4>
+                        <p>Indigenous cows produce A2 milk with easier-to-digest proteins. Research links A1 milk to
+                            health issues.</p>
+                        <span class="fact-tag">Health</span>
+                    </div>
+
+                    <!-- Carbon -->
+                    <div class="fact-card">
+                        <div class="fact-icon">🌱</div>
+                        <h4>Carbon Sequestration</h4>
+                        <p>One cow's dung + urine can regenerate 30 acres of soil, sequestering tons of carbon.</p>
+                        <span class="fact-tag">Environment</span>
+                    </div>
+
+                    <!-- ZBNF -->
+                    <div class="fact-card">
+                        <div class="fact-icon">🌾</div>
+                        <h4>Zero Budget Natural Farming</h4>
+                        <p>One indigenous cow can support 30 acres of farming with Jeevamrut & Beejamrut from cow
+                            products.</p>
+                        <span class="fact-tag">Agriculture</span>
+                    </div>
+
+                    <!-- Spiritual -->
+                    <div class="fact-card">
+                        <div class="fact-icon">🙏</div>
+                        <h4>33 Crore Devatas</h4>
+                        <p>Scriptures declare 33 crore devatas reside in the cow. Serving cows is serving the divine.
+                        </p>
+                        <span class="fact-tag">Spiritual</span>
+                    </div>
+                </div>
+
+                <!-- Myth Busters -->
+                <div class="myth-section">
+                    <h4 class="myth-title">🔍 Myth Busters</h4>
+                    <div class="myth-card">
+                        <div class="myth-header">
+                            <span class="myth-label">MYTH</span>
+                            <p>"Cows cause climate change"</p>
+                        </div>
+                        <div class="fact-header">
+                            <span class="fact-label">FACT</span>
+                            <p>Factory farming causes emissions. Holistic grazing with indigenous cows actually
+                                <strong>sequesters carbon</strong> and regenerates soil.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gaushala Directory -->
+            <section class="gaushala-section" id="donate">
+                <h3 class="section-title">
+                    <i data-lucide="home"></i>
+                    Support a Gaushala
+                </h3>
+
+                <div class="gaushala-list">
+                    <!-- Gaushala Card 1 -->
+                    <div class="gaushala-card">
+                        <div class="gaushala-header">
+                            <div class="gaushala-icon">🐄</div>
+                            <div class="gaushala-info">
+                                <h4>Shri Krishna Gaushala</h4>
+                                <p>Vrindavan, UP</p>
+                            </div>
+                            <span class="verified-badge">✓ Verified</span>
+                        </div>
+                        <div class="gaushala-stats">
+                            <div class="stat">
+                                <span class="stat-value">450</span>
+                                <span class="stat-label">Cows</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">23</span>
+                                <span class="stat-label">Medical</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">₹15/day</span>
+                                <span class="stat-label">Per Cow</span>
+                            </div>
+                        </div>
+                        <div class="gaushala-actions">
+                            <button class="donate-btn">
+                                <i data-lucide="heart"></i>
+                                Donate
+                            </button>
+                            <button class="sponsor-btn">
+                                <i data-lucide="gift"></i>
+                                Sponsor a Cow
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Gaushala Card 2 -->
+                    <div class="gaushala-card">
+                        <div class="gaushala-header">
+                            <div class="gaushala-icon">🐄</div>
+                            <div class="gaushala-info">
+                                <h4>Kamdhenu Gau Gram</h4>
+                                <p>Nagpur, Maharashtra</p>
+                            </div>
+                            <span class="verified-badge">✓ Verified</span>
+                        </div>
+                        <div class="gaushala-stats">
+                            <div class="stat">
+                                <span class="stat-value">280</span>
+                                <span class="stat-label">Cows</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">12</span>
+                                <span class="stat-label">Medical</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">₹18/day</span>
+                                <span class="stat-label">Per Cow</span>
+                            </div>
+                        </div>
+                        <div class="gaushala-actions">
+                            <button class="donate-btn">
+                                <i data-lucide="heart"></i>
+                                Donate
+                            </button>
+                            <button class="sponsor-btn">
+                                <i data-lucide="gift"></i>
+                                Sponsor a Cow
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- View All -->
+                    <button class="view-all-btn">
+                        View All 89 Gaushalas
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Volunteer Section -->
+            <section class="volunteer-section" id="volunteer">
+                <h3 class="section-title">
+                    <i data-lucide="users"></i>
+                    Join the Movement
+                </h3>
+
+                <div class="volunteer-card">
+                    <div class="volunteer-types">
+                        <div class="v-type">
+                            <div class="v-icon">💪</div>
+                            <h5>Physical Seva</h5>
+                            <p>Feeding, cleaning, cow care at Gaushalas</p>
+                        </div>
+                        <div class="v-type">
+                            <div class="v-icon">🩺</div>
+                            <h5>Professional Skills</h5>
+                            <p>Vets, accountants, tech experts</p>
+                        </div>
+                        <div class="v-type">
+                            <div class="v-icon">📱</div>
+                            <h5>Remote Support</h5>
+                            <p>Social media, content, fundraising</p>
+                        </div>
+                    </div>
+
+                    <button class="register-btn">
+                        <i data-lucide="user-plus"></i>
+                        Register as Volunteer
+                    </button>
+                </div>
+            </section>
+
+            <!-- Daily Quote -->
+            <section class="quote-section">
+                <div class="quote-card">
+                    <span class="quote-icon">📜</span>
+                    <p class="quote-text">"गावो विश्वस्य मातरः" - Cows are the mothers of the world.</p>
+                    <span class="quote-source">— Rigveda</span>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <i data-lucide="home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#rescue" class="nav-item">
+                <i data-lucide="alert-circle"></i>
+                <span>Rescue</span>
+            </a>
+            <a href="#donate" class="nav-item">
+                <i data-lucide="heart"></i>
+                <span>Donate</span>
+            </a>
+            <a href="#learn" class="nav-item">
+                <i data-lucide="book-open"></i>
+                <span>Learn</span>
+            </a>
+        </nav>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
