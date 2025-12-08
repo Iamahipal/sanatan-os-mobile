@@ -278,6 +278,18 @@ body {
     letter-spacing: 1.2px;
 }
 
+/* Sublabel for additional info */
+.tile-sublabel {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    font-size: 0.55rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 /* Standard icon sizes */
 .tile-icon {
     font-size: 2rem;
