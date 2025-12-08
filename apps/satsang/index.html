@@ -372,6 +372,262 @@
                 <p class="trust-note"><i data-lucide="shield-check"></i> Verified Trust • 80G Eligible</p>
             </div>
         </div>
+
+        <!-- Yajman Registration Modal -->
+        <div class="modal registration-modal" id="registrationModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content registration-content">
+                <div class="modal-header">
+                    <h3>🙏 यजमान पंजीकरण</h3>
+                    <button class="close-modal" id="closeRegistration">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+
+                <!-- Step Indicator -->
+                <div class="reg-steps">
+                    <div class="step active" data-step="1">1</div>
+                    <div class="step-line"></div>
+                    <div class="step" data-step="2">2</div>
+                    <div class="step-line"></div>
+                    <div class="step" data-step="3">3</div>
+                </div>
+
+                <!-- Step 1: Sponsorship Tier -->
+                <div class="reg-step-content" id="regStep1">
+                    <h4>Choose Your Seva</h4>
+                    <p class="step-desc">Select how you wish to participate in this sacred event</p>
+
+                    <div class="tier-options">
+                        <label class="tier-option">
+                            <input type="radio" name="tier" value="attendee" checked>
+                            <div class="tier-card">
+                                <span class="tier-badge free">FREE</span>
+                                <h5>उपस्थित (Attendee)</h5>
+                                <p>Attend the Katha in person</p>
+                                <ul>
+                                    <li>✓ Reserved seating</li>
+                                    <li>✓ Prasad distribution</li>
+                                    <li>✓ Digital entry pass</li>
+                                </ul>
+                            </div>
+                        </label>
+
+                        <label class="tier-option">
+                            <input type="radio" name="tier" value="dainik">
+                            <div class="tier-card">
+                                <span class="tier-badge">₹5,100</span>
+                                <h5>दैनिक यजमान</h5>
+                                <p>Daily Sponsor</p>
+                                <ul>
+                                    <li>✓ Name in daily Sankalp</li>
+                                    <li>✓ VIP seating</li>
+                                    <li>✓ Personal Aashirwad</li>
+                                    <li>✓ Prasad box delivery</li>
+                                </ul>
+                            </div>
+                        </label>
+
+                        <label class="tier-option">
+                            <input type="radio" name="tier" value="mukhya">
+                            <div class="tier-card premium">
+                                <span class="tier-badge premium">₹21,000</span>
+                                <h5>मुख्य यजमान</h5>
+                                <p>Main Sponsor</p>
+                                <ul>
+                                    <li>✓ Lead Sankalp ceremony</li>
+                                    <li>✓ Stage recognition</li>
+                                    <li>✓ Private meeting with Vachak</li>
+                                    <li>✓ Video of your Sankalp</li>
+                                    <li>✓ Full Puja Samagri kit</li>
+                                </ul>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 2: Personal Details -->
+                <div class="reg-step-content hidden" id="regStep2">
+                    <h4>Personal Details</h4>
+                    <p class="step-desc">Required for Sankalp ceremony</p>
+
+                    <div class="form-group">
+                        <label>Full Name (पूर्ण नाम) *</label>
+                        <input type="text" id="yajmanName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Father's Name (पिता का नाम) *</label>
+                        <input type="text" id="fatherName" placeholder="Enter father's name">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Gotra (गोत्र) *</label>
+                            <select id="gotra">
+                                <option value="">Select Gotra</option>
+                                <option value="bharadwaj">भारद्वाज</option>
+                                <option value="kashyap">कश्यप</option>
+                                <option value="vashistha">वशिष्ठ</option>
+                                <option value="gautam">गौतम</option>
+                                <option value="jamadagni">जमदग्नि</option>
+                                <option value="vishwamitra">विश्वामित्र</option>
+                                <option value="atri">अत्रि</option>
+                                <option value="agastya">अगस्त्य</option>
+                                <option value="shandilya">शाण्डिल्य</option>
+                                <option value="kaushik">कौशिक</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Rashi (राशि) *</label>
+                            <select id="rashi">
+                                <option value="">Select Rashi</option>
+                                <option value="mesh">मेष (Aries)</option>
+                                <option value="vrishabh">वृषभ (Taurus)</option>
+                                <option value="mithun">मिथुन (Gemini)</option>
+                                <option value="kark">कर्क (Cancer)</option>
+                                <option value="simha">सिंह (Leo)</option>
+                                <option value="kanya">कन्या (Virgo)</option>
+                                <option value="tula">तुला (Libra)</option>
+                                <option value="vrishchik">वृश्चिक (Scorpio)</option>
+                                <option value="dhanu">धनु (Sagittarius)</option>
+                                <option value="makar">मकर (Capricorn)</option>
+                                <option value="kumbh">कुम्भ (Aquarius)</option>
+                                <option value="meen">मीन (Pisces)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nakshatra (नक्षत्र)</label>
+                        <select id="nakshatra">
+                            <option value="">Select Nakshatra (Optional)</option>
+                            <option value="ashwini">अश्विनी</option>
+                            <option value="bharani">भरणी</option>
+                            <option value="krittika">कृत्तिका</option>
+                            <option value="rohini">रोहिणी</option>
+                            <option value="mrigashira">मृगशिरा</option>
+                            <option value="ardra">आर्द्रा</option>
+                            <option value="punarvasu">पुनर्वसु</option>
+                            <option value="pushya">पुष्य</option>
+                            <option value="ashlesha">आश्लेषा</option>
+                            <option value="magha">मघा</option>
+                            <option value="purvaphalguni">पूर्वाफाल्गुनी</option>
+                            <option value="uttaraphalguni">उत्तराफाल्गुनी</option>
+                            <option value="hasta">हस्त</option>
+                            <option value="chitra">चित्रा</option>
+                            <option value="swati">स्वाति</option>
+                            <option value="vishakha">विशाखा</option>
+                            <option value="anuradha">अनुराधा</option>
+                            <option value="jyeshtha">ज्येष्ठा</option>
+                            <option value="mula">मूल</option>
+                            <option value="purvashadha">पूर्वाषाढ़ा</option>
+                            <option value="uttarashadha">उत्तराषाढ़ा</option>
+                            <option value="shravana">श्रवण</option>
+                            <option value="dhanishtha">धनिष्ठा</option>
+                            <option value="shatabhisha">शतभिषा</option>
+                            <option value="purvabhadrapada">पूर्वाभाद्रपद</option>
+                            <option value="uttarabhadrapada">उत्तराभाद्रपद</option>
+                            <option value="revati">रेवती</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone *</label>
+                            <input type="tel" id="yajmanPhone" placeholder="+91 XXXXX XXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="yajmanEmail" placeholder="your@email.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="panGroup" style="display: none;">
+                        <label>PAN Number (for 80G)</label>
+                        <input type="text" id="yajmanPan" placeholder="XXXXX0000X">
+                    </div>
+                </div>
+
+                <!-- Step 3: Sankalp Confirmation -->
+                <div class="reg-step-content hidden" id="regStep3">
+                    <h4>संकल्प पुष्टि</h4>
+                    <p class="step-desc">Review and confirm your registration</p>
+
+                    <div class="sankalp-card">
+                        <div class="sankalp-header">
+                            <span class="om">ॐ</span>
+                            <h5>Digital Sankalp Patra</h5>
+                        </div>
+                        <div class="sankalp-body">
+                            <p class="sankalp-text">
+                                श्री <span id="confirmName">-</span> (<span id="confirmGotra">-</span> गोत्र),
+                                <span id="confirmRashi">-</span> राशि, इस पवित्र कथा में
+                                <span id="confirmTier">-</span> के रूप में भाग लेने का संकल्प लेते हैं।
+                            </p>
+                            <div class="sankalp-event">
+                                <strong id="confirmEvent">-</strong>
+                                <span id="confirmDate">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-summary" id="paymentSummary" style="display: none;">
+                        <div class="summary-row">
+                            <span>Seva Amount</span>
+                            <span id="sevaAmount">₹0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Platform Fee</span>
+                            <span>₹0</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="totalAmount">₹0</span>
+                        </div>
+                    </div>
+
+                    <label class="terms-check">
+                        <input type="checkbox" id="termsAgree">
+                        <span>I confirm the above details are correct and agree to the <a href="#">Terms of
+                                Service</a></span>
+                    </label>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="reg-actions">
+                    <button class="reg-btn secondary" id="regPrevBtn" style="display: none;">
+                        <i data-lucide="chevron-left"></i>
+                        Back
+                    </button>
+                    <button class="reg-btn primary" id="regNextBtn">
+                        Next Step
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Success Modal -->
+        <div class="modal success-modal" id="successModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content success-content">
+                <div class="success-icon">✓</div>
+                <h3>पंजीकरण सफल!</h3>
+                <p>Your registration is confirmed</p>
+                <div class="reg-id">
+                    <span>Registration ID</span>
+                    <strong id="registrationId">SAT-2024-XXXX</strong>
+                </div>
+                <p class="success-note">A confirmation has been sent to your phone/email</p>
+                <button class="success-btn" id="closeSuccess">
+                    <i data-lucide="check"></i>
+                    Done
+                </button>
+            </div>
+        </div>
     </div>
 
     <script src="js/event-data.js"></script>

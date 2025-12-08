@@ -667,7 +667,254 @@ function shareEvent(event) {
 }
 
 function registerForEvent(event) {
-    showToast('Registration confirmed! 🙏');
+    showRegistrationModal(event);
+}
+
+// ===== YAJMAN REGISTRATION =====
+let registrationData = {
+    tier: 'attendee',
+    name: '',
+    fatherName: '',
+    gotra: '',
+    rashi: '',
+    nakshatra: '',
+    phone: '',
+    email: '',
+    pan: '',
+    eventId: null
+};
+
+let currentRegStep = 1;
+
+function showRegistrationModal(event) {
+    registrationData.eventId = event?.id || state.currentEventId;
+    currentRegStep = 1;
+    resetRegistrationForm();
+    updateRegStep(1);
+    document.getElementById('registrationModal').classList.add('active');
+    lucide.createIcons();
+
+    // Init tier change handler
+    document.querySelectorAll('input[name="tier"]').forEach(r => {
+        r.addEventListener('change', handleTierChange);
+    });
+
+    // Init navigation
+    document.getElementById('regNextBtn').onclick = handleRegNext;
+    document.getElementById('regPrevBtn').onclick = handleRegPrev;
+    document.getElementById('closeRegistration').onclick = () => {
+        document.getElementById('registrationModal').classList.remove('active');
+    };
+    document.querySelector('.registration-modal .modal-backdrop').onclick = () => {
+        document.getElementById('registrationModal').classList.remove('active');
+    };
+}
+
+function resetRegistrationForm() {
+    document.getElementById('yajmanName').value = '';
+    document.getElementById('fatherName').value = '';
+    document.getElementById('gotra').value = '';
+    document.getElementById('rashi').value = '';
+    document.getElementById('nakshatra').value = '';
+    document.getElementById('yajmanPhone').value = '';
+    document.getElementById('yajmanEmail').value = '';
+    document.getElementById('yajmanPan').value = '';
+    document.querySelector('input[name="tier"][value="attendee"]').checked = true;
+    document.getElementById('termsAgree').checked = false;
+}
+
+function handleTierChange(e) {
+    registrationData.tier = e.target.value;
+    const panGroup = document.getElementById('panGroup');
+    if (registrationData.tier !== 'attendee') {
+        panGroup.style.display = 'block';
+    } else {
+        panGroup.style.display = 'none';
+    }
+}
+
+function updateRegStep(step) {
+    currentRegStep = step;
+
+    // Update step indicators
+    document.querySelectorAll('.reg-steps .step').forEach(s => {
+        const num = parseInt(s.dataset.step);
+        s.classList.remove('active', 'done');
+        if (num === step) s.classList.add('active');
+        if (num < step) s.classList.add('done');
+    });
+
+    // Show/hide content
+    document.getElementById('regStep1').classList.toggle('hidden', step !== 1);
+    document.getElementById('regStep2').classList.toggle('hidden', step !== 2);
+    document.getElementById('regStep3').classList.toggle('hidden', step !== 3);
+
+    // Update buttons
+    document.getElementById('regPrevBtn').style.display = step === 1 ? 'none' : 'flex';
+
+    const nextBtn = document.getElementById('regNextBtn');
+    if (step === 3) {
+        nextBtn.innerHTML = `<i data-lucide="check"></i> Confirm & ${registrationData.tier === 'attendee' ? 'Register' : 'Pay'}`;
+    } else {
+        nextBtn.innerHTML = `Next Step <i data-lucide="chevron-right"></i>`;
+    }
+
+    lucide.createIcons();
+}
+
+function handleRegNext() {
+    if (currentRegStep === 1) {
+        // Capture tier selection
+        const selected = document.querySelector('input[name="tier"]:checked');
+        registrationData.tier = selected.value;
+        updateRegStep(2);
+    } else if (currentRegStep === 2) {
+        // Validate personal details
+        const name = document.getElementById('yajmanName').value.trim();
+        const gotra = document.getElementById('gotra').value;
+        const rashi = document.getElementById('rashi').value;
+        const phone = document.getElementById('yajmanPhone').value.trim();
+
+        if (!name) {
+            showToast('Please enter your name');
+            return;
+        }
+        if (!gotra) {
+            showToast('Please select your Gotra');
+            return;
+        }
+        if (!rashi) {
+            showToast('Please select your Rashi');
+            return;
+        }
+        if (!phone) {
+            showToast('Please enter your phone number');
+            return;
+        }
+
+        // Save data
+        registrationData.name = name;
+        registrationData.fatherName = document.getElementById('fatherName').value.trim();
+        registrationData.gotra = gotra;
+        registrationData.rashi = rashi;
+        registrationData.nakshatra = document.getElementById('nakshatra').value;
+        registrationData.phone = phone;
+        registrationData.email = document.getElementById('yajmanEmail').value.trim();
+        registrationData.pan = document.getElementById('yajmanPan').value.trim();
+
+        // Populate confirmation
+        populateSankalpCard();
+        updateRegStep(3);
+    } else if (currentRegStep === 3) {
+        // Final confirmation
+        if (!document.getElementById('termsAgree').checked) {
+            showToast('Please accept the terms');
+            return;
+        }
+
+        completeRegistration();
+    }
+}
+
+function handleRegPrev() {
+    if (currentRegStep > 1) {
+        updateRegStep(currentRegStep - 1);
+    }
+}
+
+const gotraNames = {
+    bharadwaj: 'भारद्वाज',
+    kashyap: 'कश्यप',
+    vashistha: 'वशिष्ठ',
+    gautam: 'गौतम',
+    jamadagni: 'जमदग्नि',
+    vishwamitra: 'विश्वामित्र',
+    atri: 'अत्रि',
+    agastya: 'अगस्त्य',
+    shandilya: 'शाण्डिल्य',
+    kaushik: 'कौशिक',
+    other: 'अन्य'
+};
+
+const rashiNames = {
+    mesh: 'मेष',
+    vrishabh: 'वृषभ',
+    mithun: 'मिथुन',
+    kark: 'कर्क',
+    simha: 'सिंह',
+    kanya: 'कन्या',
+    tula: 'तुला',
+    vrishchik: 'वृश्चिक',
+    dhanu: 'धनु',
+    makar: 'मकर',
+    kumbh: 'कुम्भ',
+    meen: 'मीन'
+};
+
+const tierLabels = {
+    attendee: 'उपस्थित',
+    dainik: 'दैनिक यजमान',
+    mukhya: 'मुख्य यजमान'
+};
+
+const tierAmounts = {
+    attendee: 0,
+    dainik: 5100,
+    mukhya: 21000
+};
+
+function populateSankalpCard() {
+    document.getElementById('confirmName').textContent = registrationData.name;
+    document.getElementById('confirmGotra').textContent = gotraNames[registrationData.gotra] || registrationData.gotra;
+    document.getElementById('confirmRashi').textContent = rashiNames[registrationData.rashi] || registrationData.rashi;
+    document.getElementById('confirmTier').textContent = tierLabels[registrationData.tier];
+
+    const event = window.events.find(e => e.id === registrationData.eventId);
+    if (event) {
+        document.getElementById('confirmEvent').textContent = event.title;
+        document.getElementById('confirmDate').textContent = formatDateRange(event.startDate, event.endDate) + ' • ' + event.location;
+    }
+
+    // Payment summary
+    const amount = tierAmounts[registrationData.tier];
+    if (amount > 0) {
+        document.getElementById('paymentSummary').style.display = 'block';
+        document.getElementById('sevaAmount').textContent = '₹' + amount.toLocaleString();
+        document.getElementById('totalAmount').textContent = '₹' + amount.toLocaleString();
+    } else {
+        document.getElementById('paymentSummary').style.display = 'none';
+    }
+}
+
+function completeRegistration() {
+    // Generate registration ID
+    const regId = 'SAT-' + new Date().getFullYear() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+
+    // Save registration
+    const registrations = JSON.parse(localStorage.getItem('satsangRegistrations') || '[]');
+    registrations.push({
+        ...registrationData,
+        registrationId: regId,
+        timestamp: new Date().toISOString()
+    });
+    localStorage.setItem('satsangRegistrations', JSON.stringify(registrations));
+
+    // Close registration modal
+    document.getElementById('registrationModal').classList.remove('active');
+
+    // Show success modal
+    document.getElementById('registrationId').textContent = regId;
+    document.getElementById('successModal').classList.add('active');
+    lucide.createIcons();
+
+    // Success modal close
+    document.getElementById('closeSuccess').onclick = () => {
+        document.getElementById('successModal').classList.remove('active');
+        showScreen('homeScreen');
+    };
+    document.querySelector('.success-modal .modal-backdrop').onclick = () => {
+        document.getElementById('successModal').classList.remove('active');
+    };
 }
 
 function formatDateRange(start, end) {
