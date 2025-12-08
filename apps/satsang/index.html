@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a0a2e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>सत्संग - Spiritual Events</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Home/Discovery Screen -->
+        <div class="screen home-screen active" id="homeScreen">
+            <header class="app-header">
+                <a href="../../index.html" class="header-btn">
+                    <i data-lucide="chevron-left"></i>
+                </a>
+                <div class="header-center">
+                    <h1 class="header-title">सत्संग</h1>
+                    <span class="header-subtitle">Spiritual Events</span>
+                </div>
+                <button class="header-btn" id="searchBtn">
+                    <i data-lucide="search"></i>
+                </button>
+            </header>
+
+            <!-- Location Bar -->
+            <div class="location-bar">
+                <button class="location-selector" id="locationBtn">
+                    <i data-lucide="map-pin"></i>
+                    <span id="currentLocation">All India</span>
+                    <i data-lucide="chevron-down"></i>
+                </button>
+                <button class="filter-btn" id="filterBtn">
+                    <i data-lucide="sliders-horizontal"></i>
+                </button>
+            </div>
+
+            <main class="home-main">
+                <!-- Featured Event -->
+                <section class="featured-section">
+                    <div class="featured-event" id="featuredEvent">
+                        <div class="featured-gradient"></div>
+                        <div class="featured-content">
+                            <span class="featured-badge">🔴 LIVE NOW</span>
+                            <h2 class="featured-title">श्रीमद्भागवत कथा</h2>
+                            <p class="featured-vachak">Pt. Indresh Upadhyay</p>
+                            <div class="featured-meta">
+                                <span><i data-lucide="map-pin"></i> Vrindavan</span>
+                                <span><i data-lucide="calendar"></i> Day 3 of 7</span>
+                            </div>
+                            <button class="watch-live-btn">
+                                <i data-lucide="play"></i>
+                                Watch Live
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Filters -->
+                <section class="quick-filters">
+                    <button class="filter-chip active" data-type="all">All</button>
+                    <button class="filter-chip" data-type="bhagwat">भागवत</button>
+                    <button class="filter-chip" data-type="ramkatha">राम कथा</button>
+                    <button class="filter-chip" data-type="shiv">शिव पुराण</button>
+                    <button class="filter-chip" data-type="satsang">सत्संग</button>
+                </section>
+
+                <!-- Top Vachaks -->
+                <section class="vachaks-section">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i data-lucide="mic-2"></i>
+                            Popular Vachaks
+                        </h3>
+                        <button class="see-all-btn">See All</button>
+                    </div>
+                    <div class="vachaks-scroll" id="vachaksList">
+                        <!-- Vachaks will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Upcoming Events -->
+                <section class="events-section">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i data-lucide="calendar-days"></i>
+                            Upcoming Events
+                        </h3>
+                        <button class="see-all-btn" id="seeAllEvents">View Calendar</button>
+                    </div>
+                    <div class="events-list" id="eventsList">
+                        <!-- Events will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Nearby Events -->
+                <section class="nearby-section">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i data-lucide="navigation"></i>
+                            Near You
+                        </h3>
+                    </div>
+                    <div class="nearby-list" id="nearbyList">
+                        <!-- Nearby events will be loaded here -->
+                    </div>
+                </section>
+            </main>
+
+            <!-- Bottom Nav -->
+            <nav class="bottom-nav">
+                <button class="nav-item active" data-tab="home">
+                    <i data-lucide="home"></i>
+                    <span>Home</span>
+                </button>
+                <button class="nav-item" data-tab="calendar">
+                    <i data-lucide="calendar"></i>
+                    <span>Calendar</span>
+                </button>
+                <button class="nav-item" data-tab="saved">
+                    <i data-lucide="heart"></i>
+                    <span>Saved</span>
+                </button>
+                <button class="nav-item" data-tab="profile">
+                    <i data-lucide="user"></i>
+                    <span>Profile</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Event Detail Screen -->
+        <div class="screen event-screen" id="eventScreen">
+            <header class="app-header event-header">
+                <button class="header-btn" id="backFromEvent">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-actions">
+                    <button class="header-btn" id="shareEvent">
+                        <i data-lucide="share-2"></i>
+                    </button>
+                    <button class="header-btn" id="saveEvent">
+                        <i data-lucide="heart"></i>
+                    </button>
+                </div>
+            </header>
+
+            <main class="event-main" id="eventMain">
+                <!-- Event content will be loaded here -->
+            </main>
+
+            <!-- Event Actions -->
+            <div class="event-actions">
+                <button class="action-btn secondary" id="registerBtn">
+                    <i data-lucide="ticket"></i>
+                    Register Free
+                </button>
+                <button class="action-btn primary" id="donateBtn">
+                    <i data-lucide="heart-handshake"></i>
+                    Donate
+                </button>
+            </div>
+        </div>
+
+        <!-- Vachak Profile Screen -->
+        <div class="screen vachak-screen" id="vachakScreen">
+            <header class="app-header">
+                <button class="header-btn" id="backFromVachak">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title" id="vachakName">Pt. Indresh Upadhyay</h1>
+                    <span class="header-subtitle">Katha Vachak</span>
+                </div>
+                <button class="header-btn">
+                    <i data-lucide="share-2"></i>
+                </button>
+            </header>
+
+            <main class="vachak-main" id="vachakMain">
+                <!-- Vachak content will be loaded here -->
+            </main>
+        </div>
+
+        <!-- Calendar Screen -->
+        <div class="screen calendar-screen" id="calendarScreen">
+            <header class="app-header">
+                <button class="header-btn" id="backFromCalendar">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">Event Calendar</h1>
+                    <span class="header-subtitle" id="calendarMonth">December 2024</span>
+                </div>
+                <button class="header-btn invisible">
+                    <i data-lucide="x"></i>
+                </button>
+            </header>
+
+            <main class="calendar-main">
+                <div class="calendar-nav">
+                    <button id="prevMonth"><i data-lucide="chevron-left"></i></button>
+                    <span id="calendarTitle">December 2024</span>
+                    <button id="nextMonth"><i data-lucide="chevron-right"></i></button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Calendar will be generated -->
+                </div>
+                <div class="calendar-events" id="calendarEvents">
+                    <h3>Events on this day</h3>
+                    <p class="no-events">Select a date to see events</p>
+                </div>
+            </main>
+        </div>
+
+        <!-- Search Modal -->
+        <div class="modal search-modal" id="searchModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content search-content">
+                <div class="search-header">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="searchInput" placeholder="Search events, vachaks, locations...">
+                    <button class="close-search" id="closeSearch">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="search-suggestions">
+                    <h4>Popular Searches</h4>
+                    <div class="suggestion-chips">
+                        <span class="suggestion-chip">Bhagwat Katha</span>
+                        <span class="suggestion-chip">Ram Katha</span>
+                        <span class="suggestion-chip">Vrindavan</span>
+                        <span class="suggestion-chip">Indresh Upadhyay</span>
+                        <span class="suggestion-chip">Morari Bapu</span>
+                    </div>
+                </div>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+
+        <!-- Location Modal -->
+        <div class="modal location-modal" id="locationModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content location-content">
+                <div class="modal-header">
+                    <h3>Select Location</h3>
+                    <button class="close-modal" id="closeLocation">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <button class="current-location-btn" id="useCurrentLocation">
+                    <i data-lucide="navigation"></i>
+                    Use Current Location
+                </button>
+                <div class="popular-cities">
+                    <h4>Popular Cities</h4>
+                    <div class="cities-grid" id="citiesGrid">
+                        <button class="city-btn" data-city="all">🇮🇳 All India</button>
+                        <button class="city-btn" data-city="vrindavan">🏛️ Vrindavan</button>
+                        <button class="city-btn" data-city="haridwar">🌊 Haridwar</button>
+                        <button class="city-btn" data-city="varanasi">🕉️ Varanasi</button>
+                        <button class="city-btn" data-city="ayodhya">🛕 Ayodhya</button>
+                        <button class="city-btn" data-city="puri">🐚 Puri</button>
+                        <button class="city-btn" data-city="delhi">🏙️ Delhi NCR</button>
+                        <button class="city-btn" data-city="mumbai">🌆 Mumbai</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Modal -->
+        <div class="modal filter-modal" id="filterModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content filter-content">
+                <div class="modal-header">
+                    <h3>Filter Events</h3>
+                    <button class="close-modal" id="closeFilter">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="filter-group">
+                    <h4>Event Type</h4>
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="checkbox" value="bhagwat" checked>
+                            <span>श्रीमद्भागवत कथा</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="ramkatha" checked>
+                            <span>राम कथा</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="shiv" checked>
+                            <span>शिव महापुराण</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="sundarkand" checked>
+                            <span>सुंदरकांड पाठ</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h4>Duration</h4>
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="checkbox" value="1day" checked>
+                            <span>1 Day</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="7day" checked>
+                            <span>7 Days (Saptah)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="9day" checked>
+                            <span>9 Days (Navah)</span>
+                        </label>
+                    </div>
+                </div>
+                <button class="apply-filters-btn" id="applyFilters">Apply Filters</button>
+            </div>
+        </div>
+
+        <!-- Donation Modal -->
+        <div class="modal donation-modal" id="donationModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content donation-content">
+                <div class="modal-header">
+                    <h3>🙏 Make a Donation</h3>
+                    <button class="close-modal" id="closeDonation">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <p class="donation-intro">Support this sacred event and receive 80G tax benefits</p>
+                <div class="donation-amounts">
+                    <button class="amount-btn" data-amount="101">₹101</button>
+                    <button class="amount-btn" data-amount="251">₹251</button>
+                    <button class="amount-btn" data-amount="501">₹501</button>
+                    <button class="amount-btn" data-amount="1100">₹1,100</button>
+                    <button class="amount-btn" data-amount="2100">₹2,100</button>
+                    <button class="amount-btn" data-amount="5100">₹5,100</button>
+                </div>
+                <div class="custom-amount">
+                    <label>Or enter custom amount</label>
+                    <div class="amount-input">
+                        <span>₹</span>
+                        <input type="number" id="customAmount" placeholder="Enter amount">
+                    </div>
+                </div>
+                <div class="donor-details">
+                    <input type="text" id="donorName" placeholder="Your Name (for 80G receipt)">
+                    <input type="tel" id="donorPan" placeholder="PAN Number (optional)">
+                </div>
+                <button class="donate-now-btn" id="proceedDonation">
+                    <i data-lucide="heart"></i>
+                    Proceed to Pay
+                </button>
+                <p class="trust-note"><i data-lucide="shield-check"></i> Verified Trust • 80G Eligible</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/event-data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
