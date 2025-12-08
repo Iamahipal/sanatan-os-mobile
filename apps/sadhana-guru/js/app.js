@@ -211,6 +211,203 @@ function initDashboardScreen() {
     document.getElementById('truthNo')?.addEventListener('click', () => {
         confirmTruth(false);
     });
+
+    // Bottom navigation
+    initBottomNav();
+
+    // Settings button
+    document.getElementById('settingsBtn')?.addEventListener('click', showSettingsModal);
+}
+
+// ===== BOTTOM NAVIGATION =====
+function initBottomNav() {
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const tab = item.dataset.tab;
+            switchTab(tab);
+
+            // Update active state
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+        });
+    });
+}
+
+function switchTab(tab) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+
+    // Show selected tab
+    const tabContent = document.getElementById(`tab-${tab}`);
+    if (tabContent) {
+        tabContent.classList.add('active');
+    } else {
+        // If tab content doesn't exist, show toast
+        const tabNames = {
+            home: 'Today',
+            history: 'History',
+            tree: 'My Tree',
+            vow: 'My Vow'
+        };
+
+        if (tab === 'home') {
+            // Just scroll to top for home
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (tab === 'tree') {
+            // Scroll to tree section
+            document.querySelector('.tree-section')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (tab === 'vow') {
+            // Show vow modal
+            showVowModal();
+        } else if (tab === 'history') {
+            // Show history modal
+            showHistoryModal();
+        }
+    }
+}
+
+// ===== SETTINGS MODAL =====
+function showSettingsModal() {
+    // Create modal if it doesn't exist
+    let modal = document.getElementById('settingsModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'settingsModal';
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <div class="confession-header">
+                    <span class="confession-icon">⚙️</span>
+                    <h3>Settings</h3>
+                </div>
+                
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <span>Notifications</span>
+                        <label class="toggle">
+                            <input type="checkbox" id="notifToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span>Brahma Muhurta Reminder</span>
+                        <label class="toggle">
+                            <input type="checkbox" id="brahmaToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item danger" id="resetVowBtn">
+                        <span>🔥 Reset My Vow</span>
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+                </div>
+                
+                <button class="accept-penalty-btn" style="background: #666; margin-top: 20px;" id="closeSettings">
+                    Close
+                </button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        // Add event listeners
+        modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.remove('active'));
+        modal.querySelector('#closeSettings').addEventListener('click', () => modal.classList.remove('active'));
+        modal.querySelector('#resetVowBtn').addEventListener('click', resetVow);
+
+        lucide.createIcons();
+    }
+
+    modal.classList.add('active');
+}
+
+function resetVow() {
+    if (confirm('Are you sure? This will reset all your progress and require a new Sankalpa Patra.')) {
+        localStorage.removeItem('sadhanaGuru');
+        localStorage.removeItem('sadhanaGuruLastDate');
+        location.reload();
+    }
+}
+
+// ===== VOW MODAL =====
+function showVowModal() {
+    let modal = document.getElementById('vowModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'vowModal';
+        modal.className = 'modal';
+
+        const vowDate = state.vowDate ? new Date(state.vowDate).toLocaleDateString('en-IN', {
+            day: 'numeric', month: 'long', year: 'numeric'
+        }) : 'Unknown';
+
+        modal.innerHTML = `
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <div class="confession-header">
+                    <span class="confession-icon">📜</span>
+                    <h3>My Sacred Vow</h3>
+                </div>
+                
+                <div class="vow-display">
+                    <p class="vow-date">Sealed on: ${vowDate}</p>
+                    ${state.signature ? `<img src="${state.signature}" class="vow-signature" alt="My Signature"/>` : ''}
+                    <div class="vow-stats">
+                        <div><strong>${state.dayCount}</strong> Days on Path</div>
+                        <div><strong>${state.truthScore}%</strong> Truth Score</div>
+                    </div>
+                </div>
+                
+                <button class="accept-penalty-btn" style="background: #FF9800; margin-top: 20px;" id="closeVow">
+                    Close
+                </button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.remove('active'));
+        modal.querySelector('#closeVow').addEventListener('click', () => modal.classList.remove('active'));
+    }
+
+    modal.classList.add('active');
+}
+
+// ===== HISTORY MODAL =====
+function showHistoryModal() {
+    let modal = document.getElementById('historyModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'historyModal';
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <div class="confession-header">
+                    <span class="confession-icon">📅</span>
+                    <h3>History</h3>
+                </div>
+                
+                <div class="history-content">
+                    <p style="color: var(--text-secondary); text-align: center; padding: 20px 0;">
+                        🚧 Full history tracking coming soon!<br><br>
+                        Current Stats:<br>
+                        <strong style="color: var(--fire-orange);">${state.completedTasks}</strong> tasks completed<br>
+                        <strong style="color: var(--fire-orange);">${state.streakDays}</strong> day streak
+                    </p>
+                </div>
+                
+                <button class="accept-penalty-btn" style="background: #666; margin-top: 20px;" id="closeHistory">
+                    Close
+                </button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.classList.remove('active'));
+        modal.querySelector('#closeHistory').addEventListener('click', () => modal.classList.remove('active'));
+    }
+
+    modal.classList.add('active');
 }
 
 function updateDashboard() {
