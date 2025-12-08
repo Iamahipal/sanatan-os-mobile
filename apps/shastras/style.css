@@ -1,0 +1,824 @@
+/**
+ * Shastras - Sacred Scriptures App
+ * Elegant reading experience with Sanskrit aesthetics
+ */
+
+/* ===== CSS VARIABLES ===== */
+:root {
+    /* Sacred Palette */
+    --saffron: #FF9933;
+    --saffron-dark: #E67300;
+    --maroon: #800000;
+    --gold: #FFD700;
+    --gold-muted: rgba(255, 215, 0, 0.7);
+
+    /* Backgrounds */
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --bg-card-hover: rgba(255, 255, 255, 0.08);
+
+    /* Text */
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+
+    /* Borders */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-gold: rgba(255, 215, 0, 0.3);
+
+    /* Safe areas */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Outfit', -apple-system, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* ===== APP CONTAINER ===== */
+.app-container {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+}
+
+@media (min-width: 481px) {
+    body {
+        background: #080a0d;
+    }
+
+    .app-container {
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+        border-left: 1px solid var(--border-color);
+        border-right: 1px solid var(--border-color);
+    }
+}
+
+/* ===== SCREENS ===== */
+.screen {
+    display: none;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* ===== HEADER ===== */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 12px;
+    background: rgba(13, 17, 23, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-center {
+    text-align: center;
+}
+
+.header-title {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: var(--saffron);
+}
+
+.header-subtitle {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.header-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.header-btn:hover {
+    background: var(--bg-card-hover);
+    color: var(--saffron);
+}
+
+.header-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== LIBRARY SCREEN ===== */
+.library-screen {
+    background: var(--bg-primary);
+}
+
+.library-main {
+    flex: 1;
+    padding: 16px;
+    padding-bottom: 100px;
+    overflow-y: auto;
+}
+
+/* Featured Section */
+.featured-section {
+    margin-bottom: 24px;
+}
+
+.featured-card {
+    background: linear-gradient(135deg,
+            rgba(255, 153, 51, 0.15) 0%,
+            rgba(128, 0, 0, 0.1) 100%);
+    border: 1px solid rgba(255, 153, 51, 0.3);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.featured-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 153, 51, 0.2);
+}
+
+.featured-image {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 153, 51, 0.2);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.featured-icon {
+    font-size: 2.5rem;
+}
+
+.featured-content {
+    flex: 1;
+}
+
+.featured-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--saffron);
+    border-radius: 10px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: #000;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.featured-title {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-bottom: 2px;
+}
+
+.featured-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.featured-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.read-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--saffron);
+    border: none;
+    border-radius: 10px;
+    color: #000;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.read-btn i {
+    width: 14px;
+    height: 14px;
+}
+
+.read-btn:hover {
+    background: var(--saffron-dark);
+}
+
+/* Section Title */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.section-title i {
+    width: 18px;
+    height: 18px;
+    color: var(--saffron);
+}
+
+/* Categories */
+.categories-section {
+    margin-bottom: 24px;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.category-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.category-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--saffron);
+}
+
+.category-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.category-card h4 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 2px;
+}
+
+.category-card p {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.category-count {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+}
+
+/* Scripture List */
+.scriptures-section {
+    margin-bottom: 24px;
+}
+
+.scripture-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.scripture-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.scripture-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--saffron);
+}
+
+.scripture-icon {
+    font-size: 1.8rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 153, 51, 0.1);
+    border-radius: 12px;
+}
+
+.scripture-info {
+    flex: 1;
+}
+
+.scripture-info h4 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.scripture-info p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.chevron {
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+}
+
+/* Daily Verse */
+.daily-verse-section {
+    margin-bottom: 20px;
+}
+
+.daily-verse-card {
+    background: linear-gradient(135deg,
+            rgba(128, 0, 0, 0.15) 0%,
+            rgba(255, 215, 0, 0.1) 100%);
+    border: 1px solid var(--border-gold);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.verse-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 10px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.verse-sanskrit {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.verse-translation {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.verse-source {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Bottom Nav */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 16px calc(10px + var(--safe-bottom));
+    background: rgba(13, 17, 23, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-color);
+    z-index: 100;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.nav-item.active {
+    color: var(--saffron);
+}
+
+.nav-item i {
+    width: 22px;
+    height: 22px;
+}
+
+/* ===== SCRIPTURE SCREEN ===== */
+.scripture-screen {
+    background: var(--bg-primary);
+}
+
+.scripture-main {
+    flex: 1;
+    padding: 16px;
+    padding-bottom: 100px;
+    overflow-y: auto;
+}
+
+.scripture-info-section {
+    margin-bottom: 24px;
+}
+
+.scripture-hero {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 16px;
+}
+
+.hero-icon {
+    font-size: 4rem;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 24px;
+}
+
+.hero-stats .stat {
+    text-align: center;
+}
+
+.hero-stats .stat-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--saffron);
+}
+
+.hero-stats .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.scripture-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Chapter List */
+.chapters-section {
+    margin-bottom: 20px;
+}
+
+.chapter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chapter-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.chapter-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--saffron);
+}
+
+.chapter-number {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 153, 51, 0.15);
+    border-radius: 10px;
+    font-weight: 700;
+    color: var(--saffron);
+    font-size: 0.9rem;
+}
+
+.chapter-info {
+    flex: 1;
+}
+
+.chapter-info h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.chapter-info p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.chapter-card .chevron {
+    width: 16px;
+    height: 16px;
+}
+
+/* ===== READING SCREEN ===== */
+.reading-screen {
+    background: var(--bg-primary);
+}
+
+.reading-main {
+    flex: 1;
+    padding: 20px;
+    padding-bottom: 80px;
+    overflow-y: auto;
+}
+
+.verse-container {
+    margin-bottom: 32px;
+}
+
+.verse-number {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(255, 153, 51, 0.2);
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--saffron);
+    margin-bottom: 12px;
+}
+
+.verse-text-sanskrit {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    line-height: 1.8;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: rgba(255, 215, 0, 0.05);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+}
+
+.verse-transliteration {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 12px;
+    padding: 0 16px;
+}
+
+.verse-translation-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    padding: 0 16px;
+}
+
+.verse-commentary {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--bg-card);
+    border-radius: 12px;
+}
+
+.verse-commentary h5 {
+    font-size: 0.8rem;
+    color: var(--saffron);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.verse-commentary p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Reading Controls */
+.reading-controls {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px calc(12px + var(--safe-bottom));
+    background: rgba(13, 17, 23, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-color);
+}
+
+.control-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.control-btn:hover {
+    background: var(--saffron);
+    color: #000;
+}
+
+.control-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+.chapter-progress {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.chapter-progress span:first-child {
+    color: var(--saffron);
+    font-weight: 600;
+}
+
+/* ===== SEARCH MODAL ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.search-content {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--bg-primary);
+    min-height: 100vh;
+}
+
+.search-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.search-header i {
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+}
+
+.search-header input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-header input::placeholder {
+    color: var(--text-muted);
+}
+
+.close-search {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 8px;
+}
+
+.close-search i {
+    width: 20px;
+    height: 20px;
+}
+
+.search-results {
+    padding: 20px;
+}
+
+.search-hint {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.search-result-item {
+    padding: 14px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background: var(--bg-card-hover);
+}
+
+.search-result-item h4 {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.search-result-item p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 2px;
+}

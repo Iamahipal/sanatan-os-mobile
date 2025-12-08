@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0d1117">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Shastras - Sacred Scriptures</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Library Screen -->
+        <div class="screen library-screen active" id="libraryScreen">
+            <header class="app-header">
+                <a href="../../index.html" class="header-btn">
+                    <i data-lucide="chevron-left"></i>
+                </a>
+                <div class="header-center">
+                    <h1 class="header-title">शास्त्र</h1>
+                    <span class="header-subtitle">Sacred Scriptures</span>
+                </div>
+                <button class="header-btn" id="searchBtn">
+                    <i data-lucide="search"></i>
+                </button>
+            </header>
+
+            <main class="library-main">
+                <!-- Featured Scripture -->
+                <section class="featured-section">
+                    <div class="featured-card" data-scripture="gita">
+                        <div class="featured-image">
+                            <span class="featured-icon">🙏</span>
+                        </div>
+                        <div class="featured-content">
+                            <span class="featured-badge">Most Popular</span>
+                            <h2 class="featured-title">श्रीमद्भगवद्गीता</h2>
+                            <p class="featured-subtitle">Bhagavad Gita</p>
+                            <p class="featured-desc">18 Chapters • 700 Verses</p>
+                            <button class="read-btn">
+                                <i data-lucide="book-open"></i>
+                                Start Reading
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Categories -->
+                <section class="categories-section">
+                    <h3 class="section-title">
+                        <i data-lucide="layers"></i>
+                        Categories
+                    </h3>
+                    <div class="categories-grid">
+                        <div class="category-card" data-category="shruti">
+                            <span class="category-icon">📜</span>
+                            <h4>श्रुति</h4>
+                            <p>Shruti</p>
+                            <span class="category-count">Vedas & Upanishads</span>
+                        </div>
+                        <div class="category-card" data-category="smriti">
+                            <span class="category-icon">📖</span>
+                            <h4>स्मृति</h4>
+                            <p>Smriti</p>
+                            <span class="category-count">Epics & Puranas</span>
+                        </div>
+                        <div class="category-card" data-category="darshan">
+                            <span class="category-icon">🧘</span>
+                            <h4>दर्शन</h4>
+                            <p>Darshan</p>
+                            <span class="category-count">Philosophy</span>
+                        </div>
+                        <div class="category-card" data-category="tantra">
+                            <span class="category-icon">🕉️</span>
+                            <h4>आगम</h4>
+                            <p>Agamas</p>
+                            <span class="category-count">Tantras & Rituals</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Scripture Library -->
+                <section class="scriptures-section">
+                    <h3 class="section-title">
+                        <i data-lucide="library"></i>
+                        All Scriptures
+                    </h3>
+
+                    <div class="scripture-list" id="scriptureList">
+                        <!-- Bhagavad Gita -->
+                        <div class="scripture-card" data-scripture="gita">
+                            <div class="scripture-icon">🪷</div>
+                            <div class="scripture-info">
+                                <h4>श्रीमद्भगवद्गीता</h4>
+                                <p>Bhagavad Gita • 18 Chapters</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="chevron"></i>
+                        </div>
+
+                        <!-- Upanishads -->
+                        <div class="scripture-card" data-scripture="upanishads">
+                            <div class="scripture-icon">🕯️</div>
+                            <div class="scripture-info">
+                                <h4>उपनिषद्</h4>
+                                <p>Upanishads • 10+ Texts</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="chevron"></i>
+                        </div>
+
+                        <!-- Vedas -->
+                        <div class="scripture-card" data-scripture="vedas">
+                            <div class="scripture-icon">🔱</div>
+                            <div class="scripture-info">
+                                <h4>वेद</h4>
+                                <p>Vedas • 4 Vedas</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="chevron"></i>
+                        </div>
+
+                        <!-- Ramayana -->
+                        <div class="scripture-card" data-scripture="ramayana">
+                            <div class="scripture-icon">🏹</div>
+                            <div class="scripture-info">
+                                <h4>रामायण</h4>
+                                <p>Ramayana • 7 Kandas</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="chevron"></i>
+                        </div>
+
+                        <!-- Mahabharata -->
+                        <div class="scripture-card" data-scripture="mahabharata">
+                            <div class="scripture-icon">⚔️</div>
+                            <div class="scripture-info">
+                                <h4>महाभारत</h4>
+                                <p>Mahabharata • 18 Parvas</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="chevron"></i>
+                        </div>
+
+                        <!-- Yoga Sutras -->
+                        <div class="scripture-card" data-scripture="yoga-sutras">
+                            <div class="scripture-icon">🧘</div>
+                            <div class="scripture-info">
+                                <h4>योग सूत्र</h4>
+                                <p>Yoga Sutras • 196 Sutras</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="chevron"></i>
+                        </div>
+
+                        <!-- Puranas -->
+                        <div class="scripture-card" data-scripture="puranas">
+                            <div class="scripture-icon">📚</div>
+                            <div class="scripture-info">
+                                <h4>पुराण</h4>
+                                <p>Puranas • 18 Mahapuranas</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="chevron"></i>
+                        </div>
+
+                        <!-- Brahma Sutras -->
+                        <div class="scripture-card" data-scripture="brahma-sutras">
+                            <div class="scripture-icon">🌟</div>
+                            <div class="scripture-info">
+                                <h4>ब्रह्म सूत्र</h4>
+                                <p>Brahma Sutras • 555 Sutras</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="chevron"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Daily Verse -->
+                <section class="daily-verse-section">
+                    <div class="daily-verse-card">
+                        <span class="verse-badge">Verse of the Day</span>
+                        <p class="verse-sanskrit" id="dailySanskrit">
+                            कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।
+                        </p>
+                        <p class="verse-translation" id="dailyTranslation">
+                            You have the right to work only, but never to its fruits.
+                        </p>
+                        <span class="verse-source" id="dailySource">— Bhagavad Gita 2.47</span>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Bottom Nav -->
+            <nav class="bottom-nav">
+                <button class="nav-item active" data-tab="library">
+                    <i data-lucide="library"></i>
+                    <span>Library</span>
+                </button>
+                <button class="nav-item" data-tab="bookmarks">
+                    <i data-lucide="bookmark"></i>
+                    <span>Saved</span>
+                </button>
+                <button class="nav-item" data-tab="history">
+                    <i data-lucide="clock"></i>
+                    <span>Recent</span>
+                </button>
+                <button class="nav-item" data-tab="settings">
+                    <i data-lucide="settings"></i>
+                    <span>Settings</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Scripture Detail Screen -->
+        <div class="screen scripture-screen" id="scriptureScreen">
+            <header class="app-header">
+                <button class="header-btn" id="backToLibrary">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title" id="scriptureTitle">श्रीमद्भगवद्गीता</h1>
+                    <span class="header-subtitle" id="scriptureSubtitle">Bhagavad Gita</span>
+                </div>
+                <button class="header-btn" id="bookmarkScripture">
+                    <i data-lucide="bookmark"></i>
+                </button>
+            </header>
+
+            <main class="scripture-main">
+                <!-- Scripture Info -->
+                <section class="scripture-info-section">
+                    <div class="scripture-hero">
+                        <span class="hero-icon" id="heroIcon">🪷</span>
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <span class="stat-value" id="chapterCount">18</span>
+                                <span class="stat-label">Chapters</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="verseCount">700</span>
+                                <span class="stat-label">Verses</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="scripture-desc" id="scriptureDesc">
+                        The Bhagavad Gita is a 700-verse Hindu scripture that is part of the epic Mahabharata.
+                        It contains a conversation between prince Arjuna and his guide Krishna on a variety of
+                        philosophical issues.
+                    </p>
+                </section>
+
+                <!-- Chapter List -->
+                <section class="chapters-section">
+                    <h3 class="section-title">
+                        <i data-lucide="list"></i>
+                        Chapters
+                    </h3>
+                    <div class="chapter-list" id="chapterList">
+                        <!-- Chapters will be dynamically loaded -->
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Reading Screen -->
+        <div class="screen reading-screen" id="readingScreen">
+            <header class="app-header reading-header">
+                <button class="header-btn" id="backToScripture">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title" id="chapterTitle">Chapter 1</h1>
+                    <span class="header-subtitle" id="chapterName">Arjuna Vishada Yoga</span>
+                </div>
+                <button class="header-btn" id="fontSizeBtn">
+                    <i data-lucide="type"></i>
+                </button>
+            </header>
+
+            <main class="reading-main" id="readingMain">
+                <!-- Verses will be loaded here -->
+            </main>
+
+            <!-- Reading Controls -->
+            <div class="reading-controls">
+                <button class="control-btn" id="prevChapter">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="chapter-progress">
+                    <span id="currentVerse">1</span> / <span id="totalVerses">47</span>
+                </div>
+                <button class="control-btn" id="nextChapter">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Modal -->
+        <div class="modal search-modal" id="searchModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content search-content">
+                <div class="search-header">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="searchInput" placeholder="Search scriptures...">
+                    <button class="close-search" id="closeSearch">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="searchResults">
+                    <p class="search-hint">Search for verses, chapters, or concepts...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/scripture-data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
