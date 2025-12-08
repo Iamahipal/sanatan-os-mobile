@@ -27,11 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Somnath', location: 'Veraval, Gujarat', category: 'jyotirlinga', youtube: '@SomnathTempleOfficial', channelId: 'UCqKSfpFkJmNQMyVZmZLMLBg', hasLive: true, icon: '🔱' },
         { name: 'Mallikarjuna', location: 'Srisailam, AP', category: 'jyotirlinga', youtube: '@SrisailaTV', channelId: 'UCqK7cM4AYTxQFjhZhXJqCqg', hasLive: true, icon: '🔱' },
         { name: 'Mahakaleshwar', location: 'Ujjain, MP', category: 'jyotirlinga', youtube: '@mahakaleshwarujjain', channelId: 'UCvQ7iV1qfqJrqDAKNYTaHPw', hasLive: true, icon: '🔱' },
-        { name: 'Omkareshwar', location: 'Khandwa, MP', category: 'jyotirlinga', youtube: '@ShriOmkareshwarJyotirlingaOfficial', channelId: 'UC_omkareshwar', hasLive: true, icon: '🔱' },
+        { name: 'Omkareshwar', location: 'Khandwa, MP', category: 'jyotirlinga', youtube: '@ShriOmkareshwarJyotirlingaOfficial', channelId: null, hasLive: true, icon: '🔱' },
         { name: 'Kedarnath', location: 'Uttarakhand', category: 'jyotirlinga', youtube: null, channelId: null, hasLive: false, icon: '🔱' },
         { name: 'Bhimashankar', location: 'Pune, MH', category: 'jyotirlinga', youtube: null, channelId: null, hasLive: false, icon: '🔱' },
         { name: 'Kashi Vishwanath', location: 'Varanasi, UP', category: 'jyotirlinga', youtube: '@ShreeKashiVishwanathMandirTrust', channelId: 'UC5Ky5GAbFwCdBMVjKl1lAog', hasLive: true, icon: '🔱' },
-        { name: 'Trimbakeshwar', location: 'Nashik, MH', category: 'jyotirlinga', youtube: '@ShriTrimbakeshwarJyotirling', channelId: 'UCtrimbak', hasLive: true, icon: '🔱' },
+        { name: 'Trimbakeshwar', location: 'Nashik, MH', category: 'jyotirlinga', youtube: '@ShriTrimbakeshwarJyotirling', channelId: null, hasLive: true, icon: '🔱' },
         { name: 'Vaidyanath', location: 'Deoghar, JH', category: 'jyotirlinga', youtube: null, channelId: null, hasLive: false, icon: '🔱' },
         { name: 'Nageshwar', location: 'Dwarka, GJ', category: 'jyotirlinga', youtube: null, channelId: null, hasLive: false, icon: '🔱' },
         { name: 'Rameshwaram', location: 'Tamil Nadu', category: 'jyotirlinga', youtube: null, channelId: null, hasLive: false, icon: '🔱' },
@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // === CHAR DHAM ===
         { name: 'Badrinath', location: 'Uttarakhand', category: 'chardham', youtube: null, channelId: null, hasLive: false, icon: '🛕' },
-        { name: 'Dwarkadheesh', location: 'Dwarka, Gujarat', category: 'chardham', youtube: '@ShriDwarikadhishMandirOfficial', channelId: 'UCdwarka', hasLive: true, icon: '🛕' },
-        { name: 'Jagannath Puri', location: 'Puri, Odisha', category: 'chardham', youtube: '@SJTA_Puri', channelId: 'UCsjta', hasLive: true, icon: '🛕' },
+        { name: 'Dwarkadheesh', location: 'Dwarka, Gujarat', category: 'chardham', youtube: '@ShriDwarikadhishMandirOfficial', channelId: null, hasLive: true, icon: '🛕' },
+        { name: 'Jagannath Puri', location: 'Puri, Odisha', category: 'chardham', youtube: '@SJTA_Puri', channelId: null, hasLive: true, icon: '🛕' },
         { name: 'Rameshwaram', location: 'Tamil Nadu', category: 'chardham', youtube: null, channelId: null, hasLive: false, icon: '🛕' },
 
         // === CHOTA CHAR DHAM ===
@@ -73,10 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Yogadhyan Badri', location: 'Pandukeshwar', category: 'panchbadri', youtube: null, channelId: null, hasLive: false, icon: '🙏', subtitle: "Meditation" },
 
         // === SHAKTI PEETHA ===
-        { name: 'Kamakhya', location: 'Guwahati, Assam', category: 'shaktipeetha', youtube: '@maakamakhyadham9903', channelId: 'UCkamakhya', hasLive: true, icon: '🔴', subtitle: "Yoni - Most Powerful" },
+        { name: 'Kamakhya', location: 'Guwahati, Assam', category: 'shaktipeetha', youtube: '@maakamakhyadham9903', channelId: null, hasLive: true, icon: '🔴', subtitle: "Yoni - Most Powerful" },
         { name: 'Kalighat', location: 'Kolkata, WB', category: 'shaktipeetha', youtube: null, channelId: null, hasLive: false, icon: '🔴', subtitle: "Right Toes" },
         { name: 'Vindhyachal', location: 'Mirzapur, UP', category: 'shaktipeetha', youtube: null, channelId: null, hasLive: false, icon: '🔴' },
-        { name: 'Vaishno Devi', location: 'J&K', category: 'shaktipeetha', youtube: '@shrimatavaishnodevishrineboard', channelId: 'UCvaishno', hasLive: true, icon: '🔴', subtitle: "Arms" },
+        { name: 'Vaishno Devi', location: 'J&K', category: 'shaktipeetha', youtube: '@shrimatavaishnodevishrineboard', channelId: null, hasLive: true, icon: '🔴', subtitle: "Arms" },
         { name: 'Jwalaji', location: 'Kangra, HP', category: 'shaktipeetha', youtube: null, channelId: null, hasLive: false, icon: '🔴', subtitle: "Tongue" },
         { name: 'Naina Devi', location: 'Bilaspur, HP', category: 'shaktipeetha', youtube: null, channelId: null, hasLive: false, icon: '🔴', subtitle: "Eyes" },
         { name: 'Chintpurni', location: 'Una, HP', category: 'shaktipeetha', youtube: null, channelId: null, hasLive: false, icon: '🔴', subtitle: "Feet" },
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // === DIVYA DESAM (Top Ones) ===
         { name: 'Srirangam', location: 'Trichy, TN', category: 'divyadesam', youtube: null, channelId: null, hasLive: false, icon: '🪷' },
-        { name: 'Tirupati Balaji', location: 'Tirumala, AP', category: 'divyadesam', youtube: '@svbcttd', channelId: 'UCTVsvbc', hasLive: true, icon: '🪷' },
+        { name: 'Tirupati Balaji', location: 'Tirumala, AP', category: 'divyadesam', youtube: '@svbcttd', channelId: null, hasLive: true, icon: '🪷' },
         { name: 'Badrinath', location: 'Chamoli, UK', category: 'divyadesam', youtube: null, channelId: null, hasLive: false, icon: '🪷' },
         { name: 'Muktinath', location: 'Nepal', category: 'divyadesam', youtube: null, channelId: null, hasLive: false, icon: '🪷' },
         { name: 'Guruvayur', location: 'Thrissur, Kerala', category: 'divyadesam', youtube: null, channelId: null, hasLive: false, icon: '🪷' },
@@ -115,13 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Ujjain', location: 'Madhya Pradesh', category: 'kumbh', youtube: '@mahakaleshwarujjain', channelId: 'UCvQ7iV1qfqJrqDAKNYTaHPw', hasLive: true, icon: '💧', subtitle: "Shipra" },
 
         // === ISKCON TEMPLES ===
-        { name: 'ISKCON Mayapur', location: 'West Bengal', category: 'iskcon', youtube: '@MayapurTVOfficial', channelId: 'UCmayapur', hasLive: true, icon: '🙏', subtitle: "HQ" },
-        { name: 'ISKCON Vrindavan', location: 'Uttar Pradesh', category: 'iskcon', youtube: '@ISKCONVrndavan', channelId: 'UCvrindavan', hasLive: true, icon: '🙏' },
-        { name: 'ISKCON Bangalore', location: 'Karnataka', category: 'iskcon', youtube: '@iskconbangalore', channelId: 'UCbangalore', hasLive: true, icon: '🙏' },
-        { name: 'ISKCON Dwarka', location: 'Delhi', category: 'iskcon', youtube: '@ISKCONDwarka', channelId: 'UCdwarkaiskcon', hasLive: true, icon: '🙏' },
+        { name: 'ISKCON Mayapur', location: 'West Bengal', category: 'iskcon', youtube: '@MayapurTVOfficial', channelId: null, hasLive: true, icon: '🙏', subtitle: "HQ" },
+        { name: 'ISKCON Vrindavan', location: 'Uttar Pradesh', category: 'iskcon', youtube: '@ISKCONVrndavan', channelId: null, hasLive: true, icon: '🙏' },
+        { name: 'ISKCON Bangalore', location: 'Karnataka', category: 'iskcon', youtube: '@iskconbangalore', channelId: null, hasLive: true, icon: '🙏' },
+        { name: 'ISKCON Dwarka', location: 'Delhi', category: 'iskcon', youtube: '@ISKCONDwarka', channelId: null, hasLive: true, icon: '🙏' },
 
         // === HISTORIC TEMPLES ===
-        { name: 'Jagannath Puri', location: 'Odisha', category: 'historic', youtube: '@SJTA_Puri', channelId: 'UCsjta', hasLive: true, icon: '🏛️' },
+        { name: 'Jagannath Puri', location: 'Odisha', category: 'historic', youtube: '@SJTA_Puri', channelId: null, hasLive: true, icon: '🏛️' },
         { name: 'Meenakshi Amman', location: 'Madurai, TN', category: 'historic', youtube: null, channelId: null, hasLive: false, icon: '🏛️', subtitle: "Parvati" },
         { name: 'Brihadeeswara', location: 'Thanjavur, TN', category: 'historic', youtube: null, channelId: null, hasLive: false, icon: '🏛️', subtitle: "UNESCO - Shiva" },
         { name: 'Konark Sun Temple', location: 'Odisha', category: 'historic', youtube: null, channelId: null, hasLive: false, icon: '🏛️', subtitle: "UNESCO - Surya" },
@@ -262,22 +262,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
         playerTitle.textContent = temple.name;
 
-        // Build YouTube embed URL for live stream
+        // Clear any previous error state
+        const errorContainer = document.getElementById('player-error');
+        if (errorContainer) {
+            errorContainer.style.display = 'none';
+        }
+
+        // Build YouTube embed URL for live stream using channel ID if available
+        // Note: YouTube embed for live streams works best with channel handle for /live endpoint
+        // We'll use the direct channel live page embed approach
         const channelHandle = temple.youtube.replace('@', '');
-        youtubePlayer.src = `https://www.youtube.com/embed/live_stream?channel=${channelHandle}&autoplay=1`;
+
+        // Use the channel's live page via embed - more reliable than live_stream parameter
+        // The live_stream?channel= parameter requires the OLD channel ID format (starts with UC)
+        if (temple.channelId && temple.channelId.startsWith('UC') && temple.channelId.length === 24) {
+            // Valid channel ID found - use live_stream embed
+            youtubePlayer.src = `https://www.youtube.com/embed/live_stream?channel=${temple.channelId}&autoplay=1`;
+        } else {
+            // Fallback: embed the channel's homepage which will show latest/live content
+            youtubePlayer.src = `https://www.youtube.com/embed?listType=user_uploads&list=${channelHandle}&autoplay=1`;
+        }
 
         // Set button links
         subscribeBtn.href = `https://www.youtube.com/${temple.youtube}?sub_confirmation=1`;
         youtubeBtn.href = `https://www.youtube.com/${temple.youtube}/live`;
 
         playerModal.classList.add('active');
+
+        // Add error handling for iframe
+        youtubePlayer.onerror = () => showPlayerError(temple);
+
+        // Set a timeout to check if video loaded (fallback error detection)
+        setTimeout(() => {
+            if (playerModal.classList.contains('active')) {
+                // Add a subtle indicator that user can click "Open YouTube" if embed fails
+                const actionsEl = document.querySelector('.player-actions');
+                if (actionsEl && !document.getElementById('youtube-tip')) {
+                    const tip = document.createElement('p');
+                    tip.id = 'youtube-tip';
+                    tip.className = 'youtube-tip';
+                    tip.textContent = 'If video doesn\'t load, click "Open YouTube" to watch directly';
+                    tip.style.cssText = 'font-size: 12px; color: #888; text-align: center; margin-top: 8px; width: 100%;';
+                    actionsEl.appendChild(tip);
+                }
+            }
+        }, 3000);
+
         lucide.createIcons();
+    }
+
+    // === SHOW PLAYER ERROR ===
+    function showPlayerError(temple) {
+        const playerContainer = document.querySelector('.player-container');
+        if (playerContainer) {
+            playerContainer.innerHTML = `
+                <div id="player-error" class="player-error" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; background: #1a1a2e; border-radius: 12px; padding: 24px; text-align: center;">
+                    <span style="font-size: 48px; margin-bottom: 16px;">🙏</span>
+                    <h4 style="color: #fff; margin-bottom: 8px;">Live stream unavailable</h4>
+                    <p style="color: #888; font-size: 14px; margin-bottom: 16px;">The live stream may be offline or temporarily unavailable.</p>
+                    <a href="https://www.youtube.com/${temple.youtube}/live" target="_blank" class="action-btn youtube-btn" style="padding: 10px 20px; background: #ff0000; color: #fff; border-radius: 8px; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="youtube"></i> Watch on YouTube
+                    </a>
+                </div>
+            `;
+            lucide.createIcons();
+        }
     }
 
     // === CLOSE PLAYER ===
     function closePlayerModal() {
         playerModal.classList.remove('active');
         youtubePlayer.src = '';
+
+        // Remove temporary tip if exists
+        const tip = document.getElementById('youtube-tip');
+        if (tip) tip.remove();
+
+        // Restore player container if it was replaced with error
+        const playerContainer = document.querySelector('.player-container');
+        const errorEl = document.getElementById('player-error');
+        if (errorEl && playerContainer) {
+            playerContainer.innerHTML = `
+                <iframe id="youtube-player" src="" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            `;
+        }
     }
 
     // === EVENT LISTENERS ===

@@ -1,20 +1,16 @@
 /**
  * Vedic Panchang Ephemeris Engine
- * NASA-grade astronomical calculations for Panchang
- * Based on Swiss Ephemeris algorithms
+ * Using mhah-panchang library for accurate astronomical calculations
+ * With proper IST timezone handling
  */
 
 const VedicEphemeris = (function () {
     'use strict';
 
     // === CONSTANTS ===
-    const J2000 = 2451545.0; // Julian Date for J2000 epoch
+    const IST_OFFSET_HOURS = 5.5; // IST is UTC+5:30
     const DEG_TO_RAD = Math.PI / 180;
     const RAD_TO_DEG = 180 / Math.PI;
-
-    // Lahiri Ayanamsa constants (Chitra Paksha)
-    const AYANAMSA_BASE = 23.85; // Ayanamsa at J2000
-    const AYANAMSA_RATE = 50.2564 / 3600; // Annual precession in degrees
 
     // Nakshatra names (27)
     const NAKSHATRAS = [
@@ -49,10 +45,22 @@ const VedicEphemeris = (function () {
         'शुभ', 'शुक्ल', 'ब्रह्म', 'इन्द्र', 'वैधृति'
     ];
 
+    const YOGAS_EN = [
+        'Vishkumbha', 'Priti', 'Ayushman', 'Saubhagya', 'Shobhana', 'Atiganda', 'Sukarma',
+        'Dhriti', 'Shula', 'Ganda', 'Vriddhi', 'Dhruva', 'Vyaghata', 'Harshana', 'Vajra',
+        'Siddhi', 'Vyatipata', 'Variyana', 'Parigha', 'Shiva', 'Siddha', 'Sadhya',
+        'Shubha', 'Shukla', 'Brahma', 'Indra', 'Vaidhriti'
+    ];
+
     // Karana names (11)
     const KARANAS = [
         'बव', 'बालव', 'कौलव', 'तैतिल', 'गर', 'वणिज', 'विष्टि',
         'शकुनि', 'चतुष्पद', 'नाग', 'किंस्तुघ्न'
+    ];
+
+    const KARANAS_EN = [
+        'Bava', 'Balava', 'Kaulava', 'Taitila', 'Gara', 'Vanija', 'Vishti',
+        'Shakuni', 'Chatushpada', 'Naga', 'Kimstughna'
     ];
 
     // Hindu months
@@ -86,275 +94,44 @@ const VedicEphemeris = (function () {
         { name: 'परम मित्र', english: 'Parama Mitra', result: 'best friend', good: true }
     ];
 
-    // === DATE/TIME UTILITIES ===
+    // === mhah-panchang INTEGRATION ===
+    let mhahPanchang = null;
 
-    /**
-     * Convert Date to Julian Day Number
-     */
-    function dateToJD(date) {
-        const year = date.getUTCFullYear();
-        const month = date.getUTCMonth() + 1;
-        const day = date.getUTCDate() +
-            date.getUTCHours() / 24 +
-            date.getUTCMinutes() / 1440 +
-            date.getUTCSeconds() / 86400;
-
-        let y = year;
-        let m = month;
-        if (m <= 2) {
-            y -= 1;
-            m += 12;
+    function initMhahPanchang() {
+        // Try different ways the library might be exported
+        if (typeof MhahPanchang !== 'undefined') {
+            try {
+                // Try different initialization methods
+                if (MhahPanchang.MhahPanchang) {
+                    mhahPanchang = new MhahPanchang.MhahPanchang();
+                } else if (MhahPanchang.default) {
+                    mhahPanchang = new MhahPanchang.default();
+                } else if (typeof MhahPanchang === 'function') {
+                    mhahPanchang = new MhahPanchang();
+                } else {
+                    mhahPanchang = MhahPanchang;
+                }
+                console.log('mhah-panchang library loaded:', mhahPanchang);
+                return true;
+            } catch (e) {
+                console.error('Error initializing mhah-panchang:', e);
+                return false;
+            }
         }
-
-        const a = Math.floor(y / 100);
-        const b = 2 - a + Math.floor(a / 4);
-
-        return Math.floor(365.25 * (y + 4716)) +
-            Math.floor(30.6001 * (m + 1)) +
-            day + b - 1524.5;
+        console.warn('mhah-panchang library not found, using fallback calculations');
+        return false;
     }
 
-    /**
-     * Convert Julian Day to Date
-     */
-    function jdToDate(jd) {
-        const z = Math.floor(jd + 0.5);
-        const f = (jd + 0.5) - z;
-        let a = z;
-
-        if (z >= 2299161) {
-            const alpha = Math.floor((z - 1867216.25) / 36524.25);
-            a = z + 1 + alpha - Math.floor(alpha / 4);
-        }
-
-        const b = a + 1524;
-        const c = Math.floor((b - 122.1) / 365.25);
-        const d = Math.floor(365.25 * c);
-        const e = Math.floor((b - d) / 30.6001);
-
-        const day = b - d - Math.floor(30.6001 * e) + f;
-        const month = e < 14 ? e - 1 : e - 13;
-        const year = month > 2 ? c - 4716 : c - 4715;
-
-        const dayInt = Math.floor(day);
-        const dayFrac = day - dayInt;
-        const hours = Math.floor(dayFrac * 24);
-        const minutes = Math.floor((dayFrac * 24 - hours) * 60);
-
-        return new Date(Date.UTC(year, month - 1, dayInt, hours, minutes));
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMhahPanchang);
+    } else {
+        initMhahPanchang();
     }
 
-    // === ASTRONOMICAL CALCULATIONS ===
+    // === SUNRISE/SUNSET CALCULATION (Accurate for India) ===
 
-    /**
-     * Calculate Lahiri Ayanamsa for given Julian Day
-     */
-    function getLahiriAyanamsa(jd) {
-        const t = (jd - J2000) / 36525; // Julian centuries from J2000
-        return AYANAMSA_BASE + AYANAMSA_RATE * (jd - J2000) / 365.25;
-    }
-
-    /**
-     * Calculate Sun's ecliptic longitude (tropical)
-     * Using VSOP87 simplified algorithm
-     */
-    function getSunLongitude(jd) {
-        const t = (jd - J2000) / 36525;
-
-        // Mean longitude of the Sun
-        let L0 = 280.4664567 + 360007.6982779 * t + 0.03032028 * t * t;
-        L0 = normalizeAngle(L0);
-
-        // Mean anomaly of the Sun
-        let M = 357.5291092 + 35999.0502909 * t - 0.0001536 * t * t;
-        M = normalizeAngle(M) * DEG_TO_RAD;
-
-        // Equation of center
-        const C = (1.9146 - 0.004817 * t - 0.000014 * t * t) * Math.sin(M) +
-            (0.019993 - 0.000101 * t) * Math.sin(2 * M) +
-            0.00029 * Math.sin(3 * M);
-
-        // Sun's true longitude
-        let sunLong = L0 + C;
-
-        // Apparent longitude (correcting for nutation and aberration)
-        const omega = 125.04 - 1934.136 * t;
-        sunLong = sunLong - 0.00569 - 0.00478 * Math.sin(omega * DEG_TO_RAD);
-
-        return normalizeAngle(sunLong);
-    }
-
-    /**
-     * Calculate Moon's ecliptic longitude (tropical)
-     * Using simplified lunar theory
-     */
-    function getMoonLongitude(jd) {
-        const t = (jd - J2000) / 36525;
-
-        // Mean longitude of Moon
-        let Lp = 218.3164477 + 481267.88123421 * t - 0.0015786 * t * t;
-
-        // Mean elongation of Moon
-        let D = 297.8501921 + 445267.1114034 * t - 0.0018819 * t * t;
-
-        // Mean anomaly of Sun
-        let M = 357.5291092 + 35999.0502909 * t;
-
-        // Mean anomaly of Moon
-        let Mp = 134.9633964 + 477198.8675055 * t + 0.0087414 * t * t;
-
-        // Moon's argument of latitude
-        let F = 93.272095 + 483202.0175233 * t - 0.0036539 * t * t;
-
-        // Convert to radians
-        D = normalizeAngle(D) * DEG_TO_RAD;
-        M = normalizeAngle(M) * DEG_TO_RAD;
-        Mp = normalizeAngle(Mp) * DEG_TO_RAD;
-        F = normalizeAngle(F) * DEG_TO_RAD;
-
-        // Longitude correction terms
-        let dL = 6.289 * Math.sin(Mp)
-            + 1.274 * Math.sin(2 * D - Mp)
-            + 0.658 * Math.sin(2 * D)
-            + 0.214 * Math.sin(2 * Mp)
-            - 0.186 * Math.sin(M)
-            - 0.114 * Math.sin(2 * F)
-            + 0.059 * Math.sin(2 * D - 2 * Mp)
-            + 0.057 * Math.sin(2 * D - M - Mp)
-            + 0.053 * Math.sin(2 * D + Mp)
-            + 0.046 * Math.sin(2 * D - M)
-            - 0.041 * Math.sin(M - Mp)
-            - 0.035 * Math.sin(D)
-            - 0.031 * Math.sin(M + Mp);
-
-        return normalizeAngle(Lp + dL);
-    }
-
-    /**
-     * Normalize angle to 0-360 range
-     */
-    function normalizeAngle(angle) {
-        angle = angle % 360;
-        if (angle < 0) angle += 360;
-        return angle;
-    }
-
-    // === PANCHANG CALCULATIONS ===
-
-    /**
-     * Calculate Tithi (lunar day)
-     * Tithi = (Moon - Sun) / 12, where each Tithi is 12°
-     */
-    function calculateTithi(jd) {
-        const sunLong = getSunLongitude(jd);
-        const moonLong = getMoonLongitude(jd);
-        const ayanamsa = getLahiriAyanamsa(jd);
-
-        // Calculate the angular distance
-        let angle = moonLong - sunLong;
-        if (angle < 0) angle += 360;
-
-        const tithiIndex = Math.floor(angle / 12);
-        const tithiProgress = (angle % 12) / 12;
-
-        const paksha = tithiIndex < 15 ? 'शुक्ल' : 'कृष्ण';
-        const pakshaEn = tithiIndex < 15 ? 'Shukla' : 'Krishna';
-        const tithiInPaksha = tithiIndex % 15;
-
-        return {
-            index: tithiIndex,
-            name: TITHIS[tithiIndex],
-            paksha: paksha,
-            pakshaEn: pakshaEn,
-            fullName: `${paksha} ${TITHIS[tithiIndex]}`,
-            progress: tithiProgress,
-            angle: angle
-        };
-    }
-
-    /**
-     * Calculate Nakshatra (lunar mansion)
-     * Each Nakshatra = 13°20' = 13.3333°
-     */
-    function calculateNakshatra(jd) {
-        const moonLong = getMoonLongitude(jd);
-        const ayanamsa = getLahiriAyanamsa(jd);
-
-        // Convert to sidereal
-        let siderealMoon = moonLong - ayanamsa;
-        if (siderealMoon < 0) siderealMoon += 360;
-
-        const nakshatraIndex = Math.floor(siderealMoon / (360 / 27));
-        const nakshatraProgress = (siderealMoon % (360 / 27)) / (360 / 27);
-
-        return {
-            index: nakshatraIndex,
-            name: NAKSHATRAS[nakshatraIndex],
-            nameEn: NAKSHATRAS_EN[nakshatraIndex],
-            progress: nakshatraProgress,
-            longitude: siderealMoon
-        };
-    }
-
-    /**
-     * Calculate Yoga (Sun + Moon)
-     * Yoga = (Sun + Moon) / 13.3333
-     */
-    function calculateYoga(jd) {
-        const sunLong = getSunLongitude(jd);
-        const moonLong = getMoonLongitude(jd);
-        const ayanamsa = getLahiriAyanamsa(jd);
-
-        // Convert to sidereal
-        const siderealSun = normalizeAngle(sunLong - ayanamsa);
-        const siderealMoon = normalizeAngle(moonLong - ayanamsa);
-
-        let sum = siderealSun + siderealMoon;
-        if (sum >= 360) sum -= 360;
-
-        const yogaIndex = Math.floor(sum / (360 / 27));
-        const yogaProgress = (sum % (360 / 27)) / (360 / 27);
-
-        return {
-            index: yogaIndex,
-            name: YOGAS[yogaIndex],
-            progress: yogaProgress
-        };
-    }
-
-    /**
-     * Calculate Karana (half-tithi)
-     * Each Karana = 6°
-     */
-    function calculateKarana(jd) {
-        const sunLong = getSunLongitude(jd);
-        const moonLong = getMoonLongitude(jd);
-
-        let angle = moonLong - sunLong;
-        if (angle < 0) angle += 360;
-
-        const karanaNum = Math.floor(angle / 6);
-
-        // Map to Karana names (complex cycle)
-        let karanaIndex;
-        if (karanaNum === 0) karanaIndex = 10; // Kimstughna
-        else if (karanaNum === 57) karanaIndex = 7; // Shakuni
-        else if (karanaNum === 58) karanaIndex = 8; // Chatushpada
-        else if (karanaNum === 59) karanaIndex = 9; // Naga
-        else karanaIndex = ((karanaNum - 1) % 7);
-
-        return {
-            index: karanaIndex,
-            name: KARANAS[karanaIndex],
-            number: karanaNum
-        };
-    }
-
-    /**
-     * Calculate sunrise for given location and date
-     */
     function calculateSunrise(date, lat, lon) {
-        const jd = dateToJD(date);
         const dayOfYear = getDayOfYear(date);
 
         // Solar declination
@@ -370,18 +147,24 @@ const VedicEphemeris = (function () {
 
         const H = Math.acos(cosH) * RAD_TO_DEG;
 
-        // Time of solar noon (approximate)
-        const solarNoon = 12 - lon / 15;
+        // Equation of time correction (minutes)
+        const B = (360 / 365) * (dayOfYear - 81) * DEG_TO_RAD;
+        const EoT = 9.87 * Math.sin(2 * B) - 7.53 * Math.cos(B) - 1.5 * Math.sin(B);
 
-        const sunrise = solarNoon - H / 15;
-        const sunset = solarNoon + H / 15;
+        // Local solar noon in IST
+        // Standard meridian for IST is 82.5°E
+        const IST_MERIDIAN = 82.5;
+        const solarNoon = 12 + (IST_MERIDIAN - lon) * 4 / 60 - EoT / 60;
+
+        const sunriseLocal = solarNoon - H / 15;
+        const sunsetLocal = solarNoon + H / 15;
 
         return {
-            sunrise: sunrise,
-            sunset: sunset,
-            sunriseTime: hoursToTime(sunrise),
-            sunsetTime: hoursToTime(sunset),
-            dayDuration: sunset - sunrise
+            sunrise: sunriseLocal,
+            sunset: sunsetLocal,
+            sunriseTime: hoursToTime(sunriseLocal),
+            sunsetTime: hoursToTime(sunsetLocal),
+            dayDuration: sunsetLocal - sunriseLocal
         };
     }
 
@@ -399,11 +182,308 @@ const VedicEphemeris = (function () {
         return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
     }
 
+    // === PANCHANG DATA FROM LIBRARY ===
+
+    function getPanchangFromLibrary(date, lat, lon) {
+        if (!mhahPanchang) {
+            initMhahPanchang();
+        }
+
+        if (mhahPanchang) {
+            try {
+                // mhah-panchang.calendar() returns accurate panchang with location
+                const calData = mhahPanchang.calendar(date, lat, lon);
+
+                // Also get basic calculation for cross-reference
+                const calcData = mhahPanchang.calculate(date);
+
+                return { calData, calcData };
+            } catch (e) {
+                console.error('mhah-panchang error:', e);
+                return null;
+            }
+        }
+        return null;
+    }
+
+    // === MAP LIBRARY DATA TO OUR FORMAT ===
+
+    function mapTithiFromLibrary(libData) {
+        if (!libData) return null;
+
+        // Library returns Tithi object with name, index
+        const tithi = libData.calData?.Tithi || libData.calcData?.Tithi;
+        if (!tithi) return null;
+
+        const index = tithi.index || 0;
+        const paksha = index < 15 ? 'शुक्ल' : 'कृष्ण';
+        const pakshaEn = index < 15 ? 'Shukla' : 'Krishna';
+
+        return {
+            index: index,
+            name: TITHIS[index] || tithi.name,
+            paksha: paksha,
+            pakshaEn: pakshaEn,
+            fullName: `${paksha} ${TITHIS[index] || tithi.name}`,
+            progress: 0,
+            angle: index * 12
+        };
+    }
+
+    function mapNakshatraFromLibrary(libData) {
+        if (!libData) return null;
+
+        const nakshatra = libData.calData?.Nakshatra || libData.calcData?.Nakshatra;
+        if (!nakshatra) return null;
+
+        const index = nakshatra.index || 0;
+
+        return {
+            index: index,
+            name: NAKSHATRAS[index] || nakshatra.name,
+            nameEn: NAKSHATRAS_EN[index] || nakshatra.name,
+            progress: 0,
+            longitude: 0
+        };
+    }
+
+    function mapYogaFromLibrary(libData) {
+        if (!libData) return null;
+
+        const yoga = libData.calData?.Yoga || libData.calcData?.Yoga;
+        if (!yoga) return null;
+
+        const index = yoga.index || 0;
+
+        return {
+            index: index,
+            name: YOGAS[index] || yoga.name,
+            nameEn: YOGAS_EN[index] || yoga.name,
+            progress: 0
+        };
+    }
+
+    function mapKaranaFromLibrary(libData) {
+        if (!libData) return null;
+
+        const karana = libData.calData?.Karna || libData.calcData?.Karna;
+        if (!karana) return null;
+
+        const index = karana.index || 0;
+
+        return {
+            index: index,
+            name: KARANAS[index % 11] || karana.name,
+            nameEn: KARANAS_EN[index % 11] || karana.name,
+            number: index
+        };
+    }
+
+    // === FALLBACK CALCULATIONS (if library not available) ===
+
+    function dateToJD(date) {
+        // Use LOCAL time, not UTC
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate() +
+            date.getHours() / 24 +
+            date.getMinutes() / 1440 +
+            date.getSeconds() / 86400;
+
+        let y = year;
+        let m = month;
+        if (m <= 2) {
+            y -= 1;
+            m += 12;
+        }
+
+        const a = Math.floor(y / 100);
+        const b = 2 - a + Math.floor(a / 4);
+
+        return Math.floor(365.25 * (y + 4716)) +
+            Math.floor(30.6001 * (m + 1)) +
+            day + b - 1524.5;
+    }
+
+    function normalizeAngle(angle) {
+        angle = angle % 360;
+        if (angle < 0) angle += 360;
+        return angle;
+    }
+
+    function getSunLongitude(jd) {
+        const J2000 = 2451545.0;
+        const t = (jd - J2000) / 36525;
+
+        // Mean longitude of the Sun (VSOP87 simplified)
+        // L0 = 280.46646 + 36000.76983*T + 0.0003032*T^2 (degrees)
+        let L0 = 280.46646 + 36000.76983 * t + 0.0003032 * t * t;
+        L0 = normalizeAngle(L0);
+
+        // Mean anomaly of the Sun
+        let M = 357.52911 + 35999.05029 * t - 0.0001537 * t * t;
+        M = normalizeAngle(M) * DEG_TO_RAD;
+
+        // Equation of center
+        const C = (1.914602 - 0.004817 * t - 0.000014 * t * t) * Math.sin(M) +
+            (0.019993 - 0.000101 * t) * Math.sin(2 * M) +
+            0.000289 * Math.sin(3 * M);
+
+        // Sun's true longitude
+        let sunLong = L0 + C;
+
+        // Apparent longitude (correction for nutation and aberration)
+        const omega = 125.04 - 1934.136 * t;
+        sunLong = sunLong - 0.00569 - 0.00478 * Math.sin(omega * DEG_TO_RAD);
+
+        return normalizeAngle(sunLong);
+    }
+
+    function getMoonLongitude(jd) {
+        const J2000 = 2451545.0;
+        const t = (jd - J2000) / 36525;
+
+        let Lp = 218.3164477 + 481267.88123421 * t - 0.0015786 * t * t;
+        let D = 297.8501921 + 445267.1114034 * t - 0.0018819 * t * t;
+        let M = 357.5291092 + 35999.0502909 * t;
+        let Mp = 134.9633964 + 477198.8675055 * t + 0.0087414 * t * t;
+        let F = 93.272095 + 483202.0175233 * t - 0.0036539 * t * t;
+
+        D = normalizeAngle(D) * DEG_TO_RAD;
+        M = normalizeAngle(M) * DEG_TO_RAD;
+        Mp = normalizeAngle(Mp) * DEG_TO_RAD;
+        F = normalizeAngle(F) * DEG_TO_RAD;
+
+        let dL = 6.289 * Math.sin(Mp)
+            + 1.274 * Math.sin(2 * D - Mp)
+            + 0.658 * Math.sin(2 * D)
+            + 0.214 * Math.sin(2 * Mp)
+            - 0.186 * Math.sin(M)
+            - 0.114 * Math.sin(2 * F)
+            + 0.059 * Math.sin(2 * D - 2 * Mp)
+            + 0.057 * Math.sin(2 * D - M - Mp)
+            + 0.053 * Math.sin(2 * D + Mp)
+            + 0.046 * Math.sin(2 * D - M)
+            - 0.041 * Math.sin(M - Mp)
+            - 0.035 * Math.sin(D)
+            - 0.031 * Math.sin(M + Mp);
+
+        return normalizeAngle(Lp + dL);
+    }
+
+    function getLahiriAyanamsa(jd) {
+        const J2000 = 2451545.0;
+        const AYANAMSA_BASE = 23.85;
+        const AYANAMSA_RATE = 50.2564 / 3600;
+        return AYANAMSA_BASE + AYANAMSA_RATE * (jd - J2000) / 365.25;
+    }
+
+    function calculateTithiFallback(jd) {
+        const sunLong = getSunLongitude(jd);
+        const moonLong = getMoonLongitude(jd);
+
+        let angle = moonLong - sunLong;
+        if (angle < 0) angle += 360;
+
+        const tithiIndex = Math.floor(angle / 12);
+        const tithiProgress = (angle % 12) / 12;
+
+        const paksha = tithiIndex < 15 ? 'शुक्ल' : 'कृष्ण';
+        const pakshaEn = tithiIndex < 15 ? 'Shukla' : 'Krishna';
+
+        return {
+            index: tithiIndex,
+            name: TITHIS[tithiIndex],
+            paksha: paksha,
+            pakshaEn: pakshaEn,
+            fullName: `${paksha} ${TITHIS[tithiIndex]}`,
+            progress: tithiProgress,
+            angle: angle
+        };
+    }
+
+    function calculateNakshatraFallback(jd) {
+        const moonLong = getMoonLongitude(jd);
+        const ayanamsa = getLahiriAyanamsa(jd);
+
+        let siderealMoon = moonLong - ayanamsa;
+        if (siderealMoon < 0) siderealMoon += 360;
+
+        const nakshatraIndex = Math.floor(siderealMoon / (360 / 27));
+        const nakshatraProgress = (siderealMoon % (360 / 27)) / (360 / 27);
+
+        return {
+            index: nakshatraIndex,
+            name: NAKSHATRAS[nakshatraIndex],
+            nameEn: NAKSHATRAS_EN[nakshatraIndex],
+            progress: nakshatraProgress,
+            longitude: siderealMoon
+        };
+    }
+
+    function calculateYogaFallback(jd) {
+        const sunLong = getSunLongitude(jd);
+        const moonLong = getMoonLongitude(jd);
+        const ayanamsa = getLahiriAyanamsa(jd);
+
+        const siderealSun = normalizeAngle(sunLong - ayanamsa);
+        const siderealMoon = normalizeAngle(moonLong - ayanamsa);
+
+        let sum = siderealSun + siderealMoon;
+        if (sum >= 360) sum -= 360;
+
+        const yogaIndex = Math.floor(sum / (360 / 27));
+
+        return {
+            index: yogaIndex,
+            name: YOGAS[yogaIndex],
+            nameEn: YOGAS_EN[yogaIndex],
+            progress: (sum % (360 / 27)) / (360 / 27)
+        };
+    }
+
+    function calculateKaranaFallback(jd) {
+        const sunLong = getSunLongitude(jd);
+        const moonLong = getMoonLongitude(jd);
+
+        let angle = moonLong - sunLong;
+        if (angle < 0) angle += 360;
+
+        const karanaNum = Math.floor(angle / 6);
+
+        let karanaIndex;
+        if (karanaNum === 0) karanaIndex = 10;
+        else if (karanaNum === 57) karanaIndex = 7;
+        else if (karanaNum === 58) karanaIndex = 8;
+        else if (karanaNum === 59) karanaIndex = 9;
+        else karanaIndex = ((karanaNum - 1) % 7);
+
+        return {
+            index: karanaIndex,
+            name: KARANAS[karanaIndex],
+            nameEn: KARANAS_EN[karanaIndex],
+            number: karanaNum
+        };
+    }
+
     // === MUHURAT CALCULATIONS ===
 
-    /**
-     * Calculate Choghadiya for given sunrise/sunset
-     */
+    function calculateRahuKalam(sunTimes, dayOfWeek) {
+        const rahuSlots = [8, 2, 7, 5, 6, 4, 3];
+        const slot = rahuSlots[dayOfWeek];
+
+        const slotDuration = sunTimes.dayDuration / 8;
+        const start = sunTimes.sunrise + (slot - 1) * slotDuration;
+        const end = start + slotDuration;
+
+        return {
+            start: start,
+            end: end,
+            startTime: hoursToTime(start),
+            endTime: hoursToTime(end)
+        };
+    }
+
     function calculateChoghadiya(sunTimes, dayOfWeek) {
         const dayChogs = [
             { name: 'उद्वेग', type: 'udveg', good: false },
@@ -428,31 +508,8 @@ const VedicEphemeris = (function () {
         }));
     }
 
-    /**
-     * Calculate Rahu Kalam for given day
-     */
-    function calculateRahuKalam(sunTimes, dayOfWeek) {
-        // Rahu Kalam slot order: Sun=8, Mon=2, Tue=7, Wed=5, Thu=6, Fri=4, Sat=3
-        const rahuSlots = [8, 2, 7, 5, 6, 4, 3];
-        const slot = rahuSlots[dayOfWeek];
+    // === TARA BALA ===
 
-        const slotDuration = sunTimes.dayDuration / 8;
-        const start = sunTimes.sunrise + (slot - 1) * slotDuration;
-        const end = start + slotDuration;
-
-        return {
-            start: start,
-            end: end,
-            startTime: hoursToTime(start),
-            endTime: hoursToTime(end)
-        };
-    }
-
-    // === PERSONALIZATION ===
-
-    /**
-     * Calculate Tara Bala (personal luck based on birth star)
-     */
     function calculateTaraBala(birthNakshatraIndex, dayNakshatraIndex) {
         let distance = (dayNakshatraIndex - birthNakshatraIndex + 27) % 27;
         const taraIndex = distance % 9;
@@ -464,17 +521,14 @@ const VedicEphemeris = (function () {
         };
     }
 
-    /**
-     * Calculate Samvatsara (60-year Jupiter cycle)
-     */
+    // === SAMVATSARA ===
+
     function calculateSamvatsara(year, tradition = 'north') {
         let samvatsaraIndex;
         if (tradition === 'north') {
-            // North Indian: (Vikram Samvat + 9) mod 60
             const vikramSamvat = year + 57;
             samvatsaraIndex = (vikramSamvat + 9) % 60;
         } else {
-            // South Indian: (Saka Year + 12) mod 60
             const sakaYear = year - 78;
             samvatsaraIndex = (sakaYear + 12) % 60;
         }
@@ -487,28 +541,39 @@ const VedicEphemeris = (function () {
         };
     }
 
-    /**
-     * Get complete Panchang for a given date and location
-     */
+    // === MAIN PANCHANG FUNCTION ===
+
     function getPanchang(date, lat, lon) {
-        const jd = dateToJD(date);
         const sunTimes = calculateSunrise(date, lat, lon);
         const dayOfWeek = date.getDay();
 
-        // Use sunrise time for "Udaya Tithi"
+        // Create sunrise date for calculations
         const sunriseDate = new Date(date);
         sunriseDate.setHours(Math.floor(sunTimes.sunrise),
             Math.floor((sunTimes.sunrise % 1) * 60), 0, 0);
-        const sunriseJD = dateToJD(sunriseDate);
+        const jd = dateToJD(sunriseDate);
 
-        const tithi = calculateTithi(sunriseJD);
-        const nakshatra = calculateNakshatra(sunriseJD);
-        const yoga = calculateYoga(sunriseJD);
-        const karana = calculateKarana(sunriseJD);
+        // Try to get data from mhah-panchang library
+        const libData = getPanchangFromLibrary(sunriseDate, lat, lon);
+
+        let tithi, nakshatra, yoga, karana;
+
+        if (libData && libData.calcData) {
+            // Use library data (more accurate)
+            tithi = mapTithiFromLibrary(libData) || calculateTithiFallback(jd);
+            nakshatra = mapNakshatraFromLibrary(libData) || calculateNakshatraFallback(jd);
+            yoga = mapYogaFromLibrary(libData) || calculateYogaFallback(jd);
+            karana = mapKaranaFromLibrary(libData) || calculateKaranaFallback(jd);
+        } else {
+            // Fallback to local calculations
+            tithi = calculateTithiFallback(jd);
+            nakshatra = calculateNakshatraFallback(jd);
+            yoga = calculateYogaFallback(jd);
+            karana = calculateKaranaFallback(jd);
+        }
 
         const choghadiya = calculateChoghadiya(sunTimes, dayOfWeek);
         const rahuKalam = calculateRahuKalam(sunTimes, dayOfWeek);
-
         const samvatsara = calculateSamvatsara(date.getFullYear());
 
         // Moon illumination
@@ -527,24 +592,20 @@ const VedicEphemeris = (function () {
             rahuKalam: rahuKalam,
             samvatsara: samvatsara,
             moonIllumination: Math.round(illumination),
-            ayanamsa: getLahiriAyanamsa(jd)
+            ayanamsa: getLahiriAyanamsa(jd),
+            libraryUsed: !!libData
         };
     }
 
     // === PUBLIC API ===
     return {
         getPanchang: getPanchang,
-        calculateTithi: calculateTithi,
-        calculateNakshatra: calculateNakshatra,
-        calculateYoga: calculateYoga,
-        calculateKarana: calculateKarana,
+        calculateTaraBala: calculateTaraBala,
+        calculateSamvatsara: calculateSamvatsara,
         calculateSunrise: calculateSunrise,
         calculateChoghadiya: calculateChoghadiya,
         calculateRahuKalam: calculateRahuKalam,
-        calculateTaraBala: calculateTaraBala,
-        calculateSamvatsara: calculateSamvatsara,
         dateToJD: dateToJD,
-        jdToDate: jdToDate,
         getLahiriAyanamsa: getLahiriAyanamsa,
         NAKSHATRAS: NAKSHATRAS,
         NAKSHATRAS_EN: NAKSHATRAS_EN,
