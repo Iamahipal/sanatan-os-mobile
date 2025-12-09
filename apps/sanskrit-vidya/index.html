@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0F0C29">
+    <title>Sanskrit Vidya - संस्कृत विद्या</title>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- ===== HOME SCREEN ===== -->
+        <div class="screen home-screen active" id="homeScreen">
+            <header class="app-header">
+                <a href="../../index.html" class="header-btn">
+                    <i data-lucide="chevron-left"></i>
+                </a>
+                <div class="header-center">
+                    <h1 class="header-title">संस्कृत विद्या</h1>
+                    <span class="header-subtitle">The Guru-Shishya Parampara</span>
+                </div>
+                <button class="header-btn" id="profileBtn">
+                    <i data-lucide="user"></i>
+                </button>
+            </header>
+
+            <main class="home-main">
+                <!-- Progress Mandala Section -->
+                <section class="progress-section">
+                    <div class="mandala-card">
+                        <div class="mandala-visual" id="mandalaVisual">
+                            <svg viewBox="0 0 200 200" class="mandala-svg">
+                                <!-- Center Om symbol -->
+                                <text x="100" y="110" text-anchor="middle" class="mandala-om">ॐ</text>
+                                <!-- Petals will be added dynamically -->
+                                <g class="mandala-petals" id="mandalaPetals"></g>
+                            </svg>
+                        </div>
+                        <div class="mandala-info">
+                            <div class="streak-display">
+                                <span class="streak-icon">🔥</span>
+                                <span class="streak-count" id="streakCount">0</span>
+                                <span class="streak-label">अभ्यास दिवस</span>
+                            </div>
+                            <div class="level-badge" id="levelBadge">
+                                <span class="level-icon">🌱</span>
+                                <span class="level-name">प्रवेश</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sanskrit Effect Banner -->
+                <section class="effect-banner">
+                    <div class="effect-card">
+                        <span class="effect-icon">🧠</span>
+                        <div class="effect-content">
+                            <span class="effect-title">The Sanskrit Effect</span>
+                            <span class="effect-text">Chanting increases grey matter density in hippocampus</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Learning Paths -->
+                <section class="paths-section">
+                    <h3 class="section-title">
+                        <i data-lucide="compass"></i>
+                        Choose Your Path
+                    </h3>
+                    <div class="paths-grid" id="pathsGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Continue Learning -->
+                <section class="continue-section" id="continueSection" style="display: none;">
+                    <h3 class="section-title">
+                        <i data-lucide="play-circle"></i>
+                        Continue Learning
+                    </h3>
+                    <div class="continue-card" id="continueCard">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Modules Grid -->
+                <section class="modules-section">
+                    <h3 class="section-title">
+                        <i data-lucide="book-open"></i>
+                        प्रवेश - Pravesha Level
+                    </h3>
+                    <div class="modules-grid">
+                        <div class="module-card" data-module="varnamala">
+                            <div class="module-icon">🔤</div>
+                            <div class="module-info">
+                                <span class="module-name">वर्णमाला</span>
+                                <span class="module-english">Alphabet Mastery</span>
+                                <span class="module-desc">50+ sacred phonemes</span>
+                            </div>
+                            <div class="module-progress">
+                                <div class="progress-ring">
+                                    <svg viewBox="0 0 36 36">
+                                        <path class="progress-bg"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <path class="progress-fill" id="varnamalaProgress"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            stroke-dasharray="0, 100" />
+                                    </svg>
+                                    <span class="progress-text">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="module-card" data-module="shlokarship">
+                            <div class="module-icon">📿</div>
+                            <div class="module-info">
+                                <span class="module-name">श्लोकाध्ययन</span>
+                                <span class="module-english">Verse Memorization</span>
+                                <span class="module-desc">5 sacred shlokas</span>
+                            </div>
+                            <div class="module-progress">
+                                <div class="progress-ring">
+                                    <svg viewBox="0 0 36 36">
+                                        <path class="progress-bg"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <path class="progress-fill" id="shlokaProgress"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            stroke-dasharray="0, 100" />
+                                    </svg>
+                                    <span class="progress-text">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 2: Grammar Module -->
+                        <div class="module-card" data-module="vyakarana">
+                            <div class="module-badge">NEW</div>
+                            <div class="module-icon">📐</div>
+                            <div class="module-info">
+                                <span class="module-name">व्याकरण</span>
+                                <span class="module-english">Grammar Basics</span>
+                                <span class="module-desc">Sandhi & Vibhakti</span>
+                            </div>
+                            <div class="module-progress">
+                                <div class="progress-ring">
+                                    <svg viewBox="0 0 36 36">
+                                        <path class="progress-bg"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <path class="progress-fill" id="vyakaranaProgress"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            stroke-dasharray="0, 100" />
+                                    </svg>
+                                    <span class="progress-text">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 2: AI Guru Conversation -->
+                        <div class="module-card" data-module="guru-chat">
+                            <div class="module-badge">NEW</div>
+                            <div class="module-icon">🧘</div>
+                            <div class="module-info">
+                                <span class="module-name">गुरु संवाद</span>
+                                <span class="module-english">AI Guru Chat</span>
+                                <span class="module-desc">Practice conversation</span>
+                            </div>
+                            <div class="module-progress">
+                                <div class="progress-ring">
+                                    <svg viewBox="0 0 36 36">
+                                        <path class="progress-bg"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <path class="progress-fill" id="guruChatProgress"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            stroke-dasharray="0, 100" />
+                                    </svg>
+                                    <span class="progress-text">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phase 3: Sangha (Community) -->
+                        <div class="module-card" data-module="sangha">
+                            <div class="module-badge hot">HOT</div>
+                            <div class="module-icon">🙏</div>
+                            <div class="module-info">
+                                <span class="module-name">संघ</span>
+                                <span class="module-english">Community</span>
+                                <span class="module-desc">Group chanting & leaderboard</span>
+                            </div>
+                            <div class="module-progress">
+                                <div class="progress-ring">
+                                    <svg viewBox="0 0 36 36">
+                                        <path class="progress-bg"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <path class="progress-fill" id="sanghaProgress"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            stroke-dasharray="0, 100" />
+                                    </svg>
+                                    <span class="progress-text">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Daily Wisdom -->
+                <section class="wisdom-section">
+                    <div class="wisdom-card">
+                        <span class="wisdom-quote">❝</span>
+                        <p class="wisdom-text" id="wisdomText">श्रद्धावान् लभते ज्ञानम्</p>
+                        <p class="wisdom-translation">One with faith attains knowledge</p>
+                        <span class="wisdom-source">— Bhagavad Gita 4.39</span>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ===== VARNAMALA SCREEN ===== -->
+        <div class="screen varnamala-screen" id="varnamalaScreen">
+            <header class="app-header">
+                <button class="header-btn" id="varnamalaBackBtn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">वर्णमाला</h1>
+                    <span class="header-subtitle">Sacred Alphabet</span>
+                </div>
+                <button class="header-btn" id="varnamalaInfoBtn">
+                    <i data-lucide="info"></i>
+                </button>
+            </header>
+
+            <main class="varnamala-main">
+                <!-- Category Tabs -->
+                <div class="category-tabs" id="categoryTabs">
+                    <button class="category-tab active" data-category="swaras">स्वर</button>
+                    <button class="category-tab" data-category="kanthya">कण्ठ्य</button>
+                    <button class="category-tab" data-category="talavya">तालव्य</button>
+                    <button class="category-tab" data-category="murdhanya">मूर्धन्य</button>
+                    <button class="category-tab" data-category="dantya">दन्त्य</button>
+                    <button class="category-tab" data-category="oshthya">ओष्ठ्य</button>
+                    <button class="category-tab" data-category="antahstha">अन्तःस्थ</button>
+                    <button class="category-tab" data-category="ushman">ऊष्मन्</button>
+                </div>
+
+                <!-- Category Info -->
+                <div class="category-info" id="categoryInfo">
+                    <span class="category-name"></span>
+                    <span class="category-desc"></span>
+                </div>
+
+                <!-- Letters Grid -->
+                <div class="letters-grid" id="lettersGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== LETTER DETAIL SCREEN ===== -->
+        <div class="screen letter-screen" id="letterScreen">
+            <header class="app-header">
+                <button class="header-btn" id="letterBackBtn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title" id="letterTitle">क</h1>
+                    <span class="header-subtitle" id="letterIast">ka</span>
+                </div>
+                <button class="header-btn" id="letterCompleteBtn">
+                    <i data-lucide="check-circle"></i>
+                </button>
+            </header>
+
+            <main class="letter-main">
+                <!-- Big Letter Display -->
+                <div class="letter-display">
+                    <div class="letter-card">
+                        <span class="big-letter" id="bigLetter">क</span>
+                        <span class="letter-romanized" id="letterRomanized">ka</span>
+                    </div>
+                </div>
+
+                <!-- Articulation Guide -->
+                <div class="articulation-section">
+                    <h4 class="section-label">
+                        <i data-lucide="mic"></i>
+                        Articulation Point
+                    </h4>
+                    <div class="articulation-card" id="articulationCard">
+                        <div class="articulation-visual">
+                            <div class="mouth-diagram" id="mouthDiagram">
+                                <!-- SVG mouth diagram -->
+                                <svg viewBox="0 0 100 80" class="mouth-svg">
+                                    <path class="mouth-outline"
+                                        d="M10 60 Q10 30 30 20 Q50 10 70 20 Q90 30 90 60 Q90 70 50 75 Q10 70 10 60" />
+                                    <path class="tongue" id="tonguePath"
+                                        d="M20 60 Q30 50 50 55 Q70 50 80 60 Q70 65 50 65 Q30 65 20 60" />
+                                    <circle class="articulation-point" id="articulationPoint" cx="50" cy="25" r="5" />
+                                </svg>
+                            </div>
+                            <div class="articulation-info">
+                                <span class="sthana-name" id="sthanaName">कण्ठ (Throat)</span>
+                                <p class="sthana-instruction" id="sthanaInstruction">Produced at the back of the throat
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio Controls -->
+                <div class="audio-section">
+                    <h4 class="section-label">
+                        <i data-lucide="volume-2"></i>
+                        Listen & Learn
+                    </h4>
+                    <div class="audio-controls">
+                        <button class="listen-guru-btn" id="listenGuruBtn">
+                            <i data-lucide="play"></i>
+                            <span>Listen to Guru</span>
+                        </button>
+                        <div class="speed-selector">
+                            <button class="speed-btn" data-speed="slow">Slow</button>
+                            <button class="speed-btn active" data-speed="normal">Normal</button>
+                            <button class="speed-btn" data-speed="fast">Fast</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Record Section -->
+                <div class="record-section">
+                    <h4 class="section-label">
+                        <i data-lucide="mic"></i>
+                        Practice Pronunciation
+                    </h4>
+                    <div class="record-controls">
+                        <button class="record-btn" id="recordBtn">
+                            <div class="record-icon">
+                                <i data-lucide="mic"></i>
+                            </div>
+                            <span>Tap to Record</span>
+                        </button>
+                        <div class="waveform-display" id="waveformDisplay" style="display: none;">
+                            <canvas id="waveformCanvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="letter-nav">
+                    <button class="nav-btn prev" id="prevLetterBtn">
+                        <i data-lucide="chevron-left"></i>
+                        Previous
+                    </button>
+                    <button class="nav-btn next" id="nextLetterBtn">
+                        Next
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== SHLOKARSHIP SCREEN ===== -->
+        <div class="screen shlokarship-screen" id="shlokarshipScreen">
+            <header class="app-header">
+                <button class="header-btn" id="shlokarshipBackBtn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">श्लोकाध्ययन</h1>
+                    <span class="header-subtitle">Verse Study</span>
+                </div>
+                <div class="header-btn"></div>
+            </header>
+
+            <main class="shlokarship-main">
+                <!-- Shloka List -->
+                <div class="shloka-list" id="shlokaList">
+                    <!-- Populated by JS -->
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== SHLOKA DETAIL SCREEN ===== -->
+        <div class="screen shloka-detail-screen" id="shlokaDetailScreen">
+            <header class="app-header">
+                <button class="header-btn" id="shlokaDetailBackBtn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title" id="shlokaDetailTitle">गायत्री</h1>
+                    <span class="header-subtitle" id="shlokaDetailSubtitle">Gayatri Mantra</span>
+                </div>
+                <button class="header-btn" id="shlokaFavoriteBtn">
+                    <i data-lucide="heart"></i>
+                </button>
+            </header>
+
+            <main class="shloka-detail-main">
+                <!-- Full Shloka Card -->
+                <div class="shloka-full-card">
+                    <div class="script-toggle">
+                        <button class="script-btn active" data-script="devanagari">देवनागरी</button>
+                        <button class="script-btn" data-script="iast">IAST</button>
+                    </div>
+                    <p class="shloka-full-text" id="shlokaFullText"></p>
+                    <button class="listen-full-btn" id="listenFullBtn">
+                        <i data-lucide="volume-2"></i>
+                        Listen
+                    </button>
+                </div>
+
+                <!-- Meaning Section -->
+                <div class="detail-section">
+                    <h4 class="detail-label">
+                        <i data-lucide="book-open"></i>
+                        Meaning
+                    </h4>
+                    <p class="shloka-meaning" id="shlokaMeaning"></p>
+                </div>
+
+                <!-- Source Section -->
+                <div class="detail-section">
+                    <h4 class="detail-label">
+                        <i data-lucide="scroll"></i>
+                        Source
+                    </h4>
+                    <div class="source-info">
+                        <span class="source-text" id="shlokaSource"></span>
+                        <span class="deity-text" id="shlokaDeity"></span>
+                    </div>
+                </div>
+
+                <!-- Benefits Section -->
+                <div class="detail-section benefits-section">
+                    <h4 class="detail-label">
+                        <i data-lucide="sparkles"></i>
+                        Benefits
+                    </h4>
+                    <div class="benefits-tabs">
+                        <button class="benefit-tab active" data-tab="scientific">🔬 Scientific</button>
+                        <button class="benefit-tab" data-tab="spiritual">🕉️ Spiritual</button>
+                    </div>
+                    <ul class="benefits-list" id="shlokaBenefits"></ul>
+                </div>
+
+                <!-- Start Practice Button -->
+                <button class="start-practice-btn" id="startShlokaPractice">
+                    <i data-lucide="play-circle"></i>
+                    Begin Memorization
+                </button>
+            </main>
+        </div>
+
+        <!-- ===== SHLOKA PRACTICE SCREEN ===== -->
+        <div class="screen shloka-practice-screen" id="shlokaPracticeScreen">
+            <header class="app-header practice-header">
+                <button class="header-btn" id="shlokaPracticeBackBtn">
+                    <i data-lucide="x"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title" id="practiceShlokaTitle">Practice</h1>
+                    <span class="header-subtitle" id="practiceStepLabel">Step 1 of 10</span>
+                </div>
+                <div class="header-btn"></div>
+            </header>
+
+            <main class="shloka-practice-main">
+                <!-- Progress Bar -->
+                <div class="practice-progress">
+                    <div class="practice-progress-fill" id="practiceProgressFill"></div>
+                </div>
+
+                <!-- Current Line -->
+                <div class="practice-line-card">
+                    <span class="practice-line-label">Current Line</span>
+                    <p class="practice-line-sanskrit" id="practiceLineSanskrit"></p>
+                    <p class="practice-line-iast" id="practiceLineIast"></p>
+                    <p class="practice-line-meaning" id="practiceLineMeaning"></p>
+                </div>
+
+                <!-- Audio Controls -->
+                <div class="practice-audio-controls">
+                    <button class="practice-listen-btn" id="practiceListenBtn">
+                        <i data-lucide="volume-2"></i>
+                        Listen
+                    </button>
+                    <button class="practice-record-btn" id="practiceRecordBtn">
+                        <i data-lucide="mic"></i>
+                        Record
+                    </button>
+                </div>
+
+                <!-- Remaining Lines (Blurred) -->
+                <div class="remaining-lines" id="remainingLines">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Navigation -->
+                <div class="practice-nav">
+                    <button class="practice-nav-btn prev" id="practicePrevBtn" disabled>
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+                    <button class="practice-nav-btn next" id="practiceNextBtn">
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== VYAKARANA (GRAMMAR) SCREEN ===== -->
+        <div class="screen vyakarana-screen" id="vyakaranaScreen">
+            <header class="app-header">
+                <button class="header-btn" id="vyakaranaBackBtn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">व्याकरण</h1>
+                    <span class="header-subtitle">Grammar Foundation</span>
+                </div>
+                <div class="header-btn"></div>
+            </header>
+
+            <main class="vyakarana-main">
+                <!-- Grammar Topics -->
+                <div class="grammar-topics" id="grammarTopics">
+                    <!-- Sandhi Section -->
+                    <div class="grammar-card" data-topic="sandhi">
+                        <div class="grammar-icon">🔗</div>
+                        <div class="grammar-info">
+                            <span class="grammar-name">सन्धि</span>
+                            <span class="grammar-english">Sound Blending</span>
+                            <span class="grammar-desc">When sounds meet, they transform</span>
+                        </div>
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+
+                    <!-- Vibhakti Section -->
+                    <div class="grammar-card" data-topic="vibhakti">
+                        <div class="grammar-icon">📊</div>
+                        <div class="grammar-info">
+                            <span class="grammar-name">विभक्ति</span>
+                            <span class="grammar-english">Case Endings</span>
+                            <span class="grammar-desc">8 cases that define word roles</span>
+                        </div>
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+
+                    <!-- Dhatu Section -->
+                    <div class="grammar-card" data-topic="dhatu">
+                        <div class="grammar-icon">🌱</div>
+                        <div class="grammar-info">
+                            <span class="grammar-name">धातु</span>
+                            <span class="grammar-english">Verb Roots</span>
+                            <span class="grammar-desc">The seeds of all Sanskrit words</span>
+                        </div>
+                        <i data-lucide="chevron-right"></i>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== SANDHI LESSON SCREEN ===== -->
+        <div class="screen sandhi-screen" id="sandhiScreen">
+            <header class="app-header">
+                <button class="header-btn" id="sandhiBackBtn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">सन्धि</h1>
+                    <span class="header-subtitle">Sound Blending</span>
+                </div>
+                <div class="header-btn"></div>
+            </header>
+
+            <main class="sandhi-main">
+                <!-- Explanation Card -->
+                <div class="lesson-explanation">
+                    <h3>What is Sandhi?</h3>
+                    <p>When two sounds meet at word boundaries, they transform according to specific rules. This is
+                        called <strong>सन्धि</strong> (Sandhi) - literally "joining together".</p>
+                </div>
+
+                <!-- Interactive Example -->
+                <div class="sandhi-example-card">
+                    <span class="example-label">Interactive Example</span>
+                    <div class="sandhi-equation" id="sandhiEquation">
+                        <span class="sandhi-part" id="sandhiWord1">न</span>
+                        <span class="sandhi-plus">+</span>
+                        <span class="sandhi-part" id="sandhiWord2">इति</span>
+                        <span class="sandhi-equals">=</span>
+                        <span class="sandhi-result" id="sandhiResult">नेति</span>
+                    </div>
+                    <div class="sandhi-explanation" id="sandhiExplanation">
+                        <p><strong>अ + इ = ए</strong> (Guna Sandhi)</p>
+                        <p>The short vowel 'अ' combines with 'इ' to form 'ए'</p>
+                    </div>
+                </div>
+
+                <!-- Sandhi Rules List -->
+                <div class="sandhi-rules">
+                    <h4 class="rules-title">
+                        <i data-lucide="list"></i>
+                        Common Sandhi Rules
+                    </h4>
+                    <div class="rules-list" id="sandhiRulesList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Practice Button -->
+                <button class="practice-sandhi-btn" id="practiceSandhiBtn">
+                    <i data-lucide="brain"></i>
+                    Practice Sandhi
+                </button>
+            </main>
+        </div>
+
+        <!-- ===== SANDHI PRACTICE SCREEN ===== -->
+        <div class="screen sandhi-practice-screen" id="sandhiPracticeScreen">
+            <header class="app-header practice-header">
+                <button class="header-btn" id="sandhiPracticeBackBtn">
+                    <i data-lucide="x"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">Sandhi Practice</h1>
+                    <span class="header-subtitle" id="sandhiPracticeProgress">1 of 5</span>
+                </div>
+                <div class="header-btn"></div>
+            </header>
+
+            <main class="sandhi-practice-main">
+                <!-- Question Card -->
+                <div class="sandhi-question-card">
+                    <span class="question-label">Combine these sounds:</span>
+                    <div class="sandhi-puzzle">
+                        <span class="puzzle-word" id="puzzleWord1">अ</span>
+                        <span class="puzzle-plus">+</span>
+                        <span class="puzzle-word" id="puzzleWord2">इ</span>
+                        <span class="puzzle-equals">=</span>
+                        <span class="puzzle-answer" id="puzzleAnswer">?</span>
+                    </div>
+                </div>
+
+                <!-- Answer Options -->
+                <div class="answer-options" id="answerOptions">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Feedback Area -->
+                <div class="feedback-area" id="feedbackArea" style="display: none;">
+                    <div class="feedback-content" id="feedbackContent">
+                        <!-- Shows correct/incorrect feedback -->
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== AI GURU CHAT SCREEN ===== -->
+        <div class="screen guru-chat-screen" id="guruChatScreen">
+            <header class="app-header">
+                <button class="header-btn" id="guruChatBackBtn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">गुरु संवाद</h1>
+                    <span class="header-subtitle">AI Guru Conversation</span>
+                </div>
+                <button class="header-btn" id="scenarioSelectBtn">
+                    <i data-lucide="list"></i>
+                </button>
+            </header>
+
+            <main class="guru-chat-main">
+                <!-- Scenario Selection -->
+                <div class="scenario-banner" id="scenarioBanner">
+                    <span class="scenario-label">Current Scenario:</span>
+                    <span class="scenario-name" id="currentScenario">Temple Visit</span>
+                    <button class="change-scenario-btn" id="changeScenarioBtn">Change</button>
+                </div>
+
+                <!-- Chat Messages -->
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Guru welcome message -->
+                    <div class="chat-message guru-message">
+                        <div class="message-avatar">🧘</div>
+                        <div class="message-content">
+                            <span class="message-sender">गुरुजी</span>
+                            <p class="message-text">नमस्ते शिष्य! मैं तुम्हारा गुरु हूँ।</p>
+                            <p class="message-translation">Namaste student! I am your Guru.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Response Options -->
+                <div class="response-options" id="responseOptions">
+                    <button class="response-btn" data-response="namaste">
+                        <span class="response-sanskrit">नमस्ते गुरुजी</span>
+                        <span class="response-english">Hello Guruji</span>
+                    </button>
+                    <button class="response-btn" data-response="pranam">
+                        <span class="response-sanskrit">प्रणाम गुरुजी</span>
+                        <span class="response-english">I bow to you, Guruji</span>
+                    </button>
+                    <button class="response-btn" data-response="question">
+                        <span class="response-sanskrit">कथम् अस्ति भवान्?</span>
+                        <span class="response-english">How are you?</span>
+                    </button>
+                </div>
+
+                <!-- Record Option -->
+                <div class="chat-input-area">
+                    <button class="chat-record-btn" id="chatRecordBtn">
+                        <i data-lucide="mic"></i>
+                        <span>Speak in Sanskrit</span>
+                    </button>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== SCENARIO SELECT MODAL ===== -->
+        <div class="modal-overlay" id="scenarioModal">
+            <div class="modal-content scenario-modal">
+                <div class="modal-header">
+                    <h2>Choose Scenario</h2>
+                    <button class="close-btn" id="scenarioCloseBtn">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="scenarios-list" id="scenariosList">
+                    <div class="scenario-item active" data-scenario="temple">
+                        <span class="scenario-icon">🛕</span>
+                        <div class="scenario-info">
+                            <span class="scenario-title">Temple Visit</span>
+                            <span class="scenario-desc">Practice greetings and offerings</span>
+                        </div>
+                    </div>
+                    <div class="scenario-item" data-scenario="market">
+                        <span class="scenario-icon">🏪</span>
+                        <div class="scenario-info">
+                            <span class="scenario-title">At the Market</span>
+                            <span class="scenario-desc">Numbers, prices, and bargaining</span>
+                        </div>
+                    </div>
+                    <div class="scenario-item" data-scenario="family">
+                        <span class="scenario-icon">👨‍👩‍👧</span>
+                        <div class="scenario-info">
+                            <span class="scenario-title">Family Conversation</span>
+                            <span class="scenario-desc">Daily life and relationships</span>
+                        </div>
+                    </div>
+                    <div class="scenario-item" data-scenario="ashram">
+                        <span class="scenario-icon">🏛️</span>
+                        <div class="scenario-info">
+                            <span class="scenario-title">At the Ashram</span>
+                            <span class="scenario-desc">Spiritual discussions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PRONUNCIATION FEEDBACK MODAL ===== -->
+        <div class="modal-overlay" id="pronunciationModal">
+            <div class="modal-content pronunciation-modal">
+                <div class="modal-header">
+                    <h2>Pronunciation Feedback</h2>
+                    <button class="close-btn" id="pronunciationCloseBtn">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="pronunciation-feedback">
+                    <!-- Guru Waveform -->
+                    <div class="waveform-comparison">
+                        <div class="waveform-row">
+                            <span class="waveform-label">🧘 Guru</span>
+                            <canvas id="guruWaveform" class="waveform-canvas"></canvas>
+                        </div>
+                        <div class="waveform-row">
+                            <span class="waveform-label">🎤 You</span>
+                            <canvas id="userWaveform" class="waveform-canvas"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Score -->
+                    <div class="pronunciation-score">
+                        <div class="score-circle" id="pronunciationScore">
+                            <span class="score-value">85%</span>
+                            <span class="score-label">Match</span>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Details -->
+                    <div class="feedback-details" id="feedbackDetails">
+                        <div class="feedback-item good">
+                            <i data-lucide="check-circle"></i>
+                            <span>Duration: Good</span>
+                        </div>
+                        <div class="feedback-item warning">
+                            <i data-lucide="alert-circle"></i>
+                            <span>Vowel length: Slightly short</span>
+                        </div>
+                    </div>
+
+                    <button class="modal-btn" id="tryAgainBtn">
+                        <i data-lucide="refresh-cw"></i>
+                        Try Again
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PHASE 3: SANGHA (COMMUNITY) SCREEN ===== -->
+        <div class="screen sangha-screen" id="sanghaScreen">
+            <header class="app-header">
+                <button class="header-btn" id="sanghaBackBtn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">संघ</h1>
+                    <span class="header-subtitle">Community</span>
+                </div>
+                <button class="header-btn" id="leaderboardBtn">
+                    <i data-lucide="trophy"></i>
+                </button>
+            </header>
+
+            <main class="sangha-main">
+                <!-- Live Chanting Rooms -->
+                <section class="chanting-section">
+                    <h3 class="section-title">
+                        <i data-lucide="users"></i>
+                        Live Chanting Rooms
+                    </h3>
+                    <div class="chanting-rooms" id="chantingRooms">
+                        <div class="room-card active" data-room="gayatri">
+                            <div class="room-live-indicator">
+                                <span class="live-dot"></span>
+                                <span>LIVE</span>
+                            </div>
+                            <div class="room-info">
+                                <span class="room-mantra">गायत्री मन्त्र</span>
+                                <span class="room-english">Gayatri Mantra</span>
+                            </div>
+                            <div class="room-stats">
+                                <span class="room-count">🙏 24 साधक</span>
+                                <span class="room-time">Started 15 min ago</span>
+                            </div>
+                            <button class="join-room-btn">Join</button>
+                        </div>
+
+                        <div class="room-card" data-room="mahamrityunjaya">
+                            <div class="room-live-indicator">
+                                <span class="live-dot"></span>
+                                <span>LIVE</span>
+                            </div>
+                            <div class="room-info">
+                                <span class="room-mantra">महामृत्युञ्जय</span>
+                                <span class="room-english">Mahamrityunjaya</span>
+                            </div>
+                            <div class="room-stats">
+                                <span class="room-count">🙏 12 साधक</span>
+                                <span class="room-time">Started 32 min ago</span>
+                            </div>
+                            <button class="join-room-btn">Join</button>
+                        </div>
+
+                        <div class="room-card scheduled" data-room="hanuman">
+                            <div class="room-scheduled-indicator">
+                                <i data-lucide="clock"></i>
+                                <span>6:00 PM</span>
+                            </div>
+                            <div class="room-info">
+                                <span class="room-mantra">हनुमान चालीसा</span>
+                                <span class="room-english">Hanuman Chalisa</span>
+                            </div>
+                            <div class="room-stats">
+                                <span class="room-count">🔔 41 reminder set</span>
+                            </div>
+                            <button class="join-room-btn notify">Remind Me</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Your Study Group -->
+                <section class="study-group-section">
+                    <h3 class="section-title">
+                        <i data-lucide="book-open"></i>
+                        Your Study Group
+                    </h3>
+                    <div class="study-group-card">
+                        <div class="group-header">
+                            <span class="group-name">प्रातःकालीन संस्कृतम्</span>
+                            <span class="group-members">8 members</span>
+                        </div>
+                        <div class="group-activity">
+                            <div class="member-avatars">
+                                <span class="avatar">👤</span>
+                                <span class="avatar">👤</span>
+                                <span class="avatar">👤</span>
+                                <span class="avatar more">+5</span>
+                            </div>
+                            <span class="last-activity">Last active: Today</span>
+                        </div>
+                        <button class="group-action-btn">Enter Group</button>
+                    </div>
+                </section>
+
+                <!-- Weekly Challenge -->
+                <section class="challenge-section">
+                    <h3 class="section-title">
+                        <i data-lucide="flame"></i>
+                        Weekly Challenge
+                    </h3>
+                    <div class="challenge-card">
+                        <div class="challenge-header">
+                            <span class="challenge-title">📿 108 Gayatri Malas</span>
+                            <span class="challenge-prize">🏆 Golden Sadhak Badge</span>
+                        </div>
+                        <div class="challenge-progress">
+                            <div class="challenge-bar">
+                                <div class="challenge-fill" style="width: 35%"></div>
+                            </div>
+                            <span class="challenge-stats">35/108 Malas · 4 days left</span>
+                        </div>
+                        <button class="challenge-contribute-btn">
+                            <i data-lucide="plus"></i>
+                            Contribute Now
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Dana Button -->
+                <button class="dana-btn" id="openDanaBtn">
+                    <span class="dana-icon">🙏</span>
+                    <span class="dana-text">Support - दान</span>
+                </button>
+            </main>
+        </div>
+
+        <!-- ===== PHASE 3: LEADERBOARD SCREEN ===== -->
+        <div class="screen leaderboard-screen" id="leaderboardScreen">
+            <header class="app-header">
+                <button class="header-btn" id="leaderboardBackBtn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">प्रतिष्ठा पट्ट</h1>
+                    <span class="header-subtitle">Leaderboard</span>
+                </div>
+                <div class="header-btn"></div>
+            </header>
+
+            <main class="leaderboard-main">
+                <!-- Time Filter -->
+                <div class="leaderboard-tabs">
+                    <button class="lb-tab active" data-period="weekly">This Week</button>
+                    <button class="lb-tab" data-period="monthly">This Month</button>
+                    <button class="lb-tab" data-period="alltime">All Time</button>
+                </div>
+
+                <!-- Top 3 Podium -->
+                <div class="podium">
+                    <div class="podium-place second">
+                        <div class="podium-avatar">🧘‍♂️</div>
+                        <span class="podium-name">विद्याधर</span>
+                        <span class="podium-title">शास्त्री</span>
+                        <span class="podium-xp">1,850 XP</span>
+                        <div class="podium-rank">2</div>
+                    </div>
+                    <div class="podium-place first">
+                        <div class="podium-crown">👑</div>
+                        <div class="podium-avatar">🙏</div>
+                        <span class="podium-name">आर्यभट्ट</span>
+                        <span class="podium-title">आचार्य</span>
+                        <span class="podium-xp">2,340 XP</span>
+                        <div class="podium-rank">1</div>
+                    </div>
+                    <div class="podium-place third">
+                        <div class="podium-avatar">📿</div>
+                        <span class="podium-name">सूर्यदेव</span>
+                        <span class="podium-title">अभ्यासी</span>
+                        <span class="podium-xp">1,620 XP</span>
+                        <div class="podium-rank">3</div>
+                    </div>
+                </div>
+
+                <!-- Your Rank -->
+                <div class="your-rank-card">
+                    <span class="your-rank-position">#42</span>
+                    <div class="your-rank-info">
+                        <span class="your-name">You</span>
+                        <span class="your-title">प्रवेशी</span>
+                    </div>
+                    <span class="your-xp">245 XP</span>
+                </div>
+
+                <!-- Full Rankings List -->
+                <div class="rankings-list" id="rankingsList">
+                    <div class="rank-item">
+                        <span class="rank-position">4</span>
+                        <div class="rank-info">
+                            <span class="rank-name">कृष्णदास</span>
+                            <span class="rank-title">तपस्वी</span>
+                        </div>
+                        <span class="rank-xp">1,480 XP</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-position">5</span>
+                        <div class="rank-info">
+                            <span class="rank-name">गौरी</span>
+                            <span class="rank-title">अभ्यासी</span>
+                        </div>
+                        <span class="rank-xp">1,350 XP</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-position">6</span>
+                        <div class="rank-info">
+                            <span class="rank-name">विष्णुप्रिया</span>
+                            <span class="rank-title">मन्त्र प्रवीण</span>
+                        </div>
+                        <span class="rank-xp">1,290 XP</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-position">7</span>
+                        <div class="rank-info">
+                            <span class="rank-name">रामभक्त</span>
+                            <span class="rank-title">प्रवेशी</span>
+                        </div>
+                        <span class="rank-xp">1,180 XP</span>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== PHASE 3: DANA (DONATION) MODAL ===== -->
+        <div class="modal-overlay" id="danaModal">
+            <div class="modal-content dana-modal">
+                <div class="modal-header">
+                    <h2>दान - Support Sanskrit Vidya</h2>
+                    <button class="close-btn" id="danaCloseBtn">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="dana-content">
+                    <div class="dana-message">
+                        <span class="dana-emoji">🙏</span>
+                        <p>Your <strong>dakshina</strong> (donation) helps keep this app free for all seekers and
+                            supports Sanskrit education worldwide.</p>
+                    </div>
+
+                    <!-- Donation Amounts -->
+                    <div class="dana-amounts" id="danaAmounts">
+                        <button class="dana-amount" data-amount="51">
+                            <span class="amount">₹51</span>
+                            <span class="label">एकादश</span>
+                        </button>
+                        <button class="dana-amount selected" data-amount="108">
+                            <span class="amount">₹108</span>
+                            <span class="label">अष्टोत्तर</span>
+                        </button>
+                        <button class="dana-amount" data-amount="251">
+                            <span class="amount">₹251</span>
+                            <span class="label">शुभ</span>
+                        </button>
+                        <button class="dana-amount" data-amount="1008">
+                            <span class="amount">₹1008</span>
+                            <span class="label">सहस्र</span>
+                        </button>
+                    </div>
+
+                    <!-- Custom Amount -->
+                    <div class="dana-custom">
+                        <label>Custom Amount (₹)</label>
+                        <input type="number" id="customDanaAmount" placeholder="Enter amount">
+                    </div>
+
+                    <!-- Benefits -->
+                    <div class="dana-benefits">
+                        <h4>Your Dana Supports:</h4>
+                        <ul>
+                            <li>🎓 Free Sanskrit courses for students</li>
+                            <li>🎵 High-quality audio recordings</li>
+                            <li>📚 New lessons and shlokas</li>
+                            <li>🛕 Preservation of Vedic heritage</li>
+                        </ul>
+                    </div>
+
+                    <!-- Donate Button -->
+                    <button class="donate-btn" id="donateBtn">
+                        <i data-lucide="heart"></i>
+                        Donate ₹108
+                    </button>
+
+                    <p class="dana-note">80G tax exemption available for Indian donors</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PROFILE/ACHIEVEMENTS MODAL ===== -->
+        <div class="modal-overlay" id="profileModal">
+            <div class="modal-content profile-modal">
+                <div class="modal-header">
+                    <h2>Your Journey</h2>
+                    <button class="close-btn" id="profileCloseBtn">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalDays">0</span>
+                        <span class="stat-label">Days</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="lettersLearned">0</span>
+                        <span class="stat-label">Letters</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="shlokasMemorized">0</span>
+                        <span class="stat-label">Shlokas</span>
+                    </div>
+                </div>
+                <div class="achievements-grid" id="achievementsGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== COMPLETION MODAL ===== -->
+        <div class="modal-overlay" id="completionModal">
+            <div class="modal-content completion-modal">
+                <div class="completion-icon">
+                    <i data-lucide="check-circle-2"></i>
+                </div>
+                <h2 class="completion-title">🎉 Excellent!</h2>
+                <p class="completion-text" id="completionText">You've completed this lesson</p>
+                <div class="completion-xp">
+                    <span class="xp-icon">⭐</span>
+                    <span class="xp-value">+10 XP</span>
+                </div>
+                <button class="modal-btn" id="completionCloseBtn">
+                    <i data-lucide="check"></i>
+                    Continue
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="bellSound" src="https://assets.mixkit.co/sfx/preview/mixkit-meditation-bell-234.mp3"
+        preload="auto"></audio>
+    <audio id="successSound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"
+        preload="auto"></audio>
+
+    <!-- Scripts -->
+    <script src="lesson-data.js"></script>
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>

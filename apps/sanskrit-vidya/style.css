@@ -1,0 +1,3162 @@
+/**
+ * Sanskrit Vidya - Virtual Gurukul Styles
+ * The Guru-Shishya Digital Parampara
+ */
+
+/* ===== CSS VARIABLES ===== */
+:root {
+    /* Gurukul Color Palette */
+    --bg-primary: #0F0C29;
+    --bg-secondary: #1A1744;
+    --bg-tertiary: #241E50;
+
+    /* Sacred Colors */
+    --gold: #FFD700;
+    --gold-light: #FFE55C;
+    --saffron: #FF9933;
+    --sacred-red: #DC143C;
+    --lotus-pink: #FF69B4;
+
+    /* Accent Colors */
+    --accent-primary: #6C63FF;
+    --accent-secondary: #4ECDC4;
+    --accent-success: #4CAF50;
+    --accent-warning: #FFC107;
+
+    /* Text Colors */
+    --text-primary: #FFFFFF;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #6C63FF 0%, #4ECDC4 100%);
+    --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    --gradient-sacred: linear-gradient(135deg, #FF9933 0%, #FFD700 100%);
+    --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 50%;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 20px rgba(108, 99, 255, 0.3);
+
+    /* Safe Areas */
+    --safe-top: env(safe-area-inset-top, 20px);
+    --safe-bottom: env(safe-area-inset-bottom, 20px);
+}
+
+/* ===== RESET & BASE ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.sanskrit-text,
+.big-letter,
+.shloka-full-text,
+.practice-line-sanskrit {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+
+/* ===== APP CONTAINER ===== */
+.app-container {
+    width: 100%;
+    height: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+/* ===== SCREENS ===== */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.screen.slide-left {
+    transform: translateX(-100%);
+}
+
+/* ===== HEADER ===== */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    padding-top: calc(var(--safe-top) + var(--space-md));
+    background: rgba(15, 12, 41, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+}
+
+.header-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.header-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.header-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+.header-center {
+    text-align: center;
+    flex: 1;
+}
+
+.header-title {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--gold);
+}
+
+.header-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== HOME SCREEN ===== */
+.home-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + var(--space-xl));
+}
+
+/* Progress/Mandala Section */
+.progress-section {
+    margin-bottom: var(--space-lg);
+}
+
+.mandala-card {
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.mandala-visual {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+.mandala-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.mandala-om {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 32px;
+    fill: var(--gold);
+}
+
+.mandala-petals path {
+    fill: none;
+    stroke: rgba(255, 215, 0, 0.3);
+    stroke-width: 2;
+}
+
+.mandala-petals path.complete {
+    stroke: var(--gold);
+    fill: rgba(255, 215, 0, 0.1);
+}
+
+.mandala-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.streak-display {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.streak-icon {
+    font-size: 1.5rem;
+}
+
+.streak-count {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.streak-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.level-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: rgba(108, 99, 255, 0.2);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-full);
+    width: fit-content;
+}
+
+.level-icon {
+    font-size: 1rem;
+}
+
+.level-name {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.875rem;
+    color: var(--accent-primary);
+}
+
+/* Effect Banner */
+.effect-banner {
+    margin-bottom: var(--space-lg);
+}
+
+.effect-card {
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.2) 0%, rgba(108, 99, 255, 0.2) 100%);
+    border: 1px solid rgba(78, 205, 196, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.effect-icon {
+    font-size: 2rem;
+}
+
+.effect-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.effect-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent-secondary);
+}
+
+.effect-text {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Section Titles */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-title i {
+    width: 16px;
+    height: 16px;
+    color: var(--accent-primary);
+}
+
+/* Paths Grid */
+.paths-section {
+    margin-bottom: var(--space-lg);
+}
+
+.paths-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+.path-card {
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.path-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.path-card.selected {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.2);
+}
+
+.path-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+}
+
+.path-name {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1rem;
+    display: block;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.path-english {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Modules Grid */
+.modules-section {
+    margin-bottom: var(--space-lg);
+}
+
+.modules-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.module-card {
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.module-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.module-icon {
+    font-size: 2rem;
+    width: 48px;
+    text-align: center;
+}
+
+.module-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.module-name {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.125rem;
+    color: var(--gold);
+}
+
+.module-english {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.module-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.module-progress {
+    width: 48px;
+    height: 48px;
+}
+
+.progress-ring {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.progress-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 3;
+}
+
+.progress-fill {
+    fill: none;
+    stroke: var(--accent-primary);
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.5s ease;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Wisdom Section */
+.wisdom-section {
+    margin-bottom: var(--space-lg);
+}
+
+.wisdom-card {
+    background: linear-gradient(135deg, rgba(255, 153, 51, 0.15) 0%, rgba(255, 215, 0, 0.1) 100%);
+    border: 1px solid rgba(255, 153, 51, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+}
+
+.wisdom-quote {
+    font-size: 2rem;
+    color: var(--saffron);
+    display: block;
+    margin-bottom: var(--space-sm);
+}
+
+.wisdom-text {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.25rem;
+    color: var(--gold);
+    margin-bottom: var(--space-xs);
+}
+
+.wisdom-translation {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: var(--space-sm);
+}
+
+.wisdom-source {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ===== VARNAMALA SCREEN ===== */
+.varnamala-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + var(--space-xl));
+}
+
+/* Category Tabs */
+.category-tabs {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-md);
+    margin-bottom: var(--space-md);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.category-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.category-tab {
+    flex-shrink: 0;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.category-tab:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.category-tab.active {
+    background: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+/* Category Info */
+.category-info {
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.category-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gold);
+    display: block;
+    margin-bottom: var(--space-xs);
+}
+
+.category-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Letters Grid */
+.letters-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-sm);
+}
+
+.letter-item {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.letter-item:hover {
+    transform: scale(1.05);
+    border-color: var(--gold);
+}
+
+.letter-item.completed {
+    border-color: var(--accent-success);
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.letter-item .devanagari {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.letter-item .iast {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+}
+
+/* ===== LETTER DETAIL SCREEN ===== */
+.letter-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + var(--space-xl));
+}
+
+.letter-display {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-xl);
+}
+
+.letter-card {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 153, 51, 0.1) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-glow);
+}
+
+.big-letter {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 4rem;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.letter-romanized {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-top: var(--space-sm);
+}
+
+/* Articulation Section */
+.articulation-section {
+    margin-bottom: var(--space-lg);
+}
+
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.section-label i {
+    width: 16px;
+    height: 16px;
+    color: var(--accent-secondary);
+}
+
+.articulation-card {
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+}
+
+.articulation-visual {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+.mouth-diagram {
+    width: 100px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.mouth-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.mouth-outline {
+    fill: rgba(255, 255, 255, 0.05);
+    stroke: rgba(255, 255, 255, 0.3);
+    stroke-width: 1;
+}
+
+.tongue {
+    fill: rgba(255, 107, 107, 0.5);
+    stroke: #FF6B6B;
+    stroke-width: 1;
+    transition: d 0.3s ease;
+}
+
+.articulation-point {
+    fill: var(--accent-primary);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        r: 5;
+    }
+
+    50% {
+        opacity: 0.5;
+        r: 8;
+    }
+}
+
+.articulation-info {
+    flex: 1;
+}
+
+.sthana-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-secondary);
+    display: block;
+    margin-bottom: var(--space-xs);
+}
+
+.sthana-instruction {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Audio Controls */
+.audio-section {
+    margin-bottom: var(--space-lg);
+}
+
+.audio-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.listen-guru-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-md);
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.listen-guru-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.listen-guru-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+.speed-selector {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+}
+
+.speed-btn {
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.speed-btn.active {
+    background: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+/* Record Section */
+.record-section {
+    margin-bottom: var(--space-lg);
+}
+
+.record-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.record-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-xl);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.record-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent-primary);
+}
+
+.record-btn.recording {
+    background: rgba(220, 20, 60, 0.2);
+    border-color: var(--sacred-red);
+    border-style: solid;
+    animation: recording-pulse 1s infinite;
+}
+
+@keyframes recording-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(220, 20, 60, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px rgba(220, 20, 60, 0);
+    }
+}
+
+.record-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(108, 99, 255, 0.2);
+    border-radius: var(--radius-full);
+}
+
+.record-icon i {
+    width: 24px;
+    height: 24px;
+    color: var(--accent-primary);
+}
+
+.record-btn.recording .record-icon {
+    background: rgba(220, 20, 60, 0.3);
+}
+
+.record-btn.recording .record-icon i {
+    color: var(--sacred-red);
+}
+
+.waveform-display {
+    width: 100%;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+#waveformCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* Letter Navigation */
+.letter-nav {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.nav-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.nav-btn.next {
+    background: var(--gradient-primary);
+    color: var(--text-primary);
+}
+
+.nav-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+/* ===== SHLOKARSHIP SCREEN ===== */
+.shlokarship-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + var(--space-xl));
+}
+
+.shloka-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.shloka-card {
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.shloka-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--gold);
+}
+
+.shloka-card.completed {
+    border-color: var(--accent-success);
+}
+
+.shloka-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-sm);
+}
+
+.shloka-name {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.125rem;
+    color: var(--gold);
+}
+
+.shloka-english {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.shloka-badge {
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(108, 99, 255, 0.2);
+    border-radius: var(--radius-full);
+    font-size: 0.625rem;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+}
+
+.shloka-card.completed .shloka-badge {
+    background: rgba(76, 175, 80, 0.2);
+    color: var(--accent-success);
+}
+
+.shloka-preview {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.shloka-meta {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ===== SHLOKA DETAIL SCREEN ===== */
+.shloka-detail-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + 100px);
+}
+
+.shloka-full-card {
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 153, 51, 0.05) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.script-toggle {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    margin-bottom: var(--space-md);
+}
+
+.script-btn {
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.script-btn.active {
+    background: var(--gold);
+    color: var(--bg-primary);
+}
+
+.shloka-full-text {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.125rem;
+    line-height: 2;
+    color: var(--gold);
+    margin-bottom: var(--space-md);
+}
+
+.listen-full-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.listen-full-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+/* Detail Sections */
+.detail-section {
+    margin-bottom: var(--space-lg);
+}
+
+.detail-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.detail-label i {
+    width: 16px;
+    height: 16px;
+    color: var(--saffron);
+}
+
+.shloka-meaning {
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.source-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.source-text {
+    font-size: 0.875rem;
+    color: var(--accent-secondary);
+}
+
+.deity-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Benefits Section */
+.benefits-tabs {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.benefit-tab {
+    flex: 1;
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.benefit-tab.active {
+    background: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+.benefits-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.benefits-list li::before {
+    content: '✓';
+    color: var(--accent-success);
+    font-weight: bold;
+}
+
+/* Start Practice Button */
+.start-practice-btn {
+    position: fixed;
+    bottom: calc(var(--safe-bottom) + var(--space-md));
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-xl);
+    background: var(--gradient-gold);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bg-primary);
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.start-practice-btn:hover {
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.start-practice-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== SHLOKA PRACTICE SCREEN ===== */
+.shloka-practice-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + var(--space-xl));
+    display: flex;
+    flex-direction: column;
+}
+
+.practice-progress {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-lg);
+    overflow: hidden;
+}
+
+.practice-progress-fill {
+    height: 100%;
+    background: var(--gradient-gold);
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+}
+
+.practice-line-card {
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 153, 51, 0.1) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.practice-line-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: var(--space-md);
+}
+
+.practice-line-sanskrit {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: var(--space-sm);
+}
+
+.practice-line-iast {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: var(--space-sm);
+}
+
+.practice-line-meaning {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.practice-audio-controls {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.practice-listen-btn,
+.practice-record-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.practice-listen-btn {
+    background: var(--gradient-primary);
+    color: var(--text-primary);
+}
+
+.practice-record-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-secondary);
+}
+
+.practice-listen-btn i,
+.practice-record-btn i {
+    width: 18px;
+    height: 18px;
+}
+
+.remaining-lines {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.remaining-line {
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1rem;
+    color: var(--text-muted);
+    filter: blur(4px);
+    user-select: none;
+    transition: filter 0.3s ease;
+}
+
+.remaining-line.revealed {
+    filter: blur(0);
+    color: var(--text-primary);
+}
+
+.practice-nav {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: auto;
+    padding-top: var(--space-lg);
+}
+
+.practice-nav-btn {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.practice-nav-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.practice-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.practice-nav-btn.next {
+    background: var(--gradient-gold);
+    color: var(--bg-primary);
+    margin-left: auto;
+}
+
+.practice-nav-btn i {
+    width: 24px;
+    height: 24px;
+}
+
+/* ===== MODALS ===== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    max-width: 360px;
+    width: 100%;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.modal-header h2 {
+    font-size: 1.25rem;
+    color: var(--gold);
+}
+
+.close-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.close-btn i {
+    width: 18px;
+    height: 18px;
+}
+
+/* Profile Modal */
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+}
+
+.achievement-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    text-align: center;
+    opacity: 0.4;
+}
+
+.achievement-item.unlocked {
+    opacity: 1;
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.achievement-icon {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+}
+
+.achievement-name {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+}
+
+/* Completion Modal */
+.completion-modal {
+    text-align: center;
+}
+
+.completion-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(76, 175, 80, 0.2);
+    border-radius: var(--radius-full);
+}
+
+.completion-icon i {
+    width: 48px;
+    height: 48px;
+    color: var(--accent-success);
+}
+
+.completion-title {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.completion-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.completion-xp {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-lg);
+}
+
+.xp-icon {
+    font-size: 1rem;
+}
+
+.xp-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gold);
+}
+
+.modal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-md);
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+}
+
+.modal-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 380px) {
+    .paths-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .letters-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .big-letter {
+        font-size: 3rem;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+    }
+}
+
+.home-main>section {
+    animation: slideUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+.home-main>section:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.home-main>section:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.home-main>section:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.home-main>section:nth-child(4) {
+    animation-delay: 0.25s;
+}
+
+.home-main>section:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+.home-main>section:nth-child(6) {
+    animation-delay: 0.35s;
+}
+
+/* ===== PHASE 2: MODULE BADGE ===== */
+.module-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--gradient-gold);
+    color: var(--bg-primary);
+    font-size: 0.625rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    animation: pulse-badge 2s infinite;
+}
+
+.module-card {
+    position: relative;
+}
+
+@keyframes pulse-badge {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* ===== PHASE 2: VYAKARANA (GRAMMAR) SCREEN ===== */
+.vyakarana-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + var(--space-xl));
+}
+
+.grammar-topics {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.grammar-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.grammar-card:hover {
+    transform: translateX(4px);
+    border-color: var(--accent-secondary);
+}
+
+.grammar-icon {
+    font-size: 2rem;
+    width: 48px;
+    text-align: center;
+}
+
+.grammar-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.grammar-name {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.25rem;
+    color: var(--accent-secondary);
+}
+
+.grammar-english {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.grammar-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.grammar-card>i {
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+}
+
+/* ===== SANDHI LESSON SCREEN ===== */
+.sandhi-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + 100px);
+}
+
+.lesson-explanation {
+    background: rgba(78, 205, 196, 0.1);
+    border: 1px solid rgba(78, 205, 196, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.lesson-explanation h3 {
+    font-size: 1.125rem;
+    color: var(--accent-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.lesson-explanation p {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.sandhi-example-card {
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 153, 51, 0.05) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.example-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: var(--space-md);
+}
+
+.sandhi-equation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.sandhi-part {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+}
+
+.sandhi-plus,
+.sandhi-equals {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+}
+
+.sandhi-result {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 215, 0, 0.15);
+    border: 2px solid var(--gold);
+    border-radius: var(--radius-md);
+    animation: glow 2s infinite;
+}
+
+.sandhi-explanation {
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+}
+
+.sandhi-explanation p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xs);
+}
+
+.sandhi-explanation p:last-child {
+    margin-bottom: 0;
+}
+
+.sandhi-rules {
+    margin-bottom: var(--space-lg);
+}
+
+.rules-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.rules-title i {
+    width: 16px;
+    height: 16px;
+    color: var(--saffron);
+}
+
+.rules-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.rule-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.rule-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.rule-formula {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: var(--radius-sm);
+}
+
+.rule-info {
+    flex: 1;
+}
+
+.rule-name {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    display: block;
+}
+
+.rule-example {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.practice-sandhi-btn {
+    position: fixed;
+    bottom: calc(var(--safe-bottom) + var(--space-md));
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-xl);
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.practice-sandhi-btn:hover {
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.practice-sandhi-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== SANDHI PRACTICE SCREEN ===== */
+.sandhi-practice-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + var(--space-xl));
+    display: flex;
+    flex-direction: column;
+}
+
+.sandhi-question-card {
+    background: linear-gradient(145deg, rgba(108, 99, 255, 0.15) 0%, rgba(78, 205, 196, 0.1) 100%);
+    border: 2px solid rgba(108, 99, 255, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.question-label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: var(--space-lg);
+}
+
+.sandhi-puzzle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.puzzle-word {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 2rem;
+    color: var(--text-primary);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+}
+
+.puzzle-plus,
+.puzzle-equals {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+}
+
+.puzzle-answer {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 2rem;
+    color: var(--accent-primary);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(108, 99, 255, 0.2);
+    border: 2px dashed var(--accent-primary);
+    border-radius: var(--radius-md);
+    min-width: 60px;
+}
+
+.answer-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.answer-option {
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.answer-option:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.answer-option .devanagari {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 2rem;
+    color: var(--text-primary);
+    display: block;
+}
+
+.answer-option.correct {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: var(--accent-success);
+}
+
+.answer-option.incorrect {
+    background: rgba(220, 20, 60, 0.2);
+    border-color: var(--sacred-red);
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.feedback-area {
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.feedback-content.correct {
+    color: var(--accent-success);
+}
+
+.feedback-content.incorrect {
+    color: var(--sacred-red);
+}
+
+.feedback-content h4 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-sm);
+}
+
+.feedback-content p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* ===== AI GURU CHAT SCREEN ===== */
+.guru-chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.scenario-banner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 153, 51, 0.1);
+    border-bottom: 1px solid rgba(255, 153, 51, 0.2);
+}
+
+.scenario-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.scenario-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--saffron);
+    flex: 1;
+}
+
+.change-scenario-btn {
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.chat-message {
+    display: flex;
+    gap: var(--space-sm);
+    max-width: 85%;
+}
+
+.chat-message.guru-message {
+    align-self: flex-start;
+}
+
+.chat-message.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 153, 51, 0.2);
+    border-radius: var(--radius-full);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.user-message .message-avatar {
+    background: rgba(108, 99, 255, 0.2);
+}
+
+.message-content {
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    border-top-left-radius: var(--radius-xs);
+}
+
+.user-message .message-content {
+    background: rgba(108, 99, 255, 0.2);
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-xs);
+}
+
+.message-sender {
+    font-size: 0.75rem;
+    color: var(--saffron);
+    display: block;
+    margin-bottom: var(--space-xs);
+}
+
+.user-message .message-sender {
+    color: var(--accent-primary);
+}
+
+.message-text {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.message-translation {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.response-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.response-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.response-btn:hover {
+    background: rgba(108, 99, 255, 0.2);
+    border-color: var(--accent-primary);
+}
+
+.response-sanskrit {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.response-english {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.chat-input-area {
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + var(--space-md));
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-record-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-md);
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chat-record-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.chat-record-btn i {
+    width: 18px;
+    height: 18px;
+}
+
+/* ===== SCENARIO MODAL ===== */
+.scenario-modal {
+    max-height: 80vh;
+}
+
+.scenarios-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.scenario-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.scenario-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.scenario-item.active {
+    border-color: var(--saffron);
+    background: rgba(255, 153, 51, 0.1);
+}
+
+.scenario-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
+}
+
+.scenario-info {
+    flex: 1;
+}
+
+.scenario-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: block;
+}
+
+.scenario-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ===== PRONUNCIATION FEEDBACK MODAL ===== */
+.pronunciation-modal {
+    max-height: 85vh;
+}
+
+.pronunciation-feedback {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.waveform-comparison {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.waveform-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.waveform-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    width: 60px;
+}
+
+.waveform-canvas {
+    flex: 1;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+}
+
+.pronunciation-score {
+    display: flex;
+    justify-content: center;
+}
+
+.score-circle {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(108, 99, 255, 0.2) 100%);
+    border: 3px solid var(--accent-success);
+    border-radius: var(--radius-full);
+}
+
+.score-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-success);
+}
+
+.score-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.feedback-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.feedback-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+}
+
+.feedback-item i {
+    width: 16px;
+    height: 16px;
+}
+
+.feedback-item.good {
+    color: var(--accent-success);
+}
+
+.feedback-item.warning {
+    color: var(--accent-warning);
+}
+
+.feedback-item.error {
+    color: var(--sacred-red);
+}
+
+/* ===== PHASE 3: HOT BADGE ===== */
+.module-badge.hot {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+    animation: pulse-hot 1.5s infinite;
+}
+
+@keyframes pulse-hot {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.5);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px 3px rgba(255, 107, 107, 0.3);
+    }
+}
+
+/* ===== PHASE 3: SANGHA (COMMUNITY) SCREEN ===== */
+.sangha-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + 80px);
+}
+
+.sangha-main .section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+}
+
+.sangha-main .section-title i {
+    width: 18px;
+    height: 18px;
+    color: var(--saffron);
+}
+
+/* Chanting Rooms */
+.chanting-rooms {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.room-card {
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    transition: all 0.2s ease;
+}
+
+.room-card.active {
+    border-color: rgba(76, 175, 80, 0.4);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.1);
+}
+
+.room-card.scheduled {
+    border-color: rgba(255, 193, 7, 0.3);
+}
+
+.room-live-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-success);
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-success);
+    border-radius: 50%;
+    animation: pulse-live 1.5s infinite;
+}
+
+@keyframes pulse-live {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+.room-scheduled-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.75rem;
+    color: var(--accent-warning);
+}
+
+.room-scheduled-indicator i {
+    width: 14px;
+    height: 14px;
+}
+
+.room-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.room-mantra {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.room-english {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.room-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.join-room-btn {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.join-room-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.join-room-btn.notify {
+    background: linear-gradient(135deg, #FFC107 0%, #FFD54F 100%);
+    color: var(--bg-primary);
+}
+
+/* Study Group */
+.study-group-card {
+    background: var(--gradient-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+.group-name {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.125rem;
+    color: var(--text-primary);
+}
+
+.group-members {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.group-activity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+.member-avatars {
+    display: flex;
+}
+
+.member-avatars .avatar {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--bg-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    margin-left: -8px;
+}
+
+.member-avatars .avatar:first-child {
+    margin-left: 0;
+}
+
+.member-avatars .avatar.more {
+    background: var(--accent-primary);
+    font-size: 0.625rem;
+    font-weight: 600;
+}
+
+.last-activity {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.group-action-btn {
+    width: 100%;
+    padding: var(--space-sm);
+    background: rgba(108, 99, 255, 0.2);
+    border: 1px solid var(--accent-primary);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.group-action-btn:hover {
+    background: rgba(108, 99, 255, 0.3);
+}
+
+/* Weekly Challenge */
+.challenge-card {
+    background: linear-gradient(145deg, rgba(255, 153, 51, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
+    border: 2px solid rgba(255, 153, 51, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.challenge-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+}
+
+.challenge-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.challenge-prize {
+    font-size: 0.75rem;
+    color: var(--gold);
+}
+
+.challenge-progress {
+    margin-bottom: var(--space-md);
+}
+
+.challenge-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-xs);
+}
+
+.challenge-fill {
+    height: 100%;
+    background: var(--gradient-gold);
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease;
+}
+
+.challenge-stats {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.challenge-contribute-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm);
+    background: var(--gradient-gold);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--bg-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.challenge-contribute-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+.challenge-contribute-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Dana Button */
+.dana-btn {
+    position: fixed;
+    bottom: calc(var(--safe-bottom) + var(--space-md));
+    right: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    background: linear-gradient(135deg, #FF9933 0%, #FFD700 100%);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--bg-primary);
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.dana-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 153, 51, 0.4);
+}
+
+.dana-icon {
+    font-size: 1.25rem;
+}
+
+/* ===== PHASE 3: LEADERBOARD SCREEN ===== */
+.leaderboard-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--safe-bottom) + var(--space-xl));
+}
+
+.leaderboard-tabs {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.lb-tab {
+    flex: 1;
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lb-tab.active {
+    background: rgba(108, 99, 255, 0.2);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+/* Podium */
+.podium {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg) 0;
+}
+
+.podium-place {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--gradient-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    position: relative;
+}
+
+.podium-place.first {
+    order: 2;
+    padding-bottom: calc(var(--space-xl) + 15px);
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 153, 51, 0.1) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.podium-place.second {
+    order: 1;
+    padding-bottom: calc(var(--space-xl) + 5px);
+    background: linear-gradient(145deg, rgba(192, 192, 192, 0.15) 0%, rgba(169, 169, 169, 0.1) 100%);
+    border: 2px solid rgba(192, 192, 192, 0.3);
+}
+
+.podium-place.third {
+    order: 3;
+    padding-bottom: var(--space-xl);
+    background: linear-gradient(145deg, rgba(205, 127, 50, 0.15) 0%, rgba(160, 82, 45, 0.1) 100%);
+    border: 2px solid rgba(205, 127, 50, 0.3);
+}
+
+.podium-crown {
+    position: absolute;
+    top: -20px;
+    font-size: 1.5rem;
+}
+
+.podium-avatar {
+    font-size: 2rem;
+    margin-bottom: var(--space-xs);
+}
+
+.podium-name {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.podium-title {
+    font-size: 0.625rem;
+    color: var(--accent-secondary);
+    margin-bottom: var(--space-xs);
+}
+
+.podium-xp {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gold);
+}
+
+.podium-rank {
+    position: absolute;
+    bottom: -10px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+    border: 2px solid;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.podium-place.first .podium-rank {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.podium-place.second .podium-rank {
+    border-color: #C0C0C0;
+    color: #C0C0C0;
+}
+
+.podium-place.third .podium-rank {
+    border-color: #CD7F32;
+    color: #CD7F32;
+}
+
+/* Your Rank */
+.your-rank-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(108, 99, 255, 0.15);
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.your-rank-position {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+}
+
+.your-rank-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.your-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.your-title {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.your-xp {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gold);
+}
+
+/* Rankings List */
+.rankings-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.rank-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+}
+
+.rank-position {
+    width: 24px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.rank-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.rank-name {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.rank-title {
+    font-size: 0.625rem;
+    color: var(--accent-secondary);
+}
+
+.rank-xp {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gold);
+}
+
+/* ===== PHASE 3: DANA (DONATION) MODAL ===== */
+.dana-modal {
+    max-height: 85vh;
+}
+
+.dana-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.dana-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-sm);
+}
+
+.dana-emoji {
+    font-size: 3rem;
+}
+
+.dana-message p {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.dana-amounts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-sm);
+}
+
+.dana-amount {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dana-amount:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dana-amount.selected {
+    background: rgba(255, 153, 51, 0.15);
+    border-color: var(--saffron);
+}
+
+.dana-amount .amount {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.dana-amount .label {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.625rem;
+    color: var(--text-muted);
+}
+
+.dana-custom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.dana-custom label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.dana-custom input {
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.dana-custom input:focus {
+    outline: none;
+    border-color: var(--saffron);
+}
+
+.dana-benefits {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+}
+
+.dana-benefits h4 {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.dana-benefits ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.dana-benefits li {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.donate-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-md);
+    background: linear-gradient(135deg, #FF9933 0%, #FFD700 100%);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bg-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.donate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 153, 51, 0.3);
+}
+
+.donate-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+.dana-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+}
