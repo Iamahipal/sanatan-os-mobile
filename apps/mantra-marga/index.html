@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0F0C29">
+    <title>MantraMarga - Sacred Sound Science</title>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- ===== HOME SCREEN ===== -->
+        <div class="screen home-screen active" id="homeScreen">
+            <header class="app-header">
+                <a href="../../index.html" class="header-btn">
+                    <i data-lucide="chevron-left"></i>
+                </a>
+                <div class="header-center">
+                    <h1 class="header-title">मंत्रमार्ग</h1>
+                    <span class="header-subtitle">Sacred Sound Science</span>
+                </div>
+                <button class="header-btn" id="searchBtn">
+                    <i data-lucide="search"></i>
+                </button>
+            </header>
+
+            <main class="home-main">
+                <!-- Science/Spirit Toggle -->
+                <div class="track-toggle">
+                    <button class="track-btn active" data-track="all">All</button>
+                    <button class="track-btn" data-track="science">🔬 Science</button>
+                    <button class="track-btn" data-track="spiritual">🕉️ Spiritual</button>
+                </div>
+
+                <!-- Featured Mantra -->
+                <section class="featured-section">
+                    <div class="featured-card" id="featuredMantra">
+                        <div class="featured-glow"></div>
+                        <span class="featured-label">Featured Mantra</span>
+                        <div class="featured-content">
+                            <span class="featured-sanskrit">ॐ</span>
+                            <span class="featured-name">Om - The Primordial Sound</span>
+                            <span class="featured-benefit">Reduces limbic activity • Increases alpha waves</span>
+                        </div>
+                        <button class="featured-btn">
+                            <i data-lucide="play"></i>
+                            Begin Practice
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Categories Grid -->
+                <section class="categories-section">
+                    <h3 class="section-title">
+                        <i data-lucide="grid-3x3"></i>
+                        Categories
+                    </h3>
+                    <div class="categories-grid" id="categoriesGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- All Mantras List -->
+                <section class="mantras-section">
+                    <h3 class="section-title">
+                        <i data-lucide="list"></i>
+                        All Mantras
+                        <span class="mantra-count" id="mantraCount">20</span>
+                    </h3>
+                    <div class="mantras-list" id="mantrasList">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ===== DETAIL SCREEN ===== -->
+        <div class="screen detail-screen" id="detailScreen">
+            <header class="app-header detail-header">
+                <button class="header-btn" id="detailBackBtn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title" id="detailTitle">गायत्री</h1>
+                    <span class="header-subtitle" id="detailSubtitle">Gayatri Mantra</span>
+                </div>
+                <button class="header-btn" id="favoriteBtn">
+                    <i data-lucide="heart"></i>
+                </button>
+            </header>
+
+            <main class="detail-main" id="detailContent">
+                <!-- Sanskrit Card -->
+                <div class="sanskrit-card">
+                    <div class="script-toggle">
+                        <button class="script-btn active" data-script="devanagari">देवनागरी</button>
+                        <button class="script-btn" data-script="iast">IAST</button>
+                    </div>
+                    <p class="mantra-text" id="mantraText"></p>
+                    <button class="listen-btn" id="listenBtn">
+                        <i data-lucide="volume-2"></i>
+                        Listen
+                    </button>
+                </div>
+
+                <!-- Meaning Section -->
+                <div class="detail-section">
+                    <h4 class="detail-section-title">
+                        <i data-lucide="book-open"></i>
+                        Meaning
+                    </h4>
+                    <p class="detail-text" id="meaningText"></p>
+                </div>
+
+                <!-- Benefits Section -->
+                <div class="detail-section benefits-section">
+                    <h4 class="detail-section-title">
+                        <i data-lucide="sparkles"></i>
+                        Benefits
+                    </h4>
+                    <div class="benefits-tabs">
+                        <button class="benefit-tab active" data-tab="scientific">🔬 Scientific</button>
+                        <button class="benefit-tab" data-tab="spiritual">🕉️ Spiritual</button>
+                    </div>
+                    <ul class="benefits-list" id="benefitsList"></ul>
+                </div>
+
+                <!-- Practice Section -->
+                <div class="detail-section practice-section">
+                    <h4 class="detail-section-title">
+                        <i data-lucide="compass"></i>
+                        Practice Guidance
+                    </h4>
+                    <div class="practice-grid" id="practiceGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Source Section -->
+                <div class="detail-section source-section">
+                    <h4 class="detail-section-title">
+                        <i data-lucide="scroll-text"></i>
+                        Origin
+                    </h4>
+                    <div class="source-info" id="sourceInfo">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Start Practice Button -->
+                <button class="start-practice-btn" id="startPracticeBtn">
+                    <i data-lucide="play-circle"></i>
+                    Start Practice
+                </button>
+            </main>
+        </div>
+
+        <!-- ===== PRACTICE SCREEN ===== -->
+        <div class="screen practice-screen" id="practiceScreen">
+            <header class="app-header practice-header">
+                <button class="header-btn" id="practiceBackBtn">
+                    <i data-lucide="x"></i>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title" id="practiceTitle">Practice</h1>
+                </div>
+                <button class="header-btn" id="practiceSettingsBtn">
+                    <i data-lucide="settings"></i>
+                </button>
+            </header>
+
+            <main class="practice-main">
+                <!-- Visualization Area -->
+                <div class="practice-visual">
+                    <div class="practice-ring">
+                        <div class="ring-progress" id="ringProgress"></div>
+                        <div class="ring-center">
+                            <span class="practice-sanskrit" id="practiceSanskrit">ॐ</span>
+                        </div>
+                    </div>
+                    <div class="breath-guide">
+                        <span class="breath-text" id="breathText">Inhale</span>
+                    </div>
+                </div>
+
+                <!-- Counter Section -->
+                <div class="counter-section">
+                    <div class="counter-display">
+                        <div class="counter-item">
+                            <span class="counter-value" id="currentCount">0</span>
+                            <span class="counter-label">Count</span>
+                        </div>
+                        <div class="counter-divider"></div>
+                        <div class="counter-item">
+                            <span class="counter-value" id="targetCount">108</span>
+                            <span class="counter-label">Target</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="practice-controls">
+                    <button class="control-btn secondary" id="resetBtn">
+                        <i data-lucide="rotate-ccw"></i>
+                    </button>
+                    <button class="control-btn primary tap-btn" id="tapBtn">
+                        <i data-lucide="hand"></i>
+                        <span>Tap</span>
+                    </button>
+                    <button class="control-btn secondary" id="audioToggleBtn">
+                        <i data-lucide="volume-2"></i>
+                    </button>
+                </div>
+
+                <!-- Target Selector -->
+                <div class="target-selector">
+                    <span class="target-label">Repetitions:</span>
+                    <div class="target-options" id="targetOptions">
+                        <button class="target-btn" data-count="21">21</button>
+                        <button class="target-btn active" data-count="108">108</button>
+                        <button class="target-btn" data-count="216">216</button>
+                        <button class="target-btn" data-count="1008">1008</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- ===== SEARCH OVERLAY ===== -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="search-container">
+                <div class="search-bar">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="searchInput" placeholder="Search mantras...">
+                    <button class="search-close" id="searchClose">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+
+        <!-- ===== COMPLETION MODAL ===== -->
+        <div class="modal-overlay" id="completionModal">
+            <div class="modal-content completion-modal">
+                <div class="completion-icon">
+                    <i data-lucide="check-circle-2"></i>
+                </div>
+                <h2 class="completion-title">Practice Complete!</h2>
+                <p class="completion-text" id="completionText">You completed 108 repetitions</p>
+                <div class="completion-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="sessionTime">5:32</span>
+                        <span class="stat-label">Duration</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalSessions">12</span>
+                        <span class="stat-label">Total Sessions</span>
+                    </div>
+                </div>
+                <button class="modal-btn" id="completionCloseBtn">
+                    <i data-lucide="check"></i>
+                    Done
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== SETTINGS MODAL ===== -->
+        <div class="modal-overlay" id="settingsModal">
+            <div class="modal-content settings-modal">
+                <div class="modal-header">
+                    <h2>Practice Settings</h2>
+                    <button class="close-btn" id="settingsCloseBtn">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <span class="setting-label">Sound</span>
+                        <button class="toggle-btn active" id="soundToggle">
+                            <span class="toggle-slider"></span>
+                        </button>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Vibration</span>
+                        <button class="toggle-btn active" id="vibrationToggle">
+                            <span class="toggle-slider"></span>
+                        </button>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Auto-play Audio</span>
+                        <button class="toggle-btn" id="autoplayToggle">
+                            <span class="toggle-slider"></span>
+                        </button>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Breath Guide</span>
+                        <button class="toggle-btn active" id="breathToggle">
+                            <span class="toggle-slider"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="bellSound" src="https://assets.mixkit.co/sfx/preview/mixkit-meditation-bell-234.mp3"
+        preload="auto"></audio>
+    <audio id="completeSound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"
+        preload="auto"></audio>
+
+    <!-- Scripts -->
+    <script src="mantra-data.js"></script>
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>
