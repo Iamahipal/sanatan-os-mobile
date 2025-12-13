@@ -195,32 +195,50 @@ body {
 }
 
 /* ============================================
-   SUPER-FROSTED GLASS TILE - Mobile Optimized
+   ULTRA TRANSPARENT LIQUID GLASS TILE
    ============================================ */
 .tile {
     position: relative;
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius);
-    /* Simplified shadow for performance */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+
+    /* Ultra Transparent Liquid Glass */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(2px) saturate(1.1);
+    -webkit-backdrop-filter: blur(2px) saturate(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: var(--radius);
+
+    /* Minimal shadow */
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.06);
+
     aspect-ratio: 1/1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    /* Fast, fluid transition - only transform for GPU */
     transition: transform 0.2s ease-out;
     text-decoration: none;
-    /* Ultra-smooth entrance - 250ms is optimal for mobile */
     animation: tileReveal 0.25s cubic-bezier(0.33, 1, 0.68, 1) both;
-    /* GPU layer promotion */
     transform: translateZ(0);
     backface-visibility: hidden;
+}
+
+/* Water droplet light refraction effect */
+.tile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0.06) 50%,
+            transparent 100%);
+    border-radius: var(--radius) var(--radius) 0 0;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .tile:hover,
@@ -245,12 +263,12 @@ body {
 }
 
 /* ============================================
-   HERO TILE - Simple border glow, no expensive animations
+   HERO TILE - Subtle saffron glow accent
    ============================================ */
 .tile.hero {
     animation: tileReveal 0.25s cubic-bezier(0.33, 1, 0.68, 1) both;
-    border: 1px solid rgba(255, 153, 51, 0.35);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 153, 51, 0.15);
+    border: 1px solid rgba(255, 153, 51, 0.4);
+    box-shadow: 0 2px 15px rgba(255, 153, 51, 0.1);
 }
 
 /* ============================================
