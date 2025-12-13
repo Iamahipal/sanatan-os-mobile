@@ -22,6 +22,10 @@
 
     --radius: 14px;
     --gap: 8px;
+
+    /* Pixel 10 Pro Dimensions - Standard Phone Size */
+    --phone-width: 412px;
+    --phone-height: 924px;
 }
 
 * {
@@ -45,35 +49,73 @@ html {
 }
 
 /* ============================================
-   SACRED WALLPAPER BACKGROUND
+   PHONE CONTAINER - Pixel 10 Pro Size
+   Centers app in a phone-sized frame on desktop
    ============================================ */
+html,
+body {
+    height: 100%;
+}
+
 body {
     font-family: 'Outfit', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
-    background: var(--bg-deep);
+    /* Dark background outside phone container */
+    background: #000;
     color: var(--text-primary);
     position: relative;
+    /* Center the phone container */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
 }
 
-/* Static Wallpaper Background - Fixed position */
-.prana-bg {
+/* Phone Frame Container */
+body::before {
+    content: '';
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0d0d1a 100%);
+    z-index: -2;
+}
+
+/* Static Wallpaper Background - Contained within phone frame */
+.prana-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--phone-width);
+    height: var(--phone-height);
+    max-height: 100vh;
     overflow: hidden;
     z-index: 0;
+    border-radius: 0;
 
-    /* Mountain sunset wallpaper - FIXED, no scroll */
+    /* Mountain sunset wallpaper - constrained to phone size */
     background:
         linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.35) 100%),
         url('../home-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+}
+
+/* On mobile devices, use full screen */
+@media (max-width: 480px) {
+    .prana-bg {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transform: none;
+        max-height: none;
+    }
 }
 
 /* Blob 1 - Saffron (Top Right) */
@@ -189,18 +231,39 @@ body {
 }
 
 /* ============================================
-   MAIN GRID - No Header, Clean Start
+   MAIN GRID - Constrained to Phone Size
    ============================================ */
 .grid-container {
-    position: relative;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--gap);
+    width: var(--phone-width);
+    height: var(--phone-height);
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
     /* Fixed: Use safe-area for consistent top padding on reload */
     padding: max(40px, calc(env(safe-area-inset-top) + 20px)) var(--gap) 50px;
-    max-width: 480px;
-    margin: 0 auto;
+    align-content: start;
+}
+
+/* On mobile devices, use full screen */
+@media (max-width: 480px) {
+    .grid-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        min-height: 100vh;
+    }
 }
 
 /* ============================================
