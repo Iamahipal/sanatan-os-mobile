@@ -1328,3 +1328,156 @@ button.action-btn {
     border: none;
     cursor: pointer;
 }
+
+/* ===== NEARBY HELP SECTION ===== */
+.nearby-section {
+    padding: 20px 16px;
+}
+
+.section-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.nearby-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 30px;
+    color: var(--text-muted);
+}
+
+.nearby-loading .spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.nearby-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nearby-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 14px;
+    transition: all 0.2s;
+}
+
+.nearby-card:hover {
+    border-color: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.nearby-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.nearby-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.nearby-distance {
+    background: var(--primary);
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+}
+
+.nearby-location {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nearby-location i {
+    width: 12px;
+    height: 12px;
+}
+
+.nearby-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.nearby-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.nearby-btn.whatsapp {
+    background: #25D366;
+    color: white;
+}
+
+.nearby-btn.call {
+    background: var(--primary);
+    color: white;
+}
+
+.nearby-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.nearby-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(255, 152, 0, 0.1);
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: var(--accent-light);
+}
+
+.nearby-note i {
+    flex-shrink: 0;
+}
+
+.nearby-note a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.no-nearby {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-muted);
+}

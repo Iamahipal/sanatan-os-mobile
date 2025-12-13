@@ -40,6 +40,114 @@ function initApp() {
 
     // Update Gaushala count from database
     updateGaushalaCount();
+
+    // Nearby Help - GPS based Gaushala finder
+    initNearbyHelp();
+}
+
+// Initialize Nearby Help section
+function initNearbyHelp() {
+    const loadingEl = document.getElementById('nearbyLoading');
+    const listEl = document.getElementById('nearbyList');
+
+    if (!loadingEl || !listEl) return;
+
+    // Wait for location to be detected
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                showNearbyGaushalas(latitude, longitude);
+            },
+            (error) => {
+                // Location denied - show all Gaushalas
+                console.log('Location access denied:', error);
+                showNearbyGaushalas(null, null);
+            },
+            { enableHighAccuracy: true, timeout: 10000 }
+        );
+    } else {
+        showNearbyGaushalas(null, null);
+    }
+}
+
+// Show nearby Gaushalas with distance
+function showNearbyGaushalas(userLat, userLng) {
+    const loadingEl = document.getElementById('nearbyLoading');
+    const listEl = document.getElementById('nearbyList');
+
+    if (!listEl) return;
+
+    // Get all Gaushalas with WhatsApp or phone
+    const allGaushalas = EMERGENCY_CONTACTS.gaushalas.filter(g => g.whatsapp || g.phone);
+
+    // Calculate distance and sort
+    const withDistance = allGaushalas.map(g => {
+        let distance = null;
+        if (userLat && userLng && g.geo && g.geo.lat) {
+            distance = haversineDistance(userLat, userLng, g.geo.lat, g.geo.lng);
+        }
+        return { ...g, distance };
+    });
+
+    // Sort by distance (nearest first), null distances at end
+    withDistance.sort((a, b) => {
+        if (a.distance === null && b.distance === null) return 0;
+        if (a.distance === null) return 1;
+        if (b.distance === null) return -1;
+        return a.distance - b.distance;
+    });
+
+    // Take top 5
+    const nearest = withDistance.slice(0, 5);
+
+    // Hide loading
+    if (loadingEl) loadingEl.style.display = 'none';
+    listEl.style.display = 'flex';
+
+    if (nearest.length === 0) {
+        listEl.innerHTML = '<div class="no-nearby">No Gaushalas found. Call 1962 for help.</div>';
+        lucide.createIcons();
+        return;
+    }
+
+    // Render cards
+    listEl.innerHTML = nearest.map(g => {
+        const distanceText = g.distance !== null
+            ? `${Math.round(g.distance)} km`
+            : g.city || 'Unknown';
+
+        const whatsappBtn = g.whatsapp
+            ? `<a href="https://wa.me/${g.whatsapp}?text=🐄 Cow rescue help needed!" class="nearby-btn whatsapp" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+               </a>`
+            : '';
+
+        const callBtn = g.phone
+            ? `<a href="tel:${g.phone}" class="nearby-btn call">
+                <i data-lucide="phone"></i> Call
+               </a>`
+            : '';
+
+        return `
+            <div class="nearby-card">
+                <div class="nearby-header">
+                    <span class="nearby-name">${g.name}</span>
+                    <span class="nearby-distance">${distanceText}</span>
+                </div>
+                <div class="nearby-location">
+                    <i data-lucide="map-pin"></i>
+                    ${g.city || g.district || ''}, ${g.state}
+                </div>
+                <div class="nearby-actions">
+                    ${whatsappBtn}
+                    ${callBtn}
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    lucide.createIcons();
 }
 
 // Update Gaushala count in UI
