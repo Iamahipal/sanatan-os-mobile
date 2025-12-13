@@ -273,7 +273,7 @@ body {
     text-align: right;
 }
 
-/* Suggestion Chips - Water Droplet Liquid Glass */
+/* Suggestion Chips - True Neutral Liquid Glass */
 .suggestion-chip {
     display: flex;
     align-items: center;
@@ -282,18 +282,18 @@ body {
     padding: 14px 18px;
     margin-bottom: 10px;
 
-    /* Water Droplet Effect - minimal opacity, high clarity */
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(4px) saturate(2) contrast(1.1) brightness(1.05);
-    -webkit-backdrop-filter: blur(4px) saturate(2) contrast(1.1) brightness(1.05);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* True Liquid Glass - neutral, crystal clear */
+    background: rgba(200, 210, 220, 0.12);
+    backdrop-filter: blur(6px) saturate(1.2) brightness(1.02);
+    -webkit-backdrop-filter: blur(6px) saturate(1.2) brightness(1.02);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 18px;
 
-    /* Edge refraction effect - inner shadow simulates light bending */
+    /* Light refraction on edges */
     box-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.08),
-        inset 0 1px 1px rgba(255, 255, 255, 0.35),
-        inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+        0 2px 10px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 
     /* Text styling */
     color: #FFFFFF;
@@ -620,20 +620,20 @@ body {
     gap: 8px;
     position: relative;
 
-    /* Apple Crystal Clear Glass - minimal blur, see-through */
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(8px) saturate(1.8);
-    -webkit-backdrop-filter: blur(8px) saturate(1.8);
+    /* True Neutral Liquid Glass */
+    background: rgba(200, 210, 220, 0.15);
+    backdrop-filter: blur(6px) saturate(1.2) brightness(1.02);
+    -webkit-backdrop-filter: blur(6px) saturate(1.2) brightness(1.02);
 
-    /* Subtle border with inner glow */
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    /* Bright border for glass edge */
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 28px;
     padding: 8px 8px 8px 18px;
 
-    /* Glass depth effect */
+    /* Light refraction on edges */
     box-shadow:
-        0 2px 20px rgba(0, 0, 0, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 2px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
         inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
