@@ -57,55 +57,15 @@ body {
 }
 
 /* ============================================
-   BACKGROUND - Krishna & Arjuna Scene
+   BACKGROUND - Desktop shows black, image inside container only
    ============================================ */
 body {
-    background: var(--void);
+    background: #000000;
     position: relative;
 }
 
-/* Krishna Background Image Layer */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        /* Dark overlay for readability */
-        linear-gradient(180deg,
-            rgba(0, 0, 0, 0.3) 0%,
-            rgba(0, 0, 0, 0.2) 40%,
-            rgba(0, 0, 0, 0.4) 100%),
-        /* Krishna Image */
-        url('krishna-bg.jpg') center top / cover no-repeat;
-    z-index: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-}
-
-/* Stars overlay */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.6), transparent),
-        radial-gradient(1.5px 1.5px at 25% 15%, rgba(255, 255, 255, 0.4), transparent),
-        radial-gradient(1px 1px at 55% 10%, rgba(255, 255, 255, 0.5), transparent),
-        radial-gradient(1px 1px at 80% 25%, rgba(255, 255, 255, 0.4), transparent),
-        radial-gradient(1.5px 1.5px at 90% 45%, rgba(255, 215, 0, 0.3), transparent);
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.7;
-}
-
 /* ============================================
-   APP CONTAINER
+   APP CONTAINER - Phone Frame on Desktop
    ============================================ */
 .app-container {
     display: flex;
@@ -116,12 +76,51 @@ body::after {
     margin: 0 auto;
     position: relative;
     z-index: 1;
+    overflow: hidden;
 }
 
+/* Background inside container only */
+.app-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        /* Dark overlay for readability */
+        linear-gradient(180deg,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.15) 40%,
+            rgba(0, 0, 0, 0.4) 100%),
+        /* Krishna Image - positioned for best view */
+        url('krishna-bg.jpg') center top / cover no-repeat;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Phone frame on desktop */
 @media (min-width: 481px) {
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
     .app-container {
-        border-left: 1px solid rgba(255, 255, 255, 0.06);
-        border-right: 1px solid rgba(255, 255, 255, 0.06);
+        height: calc(100vh - 40px);
+        max-height: 900px;
+        border-radius: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow:
+            0 0 0 8px rgba(20, 20, 30, 0.9),
+            0 0 0 9px rgba(255, 255, 255, 0.1),
+            0 25px 80px rgba(0, 0, 0, 0.5);
+    }
+
+    .app-container::before {
+        border-radius: 40px;
     }
 }
 
