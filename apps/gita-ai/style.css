@@ -19,20 +19,18 @@
     --krishna-blue: #1E3A5F;
 
     /* Liquid Glass Properties */
-    --glass-blur: 12px;
-    --glass-saturate: 1.2;
-    --glass-contrast: 1.1;
-    --glass-brightness: 1.05;
+    --glass-blur: 20px;
+    --glass-saturate: 1.4;
+    --glass-contrast: 1.05;
+    --glass-brightness: 1.02;
 
     /* Text */
     --text-primary: #FFFFFF;
     --text-secondary: rgba(255, 255, 255, 0.8);
     --text-muted: rgba(255, 255, 255, 0.5);
 
-    /* Typography */
-    --font-krishna: 'Playfair Display', Georgia, serif;
-    --font-user: 'Inter', -apple-system, sans-serif;
-    --font-ui: 'Outfit', -apple-system, sans-serif;
+    /* Typography - Modern Claude/Copilot style */
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-sanskrit: 'Tiro Devanagari Sanskrit', serif;
 
     --safe-top: env(safe-area-inset-top, 0px);
@@ -52,7 +50,7 @@
 html,
 body {
     height: 100%;
-    font-family: var(--font-ui);
+    font-family: var(--font-main);
     background: var(--void);
     color: var(--text-primary);
     overflow: hidden;
@@ -466,29 +464,27 @@ body::after {
 }
 
 /* ============================================
-   KRISHNA'S MESSAGE - Gold Tinted Liquid Glass
+   KRISHNA'S MESSAGE - Liquid Glass
    ============================================ */
 .message.krishna .message-content {
     position: relative;
     padding: 18px 20px;
 
-    /* Gold tinted glass */
-    background: rgba(255, 215, 0, 0.03);
-    backdrop-filter: blur(16px) saturate(1.3) contrast(1.1) brightness(1.02);
-    -webkit-backdrop-filter: blur(16px) saturate(1.3) contrast(1.1) brightness(1.02);
+    /* TRUE Liquid Glass - more transparent */
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 
-    /* Border */
-    border: 1px solid rgba(255, 215, 0, 0.15);
+    /* Subtle border */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     border-bottom-left-radius: 6px;
 
-    /* THE KEY: Inset shadow for glass depth */
+    /* Inset shadow for depth */
     box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.12),
-        0 -8px 16px inset rgba(0, 0, 0, 0.06),
-        0 1px 0 inset rgba(255, 215, 0, 0.1);
-
-    transition: all 0.25s ease;
+        0 4px 24px rgba(0, 0, 0, 0.2),
+        0 -6px 12px inset rgba(0, 0, 0, 0.1),
+        0 1px 0 inset rgba(255, 255, 255, 0.05);
 }
 
 /* Specular highlight */
@@ -496,57 +492,45 @@ body::after {
     content: '';
     position: absolute;
     top: 0;
-    left: 15%;
-    right: 15%;
+    left: 10%;
+    right: 10%;
     height: 1px;
     background: linear-gradient(90deg,
             transparent,
-            rgba(255, 215, 0, 0.3),
+            rgba(255, 255, 255, 0.15),
             transparent);
     pointer-events: none;
 }
 
-.message.krishna .message-content:hover {
-    box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.15),
-        0 0 25px rgba(255, 215, 0, 0.1),
-        0 -8px 16px inset rgba(0, 0, 0, 0.06);
-}
-
-/* Krishna's Text - Playfair Display with Gold Gradient */
+/* Krishna's Text - Modern Inter font, solid gold */
 .message.krishna .message-content p {
-    font-family: var(--font-krishna);
-    font-size: 1rem;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
     line-height: 1.7;
-    background: linear-gradient(135deg, var(--gold) 0%, #FFF8DC 40%, var(--gold-light) 70%, #FFE4B5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--gold);
 }
 
 /* ============================================
-   USER'S MESSAGE - Frost Liquid Glass
+   USER'S MESSAGE - Liquid Glass
    ============================================ */
 .message.user .message-content {
     position: relative;
     padding: 16px 18px;
 
-    /* Frost glass */
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(16px) saturate(1.2) contrast(1.05);
-    -webkit-backdrop-filter: blur(16px) saturate(1.2) contrast(1.05);
+    /* TRUE Liquid Glass - more transparent */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
 
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 20px;
     border-bottom-right-radius: 6px;
 
     /* Inset shadow */
     box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.1),
-        0 -8px 16px inset rgba(0, 0, 0, 0.05),
-        0 1px 0 inset rgba(255, 255, 255, 0.08);
-
-    transition: all 0.25s ease;
+        0 4px 24px rgba(0, 0, 0, 0.15),
+        0 -6px 12px inset rgba(0, 0, 0, 0.08),
+        0 1px 0 inset rgba(255, 255, 255, 0.05);
 }
 
 /* Specular highlight */
@@ -554,25 +538,18 @@ body::after {
     content: '';
     position: absolute;
     top: 0;
-    left: 15%;
-    right: 15%;
+    left: 10%;
+    right: 10%;
     height: 1px;
     background: linear-gradient(90deg,
             transparent,
-            rgba(255, 255, 255, 0.25),
+            rgba(255, 255, 255, 0.15),
             transparent);
     pointer-events: none;
 }
 
-.message.user .message-content:hover {
-    box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.12),
-        0 0 20px rgba(255, 255, 255, 0.05),
-        0 -8px 16px inset rgba(0, 0, 0, 0.05);
-}
-
 .message.user .message-content p {
-    font-family: var(--font-user);
+    font-family: var(--font-main);
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--text-primary);

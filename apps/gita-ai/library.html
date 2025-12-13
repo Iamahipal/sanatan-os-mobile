@@ -8,7 +8,7 @@
 
     <!-- Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
         rel="stylesheet">
 
     <!-- Icons -->
@@ -17,65 +17,79 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Specific Library Overrides */
+        /* Library Page - Organized Cards with Glass Effect */
         .library-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            padding: 16px;
+            gap: 14px;
+            padding: 20px;
         }
 
         .chapter-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            position: relative;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
-            padding: 16px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.15),
+                0 -4px 10px inset rgba(0, 0, 0, 0.08);
         }
 
-        .chapter-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
+        /* Specular highlight */
+        .chapter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15%;
+            right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
         }
 
         .chapter-num {
-            font-size: 0.8rem;
-            color: var(--primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: #FFD700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             font-weight: 600;
         }
 
         .chapter-title {
-            font-family: 'Tiro Devanagari Sanskrit', serif;
-            font-size: 1.1rem;
-            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #FFFFFF;
         }
 
         .chapter-subtitle {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
         }
 
         .chapter-verses {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.6);
             margin-top: auto;
+            padding-top: 8px;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         /* Detail View (Verse List) */
         .verse-list-view {
             display: none;
-            /* Hidden by default */
             flex-direction: column;
             height: 100%;
         }
@@ -87,50 +101,49 @@
         .sticky-header {
             position: sticky;
             top: 0;
-            background: rgba(10, 10, 20, 0.95);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 10;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border-color);
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .back-btn {
             background: none;
             border: none;
-            color: var(--text-primary);
+            color: #FFFFFF;
             cursor: pointer;
         }
 
         .verse-item {
-            padding: 16px;
-            border-bottom: 1px solid var(--border-color);
+            padding: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             cursor: pointer;
-        }
-
-        .verse-item:hover {
-            background: var(--bg-input);
         }
 
         .verse-preview-sanskrit {
             font-family: 'Tiro Devanagari Sanskrit', serif;
             font-size: 1rem;
-            color: var(--accent);
-            margin-bottom: 4px;
+            color: #FFD700;
+            margin-bottom: 6px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .verse-preview-trans {
+            font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.7);
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            line-height: 1.5;
         }
     </style>
 </head>
