@@ -67,6 +67,11 @@ body.gopal-app {
     right: 20px;
     top: 20px;
     animation: float 6s ease-in-out infinite;
+    cursor: pointer;
+    /* Interaction hint */
+    pointer-events: auto;
+    /* Enable clicks */
+    z-index: 10;
 }
 
 .ground-layer {
@@ -85,8 +90,10 @@ body.gopal-app {
     bottom: 5%;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    height: 300px;
+    width: 250px;
+    /* Slightly wider */
+    height: 350px;
+    /* Taller to fit full body */
     display: flex;
     align-items: flex-end;
     justify-content: center;
