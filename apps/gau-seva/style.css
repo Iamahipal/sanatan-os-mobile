@@ -1182,6 +1182,7 @@ body {
     display: block;
     font-size: 1.3rem;
     font-weight: 700;
+    letter-spacing: 0;
 }
 
 .call-label {
