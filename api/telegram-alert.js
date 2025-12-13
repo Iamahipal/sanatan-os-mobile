@@ -1,10 +1,7 @@
 /**
  * Secure Telegram Proxy - Vercel Serverless Function
- * Hides bot token from client-side code
- * 
+ * Handles Text and Photo alerts
  * Endpoint: /api/telegram-alert
- * Method: POST
- * Body: { report: {...} }
  */
 
 export default async function handler(req, res) {
@@ -13,44 +10,25 @@ export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    // Handle preflight
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
+    if (req.method === 'OPTIONS') return res.status(200).end();
+    if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-    // Only allow POST
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
-
-    // Get environment variables (set in Vercel dashboard)
     const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
     const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
     if (!BOT_TOKEN || !CHAT_ID) {
-        console.error('Telegram credentials not configured');
         return res.status(500).json({ error: 'Server not configured' });
     }
 
     try {
         const { report } = req.body;
+        if (!report) return res.status(400).json({ error: 'Report data required' });
 
-        if (!report) {
-            return res.status(400).json({ error: 'Report data required' });
-        }
+        // Format message
+        const mapLink = report.lat && report.lon ? `https://www.google.com/maps?q=${report.lat},${report.lon}` : 'N/A';
+        const conditions = Array.isArray(report.conditions) ? report.conditions.join(', ') : report.conditions || 'Unknown';
 
-        // Build Google Maps link
-        const mapLink = report.lat && report.lon
-            ? `https://www.google.com/maps?q=${report.lat},${report.lon}`
-            : 'Location not available';
-
-        // Format conditions
-        const conditions = Array.isArray(report.conditions)
-            ? report.conditions.join(', ')
-            : report.conditions || 'Unknown';
-
-        // Build message
-        const message = `
+        const caption = `
 🚨 *NEW COW RESCUE ALERT* 🚨
 
 📋 *Case ID:* ${report.caseId || 'N/A'}
@@ -62,34 +40,67 @@ export default async function handler(req, res) {
 📝 *Details:* ${report.description || 'None'}
 
 ⏰ *Time:* ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+`.trim();
 
-_Please coordinate with nearest Gaushala immediately!_
-        `.trim();
+        // If Photo Exists -> sendPhoto
+        if (report.photoBase64) {
+            const boundary = '----WebKitFormBoundary7MA4YWxkTrZu0gW';
+            const cleanBase64 = report.photoBase64.replace(/^data:image\/\w+;base64,/, '');
+            const fileBuffer = Buffer.from(cleanBase64, 'base64');
 
-        // Send to Telegram
-        const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            // Construct Multipart Body Manually
+            let body = `--${boundary}\r\n`;
+            body += `Content-Disposition: form-data; name="chat_id"\r\n\r\n${CHAT_ID}\r\n`;
 
-        const telegramResponse = await fetch(telegramUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: CHAT_ID,
-                text: message,
-                parse_mode: 'Markdown',
-                disable_web_page_preview: false
-            })
-        });
+            body += `--${boundary}\r\n`;
+            body += `Content-Disposition: form-data; name="caption"\r\n\r\n${caption}\r\n`;
 
-        const result = await telegramResponse.json();
+            body += `--${boundary}\r\n`;
+            body += `Content-Disposition: form-data; name="parse_mode"\r\n\r\nMarkdown\r\n`;
 
-        if (result.ok) {
-            return res.status(200).json({ success: true, message: 'Alert sent!' });
+            body += `--${boundary}\r\n`;
+            body += `Content-Disposition: form-data; name="photo"; filename="cow_rescue.jpg"\r\n`;
+            body += `Content-Type: image/jpeg\r\n\r\n`;
+
+            const footer = `\r\n--${boundary}--`;
+
+            // Combine buffers
+            const payload = Buffer.concat([
+                Buffer.from(body),
+                fileBuffer,
+                Buffer.from(footer)
+            ]);
+
+            const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                method: 'POST',
+                headers: { 'Content-Type': `multipart/form-data; boundary=${boundary}` },
+                body: payload
+            });
+
+            const result = await response.json();
+            if (result.ok) return res.status(200).json({ success: true, mode: 'photo' });
+            else throw new Error(result.description);
+
         } else {
-            console.error('Telegram error:', result);
-            return res.status(500).json({ success: false, error: result.description });
+            // Text Only -> sendMessage
+            const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: caption,
+                    parse_mode: 'Markdown',
+                    disable_web_page_preview: false
+                })
+            });
+
+            const result = await response.json();
+            if (result.ok) return res.status(200).json({ success: true, mode: 'text' });
+            else throw new Error(result.description);
         }
+
     } catch (error) {
-        console.error('Telegram proxy error:', error);
+        console.error('Telegram Error:', error);
         return res.status(500).json({ success: false, error: error.message });
     }
 }

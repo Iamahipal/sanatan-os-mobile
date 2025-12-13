@@ -158,6 +158,16 @@ function updateGaushalaCount() {
     }
 }
 
+// Helper: Read file as Base64
+function readFileAsBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+    });
+}
+
 // ===== FIREBASE INITIALIZATION =====
 async function initFirebaseAndSync() {
     try {
@@ -609,13 +619,23 @@ function initRescueForm() {
             status: 'pending'
         };
 
-        // Store locally for offline support
-        storeReportLocally(rescueData);
-
         // Show loading state
         submitBtn.innerHTML = '<i data-lucide="loader-2"></i> Sending...';
         submitBtn.disabled = true;
         lucide.createIcons();
+
+        // Process photo if exists
+        if (photoInput.files.length > 0) {
+            try {
+                const base64Photo = await readFileAsBase64(photoInput.files[0]);
+                rescueData.photoBase64 = base64Photo;
+            } catch (e) {
+                console.error('Photo processing error:', e);
+            }
+        }
+
+        // Store locally for offline support
+        storeReportLocally(rescueData);
 
         // Save to Firebase Firestore
         let firebaseSaved = false;
