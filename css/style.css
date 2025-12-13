@@ -241,14 +241,15 @@ body::before {
     z-index: 1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--gap);
+    grid-auto-rows: min-content;
+    gap: 10px;
     width: var(--phone-width);
     height: var(--phone-height);
     max-height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
     /* Fixed: Use safe-area for consistent top padding on reload */
-    padding: max(40px, calc(env(safe-area-inset-top) + 20px)) var(--gap) 50px;
+    padding: 40px 12px 60px;
     align-content: start;
 }
 
