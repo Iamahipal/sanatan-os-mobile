@@ -56,7 +56,7 @@ body {
     position: relative;
 }
 
-/* Wallpaper Background Container */
+/* Static Wallpaper Background - Fixed position */
 .prana-bg {
     position: fixed;
     top: 0;
@@ -66,13 +66,14 @@ body {
     overflow: hidden;
     z-index: 0;
 
-    /* Vector wallpaper with gradient overlay */
+    /* Mountain sunset wallpaper - FIXED, no scroll */
     background:
-        linear-gradient(180deg, rgba(15, 12, 41, 0.3) 0%, rgba(15, 12, 41, 0.6) 100%),
-        url('../home-bg.png');
+        linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.35) 100%),
+        url('../home-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 /* Blob 1 - Saffron (Top Right) */
