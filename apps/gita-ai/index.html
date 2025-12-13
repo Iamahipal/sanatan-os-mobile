@@ -8,14 +8,13 @@
 
     <!-- Critical CSS to prevent flash of unstyled content -->
     <style>
-        body {
-            opacity: 0;
-            background: #000;
+        /* Hide everything until fully loaded */
+        .app-container {
+            visibility: hidden !important;
         }
 
-        body.loaded {
-            opacity: 1;
-            transition: opacity 0.3s ease;
+        .app-container.ready {
+            visibility: visible !important;
         }
     </style>
 
@@ -194,9 +193,11 @@
     <script src="js/gemini-brain.js"></script>
     <script src="js/chat-engine.js"></script>
     <script>
-        // Create icons and reveal page
-        lucide.createIcons();
-        document.body.classList.add('loaded');
+        // Wait for fonts and render icons, then reveal
+        document.fonts.ready.then(() => {
+            lucide.createIcons();
+            document.querySelector('.app-container').classList.add('ready');
+        });
     </script>
 </body>
 
