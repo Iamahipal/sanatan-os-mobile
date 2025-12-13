@@ -256,12 +256,12 @@ body {
     margin: 0 auto;
 }
 
-/* Suggested Questions - Aligned right like user messages */
+/* Suggested Questions - Centered */
 .suggested-questions {
     width: 100%;
     max-width: 320px;
-    margin-left: auto;
-    margin-right: 0;
+    margin: 0 auto;
+    /* Centered */
 }
 
 .suggestions-label {
@@ -273,7 +273,7 @@ body {
     text-align: right;
 }
 
-/* Suggestion Chips - True Neutral Liquid Glass */
+/* Suggestion Chips - Ultra Transparent Liquid Glass */
 .suggestion-chip {
     display: flex;
     align-items: center;
@@ -281,19 +281,18 @@ body {
     width: 100%;
     padding: 14px 18px;
     margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
 
-    /* True Liquid Glass - neutral, crystal clear */
-    background: rgba(200, 210, 220, 0.12);
-    backdrop-filter: blur(6px) saturate(1.2) brightness(1.02);
-    -webkit-backdrop-filter: blur(6px) saturate(1.2) brightness(1.02);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 18px;
+    /* Ultra Transparent - almost invisible */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(2px) saturate(1.1);
+    -webkit-backdrop-filter: blur(2px) saturate(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
 
-    /* Light refraction on edges */
-    box-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.06),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    /* Minimal shadow */
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
 
     /* Text styling */
     color: #FFFFFF;
@@ -302,6 +301,37 @@ body {
     font-weight: 400;
     text-align: left;
     cursor: pointer;
+}
+
+/* Water droplet edge refraction effect */
+.suggestion-chip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.25) 0%,
+            rgba(255, 255, 255, 0.08) 50%,
+            transparent 100%);
+    border-radius: 20px 20px 0 0;
+    pointer-events: none;
+}
+
+/* Bottom edge shadow for depth */
+.suggestion-chip::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(0, 0, 0, 0.1),
+            transparent);
+    pointer-events: none;
 }
 
 .chip-icon {
@@ -619,36 +649,35 @@ body {
     align-items: center;
     gap: 8px;
     position: relative;
+    overflow: hidden;
 
-    /* True Neutral Liquid Glass */
-    background: rgba(200, 210, 220, 0.15);
-    backdrop-filter: blur(6px) saturate(1.2) brightness(1.02);
-    -webkit-backdrop-filter: blur(6px) saturate(1.2) brightness(1.02);
+    /* Ultra Transparent Liquid Glass */
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(2px) saturate(1.1);
+    -webkit-backdrop-filter: blur(2px) saturate(1.1);
 
     /* Bright border for glass edge */
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 28px;
     padding: 8px 8px 8px 18px;
 
-    /* Light refraction on edges */
-    box-shadow:
-        0 2px 16px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    /* Minimal shadow */
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Top edge specular highlight - Apple style */
+/* Water droplet top light refraction */
 .input-wrapper::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 15%;
-    right: 15%;
-    height: 1px;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.35),
-            transparent);
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0.05) 60%,
+            transparent 100%);
+    border-radius: 28px 28px 0 0;
     pointer-events: none;
 }
 
