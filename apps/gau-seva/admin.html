@@ -330,17 +330,138 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* LOGIN OVERLAY */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0d1117;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+
+        .login-card {
+            background: #161b22;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 16px;
+            background: #21262d;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 20px 0;
+            outline: none;
+            letter-spacing: 4px;
+        }
+
+        .login-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.3);
+        }
+
+        .login-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px;
+            width: 100%;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.4);
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+        }
     </style>
 </head>
 
 <body>
+    <!-- AUTH OVERLAY -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-card">
+            <i data-lucide="shield-check" style="width: 48px; height: 48px; color: #4CAF50; margin-bottom: 20px;"></i>
+            <h2 style="margin-bottom: 10px;">Admin Access</h2>
+            <p style="color: rgba(255,255,255,0.5); margin-bottom: 20px;">Enter security PIN to continue</p>
+
+            <input type="password" id="adminPin" class="login-input" placeholder="••••" maxlength="4" pattern="[0-9]*"
+                inputmode="numeric">
+            <button id="loginBtn" class="login-btn">Unlock Dashboard</button>
+            <p id="loginError" style="color: #ef5350; margin-top: 15px; display: none; font-size: 0.9rem;">Incorrect PIN
+            </p>
+        </div>
+    </div>
+
     <div class="dashboard">
         <header class="header">
-            <h1>🐄 <span>Gau Seva</span> Admin</h1>
-            <a href="index.html" class="back-link">
-                <i data-lucide="arrow-left"></i>
-                Back to App
-            </a>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <h1 style="margin:0;">🐄 <span>Gau Seva</span> Admin</h1>
+                <a href="index.html" class="back-link" style="margin:0; font-size: 0.9rem;">
+                    <i data-lucide="arrow-left" style="width:16px;"></i> App
+                </a>
+            </div>
+            <button class="logout-btn" onclick="logoutAdmin()">
+                <i data-lucide="log-out" style="width: 16px;"></i> Logout
+            </button>
         </header>
 
         <!-- Stats -->
@@ -622,6 +743,60 @@
                 alert('Failed to update. Check console.');
             }
         }
+        // ===== AUTHENTICATION LOGIC =====
+        const PIN_HASH = '2025'; // Simple PIN for now
+        const authKey = 'gauSevaAdminAuth';
+
+        function checkAuth() {
+            const isAuth = sessionStorage.getItem(authKey);
+            const overlay = document.getElementById('loginOverlay');
+
+            if (isAuth === 'true') {
+                overlay.classList.add('hidden');
+            } else {
+                overlay.classList.remove('hidden');
+                const pinInput = document.getElementById('adminPin');
+                if (pinInput) pinInput.focus();
+            }
+        }
+
+        function loginAdmin() {
+            const pinBtn = document.getElementById('adminPin');
+            const pin = pinBtn ? pinBtn.value : '';
+            const error = document.getElementById('loginError');
+
+            if (pin === PIN_HASH) {
+                sessionStorage.setItem(authKey, 'true');
+                document.getElementById('loginOverlay').classList.add('hidden');
+                if (error) error.style.display = 'none';
+            } else {
+                if (error) error.style.display = 'block';
+                if (pinBtn) {
+                    pinBtn.value = '';
+                    pinBtn.classList.add('shake');
+                    setTimeout(() => pinBtn.classList.remove('shake'), 500);
+                }
+            }
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem(authKey);
+            location.reload();
+        }
+
+        // Event Listeners for Auth
+        const loginBtn = document.getElementById('loginBtn');
+        const adminPin = document.getElementById('adminPin');
+
+        if (loginBtn) loginBtn.addEventListener('click', loginAdmin);
+        if (adminPin) {
+            adminPin.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') loginAdmin();
+            });
+        }
+
+        // Run check on load
+        checkAuth();
     </script>
 </body>
 
