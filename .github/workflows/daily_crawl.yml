@@ -1,0 +1,38 @@
+name: Daily Gaushala Crawler
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight UTC (5:30 AM IST)
+  workflow_dispatch:      # Manual trigger
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Need write permission to update JSON
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install requests beautifulsoup4 lxml geopy
+
+    - name: Run Crawler
+      run: |
+        # Run crawler for helpgaushala directory
+        python tools/gaushala_crawler.py --source helpgaushala
+
+    - name: Commit and Push
+      run: |
+        git config --global user.name 'GaushalaBot'
+        git config --global user.email 'bot@sanatanos.com'
+        git add crawled_gaushalas.json apps/gau-seva/js/gaushala-data.js
+        # Only commit if there are changes
+        git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update Gaushala Database [skip ci]" && git push)

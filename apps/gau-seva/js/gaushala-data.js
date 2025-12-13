@@ -255,6 +255,16 @@ const EMERGENCY_CONTACTS = {
     ]
 };
 
+// Merge Crawled Data (from crawled-data.js)
+if (window.CRAWLED_GAUSHALAS && Array.isArray(window.CRAWLED_GAUSHALAS)) {
+    // Basic deduplication could be added here if needed
+    EMERGENCY_CONTACTS.gaushalas = [
+        ...EMERGENCY_CONTACTS.gaushalas,
+        ...window.CRAWLED_GAUSHALAS
+    ];
+    console.log(`🔌 Merged ${window.CRAWLED_GAUSHALAS.length} crawled verified gaushalas.`);
+}
+
 /**
  * Find nearest Gaushala using Haversine distance formula
  * Priority: GPS distance > State match > WhatsApp availability
