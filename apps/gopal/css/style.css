@@ -97,8 +97,33 @@ body.gopal-app {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    background: url('../assets/krishna.png') no-repeat bottom center;
+    background: url('../assets/krishna_v2.png') no-repeat bottom center;
     background-size: contain;
+    transition: transform 0.3s ease;
+    /* Pop effect on tap */
+}
+
+/* Tap Hint Ripple */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+.ripple {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: ripple 0.6s linear;
 }
 
 .placeholder-krishna {

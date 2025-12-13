@@ -41,10 +41,25 @@ class HabitEngine {
             this.completeAction();
         });
 
-        // Temporary: Click sun to trigger action
-        document.getElementById('sun').addEventListener('click', () => {
-            this.triggerAction("Wake Up!", 5); // 5 sec demo
+        // Interaction: Tap Anywhere on Scene to Trigger
+        this.ui.scene.addEventListener('click', (e) => {
+            // Visual Feedback (Ripple)
+            this.createRipple(e.clientX, e.clientY);
+
+            // Logic: If morning, wake up.
+            if (this.currentRoutine === 'morning') {
+                this.triggerAction("Wake Up!", 5);
+            }
         });
+    }
+
+    createRipple(x, y) {
+        const ripple = document.createElement('div');
+        ripple.classList.add('ripple');
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
     }
 
     setRoutine(routine) {
