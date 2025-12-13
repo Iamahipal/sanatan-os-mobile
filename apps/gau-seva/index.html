@@ -48,10 +48,10 @@
 
                 <!-- Quick Actions -->
                 <div class="quick-actions">
-                    <a href="#rescue" class="action-btn emergency">
+                    <button class="action-btn emergency" id="emergencyBtn">
                         <i data-lucide="phone-call"></i>
                         <span>Report Emergency</span>
-                    </a>
+                    </button>
                     <a href="#donate" class="action-btn donate">
                         <i data-lucide="heart"></i>
                         <span>Donate Now</span>
@@ -227,7 +227,8 @@
                         <div class="fact-header">
                             <span class="fact-label">FACT</span>
                             <p>Factory farming causes emissions. Holistic grazing with indigenous cows actually
-                                <strong>sequesters carbon</strong> and regenerates soil.</p>
+                                <strong>sequesters carbon</strong> and regenerates soil.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -385,6 +386,126 @@
         </nav>
     </div>
 
+    <!-- ========================================
+         EMERGENCY TRIAGE MODAL
+         ======================================== -->
+    <div class="modal-overlay" id="emergencyModal">
+        <div class="modal-content emergency-triage">
+            <button class="modal-close" id="closeEmergencyModal">
+                <i data-lucide="x"></i>
+            </button>
+
+            <div class="triage-header">
+                <span class="triage-icon">🚨</span>
+                <h2>What's the Situation?</h2>
+                <p>Help us route to the right responder</p>
+            </div>
+
+            <!-- Option 1: Critical Emergency -->
+            <div class="triage-option critical" id="triageCritical">
+                <div class="option-icon">🩸</div>
+                <div class="option-content">
+                    <h3>Critical Emergency</h3>
+                    <p>Accident, heavy bleeding, life-threatening</p>
+                </div>
+                <i data-lucide="chevron-right"></i>
+            </div>
+
+            <!-- Option 2: Non-Critical Report -->
+            <div class="triage-option report" id="triageReport">
+                <div class="option-icon">📋</div>
+                <div class="option-content">
+                    <h3>Report & Rescue</h3>
+                    <p>Sick, abandoned, stuck, or stray cow</p>
+                </div>
+                <i data-lucide="chevron-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         CRITICAL EMERGENCY MODAL
+         ======================================== -->
+    <div class="modal-overlay" id="criticalModal">
+        <div class="modal-content critical-emergency">
+            <button class="modal-close" id="closeCriticalModal">
+                <i data-lucide="x"></i>
+            </button>
+
+            <div class="critical-header">
+                <span class="critical-icon">🚑</span>
+                <h2>Emergency Contacts</h2>
+                <p id="stateServiceName">Pashu Dhan Sanjeevani</p>
+            </div>
+
+            <!-- Primary: Govt Vet Ambulance -->
+            <a href="tel:1962" class="emergency-call-btn primary">
+                <div class="call-icon">
+                    <i data-lucide="phone"></i>
+                </div>
+                <div class="call-info">
+                    <span class="call-number">1962</span>
+                    <span class="call-label">Govt Vet Ambulance (Free)</span>
+                </div>
+                <span class="call-badge">24/7</span>
+            </a>
+
+            <!-- Secondary: Police -->
+            <a href="tel:112" class="emergency-call-btn secondary">
+                <div class="call-icon">
+                    <i data-lucide="shield"></i>
+                </div>
+                <div class="call-info">
+                    <span class="call-number">112</span>
+                    <span class="call-label">Police (if road accident)</span>
+                </div>
+            </a>
+
+            <!-- Nearest Gaushala WhatsApp -->
+            <a href="#" class="emergency-call-btn whatsapp" id="nearestGaushalaBtn">
+                <div class="call-icon whatsapp-icon">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <div class="call-info">
+                    <span class="call-number" id="nearestGaushalaName">Finding nearest...</span>
+                    <span class="call-label">WhatsApp Local Gaushala</span>
+                </div>
+            </a>
+
+            <div class="critical-note">
+                <i data-lucide="info"></i>
+                <span>1962 works in 29 states. If busy, try local Gaushala.</span>
+            </div>
+
+            <button class="back-btn" id="backToTriage">
+                <i data-lucide="arrow-left"></i>
+                Back
+            </button>
+        </div>
+    </div>
+
+    <!-- ========================================
+         REPORT SUCCESS MODAL
+         ======================================== -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content success-modal">
+            <div class="success-icon">✅</div>
+            <h2>Alert Sent!</h2>
+            <p class="case-id">Case ID: <strong id="caseIdDisplay">#GAU-0000</strong></p>
+            <p class="success-message">We have notified the nearest rescue team. They will contact you shortly.</p>
+
+            <div class="success-actions">
+                <a href="#" class="whatsapp-followup-btn" id="whatsappFollowupBtn">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    Also send via WhatsApp
+                </a>
+            </div>
+
+            <button class="close-success-btn" id="closeSuccessModal">Done</button>
+        </div>
+    </div>
+
+    <script src="js/gaushala-data.js"></script>
     <script src="js/app.js"></script>
 </body>
 

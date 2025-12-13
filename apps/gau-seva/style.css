@@ -941,3 +941,384 @@ body {
     background: var(--border-color);
     border-radius: 2px;
 }
+
+/* ========================================
+   MODAL SYSTEM
+   ======================================== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 400px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 24px;
+    position: relative;
+    animation: modalSlideUp 0.3s ease;
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.modal-close:hover {
+    background: var(--emergency);
+    border-color: var(--emergency);
+    color: white;
+}
+
+/* ===== TRIAGE MODAL ===== */
+.triage-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.triage-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.triage-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+.triage-header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.triage-option {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.triage-option:hover {
+    transform: translateX(4px);
+}
+
+.triage-option.critical {
+    border-color: rgba(211, 47, 47, 0.3);
+    background: rgba(211, 47, 47, 0.1);
+}
+
+.triage-option.critical:hover {
+    border-color: var(--emergency);
+    background: rgba(211, 47, 47, 0.2);
+}
+
+.triage-option.report {
+    border-color: rgba(76, 175, 80, 0.3);
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.triage-option.report:hover {
+    border-color: var(--primary);
+    background: rgba(76, 175, 80, 0.2);
+}
+
+.option-icon {
+    font-size: 2rem;
+}
+
+.option-content {
+    flex: 1;
+}
+
+.option-content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.option-content p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.triage-option>i {
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+}
+
+/* ===== CRITICAL EMERGENCY MODAL ===== */
+.critical-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.critical-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.critical-header h2 {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
+
+.critical-header p {
+    color: var(--primary-light);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.emergency-call-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.emergency-call-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.emergency-call-btn.primary {
+    background: linear-gradient(135deg, var(--emergency), #B71C1C);
+    color: white;
+}
+
+.emergency-call-btn.secondary {
+    background: linear-gradient(135deg, #1565C0, #0D47A1);
+    color: white;
+}
+
+.emergency-call-btn.whatsapp {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+}
+
+.call-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+}
+
+.call-icon i {
+    width: 24px;
+    height: 24px;
+}
+
+.call-icon.whatsapp-icon i {
+    font-size: 1.5rem;
+}
+
+.call-info {
+    flex: 1;
+}
+
+.call-number {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.call-label {
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.call-badge {
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.critical-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.critical-note i {
+    width: 18px;
+    height: 18px;
+    color: var(--accent);
+}
+
+.critical-note span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.back-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.back-btn:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+}
+
+.back-btn i {
+    width: 18px;
+    height: 18px;
+}
+
+/* ===== SUCCESS MODAL ===== */
+.success-modal {
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+}
+
+.success-modal h2 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: var(--success);
+}
+
+.case-id {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.case-id strong {
+    color: var(--accent);
+    font-size: 1rem;
+}
+
+.success-message {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.success-actions {
+    margin-bottom: 16px;
+}
+
+.whatsapp-followup-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #25D366;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.whatsapp-followup-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-followup-btn i {
+    font-size: 1.2rem;
+}
+
+.close-success-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.close-success-btn:hover {
+    background: var(--primary-dark);
+}
+
+/* ===== ACTION BTN BUTTON STYLE ===== */
+button.action-btn {
+    border: none;
+    cursor: pointer;
+}

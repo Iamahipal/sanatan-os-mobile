@@ -1,9 +1,13 @@
 /**
  * Gau Seva - Cow Protection App
- * Main Application Logic
+ * Main Application Logic with Emergency Routing
  */
 
-// Initialize Lucide icons
+// Global state for rescue data
+let currentRescueData = {};
+let userLocation = { lat: null, lon: null, address: null, state: null };
+
+// Initialize app on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
     initApp();
@@ -16,7 +20,7 @@ function initApp() {
     // Photo upload
     initPhotoUpload();
 
-    // Location detection
+    // Location detection (auto-detect on load)
     initLocationDetection();
 
     // Condition chips
@@ -27,6 +31,124 @@ function initApp() {
 
     // Smooth scroll for nav
     initSmoothScroll();
+
+    // NEW: Emergency triage system
+    initEmergencyTriage();
+}
+
+// ===== EMERGENCY TRIAGE SYSTEM =====
+function initEmergencyTriage() {
+    const emergencyBtn = document.getElementById('emergencyBtn');
+    const emergencyModal = document.getElementById('emergencyModal');
+    const criticalModal = document.getElementById('criticalModal');
+    const successModal = document.getElementById('successModal');
+
+    // Close buttons
+    const closeEmergency = document.getElementById('closeEmergencyModal');
+    const closeCritical = document.getElementById('closeCriticalModal');
+    const closeSuccess = document.getElementById('closeSuccessModal');
+
+    // Triage options
+    const triageCritical = document.getElementById('triageCritical');
+    const triageReport = document.getElementById('triageReport');
+    const backToTriage = document.getElementById('backToTriage');
+
+    if (!emergencyBtn) return;
+
+    // Open triage modal
+    emergencyBtn.addEventListener('click', () => {
+        openModal(emergencyModal);
+        // Refresh icons in modal
+        setTimeout(() => lucide.createIcons(), 100);
+    });
+
+    // Close modals
+    closeEmergency?.addEventListener('click', () => closeModal(emergencyModal));
+    closeCritical?.addEventListener('click', () => closeModal(criticalModal));
+    closeSuccess?.addEventListener('click', () => closeModal(successModal));
+
+    // Triage: Critical path
+    triageCritical?.addEventListener('click', () => {
+        closeModal(emergencyModal);
+        openModal(criticalModal);
+        // Update state-specific service name
+        updateStateServiceName();
+        // Find nearest Gaushala for WhatsApp
+        updateNearestGaushala();
+        setTimeout(() => lucide.createIcons(), 100);
+    });
+
+    // Triage: Report path (scroll to form)
+    triageReport?.addEventListener('click', () => {
+        closeModal(emergencyModal);
+        const rescueSection = document.getElementById('rescue');
+        if (rescueSection) {
+            rescueSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+
+    // Back button in critical modal
+    backToTriage?.addEventListener('click', () => {
+        closeModal(criticalModal);
+        openModal(emergencyModal);
+    });
+
+    // Close on overlay click
+    [emergencyModal, criticalModal, successModal].forEach(modal => {
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal(modal);
+        });
+    });
+}
+
+function openModal(modal) {
+    modal?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(modal) {
+    modal?.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Update state-specific 1962 service name
+function updateStateServiceName() {
+    const serviceNameEl = document.getElementById('stateServiceName');
+    if (!serviceNameEl) return;
+
+    if (userLocation.state && typeof getStateServiceName === 'function') {
+        const service = getStateServiceName(userLocation.state);
+        serviceNameEl.textContent = service.name;
+    } else {
+        serviceNameEl.textContent = 'Pashu Dhan Sanjeevani';
+    }
+}
+
+// Find and display nearest Gaushala
+function updateNearestGaushala() {
+    const gaushalaBtnName = document.getElementById('nearestGaushalaName');
+    const gaushalaBtn = document.getElementById('nearestGaushalaBtn');
+
+    if (!gaushalaBtnName || !gaushalaBtn) return;
+
+    // Try to find nearest based on location
+    if (typeof findNearestGaushala === 'function') {
+        const gaushala = findNearestGaushala(null, userLocation.state);
+
+        if (gaushala) {
+            gaushalaBtnName.textContent = gaushala.name;
+
+            // Construct WhatsApp link with emergency message
+            const message = encodeURIComponent(
+                `🚨 *COW EMERGENCY* 🚨\n\n` +
+                `📍 Location: ${userLocation.address || 'Unknown'}\n` +
+                `🗺️ GPS: ${userLocation.lat ? `https://maps.google.com/?q=${userLocation.lat},${userLocation.lon}` : 'Not available'}\n\n` +
+                `⚠️ This is a critical emergency. Please send help immediately!`
+            );
+
+            gaushalaBtn.href = `https://wa.me/${gaushala.whatsapp}?text=${message}`;
+        }
+    }
 }
 
 // ===== COUNTER ANIMATION =====
@@ -87,6 +209,7 @@ function initPhotoUpload() {
                 preview.innerHTML = `<img src="${e.target.result}" alt="Cow photo">`;
                 preview.style.display = 'block';
                 uploadArea.style.display = 'none';
+                currentRescueData.photoData = e.target.result;
             };
             reader.readAsDataURL(file);
         }
@@ -112,6 +235,8 @@ function initLocationDetection() {
             navigator.geolocation.getCurrentPosition(
                 async (position) => {
                     const { latitude, longitude } = position.coords;
+                    userLocation.lat = latitude;
+                    userLocation.lon = longitude;
 
                     // Try to get address from coordinates
                     try {
@@ -121,10 +246,18 @@ function initLocationDetection() {
                         const data = await response.json();
                         const address = data.display_name || `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
                         locationInput.value = address;
+                        userLocation.address = address;
+
+                        // Extract state from response
+                        if (data.address && data.address.state) {
+                            userLocation.state = data.address.state;
+                        }
+
                         locationInput.dataset.lat = latitude;
                         locationInput.dataset.lon = longitude;
                     } catch (error) {
                         locationInput.value = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+                        userLocation.address = locationInput.value;
                     }
                 },
                 (error) => {
@@ -164,6 +297,27 @@ function initConditionChips() {
     window.getSelectedConditions = () => selectedConditions;
 }
 
+// ===== GENERATE CASE ID =====
+function generateCaseId() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const random = Math.floor(Math.random() * 9000) + 1000;
+    return `#GAU-${year}-${random}`;
+}
+
+// ===== STORE REPORT LOCALLY (Offline Support) =====
+function storeReportLocally(report) {
+    try {
+        let reports = JSON.parse(localStorage.getItem('gauSevaReports') || '[]');
+        reports.push(report);
+        localStorage.setItem('gauSevaReports', JSON.stringify(reports));
+        return true;
+    } catch (e) {
+        console.error('Failed to store report locally:', e);
+        return false;
+    }
+}
+
 // ===== RESCUE FORM SUBMISSION =====
 function initRescueForm() {
     const submitBtn = document.getElementById('submitRescue');
@@ -189,50 +343,73 @@ function initRescueForm() {
             return;
         }
 
+        // Generate Case ID
+        const caseId = generateCaseId();
+
         // Prepare data
         const rescueData = {
+            caseId: caseId,
             location: locationInput.value,
-            lat: locationInput.dataset.lat,
-            lon: locationInput.dataset.lon,
+            lat: userLocation.lat || locationInput.dataset.lat,
+            lon: userLocation.lon || locationInput.dataset.lon,
+            state: userLocation.state,
             conditions: conditions,
             description: description.value,
             contact: contactNumber.value,
             timestamp: new Date().toISOString(),
-            hasPhoto: photoInput.files.length > 0
+            hasPhoto: photoInput.files.length > 0,
+            status: 'pending'
         };
 
-        // In a real app, this would send to a backend
-        console.log('Rescue Report:', rescueData);
+        // Store locally for offline support
+        storeReportLocally(rescueData);
 
-        // Show success message
-        submitBtn.innerHTML = '<i data-lucide="check"></i> Alert Sent!';
-        submitBtn.style.background = '#388E3C';
+        // Show loading state
+        submitBtn.innerHTML = '<i data-lucide="loader-2"></i> Sending...';
+        submitBtn.disabled = true;
         lucide.createIcons();
 
-        showToast('🙏 Rescue alert sent! Team will contact you shortly.', 'success');
-
-        // Generate WhatsApp message
-        const whatsappText = encodeURIComponent(
-            `🐄 *COW RESCUE NEEDED*\n\n` +
-            `📍 Location: ${rescueData.location}\n` +
-            `🩹 Condition: ${conditions.join(', ')}\n` +
-            `📝 Details: ${rescueData.description || 'Not provided'}\n` +
-            `📞 Contact: ${rescueData.contact}\n\n` +
-            `🗺️ Map: https://maps.google.com/?q=${rescueData.lat},${rescueData.lon}`
-        );
-
-        // Update WhatsApp link
-        const whatsappBtn = document.querySelector('.whatsapp-btn');
-        if (whatsappBtn) {
-            whatsappBtn.href = `https://wa.me/919876543210?text=${whatsappText}`;
-        }
-
-        // Reset form after 3 seconds
+        // Simulate API call (replace with Firebase later)
         setTimeout(() => {
-            submitBtn.innerHTML = '<i data-lucide="send"></i> Send Rescue Alert';
-            submitBtn.style.background = '';
+            // Show success modal
+            const successModal = document.getElementById('successModal');
+            const caseIdDisplay = document.getElementById('caseIdDisplay');
+            const whatsappFollowupBtn = document.getElementById('whatsappFollowupBtn');
+
+            if (caseIdDisplay) caseIdDisplay.textContent = caseId;
+
+            // Generate WhatsApp message for followup
+            const message = encodeURIComponent(
+                `🐄 *COW RESCUE REPORT* 🐄\n\n` +
+                `📋 Case ID: ${caseId}\n` +
+                `📍 Location: ${rescueData.location}\n` +
+                `🩹 Condition: ${conditions.join(', ')}\n` +
+                `📝 Details: ${rescueData.description || 'Not provided'}\n` +
+                `📞 Contact: ${rescueData.contact}\n\n` +
+                `🗺️ Map: https://maps.google.com/?q=${rescueData.lat},${rescueData.lon}`
+            );
+
+            // Find nearest Gaushala for WhatsApp
+            let rescueNumber = '919876543210'; // Default
+            if (typeof findNearestGaushala === 'function') {
+                const gaushala = findNearestGaushala(null, rescueData.state);
+                if (gaushala) rescueNumber = gaushala.whatsapp;
+            }
+
+            if (whatsappFollowupBtn) {
+                whatsappFollowupBtn.href = `https://wa.me/${rescueNumber}?text=${message}`;
+            }
+
+            openModal(successModal);
             lucide.createIcons();
-        }, 3000);
+
+            // Reset button
+            submitBtn.innerHTML = '<i data-lucide="send"></i> Send Rescue Alert';
+            submitBtn.disabled = false;
+            lucide.createIcons();
+
+            showToast('🙏 Report saved! Case ID: ' + caseId, 'success');
+        }, 1500);
     });
 }
 
@@ -295,6 +472,10 @@ function showToast(message, type = 'info') {
 // Add CSS animation for toast
 const style = document.createElement('style');
 style.textContent = `
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
     @keyframes fadeOut {
         to { opacity: 0; transform: translateX(-50%) translateY(20px); }
     }
