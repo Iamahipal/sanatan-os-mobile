@@ -6,21 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Krishna Vaani - कृष्ण वाणी</title>
 
+    <!-- Preload critical assets -->
+    <link rel="preload" href="krishna-bg.jpg" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <!-- Critical CSS to prevent flash of unstyled content -->
     <style>
-        /* Hide everything until fully loaded */
+        /* Start with black background, hidden container */
+        html,
+        body {
+            background: #000;
+        }
+
         .app-container {
-            visibility: hidden !important;
+            visibility: hidden;
         }
 
         .app-container.ready {
-            visibility: visible !important;
+            visibility: visible;
         }
     </style>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Tiro+Devanagari+Sanskrit&display=swap"
         rel="stylesheet">
@@ -193,8 +201,17 @@
     <script src="js/gemini-brain.js"></script>
     <script src="js/chat-engine.js"></script>
     <script>
-        // Wait for fonts and render icons, then reveal
-        document.fonts.ready.then(() => {
+        // Wait for fonts AND background image before revealing
+        const bgImage = new Image();
+        bgImage.src = 'krishna-bg.jpg';
+
+        Promise.all([
+            document.fonts.ready,
+            new Promise(resolve => {
+                if (bgImage.complete) resolve();
+                else bgImage.onload = resolve;
+            })
+        ]).then(() => {
             lucide.createIcons();
             document.querySelector('.app-container').classList.add('ready');
         });
