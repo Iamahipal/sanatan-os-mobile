@@ -173,25 +173,49 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+
+    /* Ultra Transparent Liquid Glass */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(2px) saturate(1.1);
+    -webkit-backdrop-filter: blur(2px) saturate(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 14px;
+
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.2s ease;
     text-decoration: none;
-    box-shadow: 0 -4px 10px inset rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Water droplet refraction */
+.header-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.25) 0%,
+            rgba(255, 255, 255, 0.08) 50%,
+            transparent 100%);
+    border-radius: 14px 14px 0 0;
+    pointer-events: none;
 }
 
 .header-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 215, 0, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .header-btn svg {
     width: 20px;
     height: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 /* ============================================
@@ -392,41 +416,40 @@ body {
 /* Avatar styles removed - using clean layout */
 
 /* ============================================
-   KRISHNA'S MESSAGE - Liquid Glass
+   KRISHNA'S MESSAGE - Ultra Transparent Liquid Glass
    ============================================ */
 .message.krishna .message-content {
     position: relative;
     padding: 18px 20px;
+    overflow: hidden;
 
-    /* TRUE Liquid Glass - more transparent */
-    background: rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    /* Ultra Transparent Liquid Glass */
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(2px) saturate(1.1);
+    -webkit-backdrop-filter: blur(2px) saturate(1.1);
 
-    /* Subtle border */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Bright border */
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 20px;
     border-bottom-left-radius: 6px;
 
-    /* Inset shadow for depth */
-    box-shadow:
-        0 4px 24px rgba(0, 0, 0, 0.2),
-        0 -6px 12px inset rgba(0, 0, 0, 0.1),
-        0 1px 0 inset rgba(255, 255, 255, 0.05);
+    /* Minimal shadow */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-/* Specular highlight */
+/* Water droplet refraction */
 .message.krishna .message-content::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 10%;
-    right: 10%;
-    height: 1px;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.15),
-            transparent);
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0.05) 60%,
+            transparent 100%);
+    border-radius: 20px 20px 0 0;
     pointer-events: none;
 }
 
@@ -487,35 +510,34 @@ body {
 .message.user .message-content {
     position: relative;
     padding: 16px 18px;
+    overflow: hidden;
 
-    /* TRUE Liquid Glass - more transparent */
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    /* Ultra Transparent Liquid Glass */
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(2px) saturate(1.1);
+    -webkit-backdrop-filter: blur(2px) saturate(1.1);
 
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 20px;
     border-bottom-right-radius: 6px;
 
-    /* Inset shadow */
-    box-shadow:
-        0 4px 24px rgba(0, 0, 0, 0.15),
-        0 -6px 12px inset rgba(0, 0, 0, 0.08),
-        0 1px 0 inset rgba(255, 255, 255, 0.05);
+    /* Minimal shadow */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-/* Specular highlight */
+/* Water droplet refraction */
 .message.user .message-content::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 10%;
-    right: 10%;
-    height: 1px;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.15),
-            transparent);
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0.05) 60%,
+            transparent 100%);
+    border-radius: 20px 20px 0 0;
     pointer-events: none;
 }
 

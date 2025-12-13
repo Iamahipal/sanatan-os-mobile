@@ -27,30 +27,33 @@
 
         .chapter-card {
             position: relative;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(20px) saturate(1.4);
-            -webkit-backdrop-filter: blur(20px) saturate(1.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            overflow: hidden;
+
+            /* Ultra Transparent Liquid Glass */
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(2px) saturate(1.1);
+            -webkit-backdrop-filter: blur(2px) saturate(1.1);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 18px;
             padding: 18px;
             display: flex;
             flex-direction: column;
             gap: 6px;
             cursor: pointer;
-            box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.15),
-                0 -4px 10px inset rgba(0, 0, 0, 0.08);
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
         }
 
-        /* Specular highlight */
+        /* Water droplet refraction */
         .chapter-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 15%;
-            right: 15%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+            border-radius: 18px 18px 0 0;
+            pointer-events: none;
         }
 
         .chapter-num {
