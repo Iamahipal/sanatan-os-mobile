@@ -359,42 +359,36 @@ body {
     letter-spacing: 1px;
 }
 
-/* Suggestion Chips - Liquid Glass */
+/* Suggestion Chips - Apple Vibrancy Glass */
 .suggestion-chip {
     display: block;
     width: 100%;
-    padding: 16px 18px;
-    margin-bottom: 10px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
 
-    /* Liquid Glass */
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(12px) saturate(1.2);
-    -webkit-backdrop-filter: blur(12px) saturate(1.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+    /* Apple Vibrancy - higher blur, saturation for color boost */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(1.6) brightness(1.1);
+    -webkit-backdrop-filter: blur(24px) saturate(1.6) brightness(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
 
-    /* Inset shadow for depth */
+    /* Subtle inset for glass depth */
     box-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.1),
-        0 -4px 12px inset rgba(0, 0, 0, 0.06);
+        0 2px 16px rgba(0, 0, 0, 0.12),
+        inset 0 -2px 8px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
-    color: var(--text-primary);
-    font-family: var(--font-user);
-    font-size: 0.9rem;
+    /* High contrast white text */
+    color: #FFFFFF;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 500;
     text-align: left;
     cursor: pointer;
-    transition: all 0.25s ease;
 }
 
-.suggestion-chip:hover {
-    background: rgba(255, 215, 0, 0.05);
-    border-color: rgba(255, 215, 0, 0.2);
-    transform: translateX(4px);
-    box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.15),
-        0 0 20px rgba(255, 215, 0, 0.08),
-        0 -4px 12px inset rgba(0, 0, 0, 0.06);
-}
+/* No hover effect - cleaner Apple style */
 
 /* ============================================
    CHAT MESSAGES

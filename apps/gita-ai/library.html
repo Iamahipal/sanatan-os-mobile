@@ -191,7 +191,176 @@
                 <!-- Verses go here -->
             </div>
         </div>
+
+        <!-- Verse Reader Modal -->
+        <div id="verse-reader" class="verse-reader-modal">
+            <div class="reader-header">
+                <button class="reader-close-btn" id="close-reader">
+                    <i data-lucide="x"></i>
+                </button>
+                <div class="reader-nav">
+                    <button class="nav-btn" id="prev-verse">
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+                    <span class="reader-verse-num" id="reader-verse-num">Verse 1</span>
+                    <button class="nav-btn" id="next-verse">
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="reader-content" id="reader-content">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
     </div>
+
+    <style>
+        /* Verse Reader Modal - Modern Immersive Design */
+        .verse-reader-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 100;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .verse-reader-modal.active {
+            display: flex;
+        }
+
+        .reader-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .reader-close-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .reader-nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .reader-verse-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        .reader-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Sanskrit Section */
+        .reader-sanskrit {
+            font-family: 'Tiro Devanagari Sanskrit', serif;
+            font-size: 1.4rem;
+            color: #FFD700;
+            line-height: 2;
+            text-align: center;
+            padding: 24px;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+        }
+
+        /* Transliteration */
+        .reader-transliteration {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        /* Translation/Meaning */
+        .reader-meaning {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            color: #FFFFFF;
+            line-height: 1.8;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border-left: 3px solid #FFD700;
+        }
+
+        .reader-meaning-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Commentary */
+        .reader-commentary {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+        }
+
+        .reader-commentary-label {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
 
     <!-- Scripts -->
     <!-- Load Core Data produced by User Tool -->
@@ -208,6 +377,11 @@
             const chapterView = document.getElementById('chapter-view');
             const verseView = document.getElementById('verse-view');
             const verseContainer = document.getElementById('verse-list-container');
+            const verseReader = document.getElementById('verse-reader');
+            const readerContent = document.getElementById('reader-content');
+
+            let currentVerses = [];
+            let currentVerseIndex = 0;
 
             // Prefer Complete Data if available, else fallback
             const DATA = (typeof GITA_DATA_COMPLETE !== 'undefined') ? GITA_DATA_COMPLETE : GITA_DATA;
@@ -243,14 +417,9 @@
                         map.get(cNum).verses.push(v);
                     });
                     chapters = Array.from(map.values()).sort((a, b) => a.chapter - b.chapter);
-
-                    // Try to enrich titles if available in first verse or meta
-                    // (Optional enhancement)
                 }
 
                 if (chapters.length === 0) {
-                    // Try to infer from flat verses if necessary (User's script output structure)
-                    // Or just show fallback message
                     chapterGrid.innerHTML = `<div style="grid-column: span 2; text-align:center">
                         <p>No Chapters Found.</p>
                         <small>Did you run python tools/gita_ingest.py?</small>
@@ -283,29 +452,87 @@
                     verses = DATA.verses.filter(v => parseInt(v.chapter) === parseInt(chapter.chapter));
                 }
 
+                currentVerses = verses.sort((a, b) => a.verse - b.verse);
+
                 // Update Header
                 document.getElementById('current-chapter-title').textContent = `Chapter ${chapter.chapter}`;
-                document.getElementById('current-chapter-subtitle').textContent = chapter.titleEnglish;
+                document.getElementById('current-chapter-subtitle').textContent = chapter.titleEnglish || '';
 
                 // Render List
                 verseContainer.innerHTML = '';
-                verses.sort((a, b) => a.verse - b.verse).forEach(v => {
+                currentVerses.forEach((v, index) => {
                     const el = document.createElement('div');
                     el.className = 'verse-item';
                     el.innerHTML = `
                         <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-                            <span style="color:var(--primary); font-size:0.8rem; font-weight:600;">Verse ${v.verse}</span>
+                            <span style="color:#FFD700; font-size:0.8rem; font-weight:600;">Verse ${v.verse}</span>
+                            <i data-lucide="chevron-right" style="width:16px; height:16px; color:rgba(255,255,255,0.3);"></i>
                         </div>
-                        <div class="verse-preview-sanskrit">${v.sanskrit}</div>
-                        <div class="verse-preview-trans">${v.translation}</div>
+                        <div class="verse-preview-sanskrit">${v.sanskrit || ''}</div>
+                        <div class="verse-preview-trans">${v.translation || ''}</div>
                     `;
+                    el.onclick = () => openVerseReader(index);
                     verseContainer.appendChild(el);
                 });
+                lucide.createIcons();
 
                 // Toggle View
                 chapterView.style.display = 'none';
                 verseView.classList.add('active');
             }
+
+            function openVerseReader(index) {
+                currentVerseIndex = index;
+                renderVerseReader();
+                verseReader.classList.add('active');
+                lucide.createIcons();
+            }
+
+            function renderVerseReader() {
+                const v = currentVerses[currentVerseIndex];
+                if (!v) return;
+
+                document.getElementById('reader-verse-num').textContent = `Verse ${v.verse}`;
+
+                readerContent.innerHTML = `
+                    <div class="reader-sanskrit">${v.sanskrit || 'Sanskrit not available'}</div>
+                    ${v.transliteration ? `<div class="reader-transliteration">${v.transliteration}</div>` : ''}
+                    <div class="reader-meaning">
+                        <span class="reader-meaning-label">Meaning</span>
+                        ${v.translation || v.meaning || 'Translation not available'}
+                    </div>
+                    ${v.commentary ? `
+                        <div class="reader-commentary">
+                            <span class="reader-commentary-label">Commentary</span>
+                            ${v.commentary}
+                        </div>
+                    ` : ''}
+                `;
+
+                // Update nav buttons
+                document.getElementById('prev-verse').disabled = currentVerseIndex === 0;
+                document.getElementById('next-verse').disabled = currentVerseIndex >= currentVerses.length - 1;
+            }
+
+            // Navigation
+            document.getElementById('prev-verse').onclick = () => {
+                if (currentVerseIndex > 0) {
+                    currentVerseIndex--;
+                    renderVerseReader();
+                }
+            };
+
+            document.getElementById('next-verse').onclick = () => {
+                if (currentVerseIndex < currentVerses.length - 1) {
+                    currentVerseIndex++;
+                    renderVerseReader();
+                }
+            };
+
+            // Close Reader
+            document.getElementById('close-reader').onclick = () => {
+                verseReader.classList.remove('active');
+            };
 
             // Back Navigation
             document.getElementById('back-to-chapters').onclick = () => {
