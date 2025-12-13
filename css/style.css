@@ -268,21 +268,22 @@ body::before {
 }
 
 /* ============================================
-   ULTRA TRANSPARENT LIQUID GLASS TILE
+   LIQUID GLASS TILE - Enhanced with JS Effect
    ============================================ */
 .tile {
     position: relative;
     overflow: hidden;
 
-    /* Ultra Transparent Liquid Glass */
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(2px) saturate(1.1);
-    -webkit-backdrop-filter: blur(2px) saturate(1.1);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    /* Base glass background - distortion applied by liquid-glass.js */
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: var(--radius);
 
-    /* Minimal shadow */
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.06);
+    /* Subtle depth shadow */
+    box-shadow:
+        0 2px 20px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.08);
 
     aspect-ratio: 1/1;
     display: flex;
@@ -290,24 +291,24 @@ body::before {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: transform 0.2s ease-out;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
     text-decoration: none;
     animation: tileReveal 0.25s cubic-bezier(0.33, 1, 0.68, 1) both;
     transform: translateZ(0);
     backface-visibility: hidden;
 }
 
-/* Water droplet light refraction effect */
+/* Water droplet light refraction - top highlight */
 .tile::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 55%;
     background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.2) 0%,
-            rgba(255, 255, 255, 0.06) 50%,
+            rgba(255, 255, 255, 0.22) 0%,
+            rgba(255, 255, 255, 0.08) 40%,
             transparent 100%);
     border-radius: var(--radius) var(--radius) 0 0;
     pointer-events: none;
