@@ -111,11 +111,19 @@
             </div>
         </a>
 
-        <!-- Quote -->
-        <div class="tile quote">
+        <!-- Divine Wisdom -->
+        <div id="wisdom-tile" class="tile quote" onclick="refreshWisdom()">
+            <!-- Animation Container -->
+            <div id="prakata-animation" class="prakata-container">
+                <div class="diya-flame"></div>
+                <div class="lotus-bloom"></div>
+                <div class="chakra-spin"></div>
+            </div>
+            <!-- Content -->
             <span class="quote-icon">❝</span>
-            <p class="quote-text">"You have the right to work, but for the work's sake only."</p>
-            <span class="quote-label">Daily Wisdom</span>
+            <p id="wisdom-text" class="quote-text">"You have the right to work, but for the work's sake only."</p>
+            <span id="wisdom-chapter" class="quote-label">Gita 2.47</span>
+            <span class="tap-hint">Tap for revelation</span>
         </div>
 
         <!-- Bottom Row -->
@@ -174,6 +182,66 @@
                 clickSound.play().catch(() => { });
             }
         });
+
+        // ============================================
+        // DIVINE WISDOM - Gita Quotes
+        // ============================================
+        const gitaQuotes = [
+            { text: "You have the right to work, but for the work's sake only.", chapter: "2.47" },
+            { text: "The soul is neither born, and nor does it die.", chapter: "2.20" },
+            { text: "Reshape yourself through the power of your will.", chapter: "6.5" },
+            { text: "A gift is pure when given from the heart without expectation of return.", chapter: "17.20" },
+            { text: "When meditation is mastered, the mind is unwavering like the flame of a candle in a windless place.", chapter: "6.19" },
+            { text: "He who has no attachments can really love others, for his love is pure and divine.", chapter: "2.64" },
+            { text: "Change is the law of the universe. What you think of as death is indeed life.", chapter: "2.22" },
+            { text: "Set thy heart upon thy work, but never on its reward.", chapter: "2.47" },
+            { text: "Fear not. What is not real, never was and never will be.", chapter: "2.16" },
+            { text: "Man is made by his belief. As he believes, so he is.", chapter: "17.3" },
+            { text: "Calmness, gentleness, silence, self-restraint, and purity: these are the disciplines of the mind.", chapter: "17.16" },
+            { text: "Perform your obligatory duty, because action is better than inaction.", chapter: "3.8" },
+            { text: "The wise see knowledge and action as one.", chapter: "5.4" },
+            { text: "One who sees inaction in action, and action in inaction, is intelligent among men.", chapter: "4.18" },
+            { text: "Whatever happened, happened for good. Whatever is happening, is happening for good.", chapter: "2.27" }
+        ];
+
+        let isAnimating = false;
+        const animations = ['diya', 'lotus', 'chakra'];
+
+        function refreshWisdom() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const tile = document.getElementById('wisdom-tile');
+            const textEl = document.getElementById('wisdom-text');
+            const chapterEl = document.getElementById('wisdom-chapter');
+
+            // Remove previous animation classes
+            tile.classList.remove('anim-diya', 'anim-lotus', 'anim-chakra');
+
+            // Add animating state (hides text)
+            tile.classList.add('animating');
+
+            // Pick random animation
+            const randomAnim = animations[Math.floor(Math.random() * animations.length)];
+            tile.classList.add(`anim-${randomAnim}`);
+
+            // After animation, show new quote
+            setTimeout(() => {
+                // Pick random quote
+                const quote = gitaQuotes[Math.floor(Math.random() * gitaQuotes.length)];
+                textEl.textContent = `"${quote.text}"`;
+                chapterEl.textContent = `Gita ${quote.chapter}`;
+
+                // Remove animating state (shows text)
+                tile.classList.remove('animating');
+                tile.classList.remove(`anim-${randomAnim}`);
+
+                isAnimating = false;
+            }, 1200);
+        }
+
+        // Auto-refresh on first load with delay
+        setTimeout(() => refreshWisdom(), 1500);
     </script>
 </body>
 

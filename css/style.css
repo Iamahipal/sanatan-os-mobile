@@ -532,3 +532,233 @@ body {
         font-size: 0.65rem;
     }
 }
+
+/* ============================================
+   DIVINE WISDOM - Prakata Animations
+   ============================================ */
+.tile.quote {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.prakata-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.prakata-container>div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+/* TAP HINT */
+.tap-hint {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 215, 0, 0.4);
+    animation: pulseHint 2s ease-in-out infinite;
+}
+
+@keyframes pulseHint {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Hide text during animation */
+.tile.quote.animating .quote-icon,
+.tile.quote.animating .quote-text,
+.tile.quote.animating .quote-label {
+    opacity: 0;
+}
+
+/* Fade in text after animation */
+.tile.quote .quote-text,
+.tile.quote .quote-label {
+    transition: opacity 0.4s ease;
+}
+
+/* ============================================
+   DIYA (LAMP) ANIMATION
+   ============================================ */
+.diya-flame {
+    width: 20px;
+    height: 40px;
+    background: linear-gradient(to top, #FF6B35 0%, #FFD700 50%, #FFF 90%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    filter: blur(1px);
+}
+
+.tile.quote.anim-diya .diya-flame {
+    animation: diyaReveal 1.2s ease-out forwards;
+}
+
+@keyframes diyaReveal {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3);
+        filter: blur(2px);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    30%,
+    70% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) translateY(-2px);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 107, 53, 0.5);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.1) translateY(-4px);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.5);
+        box-shadow: 0 0 80px rgba(255, 215, 0, 1), 0 0 150px rgba(255, 107, 53, 0.8);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(3);
+        box-shadow: 0 0 200px rgba(255, 215, 0, 0);
+    }
+}
+
+/* ============================================
+   LOTUS (PADMA) ANIMATION
+   ============================================ */
+.lotus-bloom {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(ellipse, #FF69B4 0%, #DB7093 40%, transparent 70%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.lotus-bloom::before,
+.lotus-bloom::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(ellipse, rgba(255, 182, 193, 0.8) 0%, transparent 70%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.lotus-bloom::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.lotus-bloom::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.tile.quote.anim-lotus .lotus-bloom {
+    animation: lotusReveal 1.2s ease-out forwards;
+}
+
+@keyframes lotusReveal {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 100%) scale(0.3);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.8));
+    }
+
+    70% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+}
+
+/* ============================================
+   CHAKRA (SUDARSHAN) ANIMATION
+   ============================================ */
+.chakra-spin {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #FFD700;
+    border-radius: 50%;
+    position: relative;
+}
+
+.chakra-spin::before {
+    content: '☸';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: #FFD700;
+}
+
+.tile.quote.anim-chakra .chakra-spin {
+    animation: chakraReveal 1.2s ease-out forwards;
+}
+
+@keyframes chakraReveal {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(180deg);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1) rotate(720deg);
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+    }
+
+    70% {
+        transform: translate(-50%, -50%) scale(1.1) rotate(1080deg);
+    }
+
+    90% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2) rotate(1260deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5) rotate(1440deg);
+    }
+}
