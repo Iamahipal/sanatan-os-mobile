@@ -172,6 +172,38 @@ function updateNearestGaushala() {
     }
 }
 
+// Update the direct WhatsApp link in the rescue form
+function updateDirectWhatsappLink() {
+    const directWhatsappBtn = document.getElementById('directWhatsappBtn');
+    if (!directWhatsappBtn) return;
+
+    // Find nearest Gaushala
+    if (typeof findNearestGaushala === 'function') {
+        const gaushala = findNearestGaushala(userLocation.lat, userLocation.lon, userLocation.state);
+
+        // Build message
+        const message = encodeURIComponent(
+            `🐄 *COW RESCUE NEEDED* 🐄\n\n` +
+            `📍 Location: ${userLocation.address || 'Unknown'}\n` +
+            `🗺️ GPS: ${userLocation.lat ? `https://maps.google.com/?q=${userLocation.lat},${userLocation.lon}` : 'Not available'}\n\n` +
+            `Please send help!`
+        );
+
+        // Use Gaushala WhatsApp if available, otherwise show alert
+        if (gaushala && gaushala.whatsapp) {
+            directWhatsappBtn.href = `https://wa.me/${gaushala.whatsapp}?text=${message}`;
+            directWhatsappBtn.onclick = null;
+        } else {
+            // No WhatsApp available - show 1962 prompt instead
+            directWhatsappBtn.href = '#';
+            directWhatsappBtn.onclick = (e) => {
+                e.preventDefault();
+                showToast('📞 No local WhatsApp available. Please call 1962 for fastest help.', 'info');
+            };
+        }
+    }
+}
+
 // ===== COUNTER ANIMATION =====
 function animateCounters() {
     const counters = document.querySelectorAll('.impact-number');
@@ -274,8 +306,20 @@ function initLocationDetection() {
                             userLocation.state = data.address.state;
                         }
 
+                        // Extract city from response
+                        if (data.address && data.address.city) {
+                            userLocation.city = data.address.city;
+                        } else if (data.address && data.address.town) {
+                            userLocation.city = data.address.town;
+                        } else if (data.address && data.address.village) {
+                            userLocation.city = data.address.village;
+                        }
+
                         locationInput.dataset.lat = latitude;
                         locationInput.dataset.lon = longitude;
+
+                        // Update WhatsApp link with nearest Gaushala
+                        updateDirectWhatsappLink();
                     } catch (error) {
                         locationInput.value = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
                         userLocation.address = locationInput.value;
@@ -319,11 +363,69 @@ function initConditionChips() {
 }
 
 // ===== GENERATE CASE ID =====
+// Format: #MH-PUN-131224-001 (State-City-Date-Seq)
 function generateCaseId() {
     const date = new Date();
-    const year = date.getFullYear();
-    const random = Math.floor(Math.random() * 9000) + 1000;
-    return `#GAU-${year}-${random}`;
+
+    // Date part: DDMMYY
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = String(date.getFullYear()).slice(-2);
+    const dateStr = `${day}${month}${year}`;
+
+    // State code (2 letters)
+    const stateCode = getStateCode(userLocation.state);
+
+    // City code (first 3 letters)
+    const cityCode = getCityCode(userLocation.address);
+
+    // Sequential number for today (stored in localStorage)
+    const seqKey = `gauSevaSeq_${dateStr}`;
+    let seq = parseInt(localStorage.getItem(seqKey) || '0') + 1;
+    localStorage.setItem(seqKey, seq.toString());
+    const seqStr = String(seq).padStart(3, '0');
+
+    return `#${stateCode}-${cityCode}-${dateStr}-${seqStr}`;
+}
+
+// State code mapping (ISO 3166-2:IN)
+function getStateCode(state) {
+    const codes = {
+        'andhra pradesh': 'AP', 'arunachal pradesh': 'AR', 'assam': 'AS',
+        'bihar': 'BR', 'chhattisgarh': 'CG', 'goa': 'GA', 'gujarat': 'GJ',
+        'haryana': 'HR', 'himachal pradesh': 'HP', 'jharkhand': 'JH',
+        'karnataka': 'KA', 'kerala': 'KL', 'madhya pradesh': 'MP',
+        'maharashtra': 'MH', 'manipur': 'MN', 'meghalaya': 'ML',
+        'mizoram': 'MZ', 'nagaland': 'NL', 'odisha': 'OR', 'punjab': 'PB',
+        'rajasthan': 'RJ', 'sikkim': 'SK', 'tamil nadu': 'TN',
+        'telangana': 'TG', 'tripura': 'TR', 'uttar pradesh': 'UP',
+        'uttarakhand': 'UK', 'west bengal': 'WB', 'delhi': 'DL',
+        'jammu and kashmir': 'JK', 'ladakh': 'LA', 'puducherry': 'PY',
+        'chandigarh': 'CH', 'dadra and nagar haveli': 'DN',
+        'daman and diu': 'DD', 'lakshadweep': 'LD', 'andaman and nicobar': 'AN'
+    };
+
+    if (!state) return 'XX';
+    const key = state.toLowerCase().trim();
+    return codes[key] || state.substring(0, 2).toUpperCase();
+}
+
+// Extract city code from address
+function getCityCode(address) {
+    if (!address) return 'UNK';
+
+    // Try to extract city name (usually after first comma or before district)
+    const parts = address.split(',');
+    if (parts.length > 1) {
+        // Take second part (usually city/area name)
+        const cityPart = parts[1].trim();
+        // Remove common suffixes
+        const cleanCity = cityPart.replace(/\s*(district|taluka|tehsil|block)/gi, '').trim();
+        return cleanCity.substring(0, 3).toUpperCase();
+    }
+
+    // Fallback: first 3 letters of first word
+    return address.split(' ')[0].substring(0, 3).toUpperCase();
 }
 
 // ===== STORE REPORT LOCALLY (Offline Support) =====
