@@ -34,6 +34,27 @@ function initApp() {
 
     // NEW: Emergency triage system
     initEmergencyTriage();
+
+    // Initialize Firebase and sync any offline reports
+    initFirebaseAndSync();
+}
+
+// ===== FIREBASE INITIALIZATION =====
+async function initFirebaseAndSync() {
+    try {
+        // Initialize Firebase (from firebase-service.js)
+        if (window.GauSevaFirebase) {
+            await window.GauSevaFirebase.init();
+
+            // Sync any offline reports
+            const syncResult = await window.GauSevaFirebase.syncLocalReports();
+            if (syncResult.synced > 0) {
+                console.log(`✅ Synced ${syncResult.synced} offline reports to cloud`);
+            }
+        }
+    } catch (error) {
+        console.warn('Firebase init warning:', error);
+    }
 }
 
 // ===== EMERGENCY TRIAGE SYSTEM =====
@@ -369,47 +390,63 @@ function initRescueForm() {
         submitBtn.disabled = true;
         lucide.createIcons();
 
-        // Simulate API call (replace with Firebase later)
-        setTimeout(() => {
-            // Show success modal
-            const successModal = document.getElementById('successModal');
-            const caseIdDisplay = document.getElementById('caseIdDisplay');
-            const whatsappFollowupBtn = document.getElementById('whatsappFollowupBtn');
-
-            if (caseIdDisplay) caseIdDisplay.textContent = caseId;
-
-            // Generate WhatsApp message for followup
-            const message = encodeURIComponent(
-                `🐄 *COW RESCUE REPORT* 🐄\n\n` +
-                `📋 Case ID: ${caseId}\n` +
-                `📍 Location: ${rescueData.location}\n` +
-                `🩹 Condition: ${conditions.join(', ')}\n` +
-                `📝 Details: ${rescueData.description || 'Not provided'}\n` +
-                `📞 Contact: ${rescueData.contact}\n\n` +
-                `🗺️ Map: https://maps.google.com/?q=${rescueData.lat},${rescueData.lon}`
-            );
-
-            // Find nearest Gaushala for WhatsApp
-            let rescueNumber = '919876543210'; // Default
-            if (typeof findNearestGaushala === 'function') {
-                const gaushala = findNearestGaushala(null, rescueData.state);
-                if (gaushala) rescueNumber = gaushala.whatsapp;
+        // Save to Firebase Firestore
+        let firebaseSaved = false;
+        try {
+            if (window.GauSevaFirebase) {
+                const result = await window.GauSevaFirebase.saveReport(rescueData);
+                firebaseSaved = result.success;
+                if (result.success) {
+                    console.log('✅ Report saved to Firebase:', result.docId);
+                }
             }
+        } catch (error) {
+            console.warn('Firebase save failed, using localStorage:', error);
+        }
 
-            if (whatsappFollowupBtn) {
-                whatsappFollowupBtn.href = `https://wa.me/${rescueNumber}?text=${message}`;
-            }
+        // Show success modal
+        const successModal = document.getElementById('successModal');
+        const caseIdDisplay = document.getElementById('caseIdDisplay');
+        const whatsappFollowupBtn = document.getElementById('whatsappFollowupBtn');
 
-            openModal(successModal);
-            lucide.createIcons();
+        if (caseIdDisplay) caseIdDisplay.textContent = caseId;
 
-            // Reset button
-            submitBtn.innerHTML = '<i data-lucide="send"></i> Send Rescue Alert';
-            submitBtn.disabled = false;
-            lucide.createIcons();
+        // Generate WhatsApp message for followup
+        const message = encodeURIComponent(
+            `🐄 *COW RESCUE REPORT* 🐄\n\n` +
+            `📋 Case ID: ${caseId}\n` +
+            `📍 Location: ${rescueData.location}\n` +
+            `🩹 Condition: ${conditions.join(', ')}\n` +
+            `📝 Details: ${rescueData.description || 'Not provided'}\n` +
+            `📞 Contact: ${rescueData.contact}\n\n` +
+            `🗺️ Map: https://maps.google.com/?q=${rescueData.lat},${rescueData.lon}`
+        );
 
-            showToast('🙏 Report saved! Case ID: ' + caseId, 'success');
-        }, 1500);
+        // Find nearest Gaushala for WhatsApp
+        let rescueNumber = '919876543210'; // Default
+        if (typeof findNearestGaushala === 'function') {
+            const gaushala = findNearestGaushala(null, rescueData.state);
+            if (gaushala && gaushala.whatsapp) rescueNumber = gaushala.whatsapp;
+        }
+
+        if (whatsappFollowupBtn) {
+            whatsappFollowupBtn.href = `https://wa.me/${rescueNumber}?text=${message}`;
+        }
+
+        openModal(successModal);
+        lucide.createIcons();
+
+        // Reset button
+        submitBtn.innerHTML = '<i data-lucide="send"></i> Send Rescue Alert';
+        submitBtn.disabled = false;
+        lucide.createIcons();
+
+        // Show appropriate toast
+        if (firebaseSaved) {
+            showToast('🙏 Report sent to rescue network! Case ID: ' + caseId, 'success');
+        } else {
+            showToast('📱 Report saved locally. Tap WhatsApp to send directly.', 'success');
+        }
     });
 }
 
