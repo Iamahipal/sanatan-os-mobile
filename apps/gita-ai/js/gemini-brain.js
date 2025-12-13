@@ -302,7 +302,7 @@ Remember: You are not just answering questions, you are transforming lives with 
         }
     }
 
-    // Format response with verse cards
+    // Format response with verse cards and markdown
     formatResponse(text) {
         // Convert [VERSE:X.X]...[/VERSE] to verse cards
         const verseRegex = /\[VERSE:(\d+\.\d+)\]([\s\S]*?)\[\/VERSE\]/g;
@@ -331,11 +331,37 @@ Remember: You are not just answering questions, you are transforming lives with 
             formatted = formatted.replace(match[0], verseCard);
         }
 
-        // Convert newlines to paragraphs
+        // Parse markdown formatting
+        // Headers
+        formatted = formatted.replace(/^### (.+)$/gm, '<h4>$1</h4>');
+        formatted = formatted.replace(/^## (.+)$/gm, '<h3>$1</h3>');
+        formatted = formatted.replace(/^# (.+)$/gm, '<h2>$1</h2>');
+
+        // Bold and italic
+        formatted = formatted.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+        formatted = formatted.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        formatted = formatted.replace(/\*(.+?)\*/g, '<em>$1</em>');
+        formatted = formatted.replace(/__(.+?)__/g, '<strong>$1</strong>');
+        formatted = formatted.replace(/_(.+?)_/g, '<em>$1</em>');
+
+        // Lists
+        formatted = formatted.replace(/^\* (.+)$/gm, '<li>$1</li>');
+        formatted = formatted.replace(/^- (.+)$/gm, '<li>$1</li>');
+        formatted = formatted.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+
+        // Wrap consecutive li elements in ul
+        formatted = formatted.replace(/(<li>.*?<\/li>\n?)+/gs, '<ul>$&</ul>');
+
+        // Convert newlines to paragraphs (skip elements already wrapped)
         formatted = formatted
             .split('\n\n')
             .filter(p => p.trim())
-            .map(p => `<p>${p.trim()}</p>`)
+            .map(p => {
+                const trimmed = p.trim();
+                // Don't wrap if already wrapped in HTML tag
+                if (trimmed.startsWith('<')) return trimmed;
+                return `<p>${trimmed}</p>`;
+            })
             .join('');
 
         return formatted;
