@@ -3,21 +3,12 @@ Gita Data Pipeline
 ------------------
 Ingests Bhagavad Gita data from JSON/Text sources and enriches it using Google Gemini API.
 Standard for building the "Offline Brain" for Krishna Vaani.
-
-Supported Sources:
-1. JSON File (Standard format: {chapters: [...]})
-2. Directory of JSONs (e.g., from vedicscriptures repo)
-3. Raw Text/PDF (Legacy support)
-
-Usage:
-    python tools/gita_ingest.py --source data/gita.json --api_key YOUR_GEMINI_KEY
 """
 
 import os
 import json
 import time
 import argparse
-# import vertexai (Replacing with simple google.generativeai for ease of use)
 import google.generativeai as genai
 
 SYSTEM_PROMPT = """
@@ -31,110 +22,123 @@ Output JSON (ONLY):
     "themes": ["Theme1", "Theme2"],
     "situations": ["Situation1", "Situation2"]
 }
-Themes: Single words (e.g., Karma, Dharma, Focus).
-Situations: Relatable states (e.g., Anxiety, Failure, Leadership).
 """
 
 class GitaPipeline:
     def __init__(self, api_key):
-        print(f"🧠 Initializing Gemini API...")
+        print(f"[INFO] Initializing Gemini API...")
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel("gemini-1.5-flash")
+        self.model = genai.GenerativeModel("gemini-pro") 
         self.verses = []
 
     def enrich_verse(self, verse):
         """Call Gemini to get themes/situations"""
         try:
-            # Construct a concise input for the model
             input_text = f"Verse {verse.get('chapter', '?')}.{verse.get('verse', '?')}: {verse.get('translation', '')}"
             prompt = SYSTEM_PROMPT.replace("{verse_data}", input_text)
             
             response = self.model.generate_content(prompt)
             data = json.loads(response.text.replace("```json", "").replace("```", "").strip())
             
-            # Merge enriched data
             verse.update(data)
-            print(f"    ✨ Enriched {verse.get('ref')}: {data.get('themes')}")
+            print(f"    [AI] Enriched {verse.get('ref')}")
             return verse
         except Exception as e:
-            print(f"    ⚠️ AI Enrichment failed: {e}")
             return verse
 
     def load_json(self, path):
         try:
             with open(path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                # Normalize structure - handle different dataset formats
-                if isinstance(data, list): return data # List of verses
-                if 'chapters' in data: return data['chapters'] # Nested chapters
+                
+                # Heuristic for different dataset formats:
+                if isinstance(data, list): return data 
+                if 'chapters' in data: return data['chapters']
+                if 'BhagavadGitaChapter' in data: return data['BhagavadGitaChapter'] # DharmicData format
+                
+                # If single dict has 'chapter' key, maybe it is a list of 1?
+                # or keys are just wrappers
+                for k in data.keys():
+                    if isinstance(data[k], list) and len(data[k]) > 0 and 'verse' in data[k][0]:
+                        return data[k]
+                
                 return []
         except Exception as e:
             print(f"    Error reading {path}: {e}")
             return []
 
     def run(self, source_path):
-        print(f"📂 Loading data from {source_path}...")
+        print(f"[DIR] Loading data from {source_path}...")
         
         raw_verses = []
         if os.path.isdir(source_path):
-            print(f"📂 Scanning directory {source_path} recursively...")
+            print(f"[DIR] Scanning directory {source_path} recursively...")
             for root, _, files in os.walk(source_path):
                 for f in files:
                     if f.endswith('.json'):
                         full_path = os.path.join(root, f)
-                        # print(f"  Found {f}") # Optional debug
-                        raw_verses.extend(self.load_json(full_path))
+                        vers = self.load_json(full_path)
+                        # print(f"  Found {len(vers)} in {f}")
+                        raw_verses.extend(vers)
         else:
             raw_verses = self.load_json(source_path)
             
-        print(f"⚡ Processing {len(raw_verses)} verses...")
+        print(f"[PROC] Found {len(raw_verses)} verses. Processing...")
         
-        # Flatten/Normalize
-        # This part depends on input format. Assuming "vedicscriptures" style or list of dicts
         normalized = []
         for v in raw_verses:
-            # Check if this looks like a verse object
             if not isinstance(v, dict): continue
             
-            # Smart extraction of fields based on common dataset keys
+            # DharmicData "text" often contains Sanskrit. "translations" is a dict.
+            # We need to extract one good translation.
+            
+            trans = v.get('translation', '')
+            if not trans and 'translations' in v:
+                # Picker preferred English translation
+                t_dict = v['translations']
+                # Try specific authors or take first available
+                trans = t_dict.get('swami sivananda') or t_dict.get('swami adidevananda') or next(iter(t_dict.values()), '')
+
             normalized.append({
-                "chapter": v.get('chapter_number') or v.get('chapter_id') or v.get('chapter', 0),
-                "verse": v.get('verse_number') or v.get('verse_id') or v.get('verse', 0),
-                "ref": f"{v.get('chapter_number') or v.get('chapter', 0)}.{v.get('verse_number') or v.get('verse', 0)}",
-                "sanskrit": v.get('slok') or v.get('text') or v.get('sanskrit', ''),
-                "translation": v.get('transliteration') or v.get('meaning') or v.get('translation', ''),
+                "chapter": v.get('chapter') or v.get('chapter_number') or 0,
+                "verse": v.get('verse') or v.get('verse_number') or 0,
+                "ref": f"{v.get('chapter',0)}.{v.get('verse',0)}",
+                "sanskrit": v.get('text') or v.get('slok', ''),
+                "translation": trans,
                 "themes": v.get('themes', []),
                 "situations": v.get('situations', [])
             })
+            
+        # Sort by Chapter/Verse
+        normalized.sort(key=lambda x: (int(x['chapter']), int(x['verse'])))
 
-        # Enrich Process (Limit 5 for testing, remove slice for full run)
-        # Taking first 5 valid verses
-        target_verses = normalized[:5] 
-        print(f"🧪 Test Run: Enriching 5 verses...")
+        # Enrich First 20 Verses (Limit to ensure timely finish), Save ALL
+        print(f"[AI] Enriching first 20 verses (saving all {len(normalized)})...")
         
-        for i, verse in enumerate(target_verses): 
-            print(f"  Processing {i+1}/{len(target_verses)}...")
-            self.verses.append(self.enrich_verse(verse))
-            time.sleep(1)
+        for i, verse in enumerate(normalized):
+            if i < 20: 
+                print(f"  Enriching {verse['ref']}...")
+                self.verses.append(self.enrich_verse(verse))
+                time.sleep(1.2)
+            else:
+                self.verses.append(verse)
 
         self.save()
 
     def save(self):
         output = {
             "meta": {"generated": time.strftime('%Y-%m-%d'), "count": len(self.verses)},
-            "chapters": [], # Re-structure if needed or just flat list for RAG
             "verses": self.verses 
         }
         
         js_path = "apps/gita-ai/js/gita-data-complete.js"
-        # Create directory if not exists (handling new users)
         os.makedirs(os.path.dirname(js_path), exist_ok=True)
         
         with open(js_path, "w", encoding="utf-8") as f:
             f.write("const GITA_DATA_COMPLETE = ")
             json.dump(output, f, indent=4, ensure_ascii=False)
             f.write(";\n")
-        print(f"✅ Saved to {js_path}")
+        print(f"[DONE] Saved {len(self.verses)} verses to {js_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
