@@ -338,6 +338,8 @@ body.page-enter {
 
 /* ===== SANGHA: Silent Solidarity ===== */
 .sangha-bar {
+    display: none;
+    /* TEMPORARILY HIDDEN - Firebase Realtime DB not configured */
     position: absolute;
     top: calc(56px + max(50px, var(--safe-top)) + 40px);
     left: 50%;

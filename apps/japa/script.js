@@ -767,5 +767,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize Sangha after a short delay to not block main UI
-    setTimeout(initSangha, 1500);
+    // TEMPORARILY DISABLED - Firebase Realtime Database needs to be created first
+    // setTimeout(initSangha, 1500);
+    console.log('[Sangha] Disabled - Firebase Realtime Database not configured');
 });
