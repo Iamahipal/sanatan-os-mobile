@@ -273,28 +273,28 @@ body {
     text-align: right;
 }
 
-/* Suggestion Chips - iOS 26 Liquid Glass */
+/* Suggestion Chips - Apple Crystal Clear Glass */
 .suggestion-chip {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     width: 100%;
-    padding: 14px 16px;
+    padding: 14px 18px;
     margin-bottom: 10px;
 
-    /* iOS 26 Liquid Glass - subtle with high blur */
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(30px) saturate(1.5);
-    -webkit-backdrop-filter: blur(30px) saturate(1.5);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 14px;
+    /* Apple Crystal Clear - see through with minimal blur */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px) saturate(1.8);
+    -webkit-backdrop-filter: blur(8px) saturate(1.8);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
 
-    /* Subtle glass depth */
+    /* Glass depth - subtle */
     box-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        0 2px 16px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 
-    /* Normal weight text */
+    /* Text styling */
     color: #FFFFFF;
     font-family: var(--font-main);
     font-size: 0.9rem;
@@ -561,7 +561,7 @@ body {
 }
 
 /* ============================================
-   INPUT AREA - Floating Liquid Glass Pill
+   INPUT AREA - Apple Crystal Clear Liquid Glass
    ============================================ */
 .input-container {
     padding: 12px 16px calc(var(--safe-bottom) + 12px);
@@ -574,43 +574,43 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    position: relative;
 
-    /* Liquid Glass */
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(20px) saturate(1.4);
-    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    /* Apple Crystal Clear Glass - minimal blur, see-through */
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px) saturate(1.8);
+    -webkit-backdrop-filter: blur(8px) saturate(1.8);
 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    padding: 8px 8px 8px 16px;
+    /* Subtle border with inner glow */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 28px;
+    padding: 8px 8px 8px 18px;
 
-    /* Inset shadow for depth */
+    /* Glass depth effect */
     box-shadow:
-        0 4px 16px rgba(0, 0, 0, 0.15),
-        0 -4px 10px inset rgba(0, 0, 0, 0.08);
+        0 2px 20px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
-/* Specular highlight */
+/* Top edge specular highlight - Apple style */
 .input-wrapper::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 20%;
-    right: 20%;
+    left: 15%;
+    right: 15%;
     height: 1px;
     background: linear-gradient(90deg,
             transparent,
-            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.35),
             transparent);
     pointer-events: none;
 }
 
 .input-wrapper:focus-within {
-    border-color: rgba(255, 215, 0, 0.25);
-    box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.15),
-        0 0 25px rgba(255, 215, 0, 0.08),
-        0 -8px 16px inset rgba(0, 0, 0, 0.06);
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 #user-input {
