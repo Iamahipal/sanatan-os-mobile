@@ -132,6 +132,54 @@ const EMERGENCY_CONTACTS = {
             capacity: 585,
             geo: { lat: 26.2389, lng: 73.0243 }
         },
+        {
+            id: 'RJ-CHU-001',
+            name: 'Gau Sewa Sadan (Gandhi Vidya Mandir)',
+            state: 'Rajasthan',
+            city: 'Sardarshahr',
+            district: 'Churu',
+            address: 'Gandhi Vidya Mandir, Sardarshahr-331403, Churu',
+            pincode: '331403',
+            phone: '9414086016',
+            whatsapp: '919602411441', // Verified WhatsApp
+            type: 'Institution',
+            verified: true,
+            source: 'iaseuniversityonline.org',
+            features: ['Educational', 'Rescue', 'Care'],
+            geo: { lat: 28.4404, lng: 74.4908 }
+        },
+        {
+            id: 'RJ-JAI-003',
+            name: 'Rajasthan Gau Sewa Sangh',
+            state: 'Rajasthan',
+            city: 'Jaipur',
+            district: 'Jaipur',
+            address: 'Income Tax Colony, Opposite Income Tax Office, Durgapura',
+            pincode: '302015',
+            phone: '01412551310',
+            whatsapp: '919414142727', // Verified
+            type: 'Trust',
+            verified: true,
+            source: 'jupiteryellowdetail.com',
+            features: ['State Level', 'Coordination'],
+            geo: { lat: 26.8574, lng: 75.7893 }
+        },
+        {
+            id: 'RJ-JAI-004',
+            name: 'Gau Seva Parivar Samiti',
+            state: 'Rajasthan',
+            city: 'Jaipur',
+            district: 'Jaipur',
+            address: '696, Panon Ka Dariba, Subhash Chowk, Jaipur-302002',
+            pincode: '302002',
+            phone: '9828088224',
+            whatsapp: '919828088224', // Verified
+            type: 'Samiti',
+            verified: true,
+            source: 'gausevaparivar.org',
+            features: ['Rescue', 'Shelter', 'Care'],
+            geo: { lat: 26.9260, lng: 75.8235 }
+        },
 
         // --- UTTAR PRADESH (Mathura/Vrindavan) ---
         {
