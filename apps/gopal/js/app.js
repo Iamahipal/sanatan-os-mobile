@@ -1,127 +1,105 @@
 /**
- * Gopal App - Dharmic Habit Companion
- * "Watch -> Do -> Check" Logic
+ * Bal Krishna - Dharmic Habit Companion
+ * Simplified Mobile-First Logic
  */
 
-class HabitEngine {
-    constructor() {
-        this.currentRoutine = 'morning';
-        this.streak = parseInt(localStorage.getItem('gopal_streak') || '0');
-        this.ui = {
-            scene: document.getElementById('scene-container'),
-            krishna: document.getElementById('krishna-container'),
-            overlay: document.getElementById('action-overlay'),
-            timerText: document.getElementById('timer-text'),
-            streakCount: document.getElementById('streak-count'),
-            btns: document.querySelectorAll('.routine-btn')
-        };
+const routines = {
+    morning: { title: 'Wake Up!', action: 'Time to Stretch!', duration: 10 },
+    meal: { title: 'Bhog Time!', action: 'Time to Eat Mindfully!', duration: 60 },
+    night: { title: 'Goodnight!', action: 'Time to Sleep!', duration: 10 }
+};
 
-        this.init();
-    }
+let currentRoutine = 'morning';
+let streak = parseInt(localStorage.getItem('gopal_streak') || '0');
+let timer = null;
 
-    init() {
-        this.updateStreakUI();
-        this.setupListeners();
-        this.setRoutine('morning'); // Default
-    }
+// DOM Elements
+const startBtn = document.getElementById('start-btn');
+const doneBtn = document.getElementById('done-btn');
+const overlay = document.getElementById('overlay');
+const actionTitle = document.getElementById('action-title');
+const timerDisplay = document.getElementById('timer');
+const streakDisplay = document.getElementById('streak');
+const tabs = document.querySelectorAll('.tab');
+const krishnaImg = document.getElementById('krishna');
 
-    setupListeners() {
-        this.ui.btns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const routine = btn.dataset.routine;
-                this.setRoutine(routine);
+// Init
+function init() {
+    streakDisplay.textContent = streak;
+    updateStartBtn();
 
-                // Active Class Logic
-                this.ui.btns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-            });
+    // Tab Switching
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentRoutine = tab.dataset.routine;
+            updateStartBtn();
         });
+    });
 
-        document.getElementById('btn-done').addEventListener('click', () => {
-            this.completeAction();
-        });
+    // Start Button
+    startBtn.addEventListener('click', startAction);
 
-        // Interaction: Tap Anywhere on Scene to Trigger
-        this.ui.scene.addEventListener('click', (e) => {
-            // Visual Feedback (Ripple)
-            this.createRipple(e.clientX, e.clientY);
-
-            // Logic: If morning, wake up.
-            if (this.currentRoutine === 'morning') {
-                this.triggerAction("Wake Up!", 5);
-            }
-        });
-    }
-
-    createRipple(x, y) {
-        const ripple = document.createElement('div');
-        ripple.classList.add('ripple');
-        ripple.style.left = `${x}px`;
-        ripple.style.top = `${y}px`;
-        document.body.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-    }
-
-    setRoutine(routine) {
-        this.currentRoutine = routine;
-
-        // Theme Switching
-        if (routine === 'night') {
-            this.ui.scene.classList.add('scene-night');
-            this.ui.scene.classList.remove('scene-morning');
-        } else {
-            this.ui.scene.classList.remove('scene-night');
-            this.ui.scene.classList.add('scene-morning');
-        }
-
-        console.log(`[Gopal] Switched to ${routine} routine`);
-    }
-
-    triggerAction(title, durationSeconds) {
-        document.getElementById('action-title').textContent = title;
-        this.ui.overlay.classList.remove('hidden');
-        this.startTimer(durationSeconds);
-        // Play Flute Sound Here
-    }
-
-    startTimer(seconds) {
-        let remaining = seconds;
-        this.ui.timerText.textContent = this.formatTime(remaining);
-
-        this.timer = setInterval(() => {
-            remaining--;
-            this.ui.timerText.textContent = this.formatTime(remaining);
-
-            if (remaining <= 0) {
-                clearInterval(this.timer);
-                // Enable 'Done' button or Auto-finish
-            }
-        }, 1000);
-    }
-
-    completeAction() {
-        this.ui.overlay.classList.add('hidden');
-        clearInterval(this.timer);
-
-        // Reward Logic
-        this.streak++;
-        localStorage.setItem('gopal_streak', this.streak);
-        this.updateStreakUI();
-
-        // Animation: Krishna High Five or Jump
-        alert("Jai Shri Krishna! Great job!");
-    }
-
-    updateStreakUI() {
-        this.ui.streakCount.textContent = this.streak;
-    }
-
-    formatTime(seconds) {
-        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-        const s = (seconds % 60).toString().padStart(2, '0');
-        return `${m}:${s}`;
-    }
+    // Done Button
+    doneBtn.addEventListener('click', completeAction);
 }
 
-// Initialize
-const app = new HabitEngine();
+function updateStartBtn() {
+    const r = routines[currentRoutine];
+    startBtn.innerHTML = `<i class="fa-solid fa-play"></i> <span>${r.title}</span>`;
+}
+
+function startAction() {
+    const r = routines[currentRoutine];
+    actionTitle.textContent = r.action;
+    overlay.classList.remove('hidden');
+
+    // Make Krishna bounce
+    krishnaImg.style.animation = 'none';
+    setTimeout(() => krishnaImg.style.animation = 'float 1s ease-in-out infinite', 10);
+
+    startTimer(r.duration);
+}
+
+function startTimer(seconds) {
+    let remaining = seconds;
+    updateTimerDisplay(remaining);
+
+    timer = setInterval(() => {
+        remaining--;
+        updateTimerDisplay(remaining);
+
+        if (remaining <= 0) {
+            clearInterval(timer);
+            // Auto highlight done button
+            doneBtn.style.animation = 'pulse 0.5s infinite';
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay(seconds) {
+    const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const s = String(seconds % 60).padStart(2, '0');
+    timerDisplay.textContent = `${m}:${s}`;
+}
+
+function completeAction() {
+    clearInterval(timer);
+    overlay.classList.add('hidden');
+    doneBtn.style.animation = '';
+
+    // Update Streak
+    streak++;
+    localStorage.setItem('gopal_streak', streak);
+    streakDisplay.textContent = streak;
+
+    // Celebrate
+    krishnaImg.style.transform = 'scale(1.2)';
+    setTimeout(() => krishnaImg.style.transform = 'scale(1)', 300);
+
+    alert('🎉 Jai Shri Krishna! You did it!');
+}
+
+// Start
+init();
