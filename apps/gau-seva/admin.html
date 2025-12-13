@@ -397,13 +397,110 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
+        // Track known report IDs to detect new ones
+        let knownReportIds = new Set();
+        let isFirstLoad = true;
+        let unsubscribe = null;
+
         // DOM ready
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
-            loadReports();
+
+            // Request notification permission
+            requestNotificationPermission();
+
+            // Set up real-time listener
+            setupRealtimeListener();
 
             document.getElementById('refreshBtn').addEventListener('click', loadReports);
         });
+
+        // Request notification permission
+        async function requestNotificationPermission() {
+            if ('Notification' in window) {
+                const permission = await Notification.requestPermission();
+                console.log('Notification permission:', permission);
+            }
+        }
+
+        // Show browser notification
+        function showBrowserNotification(report) {
+            if ('Notification' in window && Notification.permission === 'granted') {
+                const notification = new Notification('🐄 New Rescue Report!', {
+                    body: `${report.caseId || 'New Case'}\n📍 ${report.location?.substring(0, 50) || 'Location unknown'}...`,
+                    icon: '/icons/icon-192.png',
+                    tag: 'gau-seva-rescue',
+                    requireInteraction: true
+                });
+
+                notification.onclick = () => {
+                    window.focus();
+                    notification.close();
+                };
+
+                // Play alert sound
+                playAlertSound();
+            }
+        }
+
+        // Play alert sound
+        function playAlertSound() {
+            try {
+                const audio = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU' + Array(300).join('77'));
+                audio.volume = 0.3;
+                audio.play().catch(() => { });
+            } catch (e) { }
+        }
+
+        // Setup real-time Firestore listener
+        function setupRealtimeListener() {
+            unsubscribe = db.collection('rescue_reports')
+                .orderBy('createdAt', 'desc')
+                .limit(50)
+                .onSnapshot((snapshot) => {
+                    const reports = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                    // Check for new reports (not on first load)
+                    if (!isFirstLoad) {
+                        snapshot.docChanges().forEach(change => {
+                            if (change.type === 'added') {
+                                const newReport = { id: change.doc.id, ...change.doc.data() };
+                                if (!knownReportIds.has(newReport.id)) {
+                                    showBrowserNotification(newReport);
+                                }
+                            }
+                        });
+                    }
+
+                    // Update known IDs
+                    knownReportIds = new Set(reports.map(r => r.id));
+                    isFirstLoad = false;
+
+                    // Update UI
+                    updateStats(reports);
+                    renderReportsList(reports);
+                }, (error) => {
+                    console.error('Realtime listener error:', error);
+                });
+        }
+
+        // Render reports list
+        function renderReportsList(reports) {
+            const reportsList = document.getElementById('reportsList');
+
+            if (reports.length === 0) {
+                reportsList.innerHTML = `
+                    <div class="empty-state">
+                        <i data-lucide="inbox"></i>
+                        <p>No rescue reports yet</p>
+                    </div>
+                `;
+            } else {
+                reportsList.innerHTML = reports.map(renderReportCard).join('');
+            }
+
+            lucide.createIcons();
+        }
 
         // Load all reports
         async function loadReports() {
