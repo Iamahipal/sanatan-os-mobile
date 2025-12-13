@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Digital Yatra | Sacred Temples</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <a href="../../index.html" class="header-btn" aria-label="Back">
+                <i data-lucide="chevron-left"></i>
+            </a>
+            <h1 class="header-title">🛕 Digital Yatra</h1>
+            <button id="passport-btn" class="header-btn" aria-label="Passport">
+                <i data-lucide="stamp"></i>
+            </button>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h2 class="hero-tagline">Transform from Tourist<br>to <span class="highlight">Conscious Pilgrim</span></h2>
+            <p class="hero-subtitle">Discover the hidden stories they never told you</p>
+        </section>
+
+        <!-- Temple Cards -->
+        <section class="temples-section">
+            <h3 class="section-title"><i data-lucide="map-pin"></i> Sacred Destinations</h3>
+            <div id="temples-grid" class="temples-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Yatra Passport Section -->
+        <section class="passport-section">
+            <h3 class="section-title"><i data-lucide="book-open"></i> Your Yatra Passport</h3>
+            <div class="passport-card">
+                <div class="passport-header">
+                    <span class="passport-title">Pilgrim</span>
+                    <span id="temples-visited" class="passport-count">0 / 5</span>
+                </div>
+                <div id="passport-stamps" class="passport-stamps">
+                    <!-- Stamps populated by JS -->
+                </div>
+                <div class="passport-paths">
+                    <div class="path-item">
+                        <span class="path-name">Jyotirlinga</span>
+                        <div class="path-progress">
+                            <div class="path-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="path-count">0/12</span>
+                    </div>
+                    <div class="path-item">
+                        <span class="path-name">Char Dham</span>
+                        <div class="path-progress">
+                            <div class="path-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="path-count">0/4</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Temple Detail Modal -->
+    <div id="temple-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-modal" class="close-btn"><i data-lucide="x"></i></button>
+
+            <!-- Hero Image -->
+            <div id="modal-hero" class="modal-hero"></div>
+
+            <!-- Temple Info -->
+            <div class="modal-body">
+                <div class="modal-header">
+                    <span id="modal-icon" class="temple-icon">🕉️</span>
+                    <div>
+                        <h2 id="modal-name">Temple Name</h2>
+                        <p id="modal-location" class="temple-location">Location</p>
+                    </div>
+                </div>
+
+                <!-- Hidden Secret Section -->
+                <div class="secret-section">
+                    <h3 class="secret-title"><i data-lucide="eye"></i> The Hidden Story</h3>
+                    <p id="secret-hook" class="secret-hook"></p>
+                    <div id="secret-full" class="secret-full hidden">
+                        <p id="secret-story"></p>
+                        <span id="secret-source" class="secret-source"></span>
+                    </div>
+                    <button id="reveal-btn" class="reveal-btn">Reveal the Secret <i
+                            data-lucide="chevron-down"></i></button>
+                </div>
+
+                <!-- Darshan Guide -->
+                <div class="guide-section">
+                    <h3 class="guide-title"><i data-lucide="footprints"></i> Your Darshan Guide</h3>
+                    <div id="guide-steps" class="guide-steps">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Sensory Vibe -->
+                <div class="vibe-section">
+                    <h3 class="vibe-title"><i data-lucide="sparkles"></i> The Vibe</h3>
+                    <div class="vibe-grid">
+                        <div class="vibe-item">
+                            <i data-lucide="wind"></i>
+                            <span class="vibe-label">Smell</span>
+                            <p id="vibe-smell" class="vibe-text"></p>
+                        </div>
+                        <div class="vibe-item">
+                            <i data-lucide="music"></i>
+                            <span class="vibe-label">Sound</span>
+                            <p id="vibe-sound" class="vibe-text"></p>
+                        </div>
+                        <div class="vibe-item">
+                            <i data-lucide="hand"></i>
+                            <span class="vibe-label">Feel</span>
+                            <p id="vibe-feel" class="vibe-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Best Time -->
+                <div class="time-section">
+                    <h3 class="time-title"><i data-lucide="clock"></i> Best Time to Visit</h3>
+                    <p id="best-time" class="time-text"></p>
+                </div>
+
+                <!-- Mark as Visited -->
+                <button id="mark-visited-btn" class="visited-btn">
+                    <i data-lucide="check-circle"></i> I've Visited This Temple
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>lucide.createIcons();</script>
+    <script src="temple-data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
