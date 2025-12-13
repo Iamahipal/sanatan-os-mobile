@@ -371,6 +371,12 @@ function initConditionChips() {
 
     // Store globally for form submission
     window.getSelectedConditions = () => selectedConditions;
+
+    // Function to clear all selected conditions
+    window.clearSelectedConditions = () => {
+        selectedConditions = [];
+        chips.forEach(chip => chip.classList.remove('active'));
+    };
 }
 
 // ===== GENERATE CASE ID =====
@@ -554,6 +560,9 @@ function initRescueForm() {
         submitBtn.disabled = false;
         lucide.createIcons();
 
+        // Reset entire form for next submission
+        resetRescueForm();
+
         // Show appropriate toast
         if (firebaseSaved) {
             showToast('🙏 Report sent to rescue network! Case ID: ' + caseId, 'success');
@@ -561,6 +570,39 @@ function initRescueForm() {
             showToast('📱 Report saved locally. Tap WhatsApp to send directly.', 'success');
         }
     });
+}
+
+// Reset the rescue form for new submission
+function resetRescueForm() {
+    // Reset description
+    const description = document.getElementById('description');
+    if (description) description.value = '';
+
+    // Reset contact number
+    const contactNumber = document.getElementById('contactNumber');
+    if (contactNumber) contactNumber.value = '';
+
+    // Reset photo upload
+    const photoInput = document.getElementById('cowPhoto');
+    if (photoInput) photoInput.value = '';
+
+    // Hide photo preview
+    const photoPreview = document.getElementById('photoPreview');
+    if (photoPreview) {
+        photoPreview.innerHTML = '';
+        photoPreview.style.display = 'none';
+    }
+
+    // Show upload area again
+    const uploadArea = document.getElementById('photoUpload');
+    if (uploadArea) uploadArea.style.display = 'flex';
+
+    // Clear selected conditions using the proper function
+    if (window.clearSelectedConditions) {
+        window.clearSelectedConditions();
+    }
+
+    console.log('✅ Form reset for new submission');
 }
 
 // ===== SMOOTH SCROLL =====
