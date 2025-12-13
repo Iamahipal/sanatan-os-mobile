@@ -170,14 +170,15 @@ body {
 }
 
 /* ============================================
-   HEADER
+   HEADER - Match input box height (72px)
    ============================================ */
 .app-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 60px;
+    height: 72px;
     padding: 0 16px;
+    padding-top: 8px;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(20px) saturate(1.3);
     -webkit-backdrop-filter: blur(20px) saturate(1.3);
@@ -326,66 +327,80 @@ body {
     }
 }
 
+/* Welcome Content - Top section */
+.welcome-content {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
 .welcome-title {
-    font-family: var(--font-krishna);
-    font-size: 2rem;
-    font-weight: 600;
-    background: linear-gradient(135deg, var(--gold) 0%, #FFF8DC 50%, var(--saffron) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-family: var(--font-main);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--gold);
     margin-bottom: 8px;
 }
 
 .welcome-subtitle {
-    font-family: var(--font-user);
-    font-size: 0.95rem;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
     color: var(--text-secondary);
     max-width: 280px;
     line-height: 1.5;
-    margin-bottom: 32px;
+    margin: 0 auto;
 }
 
+/* Suggested Questions - Aligned right like user messages */
 .suggested-questions {
     width: 100%;
-    max-width: 360px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: 0;
 }
 
 .suggestions-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    text-align: right;
 }
 
-/* Suggestion Chips - Apple Vibrancy Glass */
+/* Suggestion Chips - iOS 26 Liquid Glass */
 .suggestion-chip {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     width: 100%;
-    padding: 16px 20px;
-    margin-bottom: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
 
-    /* Apple Vibrancy - higher blur, saturation for color boost */
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(24px) saturate(1.6) brightness(1.1);
-    -webkit-backdrop-filter: blur(24px) saturate(1.6) brightness(1.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 16px;
+    /* iOS 26 Liquid Glass - subtle with high blur */
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(30px) saturate(1.5);
+    -webkit-backdrop-filter: blur(30px) saturate(1.5);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
 
-    /* Subtle inset for glass depth */
+    /* Subtle glass depth */
     box-shadow:
-        0 2px 16px rgba(0, 0, 0, 0.12),
-        inset 0 -2px 8px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 2px 12px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
-    /* High contrast white text */
+    /* Normal weight text */
     color: #FFFFFF;
     font-family: var(--font-main);
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 400;
     text-align: left;
     cursor: pointer;
+}
+
+.chip-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
 }
 
 /* No hover effect - cleaner Apple style */
