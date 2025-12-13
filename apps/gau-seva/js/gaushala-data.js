@@ -1,6 +1,6 @@
 /**
  * Gau Seva - Gaushala & Emergency Contacts Database
- * Data Source: Animal Welfare Board of India (AWBI) & State Goseva Aayogs
+ * Data Source: Verified from official websites, AWBI, State Goseva Aayogs
  * Last Updated: December 2024
  */
 
@@ -24,81 +24,100 @@ const EMERGENCY_CONTACTS = {
         'Uttar Pradesh': { name: 'Pashu Dhan Sanjeevani', number: '1962' },
         'Rajasthan': { name: 'Gau Raksha', number: '1962' },
         'Maharashtra': { name: 'Pashu Swasthya Seva', number: '1962' },
+        'Haryana': { name: 'Gau Seva Aayog', number: '1962' },
         'default': { name: 'Pashu Dhan Sanjeevani', number: '1962' }
     },
 
-    // Verified Gaushalas from AWBI & State Goseva Aayogs
-    // Source: awbi.gov.in, gopalanapp.rajasthan.gov.in, mhgosevaayog
+    // Verified Gaushalas with REAL contact numbers
+    // Sources: Official websites, helpgaushala.com, AWBI
     gaushalas: [
-        // --- ANDHRA PRADESH (AWBI Verified) ---
+        // --- DELHI (24/7 Ambulance) ---
         {
-            id: 'AP016',
-            name: 'Visakha Society for Protection and Care of Animals',
-            state: 'Andhra Pradesh',
-            city: 'Visakhapatnam',
-            district: 'Visakhapatnam',
-            address: '26-15-200, Main Road, Visakhapatnam, AP - 530001',
-            pincode: '530001',
-            phone: '0891-2564759',
-            whatsapp: null,
+            id: 'DL-KMP-001',
+            name: 'Kamdhenu Mangal Parivar',
+            state: 'Delhi',
+            city: 'Delhi',
+            district: 'Central Delhi',
+            address: 'Delhi NCR Region',
+            pincode: '110001',
+            phone: '7503777888',
+            whatsapp: '917503777888', // 24/7 Cow Ambulance
             type: 'NGO',
             verified: true,
-            source: 'AWBI',
-            geo: { lat: 17.6868, lng: 83.2185 }
+            source: 'voicelessindia.org',
+            features: ['24/7', 'Ambulance', 'Doctor on board'],
+            geo: { lat: 28.6139, lng: 77.2090 }
         },
-
-        // --- GUJARAT (State Registered) ---
         {
-            id: 'GJ015',
-            name: 'Shri Amreli Gaushala Panjrapole',
-            state: 'Gujarat',
-            city: 'Amreli',
-            district: 'Amreli',
-            address: 'Gandhi Chowk, Amreli, Gujarat - 365601',
-            pincode: '365601',
-            phone: null,
-            whatsapp: null,
-            type: 'Trust',
+            id: 'DL-SGACC-001',
+            name: 'Sanjay Gandhi Animal Care Centre',
+            state: 'Delhi',
+            city: 'Delhi',
+            district: 'Delhi',
+            address: 'Raja Garden, New Delhi',
+            pincode: '110015',
+            phone: '9560802425',
+            whatsapp: '919560802425',
+            type: 'Hospital',
             verified: true,
-            source: 'Gujarat Goseva Aayog',
-            geo: { lat: 21.6032, lng: 71.2217 }
+            source: 'sanjaygandhianimalcarecentre.org',
+            features: ['Hospital', 'Surgery', 'Shelter'],
+            geo: { lat: 28.6519, lng: 77.1169 }
         },
 
-        // --- MAHARASHTRA (Maha Goseva Aayog) ---
+        // --- TAMIL NADU (Chennai) ---
         {
-            id: 'MHGA00186',
-            name: 'Gopal Gauraksha Anand Ashram',
-            state: 'Maharashtra',
-            city: 'Sengaon',
-            district: 'Hingoli',
-            address: 'At Post Bamni Kedi, Taluka Sengaon, Dist Hingoli',
-            pincode: '431542',
-            phone: null,
-            whatsapp: null,
-            type: 'Registered',
+            id: 'TN-CHN-001',
+            name: 'Blue Cross of India',
+            state: 'Tamil Nadu',
+            city: 'Chennai',
+            district: 'Chennai',
+            address: 'Velachery, Chennai',
+            pincode: '600042',
+            phone: '9962998886',
+            whatsapp: '919962998886', // Click to Rescue WhatsApp
+            type: 'NGO',
             verified: true,
-            source: 'Maharashtra Goseva Aayog',
-            geo: { lat: 19.7027, lng: 76.9298 }
+            source: 'bluecrossofindia.org',
+            features: ['WhatsApp Rescue', 'Hospital', 'Shelter'],
+            geo: { lat: 13.0067, lng: 80.2206 }
         },
 
-        // --- RAJASTHAN (Gopalan Dept Verified) ---
+        // --- RAJASTHAN (Jaipur) ---
         {
-            id: 'RJ-AJM-001',
-            name: 'Shri Madnesh Goshala',
+            id: 'RJ-JAI-001',
+            name: 'TOLFA - Tree of Life for Animals',
             state: 'Rajasthan',
-            city: 'Kishangarh',
-            district: 'Ajmer',
-            address: 'Madanganj, Kishangarh, Dist Ajmer, Rajasthan',
-            pincode: '305801',
-            phone: '01463-251591',
-            whatsapp: null,
-            type: 'Trust',
+            city: 'Jaipur',
+            district: 'Jaipur',
+            address: 'Bassi Road, Jaipur',
+            pincode: '303012',
+            phone: '9829965585',
+            whatsapp: '919829965585', // WhatsApp for rescue assessment
+            type: 'NGO',
             verified: true,
-            source: 'Rajasthan Gopalan Dept',
-            geo: { lat: 26.5786, lng: 74.8569 }
+            source: 'tolfa.in',
+            features: ['8am-5pm', 'WhatsApp Assessment', 'Rescue'],
+            geo: { lat: 26.8469, lng: 75.8124 }
         },
         {
-            id: 'RJ-JOD-157',
+            id: 'RJ-JAI-002',
+            name: 'Help in Suffering',
+            state: 'Rajasthan',
+            city: 'Jaipur',
+            district: 'Jaipur',
+            address: 'Maharani Farm, Jaipur',
+            pincode: '302019',
+            phone: '8107299711',
+            whatsapp: '918107299711',
+            type: 'NGO',
+            verified: true,
+            source: 'helpinsuffering.org',
+            features: ['Hospital', 'Rescue', 'Rehabilitation'],
+            geo: { lat: 26.8866, lng: 75.7890 }
+        },
+        {
+            id: 'RJ-JOD-001',
             name: 'Shree Ratnesh Gaushala Samiti',
             state: 'Rajasthan',
             city: 'Shekhala',
@@ -109,86 +128,128 @@ const EMERGENCY_CONTACTS = {
             whatsapp: '919149678510', // Verified from HelpGaushala
             type: 'Samiti',
             verified: true,
-            source: 'HelpGaushala',
+            source: 'helpgaushala.com',
             capacity: 585,
             geo: { lat: 26.2389, lng: 73.0243 }
         },
 
-        // --- UTTAR PRADESH (Vrindavan) ---
+        // --- UTTAR PRADESH (Mathura/Vrindavan) ---
         {
             id: 'UP-MTH-001',
-            name: 'Shri Krishna Gaushala',
+            name: 'Shri Mataji Gaushala',
             state: 'Uttar Pradesh',
-            city: 'Vrindavan',
+            city: 'Barsana',
             district: 'Mathura',
-            address: 'Near Banke Bihari Temple, Vrindavan',
-            pincode: '281121',
-            phone: null,
-            whatsapp: null, // Need to verify
+            address: 'Barsana, Mathura, UP',
+            pincode: '281405',
+            phone: '9927338666',
+            whatsapp: '919927338666', // Primary rescue line
             type: 'Trust',
-            verified: false,
-            source: 'Manual Entry',
-            capacity: 450,
-            geo: { lat: 27.5800, lng: 77.6964 }
+            verified: true,
+            source: 'matajigaushala.org',
+            features: ['Rescue', 'Care', 'Support'],
+            geo: { lat: 27.6500, lng: 77.3800 }
         },
 
-        // --- DELHI ---
+        // --- MAHARASHTRA (Nagpur) ---
         {
-            id: 'DL-001',
-            name: 'Delhi Gaushala Society',
-            state: 'Delhi',
-            city: 'Delhi',
-            district: 'Central Delhi',
-            address: 'Azadpur, Delhi',
-            pincode: '110033',
-            phone: null,
-            whatsapp: null,
-            type: 'Society',
-            verified: false,
-            source: 'Manual Entry',
-            geo: { lat: 28.7041, lng: 77.1025 }
+            id: 'MH-NGP-001',
+            name: 'Gaushala Pashupalan Sanstha',
+            state: 'Maharashtra',
+            city: 'Nagpur',
+            district: 'Nagpur',
+            address: 'Nagpur, Maharashtra',
+            pincode: '440001',
+            phone: '9325103104',
+            whatsapp: '919325103104',
+            type: 'Trust',
+            verified: true,
+            source: 'goushalanagpur.com',
+            features: ['AWBI Registered', 'Rescue'],
+            geo: { lat: 21.1458, lng: 79.0882 }
+        },
+
+        // --- NATIONAL (Gau Chikitsa) ---
+        {
+            id: 'NAT-GC-001',
+            name: 'Gau Chikitsa (National Helpline)',
+            state: 'All India',
+            city: 'National',
+            district: 'All India',
+            address: 'Pan-India Service',
+            pincode: '000000',
+            phone: '8003470108',
+            whatsapp: '918003470108',
+            type: 'National NGO',
+            verified: true,
+            source: 'gauchikitsa.org',
+            features: ['National', 'Helpline', 'Guidance'],
+            geo: null
+        },
+
+        // --- HARYANA (Government) ---
+        {
+            id: 'HR-GOV-001',
+            name: 'Haryana Gau Seva Aayog',
+            state: 'Haryana',
+            city: 'Chandigarh',
+            district: 'Chandigarh',
+            address: 'SCO 17-19, Sector 17-C, Chandigarh',
+            pincode: '160017',
+            phone: '0172-2992817',
+            whatsapp: null, // Government office, no WhatsApp
+            type: 'Government',
+            verified: true,
+            source: 'hargauseva.gov.in',
+            features: ['Government', 'Policy', 'Coordination'],
+            geo: { lat: 30.7333, lng: 76.7794 }
         }
     ]
 };
 
 /**
  * Find nearest Gaushala using Haversine distance formula
+ * Priority: GPS distance > State match > WhatsApp availability
  */
 function findNearestGaushala(userLat, userLng, state) {
     const gaushalas = EMERGENCY_CONTACTS.gaushalas;
+
+    // Filter only those with WhatsApp for rescue
+    const withWhatsapp = gaushalas.filter(g => g.whatsapp && g.verified);
 
     // If we have GPS coordinates, find by distance
     if (userLat && userLng) {
         let nearest = null;
         let minDist = Infinity;
 
-        gaushalas.forEach(g => {
+        withWhatsapp.forEach(g => {
             if (g.geo && g.geo.lat && g.geo.lng) {
                 const dist = haversineDistance(userLat, userLng, g.geo.lat, g.geo.lng);
                 if (dist < minDist) {
                     minDist = dist;
-                    nearest = { ...g, distance: dist };
+                    nearest = { ...g, distance: Math.round(dist) };
                 }
             }
         });
 
-        if (nearest) return nearest;
+        // Return nearest if within 200km, otherwise try state match
+        if (nearest && minDist < 200) return nearest;
     }
 
-    // Fallback: Try state match
+    // Try state match
     if (state) {
-        const stateMatch = gaushalas.find(g =>
-            g.state.toLowerCase() === state.toLowerCase() && g.verified
+        const stateMatch = withWhatsapp.find(g =>
+            g.state.toLowerCase() === state.toLowerCase()
         );
         if (stateMatch) return stateMatch;
     }
 
-    // Fallback: Return first verified with WhatsApp
-    const withWhatsapp = gaushalas.find(g => g.whatsapp && g.verified);
-    if (withWhatsapp) return withWhatsapp;
+    // Fallback to National helpline (Gau Chikitsa)
+    const national = withWhatsapp.find(g => g.id === 'NAT-GC-001');
+    if (national) return national;
 
-    // Last resort: First verified
-    return gaushalas.find(g => g.verified) || gaushalas[0];
+    // Last resort: First verified with WhatsApp
+    return withWhatsapp[0] || gaushalas[0];
 }
 
 /**
@@ -223,8 +284,16 @@ function getGaushalasByState(state) {
     );
 }
 
-// Export for use
+/**
+ * Get count of verified Gaushalas with WhatsApp
+ */
+function getVerifiedGaushalaCount() {
+    return EMERGENCY_CONTACTS.gaushalas.filter(g => g.whatsapp && g.verified).length;
+}
+
+// Export functions
 window.EMERGENCY_CONTACTS = EMERGENCY_CONTACTS;
 window.findNearestGaushala = findNearestGaushala;
 window.getStateServiceName = getStateServiceName;
 window.getGaushalasByState = getGaushalasByState;
+window.getVerifiedGaushalaCount = getVerifiedGaushalaCount;

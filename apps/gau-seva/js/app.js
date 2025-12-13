@@ -37,6 +37,17 @@ function initApp() {
 
     // Initialize Firebase and sync any offline reports
     initFirebaseAndSync();
+
+    // Update Gaushala count from database
+    updateGaushalaCount();
+}
+
+// Update Gaushala count in UI
+function updateGaushalaCount() {
+    const countEl = document.getElementById('gaushalaCount');
+    if (countEl && typeof getVerifiedGaushalaCount === 'function') {
+        countEl.textContent = getVerifiedGaushalaCount();
+    }
 }
 
 // ===== FIREBASE INITIALIZATION =====
