@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gita Library | Krishna Vaani</title>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific Library Overrides */
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .chapter-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .chapter-num {
+            font-size: 0.8rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .chapter-title {
+            font-family: 'Tiro Devanagari Sanskrit', serif;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .chapter-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .chapter-verses {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Detail View (Verse List) */
+        .verse-list-view {
+            display: none;
+            /* Hidden by default */
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .verse-list-view.active {
+            display: flex;
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 10;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .verse-item {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .verse-item:hover {
+            background: var(--bg-input);
+        }
+
+        .verse-preview-sanskrit {
+            font-family: 'Tiro Devanagari Sanskrit', serif;
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .verse-preview-trans {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <a href="index.html" class="header-btn" aria-label="Back">
+                <i data-lucide="arrow-left"></i>
+            </a>
+            <div class="header-center">
+                <h1 class="header-title">गीता ज्ञान</h1>
+                <p class="header-subtitle">Divine Library</p>
+            </div>
+            <button class="header-btn" id="search-btn">
+                <i data-lucide="search"></i>
+            </button>
+        </header>
+
+        <!-- Chapter Grid View -->
+        <div id="chapter-view" class="chat-container">
+            <!-- Content Injected via JS -->
+            <div class="library-grid" id="chapter-grid">
+                <!-- Loading State -->
+                <div style="grid-column: span 2; text-align: center; color: var(--text-muted); padding: 40px;">
+                    <i data-lucide="loader-2" class="animate-spin" style="margin-bottom: 10px;"></i>
+                    <p>Opening Library...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verse List View -->
+        <div id="verse-view" class="verse-list-view">
+            <div class="sticky-header">
+                <button class="back-btn" id="back-to-chapters">
+                    <i data-lucide="arrow-left"></i>
+                </button>
+                <div>
+                    <h2 class="header-title" style="font-size: 1.2rem;" id="current-chapter-title">Chapter 1</h2>
+                    <p class="header-subtitle" id="current-chapter-subtitle">Arjuna Vishada Yoga</p>
+                </div>
+            </div>
+            <div id="verse-list-container" style="overflow-y: auto; flex: 1;">
+                <!-- Verses go here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Load Core Data produced by User Tool -->
+    <script src="js/gita-data-complete.js"></script>
+    <script src="js/gita-data.js"></script> <!-- Fallback -->
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const chapterGrid = document.getElementById('chapter-grid');
+            const chapterView = document.getElementById('chapter-view');
+            const verseView = document.getElementById('verse-view');
+            const verseContainer = document.getElementById('verse-list-container');
+
+            // Prefer Complete Data if available, else fallback
+            const DATA = (typeof GITA_DATA_COMPLETE !== 'undefined') ? GITA_DATA_COMPLETE : GITA_DATA;
+
+            if (!DATA) {
+                chapterGrid.innerHTML = `<p style="text-align:center; padding:20px;">Library Empty. Please run the Ingestion Tool.</p>`;
+                return;
+            }
+
+            // Render Chapters
+            renderChapters();
+
+            function renderChapters() {
+                chapterGrid.innerHTML = '';
+
+                // Assuming DATA.chapters is array of objects
+                let chapters = DATA.chapters || [];
+
+                // If chapters are empty but verses exist (Flat structure from Ingest Tool)
+                if (chapters.length === 0 && DATA.verses && DATA.verses.length > 0) {
+                    // Group by chapter
+                    const map = new Map();
+                    DATA.verses.forEach(v => {
+                        const cNum = parseInt(v.chapter);
+                        if (!map.has(cNum)) {
+                            map.set(cNum, {
+                                chapter: cNum,
+                                title: `Chapter ${cNum}`, // Default
+                                titleEnglish: '',
+                                verses: []
+                            });
+                        }
+                        map.get(cNum).verses.push(v);
+                    });
+                    chapters = Array.from(map.values()).sort((a, b) => a.chapter - b.chapter);
+
+                    // Try to enrich titles if available in first verse or meta
+                    // (Optional enhancement)
+                }
+
+                if (chapters.length === 0) {
+                    // Try to infer from flat verses if necessary (User's script output structure)
+                    // Or just show fallback message
+                    chapterGrid.innerHTML = `<div style="grid-column: span 2; text-align:center">
+                        <p>No Chapters Found.</p>
+                        <small>Did you run python tools/gita_ingest.py?</small>
+                     </div>`;
+                    return;
+                }
+
+                chapters.forEach(ch => {
+                    const card = document.createElement('div');
+                    card.className = 'chapter-card';
+                    card.innerHTML = `
+                        <span class="chapter-num">Chapter ${ch.chapter}</span>
+                        <h3 class="chapter-title">${ch.title || 'In Progress'}</h3>
+                        <p class="chapter-subtitle">${ch.titleEnglish || ''}</p>
+                        <div class="chapter-verses">
+                            <i data-lucide="book-open" size="12"></i>
+                            ${ch.verses ? ch.verses.length : 0} Verses
+                        </div>
+                    `;
+                    card.onclick = () => openChapter(ch);
+                    chapterGrid.appendChild(card);
+                });
+                lucide.createIcons();
+            }
+
+            function openChapter(chapter) {
+                // Determine verses (either in chapter.verses or filtered from DATA.verses)
+                let verses = chapter.verses;
+                if (!verses && DATA.verses) {
+                    verses = DATA.verses.filter(v => parseInt(v.chapter) === parseInt(chapter.chapter));
+                }
+
+                // Update Header
+                document.getElementById('current-chapter-title').textContent = `Chapter ${chapter.chapter}`;
+                document.getElementById('current-chapter-subtitle').textContent = chapter.titleEnglish;
+
+                // Render List
+                verseContainer.innerHTML = '';
+                verses.sort((a, b) => a.verse - b.verse).forEach(v => {
+                    const el = document.createElement('div');
+                    el.className = 'verse-item';
+                    el.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                            <span style="color:var(--primary); font-size:0.8rem; font-weight:600;">Verse ${v.verse}</span>
+                        </div>
+                        <div class="verse-preview-sanskrit">${v.sanskrit}</div>
+                        <div class="verse-preview-trans">${v.translation}</div>
+                    `;
+                    verseContainer.appendChild(el);
+                });
+
+                // Toggle View
+                chapterView.style.display = 'none';
+                verseView.classList.add('active');
+            }
+
+            // Back Navigation
+            document.getElementById('back-to-chapters').onclick = () => {
+                verseView.classList.remove('active');
+                chapterView.style.display = 'flex';
+            };
+        });
+    </script>
+</body>
+
+</html>

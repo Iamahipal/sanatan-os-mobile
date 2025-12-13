@@ -200,23 +200,40 @@ Remember: You are not just answering questions, you are transforming lives with 
 
     // Get relevant verses for context
     getRelevantVerses(message) {
-        if (typeof GITA_DATA === 'undefined') return [];
+        // PRIORITIZE COMPLETE DATA
+        const DATA = (typeof GITA_DATA_COMPLETE !== 'undefined') ? GITA_DATA_COMPLETE : ((typeof GITA_DATA !== 'undefined') ? GITA_DATA : null);
+
+        if (!DATA) return [];
+
+        // Handle flattened 'verses' array (from Ingest Tool) vs nested 'chapters' (Legacy)
+        const verseList = DATA.verses ? DATA.verses : DATA.chapters.flatMap(c => c.verses);
 
         const emotion = this.detectEmotion(message);
-        if (emotion) {
-            return GITA_DATA.findByEmotion(emotion);
+        if (emotion && DATA.emotionMap) { // Only legacy has emotionMap pre-calculated
+            return DATA.findByEmotion(emotion);
         }
 
-        // Fallback to keyword search
-        const words = message.toLowerCase().split(/\s+/);
-        for (const word of words) {
-            if (word.length > 4) {
-                const results = GITA_DATA.search(word);
-                if (results.length > 0) return results.slice(0, 2);
+        // Fallback to keyword search over ALL verses
+        const words = message.toLowerCase().split(/\s+/).filter(w => w.length > 4);
+        const results = [];
+
+        // Limit search to 50 results max to be fast
+        for (const verse of verseList) {
+            const items = [verse.translation, verse.explanation, ...(verse.themes || []), ...(verse.situations || [])].join(' ').toLowerCase();
+
+            // Check themes match (high priority)
+            if (verse.themes && verse.themes.some(t => message.toLowerCase().includes(t.toLowerCase()))) {
+                results.push(verse);
+                continue;
+            }
+
+            // Check keywords
+            if (words.some(w => items.includes(w))) {
+                results.push(verse);
             }
         }
 
-        return [];
+        return results.slice(0, 3); // Return top 3 matches
     }
 
     // Main chat function - uses Vercel proxy
