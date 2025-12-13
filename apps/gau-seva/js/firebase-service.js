@@ -91,78 +91,40 @@ async function saveRescueReport(report) {
     }
 }
 
-// ===== TELEGRAM BOT INTEGRATION =====
-// Gau Seva Alert Bot - Instant notifications to admin group
+// ===== TELEGRAM BOT INTEGRATION (SECURE) =====
+// Uses Vercel serverless proxy - Token hidden in environment variables
 const TELEGRAM_CONFIG = {
-    // Bot token from @BotFather
-    botToken: '8324979909:AAEhGsir2FyhdbYALLvmGuyGvH5kWm2cqnE',
-    // Gau Seva group chat ID
-    chatId: '-5093954682',
-    // ENABLED - Will send alerts for every rescue report
+    // Proxy endpoint (token stored in Vercel env vars)
+    proxyUrl: '/api/telegram-alert',
+    // Enable/disable notifications
     enabled: true
 };
 
 /**
- * Send instant alert to Telegram admin group
+ * Send instant alert via secure Vercel proxy
  * @param {Object} report - The rescue report data
  */
 async function sendTelegramAlert(report) {
-    // Check if Telegram is configured
-    if (!TELEGRAM_CONFIG.enabled ||
-        TELEGRAM_CONFIG.botToken === 'YOUR_BOT_TOKEN_HERE') {
-        console.log('⚠️ Telegram not configured - skipping alert');
+    if (!TELEGRAM_CONFIG.enabled) {
+        console.log('⚠️ Telegram notifications disabled');
         return false;
     }
 
     try {
-        // Build Google Maps link
-        const mapLink = report.lat && report.lon
-            ? `https://www.google.com/maps?q=${report.lat},${report.lon}`
-            : 'Location not available';
-
-        // Format conditions
-        const conditions = Array.isArray(report.conditions)
-            ? report.conditions.join(', ')
-            : report.conditions || 'Unknown';
-
-        // Build message
-        const message = `
-🚨 *NEW COW RESCUE ALERT* 🚨
-
-📋 *Case ID:* ${report.caseId || 'N/A'}
-🩹 *Condition:* ${conditions}
-📍 *Address:* ${report.location || 'Not provided'}
-🗺️ *Map:* [Open Location](${mapLink})
-📞 *Reporter:* ${report.contact || 'N/A'}
-🏛️ *State:* ${report.state || 'Unknown'}
-📝 *Details:* ${report.description || 'None'}
-
-⏰ *Time:* ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
-
-_Please coordinate with nearest Gaushala immediately!_
-        `.trim();
-
-        // Send to Telegram
-        const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
-
-        const response = await fetch(url, {
+        // Send to secure proxy (no token exposed)
+        const response = await fetch(TELEGRAM_CONFIG.proxyUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: TELEGRAM_CONFIG.chatId,
-                text: message,
-                parse_mode: 'Markdown',
-                disable_web_page_preview: false
-            })
+            body: JSON.stringify({ report })
         });
 
         const result = await response.json();
 
-        if (result.ok) {
-            console.log('✅ Telegram alert sent successfully!');
+        if (result.success) {
+            console.log('✅ Telegram alert sent via secure proxy!');
             return true;
         } else {
-            console.error('❌ Telegram error:', result.description);
+            console.error('❌ Telegram proxy error:', result.error);
             return false;
         }
     } catch (error) {
