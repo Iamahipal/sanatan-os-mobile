@@ -92,14 +92,14 @@ async function saveRescueReport(report) {
 }
 
 // ===== TELEGRAM BOT INTEGRATION =====
-// ⚠️ CONFIGURE YOUR BOT HERE - Get from @BotFather
+// Gau Seva Alert Bot - Instant notifications to admin group
 const TELEGRAM_CONFIG = {
-    // Replace with your bot token from @BotFather
-    botToken: 'YOUR_BOT_TOKEN_HERE',
-    // Replace with your group chat ID (starts with -100...)
-    chatId: 'YOUR_CHAT_ID_HERE',
-    // Set to true once configured
-    enabled: false
+    // Bot token from @BotFather
+    botToken: '8324979909:AAEhGsir2FyhdbYALLvmGuyGvH5kWm2cqnE',
+    // Gau Seva group chat ID
+    chatId: '-5093954682',
+    // ENABLED - Will send alerts for every rescue report
+    enabled: true
 };
 
 /**
