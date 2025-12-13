@@ -124,50 +124,7 @@ body {
     }
 }
 
-/* ============================================
-   LIQUID GLASS - The Real Deal
-   Based on archisvaze/liquid-glass technique
-   ============================================ */
-.liquid-glass {
-    position: relative;
-
-    /* THE KEY: backdrop-filter with saturation + contrast + brightness */
-    backdrop-filter:
-        blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast)) brightness(var(--glass-brightness));
-    -webkit-backdrop-filter:
-        blur(var(--glass-blur)) saturate(var(--glass-saturate)) contrast(var(--glass-contrast)) brightness(var(--glass-brightness));
-
-    /* Glass tint - very subtle */
-    background: rgba(255, 255, 255, 0.02);
-
-    /* Border with specular highlight */
-    border: 1px solid rgba(255, 255, 255, 0.12);
-
-    /* THE SECRET: Inset shadow for depth + outer glow */
-    box-shadow:
-        0 4px 24px rgba(0, 0, 0, 0.15),
-        0 -8px 20px inset rgba(0, 0, 0, 0.08),
-        0 1px 0 inset rgba(255, 255, 255, 0.08);
-
-    border-radius: 24px;
-    overflow: hidden;
-}
-
-/* Specular highlight on top edge */
-.liquid-glass::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 10%;
-    right: 10%;
-    height: 1px;
-    background: linear-gradient(90deg,
-            transparent 0%,
-            rgba(255, 255, 255, 0.4) 50%,
-            transparent 100%);
-    pointer-events: none;
-    z-index: 10;
-}
+/* Unused .liquid-glass class removed - styles applied directly to elements */
 
 /* ============================================
    HEADER - Match input box height (72px)
@@ -250,16 +207,15 @@ body {
 }
 
 /* ============================================
-   WELCOME SCREEN
+   WELCOME SCREEN - Vertical distribution
    ============================================ */
 .welcome-screen {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
     flex: 1;
-    padding: 24px;
-    text-align: center;
+    padding: 32px 20px 20px;
     animation: fadeIn 0.6s ease;
 }
 
@@ -275,57 +231,7 @@ body {
     }
 }
 
-.krishna-avatar {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 24px;
-}
-
-.avatar-glow {
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, transparent 60%);
-    border-radius: 50%;
-    animation: pulseGlow 3s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: 0.6;
-    }
-
-    50% {
-        transform: scale(1.15);
-        opacity: 1;
-    }
-}
-
-.avatar-icon {
-    font-size: 4rem;
-    position: relative;
-    z-index: 1;
-    animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-}
+/* Unused avatar styles removed */
 
 /* Welcome Content - Top section */
 .welcome-content {
@@ -398,9 +304,11 @@ body {
 }
 
 .chip-icon {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     flex-shrink: 0;
+    stroke-width: 2.5;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
 /* No hover effect - cleaner Apple style */
@@ -607,17 +515,7 @@ body {
     animation: fadeIn 0.3s ease;
 }
 
-.krishna-mini-avatar {
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, rgba(30, 58, 95, 0.5), rgba(42, 74, 115, 0.3));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
+/* Unused .krishna-mini-avatar removed - typing indicator simplified */
 
 .typing-dots {
     display: flex;
