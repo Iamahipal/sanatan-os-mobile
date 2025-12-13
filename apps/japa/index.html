@@ -9,9 +9,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Tiro+Devanagari+Sanskrit&display=swap"
         rel="stylesheet">
-    <!-- Firebase SDK for Push Notifications -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     <!-- Lucide Icons - Modern SVG icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -38,6 +38,13 @@
         <div id="level-badge" class="level-badge">
             <i data-lucide="sparkles" class="level-icon-svg"></i>
             <span id="level-text" class="level-text">Aarambh</span>
+        </div>
+
+        <!-- Sangha: Silent Solidarity Counter -->
+        <div id="sangha-bar" class="sangha-bar">
+            <i data-lucide="users" class="sangha-icon"></i>
+            <span id="sangha-count">0</span>
+            <span class="sangha-label">souls chanting with you</span>
         </div>
 
         <!-- Main Tap Canvas -->

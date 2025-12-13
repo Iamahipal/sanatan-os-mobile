@@ -336,6 +336,67 @@ body.page-enter {
     letter-spacing: 0.5px;
 }
 
+/* ===== SANGHA: Silent Solidarity ===== */
+.sangha-bar {
+    position: absolute;
+    top: calc(56px + max(50px, var(--safe-top)) + 40px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(76, 175, 80, 0.15);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    z-index: 14;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.5s ease;
+}
+
+.sangha-icon {
+    width: 14px;
+    height: 14px;
+    stroke: #4CAF50;
+    stroke-width: 2;
+}
+
+#sangha-count {
+    font-weight: 700;
+    color: #4CAF50;
+    font-size: 0.9rem;
+}
+
+.sangha-label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Glow effects based on user count */
+.sangha-bar.glow-medium {
+    background: rgba(76, 175, 80, 0.25);
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+}
+
+.sangha-bar.glow-strong {
+    background: rgba(76, 175, 80, 0.35);
+    box-shadow: 0 0 25px rgba(76, 175, 80, 0.5), 0 0 50px rgba(76, 175, 80, 0.2);
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 25px rgba(76, 175, 80, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(76, 175, 80, 0.7), 0 0 60px rgba(76, 175, 80, 0.3);
+    }
+}
+
 /* Main Canvas */
 .japa-canvas {
     flex: 1;
