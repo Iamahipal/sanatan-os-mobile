@@ -1150,6 +1150,11 @@ body {
     color: white;
 }
 
+.emergency-call-btn.highway {
+    background: linear-gradient(135deg, #FF8F00, #EF6C00);
+    color: white;
+}
+
 .call-icon {
     width: 48px;
     height: 48px;

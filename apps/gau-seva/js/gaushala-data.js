@@ -8,6 +8,7 @@ const EMERGENCY_CONTACTS = {
     govt: {
         vetAmbulance: '1962',
         police: '112',
+        nhaiHighway: '1033',
         description: 'Pashu Dhan Sanjeevani - 29 States'
     },
 
