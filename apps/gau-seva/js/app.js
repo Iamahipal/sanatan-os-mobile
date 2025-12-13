@@ -158,12 +158,78 @@ function updateGaushalaCount() {
     }
 }
 
-// Helper: Read file as Base64
+// Generate Smart Case ID with Random Suffix
+// Format: #MH-PUN-131225-X7K9 (Prevents collisions)
+function generateCaseId() {
+    const today = new Date();
+
+    // Date part (DDMMYY)
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yy = String(today.getFullYear()).slice(-2);
+    const dateStr = `${dd}${mm}${yy}`;
+
+    // Location parts
+    const locationInput = document.getElementById('locationInput');
+    const userLocation = window.userLocation || {};
+
+    // State code (2 letters)
+    const stateCode = getStateCode(userLocation.state);
+
+    // City code (first 3 letters)
+    const cityCode = getCityCode(userLocation.address);
+
+    // Random 4-digit alphanumeric suffix (e.g., A7X9)
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // No I, O, 1, 0 to avoid confusion
+    let randomSuffix = '';
+    for (let i = 0; i < 4; i++) {
+        randomSuffix += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    return `#${stateCode}-${cityCode}-${dateStr}-${randomSuffix}`;
+}
+
+// ... existing code ...
+
+// Helper: Read and Compress file as Base64 (Max 1000px, 0.7 quality)
+// Fixes "payload too large" error on mobile
 function readFileAsBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
+        reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const MAX_WIDTH = 1000;
+                const MAX_HEIGHT = 1000;
+                let width = img.width;
+                let height = img.height;
+
+                // Calculate new dimensions
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Compress to JPEG at 70% quality
+                resolve(canvas.toDataURL('image/jpeg', 0.7));
+            };
+            img.onerror = (e) => reject(new Error('Image failed to load'));
+            img.src = event.target.result;
+        };
+        reader.onerror = (e) => reject(new Error('File reading failed'));
         reader.readAsDataURL(file);
     });
 }
@@ -497,31 +563,7 @@ function initConditionChips() {
     };
 }
 
-// ===== GENERATE CASE ID =====
-// Format: #MH-PUN-131224-001 (State-City-Date-Seq)
-function generateCaseId() {
-    const date = new Date();
 
-    // Date part: DDMMYY
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = String(date.getFullYear()).slice(-2);
-    const dateStr = `${day}${month}${year}`;
-
-    // State code (2 letters)
-    const stateCode = getStateCode(userLocation.state);
-
-    // City code (first 3 letters)
-    const cityCode = getCityCode(userLocation.address);
-
-    // Sequential number for today (stored in localStorage)
-    const seqKey = `gauSevaSeq_${dateStr}`;
-    let seq = parseInt(localStorage.getItem(seqKey) || '0') + 1;
-    localStorage.setItem(seqKey, seq.toString());
-    const seqStr = String(seq).padStart(3, '0');
-
-    return `#${stateCode}-${cityCode}-${dateStr}-${seqStr}`;
-}
 
 // State code mapping (ISO 3166-2:IN)
 function getStateCode(state) {
