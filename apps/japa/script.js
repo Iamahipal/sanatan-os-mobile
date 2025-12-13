@@ -688,62 +688,84 @@ document.addEventListener('DOMContentLoaded', () => {
     // === SANGHA: Silent Solidarity ===
     // Shows live count of users currently chanting
     function initSangha() {
-        const sanghaCountEl = document.getElementById('sangha-count');
-
-        // Firebase config (same as messaging)
-        const firebaseConfig = {
-            apiKey: "AIzaSyCbpJn70aedORd6dycc88jxSqM178U91ig",
-            authDomain: "sanatan-os-push.firebaseapp.com",
-            projectId: "sanatan-os-push",
-            storageBucket: "sanatan-os-push.firebasestorage.app",
-            messagingSenderId: "840881978014",
-            appId: "1:840881978014:web:a3d8d5d30f274ecc719ae7b",
-            databaseURL: "https://sanatan-os-push-default-rtdb.firebaseio.com"
-        };
-
-        // Initialize Firebase if not already done
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-
-        const database = firebase.database();
-        const presenceRef = database.ref('sangha/japa/online');
-        const myPresenceRef = presenceRef.push();
-
-        // Track connection state
-        const connectedRef = database.ref('.info/connected');
-        connectedRef.on('value', (snap) => {
-            if (snap.val() === true) {
-                // I'm connected - add myself
-                myPresenceRef.set(true);
-
-                // Remove me when I disconnect
-                myPresenceRef.onDisconnect().remove();
-
-                console.log('[Sangha] Connected to presence system');
-            }
-        });
-
-        // Listen for changes in online count
-        presenceRef.on('value', (snapshot) => {
-            const count = snapshot.numChildren();
-            sanghaCountEl.textContent = count;
-
-            // Glow effect based on count
+        try {
+            const sanghaCountEl = document.getElementById('sangha-count');
             const sanghaBar = document.getElementById('sangha-bar');
-            if (count > 10) {
-                sanghaBar.classList.add('glow-strong');
-            } else if (count > 5) {
-                sanghaBar.classList.add('glow-medium');
-                sanghaBar.classList.remove('glow-strong');
-            } else {
-                sanghaBar.classList.remove('glow-medium', 'glow-strong');
+
+            if (!sanghaCountEl || !sanghaBar) {
+                console.log('[Sangha] UI elements not found, skipping');
+                return;
             }
 
-            console.log(`[Sangha] ${count} souls chanting`);
-        });
+            // Firebase config (same as messaging)
+            const firebaseConfig = {
+                apiKey: "AIzaSyCbpJn70aedORd6dycc88jxSqM178U91ig",
+                authDomain: "sanatan-os-push.firebaseapp.com",
+                projectId: "sanatan-os-push",
+                storageBucket: "sanatan-os-push.firebasestorage.app",
+                messagingSenderId: "840881978014",
+                appId: "1:840881978014:web:a3d8d5d30f274ecc719ae7b",
+                databaseURL: "https://sanatan-os-push-default-rtdb.firebaseio.com"
+            };
+
+            // Initialize Firebase if not already done
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+
+            const database = firebase.database();
+            const presenceRef = database.ref('sangha/japa/online');
+            const myPresenceRef = presenceRef.push();
+
+            // Track connection state
+            const connectedRef = database.ref('.info/connected');
+            connectedRef.on('value', (snap) => {
+                if (snap.val() === true) {
+                    // I'm connected - add myself
+                    myPresenceRef.set(true).catch(err => {
+                        console.warn('[Sangha] Write failed:', err.message);
+                    });
+
+                    // Remove me when I disconnect
+                    myPresenceRef.onDisconnect().remove();
+
+                    console.log('[Sangha] Connected to presence system');
+                }
+            }, (error) => {
+                console.warn('[Sangha] Connection error:', error.message);
+                sanghaBar.style.display = 'none';
+            });
+
+            // Listen for changes in online count
+            presenceRef.on('value', (snapshot) => {
+                const count = snapshot.numChildren();
+                sanghaCountEl.textContent = count;
+
+                // Glow effect based on count
+                if (count > 10) {
+                    sanghaBar.classList.add('glow-strong');
+                    sanghaBar.classList.remove('glow-medium');
+                } else if (count > 5) {
+                    sanghaBar.classList.add('glow-medium');
+                    sanghaBar.classList.remove('glow-strong');
+                } else {
+                    sanghaBar.classList.remove('glow-medium', 'glow-strong');
+                }
+
+                console.log(`[Sangha] ${count} souls chanting`);
+            }, (error) => {
+                console.warn('[Sangha] Read error:', error.message);
+                sanghaBar.style.display = 'none';
+            });
+
+        } catch (err) {
+            console.error('[Sangha] Init failed:', err.message);
+            // Hide the sangha bar if there's an error
+            const sanghaBar = document.getElementById('sangha-bar');
+            if (sanghaBar) sanghaBar.style.display = 'none';
+        }
     }
 
     // Initialize Sangha after a short delay to not block main UI
-    setTimeout(initSangha, 1000);
+    setTimeout(initSangha, 1500);
 });
