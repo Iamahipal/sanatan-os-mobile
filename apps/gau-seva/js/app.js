@@ -863,3 +863,62 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+// ===== SUGGEST GAUSHALA LOGIC =====
+function openSuggestionModal() {
+    const modal = document.getElementById('suggestModal');
+    if (modal) modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSuggestionModal() {
+    const modal = document.getElementById('suggestModal');
+    if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+async function submitSuggestion() {
+    const name = document.getElementById('s_name').value.trim();
+    const phone = document.getElementById('s_phone').value.trim();
+    const location = document.getElementById('s_location').value.trim();
+    const btn = document.getElementById('submitSuggestBtn');
+
+    if (!name || !phone || !location) {
+        showToast('❌ Please fill all required fields', 'error');
+        return;
+    }
+
+    // visual feedback
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    // Send to Firebase
+    if (window.GauSevaFirebase && window.GauSevaFirebase.saveSuggestion) {
+        const success = await window.GauSevaFirebase.saveSuggestion({
+            name, phone, location
+        });
+
+        if (success) {
+            showToast('✅ Suggestion sent! We will verify it soon.', 'success');
+            document.getElementById('suggestForm').reset();
+            closeSuggestionModal();
+        } else {
+            showToast('❌ Failed to send. Please try again.', 'error');
+        }
+    } else {
+        console.error('Firebase saveSuggestion not available');
+        showToast('❌ System error. Check console.', 'error');
+    }
+
+    // Reset button
+    btn.textContent = originalText;
+    btn.disabled = false;
+}
+
+// Close modal on click outside
+const suggestModal = document.getElementById('suggestModal');
+if (suggestModal) {
+    suggestModal.addEventListener('click', (e) => {
+        if (e.target === suggestModal) closeSuggestionModal();
+    });
+}

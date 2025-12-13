@@ -114,6 +114,13 @@
                     <i data-lucide="info"></i>
                     <span>Can't find nearby help? Call <a href="tel:1962"><strong>1962</strong></a> (Pan-India)</span>
                 </div>
+
+                <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                    <button onclick="openSuggestionModal()"
+                        style="background:none; border:none; color: var(--primary-light); font-size: 0.9rem; text-decoration:underline; cursor:pointer; padding: 8px;">
+                        Know a Gaushala? Add it here
+                    </button>
+                </div>
             </section>
 
             <!-- Emergency Rescue Section -->
@@ -545,6 +552,56 @@
             </div>
 
             <button class="close-success-btn" id="closeSuccessModal">Done</button>
+        </div>
+    </div>
+
+    <!-- ========================================
+         SUGGEST GAUSHALA MODAL
+         ======================================== -->
+    <div class="modal-overlay" id="suggestModal">
+        <div class="modal-content suggest-modal"
+            style="background: #161b22; max-width: 400px; padding: 24px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
+            <div style="text-align:center; margin-bottom:20px;">
+                <div style="font-size:3rem; margin-bottom:10px;">🏘️</div>
+                <h2 style="font-size:1.5rem; margin-bottom:8px; color:white;">Add Gaushala</h2>
+                <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">Help us expand the rescue network</p>
+            </div>
+
+            <form id="suggestForm" onsubmit="event.preventDefault(); submitSuggestion();">
+                <div style="margin-bottom:15px;">
+                    <label
+                        style="display:block; margin-bottom:6px; font-size:0.85rem; color:rgba(255,255,255,0.7); font-weight:500;">Gaushala
+                        Name *</label>
+                    <input type="text" id="s_name" required
+                        style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:white; outline:none; font-family:inherit;"
+                        placeholder="Organization Name">
+                </div>
+
+                <div style="margin-bottom:15px;">
+                    <label
+                        style="display:block; margin-bottom:6px; font-size:0.85rem; color:rgba(255,255,255,0.7); font-weight:500;">Phone
+                        / WhatsApp *</label>
+                    <input type="tel" id="s_phone" required
+                        style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:white; outline:none; font-family:inherit;"
+                        placeholder="Contact Number">
+                </div>
+
+                <div style="margin-bottom:20px;">
+                    <label
+                        style="display:block; margin-bottom:6px; font-size:0.85rem; color:rgba(255,255,255,0.7); font-weight:500;">City
+                        & State *</label>
+                    <input type="text" id="s_location" required
+                        style="width:100%; padding:12px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:white; outline:none; font-family:inherit;"
+                        placeholder="e.g. Nashik, Maharashtra">
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <button type="button" onclick="closeSuggestionModal()"
+                        style="padding:12px; background:transparent; border:1px solid rgba(255,255,255,0.2); color:white; border-radius:10px; cursor:pointer; font-weight:500;">Cancel</button>
+                    <button type="submit" id="submitSuggestBtn"
+                        style="padding:12px; background:#2E7D32; border:none; color:white; border-radius:10px; font-weight:600; cursor:pointer;">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 

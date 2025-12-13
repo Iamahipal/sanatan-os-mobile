@@ -282,6 +282,32 @@ async function syncLocalReports() {
     }
 }
 
+/**
+ * Save a crowdsourced Gaushala suggestion
+ * @param {Object} suggestionData
+ * @returns {Promise<boolean>}
+ */
+async function saveGaushalaSuggestion(suggestionData) {
+    try {
+        if (!db) await initFirebase();
+        if (!db) return false;
+
+        const data = {
+            ...suggestionData,
+            status: 'pending',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            source: 'crowdsource_form'
+        };
+
+        await db.collection('gaushala_suggestions').add(data);
+        console.log('✅ Suggestion saved to Firestore');
+        return true;
+    } catch (error) {
+        console.error('❌ Suggestion save error:', error);
+        return false;
+    }
+}
+
 // Export functions
 window.GauSevaFirebase = {
     init: initFirebase,
@@ -289,5 +315,6 @@ window.GauSevaFirebase = {
     getReportByCaseId: getReportByCaseId,
     updateStatus: updateReportStatus,
     getPendingReports: getPendingReports,
-    syncLocalReports: syncLocalReports
+    syncLocalReports: syncLocalReports,
+    saveSuggestion: saveGaushalaSuggestion
 };
