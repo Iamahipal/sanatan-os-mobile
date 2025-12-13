@@ -173,11 +173,31 @@ function generateCaseId() {
     const locationInput = document.getElementById('locationInput');
     const userLocation = window.userLocation || {};
 
+    // State check fallback
+    let stateVal = userLocation.state;
+    let cityCheck = userLocation.city || userLocation.address;
+
+    // If no state detected, try to parse from input value
+    if (!stateVal && locationInput.value) {
+        const parts = locationInput.value.split(',').map(p => p.trim());
+        // Check last few parts for state name
+        for (const part of parts.reverse()) {
+            if (getStateCode(part) !== 'XX') {
+                stateVal = part;
+                break;
+            }
+        }
+    }
+
     // State code (2 letters)
-    const stateCode = getStateCode(userLocation.state);
+    const stateCode = getStateCode(stateVal);
 
     // City code (first 3 letters)
-    const cityCode = getCityCode(userLocation.address);
+    // If city detection failed, try to use the first part of input
+    if (!cityCheck && locationInput.value) {
+        cityCheck = locationInput.value;
+    }
+    const cityCode = getCityCode(cityCheck || 'UNK');
 
     // Random 4-digit alphanumeric suffix (e.g., A7X9)
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // No I, O, 1, 0 to avoid confusion
