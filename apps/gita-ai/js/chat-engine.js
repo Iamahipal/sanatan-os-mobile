@@ -111,7 +111,7 @@
             const key = elements.apiKeyInput.value.trim();
             if (key) {
                 krishnaBrain.setApiKey(key);
-                showToast('API key saved successfully! 🙏');
+                showToast('API key saved successfully!');
                 elements.settingsModal.classList.remove('active');
             }
         });
@@ -137,7 +137,7 @@
             if (key) {
                 krishnaBrain.setApiKey(key);
                 hideApiSetupModal();
-                showToast('Welcome! Krishna is ready to guide you 🙏');
+                showToast('Welcome! Krishna is ready to guide you');
             }
         });
 
@@ -201,7 +201,7 @@
             if (errorMsg.includes('API key')) {
                 showApiSetupModal();
             } else {
-                addMessage('krishna', `<p>🙏 Forgive me, dear one. I encountered an issue: ${errorMsg}</p><p>Please try again, or check your settings.</p>`);
+                addMessage('krishna', `<p>Forgive me, dear one. I encountered an issue: ${errorMsg}</p><p>Please try again, or check your settings.</p>`);
             }
         }
 
@@ -214,10 +214,8 @@
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${type}`;
 
-        const avatar = type === 'krishna' ? '🙏' : '🙏';
-
+        // No avatar - cleaner layout
         messageDiv.innerHTML = `
-            <div class="message-avatar">${avatar}</div>
             <div class="message-content">${content}</div>
         `;
 
