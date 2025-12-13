@@ -201,19 +201,34 @@
     <script src="js/gemini-brain.js"></script>
     <script src="js/chat-engine.js"></script>
     <script>
-        // Wait for fonts AND background image before revealing
+        // Function to reveal app
+        function revealApp() {
+            lucide.createIcons();
+            document.querySelector('.app-container').style.visibility = 'visible';
+        }
+        
+        // Wait for fonts AND background image, with fallback timeout
         const bgImage = new Image();
         bgImage.src = 'krishna-bg.jpg';
-
+        
+        // Fallback: reveal after 2 seconds max regardless
+        const fallbackTimer = setTimeout(revealApp, 2000);
+        
         Promise.all([
             document.fonts.ready,
             new Promise(resolve => {
                 if (bgImage.complete) resolve();
-                else bgImage.onload = resolve;
+                else {
+                    bgImage.onload = resolve;
+                    bgImage.onerror = resolve; // Reveal even if image fails
+                }
             })
         ]).then(() => {
-            lucide.createIcons();
-            document.querySelector('.app-container').classList.add('ready');
+            clearTimeout(fallbackTimer);
+            revealApp();
+        }).catch(() => {
+            clearTimeout(fallbackTimer);
+            revealApp();
         });
     </script>
 </body>
