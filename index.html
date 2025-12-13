@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description"
+        content="Sanatan OS - Your spiritual companion app with Krishna Vaani AI, Live Darshan, Panchang, Japa counter, and more.">
     <title>Sanatan OS</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
@@ -140,7 +142,6 @@
 
         <!-- Sanskrit Vidya - Revolutionary Learning -->
         <a href="apps/sanskrit-vidya/index.html" class="tile small sanskrit-vidya">
-            <div class="tile-badge">NEW</div>
             <div class="tile-content">
                 <span class="tile-icon">📜</span>
                 <span class="tile-label">Sanskrit</span>
@@ -156,24 +157,22 @@
         </a>
     </main>
 
-    <!-- Subtle click sound -->
+    <!-- Subtle click sound - lazy load -->
     <audio id="click-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-modern-technology-select-3124.mp3"
-        preload="auto"></audio>
+        preload="none"></audio>
 
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
+        // Service Worker registration
+        'serviceWorker' in navigator && navigator.serviceWorker.register('sw.js');
 
-        // Play subtle click sound on tile tap
+        // Optimized: Single event delegation instead of 15 individual listeners
         const clickSound = document.getElementById('click-sound');
-        clickSound.volume = 0.15; // Very subtle
-
-        document.querySelectorAll('.tile').forEach(tile => {
-            tile.addEventListener('click', () => {
+        document.querySelector('.grid-container').addEventListener('click', e => {
+            if (e.target.closest('.tile')) {
+                clickSound.volume = 0.15;
                 clickSound.currentTime = 0;
                 clickSound.play().catch(() => { });
-            });
+            }
         });
     </script>
 </body>
