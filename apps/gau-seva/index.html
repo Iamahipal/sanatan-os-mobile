@@ -270,11 +270,13 @@
                             </div>
                         </div>
                         <div class="gaushala-actions">
-                            <button class="donate-btn">
+                            <button class="donate-btn"
+                                onclick="showToast('💚 Donation feature coming soon! Contact Gaushala directly.', 'info')">
                                 <i data-lucide="heart"></i>
                                 Donate
                             </button>
-                            <button class="sponsor-btn">
+                            <button class="sponsor-btn"
+                                onclick="showToast('🐄 Sponsorship feature coming soon!', 'info')">
                                 <i data-lucide="gift"></i>
                                 Sponsor a Cow
                             </button>
@@ -306,11 +308,13 @@
                             </div>
                         </div>
                         <div class="gaushala-actions">
-                            <button class="donate-btn">
+                            <button class="donate-btn"
+                                onclick="showToast('💚 Donation feature coming soon! Contact Gaushala directly.', 'info')">
                                 <i data-lucide="heart"></i>
                                 Donate
                             </button>
-                            <button class="sponsor-btn">
+                            <button class="sponsor-btn"
+                                onclick="showToast('🐄 Sponsorship feature coming soon!', 'info')">
                                 <i data-lucide="gift"></i>
                                 Sponsor a Cow
                             </button>
@@ -318,8 +322,9 @@
                     </div>
 
                     <!-- View All -->
-                    <button class="view-all-btn">
-                        View All 89 Gaushalas
+                    <button class="view-all-btn" id="viewAllGaushalasBtn"
+                        onclick="showToast('🐄 Full directory coming soon! We have 7 verified Gaushalas.', 'info')">
+                        View All <span id="gaushalaCount">7</span> Gaushalas
                         <i data-lucide="arrow-right"></i>
                     </button>
                 </div>
@@ -351,7 +356,8 @@
                         </div>
                     </div>
 
-                    <button class="register-btn">
+                    <button class="register-btn"
+                        onclick="showToast('🙏 Volunteer registration coming soon! Contact your local Gaushala directly.', 'info')">
                         <i data-lucide="user-plus"></i>
                         Register as Volunteer
                     </button>
