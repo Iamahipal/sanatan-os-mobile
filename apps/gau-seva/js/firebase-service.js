@@ -73,6 +73,9 @@ async function saveRescueReport(report) {
 
         console.log('✅ Report saved to Firestore:', docRef.id);
 
+        // Send Telegram notification to admin group
+        await sendTelegramAlert(report);
+
         return {
             success: true,
             docId: docRef.id,
@@ -85,6 +88,116 @@ async function saveRescueReport(report) {
             error: error.message,
             savedLocally: true
         };
+    }
+}
+
+// ===== TELEGRAM BOT INTEGRATION =====
+// ⚠️ CONFIGURE YOUR BOT HERE - Get from @BotFather
+const TELEGRAM_CONFIG = {
+    // Replace with your bot token from @BotFather
+    botToken: 'YOUR_BOT_TOKEN_HERE',
+    // Replace with your group chat ID (starts with -100...)
+    chatId: 'YOUR_CHAT_ID_HERE',
+    // Set to true once configured
+    enabled: false
+};
+
+/**
+ * Send instant alert to Telegram admin group
+ * @param {Object} report - The rescue report data
+ */
+async function sendTelegramAlert(report) {
+    // Check if Telegram is configured
+    if (!TELEGRAM_CONFIG.enabled ||
+        TELEGRAM_CONFIG.botToken === 'YOUR_BOT_TOKEN_HERE') {
+        console.log('⚠️ Telegram not configured - skipping alert');
+        return false;
+    }
+
+    try {
+        // Build Google Maps link
+        const mapLink = report.lat && report.lon
+            ? `https://www.google.com/maps?q=${report.lat},${report.lon}`
+            : 'Location not available';
+
+        // Format conditions
+        const conditions = Array.isArray(report.conditions)
+            ? report.conditions.join(', ')
+            : report.conditions || 'Unknown';
+
+        // Build message
+        const message = `
+🚨 *NEW COW RESCUE ALERT* 🚨
+
+📋 *Case ID:* ${report.caseId || 'N/A'}
+🩹 *Condition:* ${conditions}
+📍 *Address:* ${report.location || 'Not provided'}
+🗺️ *Map:* [Open Location](${mapLink})
+📞 *Reporter:* ${report.contact || 'N/A'}
+🏛️ *State:* ${report.state || 'Unknown'}
+📝 *Details:* ${report.description || 'None'}
+
+⏰ *Time:* ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+
+_Please coordinate with nearest Gaushala immediately!_
+        `.trim();
+
+        // Send to Telegram
+        const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CONFIG.chatId,
+                text: message,
+                parse_mode: 'Markdown',
+                disable_web_page_preview: false
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.ok) {
+            console.log('✅ Telegram alert sent successfully!');
+            return true;
+        } else {
+            console.error('❌ Telegram error:', result.description);
+            return false;
+        }
+    } catch (error) {
+        console.error('❌ Telegram send error:', error);
+        return false;
+    }
+}
+
+/**
+ * Send photo to Telegram (for rescue photos)
+ * @param {File} photoFile - The photo file
+ * @param {string} caption - Photo caption
+ */
+async function sendTelegramPhoto(photoFile, caption) {
+    if (!TELEGRAM_CONFIG.enabled) return false;
+
+    try {
+        const formData = new FormData();
+        formData.append('chat_id', TELEGRAM_CONFIG.chatId);
+        formData.append('photo', photoFile);
+        formData.append('caption', caption);
+        formData.append('parse_mode', 'Markdown');
+
+        const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendPhoto`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+        return result.ok;
+    } catch (error) {
+        console.error('❌ Telegram photo error:', error);
+        return false;
     }
 }
 
