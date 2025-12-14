@@ -84,7 +84,7 @@ body::before {
     z-index: -2;
 }
 
-/* Static Wallpaper Background - Contained within phone frame */
+/* Static Wallpaper Background - EXACTLY matches grid-container */
 .prana-bg {
     position: fixed;
     top: 50%;
@@ -93,38 +93,38 @@ body::before {
     width: var(--phone-width);
     height: var(--phone-height);
     max-height: 100vh;
-    /* CRITICAL: These combined ensure content stays inside */
-    overflow: hidden;
-    clip-path: inset(0 0 0 0);
-    -webkit-clip-path: inset(0 0 0 0);
     z-index: 0;
-    border-radius: 0;
+    overflow: hidden;
 
-    /* Mountain sunset wallpaper - constrained to phone size */
+    /* Mountain sunset wallpaper */
     background:
         linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.35) 100%),
-        url('../home-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+        url('../home-bg.jpg') center center / cover no-repeat;
 }
 
-/* On mobile devices - FULL SCREEN with extended height for scrolling */
+/* On mobile - full screen fixed background */
 @media (max-width: 480px) {
     .prana-bg {
         position: fixed;
-        width: 100vw;
-        height: 100vh;
-        /* Extend visual bounds for scroll */
-        min-height: 100%;
         top: 0;
         left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
         transform: none;
         max-height: none;
-        clip-path: none;
-        -webkit-clip-path: none;
-        /* Background stays fixed while content scrolls */
-        background-attachment: fixed;
+    }
+}
+
+/* Hide blobs on desktop - they cause overflow issues */
+@media (min-width: 481px) {
+
+    .blob-1,
+    .blob-2,
+    .blob-3,
+    .blob-4 {
+        display: none;
     }
 }
 
