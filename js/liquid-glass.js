@@ -208,8 +208,16 @@
         -webkit-backdrop-filter: url(#liquid-glass-quote) blur(${blurLarge}) saturate(1.1) brightness(1.03);
       }
 
+      /* Daily Wisdom Flip Card - Liquid Glass Effect */
+      .wisdom-front,
+      .wisdom-back {
+        backdrop-filter: url(#liquid-glass-large) blur(${blurLarge}) saturate(1.2) brightness(1.05);
+        -webkit-backdrop-filter: url(#liquid-glass-large) blur(${blurLarge}) saturate(1.2) brightness(1.05);
+      }
+
       /* Enhanced glass appearance - top light refraction */
-      .tile::before {
+      .tile::before,
+      .wisdom-front::before {
         background: linear-gradient(180deg,
           rgba(255, 255, 255, 0.28) 0%,
           rgba(255, 255, 255, 0.12) 30%,
@@ -217,8 +225,23 @@
           transparent 100%) !important;
       }
 
+      /* Add the light refraction overlay for wisdom front */
+      .wisdom-front::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 55%;
+        border-radius: var(--radius) var(--radius) 0 0;
+        pointer-events: none;
+        z-index: 1;
+      }
+
       /* Inner edge highlight for depth */
-      .tile::after {
+      .tile::after,
+      .wisdom-front::after,
+      .wisdom-back::after {
         content: '';
         position: absolute;
         inset: 0;
