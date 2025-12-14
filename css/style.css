@@ -106,30 +106,28 @@ body::before {
     background-clip: padding-box;
 }
 
-/* On mobile - EXTENDED background to cover overscroll bounce */
+/* On mobile - FIXED FULL-SCREEN background (tiles scroll over it) */
 @media (max-width: 480px) {
 
-    /* Match body background to wallpaper top color on mobile */
+    /* Match body background to wallpaper */
     body {
         background: #1a1520;
-        /* Matches dark purple of mountain scene */
-        overscroll-behavior: none;
-        /* Disable bounce effect */
+        overscroll-behavior-y: contain;
     }
 
     .prana-bg {
         position: fixed;
-        /* Extend beyond viewport to cover overscroll */
-        top: -50px;
+        top: 0;
         left: 0;
-        right: 0;
-        bottom: -50px;
-        width: 100%;
-        height: calc(100% + 100px);
+        /* Cover entire viewport regardless of screen size */
+        width: 100vw;
+        height: 100vh;
         transform: none;
         max-height: none;
-        /* Extend background position to account for offset */
-        background-position: center calc(50% + 25px);
+        z-index: 0;
+        /* Background covers and centers */
+        background-size: cover;
+        background-position: center center;
     }
 }
 
