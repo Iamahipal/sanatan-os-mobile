@@ -111,19 +111,28 @@
             </div>
         </a>
 
-        <!-- Divine Wisdom -->
-        <div id="wisdom-tile" class="tile quote" onclick="refreshWisdom()">
-            <!-- Animation Container -->
-            <div id="prakata-animation" class="prakata-container">
-                <div class="diya-flame"></div>
-                <div class="lotus-bloom"></div>
-                <div class="chakra-spin"></div>
+        <!-- Daily Wisdom - 3D Flip Card -->
+        <div id="wisdom-tile" class="wisdom-card" onclick="flipWisdomCard()">
+            <div class="wisdom-card-inner">
+                <!-- Side A: Teaser -->
+                <div class="wisdom-front">
+                    <div class="wisdom-shimmer"></div>
+                    <i class="fa-solid fa-om wisdom-icon"></i>
+                    <span class="wisdom-title">Daily Wisdom</span>
+                    <div class="wisdom-cta">
+                        <i class="fa-solid fa-hand-pointer pulse-icon"></i>
+                        <span>Tap to Reveal</span>
+                    </div>
+                </div>
+
+                <!-- Side B: Quote (Revealed) -->
+                <div class="wisdom-back">
+                    <div class="wisdom-shimmer"></div>
+                    <p id="wisdom-text" class="wisdom-quote">"You have the right to work, but for the work's sake only."
+                    </p>
+                    <span id="wisdom-chapter" class="wisdom-ref">Gita 2.47</span>
+                </div>
             </div>
-            <!-- Content -->
-            <span class="quote-icon">❝</span>
-            <p id="wisdom-text" class="quote-text">"You have the right to work, but for the work's sake only."</p>
-            <span id="wisdom-chapter" class="quote-label">Gita 2.47</span>
-            <span class="tap-hint">Tap for revelation</span>
         </div>
 
         <!-- Bottom Row -->
@@ -184,7 +193,7 @@
         });
 
         // ============================================
-        // DIVINE WISDOM - Gita Quotes
+        // DAILY WISDOM - 3D Flip Card
         // ============================================
         const gitaQuotes = [
             { text: "You have the right to work, but for the work's sake only.", chapter: "2.47" },
@@ -204,46 +213,55 @@
             { text: "Whatever happened, happened for good. Whatever is happening, is happening for good.", chapter: "2.27" }
         ];
 
+        let isFlipped = false;
         let isAnimating = false;
-        const animations = ['diya', 'lotus', 'chakra'];
+        let currentQuoteIndex = 0;
 
-        function refreshWisdom() {
+        function flipWisdomCard() {
             if (isAnimating) return;
             isAnimating = true;
 
-            const tile = document.getElementById('wisdom-tile');
+            const card = document.getElementById('wisdom-tile');
             const textEl = document.getElementById('wisdom-text');
             const chapterEl = document.getElementById('wisdom-chapter');
 
-            // Remove previous animation classes
-            tile.classList.remove('anim-diya', 'anim-lotus', 'anim-chakra');
+            // Toggle flip state
+            isFlipped = !isFlipped;
 
-            // Add animating state (hides text)
-            tile.classList.add('animating');
+            if (isFlipped) {
+                // Flipping to reveal quote - add shimmer effect
+                card.classList.add('flipping');
+                card.classList.add('flipped');
 
-            // Pick random animation
-            const randomAnim = animations[Math.floor(Math.random() * animations.length)];
-            tile.classList.add(`anim-${randomAnim}`);
+                // Remove flipping class after animation completes
+                setTimeout(() => {
+                    card.classList.remove('flipping');
+                    isAnimating = false;
+                }, 700);
+            } else {
+                // Flipping back to teaser
+                card.classList.remove('flipped');
 
-            // After animation, show new quote
-            setTimeout(() => {
-                // Pick random quote
-                const quote = gitaQuotes[Math.floor(Math.random() * gitaQuotes.length)];
-                textEl.textContent = `"${quote.text}"`;
-                chapterEl.textContent = `Gita ${quote.chapter}`;
+                // Update quote for next reveal (curiosity gap)
+                setTimeout(() => {
+                    currentQuoteIndex = (currentQuoteIndex + 1) % gitaQuotes.length;
+                    const quote = gitaQuotes[currentQuoteIndex];
+                    textEl.textContent = `"${quote.text}"`;
+                    chapterEl.textContent = `Gita ${quote.chapter}`;
+                }, 350); // Update at midpoint of flip-back
 
-                // Remove animating state (shows text)
-                tile.classList.remove('animating');
-                tile.classList.remove(`anim-${randomAnim}`);
-
-                isAnimating = false;
-            }, 1200);
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 700);
+            }
         }
 
-        // Auto-refresh on first load with delay
-        setTimeout(() => refreshWisdom(), 1500);
+        // Set random quote on page load
+        currentQuoteIndex = Math.floor(Math.random() * gitaQuotes.length);
+        document.getElementById('wisdom-text').textContent = `"${gitaQuotes[currentQuoteIndex].text}"`;
+        document.getElementById('wisdom-chapter').textContent = `Gita ${gitaQuotes[currentQuoteIndex].chapter}`;
     </script>
-    
+
     <!-- Liquid Glass Effect -->
     <script src="js/liquid-glass.js"></script>
 </body>
