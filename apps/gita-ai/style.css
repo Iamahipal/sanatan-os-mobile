@@ -311,7 +311,7 @@ body {
     text-align: right;
 }
 
-/* Suggestion Chips - Milky Glass for Questions */
+/* Suggestion Chips - Heavenly Light Glass */
 .suggestion-chip {
     display: flex;
     align-items: center;
@@ -322,17 +322,17 @@ body {
     position: relative;
     overflow: hidden;
 
-    /* Milky Glass - Lighter for questions */
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(15px) saturate(1.2);
-    -webkit-backdrop-filter: blur(15px) saturate(1.2);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    /* Light Airy Glass - Heavenly vibe */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
 
-    /* Soft shadow to lift off the painting */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    /* Soft shadow */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 
-    /* Text styling */
+    /* Text styling with soft shadow for readability */
     color: #FFFFFF;
     font-family: var(--font-main);
     font-size: 0.9rem;
@@ -340,6 +340,10 @@ body {
     text-align: left;
     cursor: pointer;
     transition: all 0.3s var(--spring-easing);
+
+    /* Soft text shadow - like movie subtitles */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5),
+        0px 0px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Water droplet edge refraction effect */
@@ -431,25 +435,29 @@ body {
 /* Avatar styles removed - using clean layout */
 
 /* ============================================
-   KRISHNA'S MESSAGE - Deep Frost for Wisdom
+   KRISHNA'S MESSAGE - Heavenly Light Glass
    ============================================ */
 .message.krishna .message-content {
     position: relative;
     padding: 18px 20px;
     overflow: hidden;
 
-    /* Dark Milky Glass - Rich background for wisdom */
-    background: rgba(10, 10, 20, 0.6);
+    /* Light Airy Glass - Heavenly vibe */
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px) saturate(1.2);
     -webkit-backdrop-filter: blur(20px) saturate(1.2);
 
-    /* Subtle border */
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Subtle white border */
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
     border-bottom-left-radius: 6px;
 
-    /* Shadow to lift off the painting */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    /* Soft shadow */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+
+    /* Soft text shadow for all text */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5),
+        0px 0px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Water droplet refraction */
@@ -520,24 +528,28 @@ body {
 }
 
 /* ============================================
-   USER'S MESSAGE - Milky Glass (Lighter)
+   USER'S MESSAGE - Heavenly Light Glass
    ============================================ */
 .message.user .message-content {
     position: relative;
     padding: 16px 18px;
     overflow: hidden;
 
-    /* Milky Glass - Lighter for user messages */
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(15px) saturate(1.2);
-    -webkit-backdrop-filter: blur(15px) saturate(1.2);
+    /* Light Airy Glass - Heavenly vibe */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
 
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
     border-bottom-right-radius: 6px;
 
-    /* Shadow to lift off the painting */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    /* Soft shadow */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+
+    /* Soft text shadow */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5),
+        0px 0px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Water droplet refraction */
@@ -688,18 +700,18 @@ body {
     position: relative;
     overflow: hidden;
 
-    /* Deep Frost - Dark tint so white text pops */
-    background: rgba(0, 0, 0, 0.5);
+    /* Light Airy Glass - Heavenly vibe */
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px) saturate(1.2);
     -webkit-backdrop-filter: blur(20px) saturate(1.2);
 
-    /* Crisp border to define edges */
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Subtle white border */
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 28px;
     padding: 8px 8px 8px 18px;
 
-    /* Soft shadow to lift off the painting */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* Soft shadow */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Water droplet top light refraction */
