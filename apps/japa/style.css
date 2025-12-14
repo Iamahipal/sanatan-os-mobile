@@ -285,6 +285,9 @@ body.page-enter {
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s var(--spring-easing);
+
+    /* Liquid Glass Distortion */
+    filter: url(#liquid-glass);
 }
 
 .header-btn:hover {
@@ -353,6 +356,9 @@ body.page-enter {
     /* Text shadow */
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5),
         0px 0px 2px rgba(0, 0, 0, 0.3);
+
+    /* Liquid Glass Distortion */
+    filter: url(#liquid-glass);
 }
 
 .level-icon {
@@ -626,6 +632,9 @@ body.page-enter {
     /* Text shadow */
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5),
         0px 0px 2px rgba(0, 0, 0, 0.3);
+
+    /* Liquid Glass Distortion */
+    filter: url(#liquid-glass);
 }
 
 .counter-item {

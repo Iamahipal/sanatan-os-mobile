@@ -122,7 +122,19 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTheme(state.currentDeity); // Theme = Deity
 
     // === Event Listeners ===
+    // Tap anywhere on canvas
     canvas.addEventListener('pointerdown', handleTap, { passive: false });
+
+    // Also listen for taps on mala section (below counter)
+    const malaSection = document.querySelector('.mala-section');
+    if (malaSection) {
+        malaSection.addEventListener('pointerdown', (e) => {
+            // Don't count if tapping on counter display
+            if (!e.target.closest('.counter-display')) {
+                handleTap(e);
+            }
+        }, { passive: false });
+    }
 
     // Name selector
     nameSelectorBtn.addEventListener('click', () => nameModal.classList.add('active'));
