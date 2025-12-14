@@ -206,14 +206,14 @@
             lucide.createIcons();
             document.querySelector('.app-container').style.visibility = 'visible';
         }
-        
+
         // Wait for fonts AND background image, with fallback timeout
         const bgImage = new Image();
         bgImage.src = 'krishna-bg.jpg';
-        
+
         // Fallback: reveal after 2 seconds max regardless
         const fallbackTimer = setTimeout(revealApp, 2000);
-        
+
         Promise.all([
             document.fonts.ready,
             new Promise(resolve => {
@@ -231,6 +231,9 @@
             revealApp();
         });
     </script>
+
+    <!-- Liquid Glass Effect -->
+    <script src="js/liquid-glass.js"></script>
 </body>
 
 </html>
