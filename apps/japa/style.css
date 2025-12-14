@@ -1,12 +1,18 @@
 :root {
-    --bg-color: #1a0a1f;
-    --bg-gradient: radial-gradient(ellipse at bottom, #2d1b3d 0%, #1a0a1f 50%, #0d0510 100%);
+    /* Sanatan OS Cosmic Background */
+    --bg-color: #0F0C29;
+    --bg-gradient: linear-gradient(135deg, #0F0C29 0%, #1a1030 50%, #0F0C29 100%);
     --accent: #ff69b4;
     --accent-secondary: #ffd700;
     --text: #f0f0f0;
     --text-muted: rgba(255, 255, 255, 0.6);
-    --glass-bg: rgba(0, 0, 0, 0.4);
-    --glass-border: rgba(255, 255, 255, 0.12);
+
+    /* Heavenly Light Glass */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-blur: 20px;
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --spring-easing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
     --deity-color: #ff69b4;
     --safe-top: env(safe-area-inset-top, 0px);
 }
@@ -242,25 +248,35 @@ body.page-enter {
     }
 }
 
-/* ===== HEADER BAR ===== */
+/* ===== HEADER BAR - Heavenly Light Glass ===== */
 .app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 56px;
     padding: 0 12px;
+
+    /* Heavenly Light Glass */
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
     border-bottom: 1px solid var(--glass-border);
     z-index: 20;
+
+    /* Text shadow for readability */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5),
+        0px 0px 2px rgba(0, 0, 0, 0.3);
 }
 
 .header-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.06);
+
+    /* Heavenly Light Glass */
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px) saturate(1.2);
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
     border: 1px solid var(--glass-border);
     color: var(--text);
     text-decoration: none;
@@ -268,12 +284,18 @@ body.page-enter {
     height: 40px;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s var(--spring-easing);
+}
+
+.header-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
 }
 
 .header-btn:active {
     opacity: 1;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.95);
 }
 
 /* Name Selector Button - Centered in header */
@@ -308,7 +330,7 @@ body.page-enter {
     flex-shrink: 0;
 }
 
-/* Level Badge */
+/* Level Badge - Heavenly Light Glass */
 .level-badge {
     position: absolute;
     top: calc(56px + max(16px, var(--safe-top)));
@@ -318,12 +340,19 @@ body.page-enter {
     align-items: center;
     gap: 6px;
     padding: 8px 16px;
+
+    /* Heavenly Light Glass */
     background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+    border: 1px solid var(--glass-border);
     border-radius: 20px;
     font-size: 0.8rem;
     z-index: 15;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+
+    /* Text shadow */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5),
+        0px 0px 2px rgba(0, 0, 0, 0.3);
 }
 
 .level-icon {
@@ -334,6 +363,45 @@ body.page-enter {
     color: var(--accent);
     font-weight: 500;
     letter-spacing: 0.5px;
+}
+
+/* ===== CENTERED DEITY NAME DISPLAY ===== */
+.deity-name-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.deity-name-text {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 5rem;
+    font-weight: 400;
+    color: var(--deity-color);
+    opacity: 0.25;
+    text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6),
+        0px 0px 40px var(--deity-color);
+    white-space: nowrap;
+    user-select: none;
+    animation: deityGlow 4s ease-in-out infinite;
+}
+
+@keyframes deityGlow {
+
+    0%,
+    100% {
+        opacity: 0.2;
+        text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6),
+            0px 0px 30px var(--deity-color);
+    }
+
+    50% {
+        opacity: 0.35;
+        text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6),
+            0px 0px 60px var(--deity-color);
+    }
 }
 
 /* ===== SANGHA: Silent Solidarity ===== */
@@ -525,6 +593,7 @@ body.page-enter {
     overflow: hidden;
 }
 
+/* Counter Display - Heavenly Light Glass */
 .counter-display {
     position: absolute;
     top: 20px;
@@ -534,11 +603,19 @@ body.page-enter {
     align-items: center;
     gap: 24px;
     z-index: 10;
+
+    /* Heavenly Light Glass */
     background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+    border: 1px solid var(--glass-border);
     padding: 10px 28px;
     border-radius: 24px;
-    backdrop-filter: blur(8px);
     min-width: 180px;
+
+    /* Text shadow */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5),
+        0px 0px 2px rgba(0, 0, 0, 0.3);
 }
 
 .counter-item {
@@ -584,24 +661,76 @@ body.page-enter {
     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* 3D Mala Beads */
 .bead {
     position: absolute;
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: radial-gradient(circle at 25% 25%, #d4a064 0%, #8b5a2b 40%, #5d4037 100%);
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5), inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+
+    /* Realistic 3D Wood Texture */
+    background: radial-gradient(circle at 30% 30%,
+            #e8c99b 0%,
+            #c4a06e 25%,
+            #a67c52 50%,
+            #8b5a2b 75%,
+            #5d4037 100%);
+
+    /* 3D Depth Effect */
+    box-shadow:
+        inset 3px 3px 6px rgba(255, 255, 255, 0.25),
+        inset -3px -3px 6px rgba(0, 0, 0, 0.4),
+        4px 4px 10px rgba(0, 0, 0, 0.5),
+        0 0 3px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(93, 64, 55, 0.6);
+    transition: all 0.2s var(--spring-easing);
 }
 
 .bead.complete-bead {
-    background: radial-gradient(circle at 25% 25%, #ffe066 0%, var(--accent) 50%, #b8860b 100%);
-    box-shadow: 0 0 20px var(--accent);
-    animation: beadPulse 0.3s ease-out;
+    background: radial-gradient(circle at 30% 30%,
+            #ffe066 0%,
+            var(--accent) 50%,
+            #b8860b 100%);
+    box-shadow:
+        inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+        0 0 20px var(--accent),
+        0 0 40px rgba(255, 153, 51, 0.3);
+    animation: beadPulse 0.3s var(--spring-easing);
 }
 
-@keyframes beadPulse {
+/* Meru Bead (Golden Knot) */
+.meru-bead {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 30% 30%,
+            #ffd700 0%,
+            #ff9933 40%,
+            #cc6600 100%);
+    border: 2px solid rgba(255, 215, 0, 0.7);
+    box-shadow:
+        inset 3px 3px 8px rgba(255, 255, 255, 0.4),
+        inset -2px -2px 6px rgba(0, 0, 0, 0.3),
+        0 0 25px rgba(255, 153, 51, 0.6),
+        0 0 50px rgba(255, 153, 51, 0.3);
+    animation: meruGlow 3s ease-in-out infinite;
+}
+
+@keyframes meruGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            inset 3px 3px 8px rgba(255, 255, 255, 0.4),
+            inset -2px -2px 6px rgba(0, 0, 0, 0.3),
+            0 0 25px rgba(255, 153, 51, 0.6);
+    }
+
     50% {
-        transform: scale(1.2);
+        box-shadow:
+            inset 3px 3px 8px rgba(255, 255, 255, 0.5),
+            inset -2px -2px 6px rgba(0, 0, 0, 0.3),
+            0 0 40px rgba(255, 153, 51, 0.8),
+            0 0 60px rgba(255, 153, 51, 0.4);
     }
 }
 
@@ -642,15 +771,16 @@ body.page-enter {
     }
 }
 
-/* ===== MODALS ===== */
+/* ===== MODALS - Heavenly Light Glass ===== */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(6px);
+    background: rgba(15, 12, 41, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: none;
     justify-content: center;
     align-items: flex-end;
@@ -662,14 +792,15 @@ body.page-enter {
 }
 
 .modal-content {
-    /* Apple Liquid Glass Effect */
-    background: linear-gradient(180deg,
-            rgba(60, 60, 90, 0.7) 0%,
-            rgba(40, 40, 70, 0.75) 50%,
-            rgba(30, 30, 55, 0.8) 100%);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    /* Heavenly Light Glass */
+    background:
+        linear-gradient(180deg,
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(255, 255, 255, 0.08) 50%,
+            rgba(255, 255, 255, 0.1) 100%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.3);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.3);
+    border: 1px solid var(--glass-border);
     border-bottom: none;
     border-radius: 28px 28px 0 0;
     width: 100%;
@@ -677,10 +808,14 @@ body.page-enter {
     max-height: 85vh;
     overflow-y: auto;
     padding: 20px;
-    animation: slideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    animation: slideUp 0.3s var(--spring-easing);
     box-shadow:
-        0 -4px 30px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 -4px 30px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    /* Text shadow for readability */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5),
+        0px 0px 2px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes slideUp {

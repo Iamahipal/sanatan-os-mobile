@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Name Selector
     const nameSelectorBtn = document.getElementById('name-selector-btn');
     const selectedNameEl = document.getElementById('selected-name');
+    const deityNameText = document.getElementById('deity-name-text'); // Centered display
     const nameModal = document.getElementById('name-modal');
     const nameOptions = document.querySelectorAll('.name-option');
 
@@ -305,6 +306,13 @@ document.addEventListener('DOMContentLoaded', () => {
             bead.style.top = `${300 + radius * Math.sin(angleRad) - 15}px`;
             malaContainer.appendChild(bead);
         }
+
+        // Add Meru Bead (golden knot) at bottom center
+        const meruBead = document.createElement('div');
+        meruBead.className = 'bead meru-bead';
+        meruBead.style.left = '280px';
+        meruBead.style.top = '550px';
+        malaContainer.appendChild(meruBead);
     }
 
     function rotateMala() {
@@ -395,7 +403,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateSelectedName() {
         const deity = DEITIES[state.currentDeity];
-        selectedNameEl.textContent = state.language === 'hi' ? deity.text_hi : deity.text_en;
+        const text = state.language === 'hi' ? deity.text_hi : deity.text_en;
+        selectedNameEl.textContent = text;
+
+        // Also update the centered deity name display
+        if (deityNameText) {
+            deityNameText.textContent = text;
+        }
     }
 
     function resetAllData() {
