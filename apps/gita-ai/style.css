@@ -311,7 +311,7 @@ body {
     text-align: right;
 }
 
-/* Suggestion Chips - Ultra Transparent Liquid Glass */
+/* Suggestion Chips - Milky Glass for Questions */
 .suggestion-chip {
     display: flex;
     align-items: center;
@@ -322,15 +322,15 @@ body {
     position: relative;
     overflow: hidden;
 
-    /* Ultra Transparent - almost invisible */
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(2px) saturate(1.1);
-    -webkit-backdrop-filter: blur(2px) saturate(1.1);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    /* Milky Glass - Lighter for questions */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px) saturate(1.2);
+    -webkit-backdrop-filter: blur(15px) saturate(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 20px;
 
-    /* Minimal shadow */
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+    /* Soft shadow to lift off the painting */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 
     /* Text styling */
     color: #FFFFFF;
@@ -339,6 +339,7 @@ body {
     font-weight: 400;
     text-align: left;
     cursor: pointer;
+    transition: all 0.3s var(--spring-easing);
 }
 
 /* Water droplet edge refraction effect */
@@ -430,25 +431,25 @@ body {
 /* Avatar styles removed - using clean layout */
 
 /* ============================================
-   KRISHNA'S MESSAGE - Ultra Transparent Liquid Glass
+   KRISHNA'S MESSAGE - Deep Frost for Wisdom
    ============================================ */
 .message.krishna .message-content {
     position: relative;
     padding: 18px 20px;
     overflow: hidden;
 
-    /* Ultra Transparent Liquid Glass */
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(2px) saturate(1.1);
-    -webkit-backdrop-filter: blur(2px) saturate(1.1);
+    /* Dark Milky Glass - Rich background for wisdom */
+    background: rgba(10, 10, 20, 0.6);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
 
-    /* Bright border */
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    /* Subtle border */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     border-bottom-left-radius: 6px;
 
-    /* Minimal shadow */
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    /* Shadow to lift off the painting */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 /* Water droplet refraction */
@@ -519,24 +520,24 @@ body {
 }
 
 /* ============================================
-   USER'S MESSAGE - Liquid Glass
+   USER'S MESSAGE - Milky Glass (Lighter)
    ============================================ */
 .message.user .message-content {
     position: relative;
     padding: 16px 18px;
     overflow: hidden;
 
-    /* Ultra Transparent Liquid Glass */
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(2px) saturate(1.1);
-    -webkit-backdrop-filter: blur(2px) saturate(1.1);
+    /* Milky Glass - Lighter for user messages */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px) saturate(1.2);
+    -webkit-backdrop-filter: blur(15px) saturate(1.2);
 
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 20px;
     border-bottom-right-radius: 6px;
 
-    /* Minimal shadow */
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    /* Shadow to lift off the painting */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* Water droplet refraction */
@@ -687,18 +688,18 @@ body {
     position: relative;
     overflow: hidden;
 
-    /* Ultra Transparent Liquid Glass */
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(2px) saturate(1.1);
-    -webkit-backdrop-filter: blur(2px) saturate(1.1);
+    /* Deep Frost - Dark tint so white text pops */
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
 
-    /* Bright border for glass edge */
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    /* Crisp border to define edges */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 28px;
     padding: 8px 8px 8px 18px;
 
-    /* Minimal shadow */
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+    /* Soft shadow to lift off the painting */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Water droplet top light refraction */
