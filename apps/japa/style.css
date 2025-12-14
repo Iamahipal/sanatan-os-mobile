@@ -759,8 +759,6 @@ body.page-enter {
         transform: scale(3);
     }
 }
-}
-}
 
 .pulse {
     animation: counterPulse 0.4s ease-out;
