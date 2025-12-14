@@ -90,16 +90,20 @@ body::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: var(--phone-width);
+    /* FORCE the width to be exactly 412px */
+    width: 412px !important;
+    max-width: 412px !important;
     height: var(--phone-height);
     max-height: 100vh;
     z-index: 0;
-    overflow: hidden;
+    overflow: hidden !important;
+    box-sizing: border-box;
 
-    /* Mountain sunset wallpaper */
+    /* Mountain sunset wallpaper - contained within bounds */
     background:
         linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.35) 100%),
         url('../home-bg.jpg') center center / cover no-repeat;
+    background-clip: padding-box;
 }
 
 /* On mobile - full screen fixed background */
