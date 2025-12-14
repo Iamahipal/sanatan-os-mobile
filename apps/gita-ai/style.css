@@ -1,40 +1,48 @@
 /**
- * Krishna Vaani - TRUE Liquid Glass Edition
- * Based on shuding/liquid-glass & archisvaze/liquid-glass
- * Uses SVG filters + backdrop-filter with proper layering
+ * Krishna Vaani - Unified with Sanatan OS Design System
+ * Liquid Glass Theme Edition
  */
 
+/* Sanatan OS Design System Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
+
 /* ============================================
-   CSS VARIABLES
+   SANATAN OS DESIGN SYSTEM TOKENS
    ============================================ */
 :root {
-    /* Base Colors */
-    --void: #000000;
-    --deep: #050508;
-
-    /* Divine Colors */
+    /* Core Colors */
+    --bg-deep: #0F0C29;
+    --saffron: #FF9933;
     --gold: #FFD700;
     --gold-light: #FFE55C;
-    --saffron: #FF9933;
-    --krishna-blue: #1E3A5F;
-
-    /* Liquid Glass Properties */
-    --glass-blur: 20px;
-    --glass-saturate: 1.4;
-    --glass-contrast: 1.05;
-    --glass-brightness: 1.02;
+    --purple: #6A0572;
+    --teal: #00A896;
 
     /* Text */
-    --text-primary: #FFFFFF;
+    --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.8);
     --text-muted: rgba(255, 255, 255, 0.5);
 
-    /* Typography - Modern Claude/Copilot style */
-    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* Liquid Glass */
+    --glass-bg: linear-gradient(135deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.12));
+    --glass-border: rgba(255, 255, 255, 0.35);
+    --glass-blur: 12px;
+
+    /* Typography */
+    --font-main: 'Outfit', sans-serif;
     --font-sanskrit: 'Tiro Devanagari Sanskrit', serif;
 
+    /* Spacing */
+    --radius: 14px;
+    --gap: 8px;
+
+    /* Safe Areas */
     --safe-top: env(safe-area-inset-top, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+    /* Spring Animation */
+    --spring-easing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* ============================================
@@ -51,16 +59,17 @@ html,
 body {
     height: 100%;
     font-family: var(--font-main);
-    background: var(--void);
+    background: var(--bg-deep);
     color: var(--text-primary);
     overflow: hidden;
 }
 
 /* ============================================
-   BACKGROUND - Desktop shows black, image inside container only
+   BACKGROUND - Cosmic gradient outside, image inside
    ============================================ */
 body {
-    background: #000000;
+    background: var(--bg-deep);
+    background: linear-gradient(135deg, #0F0C29 0%, #1a1030 50%, #0F0C29 100%);
     position: relative;
 }
 
@@ -79,7 +88,7 @@ body {
     overflow: hidden;
 }
 
-/* Background inside container only */
+/* Background inside container only - Krishna with cosmic overlay */
 .app-container::before {
     content: '';
     position: absolute;
@@ -88,12 +97,12 @@ body {
     width: 100%;
     height: 100%;
     background:
-        /* Dark overlay for readability */
+        /* Cosmic overlay for readability */
         linear-gradient(180deg,
-            rgba(0, 0, 0, 0.3) 0%,
-            rgba(0, 0, 0, 0.15) 40%,
-            rgba(0, 0, 0, 0.4) 100%),
-        /* Krishna Image - positioned for best view */
+            rgba(15, 12, 41, 0.5) 0%,
+            rgba(15, 12, 41, 0.2) 40%,
+            rgba(15, 12, 41, 0.6) 100%),
+        /* Krishna Image */
         url('krishna-bg.jpg') center top / cover no-repeat;
     z-index: 0;
     pointer-events: none;
@@ -127,7 +136,7 @@ body {
 /* Unused .liquid-glass class removed - styles applied directly to elements */
 
 /* ============================================
-   HEADER - Match input box height (72px)
+   HEADER - Liquid Glass with Light Refraction
    ============================================ */
 .app-header {
     display: flex;
@@ -135,12 +144,16 @@ body {
     justify-content: space-between;
     height: 72px;
     padding: 0 16px;
-    padding-top: 8px;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(20px) saturate(1.3);
-    -webkit-backdrop-filter: blur(20px) saturate(1.3);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 1px 0 inset rgba(255, 255, 255, 0.05);
+    padding-top: var(--safe-top);
+
+    /* Sanatan OS Glass */
+    background:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.12)),
+        rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+    border-bottom: 1px solid var(--glass-border);
+
     position: relative;
     z-index: 100;
 }
@@ -160,11 +173,11 @@ body {
 }
 
 .header-subtitle {
-    font-family: var(--font-user);
+    font-family: var(--font-main);
     font-size: 0.65rem;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
 }
 
 .header-btn {
@@ -176,18 +189,18 @@ body {
     position: relative;
     overflow: hidden;
 
-    /* Ultra Transparent Liquid Glass */
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(2px) saturate(1.1);
-    -webkit-backdrop-filter: blur(2px) saturate(1.1);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 14px;
+    /* Sanatan OS Glass Button */
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px) saturate(1.1);
+    -webkit-backdrop-filter: blur(8px) saturate(1.1);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
 
     color: var(--text-secondary);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s var(--spring-easing);
     text-decoration: none;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Water droplet refraction */
@@ -207,8 +220,9 @@ body {
 }
 
 .header-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.12);
     border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
 }
 
 .header-btn svg {
@@ -383,23 +397,23 @@ body {
 }
 
 /* ============================================
-   MESSAGE BUBBLES - Clean Layout (No Avatars)
+   MESSAGE BUBBLES - Spring Animation
    ============================================ */
 .message {
     display: flex;
     max-width: 88%;
-    animation: slideIn 0.3s ease;
+    animation: fadeInScale 0.4s var(--spring-easing);
 }
 
-@keyframes slideIn {
+@keyframes fadeInScale {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: scale(0.95) translateY(10px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1) translateY(0);
     }
 }
 
@@ -704,8 +718,9 @@ body {
 }
 
 .input-wrapper:focus-within {
-    border-color: rgba(255, 255, 255, 0.35);
-    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--gold);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
 }
 
 #user-input {
@@ -714,7 +729,7 @@ body {
     border: none;
     color: var(--text-primary);
     font-size: 0.95rem;
-    font-family: var(--font-user);
+    font-family: var(--font-main);
     resize: none;
     max-height: 100px;
     line-height: 1.4;
@@ -732,17 +747,17 @@ body {
 .send-btn {
     width: 44px;
     height: 44px;
-    background: linear-gradient(135deg, var(--gold), var(--saffron));
+    background: linear-gradient(135deg, var(--saffron), #ff6b35);
     border: none;
     border-radius: 50%;
-    color: var(--void);
+    color: #fff;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: all 0.3s var(--spring-easing);
     flex-shrink: 0;
-    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.25);
+    box-shadow: 0 4px 15px rgba(255, 153, 51, 0.4);
 }
 
 .send-btn:disabled {
