@@ -232,12 +232,8 @@
         z-index: 3;
       }
 
-      /* Performance: Use GPU compositing for background animation */
-      .prana-bg {
-        will-change: transform;
-        transform: translateZ(0);
-        backface-visibility: hidden;
-      }
+      /* Note: Do NOT add transform to .prana-bg here - 
+         it overrides the translate(-50%, -50%) centering in CSS */
     `;
     document.head.appendChild(style);
 
