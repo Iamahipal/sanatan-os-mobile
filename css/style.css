@@ -96,6 +96,8 @@ body::before {
     overflow: hidden;
     z-index: 0;
     border-radius: 0;
+    /* Clip content to prevent overflow */
+    clip-path: inset(0);
 
     /* Mountain sunset wallpaper - constrained to phone size */
     background:
@@ -115,16 +117,17 @@ body::before {
         left: 0;
         transform: none;
         max-height: none;
+        clip-path: none;
     }
 }
 
 /* Blob 1 - Saffron (Top Right) */
 .blob-1 {
     position: absolute;
-    top: -20%;
-    right: -20%;
-    width: 60vmax;
-    height: 60vmax;
+    top: -15%;
+    right: -15%;
+    width: 300px;
+    height: 300px;
     background: radial-gradient(circle, rgba(255, 153, 51, 0.35) 0%, transparent 70%);
     border-radius: 50%;
     filter: blur(60px);
@@ -135,10 +138,10 @@ body::before {
 /* Blob 2 - Purple (Bottom Left) */
 .blob-2 {
     position: absolute;
-    bottom: -30%;
-    left: -20%;
-    width: 70vmax;
-    height: 70vmax;
+    bottom: -20%;
+    left: -15%;
+    width: 350px;
+    height: 350px;
     background: radial-gradient(circle, rgba(106, 5, 114, 0.4) 0%, transparent 70%);
     border-radius: 50%;
     filter: blur(80px);
@@ -150,9 +153,9 @@ body::before {
 .blob-3 {
     position: absolute;
     top: 40%;
-    left: 30%;
-    width: 50vmax;
-    height: 50vmax;
+    left: 20%;
+    width: 250px;
+    height: 250px;
     background: radial-gradient(circle, rgba(0, 168, 150, 0.3) 0%, transparent 70%);
     border-radius: 50%;
     filter: blur(70px);
@@ -164,9 +167,9 @@ body::before {
 .blob-4 {
     position: absolute;
     top: 10%;
-    left: 50%;
-    width: 35vmax;
-    height: 35vmax;
+    left: 40%;
+    width: 180px;
+    height: 180px;
     background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 60%);
     border-radius: 50%;
     filter: blur(50px);
