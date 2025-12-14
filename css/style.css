@@ -93,11 +93,12 @@ body::before {
     width: var(--phone-width);
     height: var(--phone-height);
     max-height: 100vh;
+    /* CRITICAL: These combined ensure content stays inside */
     overflow: hidden;
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
     z-index: 0;
     border-radius: 0;
-    /* Clip content to prevent overflow */
-    clip-path: inset(0);
 
     /* Mountain sunset wallpaper - constrained to phone size */
     background:
@@ -108,26 +109,32 @@ body::before {
     background-repeat: no-repeat;
 }
 
-/* On mobile devices, use full screen */
+/* On mobile devices - FULL SCREEN with extended height for scrolling */
 @media (max-width: 480px) {
     .prana-bg {
-        width: 100%;
-        height: 100%;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        /* Extend visual bounds for scroll */
+        min-height: 100%;
         top: 0;
         left: 0;
         transform: none;
         max-height: none;
         clip-path: none;
+        -webkit-clip-path: none;
+        /* Background stays fixed while content scrolls */
+        background-attachment: fixed;
     }
 }
 
-/* Blob 1 - Saffron (Top Right) */
+/* Blob 1 - Saffron (Top Right) - INSIDE container */
 .blob-1 {
     position: absolute;
-    top: -15%;
-    right: -15%;
-    width: 300px;
-    height: 300px;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 250px;
     background: radial-gradient(circle, rgba(255, 153, 51, 0.35) 0%, transparent 70%);
     border-radius: 50%;
     filter: blur(60px);
@@ -135,13 +142,13 @@ body::before {
     will-change: transform;
 }
 
-/* Blob 2 - Purple (Bottom Left) */
+/* Blob 2 - Purple (Bottom Left) - INSIDE container */
 .blob-2 {
     position: absolute;
-    bottom: -20%;
-    left: -15%;
-    width: 350px;
-    height: 350px;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
     background: radial-gradient(circle, rgba(106, 5, 114, 0.4) 0%, transparent 70%);
     border-radius: 50%;
     filter: blur(80px);
@@ -152,10 +159,10 @@ body::before {
 /* Blob 3 - Teal (Center) */
 .blob-3 {
     position: absolute;
-    top: 40%;
-    left: 20%;
-    width: 250px;
-    height: 250px;
+    top: 35%;
+    left: 15%;
+    width: 220px;
+    height: 220px;
     background: radial-gradient(circle, rgba(0, 168, 150, 0.3) 0%, transparent 70%);
     border-radius: 50%;
     filter: blur(70px);
@@ -166,10 +173,10 @@ body::before {
 /* Blob 4 - Gold Accent */
 .blob-4 {
     position: absolute;
-    top: 10%;
-    left: 40%;
-    width: 180px;
-    height: 180px;
+    top: 5%;
+    left: 30%;
+    width: 150px;
+    height: 150px;
     background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 60%);
     border-radius: 50%;
     filter: blur(50px);
