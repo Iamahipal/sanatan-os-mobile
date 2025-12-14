@@ -106,8 +106,9 @@ body::before {
     background-clip: padding-box;
 }
 
-/* On mobile - FIXED FULL-SCREEN background (tiles scroll over it) */
-@media (max-width: 480px) {
+/* On mobile/tablet - FIXED FULL-SCREEN background (tiles scroll over it) */
+/* Breakpoint at 768px catches all phones including wide ones */
+@media (max-width: 768px) {
 
     /* Match body background to wallpaper */
     body {
@@ -116,23 +117,26 @@ body::before {
     }
 
     .prana-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        /* Cover entire viewport regardless of screen size */
-        width: 100vw;
-        height: 100vh;
-        transform: none;
-        max-height: none;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        /* Override desktop width constraints */
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        transform: none !important;
         z-index: 0;
         /* Background covers and centers */
-        background-size: cover;
-        background-position: center center;
+        background-size: cover !important;
+        background-position: center center !important;
     }
 }
 
-/* Hide blobs on desktop - they cause overflow issues */
-@media (min-width: 481px) {
+/* Hide blobs on desktop only (769px+) */
+@media (min-width: 769px) {
 
     .blob-1,
     .blob-2,
@@ -277,8 +281,8 @@ body::before {
     align-content: start;
 }
 
-/* On mobile devices, use full screen */
-@media (max-width: 480px) {
+/* On mobile/tablet devices, use full screen */
+@media (max-width: 768px) {
     .grid-container {
         position: relative;
         top: auto;
