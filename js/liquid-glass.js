@@ -168,10 +168,10 @@
 
     document.body.appendChild(container);
 
-    // Use lighter blur on desktop for better performance
-    const blurSmall = isMobile ? '2px' : '1px';
-    const blurMedium = isMobile ? '2px' : '1px';
-    const blurLarge = isMobile ? '1.5px' : '0.5px';
+    // Use same blur values for consistency (optimized elsewhere)
+    const blurSmall = '2px';
+    const blurMedium = '2px';
+    const blurLarge = '1.5px';
 
     // Add CSS for liquid glass tiles with GPU acceleration
     const style = document.createElement('style');
@@ -181,10 +181,8 @@
          LIQUID GLASS - GPU Accelerated
          ============================================ */
 
-      /* GPU acceleration for all tiles */
+      /* GPU acceleration hints - careful not to break backdrop-filter */
       .tile {
-        will-change: transform;
-        contain: layout style paint;
         transform: translateZ(0);
         backface-visibility: hidden;
       }
