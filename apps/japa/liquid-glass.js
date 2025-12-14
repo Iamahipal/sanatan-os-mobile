@@ -169,7 +169,7 @@
         style.textContent = `
       /* Japa Liquid Glass - GPU Accelerated */
       
-      /* Header Buttons */
+      /* Header Buttons - no centering needed, just GPU acceleration */
       .header-btn {
         backdrop-filter: url(#japa-glass-btn) blur(12px) saturate(1.3) brightness(1.05);
         -webkit-backdrop-filter: url(#japa-glass-btn) blur(12px) saturate(1.3) brightness(1.05);
@@ -177,19 +177,19 @@
         backface-visibility: hidden;
       }
       
-      /* Level Badge */
+      /* Level Badge - MUST preserve translateX(-50%) for centering */
       .level-badge {
         backdrop-filter: url(#japa-glass-badge) blur(12px) saturate(1.3) brightness(1.05);
         -webkit-backdrop-filter: url(#japa-glass-badge) blur(12px) saturate(1.3) brightness(1.05);
-        transform: translateZ(0);
+        transform: translateX(-50%) translateZ(0);
         backface-visibility: hidden;
       }
       
-      /* Counter Display */
+      /* Counter Display - MUST preserve translateX(-50%) for centering */
       .counter-display {
         backdrop-filter: url(#japa-glass-counter) blur(12px) saturate(1.3) brightness(1.05);
         -webkit-backdrop-filter: url(#japa-glass-counter) blur(12px) saturate(1.3) brightness(1.05);
-        transform: translateZ(0);
+        transform: translateX(-50%) translateZ(0);
         backface-visibility: hidden;
       }
       
