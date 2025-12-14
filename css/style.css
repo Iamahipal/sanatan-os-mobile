@@ -135,7 +135,7 @@ body::before {
     }
 }
 
-/* Hide blobs on desktop only (769px+) */
+/* Hide blobs on desktop only (769px+) - Disable animations to fix lag */
 @media (min-width: 769px) {
 
     .blob-1,
@@ -143,6 +143,7 @@ body::before {
     .blob-3,
     .blob-4 {
         display: none;
+        animation: none !important;
     }
 }
 
@@ -302,8 +303,11 @@ body::before {
     position: relative;
     overflow: hidden;
 
-    /* Base glass background - distortion applied by liquid-glass.js */
-    background: rgba(255, 255, 255, 0.06);
+    /* Base glass background with dark overlay for text readability */
+    /* Dark overlay (20-30% opacity) ensures text pops regardless of background */
+    background:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.12)),
+        rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: var(--radius);
 
@@ -486,10 +490,13 @@ body::before {
 
 .quote-text {
     font-size: 0.88rem;
-    font-style: italic;
-    font-weight: 300;
+    font-style: normal;
+    /* Avoid italics for better legibility on small text */
+    font-weight: 400;
+    /* Slightly heavier for readability */
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.75;
+    /* Increased leading for better readability */
 }
 
 .quote-label {
@@ -680,15 +687,19 @@ body::before {
     opacity: 0;
 }
 
-/* TAP HINT */
+/* TAP HINT - Enhanced contrast for accessibility */
 .tap-hint {
     position: absolute;
     bottom: 8px;
     right: 12px;
-    font-size: 0.55rem;
+    font-size: 0.6rem;
+    /* Slightly larger for legibility */
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: rgba(255, 215, 0, 0.4);
+    color: rgba(255, 215, 0, 0.75);
+    /* Increased opacity for AA contrast */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    /* Shadow for contrast on light backgrounds */
     animation: pulseHint 2s ease-in-out infinite;
 }
 
