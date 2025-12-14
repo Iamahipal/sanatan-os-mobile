@@ -144,11 +144,11 @@
         const existingStyle = document.getElementById('japa-liquid-glass-styles');
         if (existingStyle) existingStyle.remove();
 
-        // Create filters for Japa app elements
+        // Create filters for Japa app elements - higher intensity for visible distortion
         const filterConfigs = [
-            { id: 'japa-glass-btn', width: 40, height: 40, intensity: 0.8 },
-            { id: 'japa-glass-badge', width: 120, height: 36, intensity: 0.7 },
-            { id: 'japa-glass-counter', width: 220, height: 70, intensity: 0.6 }
+            { id: 'japa-glass-btn', width: 40, height: 40, intensity: 1.0 },
+            { id: 'japa-glass-badge', width: 140, height: 40, intensity: 1.0 },
+            { id: 'japa-glass-counter', width: 260, height: 80, intensity: 1.2 }
         ];
 
         // Create container for SVG filters
