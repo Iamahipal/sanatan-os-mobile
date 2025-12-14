@@ -2,10 +2,19 @@
  * Liquid Glass Effect for SanatanOS
  * Adapted from Shu Ding's liquid-glass (https://github.com/shuding/liquid-glass)
  * Creates a beautiful distortion/refraction effect on tiles
+ * 
+ * OPTIMIZED for desktop performance with GPU acceleration
  */
 
 (function () {
   'use strict';
+
+  // Check if device prefers reduced motion
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Detect if mobile device (better performance on mobile)
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || window.innerWidth <= 480;
 
   // Utility functions
   function smoothStep(a, b, t) {
@@ -27,36 +36,26 @@
     return { type: 't', x, y };
   }
 
-  // Create SVG filter for liquid glass effect with enhanced distortion
+  // Create SVG filter for liquid glass effect
   function createLiquidGlassFilter(id, width, height, intensity = 1.0) {
     const canvasDPI = 1;
 
-    // Create canvas for displacement map
     const canvas = document.createElement('canvas');
     canvas.width = width * canvasDPI;
     canvas.height = height * canvasDPI;
     canvas.style.display = 'none';
     const context = canvas.getContext('2d');
 
-    // Enhanced fragment shader with stronger edge refraction
+    // Fragment shader with edge refraction
     const fragment = (uv) => {
       const ix = uv.x - 0.5;
       const iy = uv.y - 0.5;
 
-      // Distance to edge of rounded rectangle
       const distanceToEdge = roundedRectSDF(ix, iy, 0.42, 0.42, 0.15);
-
-      // Edge refraction - stronger near edges, creates lens effect
       const edgeRefract = smoothStep(0.0, -0.15, distanceToEdge) * 0.8;
-
-      // Center bulge - subtle magnification in center
       const centerDist = length(ix, iy);
       const centerBulge = smoothStep(0.5, 0, centerDist) * 0.3;
-
-      // Combine effects
       const totalDisplacement = (edgeRefract + centerBulge) * intensity;
-
-      // Apply displacement - scale towards center
       const scale = 1.0 - totalDisplacement * 0.4;
       return texture(ix * scale + 0.5, iy * scale + 0.5);
     };
@@ -78,7 +77,6 @@
       rawValues.push(dx, dy);
     }
 
-    // Increase scale for more visible effect
     maxScale = Math.max(maxScale * 0.6, 5);
 
     let index = 0;
@@ -100,12 +98,7 @@
     svg.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
     svg.setAttribute('width', '0');
     svg.setAttribute('height', '0');
-    svg.style.cssText = `
-      position: absolute;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-    `;
+    svg.style.cssText = 'position: absolute; top: 0; left: 0; pointer-events: none;';
 
     const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
     const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
@@ -129,7 +122,9 @@
     feDisplacementMap.setAttribute('in2', 'displacementMap');
     feDisplacementMap.setAttribute('xChannelSelector', 'R');
     feDisplacementMap.setAttribute('yChannelSelector', 'G');
-    feDisplacementMap.setAttribute('scale', Math.round(maxScale * 1.5).toString());
+    // Reduce scale on desktop for better performance
+    const scaleValue = isMobile ? Math.round(maxScale * 1.5) : Math.round(maxScale * 1.2);
+    feDisplacementMap.setAttribute('scale', scaleValue.toString());
 
     filter.appendChild(feImage);
     filter.appendChild(feDisplacementMap);
@@ -141,6 +136,12 @@
 
   // Initialize liquid glass effect
   function initLiquidGlass() {
+    // Skip if user prefers reduced motion
+    if (prefersReducedMotion) {
+      console.log('🔇 Liquid Glass disabled: User prefers reduced motion');
+      return;
+    }
+
     // Remove existing if present
     const existing = document.getElementById('liquid-glass-filters');
     if (existing) existing.remove();
@@ -158,13 +159,7 @@
     // Create container for SVG filters
     const container = document.createElement('div');
     container.id = 'liquid-glass-filters';
-    container.style.cssText = `
-      position: absolute;
-      width: 0;
-      height: 0;
-      overflow: hidden;
-      pointer-events: none;
-    `;
+    container.style.cssText = 'position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;';
 
     filterConfigs.forEach(config => {
       const svg = createLiquidGlassFilter(config.id, config.width, config.height, config.intensity);
@@ -173,29 +168,46 @@
 
     document.body.appendChild(container);
 
-    // Add CSS for liquid glass tiles
+    // Use lighter blur on desktop for better performance
+    const blurSmall = isMobile ? '2px' : '1px';
+    const blurMedium = isMobile ? '2px' : '1px';
+    const blurLarge = isMobile ? '1.5px' : '0.5px';
+
+    // Add CSS for liquid glass tiles with GPU acceleration
     const style = document.createElement('style');
     style.id = 'liquid-glass-styles';
     style.textContent = `
+      /* ============================================
+         LIQUID GLASS - GPU Accelerated
+         ============================================ */
+
+      /* GPU acceleration for all tiles */
+      .tile {
+        will-change: transform;
+        contain: layout style paint;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+      }
+
       /* Liquid Glass Effect - Distortion + Blur */
       .tile {
-        backdrop-filter: url(#liquid-glass-small) blur(2px) saturate(1.2) brightness(1.05);
-        -webkit-backdrop-filter: url(#liquid-glass-small) blur(2px) saturate(1.2) brightness(1.05);
+        backdrop-filter: url(#liquid-glass-small) blur(${blurSmall}) saturate(1.2) brightness(1.05);
+        -webkit-backdrop-filter: url(#liquid-glass-small) blur(${blurSmall}) saturate(1.2) brightness(1.05);
       }
 
       .tile.medium {
-        backdrop-filter: url(#liquid-glass-medium) blur(2px) saturate(1.2) brightness(1.05);
-        -webkit-backdrop-filter: url(#liquid-glass-medium) blur(2px) saturate(1.2) brightness(1.05);
+        backdrop-filter: url(#liquid-glass-medium) blur(${blurMedium}) saturate(1.2) brightness(1.05);
+        -webkit-backdrop-filter: url(#liquid-glass-medium) blur(${blurMedium}) saturate(1.2) brightness(1.05);
       }
 
       .tile.large {
-        backdrop-filter: url(#liquid-glass-large) blur(1.5px) saturate(1.15) brightness(1.05);
-        -webkit-backdrop-filter: url(#liquid-glass-large) blur(1.5px) saturate(1.15) brightness(1.05);
+        backdrop-filter: url(#liquid-glass-large) blur(${blurLarge}) saturate(1.15) brightness(1.05);
+        -webkit-backdrop-filter: url(#liquid-glass-large) blur(${blurLarge}) saturate(1.15) brightness(1.05);
       }
 
       .tile.quote {
-        backdrop-filter: url(#liquid-glass-quote) blur(1.5px) saturate(1.1) brightness(1.03);
-        -webkit-backdrop-filter: url(#liquid-glass-quote) blur(1.5px) saturate(1.1) brightness(1.03);
+        backdrop-filter: url(#liquid-glass-quote) blur(${blurLarge}) saturate(1.1) brightness(1.03);
+        -webkit-backdrop-filter: url(#liquid-glass-quote) blur(${blurLarge}) saturate(1.1) brightness(1.03);
       }
 
       /* Enhanced glass appearance - top light refraction */
@@ -221,10 +233,17 @@
         pointer-events: none;
         z-index: 3;
       }
+
+      /* Performance: Use GPU compositing for background animation */
+      .prana-bg {
+        will-change: transform;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+      }
     `;
     document.head.appendChild(style);
 
-    console.log('✨ Liquid Glass effect initialized for SanatanOS');
+    console.log(`✨ Liquid Glass effect initialized for SanatanOS (${isMobile ? 'Mobile' : 'Desktop'} optimized)`);
   }
 
   // Wait for DOM to be ready
@@ -236,7 +255,9 @@
 
   // Expose for debugging
   window.liquidGlassEffect = {
-    reinit: initLiquidGlass
+    reinit: initLiquidGlass,
+    isMobile: isMobile
   };
 
 })();
+
