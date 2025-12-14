@@ -297,24 +297,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const radius = 270;
         const centerX = 300;
         const centerY = 300;
+        const totalBeadsInCircle = BEAD_COUNT + 1; // 54 regular + 1 meru = 55
+        const beadOffset = 15; // Half of bead width (30px)
 
-        // First, add Meru Bead (golden knot) at position 0 - the starting point
-        const meruBead = document.createElement('div');
-        meruBead.className = 'bead meru-bead';
-        const meruAngleDeg = -90; // Top of circle (position 0)
-        const meruAngleRad = meruAngleDeg * (Math.PI / 180);
-        meruBead.style.left = `${centerX + radius * Math.cos(meruAngleRad) - 20}px`;
-        meruBead.style.top = `${centerY + radius * Math.sin(meruAngleRad) - 20}px`;
-        malaContainer.appendChild(meruBead);
-
-        // Then add 54 regular beads around the circle (starting from position 1)
-        for (let i = 1; i <= BEAD_COUNT; i++) {
+        // Create all beads including Meru at position 0
+        for (let i = 0; i < totalBeadsInCircle; i++) {
             const bead = document.createElement('div');
-            bead.className = 'bead';
-            const angleDeg = (i * (360 / (BEAD_COUNT + 1))) - 90;
+
+            // Meru bead at position 0 (first bead)
+            if (i === 0) {
+                bead.className = 'bead meru-bead';
+            } else {
+                bead.className = 'bead';
+            }
+
+            const angleDeg = (i * (360 / totalBeadsInCircle)) - 90;
             const angleRad = angleDeg * (Math.PI / 180);
-            bead.style.left = `${centerX + radius * Math.cos(angleRad) - 15}px`;
-            bead.style.top = `${centerY + radius * Math.sin(angleRad) - 15}px`;
+            bead.style.left = `${centerX + radius * Math.cos(angleRad) - beadOffset}px`;
+            bead.style.top = `${centerY + radius * Math.sin(angleRad) - beadOffset}px`;
             malaContainer.appendChild(bead);
         }
     }

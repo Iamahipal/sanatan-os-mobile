@@ -368,53 +368,28 @@ body.page-enter {
 /* ===== CENTERED DEITY NAME DISPLAY ===== */
 .deity-name-display {
     position: absolute;
-    top: 38%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 5;
     pointer-events: none;
-    width: 95%;
+    width: 90%;
     text-align: center;
 }
 
 .deity-name-text {
     font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: clamp(2.5rem, 14vw, 5rem);
+    font-size: clamp(2rem, 12vw, 4rem);
     font-weight: 400;
     color: var(--deity-color);
-    opacity: 0.6;
+    opacity: 0.5;
     text-shadow:
-        0px 0px 20px var(--deity-color),
-        0px 0px 40px var(--deity-color),
-        0px 0px 80px var(--deity-color),
-        0px 4px 20px rgba(0, 0, 0, 0.5);
-    white-space: nowrap;
+        0px 0px 30px var(--deity-color),
+        0px 0px 60px var(--deity-color);
     user-select: none;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-    animation: divineRadiate 3s ease-in-out infinite;
-}
-
-@keyframes divineRadiate {
-
-    0%,
-    100% {
-        opacity: 0.5;
-        text-shadow:
-            0px 0px 15px var(--deity-color),
-            0px 0px 30px var(--deity-color),
-            0px 4px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    50% {
-        opacity: 0.7;
-        text-shadow:
-            0px 0px 30px var(--deity-color),
-            0px 0px 60px var(--deity-color),
-            0px 0px 100px var(--deity-color),
-            0px 4px 20px rgba(0, 0, 0, 0.5);
-    }
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.2;
 }
 
 /* ===== SANGHA: Silent Solidarity ===== */
@@ -733,19 +708,19 @@ body.page-enter {
     animation: beadPulse 0.3s var(--spring-easing);
 }
 
-/* Meru Bead (Golden Knot) - Static, no slow animation */
+/* Meru Bead (Golden Knot) - Same size as regular beads */
 .meru-bead {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background: radial-gradient(circle at 30% 30%,
             #ffd700 0%,
             #ff9933 40%,
             #cc6600 100%);
-    border: 2px solid rgba(255, 215, 0, 0.7);
+    border: 1px solid rgba(255, 215, 0, 0.6);
     box-shadow:
-        inset 3px 3px 8px rgba(255, 255, 255, 0.4),
-        inset -2px -2px 6px rgba(0, 0, 0, 0.3),
-        0 0 30px rgba(255, 153, 51, 0.7);
+        inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+        0 0 15px rgba(255, 153, 51, 0.6);
 }
 
 /* MIB-Style Divine Flash (Neuralizer Effect) */
