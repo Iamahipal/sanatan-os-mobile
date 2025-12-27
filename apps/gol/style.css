@@ -1,0 +1,611 @@
+/* Game of Life - Clean Excel Theme */
+:root {
+    --gol-bg: #F8FAF8;
+    --gol-green-500: #22C55E;
+    --gol-green-400: #4ADE80;
+    --gol-green-100: #DCFCE7;
+    --gol-border: #E5E7EB;
+    --gol-text: #1F2937;
+    --gol-text-muted: #6B7280;
+    --gol-white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--gol-bg);
+    color: var(--gol-text);
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.app-container {
+    max-width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==================== LOGIN SCREEN ==================== */
+#login-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-content {
+    text-align: center;
+    max-width: 320px;
+}
+
+.login-logo {
+    width: 80px;
+    height: 80px;
+    background: var(--gol-green-500);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3);
+}
+
+.login-logo svg {
+    width: 40px;
+    height: 40px;
+    color: white;
+}
+
+.login-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.login-subtitle {
+    color: var(--gol-text-muted);
+    margin-bottom: 24px;
+}
+
+.login-features {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.login-features span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.875rem;
+    color: var(--gol-green-500);
+}
+
+.login-features svg {
+    width: 14px;
+    height: 14px;
+}
+
+.btn-google {
+    width: 100%;
+    padding: 14px 20px;
+    background: var(--gol-white);
+    border: 1px solid var(--gol-border);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--gol-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.2s;
+}
+
+.btn-google:hover {
+    background: #f9fafb;
+}
+
+.btn-google svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ==================== XP BAR ==================== */
+.xp-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--gol-white);
+    border-bottom: 1px solid var(--gol-border);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.xp-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--gol-green-100);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gol-green-500);
+    white-space: nowrap;
+}
+
+.xp-badge svg {
+    width: 16px;
+    height: 16px;
+}
+
+.xp-progress-container {
+    flex: 1;
+}
+
+.xp-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--gol-text-muted);
+    margin-bottom: 4px;
+}
+
+.xp-bar {
+    height: 8px;
+    background: var(--gol-border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.xp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gol-green-400), var(--gol-green-500));
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.btn-signout {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--gol-white);
+    border: 1px solid var(--gol-border);
+    border-radius: 8px;
+    font-size: 0.75rem;
+    color: var(--gol-text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-signout:hover {
+    background: #f9fafb;
+}
+
+.guest-avatar {
+    width: 24px;
+    height: 24px;
+    background: var(--gol-green-500);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* ==================== DASHBOARD HEADER ==================== */
+.dashboard-header {
+    padding: 80px 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 8px;
+}
+
+.toggle-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background: var(--gol-white);
+    color: var(--gol-text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.toggle-btn:hover {
+    background: #f3f4f6;
+}
+
+.toggle-btn.active {
+    background: var(--gol-green-500);
+    color: white;
+}
+
+.toggle-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ==================== HABIT GRID ==================== */
+#grid-view {
+    padding: 0 16px 100px;
+    overflow-x: auto;
+}
+
+.habit-grid {
+    background: var(--gol-white);
+    border: 1px solid var(--gol-border);
+    border-radius: 12px;
+    overflow: hidden;
+    min-width: fit-content;
+}
+
+.grid-row {
+    display: flex;
+    border-bottom: 1px solid var(--gol-border);
+}
+
+.grid-row:last-child {
+    border-bottom: none;
+}
+
+.grid-header {
+    background: #f9fafb;
+}
+
+.habit-name {
+    width: 100px;
+    min-width: 100px;
+    padding: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--gol-border);
+}
+
+.day-header {
+    width: 44px;
+    min-width: 44px;
+    padding: 8px 4px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--gol-text-muted);
+    border-right: 1px solid var(--gol-border);
+}
+
+.day-header:last-child {
+    border-right: none;
+}
+
+.day-header .day-name {
+    font-weight: 500;
+}
+
+.day-header .day-num {
+    color: var(--gol-text);
+    font-weight: 600;
+}
+
+.habit-cell {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    border-right: 1px solid var(--gol-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.habit-cell:last-child {
+    border-right: none;
+}
+
+.habit-cell:hover {
+    background: var(--gol-green-100);
+}
+
+.habit-cell.completed {
+    background: var(--gol-green-500);
+    color: white;
+}
+
+.habit-cell.today {
+    box-shadow: inset 0 0 0 2px var(--gol-green-400);
+}
+
+.habit-cell svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ==================== DASHBOARD VIEW ==================== */
+#dashboard-view {
+    padding: 0 16px 100px;
+}
+
+.progress-card {
+    background: var(--gol-white);
+    border: 1px solid var(--gol-border);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: var(--gol-border);
+    stroke-width: 12;
+}
+
+.progress-ring-fill {
+    fill: none;
+    stroke: var(--gol-green-500);
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 439.82;
+    stroke-dashoffset: 439.82;
+    transition: stroke-dashoffset 0.35s;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.progress-text #progress-count {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.progress-text #progress-label {
+    font-size: 0.875rem;
+    color: var(--gol-text-muted);
+}
+
+.habit-list {
+    background: var(--gol-white);
+    border: 1px solid var(--gol-border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.habit-list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid var(--gol-border);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.habit-list-item:last-child {
+    border-bottom: none;
+}
+
+.habit-list-item:hover {
+    background: #f9fafb;
+}
+
+.habit-checkbox {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #f3f4f6;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+}
+
+.habit-list-item.completed .habit-checkbox {
+    background: var(--gol-green-500);
+    color: white;
+}
+
+.habit-checkbox svg {
+    width: 18px;
+    height: 18px;
+}
+
+.habit-list-item .habit-name {
+    flex: 1;
+    border: none;
+    padding: 0;
+    font-weight: 500;
+}
+
+.habit-list-item.completed .habit-name {
+    color: var(--gol-text-muted);
+    text-decoration: line-through;
+}
+
+.habit-xp {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--gol-green-500);
+}
+
+/* ==================== FAB ==================== */
+.fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    background: var(--gol-green-500);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 16px rgba(34, 197, 94, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.fab:hover {
+    background: #16a34a;
+    transform: scale(1.05);
+}
+
+.fab svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* ==================== MODAL ==================== */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--gol-white);
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+    max-width: 360px;
+}
+
+.modal-content h2 {
+    margin-bottom: 16px;
+    font-size: 1.25rem;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--gol-border);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    margin-bottom: 20px;
+}
+
+.modal-content input:focus {
+    outline: none;
+    border-color: var(--gol-green-500);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-secondary,
+.btn-primary {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary {
+    background: #f3f4f6;
+    color: var(--gol-text-muted);
+}
+
+.btn-secondary:hover {
+    background: #e5e7eb;
+}
+
+.btn-primary {
+    background: var(--gol-green-500);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #16a34a;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 400px) {
+    .login-features {
+        flex-wrap: wrap;
+    }
+
+    .xp-badge span {
+        display: none;
+    }
+
+    .habit-name {
+        width: 80px;
+        min-width: 80px;
+        font-size: 0.75rem;
+    }
+
+    .habit-cell,
+    .day-header {
+        width: 36px;
+        min-width: 36px;
+    }
+
+    .habit-cell {
+        height: 36px;
+    }
+}
