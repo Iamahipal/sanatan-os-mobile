@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* Game of Life - Clean Excel Theme */
+:root {
+  --gol-bg: #F8FAF8;
+  --gol-green-500: #22C55E;
+  --gol-green-400: #4ADE80;
+  --gol-green-100: #DCFCE7;
+  --gol-border: #E5E7EB;
+  --gol-text: #1F2937;
+  --gol-text-muted: #6B7280;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--gol-bg);
+  color: var(--gol-text);
+  min-height: 100vh;
+}
+
+/* Grid cell styles */
+.habit-cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--gol-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.habit-cell:hover {
+  background: var(--gol-green-100);
+}
+
+.habit-cell.completed {
+  background: var(--gol-green-500);
+  color: white;
+}
+
+/* XP Bar styles */
+.xp-bar {
+  height: 8px;
+  background: var(--gol-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gol-green-400), var(--gol-green-500));
+  transition: width 0.3s ease;
+}
+
+/* Progress ring */
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring circle {
+  transition: stroke-dashoffset 0.35s;
+}

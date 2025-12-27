@@ -1,0 +1,19 @@
+# Game of Life - Antigravity Rules
+
+## Project Preferences
+- **Framework**: React + Vite
+- **Styling**: Tailwind CSS v4 with "Clean Excel" theme
+- **Database**: Supabase (PostgreSQL)
+- **Icons**: Lucide React
+- **Color Palette**: Green (#22C55E) / White (#F8FAF8) / Gray borders
+
+## Development Rules
+1. Always use optimistic UI updates for database operations
+2. Mock data first, connect to DB later
+3. One bug fix attempt, then rollback and ask for guidance
+4. Test by simulating user clicks before marking complete
+
+## File Structure
+- Components in `src/components/`
+- Hooks in `src/hooks/`
+- Supabase client in `src/supabase.js`
