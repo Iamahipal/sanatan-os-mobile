@@ -74,6 +74,14 @@ function cacheElements() {
     elements.statCompletedToday = document.getElementById('stat-completed-today');
     elements.statTotalCompletions = document.getElementById('stat-total-completions');
     elements.statPerfectDays = document.getElementById('stat-perfect-days');
+    // Week view elements
+    elements.weekView = document.getElementById('week-view');
+    elements.btnWeek = document.getElementById('btn-week');
+    elements.weekScroll = document.getElementById('week-scroll');
+    // Milestone elements
+    elements.milestoneBanner = document.getElementById('milestone-banner');
+    elements.milestoneTitle = document.getElementById('milestone-title');
+    elements.milestoneClose = document.getElementById('milestone-close');
 }
 
 // ==================== INITIALIZATION ====================
@@ -117,6 +125,12 @@ function bindEvents() {
     elements.btnGrid.addEventListener('click', () => switchView('grid'));
     elements.btnDashboard.addEventListener('click', () => switchView('dashboard'));
     elements.btnStats.addEventListener('click', () => switchView('stats'));
+    elements.btnWeek.addEventListener('click', () => switchView('week'));
+
+    // Milestone close
+    if (elements.milestoneClose) {
+        elements.milestoneClose.addEventListener('click', closeMilestone);
+    }
 
     // Add habit
     elements.addHabitBtn.addEventListener('click', () => showModal(true));
@@ -156,11 +170,13 @@ function switchView(view) {
     elements.gridView.classList.add('hidden');
     elements.dashboardView.classList.add('hidden');
     elements.statsView.classList.add('hidden');
+    elements.weekView.classList.add('hidden');
 
     // Remove active from all buttons
     elements.btnGrid.classList.remove('active');
     elements.btnDashboard.classList.remove('active');
     elements.btnStats.classList.remove('active');
+    elements.btnWeek.classList.remove('active');
 
     if (view === 'grid') {
         elements.gridView.classList.remove('hidden');
@@ -173,6 +189,10 @@ function switchView(view) {
         elements.statsView.classList.remove('hidden');
         elements.btnStats.classList.add('active');
         renderStatsView();
+    } else if (view === 'week') {
+        elements.weekView.classList.remove('hidden');
+        elements.btnWeek.classList.add('active');
+        renderWeekView();
     }
 }
 
@@ -465,6 +485,183 @@ function countPerfectDays() {
 
     return perfectCount;
 }
+
+// ==================== WEEK VIEW ====================
+function renderWeekView() {
+    const days = generateDays(7);
+    const today = new Date().toISOString().split('T')[0];
+
+    let html = '';
+    days.forEach(d => {
+        // Calculate completion for this day
+        let completed = 0;
+        state.habits.forEach(habit => {
+            const key = `${habit.id}-${d.date}`;
+            if (state.completions[key]) completed++;
+        });
+
+        const total = state.habits.length;
+        const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+        const isToday = d.date === today;
+
+        // SVG ring calculations (radius 32, circumference ≈ 201)
+        const circumference = 2 * Math.PI * 32;
+        const offset = circumference - (percentage / 100) * circumference;
+
+        // Generate habit list for this day
+        let habitsHtml = '';
+        state.habits.forEach(habit => {
+            const key = `${habit.id}-${d.date}`;
+            const isCompleted = state.completions[key] || false;
+            const emoji = habit.emoji || '';
+
+            habitsHtml += `
+                <div class="day-habit-item ${isCompleted ? 'completed' : ''}" 
+                     data-habit="${habit.id}" data-date="${d.date}">
+                    <div class="day-habit-check">
+                        ${isCompleted ? '<i data-lucide="check"></i>' : ''}
+                    </div>
+                    <span class="day-habit-name">${emoji} ${habit.name}</span>
+                </div>
+            `;
+        });
+
+        // Format date
+        const dateObj = new Date(d.date);
+        const dateStr = dateObj.toLocaleDateString('en', { month: 'short', day: 'numeric' });
+
+        html += `
+            <div class="day-card ${isToday ? 'today' : ''}">
+                <div class="day-card-header">
+                    <div class="day-card-name">${d.dayName}</div>
+                    <div class="day-card-date">${dateStr}</div>
+                </div>
+                <div class="day-ring-container">
+                    <svg class="day-ring" width="80" height="80" viewBox="0 0 80 80">
+                        <circle class="day-ring-bg" cx="40" cy="40" r="32" />
+                        <circle class="day-ring-fill" cx="40" cy="40" r="32" 
+                                style="stroke-dasharray: ${circumference}; stroke-dashoffset: ${offset};" />
+                    </svg>
+                    <span class="day-ring-percent">${percentage}%</span>
+                </div>
+                <div class="day-habits">
+                    ${habitsHtml}
+                </div>
+            </div>
+        `;
+    });
+
+    if (elements.weekScroll) {
+        elements.weekScroll.innerHTML = html;
+        lucide.createIcons();
+
+        // Bind habit item clicks
+        document.querySelectorAll('.day-habit-item').forEach(item => {
+            item.addEventListener('click', () => {
+                toggleHabit(item.dataset.habit, item.dataset.date);
+                renderWeekView(); // Re-render week view
+            });
+        });
+
+        // Scroll to today
+        const todayCard = elements.weekScroll.querySelector('.day-card.today');
+        if (todayCard) {
+            todayCard.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        }
+    }
+}
+
+// ==================== MILESTONE CELEBRATIONS ====================
+const MILESTONES = {
+    7: { title: '7 Day Streak! 🎉', text: 'You\'ve built a new foundation' },
+    21: { title: '21 Day Streak! 🌟', text: 'A habit is forming' },
+    66: { title: '66 Day Streak! 💪', text: 'This is now automatic' },
+    108: { title: '108 Day Streak! 🙏', text: 'Sacred number achieved - you are transformed' }
+};
+
+function checkMilestone() {
+    const streak = state.currentStreak;
+
+    // Check if current streak matches a milestone
+    if (MILESTONES[streak]) {
+        const milestone = MILESTONES[streak];
+        const shownKey = `milestone_shown_${streak}`;
+
+        // Only show once per milestone achievement
+        if (!localStorage.getItem(shownKey)) {
+            showMilestone(milestone.title, milestone.text);
+            localStorage.setItem(shownKey, 'true');
+        }
+    }
+}
+
+function showMilestone(title, text) {
+    if (elements.milestoneBanner && elements.milestoneTitle) {
+        elements.milestoneTitle.textContent = title;
+        elements.milestoneBanner.querySelector('.milestone-text').textContent = text;
+        elements.milestoneBanner.classList.remove('hidden');
+        lucide.createIcons();
+
+        // Fire confetti (simple version)
+        fireConfetti();
+    }
+}
+
+function closeMilestone() {
+    if (elements.milestoneBanner) {
+        elements.milestoneBanner.classList.add('hidden');
+    }
+}
+
+function fireConfetti() {
+    // Create simple confetti effect
+    const colors = ['#22C55E', '#4ADE80', '#ffd700', '#ff6b00', '#ff00ff', '#00ffff'];
+    const confettiContainer = document.createElement('div');
+    confettiContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+        overflow: hidden;
+    `;
+    document.body.appendChild(confettiContainer);
+
+    for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const left = Math.random() * 100;
+        const delay = Math.random() * 0.5;
+        const duration = 2 + Math.random() * 2;
+
+        confetti.style.cssText = `
+            position: absolute;
+            top: -10px;
+            left: ${left}%;
+            width: 10px;
+            height: 10px;
+            background: ${color};
+            border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+            animation: confettiFall ${duration}s ease-out ${delay}s forwards;
+        `;
+        confettiContainer.appendChild(confetti);
+    }
+
+    // Remove after animation
+    setTimeout(() => confettiContainer.remove(), 4000);
+}
+
+// Add confetti animation styles
+const confettiStyle = document.createElement('style');
+confettiStyle.textContent = `
+    @keyframes confettiFall {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+`;
+document.head.appendChild(confettiStyle);
 
 // ==================== HABIT ACTIONS ====================
 function toggleHabit(habitId, date) {
