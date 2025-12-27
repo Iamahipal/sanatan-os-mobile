@@ -370,6 +370,8 @@ body {
 .grid-row {
     display: flex;
     border-bottom: 1px solid var(--border);
+    min-width: max-content;
+    /* Required for sticky column to work across full calendar */
 }
 
 .grid-row:last-child {
@@ -418,6 +420,26 @@ body {
 
 .day-header:last-child {
     border-right: none;
+}
+
+/* Month label on first of month */
+.day-header .month-label {
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1px;
+}
+
+.day-header.today {
+    background: rgba(34, 197, 94, 0.15);
+    border-bottom: 2px solid var(--primary);
+}
+
+.day-header.today .day-num {
+    color: var(--primary);
+    font-weight: 700;
 }
 
 .day-header .day-name {

@@ -199,12 +199,15 @@ function switchView(view) {
 // ==================== STREAK CALCULATION ====================
 function calculateStreak() {
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayStr = formatLocalDate(today);
+
     let streak = 0;
     let checkDate = new Date(today);
 
     // Check consecutive perfect days backwards from today
     while (true) {
-        const dateStr = checkDate.toISOString().split('T')[0];
+        const dateStr = formatLocalDate(checkDate);
         const dayComplete = isDayComplete(dateStr);
 
         if (dayComplete) {
@@ -212,7 +215,7 @@ function calculateStreak() {
             checkDate.setDate(checkDate.getDate() - 1);
         } else {
             // If today is not complete, check if yesterday started the streak
-            if (checkDate.toISOString().split('T')[0] === today.toISOString().split('T')[0]) {
+            if (dateStr === todayStr) {
                 checkDate.setDate(checkDate.getDate() - 1);
                 continue;
             }
@@ -252,21 +255,27 @@ function updateStreakDisplay() {
 
 // ==================== GRID RENDERING ====================
 function renderGrid() {
-    const days = generateDays(14);
-    const today = new Date().toISOString().split('T')[0];
+    const days = generateDays('full');
+    const today = getTodayLocal();
 
+    // Generate header row with month indicators
     let html = `
         <div class="grid-row grid-header">
             <div class="habit-name">Habits</div>
-            ${days.map(d => `
-                <div class="day-header">
-                    <div class="day-name">${d.dayName}</div>
-                    <div class="day-num">${d.dayNum}</div>
-                </div>
-            `).join('')}
+            ${days.map(d => {
+        const showMonth = d.isFirstOfMonth || d.date === days[0].date;
+        return `
+                    <div class="day-header ${d.date === today ? 'today' : ''}" data-date="${d.date}">
+                        ${showMonth ? `<div class="month-label">${d.month}</div>` : ''}
+                        <div class="day-name">${d.dayName}</div>
+                        <div class="day-num">${d.dayNum}</div>
+                    </div>
+                `;
+    }).join('')}
         </div>
     `;
 
+    // Generate habit rows
     state.habits.forEach(habit => {
         const emoji = habit.emoji || '';
         html += `
@@ -296,29 +305,84 @@ function renderGrid() {
             toggleHabit(cell.dataset.habit, cell.dataset.date);
         });
     });
+
+    // Auto-scroll to today
+    scrollToToday();
 }
 
-function generateDays(count) {
+function scrollToToday() {
+    const grid = document.querySelector('.habit-grid');
+    const todayCell = document.querySelector('.day-header.today');
+
+    if (grid && todayCell) {
+        // Calculate scroll position to center today
+        const gridRect = grid.getBoundingClientRect();
+        const cellRect = todayCell.getBoundingClientRect();
+        const habitNameWidth = 80; // sticky column width
+
+        // Scroll so today is visible but not at the very start
+        const scrollLeft = todayCell.offsetLeft - habitNameWidth - 50;
+        grid.scrollLeft = Math.max(0, scrollLeft);
+    }
+}
+
+function generateDays(mode = 'full') {
     const days = [];
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    for (let i = count - 1; i >= 0; i--) {
-        const date = new Date(today);
-        date.setDate(date.getDate() - i);
+    if (mode === 'week') {
+        // For week view and activity graph - last 7 days
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date(today);
+            date.setDate(date.getDate() - i);
+            days.push(createDayObject(date));
+        }
+    } else {
+        // Full calendar: 7 days back + forward to Dec 31, 2026
+        const startDate = new Date(today);
+        startDate.setDate(startDate.getDate() - 7);
 
-        days.push({
-            date: date.toISOString().split('T')[0],
-            dayName: date.toLocaleDateString('en', { weekday: 'short' }).slice(0, 2),
-            dayNum: date.getDate()
-        });
+        const endDate = new Date(2026, 11, 31); // Dec 31, 2026
+
+        let currentDate = new Date(startDate);
+        while (currentDate <= endDate) {
+            days.push(createDayObject(new Date(currentDate)));
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
     }
 
     return days;
 }
 
+function createDayObject(date) {
+    const dayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    return {
+        date: formatLocalDate(date),
+        dayName: dayNames[date.getDay()],
+        dayNum: date.getDate(),
+        month: date.toLocaleDateString('en', { month: 'short' }),
+        year: date.getFullYear(),
+        isFirstOfMonth: date.getDate() === 1
+    };
+}
+
+// Helper to format date as YYYY-MM-DD in local timezone (not UTC)
+function formatLocalDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+// Get today's date in local format
+function getTodayLocal() {
+    return formatLocalDate(new Date());
+}
+
 // ==================== DASHBOARD RENDERING ====================
 function renderDashboardList() {
-    const today = new Date().toISOString().split('T')[0];
+    const today = getTodayLocal();
 
     let html = '';
     state.habits.forEach(habit => {
@@ -352,7 +416,7 @@ function renderDashboardList() {
 }
 
 function updateProgressRing() {
-    const today = new Date().toISOString().split('T')[0];
+    const today = getTodayLocal();
     let completed = 0;
 
     state.habits.forEach(habit => {
@@ -387,7 +451,7 @@ function renderStatsView() {
 }
 
 function updateWeeklyProgress() {
-    const days = generateDays(7);
+    const days = generateDays('week');
     let totalPossible = state.habits.length * 7;
     let totalCompleted = 0;
 
@@ -409,8 +473,8 @@ function updateWeeklyProgress() {
 }
 
 function renderActivityGraph() {
-    const days = generateDays(7);
-    const today = new Date().toISOString().split('T')[0];
+    const days = generateDays('week');
+    const today = getTodayLocal();
 
     let html = '';
     days.forEach(d => {
@@ -446,7 +510,7 @@ function updateStatsGrid() {
     }
 
     // Completed today
-    const today = new Date().toISOString().split('T')[0];
+    const today = getTodayLocal();
     let completedToday = 0;
     state.habits.forEach(habit => {
         const key = `${habit.id}-${today}`;
@@ -488,8 +552,8 @@ function countPerfectDays() {
 
 // ==================== WEEK VIEW ====================
 function renderWeekView() {
-    const days = generateDays(7);
-    const today = new Date().toISOString().split('T')[0];
+    const days = generateDays('week');
+    const today = getTodayLocal();
 
     let html = '';
     days.forEach(d => {
@@ -672,7 +736,7 @@ function toggleHabit(habitId, date) {
     state.completions[key] = !wasCompleted;
 
     // XP logic
-    const today = new Date().toISOString().split('T')[0];
+    const today = getTodayLocal();
     if (date === today) {
         if (!wasCompleted) {
             addXP(10);
@@ -737,7 +801,7 @@ function updateXPBar() {
 }
 
 function checkDailyBonus() {
-    const today = new Date().toISOString().split('T')[0];
+    const today = getTodayLocal();
     let allComplete = true;
 
     state.habits.forEach(habit => {
@@ -838,3 +902,4 @@ function handleAddHabit() {
 
 // ==================== START ====================
 document.addEventListener('DOMContentLoaded', init);
+
