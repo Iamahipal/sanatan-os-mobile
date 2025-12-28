@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Habit Tracker - Sanatan OS</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+
+<body class="page-enter">
+    <div class="app-container">
+        <!-- ========== ONBOARDING SCREENS ========== -->
+        <div id="onboarding" class="screen onboarding-screen">
+            <div class="onboarding-slides">
+                <!-- Slide 1: Welcome -->
+                <div class="onboarding-slide active" data-slide="0" style="--slide-color: #2E5A88;">
+                    <div class="slide-content">
+                        <div class="slide-icon">
+                            <i data-lucide="repeat" class="onboarding-icon"></i>
+                        </div>
+                        <h1>Welcome</h1>
+                        <p>Build lasting habits with science-backed tracking and beautiful visualizations.</p>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Create Habits -->
+                <div class="onboarding-slide" data-slide="1" style="--slide-color: #F5A623;">
+                    <div class="slide-content">
+                        <div class="slide-visual">
+                            <div class="mock-habit-card">
+                                <span class="mock-habit-name">🧘 Meditate</span>
+                                <div class="mock-checks">
+                                    <span class="check done">✓</span>
+                                    <span class="check done">✓</span>
+                                    <span class="check missed">✕</span>
+                                    <span class="check done">✓</span>
+                                    <span class="check missed">✕</span>
+                                    <span class="check done">✓</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h1>Track Daily</h1>
+                        <p>Every day, mark your habits as done or skipped. Build your streak!</p>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Progress -->
+                <div class="onboarding-slide" data-slide="2" style="--slide-color: #9B6DAB;">
+                    <div class="slide-content">
+                        <div class="slide-visual">
+                            <div class="mock-graph">
+                                <svg viewBox="0 0 200 100" class="progress-line">
+                                    <polyline points="10,80 40,60 70,70 100,40 130,50 160,30 190,35" fill="none"
+                                        stroke="#FFD700" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <circle cx="10" cy="80" r="5" fill="#FFD700" />
+                                    <circle cx="40" cy="60" r="5" fill="#FFD700" />
+                                    <circle cx="70" cy="70" r="5" fill="#FFD700" />
+                                    <circle cx="100" cy="40" r="5" fill="#FFD700" />
+                                    <circle cx="130" cy="50" r="5" fill="#FFD700" />
+                                    <circle cx="160" cy="30" r="5" fill="#FFD700" />
+                                    <circle cx="190" cy="35" r="5" fill="#FFD700" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h1>See Progress</h1>
+                        <p>Detailed graphs and grids show how your habits improve over time.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="onboarding-nav">
+                <button id="skip-btn" class="nav-btn skip-btn">
+                    <i data-lucide="skip-forward"></i>
+                </button>
+                <div class="onboarding-dots">
+                    <span class="dot active" data-dot="0"></span>
+                    <span class="dot" data-dot="1"></span>
+                    <span class="dot" data-dot="2"></span>
+                </div>
+                <button id="next-btn" class="nav-btn next-btn">
+                    <i data-lucide="arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ========== MAIN DASHBOARD ========== -->
+        <div id="dashboard" class="screen dashboard-screen" style="display: none;">
+            <!-- Header -->
+            <header class="app-header">
+                <a href="../../index.html" class="header-btn back-btn" aria-label="Back">
+                    <i data-lucide="chevron-left"></i>
+                </a>
+                <div class="header-title">
+                    <span id="today-date" class="today-date">Today, 28th Dec</span>
+                    <span id="completion-pct" class="completion-pct">0%</span>
+                </div>
+                <button id="settings-btn" class="header-btn" aria-label="Settings">
+                    <i data-lucide="settings"></i>
+                </button>
+            </header>
+
+            <!-- Week Picker -->
+            <div class="week-picker">
+                <div id="week-days" class="week-days">
+                    <!-- Generated by JS -->
+                </div>
+            </div>
+
+            <!-- Habit List -->
+            <main id="habit-list" class="habit-list">
+                <!-- Empty State -->
+                <div id="empty-state" class="empty-state">
+                    <i data-lucide="star" class="empty-icon"></i>
+                    <p>No habits yet</p>
+                    <span>Tap + to create your first habit</span>
+                </div>
+
+                <!-- Habits will be rendered here -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <button class="nav-tab active" data-view="grid">
+                    <i data-lucide="grid-3x3"></i>
+                    <span>Grid</span>
+                </button>
+                <button id="add-habit-btn" class="nav-tab add-btn">
+                    <i data-lucide="plus"></i>
+                </button>
+                <button class="nav-tab" data-view="timeline">
+                    <i data-lucide="list"></i>
+                    <span>Timeline</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- ========== ADD/EDIT HABIT FORM ========== -->
+        <div id="habit-form" class="screen form-screen" style="display: none;">
+            <header class="app-header">
+                <button id="form-back-btn" class="header-btn" aria-label="Back">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <h1 class="header-title-text" id="form-title">Add Habit</h1>
+                <button id="save-habit-btn" class="header-btn save-btn">Save</button>
+            </header>
+
+            <div class="form-content">
+                <!-- Name -->
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="habit-name" placeholder="e.g. Exercise" maxlength="50">
+                </div>
+
+                <!-- Question -->
+                <div class="form-group">
+                    <label>Question</label>
+                    <input type="text" id="habit-question" placeholder="e.g. Did you exercise today?">
+                </div>
+
+                <!-- Type -->
+                <div class="form-group">
+                    <label>Type</label>
+                    <div class="type-options">
+                        <button class="type-btn active" data-type="boolean">
+                            <i data-lucide="check-circle"></i>
+                            <span>Yes / No</span>
+                        </button>
+                        <button class="type-btn" data-type="measurable">
+                            <i data-lucide="bar-chart-2"></i>
+                            <span>Measurable</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Target (for measurable) -->
+                <div class="form-group measurable-options" style="display: none;">
+                    <label>Daily Target</label>
+                    <div class="target-input">
+                        <input type="number" id="habit-target" placeholder="5" min="1">
+                        <input type="text" id="habit-unit" placeholder="pages">
+                    </div>
+                </div>
+
+                <!-- Color -->
+                <div class="form-group">
+                    <label>Color</label>
+                    <div class="color-picker">
+                        <button class="color-swatch active" data-color="#FFDC00" style="background: #FFDC00;"></button>
+                        <button class="color-swatch" data-color="#FF9800" style="background: #FF9800;"></button>
+                        <button class="color-swatch" data-color="#F44336" style="background: #F44336;"></button>
+                        <button class="color-swatch" data-color="#E91E63" style="background: #E91E63;"></button>
+                        <button class="color-swatch" data-color="#9C27B0" style="background: #9C27B0;"></button>
+                        <button class="color-swatch" data-color="#673AB7" style="background: #673AB7;"></button>
+                        <button class="color-swatch" data-color="#2196F3" style="background: #2196F3;"></button>
+                        <button class="color-swatch" data-color="#009688" style="background: #009688;"></button>
+                        <button class="color-swatch" data-color="#4CAF50" style="background: #4CAF50;"></button>
+                        <button class="color-swatch" data-color="#795548" style="background: #795548;"></button>
+                    </div>
+                </div>
+
+                <!-- Icon -->
+                <div class="form-group">
+                    <label>Icon</label>
+                    <div class="icon-picker" id="icon-picker">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+
+                <!-- Category -->
+                <div class="form-group">
+                    <label>Category</label>
+                    <button type="button" id="category-picker-btn" class="category-picker-btn">
+                        <span id="selected-category">None</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                </div>
+
+                <!-- Frequency -->
+                <div class="form-group">
+                    <label>Frequency</label>
+                    <div class="frequency-options">
+                        <label class="radio-option">
+                            <input type="radio" name="frequency" value="everyday" checked>
+                            <span>Every day</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="frequency" value="specific">
+                            <span>Specific days</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="frequency" value="x_per_week">
+                            <span>X times per week</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Specific Days -->
+                <div class="form-group specific-days-options" style="display: none;">
+                    <div class="day-picker">
+                        <button class="day-btn" data-day="0">S</button>
+                        <button class="day-btn" data-day="1">M</button>
+                        <button class="day-btn" data-day="2">T</button>
+                        <button class="day-btn" data-day="3">W</button>
+                        <button class="day-btn" data-day="4">T</button>
+                        <button class="day-btn" data-day="5">F</button>
+                        <button class="day-btn" data-day="6">S</button>
+                    </div>
+                </div>
+
+                <!-- X per Week -->
+                <div class="form-group x-per-week-options" style="display: none;">
+                    <div class="x-per-input">
+                        <input type="number" id="times-per-week" value="3" min="1" max="6">
+                        <span>times per week</span>
+                    </div>
+                </div>
+
+                <!-- Reminder -->
+                <div class="form-group toggle-group">
+                    <div class="toggle-row">
+                        <span>Reminder</span>
+                        <button id="reminder-toggle" class="toggle-btn">
+                            <span class="toggle-slider"></span>
+                        </button>
+                    </div>
+                    <div class="reminder-time-row" style="display: none;">
+                        <input type="time" id="reminder-time" value="09:00">
+                    </div>
+                </div>
+
+                <!-- Show on Timeline -->
+                <div class="form-group toggle-group">
+                    <div class="toggle-row">
+                        <span>Show on Timeline</span>
+                        <button id="timeline-toggle" class="toggle-btn active">
+                            <span class="toggle-slider"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== HABIT DETAIL / ANALYTICS ========== -->
+        <div id="habit-detail" class="screen detail-screen" style="display: none;">
+            <header class="app-header">
+                <button id="detail-back-btn" class="header-btn" aria-label="Back">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <h1 class="header-title-text" id="detail-title">Habit Name</h1>
+                <button id="edit-habit-btn" class="header-btn" aria-label="Edit">
+                    <i data-lucide="edit-2"></i>
+                </button>
+            </header>
+
+            <!-- Danger Zone in Detail -->
+            <div class="detail-actions" id="detail-actions">
+                <button id="archive-habit-btn" class="detail-action-btn archive-btn">
+                    <i data-lucide="archive"></i>
+                    <span>Archive</span>
+                </button>
+                <button id="delete-habit-btn" class="detail-action-btn delete-btn">
+                    <i data-lucide="trash-2"></i>
+                    <span>Delete</span>
+                </button>
+            </div>
+
+            <div class="detail-content">
+                <!-- Overview Stats -->
+                <div class="overview-stats">
+                    <div class="stat-item">
+                        <div class="stat-ring" id="score-ring">
+                            <svg viewBox="0 0 36 36">
+                                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#e0e0e0" stroke-width="3" />
+                                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#FFDC00" stroke-width="3"
+                                    stroke-dasharray="0, 100" class="score-circle" />
+                            </svg>
+                            <span class="stat-value" id="score-value">0%</span>
+                        </div>
+                        <span class="stat-label">Score</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="month-value">+0%</span>
+                        <span class="stat-label">Month</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="year-value">+0%</span>
+                        <span class="stat-label">Year</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="total-value">0</span>
+                        <span class="stat-label">Total</span>
+                    </div>
+                </div>
+
+                <!-- Score Graph -->
+                <div class="graph-section">
+                    <div class="section-header">
+                        <h3>Score</h3>
+                        <select id="score-filter" class="filter-select">
+                            <option value="week">Week</option>
+                            <option value="month">Month</option>
+                            <option value="year">Year</option>
+                        </select>
+                    </div>
+                    <div class="graph-container" id="score-graph">
+                        <!-- Canvas rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- History Graph -->
+                <div class="graph-section">
+                    <div class="section-header">
+                        <h3>History</h3>
+                        <select id="history-filter" class="filter-select">
+                            <option value="week">Week</option>
+                            <option value="month">Month</option>
+                        </select>
+                    </div>
+                    <div class="graph-container bar-graph" id="history-graph">
+                        <!-- Bars rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- Calendar Grid -->
+                <div class="calendar-section">
+                    <h3>Calendar</h3>
+                    <div class="calendar-grid" id="calendar-grid">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== TIMELINE VIEW ========== -->
+        <div id="timeline" class="screen timeline-screen" style="display: none;">
+            <header class="app-header">
+                <button id="timeline-back-btn" class="header-btn" aria-label="Back">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <h1 class="header-title-text">Timeline</h1>
+                <button id="timeline-filter-btn" class="header-btn" aria-label="Filter">
+                    <i data-lucide="filter"></i>
+                </button>
+            </header>
+
+            <div class="timeline-content" id="timeline-content">
+                <!-- Timeline entries rendered by JS -->
+            </div>
+        </div>
+
+        <!-- ========== SETTINGS ========== -->
+        <div id="settings" class="screen settings-screen" style="display: none;">
+            <header class="app-header">
+                <button id="settings-back-btn" class="header-btn" aria-label="Back">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <h1 class="header-title-text">Settings</h1>
+                <div class="header-btn"></div>
+            </header>
+
+            <div class="settings-content">
+                <!-- Account/Sync Card -->
+                <div class="settings-card account-card" id="account-card">
+                    <!-- Signed Out State -->
+                    <div id="signed-out-state" class="auth-state">
+                        <div class="account-icon">
+                            <i data-lucide="cloud-off"></i>
+                        </div>
+                        <p class="account-label">Sign in to sync your habits</p>
+                        <button id="google-signin-btn" class="google-signin-btn">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path fill="#4285F4"
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                <path fill="#34A853"
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                <path fill="#FBBC05"
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                <path fill="#EA4335"
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                            </svg>
+                            <span>Sign in with Google</span>
+                        </button>
+                    </div>
+                    <!-- Signed In State -->
+                    <div id="signed-in-state" class="auth-state" style="display: none;">
+                        <img id="user-avatar" class="user-avatar" src="" alt="Profile">
+                        <div class="user-info">
+                            <span id="user-name" class="user-name">User Name</span>
+                            <span id="user-email" class="user-email">email@example.com</span>
+                        </div>
+                        <div class="sync-status" id="sync-status">
+                            <i data-lucide="check-circle"></i>
+                            <span>Synced</span>
+                        </div>
+                        <button id="signout-btn" class="signout-btn">Sign Out</button>
+                    </div>
+                </div>
+
+                <!-- Habit Score -->
+                <div class="settings-card score-card">
+                    <div class="score-gauge" id="overall-score-gauge">
+                        <svg viewBox="0 0 120 80">
+                            <path d="M10 70 A50 50 0 0 1 110 70" fill="none" stroke="#e0e0e0" stroke-width="8"
+                                stroke-linecap="round" />
+                            <path d="M10 70 A50 50 0 0 1 110 70" fill="none" stroke="url(#scoreGradient)"
+                                stroke-width="8" stroke-linecap="round" stroke-dasharray="0, 157" class="gauge-fill" />
+                            <defs>
+                                <linearGradient id="scoreGradient">
+                                    <stop offset="0%" stop-color="#F44336" />
+                                    <stop offset="50%" stop-color="#FFDC00" />
+                                    <stop offset="100%" stop-color="#4CAF50" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span class="gauge-value" id="gauge-value">0</span>
+                    </div>
+                    <p class="score-label">Overall Habit Score</p>
+                </div>
+
+                <!-- Settings Options -->
+                <div class="settings-list">
+                    <button class="settings-item">
+                        <div class="settings-icon">
+                            <i data-lucide="palette"></i>
+                        </div>
+                        <span>Theme</span>
+                        <i data-lucide="chevron-right" class="settings-arrow"></i>
+                    </button>
+                    <button class="settings-item">
+                        <div class="settings-icon">
+                            <i data-lucide="layout-grid"></i>
+                        </div>
+                        <span>Categories</span>
+                        <i data-lucide="chevron-right" class="settings-arrow"></i>
+                    </button>
+                    <button class="settings-item">
+                        <div class="settings-icon">
+                            <i data-lucide="download"></i>
+                        </div>
+                        <span>Export Data</span>
+                        <i data-lucide="chevron-right" class="settings-arrow"></i>
+                    </button>
+                    <button id="reset-all-btn" class="settings-item danger">
+                        <div class="settings-icon">
+                            <i data-lucide="trash-2"></i>
+                        </div>
+                        <span>Reset All Data</span>
+                        <i data-lucide="chevron-right" class="settings-arrow"></i>
+                    </button>
+                    <button id="sync-now-btn" class="settings-item">
+                        <div class="settings-icon">
+                            <i data-lucide="refresh-cw"></i>
+                        </div>
+                        <span>Sync Now</span>
+                        <i data-lucide="chevron-right" class="settings-arrow"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== MODALS ========== -->
+        <!-- Quick Entry Modal -->
+        <div id="entry-modal" class="modal-overlay">
+            <div class="modal-content entry-modal">
+                <div class="modal-header">
+                    <h2 id="entry-modal-title">Mark Habit</h2>
+                    <button class="close-btn" id="close-entry-modal">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="entry-actions">
+                    <button class="entry-btn done-btn" id="mark-done">
+                        <i data-lucide="check"></i>
+                        <span>Done</span>
+                    </button>
+                    <button class="entry-btn skip-btn" id="mark-skip">
+                        <i data-lucide="x"></i>
+                        <span>Skip</span>
+                    </button>
+                </div>
+                <div class="entry-note">
+                    <label>Note (optional)</label>
+                    <textarea id="entry-note" placeholder="How did it go?"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Measurable Entry Modal -->
+        <div id="measure-modal" class="modal-overlay">
+            <div class="modal-content measure-modal">
+                <div class="modal-header">
+                    <h2 id="measure-modal-title">Log Progress</h2>
+                    <button class="close-btn" id="close-measure-modal">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="measure-input-group">
+                    <input type="number" id="measure-value" placeholder="0">
+                    <span id="measure-unit">pages</span>
+                </div>
+                <div class="measure-target">
+                    Target: <span id="measure-target-display">5 pages</span>
+                </div>
+                <button id="measure-submit" class="primary-btn">Save</button>
+            </div>
+        </div>
+
+        <!-- Celebration Overlay -->
+        <div id="celebration" class="celebration-overlay">
+            <div class="confetti-container" id="confetti"></div>
+            <div class="celebration-content">
+                <div class="celebration-icon">🎉</div>
+                <h2 id="celebration-text">Streak!</h2>
+                <p id="celebration-subtext">7 days in a row!</p>
+            </div>
+        </div>
+
+        <!-- Category Management Modal -->
+        <div id="category-modal" class="modal-overlay">
+            <div class="modal-content category-modal">
+                <div class="modal-header">
+                    <h2>Categories</h2>
+                    <button class="close-btn" id="close-category-modal">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="category-list" id="category-list">
+                    <!-- Categories rendered by JS -->
+                </div>
+                <div class="add-category-form">
+                    <input type="text" id="new-category-name" placeholder="New category name">
+                    <button id="add-category-btn" class="add-category-btn">
+                        <i data-lucide="plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirm Delete Modal -->
+        <div id="delete-modal" class="modal-overlay">
+            <div class="modal-content delete-modal">
+                <div class="modal-header">
+                    <h2>Delete Habit?</h2>
+                    <button class="close-btn" id="close-delete-modal">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <p class="delete-warning">This will permanently delete this habit and all its data. This action cannot
+                    be undone.</p>
+                <div class="delete-actions">
+                    <button id="cancel-delete" class="secondary-btn">Cancel</button>
+                    <button id="confirm-delete" class="danger-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Initialize Lucide icons FIRST -->
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="firebase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
