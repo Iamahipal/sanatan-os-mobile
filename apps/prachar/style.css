@@ -735,3 +735,512 @@ body::before {
         gap: 12px;
     }
 }
+
+/* ============================================
+   PHASE 2: ANONYMOUS PILGRIM TOGGLE
+   ============================================ */
+.anonymous-section {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.anonymous-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 12px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+}
+
+.anonymous-toggle input {
+    display: none;
+}
+
+.toggle-slider {
+    width: 48px;
+    height: 26px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 13px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.toggle-slider::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.anonymous-toggle input:checked+.toggle-slider {
+    background: var(--accent-gold);
+}
+
+.anonymous-toggle input:checked+.toggle-slider::after {
+    left: 25px;
+}
+
+.toggle-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   PHASE 2: RIPPLE MAP SCREEN
+   ============================================ */
+.ripple-map-container {
+    position: relative;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Cosmic Background */
+.cosmos-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+.star:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.star:nth-child(2) {
+    top: 30%;
+    left: 80%;
+    animation-delay: 0.5s;
+}
+
+.star:nth-child(3) {
+    top: 60%;
+    left: 15%;
+    animation-delay: 1s;
+}
+
+.star:nth-child(4) {
+    top: 80%;
+    left: 70%;
+    animation-delay: 1.5s;
+}
+
+.star:nth-child(5) {
+    top: 45%;
+    left: 50%;
+    animation-delay: 0.3s;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+/* Ripple Visualization */
+.ripple-map {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    z-index: 1;
+}
+
+.ripple-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-saffron));
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+.center-icon {
+    font-size: 1.5rem;
+}
+
+.center-label {
+    font-size: 0.6rem;
+    color: #000;
+    font-weight: 600;
+}
+
+.ripple-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.ring-1 {
+    width: 120px;
+    height: 120px;
+    margin: -60px 0 0 -60px;
+    animation: ring-pulse 3s ease-out infinite;
+}
+
+.ring-2 {
+    width: 200px;
+    height: 200px;
+    margin: -100px 0 0 -100px;
+    animation: ring-pulse 3s ease-out infinite 1s;
+}
+
+.ring-3 {
+    width: 280px;
+    height: 280px;
+    margin: -140px 0 0 -140px;
+    animation: ring-pulse 3s ease-out infinite 2s;
+}
+
+@keyframes ring-pulse {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+}
+
+/* Soul Nodes */
+.soul-nodes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.soul-node {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    animation: node-appear 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes node-appear {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Connection Lines */
+.connection-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.5), transparent);
+    transform-origin: left center;
+}
+
+/* Ripple Map Stats */
+.ripple-map-stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 32px;
+    z-index: 1;
+}
+
+.map-stat {
+    text-align: center;
+}
+
+.map-stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+}
+
+.map-stat-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Nishkama Message */
+.nishkama-message {
+    text-align: center;
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    z-index: 1;
+}
+
+.nishkama-message p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.nishkama-message span {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--accent-gold);
+}
+
+.view-ripple-btn {
+    width: 100%;
+    padding: 16px;
+    margin-top: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* ============================================
+   PHASE 2: UNWRAP SCREEN (for receivers)
+   ============================================ */
+.unwrap-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+}
+
+.unwrap-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+    animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+}
+
+.unwrap-card {
+    position: relative;
+    width: 280px;
+    padding: 40px 24px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: var(--radius);
+    text-align: center;
+    z-index: 1;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Wrapper Fold Animation */
+.unwrap-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.wrapper-fold {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(135deg, #2d1b4e, #1a1a2e);
+    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.top-fold {
+    top: 0;
+    border-radius: var(--radius) var(--radius) 0 0;
+    transform-origin: top center;
+}
+
+.bottom-fold {
+    bottom: 0;
+    border-radius: 0 0 var(--radius) var(--radius);
+    transform-origin: bottom center;
+}
+
+.unwrap-card.unwrapped .top-fold {
+    transform: rotateX(-180deg);
+}
+
+.unwrap-card.unwrapped .bottom-fold {
+    transform: rotateX(180deg);
+}
+
+.wrapper-ribbon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-saffron));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 20;
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+    transition: all 0.5s ease;
+}
+
+.unwrap-card.unwrapped .wrapper-ribbon {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+}
+
+.unwrap-card.unwrapped .unwrap-wrapper {
+    opacity: 0;
+    transition: opacity 0.3s ease 0.5s;
+}
+
+/* Unwrap Message */
+.unwrap-message {
+    opacity: 0;
+    transition: opacity 0.5s ease 0.5s;
+}
+
+.unwrap-card.unwrapped .unwrap-message {
+    opacity: 1;
+}
+
+.sender-text {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: var(--accent-gold);
+    margin-bottom: 16px;
+}
+
+.sankalpa-text {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.sender-name {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.unwrap-btn {
+    margin-top: 32px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--accent-saffron), var(--accent-gold));
+    border: none;
+    border-radius: var(--radius);
+    color: #000;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 30;
+}
+
+.unwrap-card.unwrapped .unwrap-btn {
+    display: none;
+}
+
+/* Particle burst on unwrap */
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+@keyframes particle-burst {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}

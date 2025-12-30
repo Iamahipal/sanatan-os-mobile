@@ -409,4 +409,229 @@ function incrementShareCount() {
     if (totalShares) {
         totalShares.textContent = karmaData.totalShares;
     }
+
+    // Show ripple screen after sharing
+    setTimeout(() => {
+        showRippleScreen();
+    }, 500);
 }
+
+// ============================================
+// PHASE 2: ANONYMOUS PILGRIM
+// ============================================
+let isAnonymous = false;
+
+function setupPhase2Listeners() {
+    // Anonymous toggle
+    document.getElementById('anonymous-toggle')?.addEventListener('change', (e) => {
+        isAnonymous = e.target.checked;
+    });
+
+    // Ripple screen navigation
+    document.getElementById('back-from-ripple')?.addEventListener('click', showPickerScreen);
+    document.getElementById('back-to-create')?.addEventListener('click', showPickerScreen);
+
+    // Unwrap button
+    document.getElementById('unwrap-btn')?.addEventListener('click', unwrapCard);
+
+    // Click on ripple stats to see ripple screen
+    document.querySelector('.ripple-stats')?.addEventListener('click', () => {
+        if (karmaData.totalShares > 0) {
+            showRippleScreen();
+        }
+    });
+}
+
+// Initialize Phase 2 listeners
+document.addEventListener('DOMContentLoaded', () => {
+    setupPhase2Listeners();
+});
+
+function getSenderName() {
+    if (isAnonymous) {
+        return "An Anonymous Pilgrim";
+    }
+    return "A Seeker on the Path";
+}
+
+// ============================================
+// PHASE 2: RIPPLE MAP
+// ============================================
+function showRippleScreen() {
+    // Hide all screens
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('ripple-screen').classList.add('active');
+
+    // Update stats
+    updateRippleMapStats();
+
+    // Generate soul nodes
+    generateSoulNodes();
+}
+
+function updateRippleMapStats() {
+    const souls = karmaData.totalShares;
+    const depth = Math.min(3, Math.ceil(souls / 3)); // Simulate generations
+    const merit = souls * 108; // Each share = 108 merit points
+
+    document.getElementById('map-souls').textContent = souls;
+    document.getElementById('map-depth').textContent = depth;
+    document.getElementById('map-merit').textContent = formatNumber(merit);
+}
+
+function generateSoulNodes() {
+    const container = document.getElementById('soul-nodes');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const souls = Math.min(karmaData.totalShares, 12); // Max 12 visible nodes
+    const centerX = 140;
+    const centerY = 140;
+
+    for (let i = 0; i < souls; i++) {
+        const node = document.createElement('div');
+        node.className = 'soul-node';
+        node.textContent = '🙏';
+
+        // Calculate position on rings
+        const ring = Math.floor(i / 4) + 1; // Which ring (1, 2, or 3)
+        const angleOffset = (i % 4) * 90 + (ring * 30); // Offset angle
+        const angle = (angleOffset * Math.PI) / 180;
+        const distance = ring * 50;
+
+        const x = centerX + Math.cos(angle) * distance - 12;
+        const y = centerY + Math.sin(angle) * distance - 12;
+
+        node.style.left = `${x}px`;
+        node.style.top = `${y}px`;
+        node.style.animationDelay = `${i * 0.1}s`;
+
+        container.appendChild(node);
+    }
+}
+
+// ============================================
+// PHASE 2: UNWRAP ANIMATION
+// ============================================
+function showUnwrapScreen(sankalpa, senderName) {
+    // Hide all screens
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('unwrap-screen').classList.add('active');
+
+    // Reset unwrap state
+    const unwrapCard = document.getElementById('unwrap-card');
+    unwrapCard.classList.remove('unwrapped');
+
+    // Set content
+    const sankalpaMessages = {
+        peace: "May this bring you peace today 🙏",
+        inspire: "May this inspire your journey 💡",
+        awaken: "May this awaken your spirit 🕉️",
+        gratitude: "Shared with gratitude 🌸"
+    };
+
+    document.getElementById('unwrap-sankalpa').textContent =
+        sankalpaMessages[sankalpa] || sankalpaMessages.peace;
+    document.getElementById('unwrap-sender').textContent =
+        `From ${senderName || 'a Seeker on the Path'}`;
+}
+
+function unwrapCard() {
+    const card = document.getElementById('unwrap-card');
+    card.classList.add('unwrapped');
+
+    // Create particle burst effect
+    createParticleBurst();
+
+    // Haptic feedback if available
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+}
+
+function createParticleBurst() {
+    const container = document.querySelector('.unwrap-container');
+    const colors = ['#ffd700', '#ff9933', '#e91e63', '#9c27b0', '#fff'];
+
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.left = '50%';
+        particle.style.top = '50%';
+
+        const angle = (Math.random() * 360) * (Math.PI / 180);
+        const distance = 100 + Math.random() * 100;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+
+        particle.style.setProperty('--tx', `${tx}px`);
+        particle.style.setProperty('--ty', `${ty}px`);
+        particle.style.animation = `particle-burst 0.8s ease-out forwards`;
+        particle.style.animationDelay = `${Math.random() * 0.2}s`;
+
+        container.appendChild(particle);
+
+        // Remove after animation
+        setTimeout(() => particle.remove(), 1000);
+    }
+}
+
+// ============================================
+// PHASE 2: ENHANCED SHARING WITH ANONYMOUS
+// ============================================
+function getShareMessage() {
+    const sankalpaMsg = getSankalpaMessage();
+    const senderLine = isAnonymous
+        ? "\n— An Anonymous Pilgrim"
+        : "\n— A Seeker on the Path";
+
+    return sankalpaMsg + senderLine + "\n\n🪷 via Sanatan OS";
+}
+
+// Override share functions to use anonymous setting
+const originalShareToWhatsApp = shareToWhatsApp;
+shareToWhatsApp = async function () {
+    hideShareModal();
+
+    const blob = await generateCardImage();
+    if (!blob) {
+        alert('Could not generate card. Please try again.');
+        return;
+    }
+
+    // Increment share count
+    incrementShareCount();
+
+    // Try Web Share API with file
+    if (navigator.share && navigator.canShare) {
+        const file = new File([blob], 'karma-card.png', { type: 'image/png' });
+        const shareData = {
+            files: [file],
+            title: 'A Gift of Wisdom',
+            text: getShareMessage()
+        };
+
+        if (navigator.canShare(shareData)) {
+            try {
+                await navigator.share(shareData);
+                return;
+            } catch (err) {
+                console.log('Share cancelled or failed');
+            }
+        }
+    }
+
+    // Fallback: Download and open WhatsApp
+    downloadBlob(blob, 'karma-card.png');
+    const text = encodeURIComponent(getShareMessage());
+    setTimeout(() => {
+        window.open(`whatsapp://send?text=${text}`, '_blank');
+    }, 500);
+};
+
+// Demo function to test unwrap (can be called from console)
+window.demoUnwrap = function () {
+    showUnwrapScreen('peace', 'A Fellow Traveler');
+};

@@ -156,6 +156,15 @@
                 </div>
             </div>
 
+            <!-- Anonymous Pilgrim Toggle -->
+            <div class="anonymous-section">
+                <label class="anonymous-toggle">
+                    <input type="checkbox" id="anonymous-toggle">
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Share as Anonymous Pilgrim</span>
+                </label>
+            </div>
+
             <!-- Share Button -->
             <button class="share-btn" id="share-btn">
                 <i class="fa-solid fa-paper-plane"></i>
@@ -181,6 +190,100 @@
                         </button>
                     </div>
                     <button class="close-modal" id="close-modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 3: Ripple Map -->
+        <div id="ripple-screen" class="screen">
+            <header class="app-header">
+                <button class="header-btn" id="back-from-ripple">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1>Your Ripple</h1>
+                    <span class="header-subtitle">The Journey of Wisdom</span>
+                </div>
+                <div class="header-btn invisible"></div>
+            </header>
+
+            <div class="ripple-map-container">
+                <!-- Cosmic Background -->
+                <div class="cosmos-bg">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                </div>
+
+                <!-- Ripple Visualization -->
+                <div class="ripple-map" id="ripple-map">
+                    <div class="ripple-center">
+                        <span class="center-icon">🪷</span>
+                        <span class="center-label">You</span>
+                    </div>
+                    <div class="ripple-ring ring-1"></div>
+                    <div class="ripple-ring ring-2"></div>
+                    <div class="ripple-ring ring-3"></div>
+
+                    <!-- Soul nodes will be added dynamically -->
+                    <div class="soul-nodes" id="soul-nodes"></div>
+                </div>
+
+                <!-- Ripple Stats -->
+                <div class="ripple-map-stats">
+                    <div class="map-stat">
+                        <span class="map-stat-value" id="map-souls">0</span>
+                        <span class="map-stat-label">Souls Reached</span>
+                    </div>
+                    <div class="map-stat">
+                        <span class="map-stat-value" id="map-depth">0</span>
+                        <span class="map-stat-label">Generations Deep</span>
+                    </div>
+                    <div class="map-stat">
+                        <span class="map-stat-value" id="map-merit">0</span>
+                        <span class="map-stat-label">Merit (पुण्य)</span>
+                    </div>
+                </div>
+
+                <!-- Nishkama Message -->
+                <div class="nishkama-message">
+                    <p>"The outcome is not yours to control.<br>The giving itself is the reward."</p>
+                    <span>— Nishkama Karma</span>
+                </div>
+            </div>
+
+            <button class="view-ripple-btn" id="back-to-create">
+                <i class="fa-solid fa-plus"></i>
+                <span>Create Another Card</span>
+            </button>
+        </div>
+
+        <!-- Screen 4: Card Unwrap Preview (for receivers) -->
+        <div id="unwrap-screen" class="screen">
+            <div class="unwrap-container">
+                <div class="unwrap-glow"></div>
+
+                <div class="unwrap-card" id="unwrap-card">
+                    <div class="unwrap-wrapper">
+                        <div class="wrapper-fold top-fold"></div>
+                        <div class="wrapper-fold bottom-fold"></div>
+                        <div class="wrapper-ribbon">
+                            <span>🪷</span>
+                        </div>
+                    </div>
+
+                    <div class="unwrap-message">
+                        <p class="sender-text">A Gift of Wisdom</p>
+                        <p class="sankalpa-text" id="unwrap-sankalpa">May this bring you peace</p>
+                        <p class="sender-name" id="unwrap-sender">From a Seeker on the Path</p>
+                    </div>
+
+                    <button class="unwrap-btn" id="unwrap-btn">
+                        <i class="fa-solid fa-gift"></i>
+                        <span>Tap to Receive</span>
+                    </button>
                 </div>
             </div>
         </div>
