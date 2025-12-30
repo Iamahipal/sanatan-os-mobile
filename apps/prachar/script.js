@@ -64,6 +64,14 @@ const milestones = {
     siddha: { name: "सिद्ध", english: "Accomplished", icon: "🪷", desc: "108 days of transformation" }
 };
 
+const loFiMantras = [
+    { mantra: "ॐ नमः शिवाय", meaning: "I bow to Shiva", vibe: "Cosmic" },
+    { mantra: "सो ऽहम्", meaning: "I am That", vibe: "Inner Self" },
+    { mantra: "तत् त्वम् असि", meaning: "Thou Art That", vibe: "Unity" },
+    { mantra: "अहं ब्रह्मास्मि", meaning: "I am the Universe", vibe: "Infinite" },
+    { mantra: "हरिः ॐ", meaning: "The Divine Truth", vibe: "Peace" }
+];
+
 // ============================================
 // STATE
 // ============================================
@@ -139,22 +147,32 @@ function setupEventListeners() {
         });
     });
 
+    // Hero Section Interaction
+    const heroSection = document.getElementById('hero-sadhana');
+    if (heroSection) {
+        heroSection.addEventListener('click', () => {
+            currentCardType = heroSection.dataset.type; // 'sadhana'
+            showCreatorScreen();
+        });
+    }
+
     // Back button
     document.getElementById('back-to-picker')?.addEventListener('click', showPickerScreen);
 
     // Sankalpa selection
-    document.querySelectorAll('.sankalpa-btn').forEach(btn => {
+    // Sankalpa selection (Chips)
+    document.querySelectorAll('.chip').forEach(btn => {
         btn.addEventListener('click', () => {
-            document.querySelectorAll('.sankalpa-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.chip').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentSankalpa = btn.dataset.sankalpa;
         });
     });
 
-    // Background selection
-    document.querySelectorAll('.bg-btn').forEach(btn => {
+    // Background selection (Circles)
+    document.querySelectorAll('.bg-circle').forEach(btn => {
         btn.addEventListener('click', () => {
-            document.querySelectorAll('.bg-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.bg-circle').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentBg = btn.dataset.bg;
             updateCardBackground();
@@ -195,7 +213,8 @@ function showCreatorScreen() {
         sadhana: 'Sadhana Card',
         wisdom: 'Wisdom Card',
         suprabhat: 'Suprabhat Card',
-        milestone: 'Milestone Card'
+        milestone: 'Milestone Card',
+        lofi: 'Lo-Fi Mantra'
     };
     document.getElementById('creator-title').textContent = titles[currentCardType];
 
@@ -257,6 +276,24 @@ function generateCardContent() {
                 </div>
             `;
             break;
+
+        case 'lofi':
+            const mantra = loFiMantras[Math.floor(Math.random() * loFiMantras.length)];
+            cardMain.innerHTML = `
+                <div class="lofi-content">
+                    <div class="lofi-grain"></div>
+                    <div class="lofi-frame">
+                        <span class="lofi-vibe">/// ${mantra.vibe.toUpperCase()} ///</span>
+                        <h2 class="lofi-text">${mantra.mantra}</h2>
+                        <p class="lofi-meaning">${mantra.meaning}</p>
+                        <div class="lofi-footer">
+                            <span>REC ● 00:10:08</span>
+                            <span>LO-FI MODE</span>
+                        </div>
+                    </div>
+                </div >
+                `;
+            break;
     }
 }
 
@@ -264,7 +301,12 @@ function updateCardBackground() {
     const card = document.getElementById('karma-card');
     // Remove all bg classes
     card.className = 'karma-card';
-    card.classList.add(`bg-${currentBg}`);
+    card.classList.add(`bg - ${currentBg} `);
+
+    // Add specific class for Lofi to handle global styles on the card
+    if (currentCardType === 'lofi') {
+        card.classList.add('card-lofi-mode');
+    }
 }
 
 // ============================================
