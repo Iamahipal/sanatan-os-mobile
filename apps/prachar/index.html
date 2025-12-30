@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>प्रचार - Prachar | Sanatan OS</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Screen 1: Card Picker -->
+        <div id="picker-screen" class="screen active">
+            <header class="app-header">
+                <a href="../../index.html" class="header-btn">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+                <div class="header-center">
+                    <h1>प्रचार</h1>
+                    <span class="header-subtitle">The Dharma Ripple</span>
+                </div>
+                <div class="header-btn invisible"></div>
+            </header>
+
+            <div class="intro-section">
+                <div class="intro-icon">🪷</div>
+                <p class="intro-text">Share your journey, not a sermon.<br>Let your practice inspire.</p>
+            </div>
+
+            <div class="card-grid">
+                <!-- Sadhana Card -->
+                <div class="card-option" data-type="sadhana">
+                    <div class="card-preview sadhana-preview">
+                        <span class="preview-icon">📿</span>
+                        <span class="preview-stat" id="preview-japa">0</span>
+                    </div>
+                    <h3>Sadhana</h3>
+                    <p>Your spiritual stats</p>
+                </div>
+
+                <!-- Wisdom Card -->
+                <div class="card-option" data-type="wisdom">
+                    <div class="card-preview wisdom-preview">
+                        <span class="preview-icon">🪷</span>
+                        <span class="preview-text">गीता</span>
+                    </div>
+                    <h3>Wisdom</h3>
+                    <p>Gita quotes</p>
+                </div>
+
+                <!-- Suprabhat Card -->
+                <div class="card-option" data-type="suprabhat">
+                    <div class="card-preview suprabhat-preview">
+                        <span class="preview-icon">🌅</span>
+                        <span class="preview-text">सुप्रभात</span>
+                    </div>
+                    <h3>Suprabhat</h3>
+                    <p>Morning blessings</p>
+                </div>
+
+                <!-- Milestone Card -->
+                <div class="card-option" data-type="milestone">
+                    <div class="card-preview milestone-preview">
+                        <span class="preview-icon">🏆</span>
+                        <span class="preview-text">साधक</span>
+                    </div>
+                    <h3>Milestone</h3>
+                    <p>Achievements</p>
+                </div>
+            </div>
+
+            <div class="ripple-stats">
+                <div class="ripple-icon">
+                    <div class="ripple-wave"></div>
+                    <div class="ripple-wave"></div>
+                    <div class="ripple-wave"></div>
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="ripple-info">
+                    <span class="ripple-count" id="total-shares">0</span>
+                    <span class="ripple-label">Souls Touched</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 2: Card Creator -->
+        <div id="creator-screen" class="screen">
+            <header class="app-header">
+                <button class="header-btn" id="back-to-picker">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="header-center">
+                    <h1 id="creator-title">Create Card</h1>
+                </div>
+                <div class="header-btn invisible"></div>
+            </header>
+
+            <!-- Card Preview Area -->
+            <div class="card-canvas-container">
+                <div id="karma-card" class="karma-card">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-header-icon">ॐ</div>
+                        <div class="card-main" id="card-main-content">
+                            <!-- Dynamic content here -->
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-brand">🪷 Sanatan OS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sankalpa Selector -->
+            <div class="sankalpa-section">
+                <h3>Set Your Intention (संकल्प)</h3>
+                <div class="sankalpa-options">
+                    <button class="sankalpa-btn active" data-sankalpa="peace">
+                        <span class="sankalpa-icon">🙏</span>
+                        <span>To Comfort</span>
+                    </button>
+                    <button class="sankalpa-btn" data-sankalpa="inspire">
+                        <span class="sankalpa-icon">💡</span>
+                        <span>To Inspire</span>
+                    </button>
+                    <button class="sankalpa-btn" data-sankalpa="awaken">
+                        <span class="sankalpa-icon">🕉️</span>
+                        <span>To Awaken</span>
+                    </button>
+                    <button class="sankalpa-btn" data-sankalpa="gratitude">
+                        <span class="sankalpa-icon">🌸</span>
+                        <span>Gratitude</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Background Selector -->
+            <div class="background-section">
+                <h3>Choose Background</h3>
+                <div class="background-options" id="background-options">
+                    <button class="bg-btn active" data-bg="cosmic"
+                        style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);"></button>
+                    <button class="bg-btn" data-bg="saffron"
+                        style="background: linear-gradient(135deg, #ff9933, #ff6b35, #c44536);"></button>
+                    <button class="bg-btn" data-bg="lotus"
+                        style="background: linear-gradient(135deg, #e91e63, #9c27b0, #673ab7);"></button>
+                    <button class="bg-btn" data-bg="forest"
+                        style="background: linear-gradient(135deg, #134e5e, #71b280, #2d5016);"></button>
+                    <button class="bg-btn" data-bg="gold"
+                        style="background: linear-gradient(135deg, #f7971e, #ffd200, #f7971e);"></button>
+                </div>
+            </div>
+
+            <!-- Share Button -->
+            <button class="share-btn" id="share-btn">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Share Wisdom</span>
+            </button>
+
+            <!-- Share Options Modal -->
+            <div class="share-modal" id="share-modal">
+                <div class="share-modal-content">
+                    <h3>Share Your Karma Card</h3>
+                    <div class="share-options">
+                        <button class="share-option" id="share-whatsapp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </button>
+                        <button class="share-option" id="share-native">
+                            <i class="fa-solid fa-share-nodes"></i>
+                            <span>More</span>
+                        </button>
+                        <button class="share-option" id="share-download">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Save</span>
+                        </button>
+                    </div>
+                    <button class="close-modal" id="close-modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- html2canvas for card generation -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
