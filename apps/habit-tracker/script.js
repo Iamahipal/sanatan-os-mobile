@@ -19,8 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const COLORS = [
-        '#FFDC00', '#FF9800', '#F44336', '#E91E63', '#9C27B0',
-        '#673AB7', '#2196F3', '#009688', '#4CAF50', '#795548'
+        '#007AFF', // Blue
+        '#AF52DE', // Purple
+        '#FF2D55', // Pink
+        '#FF9500', // Orange
+        '#30B0C7', // Teal
+        '#34C759'  // Green
     ];
 
     const MILESTONES = [
@@ -233,6 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== INITIALIZATION =====
     function init() {
         loadState();
+        initColorPicker();
         initIconPicker();
         bindEvents();
         initNotifications();
@@ -244,6 +249,30 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             showScreen('onboarding');
         }
+    }
+
+    function initColorPicker() {
+        const colorPicker = document.querySelector('.color-picker');
+        if (!colorPicker) return;
+
+        colorPicker.innerHTML = COLORS.map((color, index) => `
+            <button class="color-swatch ${index === 0 ? 'active' : ''}" 
+                    data-color="${color}" 
+                    style="background: ${color};"
+                    aria-label="Select color ${color}"></button>
+        `).join('');
+
+        // Re-bind click events since elements are new
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+            swatch.addEventListener('click', (e) => {
+                // Remove active class from all
+                document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+                // Add to clicked
+                e.target.classList.add('active');
+                // Update state
+                formState.color = e.target.dataset.color;
+            });
+        });
     }
 
     function loadState() {
@@ -274,10 +303,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== SCREEN NAVIGATION =====
     function showScreen(screenName) {
         Object.values(screens).forEach(screen => {
-            if (screen) screen.style.display = 'none';
+            if (screen) {
+                screen.style.display = 'none';
+                screen.classList.remove('animate-fade-in', 'animate-scale-in');
+            }
         });
         if (screens[screenName]) {
             screens[screenName].style.display = 'flex';
+
+            // Animation logic
+            if (['habitForm', 'habitDetail', 'settings'].includes(screenName)) {
+                screens[screenName].classList.add('animate-scale-in');
+            } else {
+                screens[screenName].classList.add('animate-fade-in');
+            }
+            // Reset scroll
+            window.scrollTo(0, 0);
         }
         lucide.createIcons();
     }
@@ -436,10 +477,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <div class="habit-actions">
-                    <button class="action-btn add-entry" data-action="entry">
+                    <button class="action-btn add-entry" data-action="entry" aria-label="Add entry for ${habit.name}">
                         <i data-lucide="plus"></i>
                     </button>
-                    <button class="action-btn check ${status === 'completed' ? 'done' : status === 'skipped' ? 'skipped' : ''}" data-action="check">
+                    <button class="action-btn check ${status === 'completed' ? 'done' : status === 'skipped' ? 'skipped' : ''}" data-action="check" aria-label="Toggle status for ${habit.name}">
                         <i data-lucide="${status === 'completed' ? 'check' : status === 'skipped' ? 'x' : 'circle'}"></i>
                     </button>
                 </div>
@@ -522,6 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCompletionPct() {
+        if (!completionPctEl) return;
         const dateKey = getDateKey(state.selectedDate);
         const activeHabits = state.habits.filter(h => isHabitActiveOnDate(h, state.selectedDate));
 

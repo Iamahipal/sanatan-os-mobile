@@ -2,62 +2,65 @@
 /* Design System inspired by TickOff + Loop */
 
 :root {
-    /* Primary Colors - TickOff Yellow Theme */
-    --primary: #FFDC00;
-    --primary-dark: #E5C600;
-    --primary-light: #FFF176;
+    /* Primary Colors - Jony Ive Blue Theme */
+    --primary: #007AFF;
+    --primary-dark: #0056B3;
+    --primary-light: #E1F0FF;
+    --accent-yellow: #FFDC00;
+    /* Only for streaks/celebrations */
 
     /* Background */
     --bg-primary: #FFFFFF;
-    --bg-secondary: #F5F5F5;
-    --bg-tertiary: #EEEEEE;
+    --bg-secondary: #F5F5F7;
+    /* Apple-style light gray */
+    --bg-tertiary: #E5E5EA;
 
     /* Text */
-    --text-primary: #212121;
-    --text-secondary: #666666;
-    --text-tertiary: #999999;
+    --text-primary: #1D1D1F;
+    /* Apple-style black */
+    --text-secondary: #86868B;
+    --text-tertiary: #AEAEB2;
 
     /* Status Colors */
-    --success: #4CAF50;
-    --success-light: #C8E6C9;
-    --danger: #F44336;
-    --danger-light: #FFCDD2;
-    --warning: #FF9800;
+    --success: #34C759;
+    --success-light: #D4F7DC;
+    --danger: #FF3B30;
+    --danger-light: #FFD4D1;
+    --warning: #FF9F0A;
 
-    /* Habit Colors Palette */
-    --habit-yellow: #FFDC00;
-    --habit-orange: #FF9800;
-    --habit-red: #F44336;
-    --habit-pink: #E91E63;
-    --habit-purple: #9C27B0;
-    --habit-indigo: #673AB7;
-    --habit-blue: #2196F3;
-    --habit-teal: #009688;
-    --habit-green: #4CAF50;
-    --habit-brown: #795548;
+    /* Habit Colors Palette - Muted & Accessible */
+    --habit-blue: #007AFF;
+    --habit-purple: #AF52DE;
+    --habit-pink: #FF2D55;
+    --habit-orange: #FF9500;
+    --habit-teal: #30B0C7;
+    --habit-green: #34C759;
 
-    /* Shadows */
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+    /* Shadows - Subtle & Premium */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* Softer shadow */
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
 
     /* Transitions */
-    --transition-fast: 150ms ease;
-    --transition-normal: 250ms ease;
-    --transition-slow: 400ms ease;
+    --transition-fast: 150ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-normal: 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-slow: 400ms cubic-bezier(0.25, 0.1, 0.25, 1);
 
-    /* Spacing */
+    /* Spacing - 8pt Grid */
     --spacing-xs: 4px;
     --spacing-sm: 8px;
     --spacing-md: 16px;
     --spacing-lg: 24px;
     --spacing-xl: 32px;
+    --spacing-2xl: 48px;
 
     /* Border Radius */
     --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-full: 50px;
+    --radius-md: 16px;
+    /* Increased for modern look */
+    --radius-lg: 20px;
+    --radius-full: 999px;
 }
 
 /* ===== RESET & BASE ===== */
@@ -151,6 +154,184 @@ body.page-enter .app-container {
         transform: translateX(0);
     }
 }
+
+/* ===== CORE COMPONENT SYSTEM (Jony Ive) ===== */
+
+/* Typography */
+h1,
+.text-h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+h2,
+.text-h2 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.text-body {
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--text-primary);
+}
+
+.text-caption {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--spacing-lg);
+    height: 44px;
+    /* Minimum touch target */
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 17px;
+    transition: var(--transition-fast);
+    text-decoration: none;
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+    background: var(--primary-dark);
+}
+
+.btn-secondary {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.btn-secondary:active {
+    background: #D1D1D6;
+}
+
+.btn-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    background: transparent;
+    transition: background-color var(--transition-fast);
+}
+
+.btn-icon:active {
+    background: var(--bg-secondary);
+}
+
+/* Cards */
+.card {
+    background: var(--bg-primary);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Inputs & Forms */
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.input-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-field {
+    width: 100%;
+    height: 44px;
+    padding: 0 var(--spacing-md);
+    background: var(--bg-secondary);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 17px;
+    transition: var(--transition-fast);
+}
+
+.input-field:focus {
+    background: var(--bg-primary);
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+/* Navbar Utilities */
+.nav-bar {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-sm);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* Prana Quote (Subtle) */
+.prana-quote-card {
+    text-align: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: transparent;
+    margin-bottom: var(--spacing-xs);
+    opacity: 0.9;
+}
+
+.prana-quote-card p {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    font-style: italic;
+    margin-bottom: var(--spacing-xs);
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    /* If applying to Hindi text */
+}
+
+.prana-quote-card span {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: block;
+}
+
 
 /* ===== ONBOARDING ===== */
 .onboarding-screen {
@@ -338,7 +519,8 @@ body.page-enter .app-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 56px;
+    height: 60px;
+    /* Increased from 56px */
     padding: 0 var(--spacing-sm);
     padding-top: env(safe-area-inset-top);
     background: var(--bg-primary);
@@ -348,52 +530,19 @@ body.page-enter .app-container {
 
 .header-btn {
     width: 44px;
+    /* Minimum touch target */
     height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     transition: var(--transition-fast);
+    color: var(--primary);
 }
 
 .header-btn:active {
     background: var(--bg-secondary);
-}
-
-.header-btn i {
-    width: 24px;
-    height: 24px;
-    stroke: var(--text-primary);
-    stroke-width: 2;
-}
-
-.header-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.today-date {
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-.completion-pct {
-    font-size: 0.75rem;
-    color: var(--success);
-    font-weight: 500;
-}
-
-.header-title-text {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.save-btn {
-    color: var(--primary);
-    font-weight: 600;
-    width: auto;
-    padding: 0 var(--spacing-md);
+    opacity: 0.7;
 }
 
 /* ===== WEEK PICKER ===== */
@@ -414,6 +563,9 @@ body.page-enter .app-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    min-height: 64px;
+    /* Larger touch target */
     padding: var(--spacing-sm);
     border-radius: var(--radius-md);
     transition: var(--transition-fast);
@@ -422,109 +574,43 @@ body.page-enter .app-container {
 
 .week-day:active {
     background: var(--bg-secondary);
+    transform: scale(0.96);
 }
 
 .week-day.today {
     background: var(--primary);
+    box-shadow: var(--shadow-md);
 }
 
 .week-day.today .day-name,
 .week-day.today .day-num {
-    color: var(--text-primary);
+    color: white;
+    /* Contrast fix for primary background */
+}
+
+.week-day.selected {
+    border: 2px solid var(--primary);
+    background: var(--primary-light);
+}
+
+.week-day.selected .day-name,
+.week-day.selected .day-num {
+    color: var(--primary-dark);
 }
 
 .day-name {
-    font-size: 0.7rem;
-    font-weight: 500;
+    font-size: 0.75rem;
+    font-weight: 600;
     color: var(--text-secondary);
     text-transform: uppercase;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 .day-num {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-/* ===== PRANA QUOTE CARD ===== */
-.prana-quote-card {
-    margin: var(--spacing-sm) var(--spacing-md);
-    padding: var(--spacing-md);
-    background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
-    border-radius: var(--radius-md);
-    border-left: 4px solid var(--habit-orange);
-    text-align: center;
-}
-
-.prana-sanskrit {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
     font-size: 1.1rem;
-    color: #8D6E00;
-    margin-bottom: var(--spacing-xs);
-}
-
-.prana-translation {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    font-style: italic;
-    margin-bottom: var(--spacing-xs);
-}
-
-.prana-source {
-    font-size: 0.75rem;
-    color: var(--habit-orange);
-    font-weight: 500;
-}
-
-/* ===== AUSPICIOUS DAY INDICATORS ===== */
-.auspicious-badge {
-    display: inline-block;
-    font-size: 0.65rem;
-    padding: 2px 6px;
-    border-radius: 10px;
-    margin-left: 6px;
-    font-weight: 500;
-    vertical-align: middle;
-}
-
-.auspicious-badge.ekadashi {
-    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
-    color: #2E7D32;
-}
-
-.auspicious-badge.purnima {
-    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
-    color: #E65100;
-}
-
-.auspicious-badge.amavasya {
-    background: linear-gradient(135deg, #EFEBE9, #D7CCC8);
-    color: #5D4037;
-}
-
-/* Auspicious dot on week days */
-.week-day.auspicious {
-    position: relative;
-}
-
-.auspicious-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    margin-top: 4px;
-}
-
-.auspicious-dot.ekadashi {
-    background: #4CAF50;
-}
-
-.auspicious-dot.purnima {
-    background: #FF9800;
-}
-
-.auspicious-dot.amavasya {
-    background: #795548;
+    /* Larger font */
+    font-weight: 700;
+    color: var(--text-primary);
 }
 
 /* ===== HABIT LIST ===== */
@@ -532,48 +618,56 @@ body.page-enter .app-container {
     flex: 1;
     overflow-y: auto;
     padding: var(--spacing-md);
-    padding-bottom: 80px;
+    padding-bottom: 100px;
+    /* More clearance for bottom nav */
 }
 
-/* Empty State */
+/* Empty State - Improved */
 .empty-state {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     text-align: center;
     padding: var(--spacing-xl);
 }
 
 .empty-icon {
-    width: 64px;
-    height: 64px;
-    stroke: var(--text-tertiary);
+    width: 80px;
+    height: 80px;
+    stroke: var(--primary);
+    /* Use primary color */
     stroke-width: 1;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.8;
 }
 
 .empty-state p {
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: var(--spacing-xs);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
 }
 
 .empty-state span {
-    font-size: 0.9rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 260px;
+    margin-bottom: var(--spacing-lg);
 }
 
 /* ===== HABIT CARD ===== */
 .habit-card {
     background: var(--bg-primary);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-md);
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--bg-tertiary);
-    transition: var(--transition-fast);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    /* Subtle border */
+    transition: var(--transition-normal);
 }
 
 .habit-card:active {
@@ -590,60 +684,71 @@ body.page-enter .app-container {
 .habit-info {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
+    /* Increased gap */
 }
 
 .habit-icon {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    /* Larger icon container */
+    height: 48px;
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    background: var(--bg-secondary);
+    /* Default background */
 }
 
 .habit-icon i {
-    width: 20px;
-    height: 20px;
-    stroke: white;
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-primary);
     stroke-width: 2;
 }
 
 .habit-name {
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    /* Larger font */
+    color: var(--text-primary);
 }
 
 .habit-streak {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
+    margin-top: 2px;
 }
 
 .habit-streak span {
-    color: var(--warning);
-    font-weight: 600;
+    color: var(--accent-yellow);
+    /* Use specific accent color */
+    font-weight: 700;
 }
 
 .habit-actions {
     display: flex;
-    gap: var(--spacing-xs);
+    gap: var(--spacing-sm);
 }
 
 .action-btn {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    /* Minimum touch target 44pt */
+    height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: var(--transition-fast);
+    background: var(--bg-secondary);
 }
 
 .action-btn i {
-    width: 18px;
-    height: 18px;
-    stroke-width: 2;
+    width: 24px;
+    height: 24px;
+    stroke-width: 2.5;
+    /* Bolder icons */
 }
 
 .action-btn.add-entry {
@@ -1704,9 +1809,10 @@ body.page-enter .app-container {
 .detail-actions {
     display: flex;
     gap: var(--spacing-sm);
-    padding: var(--spacing-md);
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--bg-tertiary);
+    padding: var(--spacing-lg) var(--spacing-md);
+    background: transparent;
+    margin-top: var(--spacing-lg);
+    border-top: 1px solid var(--bg-tertiary);
 }
 
 .detail-action-btn {
@@ -2140,4 +2246,103 @@ body.page-enter .app-container {
 .stack-indicator i {
     width: 12px;
     height: 12px;
+}
+
+/* =========================================
+   PHASE 4: ANIMATIONS & MICRO-INTERACTIONS
+   ========================================= */
+
+/* --- Keyframes --- */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translate3d(20px, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* --- Animation Utilities --- */
+.animate-slide-in {
+    animation: slideInRight 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-slide-up {
+    animation: slideInUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* --- Tactile Feedback (Micro-interactions) --- */
+/* Buttons: Satisfying 'squish' on click */
+button:active,
+.btn:active,
+.header-btn:active,
+.nav-tab:active,
+.fab:active,
+.detail-action-btn:active,
+.settings-item:active {
+    transform: scale(0.96);
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Cards: Subtle compression on press (if interactive) */
+.habit-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease-out;
+}
+
+/* Toggle Switch Animation */
+.toggle-btn .toggle-slider {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- Accessibility --- */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
 }
