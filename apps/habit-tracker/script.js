@@ -222,7 +222,12 @@ document.addEventListener('DOMContentLoaded', () => {
         reminder: false,
         reminderTime: '09:00',
         showOnTimeline: true,
-        category: null
+        category: null,
+        // Sprint B additions
+        allowRestDays: false,
+        maxRestDays: 1,
+        ritual: 'none',
+        stackAfter: null
     };
 
     // ===== INITIALIZATION =====
@@ -884,6 +889,150 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ===== SPRINT B: WEEKLY REPORT =====
+    function generateWeeklyReport() {
+        const reportContent = document.getElementById('report-content');
+        if (!reportContent) return;
+
+        const today = new Date();
+        const weekStart = new Date(today);
+        weekStart.setDate(today.getDate() - 7);
+
+        let totalCompleted = 0;
+        let totalExpected = 0;
+        let bestStreak = 0;
+        const habitScores = [];
+
+        state.habits.forEach(habit => {
+            let weekCompleted = 0;
+            let weekExpected = 0;
+            const streak = calculateStreak(habit);
+            if (streak > bestStreak) bestStreak = streak;
+
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(weekStart);
+                date.setDate(weekStart.getDate() + i);
+                const dateKey = getDateKey(date);
+
+                if (isHabitActiveOnDate(habit, date)) {
+                    weekExpected++;
+                    if (habit.entries[dateKey]?.status === 'completed') {
+                        weekCompleted++;
+                    }
+                }
+            }
+
+            totalCompleted += weekCompleted;
+            totalExpected += weekExpected;
+
+            const score = weekExpected > 0 ? Math.round((weekCompleted / weekExpected) * 100) : 0;
+            habitScores.push({ name: habit.name, score, color: habit.color });
+        });
+
+        const overallScore = totalExpected > 0 ? Math.round((totalCompleted / totalExpected) * 100) : 0;
+
+        reportContent.innerHTML = `
+            <div class="report-stat-grid">
+                <div class="report-stat">
+                    <div class="report-stat-value">${overallScore}%</div>
+                    <div class="report-stat-label">Week Score</div>
+                </div>
+                <div class="report-stat">
+                    <div class="report-stat-value">${totalCompleted}/${totalExpected}</div>
+                    <div class="report-stat-label">Completed</div>
+                </div>
+                <div class="report-stat">
+                    <div class="report-stat-value">🔥 ${bestStreak}</div>
+                    <div class="report-stat-label">Best Streak</div>
+                </div>
+                <div class="report-stat">
+                    <div class="report-stat-value">${state.habits.length}</div>
+                    <div class="report-stat-label">Active Habits</div>
+                </div>
+            </div>
+            <div class="report-habit-list">
+                ${habitScores.map(h => `
+                    <div class="report-habit">
+                        <span class="report-habit-name">${h.name}</span>
+                        <span class="report-habit-score ${h.score >= 80 ? 'good' : h.score >= 50 ? 'medium' : 'poor'}">${h.score}%</span>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    function openWeeklyReport() {
+        generateWeeklyReport();
+        const modal = document.getElementById('weekly-report-modal');
+        if (modal) modal.classList.add('active');
+        lucide.createIcons();
+    }
+
+    function closeWeeklyReport() {
+        const modal = document.getElementById('weekly-report-modal');
+        if (modal) modal.classList.remove('active');
+    }
+
+    function generateReportText() {
+        const today = new Date();
+        const weekStart = new Date(today);
+        weekStart.setDate(today.getDate() - 7);
+
+        let totalCompleted = 0;
+        let totalExpected = 0;
+
+        state.habits.forEach(habit => {
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(weekStart);
+                date.setDate(weekStart.getDate() + i);
+                const dateKey = getDateKey(date);
+
+                if (isHabitActiveOnDate(habit, date)) {
+                    totalExpected++;
+                    if (habit.entries[dateKey]?.status === 'completed') {
+                        totalCompleted++;
+                    }
+                }
+            }
+        });
+
+        const score = totalExpected > 0 ? Math.round((totalCompleted / totalExpected) * 100) : 0;
+
+        return `🙏 My Weekly Niyam Report 🙏
+        
+📊 Score: ${score}%
+✅ Completed: ${totalCompleted}/${totalExpected} habits
+💪 ${state.habits.length} active niyams
+
+🔥 Stay consistent, stay disciplined!
+— Niyam (Sanatan OS)`;
+    }
+
+    function showToast(message) {
+        // Check if toast already exists
+        const existingToast = document.querySelector('.toast-notification');
+        if (existingToast) existingToast.remove();
+
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.textContent = message;
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            animation: toastIn 0.3s ease;
+        `;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2500);
+    }
+
     // ===== MODALS =====
     function openEntryModal(habit) {
         state.selectedHabitId = habit.id;
@@ -1167,6 +1316,57 @@ document.addEventListener('DOMContentLoaded', () => {
             formState.showOnTimeline = !formState.showOnTimeline;
             timelineToggle.classList.toggle('active', formState.showOnTimeline);
         });
+
+        // Sprint B: Rest Days Toggle
+        const restDaysToggle = document.getElementById('rest-days-toggle');
+        const restDaysOptions = document.querySelector('.rest-days-options');
+        if (restDaysToggle) {
+            restDaysToggle.addEventListener('click', () => {
+                formState.allowRestDays = !formState.allowRestDays;
+                restDaysToggle.classList.toggle('active', formState.allowRestDays);
+                if (restDaysOptions) {
+                    restDaysOptions.style.display = formState.allowRestDays ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Sprint B: Ritual Buttons
+        const ritualButtons = document.querySelectorAll('.ritual-btn');
+        ritualButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                formState.ritual = btn.dataset.ritual;
+                ritualButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Sprint B: Weekly Report
+        const closeWeeklyReportBtn = document.getElementById('close-weekly-report');
+        if (closeWeeklyReportBtn) {
+            closeWeeklyReportBtn.addEventListener('click', closeWeeklyReport);
+        }
+
+        const shareReportBtn = document.getElementById('share-report-btn');
+        if (shareReportBtn) {
+            shareReportBtn.addEventListener('click', async () => {
+                const report = generateReportText();
+                try {
+                    if (navigator.share) {
+                        await navigator.share({ title: 'My Weekly Niyam Report', text: report });
+                    } else {
+                        await navigator.clipboard.writeText(report);
+                        showToast('Report copied to clipboard!');
+                    }
+                } catch (e) {
+                    console.log('Share cancelled');
+                }
+            });
+        }
+
+        const reportBtn = document.getElementById('report-btn');
+        if (reportBtn) {
+            reportBtn.addEventListener('click', openWeeklyReport);
+        }
 
         // Detail
         detailBackBtn.addEventListener('click', () => {

@@ -1926,3 +1926,218 @@ body.page-enter .app-container {
 .sync-status.syncing i {
     animation: spin 1s linear infinite;
 }
+
+/* ===== SPRINT B: REST DAYS ===== */
+.rest-days-options {
+    margin-top: var(--spacing-sm);
+    padding-left: var(--spacing-md);
+}
+
+.rest-days-input {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.rest-days-input input {
+    width: 60px;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--bg-tertiary);
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.rest-days-input span {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* ===== SPRINT B: RITUAL SELECTOR ===== */
+.ritual-selector {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.ritual-btn {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-secondary);
+    border: 2px solid var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    transition: var(--transition-fast);
+}
+
+.ritual-btn.active {
+    border-color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 15%, white);
+}
+
+.ritual-btn[data-ritual="morning"].active {
+    border-color: #FF9800;
+    background: #FFF3E0;
+}
+
+.ritual-btn[data-ritual="evening"].active {
+    border-color: #5C6BC0;
+    background: #E8EAF6;
+}
+
+/* ===== SPRINT B: HABIT STACKING ===== */
+.stack-select {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 1px solid var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+/* ===== SPRINT B: WEEKLY REPORT ===== */
+.weekly-report-modal {
+    max-width: 360px;
+    max-height: 80vh;
+}
+
+.report-content {
+    padding: var(--spacing-md);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.report-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.report-stat {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    text-align: center;
+}
+
+.report-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.report-stat-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.report-habit-list {
+    margin-top: var(--spacing-md);
+}
+
+.report-habit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-sm);
+    border-bottom: 1px solid var(--bg-tertiary);
+}
+
+.report-habit-name {
+    font-weight: 500;
+}
+
+.report-habit-score {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.report-habit-score.good {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.report-habit-score.medium {
+    background: #FFF8E1;
+    color: #F9A825;
+}
+
+.report-habit-score.poor {
+    background: var(--danger-light);
+    color: var(--danger);
+}
+
+.share-report-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    width: 100%;
+    margin-top: var(--spacing-md);
+}
+
+.share-report-btn i {
+    width: 18px;
+    height: 18px;
+}
+
+/* ===== SPRINT B: RITUAL GROUPS ===== */
+.ritual-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.ritual-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-sm) 0;
+    margin-bottom: var(--spacing-sm);
+}
+
+.ritual-group-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.ritual-group-title.morning {
+    color: #FF9800;
+}
+
+.ritual-group-title.evening {
+    color: #5C6BC0;
+}
+
+.complete-ritual-btn {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    background: var(--success-light);
+    color: var(--success);
+    border-radius: var(--radius-full);
+    font-weight: 500;
+}
+
+.complete-ritual-btn:active {
+    background: var(--success);
+    color: white;
+}
+
+/* Stack indicator */
+.stack-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+}
+
+.stack-indicator i {
+    width: 12px;
+    height: 12px;
+}

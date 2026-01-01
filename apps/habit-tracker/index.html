@@ -148,6 +148,10 @@
                     <i data-lucide="list"></i>
                     <span>Timeline</span>
                 </button>
+                <button id="report-btn" class="nav-tab">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span>Report</span>
+                </button>
             </nav>
         </div>
 
@@ -293,6 +297,41 @@
                             <span class="toggle-slider"></span>
                         </button>
                     </div>
+                </div>
+
+                <!-- Rest Days (Vishram) - Sprint B -->
+                <div class="form-group toggle-group">
+                    <div class="toggle-row">
+                        <span>Allow Rest Days (विश्राम)</span>
+                        <button id="rest-days-toggle" class="toggle-btn">
+                            <span class="toggle-slider"></span>
+                        </button>
+                    </div>
+                    <div class="rest-days-options" style="display: none;">
+                        <div class="rest-days-input">
+                            <input type="number" id="max-rest-days" value="1" min="1" max="3">
+                            <span>rest days per week (won't break streak)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ritual Assignment - Sprint B -->
+                <div class="form-group">
+                    <label>Ritual (Optional)</label>
+                    <div class="ritual-selector">
+                        <button type="button" class="ritual-btn" data-ritual="none">None</button>
+                        <button type="button" class="ritual-btn" data-ritual="morning">🌅 प्रातः</button>
+                        <button type="button" class="ritual-btn" data-ritual="evening">🌙 सन्ध्या</button>
+                    </div>
+                </div>
+
+                <!-- Habit Stacking - Sprint B -->
+                <div class="form-group">
+                    <label>Stack After (Optional)</label>
+                    <select id="stack-after-habit" class="stack-select">
+                        <option value="">— Not stacked —</option>
+                        <!-- Populated by JS -->
+                    </select>
                 </div>
             </div>
         </div>
@@ -609,6 +648,25 @@
                     <button id="confirm-delete" class="danger-btn">Delete</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Weekly Report Modal - Sprint B -->
+    <div id="weekly-report-modal" class="modal-overlay">
+        <div class="modal-content weekly-report-modal">
+            <div class="modal-header">
+                <h2>Weekly सारांश</h2>
+                <button class="close-btn" id="close-weekly-report">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="report-content" id="report-content">
+                <!-- Populated by JS -->
+            </div>
+            <button id="share-report-btn" class="primary-btn share-report-btn">
+                <i data-lucide="share-2"></i>
+                Share Report
+            </button>
         </div>
     </div>
 
