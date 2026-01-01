@@ -32,6 +32,65 @@ document.addEventListener('DOMContentLoaded', () => {
         { days: 365, name: 'Year Champion', emoji: '👑' }
     ];
 
+    // ===== PRANA QUOTES - Daily Motivation =====
+    const PRANA_QUOTES = [
+        { text: "योगस्थः कुरु कर्माणि", translation: "Be steadfast in yoga, perform actions", source: "Gita 2.48" },
+        { text: "कर्मण्येवाधिकारस्ते", translation: "Your right is to action alone", source: "Gita 2.47" },
+        { text: "अभ्यासेन तु कौन्तेय", translation: "Through practice, O Arjuna", source: "Gita 6.35" },
+        { text: "श्रद्धावाँल्लभते ज्ञानम्", translation: "The faithful attain wisdom", source: "Gita 4.39" },
+        { text: "समत्वं योग उच्यते", translation: "Equanimity is called yoga", source: "Gita 2.48" },
+        { text: "आत्मानं रथिनं विद्धि", translation: "Know the Self as the charioteer", source: "Katha 1.3.3" },
+        { text: "तपस्विभ्योऽधिको योगी", translation: "The yogi is greater than the ascetic", source: "Gita 6.46" },
+        { text: "उद्धरेदात्मनात्मानम्", translation: "Elevate yourself by yourself", source: "Gita 6.5" },
+        { text: "नियतं कुरु कर्म त्वम्", translation: "Perform your prescribed duties", source: "Gita 3.8" },
+        { text: "मनः प्रसादः सौम्यत्वम्", translation: "Serenity of mind, gentleness", source: "Gita 17.16" },
+        { text: "धृतिः क्षमा दमो", translation: "Fortitude, forgiveness, self-control", source: "Gita 16.3" },
+        { text: "सत्त्वं रजस्तम इति", translation: "Sattva, Rajas, Tamas - the three gunas", source: "Gita 14.5" }
+    ];
+
+    // ===== AUSPICIOUS DAYS CALCULATOR =====
+    function getTithi(date) {
+        // Simplified lunar phase calculation
+        const lunationLength = 29.53058867;
+        const newMoon = new Date(2024, 0, 11); // Known new moon date
+        const diff = (date - newMoon) / (1000 * 60 * 60 * 24);
+        const phase = ((diff % lunationLength) + lunationLength) % lunationLength;
+        const tithi = Math.floor(phase / (lunationLength / 30)) + 1;
+        return tithi;
+    }
+
+    function getAuspiciousInfo(date) {
+        const tithi = getTithi(date);
+        const dayInfo = { tithi, isAuspicious: false, type: null, name: null };
+
+        // Purnima (Full Moon) - Tithi 15 of Shukla Paksha
+        if (tithi === 15) {
+            dayInfo.isAuspicious = true;
+            dayInfo.type = 'purnima';
+            dayInfo.name = 'पूर्णिमा';
+        }
+        // Amavasya (New Moon) - Tithi 30
+        else if (tithi === 30 || tithi === 0) {
+            dayInfo.isAuspicious = true;
+            dayInfo.type = 'amavasya';
+            dayInfo.name = 'अमावस्या';
+        }
+        // Ekadashi - 11th day of each fortnight
+        else if (tithi === 11 || tithi === 26) {
+            dayInfo.isAuspicious = true;
+            dayInfo.type = 'ekadashi';
+            dayInfo.name = 'एकादशी';
+        }
+
+        return dayInfo;
+    }
+
+    function getDailyPranaQuote() {
+        const today = new Date();
+        const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+        return PRANA_QUOTES[dayOfYear % PRANA_QUOTES.length];
+    }
+
     // ===== DOM ELEMENTS =====
     // Screens
     const screens = {
@@ -255,17 +314,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== DASHBOARD =====
     function renderDashboard() {
+        renderPranaQuote();
         renderTodayDate();
         renderWeekPicker();
         renderHabitList();
         updateCompletionPct();
     }
 
+    function renderPranaQuote() {
+        const pranaQuoteEl = document.getElementById('prana-quote');
+        if (!pranaQuoteEl) return;
+
+        const quote = getDailyPranaQuote();
+        pranaQuoteEl.innerHTML = `
+            <div class="prana-sanskrit">${quote.text}</div>
+            <div class="prana-translation">${quote.translation}</div>
+            <div class="prana-source">— ${quote.source}</div>
+        `;
+    }
+
     function renderTodayDate() {
         const today = new Date();
         const options = { day: 'numeric', month: 'short' };
         const dateStr = today.toLocaleDateString('en-US', options);
-        todayDateEl.textContent = `Today, ${dateStr}`;
+
+        // Check for auspicious day
+        const auspicious = getAuspiciousInfo(today);
+        if (auspicious.isAuspicious) {
+            todayDateEl.innerHTML = `Today, ${dateStr} <span class="auspicious-badge ${auspicious.type}">${auspicious.name}</span>`;
+        } else {
+            todayDateEl.textContent = `Today, ${dateStr}`;
+        }
     }
 
     function renderWeekPicker() {
@@ -290,9 +369,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 dayEl.classList.add('selected');
             }
 
+            // Check for auspicious day
+            const auspicious = getAuspiciousInfo(date);
+            if (auspicious.isAuspicious) {
+                dayEl.classList.add('auspicious', auspicious.type);
+            }
+
             dayEl.innerHTML = `
                 <span class="day-name">${dayNames[date.getDay()]}</span>
                 <span class="day-num">${date.getDate()}</span>
+                ${auspicious.isAuspicious ? `<span class="auspicious-dot ${auspicious.type}"></span>` : ''}
             `;
 
             dayEl.addEventListener('click', () => {
