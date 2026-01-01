@@ -533,6 +533,16 @@ h2,
     flex-shrink: 0;
 }
 
+.header-title-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .header-btn {
     width: 44px;
     /* Minimum touch target */
@@ -808,19 +818,23 @@ h2,
 }
 
 .grid-cell.level-1 {
-    background: color-mix(in srgb, var(--habit-color, var(--primary)) 25%, var(--bg-secondary));
+    background: rgba(52, 199, 89, 0.25) !important;
+    /* Light green */
 }
 
 .grid-cell.level-2 {
-    background: color-mix(in srgb, var(--habit-color, var(--primary)) 50%, var(--bg-secondary));
+    background: rgba(52, 199, 89, 0.5) !important;
+    /* Medium green */
 }
 
 .grid-cell.level-3 {
-    background: color-mix(in srgb, var(--habit-color, var(--primary)) 75%, var(--bg-secondary));
+    background: rgba(52, 199, 89, 0.75) !important;
+    /* Strong green */
 }
 
 .grid-cell.level-4 {
-    background: var(--habit-color, var(--primary));
+    background: var(--habit-color, #34C759) !important;
+    /* Full habit color or green */
 }
 
 /* ===== BOTTOM NAVIGATION ===== */
@@ -2350,4 +2364,292 @@ button:active,
     outline: 2px solid var(--primary);
     outline-offset: 2px;
     border-radius: 4px;
+}
+
+/* ===== UI HYGIENE FIXES ===== */
+
+/* Radio button vertical alignment fix - PERFECT CENTER */
+.frequency-options .radio-option {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 8px 0 !important;
+    min-height: 40px !important;
+}
+
+.frequency-options .radio-option input[type="radio"] {
+    flex-shrink: 0 !important;
+    width: 22px !important;
+    height: 22px !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    vertical-align: middle !important;
+}
+
+.frequency-options .radio-option span {
+    font-size: 1rem !important;
+    line-height: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Stack After dropdown fix - prevent text cutoff */
+.stack-select,
+#stack-after-habit {
+    width: 100% !important;
+    height: 50px !important;
+    padding: 14px 40px 14px 16px !important;
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--bg-tertiary) !important;
+    border-radius: var(--radius-md) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 18px !important;
+}
+
+/* Action button icon visibility fix */
+.action-btn i,
+.action-btn svg {
+    width: 24px !important;
+    height: 24px !important;
+    display: block !important;
+}
+
+/* Color picker grid for 12 colors */
+.color-picker {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--spacing-sm);
+}
+
+/* ===== CATEGORY MODAL FIX ===== */
+/* HTML structure: div.modal-content.category-modal */
+.modal-content.category-modal {
+    max-width: 360px !important;
+    width: calc(100% - 32px) !important;
+    max-height: 80vh !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+}
+
+.category-list {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 300px;
+    margin: var(--spacing-md) 0;
+}
+
+.category-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--bg-tertiary);
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.category-item:hover {
+    background: var(--bg-secondary);
+}
+
+.category-item.active {
+    background: var(--primary-light);
+}
+
+.category-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: var(--spacing-sm);
+}
+
+.category-count {
+    flex-shrink: 0;
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+}
+
+.add-category-form {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) 0;
+    border-top: 1px solid var(--bg-tertiary);
+}
+
+.add-category-form input {
+    flex: 1;
+    min-width: 0;
+}
+
+.add-category-btn {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== HEADER ACTIONS CONTAINER ===== */
+.header-actions {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+/* ===== YEAR PROGRESS FEATURE ===== */
+.year-progress-modal {
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%) !important;
+    border-radius: 24px !important;
+    padding: 32px 24px !important;
+    text-align: center;
+    max-width: 420px !important;
+    width: 95% !important;
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+}
+
+.year-progress-modal .close-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+}
+
+.year-progress-modal .close-btn i {
+    stroke: rgba(255, 255, 255, 0.6);
+}
+
+.year-title {
+    font-size: 2.5rem;
+    font-weight: 200;
+    letter-spacing: 12px;
+    color: white;
+    margin: 0 0 32px 0;
+    font-family: 'Outfit', sans-serif;
+    text-shadow: 0 0 40px rgba(124, 58, 237, 0.5);
+}
+
+.year-dots-grid {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    gap: 6px;
+    padding: 8px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.year-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(124, 58, 237, 0.12);
+    transition: all 0.3s ease;
+    aspect-ratio: 1;
+}
+
+.year-dot.elapsed {
+    background: #7C3AED;
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.6);
+}
+
+.year-dot.today {
+    background: #00FFFF !important;
+    /* Bright cyan for TODAY */
+    animation: yearDotPulse 1.5s ease-in-out infinite;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.9) !important;
+    transform: scale(1.2);
+}
+
+@keyframes yearDotPulse {
+
+    0%,
+    100% {
+        transform: scale(1.2);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+    }
+
+    50% {
+        transform: scale(1.5);
+        box-shadow: 0 0 35px rgba(0, 255, 255, 1);
+    }
+}
+
+/* Entry animation for dots */
+.year-dot {
+    opacity: 0;
+    animation: yearDotFadeIn 0.5s ease forwards;
+}
+
+@keyframes yearDotFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.year-stats {
+    margin-top: 28px;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.year-stats .separator {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.days-left {
+    color: #34C759;
+    font-weight: 600;
+}
+
+.days-left.urgent {
+    color: #FF3B30;
+}
+
+.days-left.warning {
+    color: #FF9500;
+}
+
+.percent-complete {
+    color: white;
+    font-weight: 500;
+}
+
+/* Responsive dot sizing */
+@media (max-width: 400px) {
+    .year-dots-grid {
+        gap: 4px;
+    }
+
+    .year-dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .year-title {
+        font-size: 2rem;
+        letter-spacing: 8px;
+    }
 }

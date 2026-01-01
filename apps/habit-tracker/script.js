@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Sanatan OS Habit Tracker
  * Core JavaScript Logic
  */
@@ -9,22 +9,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const ICONS = [
         'sun', 'moon', 'star', 'heart', 'zap', 'flame', 'droplet', 'leaf',
-        'flower-2', 'tree', 'mountain', 'waves', 'wind', 'cloud', 'snowflake',
-        'umbrella', 'coffee', 'apple', 'carrot', 'beef', 'cake', 'cookie',
-        'dumbbell', 'bike', 'footprints', 'timer', 'alarm-clock', 'calendar',
+        'flower-2', 'trees', 'mountain', 'waves', 'wind', 'cloud', 'snowflake',
+        'umbrella', 'coffee', 'apple', 'carrot', 'egg', 'cake', 'cookie',
+        'dumbbell', 'bike', 'footprints', 'clock', 'alarm-clock', 'calendar',
         'book-open', 'pen-tool', 'music', 'mic', 'headphones', 'camera',
         'palette', 'brush', 'scissors', 'hammer', 'wrench', 'laptop',
         'smartphone', 'tv', 'gamepad-2', 'puzzle', 'target', 'trophy',
-        'medal', 'award', 'gift', 'sparkles', 'smile', 'meh', 'frown'
+        'medal', 'award', 'gift', 'sparkles', 'smile', 'frown', 'brain'
     ];
 
     const COLORS = [
         '#007AFF', // Blue
+        '#5856D6', // Indigo
         '#AF52DE', // Purple
         '#FF2D55', // Pink
+        '#FF3B30', // Red
         '#FF9500', // Orange
+        '#FFCC00', // Yellow
+        '#34C759', // Green
+        '#00C7BE', // Mint
         '#30B0C7', // Teal
-        '#34C759'  // Green
+        '#5AC8FA', // Cyan
+        '#8E8E93'  // Gray
     ];
 
     const MILESTONES = [
@@ -35,6 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { days: 100, name: 'Century Legend', emoji: '🏆' },
         { days: 365, name: 'Year Champion', emoji: '👑' }
     ];
+
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     // ===== PRANA QUOTES - Daily Motivation =====
     const PRANA_QUOTES = [
@@ -71,19 +79,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (tithi === 15) {
             dayInfo.isAuspicious = true;
             dayInfo.type = 'purnima';
-            dayInfo.name = 'पूर्णिमा';
+            dayInfo.name = 'à¤ªà¥‚à¤°à¥à¤£à¤¿à¤®à¤¾';
         }
         // Amavasya (New Moon) - Tithi 30
         else if (tithi === 30 || tithi === 0) {
             dayInfo.isAuspicious = true;
             dayInfo.type = 'amavasya';
-            dayInfo.name = 'अमावस्या';
+            dayInfo.name = 'à¤…à¤®à¤¾à¤µà¤¸à¥à¤¯à¤¾';
         }
         // Ekadashi - 11th day of each fortnight
         else if (tithi === 11 || tithi === 26) {
             dayInfo.isAuspicious = true;
             dayInfo.type = 'ekadashi';
-            dayInfo.name = 'एकादशी';
+            dayInfo.name = 'à¤à¤•à¤¾à¤¦à¤¶à¥€';
         }
 
         return dayInfo;
@@ -442,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const existingCards = habitListEl.querySelectorAll('.habit-card');
         existingCards.forEach(card => card.remove());
 
-        if (state.habits.length === 0) {
+        if (!state.habits || state.habits.length === 0) {
             emptyStateEl.style.display = 'flex';
             return;
         }
@@ -450,15 +458,29 @@ document.addEventListener('DOMContentLoaded', () => {
         emptyStateEl.style.display = 'none';
 
         state.habits.forEach(habit => {
-            const card = createHabitCard(habit);
-            habitListEl.appendChild(card);
+            try {
+                const card = createHabitCard(habit);
+                habitListEl.appendChild(card);
+            } catch (e) {
+                console.error('Error rendering habit card:', e, habit);
+            }
         });
+
+        // Re-initialize Lucide icons for the entire habit list
+        if (typeof lucide !== 'undefined') {
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 50);
+        }
     }
 
     function createHabitCard(habit) {
         const card = document.createElement('div');
         card.className = 'habit-card';
         card.dataset.habitId = habit.id;
+
+        // Ensure entries object exists
+        if (!habit.entries) habit.entries = {};
 
         const dateKey = getDateKey(state.selectedDate);
         const entry = habit.entries[dateKey];
@@ -505,17 +527,26 @@ document.addEventListener('DOMContentLoaded', () => {
             openHabitDetail(habit);
         });
 
-        lucide.createIcons({ nodes: [card] });
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons({ nodes: [card] });
+        }
         return card;
     }
 
     function generateContributionGrid(habit) {
         const cells = [];
         const today = new Date();
-        const startDate = new Date(today);
-        startDate.setDate(today.getDate() - 365);
+        today.setHours(0, 0, 0, 0); // Normalize to start of day
 
-        for (let i = 0; i < 52 * 7; i++) {
+        // Start from 364 days ago so the last cell is TODAY
+        const startDate = new Date(today);
+        startDate.setDate(today.getDate() - 364);
+
+        // Ensure entries object exists
+        if (!habit.entries) habit.entries = {};
+
+        // Generate 365 cells (52 weeks + 1 day to include today)
+        for (let i = 0; i < 365; i++) {
             const date = new Date(startDate);
             date.setDate(startDate.getDate() + i);
             const dateKey = getDateKey(date);
@@ -1184,13 +1215,119 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getDateKey(date) {
-        return date.toISOString().split('T')[0];
+        // Use local date to avoid timezone issues
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
     }
 
     function isSameDay(d1, d2) {
         return d1.getFullYear() === d2.getFullYear() &&
             d1.getMonth() === d2.getMonth() &&
             d1.getDate() === d2.getDate();
+    }
+
+    // ===== YEAR PROGRESS FEATURE =====
+    function getYearProgress() {
+        const now = new Date();
+        const year = now.getFullYear();
+
+        // Check for leap year
+        const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        const totalDays = isLeapYear ? 366 : 365;
+
+        // Calculate day of year (1-indexed)
+        const startOfYear = new Date(year, 0, 1);
+        startOfYear.setHours(0, 0, 0, 0);
+
+        const diff = now - startOfYear;
+        const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24)) + 1;
+
+        // Days remaining
+        const daysLeft = totalDays - dayOfYear;
+
+        // Percentage completed (rounded)
+        const percentComplete = Math.round((dayOfYear / totalDays) * 100);
+
+        return { year, totalDays, dayOfYear, daysLeft, percentComplete, isLeapYear };
+    }
+
+    function renderYearProgressModal() {
+        const progress = getYearProgress();
+        const { year, totalDays, dayOfYear, daysLeft, percentComplete } = progress;
+
+        // Update title
+        const yearTitle = document.getElementById('year-title');
+        if (yearTitle) yearTitle.textContent = year;
+
+        // Update stats
+        const daysLeftEl = document.getElementById('days-left');
+        const percentEl = document.getElementById('percent-complete');
+
+        if (daysLeftEl) {
+            daysLeftEl.textContent = `${daysLeft}d left`;
+            daysLeftEl.classList.remove('urgent', 'warning');
+            if (daysLeft <= 7) {
+                daysLeftEl.classList.add('urgent');
+            } else if (daysLeft <= 30) {
+                daysLeftEl.classList.add('warning');
+            }
+        }
+
+        if (percentEl) {
+            percentEl.textContent = `${percentComplete}%`;
+        }
+
+        // Render dots grid
+        const grid = document.getElementById('year-dots-grid');
+        if (!grid) return;
+
+        grid.innerHTML = '';
+
+        for (let i = 1; i <= totalDays; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'year-dot';
+
+            // Add staggered animation delay
+            dot.style.animationDelay = `${(i * 2)}ms`;
+
+            if (i < dayOfYear) {
+                // Past days - lit up
+                dot.classList.add('elapsed');
+            } else if (i === dayOfYear) {
+                // Today - lit up AND pulsing
+                dot.classList.add('elapsed');  // Make it colored/lit
+                dot.classList.add('today');    // Add pulsing animation
+            }
+
+            // Add tooltip with date
+            const date = new Date(year, 0, i);
+            dot.title = date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric'
+            });
+
+            grid.appendChild(dot);
+        }
+    }
+
+    function openYearProgressModal() {
+        renderYearProgressModal();
+        const modal = document.getElementById('year-progress-modal');
+        if (modal) {
+            modal.classList.add('active');
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+    }
+
+    function closeYearProgressModal() {
+        const modal = document.getElementById('year-progress-modal');
+        if (modal) {
+            modal.classList.remove('active');
+        }
     }
 
     function formatDate(date) {
@@ -1297,6 +1434,25 @@ document.addEventListener('DOMContentLoaded', () => {
         addHabitBtn.addEventListener('click', openAddHabitForm);
         settingsBtn.addEventListener('click', openSettings);
 
+        // Year Progress
+        const yearProgressBtn = document.getElementById('year-progress-btn');
+        const closeYearBtn = document.getElementById('close-year-modal');
+        const yearProgressModal = document.getElementById('year-progress-modal');
+
+        if (yearProgressBtn) {
+            yearProgressBtn.addEventListener('click', openYearProgressModal);
+        }
+        if (closeYearBtn) {
+            closeYearBtn.addEventListener('click', closeYearProgressModal);
+        }
+        if (yearProgressModal) {
+            yearProgressModal.addEventListener('click', (e) => {
+                if (e.target === yearProgressModal) {
+                    closeYearProgressModal();
+                }
+            });
+        }
+
         navTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 const view = tab.dataset.view;
@@ -1309,21 +1465,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Add Habit Button
-        if (addHabitBtn) {
-            addHabitBtn.addEventListener('click', openAddHabitForm);
-        }
-
-        // Report Button
-        if (reportBtn) {
-            reportBtn.addEventListener('click', openWeeklyReport);
-        }
+        // Note: addHabitBtn binding is on line 1311
+        // Note: reportBtn binding is on line 1437-1440
 
         // Form
-        formBackBtn.addEventListener('click', () => {
-            showScreen('dashboard');
-            renderDashboard();
-        });
+        if (formBackBtn) {
+            formBackBtn.addEventListener('click', () => {
+                console.log('Form Back Button Clicked');
+                showScreen('dashboard');
+                renderDashboard();
+            });
+        } else {
+            console.error('formBackBtn element not found in DOM');
+        }
 
         saveHabitBtn.addEventListener('click', saveHabit);
 
@@ -1653,15 +1807,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function sendHabitReminder(habit) {
-        const notification = new Notification('Habit Reminder 🔔', {
+        const notification = new Notification('Habit Reminder ðŸ””', {
             body: habit.question || `Time to ${habit.name}!`,
             icon: '/icon.png',
             badge: '/icon.png',
             tag: `habit-${habit.id}`,
             requireInteraction: true,
             actions: [
-                { action: 'complete', title: '✓ Done' },
-                { action: 'skip', title: '✕ Skip' }
+                { action: 'complete', title: 'âœ“ Done' },
+                { action: 'skip', title: 'âœ• Skip' }
             ]
         });
 
@@ -1812,7 +1966,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, { merge: true });
 
             updateSyncStatus('synced');
-            console.log('Data saved to cloud');
         } catch (error) {
             console.error('Cloud save error:', error);
             updateSyncStatus('error');
@@ -1885,102 +2038,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Firebase auth after a short delay
     setTimeout(initFirebaseAuth, 500);
 
-    // ===== WEEKLY REPORT =====
-    function openWeeklyReport() {
-        const modal = document.getElementById('weekly-report-modal');
-        const content = document.getElementById('report-content');
-        if (!modal || !content) return;
-
-        // Calculate stats for the last 7 days
-        const today = new Date();
-        const last7Days = [];
-        for (let i = 0; i < 7; i++) {
-            const d = new Date(today);
-            d.setDate(today.getDate() - i);
-            last7Days.push(getDateKey(d));
-        }
-
-        let totalEntries = 0;
-        let totalCompleted = 0;
-        const habitStats = state.habits.map(habit => {
-            let completed = 0;
-            let possible = 0;
-            last7Days.forEach(dateKey => {
-                if (isHabitActiveOnDate(habit, new Date(dateKey))) {
-                    possible++;
-                    if (habit.entries[dateKey]?.status === 'completed') {
-                        completed++;
-                        totalCompleted++;
-                    }
-                }
-            });
-            totalEntries += possible;
-            return {
-                name: habit.name,
-                completed,
-                possible,
-                score: possible > 0 ? (completed / possible) * 100 : 0
-            };
-        });
-
-        // Top Performing
-        habitStats.sort((a, b) => b.score - a.score);
-        const topHabits = habitStats.slice(0, 3).filter(h => h.score > 0);
-
-        // Needs Focus
-        const focusHabits = habitStats.filter(h => h.score < 50 && h.possible > 0).slice(0, 3);
-
-        const overallScore = totalEntries > 0 ? Math.round((totalCompleted / totalEntries) * 100) : 0;
-
-        content.innerHTML = `
-            <div class="report-score">
-                <div class="score-number">${overallScore}%</div>
-                <div class="score-label">Weekly Compliance</div>
-            </div>
-            
-            <div class="report-section">
-                <h3>🏆 Top Performing</h3>
-                ${topHabits.length > 0 ? `
-                    <ul class="report-list">
-                        ${topHabits.map(h => `
-                            <li>
-                                <span>${h.name}</span>
-                                <span class="report-val">${Math.round(h.score)}%</span>
-                            </li>
-                        `).join('')}
-                    </ul>
-                ` : '<p class="empty-text">No completed habits yet</p>'}
-            </div>
-
-            <div class="report-section">
-                <h3>🎯 Focus Area</h3>
-                ${focusHabits.length > 0 ? `
-                    <ul class="report-list">
-                        ${focusHabits.map(h => `
-                            <li>
-                                <span>${h.name}</span>
-                                <span class="report-val">${Math.round(h.score)}%</span>
-                            </li>
-                        `).join('')}
-                    </ul>
-                ` : '<p class="empty-text">Keep it up!</p>'}
-            </div>
-        `;
-
-        modal.classList.add('active');
-        // Force display flex via style slightly later to ensure transition works if needed
-        // but class 'active' should handle it via CSS
-    }
-
-    function closeWeeklyReport() {
-        const modal = document.getElementById('weekly-report-modal');
-        if (modal) modal.classList.remove('active');
-    }
-
-    function generateReportText() {
-        const today = new Date().toLocaleDateString();
-        return `My Niyam Weekly Report (${today})\nCheck out my habit progress!`;
-    }
 
     // ===== START APP =====
     init();
