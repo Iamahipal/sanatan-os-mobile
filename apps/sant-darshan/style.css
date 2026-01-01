@@ -1,0 +1,963 @@
+/* ============================================
+   SANT DARSHAN - Sattvic Design System
+   A peaceful, spiritual aesthetic for saints
+   ============================================ */
+
+:root {
+    /* Sacred Colors */
+    --saffron: #FF9933;
+    --saffron-dark: #E67300;
+    --ochre: #CC7722;
+    --terracotta: #C04000;
+    --indigo-deep: #0F0C29;
+    --indigo-medium: #1a1a3e;
+    --gold: #FFD700;
+    --lotus-pink: #E91E63;
+
+    /* Tradition Colors */
+    --hindu-color: #FF9933;
+    --sikh-color: #1E90FF;
+    --jain-color: #FFD700;
+
+    /* Glass Effects */
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
+
+    /* Text */
+    --text-primary: #FFFFFF;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+
+    /* Spacing */
+    --radius: 16px;
+    --radius-sm: 10px;
+    --safe-top: max(20px, env(safe-area-inset-top));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--indigo-deep);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Prana Background */
+.prana-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0F0C29 0%, #1a1a3e 50%, #24243e 100%);
+}
+
+.blob-1 {
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255, 153, 51, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: blobFloat1 18s ease-in-out infinite;
+}
+
+.blob-2 {
+    position: absolute;
+    bottom: 10%;
+    left: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(30, 144, 255, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: blobFloat2 22s ease-in-out infinite;
+}
+
+.blob-3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(100px);
+    animation: blobFloat3 25s ease-in-out infinite;
+}
+
+@keyframes blobFloat1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(-20%, 10%) scale(1.1);
+    }
+}
+
+@keyframes blobFloat2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(15%, -10%) scale(1.15);
+    }
+}
+
+@keyframes blobFloat3 {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+/* App Container */
+.app-container {
+    max-width: 500px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--safe-top) 16px 12px;
+    background: rgba(15, 12, 41, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.header-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: var(--glass-bg);
+    border-radius: 50%;
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.header-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+.header-title {
+    text-align: center;
+    flex: 1;
+}
+
+.header-title h1 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--saffron);
+}
+
+.header-subtitle {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Search Overlay */
+.search-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 12, 41, 0.98);
+    z-index: 200;
+    padding: var(--safe-top) 16px 16px;
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.3s ease;
+}
+
+.search-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+}
+
+.search-container .search-icon {
+    color: var(--text-muted);
+}
+
+.search-container input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.search-container input::placeholder {
+    color: var(--text-muted);
+}
+
+.close-search-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.search-results {
+    flex: 1;
+    overflow-y: auto;
+    padding-top: 16px;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 16px;
+    padding-bottom: 100px;
+}
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+}
+
+.hero-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    animation: gentlePulse 3s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.hero-title {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--saffron);
+    margin-bottom: 8px;
+}
+
+.hero-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    max-width: 280px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Today's Saint Card */
+.today-saint-card {
+    background: linear-gradient(135deg, rgba(255, 153, 51, 0.15) 0%, var(--glass-bg) 100%);
+    border: 1px solid rgba(255, 153, 51, 0.3);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    overflow: hidden;
+    animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(255, 153, 51, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(255, 153, 51, 0.25);
+    }
+}
+
+.today-saint-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(255, 153, 51, 0.2);
+    font-size: 0.75rem;
+    color: var(--saffron);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.today-saint-header i {
+    animation: sunSpin 20s linear infinite;
+}
+
+@keyframes sunSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.today-saint-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.today-saint-content:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.today-saint-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(255, 153, 51, 0.3);
+}
+
+.today-saint-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.today-saint-name {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.today-saint-name-local {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.85rem;
+    color: var(--saffron);
+    margin-bottom: 4px;
+}
+
+.today-saint-tradition {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.today-saint-arrow {
+    color: var(--saffron);
+    font-size: 0.8rem;
+}
+
+/* Traditions Grid */
+.traditions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 30px;
+}
+
+.tradition-card {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 24px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.tradition-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--tradition-color, var(--saffron));
+    opacity: 0.8;
+}
+
+.tradition-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--tradition-color, var(--saffron));
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.tradition-card.full-width {
+    grid-column: span 2;
+}
+
+.tradition-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: var(--tradition-color, var(--saffron));
+}
+
+.tradition-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.tradition-name-hi {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.tradition-count {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* Stats Section */
+.stats-section {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    background: var(--glass-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--saffron);
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Tradition Header */
+.tradition-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: var(--glass-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    margin-bottom: 16px;
+}
+
+.tradition-header-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.tradition-header-text h2 {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.tradition-header-text p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Sampradaya Filter */
+.sampradaya-filter {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.filter-chip {
+    padding: 8px 16px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+    background: var(--tradition-color, var(--saffron));
+    color: #000;
+    border-color: transparent;
+}
+
+/* Saints List */
+.saints-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.saint-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.saint-card:hover {
+    transform: translateX(4px);
+    border-color: var(--saffron);
+}
+
+.saint-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--ochre) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.saint-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.saint-name {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.saint-name-local {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.saint-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.saint-arrow {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+/* Saint Detail */
+.saint-detail-content {
+    animation: fadeIn 0.4s ease;
+}
+
+.saint-hero {
+    text-align: center;
+    padding: 30px 20px;
+    margin-bottom: 24px;
+    background: var(--glass-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.saint-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--tradition-color, var(--saffron));
+}
+
+.saint-avatar-large {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--ochre) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #fff;
+    margin: 0 auto 16px;
+    box-shadow: 0 8px 32px rgba(255, 153, 51, 0.3);
+}
+
+.saint-detail-name {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.saint-detail-name-local {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.2rem;
+    color: var(--saffron);
+    margin-bottom: 12px;
+}
+
+.saint-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.saint-tag {
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Detail Sections */
+.detail-section {
+    margin-bottom: 20px;
+}
+
+.detail-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--saffron);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.detail-section-title i {
+    font-size: 0.9rem;
+}
+
+.detail-section-content {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* Quote Block */
+.quote-block {
+    background: var(--glass-bg);
+    border-left: 3px solid var(--saffron);
+    padding: 16px 20px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin-bottom: 20px;
+}
+
+.quote-text {
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.quote-source {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Lists */
+.detail-list {
+    list-style: none;
+}
+
+.detail-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
+.detail-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--saffron);
+}
+
+/* Tags Grid */
+.tags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.teaching-tag {
+    padding: 8px 14px;
+    background: rgba(255, 153, 51, 0.15);
+    border: 1px solid rgba(255, 153, 51, 0.3);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--saffron);
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 4px;
+}
+
+/* Wisdom Quote Card */
+.wisdom-quote-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.wisdom-quote-icon {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.wisdom-quote-text {
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.wisdom-quote-source {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Share Button & Actions */
+.saint-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+    padding-bottom: 20px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 25px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: var(--saffron);
+    color: #000;
+    border-color: var(--saffron);
+    transform: scale(1.05);
+}
+
+.action-btn i {
+    font-size: 1rem;
+}
+
+/* Toast Message */
+.toast-message {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 153, 51, 0.95);
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    z-index: 1000;
+    animation: toastIn 0.3s ease, toastOut 0.3s ease 1.7s forwards;
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes toastOut {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+}
+
+/* Accessibility - Focus States */
+.header-btn:focus,
+.action-btn:focus,
+.tradition-card:focus,
+.saint-card:focus,
+.filter-chip:focus {
+    outline: 2px solid var(--saffron);
+    outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 400px) {
+    .traditions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tradition-card.full-width {
+        grid-column: span 1;
+    }
+
+    .stats-section {
+        gap: 20px;
+    }
+}

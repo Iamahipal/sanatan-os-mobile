@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sant Darshan - भारत संत दर्शन</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Living Prana Background -->
+    <div class="prana-bg">
+        <div class="blob-1"></div>
+        <div class="blob-2"></div>
+        <div class="blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <button id="back-btn" class="header-btn back-btn" aria-label="Back" style="visibility: hidden;">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="header-title">
+                <h1 id="page-title">संत दर्शन</h1>
+                <span id="page-subtitle" class="header-subtitle">Bharat Sant Darshan</span>
+            </div>
+            <button id="search-btn" class="header-btn" aria-label="Search">
+                <i class="fa-solid fa-search"></i>
+            </button>
+        </header>
+
+        <!-- Search Overlay -->
+        <div id="search-overlay" class="search-overlay hidden">
+            <div class="search-container">
+                <i class="fa-solid fa-search search-icon"></i>
+                <input type="text" id="search-input" placeholder="Search saints..." autocomplete="off">
+                <button id="close-search" class="close-search-btn">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main id="main-content" class="main-content">
+            <!-- Home Screen - Traditions Grid -->
+            <section id="home-screen" class="screen active">
+                <div class="hero-section">
+                    <div class="hero-icon">🙏</div>
+                    <h2 class="hero-title">भारत संत दर्शन</h2>
+                    <p class="hero-subtitle">Discover the eternal wisdom of Sanatan Dharma's greatest saints</p>
+                </div>
+
+                <!-- Today's Saint Card -->
+                <div id="today-saint-card" class="today-saint-card">
+                    <!-- Will be populated by JS -->
+                </div>
+
+                <div id="traditions-grid" class="traditions-grid">
+                    <!-- Traditions will be rendered by JS -->
+                </div>
+
+                <div class="stats-section">
+                    <div class="stat-item">
+                        <span class="stat-number" id="total-saints">30</span>
+                        <span class="stat-label">Saints</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Traditions</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Sampradayas</span>
+                    </div>
+                </div>
+
+                <!-- Daily Wisdom Quote -->
+                <div id="wisdom-quote" class="wisdom-quote-card" aria-label="Daily wisdom quote">
+                    <!-- Will be populated by JS -->
+                </div>
+            </section>
+
+            <!-- Saints List Screen -->
+            <section id="saints-list-screen" class="screen">
+                <div id="tradition-header" class="tradition-header">
+                    <!-- Dynamic tradition header -->
+                </div>
+                <div id="sampradaya-filter" class="sampradaya-filter">
+                    <!-- Sampradaya filters will be rendered by JS -->
+                </div>
+                <div id="saints-list" class="saints-list">
+                    <!-- Saints cards will be rendered by JS -->
+                </div>
+            </section>
+
+            <!-- Saint Detail Screen -->
+            <section id="saint-detail-screen" class="screen">
+                <div id="saint-detail-content" class="saint-detail-content">
+                    <!-- Saint detail will be rendered by JS -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="saints-data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
