@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Sanatan OS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-deep: #0a0a1a;
+            --saffron: #FF9933;
+            --gold: #FFD700;
+            --text-primary: #f0f0f5;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Prana Background */
+        .prana-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #FF9933 0%, transparent 70%);
+            top: -100px;
+            right: -50px;
+        }
+
+        .blob-2 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #FFD700 0%, transparent 70%);
+            bottom: 20%;
+            left: -80px;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, 30px) scale(1.1);
+            }
+        }
+
+        /* Header */
+        .header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* Content */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        /* Om Symbol */
+        .om-container {
+            text-align: center;
+            margin: 40px 0 30px;
+        }
+
+        .om-symbol {
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--saffron), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        .app-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 15px;
+            background: linear-gradient(135deg, var(--saffron), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* Mission Card */
+        .mission-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .mission-icon {
+            font-size: 2rem;
+            color: var(--saffron);
+            margin-bottom: 15px;
+        }
+
+        .mission-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--gold);
+        }
+
+        .mission-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+
+        /* Vision Points */
+        .vision-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .vision-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px 16px;
+            text-align: center;
+        }
+
+        .vision-icon {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .vision-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Quote */
+        .quote-section {
+            margin-top: 30px;
+            text-align: center;
+            padding: 20px;
+            border-left: 3px solid var(--saffron);
+            background: linear-gradient(90deg, rgba(255, 153, 51, 0.1) 0%, transparent 100%);
+        }
+
+        .quote-text {
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .quote-source {
+            font-size: 0.85rem;
+            color: var(--saffron);
+            margin-top: 10px;
+        }
+
+        /* Goal Cards */
+        .goals-section {
+            margin-top: 30px;
+        }
+
+        .goal-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .goal-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--saffron), var(--gold));
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .goal-content h4 {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .goal-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="prana-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <header class="header">
+        <a href="../../index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+    </header>
+
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="om-container">
+            <div class="om-symbol">ॐ</div>
+            <div class="app-name">Sanatan OS</div>
+            <div class="tagline">A Spiritual Companion for the Digital Age</div>
+        </div>
+
+        <!-- Mission -->
+        <div class="mission-card">
+            <div class="mission-icon"><i class="fa-solid fa-bullseye"></i></div>
+            <div class="mission-title">Our Mission</div>
+            <div class="mission-text">
+                To bring the timeless wisdom of Sanatan Dharma to every smartphone,
+                making daily spiritual practice accessible, engaging, and beautiful
+                for the modern seeker.
+            </div>
+        </div>
+
+        <!-- Vision Grid -->
+        <div class="vision-grid">
+            <div class="vision-item">
+                <div class="vision-icon">🕉️</div>
+                <div class="vision-label">Preserve Tradition</div>
+            </div>
+            <div class="vision-item">
+                <div class="vision-icon">📱</div>
+                <div class="vision-label">Digital Sadhana</div>
+            </div>
+            <div class="vision-item">
+                <div class="vision-icon">🌍</div>
+                <div class="vision-label">Free Forever</div>
+            </div>
+            <div class="vision-item">
+                <div class="vision-icon">🙏</div>
+                <div class="vision-label">Open Source</div>
+            </div>
+        </div>
+
+        <!-- Quote -->
+        <div class="quote-section">
+            <div class="quote-text">
+                "यत्र योगेश्वरः कृष्णो यत्र पार्थो धनुर्धरः।<br>
+                तत्र श्रीर्विजयो भूतिर्ध्रुवा नीतिर्मतिर्मम॥"
+            </div>
+            <div class="quote-source">— Bhagavad Gita 18.78</div>
+        </div>
+
+        <!-- Goals -->
+        <div class="goals-section">
+            <div class="goal-card">
+                <div class="goal-number">1</div>
+                <div class="goal-content">
+                    <h4>Daily Connection</h4>
+                    <p>Help users maintain daily spiritual practices - Japa, Panchang, and Darshan.</p>
+                </div>
+            </div>
+
+            <div class="goal-card">
+                <div class="goal-number">2</div>
+                <div class="goal-content">
+                    <h4>Scriptural Access</h4>
+                    <p>Provide instant access to Gita, Vedas, and ancient wisdom through AI.</p>
+                </div>
+            </div>
+
+            <div class="goal-card">
+                <div class="goal-number">3</div>
+                <div class="goal-content">
+                    <h4>Cultural Revival</h4>
+                    <p>Inspire the next generation to explore their rich spiritual heritage.</p>
+                </div>
+            </div>
+
+            <div class="goal-card">
+                <div class="goal-number">4</div>
+                <div class="goal-content">
+                    <h4>Global Reach</h4>
+                    <p>Spread Dharmic wisdom to seekers worldwide, in all languages.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
