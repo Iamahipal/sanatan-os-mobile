@@ -1309,6 +1309,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // Add Habit Button
+        if (addHabitBtn) {
+            addHabitBtn.addEventListener('click', openAddHabitForm);
+        }
+
+        // Report Button
+        if (reportBtn) {
+            reportBtn.addEventListener('click', openWeeklyReport);
+        }
+
         // Form
         formBackBtn.addEventListener('click', () => {
             showScreen('dashboard');
@@ -1874,6 +1884,103 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Firebase auth after a short delay
     setTimeout(initFirebaseAuth, 500);
+
+    // ===== WEEKLY REPORT =====
+    function openWeeklyReport() {
+        const modal = document.getElementById('weekly-report-modal');
+        const content = document.getElementById('report-content');
+        if (!modal || !content) return;
+
+        // Calculate stats for the last 7 days
+        const today = new Date();
+        const last7Days = [];
+        for (let i = 0; i < 7; i++) {
+            const d = new Date(today);
+            d.setDate(today.getDate() - i);
+            last7Days.push(getDateKey(d));
+        }
+
+        let totalEntries = 0;
+        let totalCompleted = 0;
+        const habitStats = state.habits.map(habit => {
+            let completed = 0;
+            let possible = 0;
+            last7Days.forEach(dateKey => {
+                if (isHabitActiveOnDate(habit, new Date(dateKey))) {
+                    possible++;
+                    if (habit.entries[dateKey]?.status === 'completed') {
+                        completed++;
+                        totalCompleted++;
+                    }
+                }
+            });
+            totalEntries += possible;
+            return {
+                name: habit.name,
+                completed,
+                possible,
+                score: possible > 0 ? (completed / possible) * 100 : 0
+            };
+        });
+
+        // Top Performing
+        habitStats.sort((a, b) => b.score - a.score);
+        const topHabits = habitStats.slice(0, 3).filter(h => h.score > 0);
+
+        // Needs Focus
+        const focusHabits = habitStats.filter(h => h.score < 50 && h.possible > 0).slice(0, 3);
+
+        const overallScore = totalEntries > 0 ? Math.round((totalCompleted / totalEntries) * 100) : 0;
+
+        content.innerHTML = `
+            <div class="report-score">
+                <div class="score-number">${overallScore}%</div>
+                <div class="score-label">Weekly Compliance</div>
+            </div>
+            
+            <div class="report-section">
+                <h3>🏆 Top Performing</h3>
+                ${topHabits.length > 0 ? `
+                    <ul class="report-list">
+                        ${topHabits.map(h => `
+                            <li>
+                                <span>${h.name}</span>
+                                <span class="report-val">${Math.round(h.score)}%</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                ` : '<p class="empty-text">No completed habits yet</p>'}
+            </div>
+
+            <div class="report-section">
+                <h3>🎯 Focus Area</h3>
+                ${focusHabits.length > 0 ? `
+                    <ul class="report-list">
+                        ${focusHabits.map(h => `
+                            <li>
+                                <span>${h.name}</span>
+                                <span class="report-val">${Math.round(h.score)}%</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                ` : '<p class="empty-text">Keep it up!</p>'}
+            </div>
+        `;
+
+        modal.classList.add('active');
+        // Force display flex via style slightly later to ensure transition works if needed
+        // but class 'active' should handle it via CSS
+    }
+
+    function closeWeeklyReport() {
+        const modal = document.getElementById('weekly-report-modal');
+        if (modal) modal.classList.remove('active');
+    }
+
+    function generateReportText() {
+        const today = new Date().toLocaleDateString();
+        return `My Niyam Weekly Report (${today})\nCheck out my habit progress!`;
+    }
 
     // ===== START APP =====
     init();

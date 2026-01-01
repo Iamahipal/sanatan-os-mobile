@@ -136,6 +136,8 @@ select {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    padding-bottom: 80px;
+    /* Ensure content doesn't get hidden behind bottom bars */
 }
 
 /* Page transition animation */
@@ -470,6 +472,9 @@ h2,
     justify-content: space-between;
     padding: var(--spacing-lg);
     padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom));
+    z-index: 1001;
+    /* Ensure ABOVE bottom nav */
+    position: relative;
 }
 
 .nav-btn {
