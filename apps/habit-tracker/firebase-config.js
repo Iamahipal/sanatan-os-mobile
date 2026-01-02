@@ -4,12 +4,12 @@
  */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCbpJn70aedORd6dycc88jxSqM178U91ig",
+    apiKey: "AIzaSyCByJh7DedGRde6dycc88jxSqWI78U9iUg",
     authDomain: "sanatan-os-push.firebaseapp.com",
     projectId: "sanatan-os-push",
     storageBucket: "sanatan-os-push.firebasestorage.app",
-    messagingSenderId: "840881978014",
-    appId: "1:840881978014:web:a3d8d5d30f274ecc719ae7b",
+    messagingSenderId: "860881978914",
+    appId: "1:860881978914:web:a3d8d5d3bf274cc719ac7b",
     databaseURL: "https://sanatan-os-push-default-rtdb.firebaseio.com"
 };
 
