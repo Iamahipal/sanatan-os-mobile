@@ -775,20 +775,39 @@ h2,
     margin-bottom: var(--spacing-lg);
 }
 
-/* ===== HABIT CARD ===== */
+/* ===== HABIT CARD - PREMIUM DESIGN ===== */
 .habit-card {
-    background: var(--bg-primary);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-md);
+    background: var(--card-bg, var(--bg-primary));
+    border-radius: 20px;
+    padding: var(--spacing-lg);
     margin-bottom: var(--spacing-md);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    /* Subtle border */
-    transition: var(--transition-normal);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.05));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle colored glow effect on the left */
+.habit-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--habit-color, var(--primary));
+    border-radius: 20px 0 0 20px;
+}
+
+.habit-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 .habit-card:active {
-    transform: scale(0.98);
+    transform: scale(0.98) translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .habit-header {
@@ -802,51 +821,138 @@ h2,
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
-    /* Increased gap */
+    flex: 1;
+    min-width: 0;
+    /* Allow text truncation */
 }
 
 .habit-icon {
-    width: 48px;
-    /* Larger icon container */
-    height: 48px;
-    border-radius: var(--radius-md);
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    background: var(--bg-secondary);
-    /* Default background */
+    background: var(--bg-tertiary);
+    flex-shrink: 0;
+    transition: all 0.3s ease;
 }
 
 .habit-icon i {
-    width: 24px;
-    height: 24px;
-    stroke: var(--text-primary);
+    width: 26px;
+    height: 26px;
     stroke-width: 2;
+}
+
+.habit-details {
+    flex: 1;
+    min-width: 0;
 }
 
 .habit-name {
     font-weight: 600;
     font-size: 1.1rem;
-    /* Larger font */
     color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .habit-streak {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
-    margin-top: 2px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .habit-streak span {
-    color: var(--accent-yellow);
-    /* Use specific accent color */
+    color: #FFB800;
     font-weight: 700;
+}
+
+.habit-streak .streak-fire {
+    font-size: 1rem;
 }
 
 .habit-actions {
     display: flex;
-    gap: var(--spacing-sm);
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.action-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--bg-tertiary);
+    border: none;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    transform: scale(1.08);
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+.action-btn i {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2.5;
+}
+
+.action-btn.add-entry {
+    background: var(--bg-tertiary);
+}
+
+.action-btn.add-entry i {
+    stroke: var(--text-secondary);
+}
+
+.action-btn.add-entry:hover {
+    background: var(--bg-secondary);
+}
+
+.action-btn.check {
+    background: var(--bg-tertiary);
+}
+
+.action-btn.check i {
+    stroke: var(--text-secondary);
+}
+
+.action-btn.check:hover {
+    background: rgba(52, 199, 89, 0.15);
+}
+
+.action-btn.check:hover i {
+    stroke: var(--success);
+}
+
+.action-btn.check.done {
+    background: linear-gradient(135deg, #34C759 0%, #30D158 100%);
+    box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3);
+}
+
+.action-btn.check.done i {
+    stroke: white;
+}
+
+.action-btn.check.skipped {
+    background: rgba(255, 59, 48, 0.15);
+}
+
+.action-btn.check.skipped i {
+    stroke: #FF3B30;
 }
 
 .action-btn {
@@ -939,7 +1045,7 @@ h2,
     /* Full habit color or green */
 }
 
-/* ===== BOTTOM NAVIGATION ===== */
+/* ===== BOTTOM NAVIGATION - PREMIUM ===== */
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -950,10 +1056,12 @@ h2,
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 64px;
+    height: 70px;
     padding-bottom: env(safe-area-inset-bottom);
-    background: var(--bg-primary);
-    border-top: 1px solid var(--bg-tertiary);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
     z-index: 100;
 }
 
@@ -965,23 +1073,45 @@ h2,
     justify-content: center;
     height: 100%;
     color: var(--text-tertiary);
-    transition: var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
 
 .nav-tab i {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     stroke-width: 2;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
+    transition: all 0.3s ease;
 }
 
 .nav-tab span {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-tab:active {
+    transform: scale(0.92);
 }
 
 .nav-tab.active {
-    color: var(--primary-dark);
+    color: var(--primary);
+}
+
+.nav-tab.active i {
+    stroke-width: 2.5;
+}
+
+/* Active indicator dot */
+.nav-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--primary);
 }
 
 .nav-tab.add-btn {
