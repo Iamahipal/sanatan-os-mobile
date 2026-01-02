@@ -79,19 +79,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (tithi === 15) {
             dayInfo.isAuspicious = true;
             dayInfo.type = 'purnima';
-            dayInfo.name = 'à¤ªà¥‚à¤°à¥à¤£à¤¿à¤®à¤¾';
+            dayInfo.name = 'Purnima';
         }
         // Amavasya (New Moon) - Tithi 30
         else if (tithi === 30 || tithi === 0) {
             dayInfo.isAuspicious = true;
             dayInfo.type = 'amavasya';
-            dayInfo.name = 'à¤…à¤®à¤¾à¤µà¤¸à¥à¤¯à¤¾';
+            dayInfo.name = 'Amavasya';
         }
         // Ekadashi - 11th day of each fortnight
         else if (tithi === 11 || tithi === 26) {
             dayInfo.isAuspicious = true;
             dayInfo.type = 'ekadashi';
-            dayInfo.name = 'à¤à¤•à¤¾à¤¦à¤¶à¥€';
+            dayInfo.name = 'Ekadashi';
         }
 
         return dayInfo;
