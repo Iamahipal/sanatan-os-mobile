@@ -309,7 +309,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===== SCREEN NAVIGATION =====
-    function showScreen(screenName) {
+    let navigationHistory = ['dashboard']; // Track screen history for back navigation
+
+    function showScreen(screenName, addToHistory = true) {
         Object.values(screens).forEach(screen => {
             if (screen) {
                 screen.style.display = 'none';
@@ -327,8 +329,36 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // Reset scroll
             window.scrollTo(0, 0);
+
+            // Add to history for back navigation (Android gesture support)
+            if (addToHistory && screenName !== 'onboarding') {
+                if (navigationHistory[navigationHistory.length - 1] !== screenName) {
+                    navigationHistory.push(screenName);
+                    history.pushState({ screen: screenName }, '', '');
+                }
+            }
         }
         lucide.createIcons();
+    }
+
+    // Handle browser back button / Android gesture
+    window.addEventListener('popstate', (event) => {
+        if (navigationHistory.length > 1) {
+            navigationHistory.pop(); // Remove current screen
+            const previousScreen = navigationHistory[navigationHistory.length - 1];
+            showScreen(previousScreen, false); // Don't add to history again
+            if (previousScreen === 'dashboard') {
+                renderDashboard();
+            }
+        } else {
+            // We're at dashboard, push state again to prevent exit
+            history.pushState({ screen: 'dashboard' }, '', '');
+        }
+    });
+
+    // Initialize history state on load
+    if (history.state === null) {
+        history.replaceState({ screen: 'dashboard' }, '', '');
     }
 
     // ===== ONBOARDING =====
@@ -572,6 +602,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function quickToggleHabit(habit) {
+        // Prevent marking future dates
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const selectedNormalized = new Date(state.selectedDate);
+        selectedNormalized.setHours(0, 0, 0, 0);
+
+        if (selectedNormalized > today) {
+            showToast('Cannot mark habits for future dates');
+            return;
+        }
+
         const dateKey = getDateKey(state.selectedDate);
         const currentStatus = habit.entries[dateKey]?.status;
 
@@ -2038,6 +2079,106 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Firebase auth after a short delay
     setTimeout(initFirebaseAuth, 500);
 
+    // ===== TOAST NOTIFICATIONS =====
+    function showToast(message, duration = 2500) {
+        // Remove existing toast
+        const existingToast = document.querySelector('.toast-notification');
+        if (existingToast) existingToast.remove();
+
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        // Trigger animation
+        setTimeout(() => toast.classList.add('show'), 10);
+
+        // Remove after duration
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, duration);
+    }
+
+    // ===== THEME TOGGLE =====
+    function toggleTheme() {
+        const currentTheme = localStorage.getItem('niyam_theme') || 'dark';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('niyam_theme', newTheme);
+        document.body.classList.toggle('light-theme', newTheme === 'light');
+        showToast(`Switched to ${newTheme} mode`);
+    }
+
+    function loadTheme() {
+        const theme = localStorage.getItem('niyam_theme') || 'dark';
+        document.body.classList.toggle('light-theme', theme === 'light');
+    }
+
+    // ===== EXPORT DATA =====
+    function exportData() {
+        const exportObj = {
+            habits: state.habits,
+            categories: state.categories,
+            exportDate: new Date().toISOString(),
+            appVersion: '1.0.0'
+        };
+
+        const dataStr = JSON.stringify(exportObj, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `niyam-habits-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showToast('Habits exported successfully!');
+    }
+
+    // ===== LAST SYNCED TIMESTAMP =====
+    function updateLastSyncedDisplay() {
+        const lastSynced = localStorage.getItem('niyam_last_synced');
+        const lastSyncedEl = document.getElementById('last-synced-time');
+
+        if (lastSyncedEl && lastSynced) {
+            const date = new Date(lastSynced);
+            const timeStr = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+            const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            lastSyncedEl.textContent = `Last synced: ${dateStr} at ${timeStr}`;
+        }
+    }
+
+    // Enhance saveToCloud to update timestamp
+    const originalSaveToCloud = saveToCloud;
+    saveToCloud = async function () {
+        await originalSaveToCloud();
+        localStorage.setItem('niyam_last_synced', new Date().toISOString());
+        updateLastSyncedDisplay();
+    };
+
+    // Bind settings button events
+    const themeBtn = document.querySelector('.settings-item:has(.settings-icon i[data-lucide="palette"])');
+    const exportBtn = document.querySelector('.settings-item:has(.settings-icon i[data-lucide="download"])');
+
+    if (themeBtn) {
+        themeBtn.addEventListener('click', toggleTheme);
+    }
+    if (exportBtn) {
+        exportBtn.addEventListener('click', exportData);
+    }
+
+    // Load theme on init
+    loadTheme();
+
+    // Update last synced display when settings opens
+    const originalOpenSettings = openSettings;
+    openSettings = function () {
+        originalOpenSettings();
+        updateLastSyncedDisplay();
+    };
 
     // ===== START APP =====
     init();

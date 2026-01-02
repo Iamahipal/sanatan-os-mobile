@@ -2653,3 +2653,112 @@ button:active,
         letter-spacing: 8px;
     }
 }
+
+/* ===== TOAST NOTIFICATIONS ===== */
+.toast-notification {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 90%;
+    text-align: center;
+}
+
+.toast-notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ===== LAST SYNCED TIMESTAMP ===== */
+.last-synced-time {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 8px;
+    display: block;
+    text-align: center;
+}
+
+/* ===== LIGHT THEME ===== */
+body.light-theme {
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F5F5F7;
+    --bg-tertiary: #E5E5EA;
+    --text-primary: #1D1D1F;
+    --text-secondary: #86868B;
+    --text-tertiary: #AEAEB2;
+}
+
+/* Dark Theme (Default) */
+body:not(.light-theme) {
+    --bg-primary: #1C1C1E;
+    --bg-secondary: #2C2C2E;
+    --bg-tertiary: #3A3A3C;
+    --text-primary: #FFFFFF;
+    --text-secondary: #98989D;
+    --text-tertiary: #636366;
+}
+
+body:not(.light-theme) .app-container {
+    background: var(--bg-primary);
+}
+
+body:not(.light-theme) .screen {
+    background: var(--bg-primary);
+}
+
+body:not(.light-theme) .app-header {
+    background: var(--bg-primary);
+    border-bottom-color: var(--bg-tertiary);
+}
+
+body:not(.light-theme) .habit-card {
+    background: var(--bg-secondary);
+    border-color: var(--bg-tertiary);
+}
+
+body:not(.light-theme) .week-picker {
+    background: var(--bg-primary);
+    border-bottom-color: var(--bg-tertiary);
+}
+
+body:not(.light-theme) .week-day.selected {
+    background: rgba(0, 122, 255, 0.2);
+    border-color: var(--primary);
+}
+
+body:not(.light-theme) .modal-content {
+    background: var(--bg-secondary);
+}
+
+body:not(.light-theme) .settings-card {
+    background: var(--bg-secondary);
+}
+
+body:not(.light-theme) .settings-item {
+    background: var(--bg-secondary);
+    border-bottom-color: var(--bg-tertiary);
+}
+
+body:not(.light-theme) .input-field {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+body:not(.light-theme) .form-section.card {
+    background: var(--bg-secondary);
+}
+
+body:not(.light-theme) .toast-notification {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1D1D1F;
+}
