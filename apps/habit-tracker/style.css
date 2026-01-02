@@ -338,9 +338,12 @@ h2,
 /* ===== ONBOARDING - MODERN PREMIUM DESIGN ===== */
 .onboarding-screen {
     background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
-    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 /* Animated background decoration */
@@ -355,6 +358,7 @@ h2,
         radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
     animation: floatBg 20s ease-in-out infinite;
     pointer-events: none;
+    z-index: 0;
 }
 
 @keyframes floatBg {
@@ -373,6 +377,8 @@ h2,
     flex: 1;
     position: relative;
     z-index: 1;
+    display: flex;
+    min-height: 0;
 }
 
 .onboarding-slide {
@@ -385,6 +391,7 @@ h2,
     align-items: center;
     justify-content: center;
     padding: var(--spacing-xl);
+    padding-top: calc(env(safe-area-inset-top) + 60px);
     opacity: 0;
     transform: translateX(100%);
     transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -3223,5 +3230,199 @@ body.light-theme .bottom-nav {
 
 body.light-theme .toast-notification {
     background: rgba(0, 0, 0, 0.85);
+    color: white;
+}
+
+/* ===== DARK MODE TEXT VISIBILITY FIXES ===== */
+
+/* Modal close button */
+body:not(.light-theme) .close-btn,
+body:not(.light-theme) .modal-close,
+body:not(.light-theme) .btn-close {
+    color: white;
+    stroke: white;
+}
+
+body:not(.light-theme) .close-btn i,
+body:not(.light-theme) .modal-close i {
+    stroke: white;
+}
+
+body:not(.light-theme) .modal-header {
+    color: var(--text-primary);
+}
+
+body:not(.light-theme) .modal-header h2,
+body:not(.light-theme) .modal-header h3,
+body:not(.light-theme) .modal-title {
+    color: white;
+}
+
+/* Form labels and text */
+body:not(.light-theme) .form-group label,
+body:not(.light-theme) .input-label,
+body:not(.light-theme) .form-label {
+    color: var(--text-secondary);
+}
+
+body:not(.light-theme) .form-group,
+body:not(.light-theme) .form-section {
+    color: var(--text-primary);
+}
+
+/* Icon picker - make icons visible */
+body:not(.light-theme) .icon-option,
+body:not(.light-theme) .icon-picker-item,
+body:not(.light-theme) .icon-grid button {
+    background: var(--bg-tertiary);
+    color: white;
+}
+
+body:not(.light-theme) .icon-option i,
+body:not(.light-theme) .icon-picker-item i,
+body:not(.light-theme) .icon-grid button i {
+    stroke: white;
+    color: white;
+}
+
+body:not(.light-theme) .icon-option.selected,
+body:not(.light-theme) .icon-picker-item.selected {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Ritual/Frequency buttons */
+body:not(.light-theme) .ritual-option,
+body:not(.light-theme) .frequency-option,
+body:not(.light-theme) .day-option,
+body:not(.light-theme) .ritual-btn {
+    background: var(--bg-tertiary);
+    color: white;
+    border: 1px solid var(--border-color);
+}
+
+body:not(.light-theme) .ritual-option.selected,
+body:not(.light-theme) .frequency-option.selected,
+body:not(.light-theme) .day-option.selected {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Settings items text */
+body:not(.light-theme) .settings-item-label,
+body:not(.light-theme) .settings-item span,
+body:not(.light-theme) .settings-label {
+    color: white;
+}
+
+body:not(.light-theme) .settings-item {
+    color: white;
+}
+
+body:not(.light-theme) .settings-item i {
+    stroke: var(--primary);
+}
+
+/* Chevron arrows in settings */
+body:not(.light-theme) .settings-item .chevron,
+body:not(.light-theme) .settings-item [data-lucide="chevron-right"] {
+    stroke: var(--text-tertiary);
+}
+
+/* Week picker - today text should be white on blue */
+body:not(.light-theme) .week-day.today .day-name,
+body:not(.light-theme) .week-day.today .day-num {
+    color: white;
+}
+
+/* Week day names and numbers in dark mode */
+body:not(.light-theme) .day-name {
+    color: var(--text-secondary);
+}
+
+body:not(.light-theme) .day-num {
+    color: white;
+}
+
+/* Report modal content */
+body:not(.light-theme) .report-content,
+body:not(.light-theme) .report-section,
+body:not(.light-theme) .report-title,
+body:not(.light-theme) .report-stat {
+    color: white;
+}
+
+body:not(.light-theme) .report-stat-label {
+    color: var(--text-secondary);
+}
+
+/* General text fixes */
+body:not(.light-theme) h1,
+body:not(.light-theme) h2,
+body:not(.light-theme) h3,
+body:not(.light-theme) h4 {
+    color: white;
+}
+
+body:not(.light-theme) p {
+    color: var(--text-primary);
+}
+
+/* Color picker swatches */
+body:not(.light-theme) .color-swatch {
+    border: 2px solid var(--border-color);
+}
+
+body:not(.light-theme) .color-swatch.selected {
+    border-color: white;
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+/* Add habit form header */
+body:not(.light-theme) .form-header,
+body:not(.light-theme) .form-header h2 {
+    color: white;
+}
+
+body:not(.light-theme) .form-header .close-btn {
+    color: white;
+}
+
+body:not(.light-theme) .form-header .close-btn i {
+    stroke: white;
+}
+
+/* Category modal */
+body:not(.light-theme) .category-item,
+body:not(.light-theme) .category-option {
+    background: var(--bg-tertiary);
+    color: white;
+    border: 1px solid var(--border-color);
+}
+
+body:not(.light-theme) .category-item.selected,
+body:not(.light-theme) .category-option.selected {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Timeline text */
+body:not(.light-theme) .timeline-date,
+body:not(.light-theme) .timeline-habit span {
+    color: white;
+}
+
+body:not(.light-theme) .timeline-note {
+    color: var(--text-secondary);
+}
+
+/* Empty state */
+body:not(.light-theme) .empty-state p,
+body:not(.light-theme) .empty-state span {
+    color: var(--text-secondary);
+}
+
+/* Year progress */
+body:not(.light-theme) .year-progress-content {
     color: white;
 }

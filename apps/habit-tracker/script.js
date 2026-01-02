@@ -2159,15 +2159,25 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLastSyncedDisplay();
     };
 
-    // Bind settings button events
-    const themeBtn = document.querySelector('.settings-item:has(.settings-icon i[data-lucide="palette"])');
-    const exportBtn = document.querySelector('.settings-item:has(.settings-icon i[data-lucide="download"])');
+    // Bind settings button events using IDs
+    const themeBtn = document.getElementById('theme-btn');
+    const exportBtn = document.getElementById('export-btn');
+    const categoriesBtn = document.getElementById('categories-btn');
 
     if (themeBtn) {
         themeBtn.addEventListener('click', toggleTheme);
     }
     if (exportBtn) {
         exportBtn.addEventListener('click', exportData);
+    }
+    if (categoriesBtn) {
+        categoriesBtn.addEventListener('click', () => {
+            if (typeof openCategories === 'function') {
+                openCategories();
+            } else {
+                showToast('Categories feature coming soon!');
+            }
+        });
     }
 
     // Load theme on init
