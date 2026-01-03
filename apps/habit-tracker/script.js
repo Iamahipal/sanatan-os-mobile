@@ -1512,7 +1512,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Form
         if (formBackBtn) {
             formBackBtn.addEventListener('click', () => {
-                console.log('Form Back Button Clicked');
                 showScreen('dashboard');
                 renderDashboard();
             });

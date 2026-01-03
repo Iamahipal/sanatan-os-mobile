@@ -1135,27 +1135,25 @@ h2,
 
 .nav-tab.add-btn {
     flex: 0 0 auto;
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #007AFF 0%, #0056B3 100%);
+    background: #007AFF;
     color: white;
-    box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
-    margin-top: -24px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-top: -20px;
 }
 
 .nav-tab.add-btn i {
-    width: 28px;
-    height: 28px;
-    stroke: white !important;
-    stroke-width: 3;
-    color: white;
+    width: 26px;
+    height: 26px;
+    stroke: white;
+    stroke-width: 2.5;
 }
 
 .nav-tab.add-btn:active {
-    transform: scale(0.92);
-    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+    transform: scale(0.95);
+    background: #0056B3;
 }
 
 /* ===== FORM SCREEN ===== */
