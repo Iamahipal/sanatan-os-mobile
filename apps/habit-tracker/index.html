@@ -132,9 +132,16 @@
             <main id="habit-list" class="habit-list">
                 <!-- Empty State -->
                 <div id="empty-state" class="empty-state">
-                    <i data-lucide="sparkles" class="empty-icon"></i>
-                    <p>Begin your journey</p>
-                    <span>Add your first habit to start building a better you.</span>
+                    <div class="empty-icon-container">
+                        <i data-lucide="sparkles" class="empty-icon"></i>
+                    </div>
+                    <h2 class="empty-title">Begin Your Journey</h2>
+                    <p class="empty-subtitle">Build lasting habits that align with your values</p>
+                    <p class="empty-hint">Start with one small step today</p>
+                    <button id="empty-add-btn" class="btn-primary-cta">
+                        <i data-lucide="plus"></i>
+                        <span>Create Your First Habit</span>
+                    </button>
                 </div>
 
                 <!-- Habits will be rendered here -->

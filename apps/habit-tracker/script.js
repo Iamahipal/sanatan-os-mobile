@@ -2182,6 +2182,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load theme on init
     loadTheme();
 
+    // Empty state CTA button
+    const emptyAddBtn = document.getElementById('empty-add-btn');
+    if (emptyAddBtn) {
+        emptyAddBtn.addEventListener('click', openAddHabitForm);
+    }
+
     // Update last synced display when settings opens
     const originalOpenSettings = openSettings;
     openSettings = function () {
