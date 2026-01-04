@@ -78,6 +78,25 @@
     /* ===== TOUCH TARGETS ===== */
     --touch-min: 48px;
     --touch-comfortable: 56px;
+
+    /* ===== GLASS EFFECTS (Dark Theme) ===== */
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-bg-hover: rgba(255, 255, 255, 0.12);
+    --glass-bg-active: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-border-strong: rgba(255, 255, 255, 0.2);
+
+    /* ===== PRIMARY ALPHA VALUES ===== */
+    --primary-alpha-10: rgba(10, 132, 255, 0.1);
+    --primary-alpha-15: rgba(10, 132, 255, 0.15);
+    --primary-alpha-20: rgba(10, 132, 255, 0.2);
+    --primary-alpha-25: rgba(10, 132, 255, 0.25);
+
+    /* ===== TEXT ALPHA (Dark Theme) ===== */
+    --text-light-90: rgba(235, 235, 245, 0.9);
+    --text-light-70: rgba(235, 235, 245, 0.7);
+    --text-light-55: rgba(235, 235, 245, 0.55);
+    --text-light-30: rgba(235, 235, 245, 0.3);
 }
 
 /* ===== RESET & BASE ===== */
@@ -351,38 +370,38 @@ body.light-theme .input-field::placeholder {
     z-index: 100;
 }
 
-/* Prana Quote (Inspiration Card - Elevated) */
+/* Prana Quote (Inspiration Card - Compact) */
 .prana-quote-card {
     text-align: center;
-    padding: 20px 16px;
-    margin: 8px 16px 0;
+    padding: 12px 16px;
+    margin: 4px 16px 0;
     background: linear-gradient(135deg, #1C1C1E 0%, #252527 100%);
-    border-radius: 16px;
+    border-radius: 12px;
     opacity: 1;
 }
 
 .prana-sanskrit {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     color: #FFFFFF;
     font-family: 'Noto Sans Devanagari', 'Tiro Devanagari Sanskrit', sans-serif;
     letter-spacing: 0.5px;
-    line-height: 1.4;
-    margin-bottom: 8px;
+    line-height: 1.3;
+    margin-bottom: 4px;
 }
 
 .prana-translation {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     color: rgba(235, 235, 245, 0.85);
-    margin-bottom: 12px;
+    margin-bottom: 6px;
 }
 
 .prana-source {
-    font-size: 13px;
+    font-size: 12px;
     color: rgba(235, 235, 245, 0.5);
     position: relative;
-    padding-top: 12px;
+    padding-top: 6px;
 }
 
 .prana-source::before {
@@ -808,7 +827,7 @@ body.light-theme .prana-source::before {
     -webkit-backdrop-filter: blur(20px);
 }
 
-/* Navigation Buttons - Refined glass */
+/* Navigation Buttons - High Visibility */
 .onboarding-nav .nav-btn {
     width: 52px;
     height: 52px;
@@ -816,12 +835,12 @@ body.light-theme .prana-source::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
 .onboarding-nav .nav-btn:hover {
@@ -839,7 +858,8 @@ body.light-theme .prana-source::before {
     width: 24px;
     height: 24px;
     stroke: white;
-    stroke-width: 2;
+    stroke-width: 2.5;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
 /* Progress Dots - Modern pill style */
@@ -928,9 +948,9 @@ body.light-theme .prana-source::before {
     opacity: 0.7;
 }
 
-/* ===== WEEK PICKER - REFINED ===== */
+/* ===== WEEK PICKER - COMPACT ===== */
 .week-picker {
-    padding: 16px;
+    padding: 8px 16px;
     background: var(--bg-primary);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -938,18 +958,18 @@ body.light-theme .prana-source::before {
 .week-days {
     display: flex;
     justify-content: space-between;
-    gap: 12px;
+    gap: 8px;
 }
 
 .week-day {
-    width: 44px;
-    height: 56px;
+    width: 40px;
+    height: 48px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 8px 0;
-    border-radius: 12px;
+    padding: 4px 0;
+    border-radius: 10px;
     transition: all 150ms ease-out;
     cursor: pointer;
     background: transparent;
@@ -983,7 +1003,7 @@ body.light-theme .prana-source::before {
 }
 
 .day-num {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: rgba(235, 235, 245, 0.7);
 }
@@ -1373,10 +1393,12 @@ body.light-theme .bottom-nav {
     margin-top: -20px;
 }
 
-.nav-tab.add-btn i {
+.nav-tab.add-btn i,
+.nav-tab.add-btn svg {
     width: 26px;
     height: 26px;
-    stroke: white;
+    stroke: white !important;
+    color: white !important;
     stroke-width: 2.5;
 }
 
@@ -1451,12 +1473,18 @@ body.light-theme .bottom-nav {
 
 .type-btn.active {
     border-color: var(--primary);
-    background: color-mix(in srgb, var(--primary) 10%, white);
-    color: var(--text-primary);
+    background: rgba(10, 132, 255, 0.2);
+    color: white;
 }
 
 .type-btn.active i {
-    stroke: var(--primary-dark);
+    stroke: var(--primary);
+}
+
+/* Light theme override for type buttons */
+body.light-theme .type-btn.active {
+    background: rgba(10, 132, 255, 0.15);
+    color: var(--text-primary);
 }
 
 /* Target Input */
@@ -1850,24 +1878,112 @@ body.light-theme .bottom-nav {
     border-radius: var(--radius-sm);
 }
 
-/* ===== SETTINGS SCREEN ===== */
+/* ===== SETTINGS SCREEN - REFINED ===== */
 .settings-content {
     flex: 1;
     overflow-y: auto;
-    padding: var(--spacing-md);
+    padding: 12px;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    /* Custom scrollbar for settings */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
+.settings-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.settings-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.settings-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}
+
+/* Light theme scrollbar */
+body.light-theme .settings-content {
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+body.light-theme .settings-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+/* Account Card - Compact */
+.settings-card {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Signed Out State - Compact */
+#signed-out-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    gap: 8px;
+}
+
+#signed-out-state .account-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+}
+
+#signed-out-state .account-icon i {
+    width: 20px;
+    height: 20px;
+    stroke: rgba(235, 235, 245, 0.5);
+}
+
+#signed-out-state .account-label {
+    font-size: 13px;
+    color: rgba(235, 235, 245, 0.6);
+    margin: 0;
+}
+
+.google-signin-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: white;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #3c4043;
+    border: none;
+    cursor: pointer;
+    transition: all 150ms ease-out;
+}
+
+.google-signin-btn:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Score Card - Compact */
 .score-card {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
+    border-radius: 12px;
+    padding: 12px;
     text-align: center;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: 12px;
 }
 
 .score-gauge {
-    width: 120px;
-    margin: 0 auto var(--spacing-sm);
+    width: 80px;
+    margin: 0 auto 4px;
     position: relative;
 }
 
@@ -1882,76 +1998,183 @@ body.light-theme .bottom-nav {
 
 .gauge-value {
     position: absolute;
-    bottom: 10px;
+    bottom: 6px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
+    color: white;
 }
 
 .score-label {
+    font-size: 12px;
     font-weight: 500;
-    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.8);
 }
 
+/* Settings List - Clean with Consistent Dividers */
 .settings-list {
-    background: var(--bg-secondary);
-    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .settings-item {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
+    gap: 12px;
+    padding: 12px 14px;
     width: 100%;
     text-align: left;
-    border-bottom: 1px solid var(--bg-tertiary);
-    transition: var(--transition-fast);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 150ms ease-out;
+    cursor: pointer;
 }
 
 .settings-item:last-child {
     border-bottom: none;
 }
 
-.settings-item:active {
-    background: var(--bg-tertiary);
+.settings-item:hover {
+    background: rgba(255, 255, 255, 0.04);
 }
 
+.settings-item:active {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Settings Icons - Consistent Blue Accent */
 .settings-icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-primary);
-    border-radius: var(--radius-md);
+    background: rgba(10, 132, 255, 0.15);
+    border-radius: 8px;
+    flex-shrink: 0;
 }
 
 .settings-icon i {
-    width: 20px;
-    height: 20px;
-    stroke: var(--text-secondary);
+    width: 18px;
+    height: 18px;
+    stroke: var(--primary);
     stroke-width: 2;
 }
 
 .settings-item span {
     flex: 1;
+    font-size: 15px;
     font-weight: 500;
+    color: rgba(235, 235, 245, 0.9);
 }
 
 .settings-arrow {
-    width: 20px;
-    height: 20px;
-    stroke: var(--text-tertiary);
+    width: 18px;
+    height: 18px;
+    stroke: rgba(235, 235, 245, 0.3);
     stroke-width: 2;
 }
 
-.settings-item.danger .settings-icon i,
+/* Theme Toggle - Add Toggle Switch Instead of Arrow */
+#theme-btn .settings-arrow {
+    display: none;
+}
+
+#theme-btn::after {
+    content: '';
+    width: 36px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    position: relative;
+    transition: all 200ms ease-out;
+}
+
+body.light-theme #theme-btn::after {
+    background: var(--primary);
+}
+
+/* Danger/Destructive Action Styling */
+.settings-item.danger {
+    margin-top: 8px;
+    position: relative;
+}
+
+.settings-item.danger::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 14px;
+    right: 14px;
+    height: 1px;
+    background: rgba(255, 59, 48, 0.2);
+}
+
+.settings-item.danger .settings-icon {
+    background: rgba(255, 59, 48, 0.15);
+}
+
+.settings-item.danger .settings-icon i {
+    stroke: var(--danger);
+}
+
 .settings-item.danger span {
     color: var(--danger);
-    stroke: var(--danger);
+}
+
+.settings-item.danger .settings-arrow {
+    stroke: rgba(255, 59, 48, 0.4);
+}
+
+/* Light Theme Settings Overrides */
+body.light-theme .settings-card,
+body.light-theme .settings-list {
+    background: white;
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .settings-item {
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .settings-item:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+body.light-theme .settings-item:active {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+body.light-theme .settings-icon {
+    background: rgba(10, 132, 255, 0.1);
+}
+
+body.light-theme .settings-item span {
+    color: var(--text-primary);
+}
+
+body.light-theme .settings-arrow {
+    stroke: rgba(60, 60, 67, 0.3);
+}
+
+body.light-theme #signed-out-state {
+    background: transparent;
+}
+
+body.light-theme #signed-out-state .account-icon {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme #signed-out-state .account-icon i {
+    stroke: rgba(60, 60, 67, 0.5);
+}
+
+body.light-theme #signed-out-state .account-label {
+    color: rgba(60, 60, 67, 0.6);
 }
 
 /* ===== MODALS ===== */
@@ -2577,17 +2800,17 @@ body.light-theme .bottom-nav {
 
 .ritual-btn.active {
     border-color: var(--primary);
-    background: color-mix(in srgb, var(--primary) 15%, white);
+    background: rgba(10, 132, 255, 0.2);
+    color: white;
+    box-shadow: 0 0 12px rgba(10, 132, 255, 0.2);
 }
 
-.ritual-btn[data-ritual="morning"].active {
-    border-color: #FF9800;
-    background: #FFF3E0;
-}
-
+/* Morning and Evening use same blue accent for consistency */
+.ritual-btn[data-ritual="morning"].active,
 .ritual-btn[data-ritual="evening"].active {
-    border-color: #5C6BC0;
-    background: #E8EAF6;
+    border-color: var(--primary);
+    background: rgba(10, 132, 255, 0.2);
+    color: white;
 }
 
 /* ===== SPRINT B: HABIT STACKING ===== */
@@ -3214,16 +3437,14 @@ button:active,
 
 .year-dots-grid {
     display: grid;
-    grid-template-columns: repeat(15, 1fr);
-    gap: 6px;
+    grid-template-columns: repeat(20, 1fr);
+    gap: 4px;
     padding: 8px;
-    max-height: 400px;
-    overflow-y: auto;
 }
 
 .year-dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: rgba(124, 58, 237, 0.12);
     transition: all 0.3s ease;
@@ -3299,6 +3520,45 @@ button:active,
 .percent-complete {
     color: white;
     font-weight: 500;
+}
+
+/* ===== PRIMARY CTA BUTTON (Create Your First Habit) ===== */
+.btn-primary-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 24px;
+    background: #007AFF;
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
+.btn-primary-cta:hover {
+    background: #0056B3;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 122, 255, 0.4);
+}
+
+.btn-primary-cta:active {
+    transform: scale(0.98);
+}
+
+/* Ensure plus icon inside CTA button is WHITE */
+.btn-primary-cta i,
+.btn-primary-cta svg {
+    width: 20px;
+    height: 20px;
+    stroke: white !important;
+    color: white !important;
+    stroke-width: 2.5;
 }
 
 /* Responsive dot sizing */
@@ -3877,34 +4137,35 @@ body:not(.light-theme) .year-progress-content {
 }
 
 /* ===== EMPTY STATE COMPONENT - REFINED ===== */
+#empty-state,
 .empty-state {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 48px 32px;
-    min-height: 450px;
+    padding: 24px 24px;
+    min-height: 280px;
 }
 
 /* NO dark blob - just floating icon with glow */
 .empty-icon-container {
-    width: 80px;
-    height: 80px;
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     /* NO background, NO border-radius */
     background: transparent;
 }
 
 .empty-icon {
-    width: 80px;
-    height: 80px;
+    width: 56px;
+    height: 56px;
     stroke: var(--primary);
     stroke-width: 1.2;
-    filter: drop-shadow(0 0 20px rgba(10, 132, 255, 0.3));
+    filter: drop-shadow(0 0 15px rgba(10, 132, 255, 0.3));
     animation: iconFloat 3s ease-in-out infinite;
 }
 
@@ -3923,27 +4184,27 @@ body:not(.light-theme) .year-progress-content {
 }
 
 .empty-title {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 600;
     color: #FFFFFF;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     letter-spacing: -0.3px;
 }
 
 .empty-subtitle {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     color: rgba(235, 235, 245, 0.7);
-    line-height: 1.5;
-    max-width: 280px;
-    margin-bottom: 8px;
+    line-height: 1.4;
+    max-width: 260px;
+    margin-bottom: 4px;
 }
 
 .empty-hint {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 400;
     color: rgba(235, 235, 245, 0.55);
-    margin-bottom: 32px;
+    margin-bottom: 20px;
 }
 
 /* ===== PRIMARY CTA BUTTON - REFINED ===== */
@@ -4021,4 +4282,116 @@ body.light-theme .empty-subtitle {
 
 body.light-theme .empty-hint {
     color: rgba(60, 60, 67, 0.55);
+}
+
+/* ===== HIDE REDUNDANT EMPTY STATE CTA ===== */
+/* Keep only the FAB (+) button in bottom nav as primary creation method */
+#empty-state .btn-primary-cta,
+#empty-add-btn {
+    display: none;
+}
+
+/* Adjust empty state hint since button is removed */
+#empty-state .empty-hint {
+    margin-bottom: 0;
+}
+
+/* ===== RITUAL SELECTOR BUTTONS ===== */
+.ritual-selector {
+    display: flex;
+    gap: 8px;
+}
+
+.ritual-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 44px;
+    padding: 0 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    color: rgba(235, 235, 245, 0.7);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 150ms ease-out;
+}
+
+.ritual-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.ritual-btn.active {
+    background: rgba(10, 132, 255, 0.2);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: 0 0 12px rgba(10, 132, 255, 0.2);
+}
+
+/* Light theme ritual buttons */
+body.light-theme .ritual-btn {
+    background: var(--bg-secondary);
+    border-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+}
+
+body.light-theme .ritual-btn.active {
+    background: rgba(10, 132, 255, 0.12);
+    border-color: var(--primary);
+    color: var(--text-primary);
+}
+
+/* ===== WEEKLY REPORT - LIGHT THEME FIX ===== */
+/* Fix report stat labels visibility in light mode */
+body.light-theme .report-stat {
+    background: #F5F5F5 !important;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .report-stat-value {
+    color: var(--text-primary) !important;
+}
+
+body.light-theme .report-stat-label {
+    color: rgba(60, 60, 67, 0.6) !important;
+}
+
+body.light-theme .report-content {
+    color: var(--text-primary);
+}
+
+/* Weekly Report Modal Light Theme */
+body.light-theme .weekly-report-modal {
+    background: white;
+}
+
+body.light-theme .weekly-report-modal .modal-header h2 {
+    color: var(--text-primary);
+}
+
+body.light-theme .share-report-btn {
+    background: var(--primary);
+    color: white;
+}
+
+/* ===== SETTINGS SCREEN - SCROLL FIX ===== */
+/* Ensure settings list is visible and scrollable properly */
+.settings-content {
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.settings-list {
+    flex-shrink: 0;
+}
+
+/* Ensure bottom padding for safe area on mobile */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .settings-content {
+        padding-bottom: calc(16px + env(safe-area-inset-bottom));
+    }
 }
