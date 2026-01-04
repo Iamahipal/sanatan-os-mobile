@@ -13,6 +13,40 @@
 </head>
 
 <body>
+    <!-- Daily Darshan Modal -->
+    <div id="daily-darshan-modal" class="daily-darshan-modal">
+        <div class="darshan-content">
+            <div class="darshan-header">
+                <span class="greeting">शुभ प्रभात 🙏</span>
+                <span class="date" id="darshan-date"></span>
+            </div>
+
+            <div class="today-saint-feature">
+                <div class="saint-avatar-large" id="darshan-avatar">🙏</div>
+                <h2 class="saint-name" id="darshan-name"></h2>
+                <p class="saint-period" id="darshan-period"></p>
+            </div>
+
+            <blockquote class="daily-quote">
+                <p id="darshan-quote"></p>
+            </blockquote>
+
+            <div class="reflection-prompt">
+                <h4>Today's Reflection</h4>
+                <p id="darshan-reflection"></p>
+            </div>
+
+            <div class="darshan-actions">
+                <button class="btn-primary" id="darshan-learn-btn">Learn About This Saint</button>
+                <button class="btn-secondary" id="darshan-close-btn">Continue to App</button>
+            </div>
+
+            <div class="streak-indicator" id="streak-display">
+                🔥 <span id="streak-count">0</span> Day Streak!
+            </div>
+        </div>
+    </div>
+
     <!-- Living Prana Background -->
     <div class="prana-bg">
         <div class="blob-1"></div>
@@ -51,10 +85,29 @@
         <main id="main-content" class="main-content">
             <!-- Home Screen - Traditions Grid -->
             <section id="home-screen" class="screen active">
-                <div class="hero-section">
-                    <div class="hero-icon">🙏</div>
-                    <h2 class="hero-title">भारत संत दर्शन</h2>
-                    <p class="hero-subtitle">Discover the eternal wisdom of Sanatan Dharma's greatest saints</p>
+                <!-- Progress Tracking Banner -->
+                <div id="progress-banner" class="progress-banner">
+                    <div class="progress-ring">
+                        <svg viewBox="0 0 36 36">
+                            <circle class="bg" cx="18" cy="18" r="15.5"></circle>
+                            <circle class="progress" cx="18" cy="18" r="15.5" stroke-dasharray="97.5"
+                                stroke-dashoffset="97.5" id="progress-circle"></circle>
+                        </svg>
+                        <span class="text" id="progress-text">0/37</span>
+                    </div>
+                    <div class="progress-info">
+                        <h4>Your Spiritual Journey</h4>
+                        <p id="progress-description">Begin exploring the saints</p>
+                        <div class="progress-bar" style="--progress: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Favorites Section -->
+                <div id="favorites-section" class="favorites-section" style="display: none;">
+                    <h3>❤️ My Spiritual Companions</h3>
+                    <div id="favorites-carousel" class="favorites-carousel">
+                        <!-- Favorite saint cards will be rendered by JS -->
+                    </div>
                 </div>
 
                 <!-- Today's Saint Card -->
@@ -68,7 +121,7 @@
 
                 <div class="stats-section">
                     <div class="stat-item">
-                        <span class="stat-number" id="total-saints">30</span>
+                        <span class="stat-number" id="total-saints">37</span>
                         <span class="stat-label">Saints</span>
                     </div>
                     <div class="stat-item">
@@ -76,8 +129,8 @@
                         <span class="stat-label">Traditions</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">15+</span>
-                        <span class="stat-label">Sampradayas</span>
+                        <span class="stat-number" id="explored-count">0</span>
+                        <span class="stat-label">Explored</span>
                     </div>
                 </div>
 

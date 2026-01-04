@@ -4415,21 +4415,21 @@ body.light-theme .share-report-btn {
     padding-bottom: 8px;
 }
 
-/* Empty State - Typography Hierarchy Improvements */
+/* Empty State - Compact to fit viewport without scroll */
 .empty-state {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 40px 24px;
-    min-height: 280px;
+    padding: 16px 20px 12px;
+    flex: 1;
 }
 
 .empty-icon-container {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 24px;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4438,42 +4438,44 @@ body.light-theme .share-report-btn {
 }
 
 .empty-icon {
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
     color: var(--primary);
 }
 
 /* Heading - Stand out prominently */
 .empty-title {
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     line-height: 1.2;
 }
 
 /* Description - Flow as cohesive paragraph */
 .empty-subtitle {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 400;
     color: var(--text-secondary);
-    line-height: 1.6;
-    max-width: 320px;
-    margin: 0 auto 8px;
+    line-height: 1.4;
+    max-width: 300px;
+    margin: 0 auto 4px;
 }
 
 .empty-hint {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 400;
     color: var(--text-secondary);
-    line-height: 1.6;
-    max-width: 320px;
-    margin: 0 auto 32px;
+    line-height: 1.4;
+    max-width: 300px;
+    margin: 0 auto 16px;
 }
 
 /* CTA Button in Empty State */
 .empty-state .btn-primary-cta {
-    margin-top: 8px;
+    margin-top: 0;
+    padding: 12px 24px;
+    font-size: 15px;
 }
 
 /* Light theme empty state overrides */
@@ -4493,4 +4495,137 @@ body.light-theme .empty-hint {
 /* Light theme quote card adjustments */
 body.light-theme .prana-quote-card {
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== ONBOARDING NAVIGATION - Improved Visibility ===== */
+.onboarding-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.nav-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-btn svg,
+.nav-btn i {
+    width: 24px;
+    height: 24px;
+    color: #FFFFFF;
+    stroke-width: 2;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+.skip-btn {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.next-btn {
+    background: rgba(10, 132, 255, 0.8);
+}
+
+.next-btn:hover {
+    background: rgba(10, 132, 255, 0.95);
+}
+
+.onboarding-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.onboarding-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.onboarding-dots .dot.active {
+    background: #FFFFFF;
+    width: 24px;
+    border-radius: 4px;
+}
+
+/* ===== SETTINGS MENU - Remove Red Line Fix ===== */
+/* Ensure all settings item separators use consistent gray color */
+.settings-group {
+    border-bottom: none;
+}
+
+.settings-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.settings-item:last-child {
+    border-bottom: none;
+}
+
+/* Override any red/danger borders on settings items */
+.settings-item.danger,
+.settings-item.destructive {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Light theme settings overrides */
+body.light-theme .settings-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .settings-item:last-child {
+    border-bottom: none;
+}
+
+body.light-theme .settings-item.danger,
+body.light-theme .settings-item.destructive {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* ===== HOME SCREEN NO-SCROLL FIX ===== */
+/* Make habit-list fill available space without overflow */
+.habit-list {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* Reduce quote card margins for compact layout */
+.prana-quote-card {
+    margin: 4px 16px 16px;
+    padding: 16px;
+}
+
+/* Compact week picker */
+.week-picker {
+    margin-bottom: 16px;
+    padding: 0 16px 8px;
 }
