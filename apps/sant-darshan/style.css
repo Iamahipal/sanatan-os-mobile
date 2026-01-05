@@ -1512,3 +1512,1340 @@ body {
     color: var(--text-muted);
     font-size: 0.85rem;
 }
+
+/* ============================================
+   PHASE 2 - Quiz, Achievements, Stories
+   ============================================ */
+
+/* Home Action Buttons */
+.home-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.action-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.action-card i {
+    font-size: 1.8rem;
+}
+
+.action-card span {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.action-card small {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.quiz-card {
+    border-color: rgba(147, 112, 219, 0.3);
+}
+
+.quiz-card i {
+    color: #9370DB;
+}
+
+.quiz-card:hover {
+    background: rgba(147, 112, 219, 0.15);
+    transform: translateY(-2px);
+}
+
+.achievements-card {
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.achievements-card i {
+    color: var(--gold);
+}
+
+.achievements-card:hover {
+    background: rgba(255, 215, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 12, 41, 0.95);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--glass-bg);
+    border: none;
+    color: var(--text-secondary);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-modal-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+}
+
+/* Quiz Modal */
+.quiz-modal-content {
+    background: var(--indigo-medium);
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    width: 100%;
+    max-width: 450px;
+    max-height: 80vh;
+    overflow: hidden;
+    position: relative;
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.quiz-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(147, 112, 219, 0.2) 0%, transparent 100%);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.quiz-header h2 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: #9370DB;
+}
+
+.quiz-progress {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.quiz-body {
+    padding: 24px 20px;
+}
+
+.quiz-question {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-option {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    text-align: left;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.quiz-option:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.quiz-option.correct {
+    background: rgba(52, 199, 89, 0.2);
+    border-color: rgba(52, 199, 89, 0.5);
+    color: #34C759;
+}
+
+.quiz-option.wrong {
+    background: rgba(255, 59, 48, 0.2);
+    border-color: rgba(255, 59, 48, 0.5);
+    color: #FF3B30;
+}
+
+.quiz-option.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.quiz-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--glass-bg);
+    border-top: 1px solid var(--glass-border);
+}
+
+.quiz-score {
+    font-size: 0.9rem;
+    color: #9370DB;
+    font-weight: 500;
+}
+
+.quiz-result {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.result-icon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+    animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.quiz-result h3 {
+    font-size: 1.4rem;
+    color: var(--saffron);
+    margin-bottom: 8px;
+}
+
+.quiz-result p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 24px;
+}
+
+.result-stats .stat {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.result-stats .stat span {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #9370DB;
+}
+
+/* Achievements Modal */
+.achievements-modal-content {
+    background: var(--indigo-medium);
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    width: 100%;
+    max-width: 450px;
+    max-height: 80vh;
+    overflow: hidden;
+    position: relative;
+    animation: slideUp 0.4s ease;
+}
+
+.achievements-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, transparent 100%);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.achievements-header h2 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+}
+
+.achievements-count {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.achievements-body {
+    padding: 16px;
+    overflow-y: auto;
+    max-height: 60vh;
+    display: grid;
+    gap: 12px;
+}
+
+.achievement-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    transition: all 0.3s ease;
+}
+
+.achievement-card.locked {
+    opacity: 0.5;
+    filter: grayscale(0.6);
+}
+
+.achievement-card.unlocked {
+    border-color: rgba(255, 215, 0, 0.3);
+    background: rgba(255, 215, 0, 0.08);
+}
+
+.achievement-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.achievement-card.unlocked .achievement-icon-wrapper {
+    background: rgba(255, 215, 0, 0.15);
+}
+
+.achievement-info {
+    flex: 1;
+}
+
+.achievement-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.achievement-name-hi {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.85rem;
+    color: var(--saffron);
+}
+
+.achievement-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Achievement Toast */
+.achievement-toast {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    z-index: 400;
+    opacity: 0;
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.achievement-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.achievement-toast-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #2a2a4e 0%, #1a1a3e 100%);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+}
+
+.achievement-toast .achievement-icon {
+    font-size: 2rem;
+    animation: bounce 0.6s ease;
+}
+
+.achievement-toast .toast-title {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+}
+
+.achievement-toast .toast-name {
+    font-size: 1rem;
+    color: var(--gold);
+    font-weight: 500;
+}
+
+/* Stories Section */
+.stories-section {
+    margin-top: 24px;
+}
+
+.stories-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: var(--saffron);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.stories-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.story-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.story-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+}
+
+.story-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.story-type-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.story-type-icon.origin {
+    background: rgba(30, 144, 255, 0.2);
+}
+
+.story-type-icon.teaching {
+    background: rgba(255, 153, 51, 0.2);
+}
+
+.story-type-icon.miracle {
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.story-type-icon.death {
+    background: rgba(147, 112, 219, 0.2);
+}
+
+.story-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.story-title-hi {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.8rem;
+    color: var(--saffron);
+}
+
+.story-preview {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Story Expanded */
+.story-expanded {
+    background: var(--glass-bg);
+    border: 1px solid rgba(255, 153, 51, 0.2);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-top: 16px;
+}
+
+.story-content {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.story-lesson {
+    background: rgba(255, 153, 51, 0.1);
+    border-left: 3px solid var(--saffron);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.story-lesson-label {
+    font-size: 0.7rem;
+    color: var(--saffron);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.story-lesson-text {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-style: italic;
+}
+
+/* Connections Section */
+.connections-section {
+    margin-top: 24px;
+}
+
+.connections-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: var(--saffron);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.connection-group {
+    margin-bottom: 16px;
+}
+
+.connection-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.connected-saints {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.mini-saint-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 25px;
+    padding: 6px 14px 6px 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mini-saint-card:hover {
+    background: rgba(255, 153, 51, 0.15);
+    border-color: rgba(255, 153, 51, 0.3);
+}
+
+.mini-saint-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: #fff;
+}
+
+.mini-saint-name {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+.no-connection {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ============================================
+   PHASE 3 - Paths, Journal, Share Card
+   ============================================ */
+
+/* Additional Action Cards */
+.paths-card {
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.paths-card i {
+    color: #4CAF50;
+}
+
+.paths-card:hover {
+    background: rgba(76, 175, 80, 0.15);
+    transform: translateY(-2px);
+}
+
+.journal-card {
+    border-color: rgba(156, 39, 176, 0.3);
+}
+
+.journal-card i {
+    color: #9C27B0;
+}
+
+.journal-card:hover {
+    background: rgba(156, 39, 176, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Learning Paths Modal */
+.paths-modal-content {
+    background: var(--indigo-medium);
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    width: 100%;
+    max-width: 450px;
+    max-height: 85vh;
+    overflow: hidden;
+    position: relative;
+    animation: slideUp 0.4s ease;
+}
+
+.paths-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.15) 0%, transparent 100%);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.paths-header h2 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: #4CAF50;
+}
+
+.paths-body {
+    padding: 16px;
+    overflow-y: auto;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.path-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.path-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+}
+
+.path-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.path-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.path-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.path-title-hi {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.85rem;
+    color: var(--saffron);
+}
+
+.path-description {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.path-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.path-duration {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.path-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.progress-dots span {
+    font-size: 0.6rem;
+    opacity: 0.4;
+}
+
+.progress-dots span.completed {
+    opacity: 1;
+    color: #4CAF50;
+}
+
+.progress-dots span.current {
+    opacity: 1;
+    color: var(--saffron);
+}
+
+.path-progress-text {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.start-path-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.start-path-btn:hover {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: rgba(76, 175, 80, 0.4);
+}
+
+/* Journal Modal */
+.journal-modal-content {
+    background: var(--indigo-medium);
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    width: 100%;
+    max-width: 450px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.4s ease;
+}
+
+.journal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.15) 0%, transparent 100%);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.journal-header h2 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: #9C27B0;
+}
+
+.journal-date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.journal-body {
+    padding: 16px;
+}
+
+.journal-prompt-card {
+    background: rgba(156, 39, 176, 0.1);
+    border: 1px solid rgba(156, 39, 176, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.prompt-label {
+    font-size: 0.7rem;
+    color: #9C27B0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.journal-prompt-card p {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+    font-style: italic;
+}
+
+#journal-text {
+    width: 100%;
+    min-height: 150px;
+    padding: 14px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    margin-bottom: 12px;
+}
+
+#journal-text:focus {
+    outline: none;
+    border-color: rgba(156, 39, 176, 0.5);
+}
+
+.journal-calendar {
+    padding: 16px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.journal-calendar h4 {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar-day {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--glass-bg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calendar-day.has-entry {
+    background: rgba(156, 39, 176, 0.3);
+    color: var(--text-primary);
+}
+
+.calendar-day.today {
+    border: 2px solid #9C27B0;
+}
+
+.calendar-day:hover {
+    background: rgba(156, 39, 176, 0.2);
+}
+
+.past-entries {
+    padding: 16px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.past-entry {
+    background: var(--glass-bg);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+.past-entry-date {
+    font-size: 0.7rem;
+    color: #9C27B0;
+    margin-bottom: 6px;
+}
+
+.past-entry-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Share Card Modal */
+.share-modal-content {
+    background: var(--indigo-medium);
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    width: 100%;
+    max-width: 450px;
+    max-height: 85vh;
+    overflow: hidden;
+    position: relative;
+    animation: slideUp 0.4s ease;
+}
+
+.share-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(233, 30, 99, 0.15) 0%, transparent 100%);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.share-header h2 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: #E91E63;
+}
+
+.share-body {
+    padding: 16px;
+}
+
+.card-preview-container {
+    background: #000;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+#quote-canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.card-styles {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.style-btn {
+    flex: 1;
+    padding: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.style-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.style-btn.active {
+    background: rgba(233, 30, 99, 0.2);
+    border-color: rgba(233, 30, 99, 0.4);
+    color: var(--text-primary);
+}
+
+.share-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.share-actions button {
+    flex: 1;
+}
+
+.btn-secondary {
+    padding: 12px 20px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ============================================
+   PHASE 4 - Pilgrimage Map, Jayanti Calendar
+   ============================================ */
+
+/* Additional Action Cards */
+.pilgrimage-card {
+    border-color: rgba(0, 188, 212, 0.3);
+}
+
+.pilgrimage-card i {
+    color: #00BCD4;
+}
+
+.pilgrimage-card:hover {
+    background: rgba(0, 188, 212, 0.15);
+    transform: translateY(-2px);
+}
+
+.jayanti-card {
+    border-color: rgba(255, 87, 34, 0.3);
+}
+
+.jayanti-card i {
+    color: #FF5722;
+}
+
+.jayanti-card:hover {
+    background: rgba(255, 87, 34, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Pilgrimage Modal */
+.pilgrimage-modal-content {
+    background: var(--indigo-medium);
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    width: 100%;
+    max-width: 450px;
+    max-height: 85vh;
+    overflow: hidden;
+    position: relative;
+    animation: slideUp 0.4s ease;
+}
+
+.pilgrimage-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(0, 188, 212, 0.15) 0%, transparent 100%);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.pilgrimage-header h2 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: #00BCD4;
+}
+
+.pilgrimage-body {
+    padding: 16px;
+    overflow-y: auto;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.place-group {
+    margin-bottom: 16px;
+}
+
+.place-group-title {
+    font-size: 1rem;
+    color: var(--saffron);
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 10px;
+}
+
+.place-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.place-card:hover {
+    background: rgba(0, 188, 212, 0.1);
+    border-color: rgba(0, 188, 212, 0.3);
+}
+
+.place-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.place-type-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.place-type-icon.birthplace {
+    background: rgba(76, 175, 80, 0.2);
+}
+
+.place-type-icon.samadhi {
+    background: rgba(156, 39, 176, 0.2);
+}
+
+.place-type-icon.sadhana {
+    background: rgba(255, 193, 7, 0.2);
+}
+
+.place-type-icon.temple {
+    background: rgba(233, 30, 99, 0.2);
+}
+
+.place-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.place-location {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.place-description {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.place-temple {
+    font-size: 0.8rem;
+    color: #00BCD4;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Jayanti Calendar Modal */
+.jayanti-modal-content {
+    background: var(--indigo-medium);
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    width: 100%;
+    max-width: 450px;
+    max-height: 85vh;
+    overflow: hidden;
+    position: relative;
+    animation: slideUp 0.4s ease;
+}
+
+.jayanti-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 87, 34, 0.15) 0%, transparent 100%);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.jayanti-header h2 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.3rem;
+    color: #FF5722;
+}
+
+.jayanti-upcoming {
+    padding: 16px 16px 0;
+}
+
+.jayanti-upcoming h3 {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.jayanti-body {
+    padding: 0 16px 16px;
+    overflow-y: auto;
+    max-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.jayanti-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    display: flex;
+    gap: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.jayanti-card:hover {
+    background: rgba(255, 87, 34, 0.1);
+    border-color: rgba(255, 87, 34, 0.3);
+}
+
+.jayanti-card.today {
+    border-color: rgba(255, 87, 34, 0.5);
+    background: rgba(255, 87, 34, 0.15);
+}
+
+.jayanti-date-badge {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 87, 34, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.jayanti-date-badge .day {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.jayanti-date-badge .month {
+    font-size: 0.65rem;
+    color: #FF5722;
+    text-transform: uppercase;
+}
+
+.jayanti-info {
+    flex: 1;
+}
+
+.jayanti-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.jayanti-name-hi {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.85rem;
+    color: var(--saffron);
+}
+
+.jayanti-timing {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.jayanti-celebrations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.celebration-tag {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    background: rgba(255, 87, 34, 0.1);
+    border-radius: 12px;
+    color: #FF5722;
+}
+
+.days-until {
+    font-size: 0.7rem;
+    color: #4CAF50;
+    margin-top: 4px;
+}

@@ -134,6 +134,40 @@
                     </div>
                 </div>
 
+                <!-- Action Buttons -->
+                <div class="home-actions">
+                    <button id="open-quiz-btn" class="action-card quiz-card">
+                        <i class="fa-solid fa-brain"></i>
+                        <span>ज्ञान परीक्षा</span>
+                        <small>Test Your Knowledge</small>
+                    </button>
+                    <button id="open-achievements-btn" class="action-card achievements-card">
+                        <i class="fa-solid fa-trophy"></i>
+                        <span>उपलब्धियाँ</span>
+                        <small id="achievements-preview">0 Unlocked</small>
+                    </button>
+                    <button id="open-paths-btn" class="action-card paths-card">
+                        <i class="fa-solid fa-road"></i>
+                        <span>मार्ग</span>
+                        <small>Learning Paths</small>
+                    </button>
+                    <button id="open-journal-btn" class="action-card journal-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <span>दैनिक चिंतन</span>
+                        <small>Daily Journal</small>
+                    </button>
+                    <button id="open-pilgrimage-btn" class="action-card pilgrimage-card">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>तीर्थ</span>
+                        <small>Sacred Places</small>
+                    </button>
+                    <button id="open-jayanti-btn" class="action-card jayanti-card">
+                        <i class="fa-solid fa-calendar-star"></i>
+                        <span>जयंती</span>
+                        <small>Jayanti Calendar</small>
+                    </button>
+                </div>
+
                 <!-- Daily Wisdom Quote -->
                 <div id="wisdom-quote" class="wisdom-quote-card" aria-label="Daily wisdom quote">
                     <!-- Will be populated by JS -->
@@ -162,7 +196,158 @@
         </main>
     </div>
 
+    <!-- Quiz Modal -->
+    <div id="quiz-modal" class="modal-overlay">
+        <div class="quiz-modal-content">
+            <div class="quiz-header">
+                <h2>📝 ज्ञान परीक्षा</h2>
+                <span class="quiz-progress">Question <span id="quiz-current">1</span>/5</span>
+                <button class="close-modal-btn" id="close-quiz"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="quiz-body">
+                <div class="quiz-question" id="quiz-question"></div>
+                <div class="quiz-options" id="quiz-options"></div>
+            </div>
+            <div class="quiz-footer">
+                <div class="quiz-score">Score: <span id="quiz-score">0</span></div>
+                <button class="btn-primary" id="quiz-next" style="display:none;">Next Question</button>
+            </div>
+            <div class="quiz-result" id="quiz-result" style="display:none;">
+                <div class="result-icon">🏆</div>
+                <h3 id="result-title">Quiz Complete!</h3>
+                <p id="result-message"></p>
+                <div class="result-stats">
+                    <div class="stat"><span id="result-correct">0</span>/5 Correct</div>
+                    <div class="stat"><span id="result-percent">0</span>%</div>
+                </div>
+                <button class="btn-primary" id="quiz-restart">Try Again</button>
+                <button class="btn-secondary" id="quiz-close-final">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievements Modal -->
+    <div id="achievements-modal" class="modal-overlay">
+        <div class="achievements-modal-content">
+            <div class="achievements-header">
+                <h2>🏆 उपलब्धियाँ</h2>
+                <span class="achievements-count"><span id="unlocked-count">0</span>/<span
+                        id="total-badges">14</span></span>
+                <button class="close-modal-btn" id="close-achievements"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="achievements-body" id="achievements-list">
+                <!-- Achievements rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievement Unlock Toast -->
+    <div id="achievement-toast" class="achievement-toast">
+        <div class="achievement-toast-content">
+            <span class="achievement-icon" id="toast-icon">🏆</span>
+            <div class="achievement-text">
+                <span class="toast-title">Achievement Unlocked!</span>
+                <span class="toast-name" id="toast-name"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Paths Modal -->
+    <div id="paths-modal" class="modal-overlay">
+        <div class="paths-modal-content">
+            <div class="paths-header">
+                <h2>🛤️ आध्यात्मिक मार्ग</h2>
+                <button class="close-modal-btn" id="close-paths"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="paths-body" id="paths-list">
+                <!-- Paths rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Journal Modal -->
+    <div id="journal-modal" class="modal-overlay">
+        <div class="journal-modal-content">
+            <div class="journal-header">
+                <h2>📔 दैनिक चिंतन</h2>
+                <span class="journal-date" id="journal-date"></span>
+                <button class="close-modal-btn" id="close-journal"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="journal-body">
+                <div class="journal-prompt-card">
+                    <div class="prompt-label">Today's Reflection Prompt</div>
+                    <p id="journal-prompt"></p>
+                </div>
+                <textarea id="journal-text" placeholder="Write your thoughts..."></textarea>
+                <button class="btn-primary" id="save-journal">Save Reflection</button>
+            </div>
+            <div class="journal-calendar" id="journal-calendar">
+                <h4>📅 Your Journey</h4>
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Calendar rendered by JS -->
+                </div>
+            </div>
+            <div class="past-entries" id="past-entries">
+                <!-- Past entries rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Card Modal -->
+    <div id="share-modal" class="modal-overlay">
+        <div class="share-modal-content">
+            <div class="share-header">
+                <h2>🎨 Share Quote</h2>
+                <button class="close-modal-btn" id="close-share"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="share-body">
+                <div class="card-preview-container">
+                    <canvas id="quote-canvas" width="600" height="600"></canvas>
+                </div>
+                <div class="card-styles" id="card-styles">
+                    <button class="style-btn active" data-style="minimal">Minimal</button>
+                    <button class="style-btn" data-style="ornate">Ornate</button>
+                    <button class="style-btn" data-style="dark">Dark</button>
+                </div>
+                <div class="share-actions">
+                    <button class="btn-secondary" id="download-card"><i class="fa-solid fa-download"></i>
+                        Download</button>
+                    <button class="btn-primary" id="share-card"><i class="fa-solid fa-share-nodes"></i> Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pilgrimage Map Modal -->
+    <div id="pilgrimage-modal" class="modal-overlay">
+        <div class="pilgrimage-modal-content">
+            <div class="pilgrimage-header">
+                <h2>🗺️ तीर्थ स्थल</h2>
+                <button class="close-modal-btn" id="close-pilgrimage"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="pilgrimage-body" id="pilgrimage-list">
+                <!-- Places rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Jayanti Calendar Modal -->
+    <div id="jayanti-modal" class="modal-overlay">
+        <div class="jayanti-modal-content">
+            <div class="jayanti-header">
+                <h2>🗓️ जयंती कैलेंडर</h2>
+                <button class="close-modal-btn" id="close-jayanti"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="jayanti-upcoming">
+                <h3 id="jayanti-month-title">Upcoming Jayantis</h3>
+            </div>
+            <div class="jayanti-body" id="jayanti-list">
+                <!-- Jayantis rendered by JS -->
+            </div>
+        </div>
+    </div>
+
     <script src="saints-data.js"></script>
+    <script src="phase2-data.js"></script>
     <script src="script.js"></script>
 </body>
 
