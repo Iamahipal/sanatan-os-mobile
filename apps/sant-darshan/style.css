@@ -1,37 +1,157 @@
 /* ============================================
-   SANT DARSHAN - Sattvic Design System
-   A peaceful, spiritual aesthetic for saints
+   SANT DARSHAN - Material Design 3 System
+   Sattvic spiritual aesthetic with M3 tokens
    ============================================ */
 
 :root {
-    /* Sacred Colors */
-    --saffron: #FF9933;
+    /* ========== M3 TYPOGRAPHY SCALE ========== */
+    /* Using clamp() for fluid responsive typography */
+
+    /* Display - Large headlines */
+    --md-sys-typescale-display-large: clamp(2.5rem, 5vw + 1rem, 3.5625rem);
+    --md-sys-typescale-display-medium: clamp(2rem, 4vw + 0.5rem, 2.8125rem);
+    --md-sys-typescale-display-small: clamp(1.75rem, 3vw + 0.5rem, 2.25rem);
+
+    /* Headline - Section headers */
+    --md-sys-typescale-headline-large: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);
+    --md-sys-typescale-headline-medium: clamp(1.25rem, 2vw + 0.5rem, 1.75rem);
+    --md-sys-typescale-headline-small: clamp(1.125rem, 1.5vw + 0.5rem, 1.5rem);
+
+    /* Title - Card titles, dialogs */
+    --md-sys-typescale-title-large: clamp(1.125rem, 1.25vw + 0.5rem, 1.375rem);
+    --md-sys-typescale-title-medium: 1rem;
+    --md-sys-typescale-title-small: 0.875rem;
+
+    /* Body - Main content */
+    --md-sys-typescale-body-large: 1rem;
+    --md-sys-typescale-body-medium: 0.875rem;
+    --md-sys-typescale-body-small: 0.75rem;
+
+    /* Label - Buttons, chips, tabs */
+    --md-sys-typescale-label-large: 0.875rem;
+    --md-sys-typescale-label-medium: 0.75rem;
+    --md-sys-typescale-label-small: 0.6875rem;
+
+    /* Line Heights */
+    --md-sys-typescale-display-line-height: 1.12;
+    --md-sys-typescale-headline-line-height: 1.25;
+    --md-sys-typescale-title-line-height: 1.4;
+    --md-sys-typescale-body-line-height: 1.5;
+    --md-sys-typescale-label-line-height: 1.3;
+
+    /* Font Weights */
+    --md-sys-typescale-weight-regular: 400;
+    --md-sys-typescale-weight-medium: 500;
+    --md-sys-typescale-weight-bold: 700;
+
+    /* Letter Spacing */
+    --md-sys-typescale-tracking-tight: -0.02em;
+    --md-sys-typescale-tracking-normal: 0;
+    --md-sys-typescale-tracking-wide: 0.04em;
+
+    /* ========== M3 COLOR TOKENS ========== */
+    /* Primary (Saffron-based) */
+    --md-sys-color-primary: #FF9933;
+    --md-sys-color-on-primary: #1a1a1a;
+    --md-sys-color-primary-container: #ffe4c9;
+    --md-sys-color-on-primary-container: #331500;
+
+    /* Secondary (Blue) */
+    --md-sys-color-secondary: #1E90FF;
+    --md-sys-color-on-secondary: #ffffff;
+    --md-sys-color-secondary-container: #d1e4ff;
+    --md-sys-color-on-secondary-container: #001d36;
+
+    /* Tertiary (Gold) */
+    --md-sys-color-tertiary: #FFD700;
+    --md-sys-color-on-tertiary: #1a1a1a;
+
+    /* Surface/Background */
+    --md-sys-color-surface: #0F0C29;
+    --md-sys-color-on-surface: #FFFFFF;
+    --md-sys-color-surface-variant: #1a1a3e;
+    --md-sys-color-on-surface-variant: rgba(255, 255, 255, 0.7);
+    --md-sys-color-surface-container: rgba(255, 255, 255, 0.08);
+    --md-sys-color-surface-container-high: rgba(255, 255, 255, 0.12);
+
+    /* Outline */
+    --md-sys-color-outline: rgba(255, 255, 255, 0.15);
+    --md-sys-color-outline-variant: rgba(255, 255, 255, 0.08);
+
+    /* Error/Success */
+    --md-sys-color-error: #FF3B30;
+    --md-sys-color-on-error: #ffffff;
+    --md-sys-color-success: #4CAF50;
+
+    /* Extended M3 Feature Colors */
+    --md-sys-color-quiz: #9370DB;
+    --md-sys-color-on-quiz: #ffffff;
+    --md-sys-color-quiz-container: rgba(147, 112, 219, 0.15);
+    --md-sys-color-paths: #4CAF50;
+    --md-sys-color-on-paths: #ffffff;
+    --md-sys-color-paths-container: rgba(76, 175, 80, 0.15);
+    --md-sys-color-journal: #9C27B0;
+    --md-sys-color-on-journal: #ffffff;
+    --md-sys-color-journal-container: rgba(156, 39, 176, 0.15);
+    --md-sys-color-pilgrimage: #00BCD4;
+    --md-sys-color-on-pilgrimage: #1a1a1a;
+    --md-sys-color-pilgrimage-container: rgba(0, 188, 212, 0.15);
+    --md-sys-color-jayanti: #FF5722;
+    --md-sys-color-on-jayanti: #ffffff;
+    --md-sys-color-jayanti-container: rgba(255, 87, 34, 0.15);
+
+    /* ========== LEGACY COLOR ALIASES ========== */
+    /* Keeping for backward compatibility */
+    --saffron: var(--md-sys-color-primary);
     --saffron-dark: #E67300;
     --ochre: #CC7722;
     --terracotta: #C04000;
-    --indigo-deep: #0F0C29;
-    --indigo-medium: #1a1a3e;
-    --gold: #FFD700;
+    --indigo-deep: var(--md-sys-color-surface);
+    --indigo-medium: var(--md-sys-color-surface-variant);
+    --gold: var(--md-sys-color-tertiary);
     --lotus-pink: #E91E63;
 
     /* Tradition Colors */
-    --hindu-color: #FF9933;
-    --sikh-color: #1E90FF;
-    --jain-color: #FFD700;
+    --hindu-color: var(--md-sys-color-primary);
+    --sikh-color: var(--md-sys-color-secondary);
+    --jain-color: var(--md-sys-color-tertiary);
 
-    /* Glass Effects */
-    --glass-bg: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.15);
+    /* Glass Effects (now using M3 surface containers) */
+    --glass-bg: var(--md-sys-color-surface-container);
+    --glass-border: var(--md-sys-color-outline);
     --glass-shadow: rgba(0, 0, 0, 0.3);
 
-    /* Text */
-    --text-primary: #FFFFFF;
-    --text-secondary: rgba(255, 255, 255, 0.7);
+    /* Text (now using M3 on-surface tokens) */
+    --text-primary: var(--md-sys-color-on-surface);
+    --text-secondary: var(--md-sys-color-on-surface-variant);
     --text-muted: rgba(255, 255, 255, 0.5);
 
-    /* Spacing */
-    --radius: 16px;
-    --radius-sm: 10px;
+    /* ========== M3 MOTION TOKENS ========== */
+    --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+    --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+    --md-sys-motion-easing-decelerate: cubic-bezier(0, 0, 0, 1);
+    --md-sys-motion-easing-accelerate: cubic-bezier(0.3, 0, 1, 1);
+
+    --md-sys-motion-duration-short1: 50ms;
+    --md-sys-motion-duration-short2: 100ms;
+    --md-sys-motion-duration-short3: 150ms;
+    --md-sys-motion-duration-short4: 200ms;
+    --md-sys-motion-duration-medium1: 250ms;
+    --md-sys-motion-duration-medium2: 300ms;
+    --md-sys-motion-duration-medium3: 350ms;
+    --md-sys-motion-duration-medium4: 400ms;
+    --md-sys-motion-duration-long1: 450ms;
+    --md-sys-motion-duration-long2: 500ms;
+
+    /* ========== SPACING & SHAPE ========== */
+    --md-sys-shape-corner-small: 8px;
+    --md-sys-shape-corner-medium: 12px;
+    --md-sys-shape-corner-large: 16px;
+    --md-sys-shape-corner-extra-large: 28px;
+
+    /* Legacy aliases */
+    --radius: var(--md-sys-shape-corner-large);
+    --radius-sm: var(--md-sys-shape-corner-small);
     --safe-top: max(20px, env(safe-area-inset-top));
 }
 
@@ -43,11 +163,20 @@
 }
 
 body {
-    font-family: 'Outfit', sans-serif;
-    background: var(--indigo-deep);
-    color: var(--text-primary);
+    font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: var(--md-sys-typescale-body-large);
+    line-height: var(--md-sys-typescale-body-line-height);
+    font-weight: var(--md-sys-typescale-weight-regular);
+    font-optical-sizing: auto;
+    font-variation-settings: 'ROND' 20;
+    /* Subtle roundedness for spiritual warmth */
+    background: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
     min-height: 100vh;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 /* Prana Background */
@@ -132,13 +261,22 @@ body {
     }
 }
 
-/* App Container */
+/* App Container - Full Width Desktop Layout */
 .app-container {
-    max-width: 500px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding: 0 24px;
+}
+
+/* On smaller screens, reduce padding */
+@media (max-width: 768px) {
+    .app-container {
+        padding: 0 16px;
+    }
 }
 
 /* Header */
@@ -160,19 +298,19 @@ body {
     width: 40px;
     height: 40px;
     border: none;
-    background: var(--glass-bg);
+    background: var(--md-sys-color-surface-container);
     border-radius: 50%;
-    color: var(--text-primary);
-    font-size: 1rem;
+    color: var(--md-sys-color-on-surface);
+    font-size: var(--md-sys-typescale-body-large);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
 }
 
 .header-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--md-sys-color-surface-container-high);
     transform: scale(1.05);
 }
 
@@ -183,13 +321,14 @@ body {
 
 .header-title h1 {
     font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--saffron);
+    font-size: var(--md-sys-typescale-headline-small);
+    font-weight: var(--md-sys-typescale-weight-regular);
+    line-height: var(--md-sys-typescale-headline-line-height);
+    color: var(--md-sys-color-primary);
 }
 
 .header-subtitle {
-    font-size: 0.7rem;
+    font-size: var(--md-sys-typescale-label-small);
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -204,7 +343,7 @@ body {
     padding: var(--safe-top) 16px 16px;
     display: flex;
     flex-direction: column;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .search-overlay.hidden {
@@ -377,7 +516,7 @@ body {
     gap: 14px;
     padding: 16px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .today-saint-content:hover {
@@ -434,6 +573,18 @@ body {
     margin-bottom: 30px;
 }
 
+/* Desktop: 3 columns */
+@media (min-width: 768px) {
+    .traditions-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .tradition-card.full-width {
+        grid-column: span 1;
+    }
+}
+
 .tradition-card {
     position: relative;
     background: var(--glass-bg);
@@ -442,7 +593,7 @@ body {
     padding: 24px 16px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
     overflow: hidden;
 }
 
@@ -572,7 +723,7 @@ body {
     font-size: 0.8rem;
     color: var(--text-secondary);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .filter-chip:hover,
@@ -598,7 +749,7 @@ body {
     border: 1px solid var(--glass-border);
     border-radius: var(--radius);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .saint-card:hover {
@@ -871,7 +1022,7 @@ body {
     font-family: inherit;
     font-size: 0.9rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .action-btn:hover {
@@ -925,17 +1076,100 @@ body {
     }
 }
 
-/* Accessibility - Focus States */
-.header-btn:focus,
-.action-btn:focus,
-.tradition-card:focus,
-.saint-card:focus,
-.filter-chip:focus {
-    outline: 2px solid var(--saffron);
+/* ========== M3 ACCESSIBILITY SYSTEM ========== */
+
+/* Skip Link for Keyboard Navigation */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 9999;
+    padding: 12px 24px;
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border-radius: var(--md-sys-shape-corner-medium);
+    font-weight: var(--md-sys-typescale-weight-medium);
+    text-decoration: none;
+    transition: top var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+}
+
+.skip-link:focus {
+    top: 16px;
+}
+
+/* Focus-Visible States (Modern Approach) */
+/* Only show focus rings for keyboard navigation, not mouse clicks */
+.header-btn:focus-visible,
+.action-btn:focus-visible,
+.tradition-card:focus-visible,
+.saint-card:focus-visible,
+.filter-chip:focus-visible,
+.action-card:focus-visible,
+.favorite-saint-card:focus-visible,
+.quiz-option:focus-visible,
+.path-card:focus-visible,
+.story-card:focus-visible,
+.mini-saint-card:focus-visible,
+.jayanti-card:focus-visible,
+.place-card:focus-visible,
+.style-btn:focus-visible,
+.calendar-day:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary);
     outline-offset: 2px;
 }
 
-/* Reduced Motion */
+/* Fallback for browsers that don't support focus-visible */
+@supports not selector(:focus-visible) {
+
+    .header-btn:focus,
+    .action-btn:focus,
+    .tradition-card:focus,
+    .saint-card:focus,
+    .filter-chip:focus {
+        outline: 2px solid var(--md-sys-color-primary);
+        outline-offset: 2px;
+    }
+}
+
+/* Enhanced Input Focus */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: none;
+    border-color: var(--md-sys-color-primary);
+    box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.2);
+}
+
+/* M3 State Layers - Hover/Press Feedback */
+.tradition-card::after,
+.saint-card::after,
+.action-card::after,
+.path-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--md-sys-color-on-surface);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+}
+
+.tradition-card:hover::after,
+.saint-card:hover::after,
+.action-card:hover::after,
+.path-card:hover::after {
+    opacity: 0.08;
+}
+
+.tradition-card:active::after,
+.saint-card:active::after,
+.action-card:active::after,
+.path-card:active::after {
+    opacity: 0.12;
+}
+
+/* Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
 
     *,
@@ -944,6 +1178,21 @@ body {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .blob-1,
+    .blob-2,
+    .blob-3 {
+        animation: none !important;
+    }
+
+    .hero-icon {
+        animation: none !important;
+    }
+
+    .today-saint-card {
+        animation: none !important;
     }
 }
 
@@ -962,64 +1211,8 @@ body {
     }
 }
 
-/* ============================================
-   DESKTOP PHONE FRAME - Mobile Preview on PC
-   ============================================ */
-@media (min-width: 500px) {
-    body {
-        background: #0a0a15;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 20px;
-        min-height: 100vh;
-    }
+/* Desktop-first layout is now default - no phone frame simulation */
 
-    .prana-bg {
-        border-radius: 40px;
-        max-width: 430px;
-        max-height: 932px;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 20px;
-        bottom: 20px;
-    }
-
-    .app-container {
-        max-width: 430px;
-        min-height: 800px;
-        max-height: 932px;
-        border-radius: 40px;
-        overflow: hidden;
-        position: relative;
-        box-shadow:
-            0 0 0 12px #1a1a2e,
-            0 0 0 14px #333,
-            0 25px 80px rgba(0, 0, 0, 0.5);
-    }
-
-    .app-container::before {
-        content: '';
-        position: absolute;
-        top: 8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 120px;
-        height: 28px;
-        background: #1a1a2e;
-        border-radius: 20px;
-        z-index: 200;
-    }
-
-    .app-header {
-        padding-top: 40px;
-    }
-
-    .main-content {
-        overflow-y: auto;
-        max-height: calc(932px - 100px);
-    }
-}
 
 /* ============================================
    PHASE 1: FAVORITES SYSTEM
@@ -1060,7 +1253,7 @@ body {
     border: 1px solid var(--glass-border);
     border-radius: var(--radius);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .favorite-saint-card:hover {
@@ -1111,7 +1304,7 @@ body {
     justify-content: center;
     font-size: 1.2rem;
     color: var(--text-secondary);
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
     z-index: 10;
 }
 
@@ -1181,7 +1374,7 @@ body {
 .progress-ring .progress {
     stroke: var(--saffron);
     stroke-linecap: round;
-    transition: stroke-dashoffset 0.5s ease;
+    transition: stroke-dashoffset var(--md-sys-motion-duration-long2) var(--md-sys-motion-easing-standard);
 }
 
 .progress-ring .text {
@@ -1225,7 +1418,7 @@ body {
     width: var(--progress, 0%);
     background: var(--saffron);
     border-radius: 2px;
-    transition: width 0.5s ease;
+    transition: width var(--md-sys-motion-duration-long2) var(--md-sys-motion-easing-standard);
 }
 
 /* Explored Badge on Saint Cards */
@@ -1265,7 +1458,7 @@ body {
     backdrop-filter: blur(20px);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease;
+    transition: opacity var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-standard);
 }
 
 .daily-darshan-modal.active {
@@ -1282,7 +1475,7 @@ body {
     border: 1px solid var(--glass-border);
     border-radius: 24px;
     transform: translateY(20px);
-    transition: transform 0.4s ease;
+    transition: transform var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized);
 }
 
 .daily-darshan-modal.active .darshan-content {
@@ -1374,7 +1567,7 @@ body {
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .darshan-actions .btn-primary:hover {
@@ -1389,7 +1582,7 @@ body {
     border-radius: var(--radius);
     font-size: 0.85rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .darshan-actions .btn-secondary:hover {
@@ -1454,7 +1647,7 @@ body {
     font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .save-note-btn:hover {
@@ -1499,7 +1692,7 @@ body {
     cursor: pointer;
     padding: 4px;
     font-size: 0.8rem;
-    transition: color 0.3s ease;
+    transition: color var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
 }
 
 .delete-note:hover {
@@ -1525,6 +1718,14 @@ body {
     margin: 20px 0;
 }
 
+/* Desktop: 3 columns for action buttons */
+@media (min-width: 768px) {
+    .home-actions {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+}
+
 .action-card {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -1535,7 +1736,7 @@ body {
     align-items: center;
     gap: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
     text-align: center;
 }
 
@@ -1559,11 +1760,11 @@ body {
 }
 
 .quiz-card i {
-    color: #9370DB;
+    color: var(--md-sys-color-quiz);
 }
 
 .quiz-card:hover {
-    background: rgba(147, 112, 219, 0.15);
+    background: var(--md-sys-color-quiz-container);
     transform: translateY(-2px);
 }
 
@@ -1611,7 +1812,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .close-modal-btn:hover {
@@ -1656,7 +1857,7 @@ body {
 .quiz-header h2 {
     font-family: 'Tiro Devanagari Sanskrit', serif;
     font-size: 1.3rem;
-    color: #9370DB;
+    color: var(--md-sys-color-quiz);
 }
 
 .quiz-progress {
@@ -1689,7 +1890,7 @@ body {
     text-align: left;
     color: var(--text-primary);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
     font-size: 0.95rem;
 }
 
@@ -1726,7 +1927,7 @@ body {
 
 .quiz-score {
     font-size: 0.9rem;
-    color: #9370DB;
+    color: var(--md-sys-color-quiz);
     font-weight: 500;
 }
 
@@ -1779,7 +1980,7 @@ body {
 .result-stats .stat span {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #9370DB;
+    color: var(--md-sys-color-quiz);
 }
 
 /* Achievements Modal */
@@ -1831,7 +2032,7 @@ body {
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-sm);
     padding: 14px;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .achievement-card.locked {
@@ -1891,7 +2092,7 @@ body {
     transform: translateX(-50%) translateY(-100px);
     z-index: 400;
     opacity: 0;
-    transition: all 0.4s ease;
+    transition: all var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized);
     pointer-events: none;
 }
 
@@ -1958,7 +2159,7 @@ body {
     border-radius: var(--radius-sm);
     padding: 16px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .story-card:hover {
@@ -2103,7 +2304,7 @@ body {
     border-radius: 25px;
     padding: 6px 14px 6px 6px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .mini-saint-card:hover {
@@ -2143,11 +2344,11 @@ body {
 }
 
 .paths-card i {
-    color: #4CAF50;
+    color: var(--md-sys-color-paths);
 }
 
 .paths-card:hover {
-    background: rgba(76, 175, 80, 0.15);
+    background: var(--md-sys-color-paths-container);
     transform: translateY(-2px);
 }
 
@@ -2156,11 +2357,11 @@ body {
 }
 
 .journal-card i {
-    color: #9C27B0;
+    color: var(--md-sys-color-journal);
 }
 
 .journal-card:hover {
-    background: rgba(156, 39, 176, 0.15);
+    background: var(--md-sys-color-journal-container);
     transform: translateY(-2px);
 }
 
@@ -2189,7 +2390,7 @@ body {
 .paths-header h2 {
     font-family: 'Tiro Devanagari Sanskrit', serif;
     font-size: 1.3rem;
-    color: #4CAF50;
+    color: var(--md-sys-color-paths);
 }
 
 .paths-body {
@@ -2207,7 +2408,7 @@ body {
     border-radius: var(--radius);
     padding: 16px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .path-card:hover {
@@ -2303,7 +2504,7 @@ body {
     border-radius: var(--radius-sm);
     color: var(--text-primary);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .start-path-btn:hover {
@@ -2336,7 +2537,7 @@ body {
 .journal-header h2 {
     font-family: 'Tiro Devanagari Sanskrit', serif;
     font-size: 1.3rem;
-    color: #9C27B0;
+    color: var(--md-sys-color-journal);
 }
 
 .journal-date {
@@ -2358,7 +2559,7 @@ body {
 
 .prompt-label {
     font-size: 0.7rem;
-    color: #9C27B0;
+    color: var(--md-sys-color-journal);
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 8px;
@@ -2418,7 +2619,7 @@ body {
     color: var(--text-muted);
     background: var(--glass-bg);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .calendar-day.has-entry {
@@ -2518,7 +2719,7 @@ body {
     border-radius: var(--radius-sm);
     color: var(--text-secondary);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
     font-size: 0.85rem;
 }
 
@@ -2548,7 +2749,7 @@ body {
     border-radius: var(--radius-sm);
     color: var(--text-primary);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2569,11 +2770,11 @@ body {
 }
 
 .pilgrimage-card i {
-    color: #00BCD4;
+    color: var(--md-sys-color-pilgrimage);
 }
 
 .pilgrimage-card:hover {
-    background: rgba(0, 188, 212, 0.15);
+    background: var(--md-sys-color-pilgrimage-container);
     transform: translateY(-2px);
 }
 
@@ -2582,11 +2783,11 @@ body {
 }
 
 .jayanti-card i {
-    color: #FF5722;
+    color: var(--md-sys-color-jayanti);
 }
 
 .jayanti-card:hover {
-    background: rgba(255, 87, 34, 0.15);
+    background: var(--md-sys-color-jayanti-container);
     transform: translateY(-2px);
 }
 
@@ -2615,7 +2816,7 @@ body {
 .pilgrimage-header h2 {
     font-family: 'Tiro Devanagari Sanskrit', serif;
     font-size: 1.3rem;
-    color: #00BCD4;
+    color: var(--md-sys-color-pilgrimage);
 }
 
 .pilgrimage-body {
@@ -2646,7 +2847,7 @@ body {
     border-radius: var(--radius-sm);
     padding: 14px;
     margin-bottom: 10px;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
 .place-card:hover {
@@ -2708,7 +2909,7 @@ body {
 
 .place-temple {
     font-size: 0.8rem;
-    color: #00BCD4;
+    color: var(--md-sys-color-pilgrimage);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -2739,7 +2940,7 @@ body {
 .jayanti-header h2 {
     font-family: 'Tiro Devanagari Sanskrit', serif;
     font-size: 1.3rem;
-    color: #FF5722;
+    color: var(--md-sys-color-jayanti);
 }
 
 .jayanti-upcoming {
@@ -2768,7 +2969,7 @@ body {
     padding: 14px;
     display: flex;
     gap: 14px;
-    transition: all 0.3s ease;
+    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
     cursor: pointer;
 }
 
