@@ -49,82 +49,87 @@
     --md-sys-typescale-tracking-normal: 0;
     --md-sys-typescale-tracking-wide: 0.04em;
 
-    /* ========== M3 COLOR TOKENS ========== */
+    /* ========== M3 COLOR TOKENS - LIGHT THEME ========== */
     /* Primary (Saffron-based) */
-    --md-sys-color-primary: #FF9933;
-    --md-sys-color-on-primary: #1a1a1a;
-    --md-sys-color-primary-container: #ffe4c9;
+    --md-sys-color-primary: #E65100;
+    --md-sys-color-on-primary: #FFFFFF;
+    --md-sys-color-primary-container: #FFE0B2;
     --md-sys-color-on-primary-container: #331500;
 
     /* Secondary (Blue) */
-    --md-sys-color-secondary: #1E90FF;
-    --md-sys-color-on-secondary: #ffffff;
-    --md-sys-color-secondary-container: #d1e4ff;
+    --md-sys-color-secondary: #1565C0;
+    --md-sys-color-on-secondary: #FFFFFF;
+    --md-sys-color-secondary-container: #BBDEFB;
     --md-sys-color-on-secondary-container: #001d36;
 
     /* Tertiary (Gold) */
-    --md-sys-color-tertiary: #FFD700;
+    --md-sys-color-tertiary: #F9A825;
     --md-sys-color-on-tertiary: #1a1a1a;
 
-    /* Surface/Background */
-    --md-sys-color-surface: #0F0C29;
-    --md-sys-color-on-surface: #FFFFFF;
-    --md-sys-color-surface-variant: #1a1a3e;
-    --md-sys-color-on-surface-variant: rgba(255, 255, 255, 0.7);
-    --md-sys-color-surface-container: rgba(255, 255, 255, 0.08);
-    --md-sys-color-surface-container-high: rgba(255, 255, 255, 0.12);
+    /* Surface/Background - M3 Light Theme */
+    --md-sys-color-surface: #FFFBFE;
+    --md-sys-color-surface-dim: #DED8E1;
+    --md-sys-color-surface-bright: #FFFBFE;
+    --md-sys-color-on-surface: #1C1B1F;
+    --md-sys-color-surface-variant: #E7E0EC;
+    --md-sys-color-on-surface-variant: #49454F;
+    --md-sys-color-surface-container-lowest: #FFFFFF;
+    --md-sys-color-surface-container-low: #F7F2FA;
+    --md-sys-color-surface-container: #F3EDF7;
+    --md-sys-color-surface-container-high: #ECE6F0;
+    --md-sys-color-surface-container-highest: #E6E0E9;
 
     /* Outline */
-    --md-sys-color-outline: rgba(255, 255, 255, 0.15);
-    --md-sys-color-outline-variant: rgba(255, 255, 255, 0.08);
+    --md-sys-color-outline: #79747E;
+    --md-sys-color-outline-variant: #CAC4D0;
 
     /* Error/Success */
-    --md-sys-color-error: #FF3B30;
-    --md-sys-color-on-error: #ffffff;
-    --md-sys-color-success: #4CAF50;
+    --md-sys-color-error: #B3261E;
+    --md-sys-color-on-error: #FFFFFF;
+    --md-sys-color-success: #2E7D32;
 
     /* Extended M3 Feature Colors */
-    --md-sys-color-quiz: #9370DB;
-    --md-sys-color-on-quiz: #ffffff;
-    --md-sys-color-quiz-container: rgba(147, 112, 219, 0.15);
-    --md-sys-color-paths: #4CAF50;
-    --md-sys-color-on-paths: #ffffff;
-    --md-sys-color-paths-container: rgba(76, 175, 80, 0.15);
-    --md-sys-color-journal: #9C27B0;
-    --md-sys-color-on-journal: #ffffff;
-    --md-sys-color-journal-container: rgba(156, 39, 176, 0.15);
-    --md-sys-color-pilgrimage: #00BCD4;
-    --md-sys-color-on-pilgrimage: #1a1a1a;
-    --md-sys-color-pilgrimage-container: rgba(0, 188, 212, 0.15);
-    --md-sys-color-jayanti: #FF5722;
-    --md-sys-color-on-jayanti: #ffffff;
-    --md-sys-color-jayanti-container: rgba(255, 87, 34, 0.15);
+    --md-sys-color-quiz: #7B1FA2;
+    --md-sys-color-on-quiz: #FFFFFF;
+    --md-sys-color-quiz-container: #F3E5F5;
+    --md-sys-color-paths: #2E7D32;
+    --md-sys-color-on-paths: #FFFFFF;
+    --md-sys-color-paths-container: #E8F5E9;
+    --md-sys-color-journal: #7B1FA2;
+    --md-sys-color-on-journal: #FFFFFF;
+    --md-sys-color-journal-container: #F3E5F5;
+    --md-sys-color-pilgrimage: #00838F;
+    --md-sys-color-on-pilgrimage: #FFFFFF;
+    --md-sys-color-pilgrimage-container: #E0F7FA;
+    --md-sys-color-jayanti: #E64A19;
+    --md-sys-color-on-jayanti: #FFFFFF;
+    --md-sys-color-jayanti-container: #FBE9E7;
 
     /* ========== LEGACY COLOR ALIASES ========== */
-    /* Keeping for backward compatibility */
+    /* Updated for light theme */
     --saffron: var(--md-sys-color-primary);
-    --saffron-dark: #E67300;
-    --ochre: #CC7722;
-    --terracotta: #C04000;
-    --indigo-deep: var(--md-sys-color-surface);
-    --indigo-medium: var(--md-sys-color-surface-variant);
+    --saffron-dark: #BF360C;
+    --ochre: #E65100;
+    --terracotta: #D84315;
+    --indigo-deep: #1A237E;
+    --indigo-medium: #303F9F;
     --gold: var(--md-sys-color-tertiary);
-    --lotus-pink: #E91E63;
+    --lotus-pink: #C2185B;
 
     /* Tradition Colors */
-    --hindu-color: var(--md-sys-color-primary);
-    --sikh-color: var(--md-sys-color-secondary);
-    --jain-color: var(--md-sys-color-tertiary);
+    --hindu-color: #E65100;
+    --sikh-color: #1565C0;
+    --jain-color: #F9A825;
 
-    /* Glass Effects (now using M3 surface containers) */
-    --glass-bg: var(--md-sys-color-surface-container);
-    --glass-border: var(--md-sys-color-outline);
-    --glass-shadow: rgba(0, 0, 0, 0.3);
+    /* Clean Surface Effects (replacing glass) */
+    --glass-bg: #FFFFFF;
+    --glass-border: #E0E0E0;
+    --glass-shadow: rgba(0, 0, 0, 0.08);
 
-    /* Text (now using M3 on-surface tokens) */
-    --text-primary: var(--md-sys-color-on-surface);
-    --text-secondary: var(--md-sys-color-on-surface-variant);
-    --text-muted: rgba(255, 255, 255, 0.5);
+    /* Text - Light Theme */
+    --text-primary: #1C1B1F;
+    --text-secondary: #49454F;
+    --text-muted: #79747E;
 
     /* ========== M3 MOTION TOKENS ========== */
     --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
@@ -162,6 +167,44 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+/* Google Material Symbols Icon Styling */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Icon sizes for different contexts */
+.action-card .material-symbols-outlined {
+    font-size: 28px;
+}
+
+.header-btn .material-symbols-outlined {
+    font-size: 22px;
+}
+
+.close-modal-btn .material-symbols-outlined {
+    font-size: 20px;
+}
+
+.btn-primary .material-symbols-outlined,
+.btn-secondary .material-symbols-outlined {
+    font-size: 18px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
 body {
     font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-size: var(--md-sys-typescale-body-large);
@@ -179,13 +222,9 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-/* Prana Background */
+/* Prana Background - Hidden for light theme */
 .prana-bg {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    overflow: hidden;
-    background: linear-gradient(135deg, #0F0C29 0%, #1a1a3e 50%, #24243e 100%);
+    display: none;
 }
 
 .blob-1 {
@@ -285,13 +324,12 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: var(--safe-top) 16px 12px;
-    background: rgba(15, 12, 41, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: #FFFFFF;
     position: sticky;
     top: 0;
     z-index: 100;
     border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .header-btn {
@@ -338,7 +376,7 @@ body {
 .search-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(15, 12, 41, 0.98);
+    background: rgba(255, 255, 255, 0.98);
     z-index: 200;
     padding: var(--safe-top) 16px 16px;
     display: flex;
@@ -1454,8 +1492,7 @@ select:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(15, 12, 41, 0.95);
-    backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.32);
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-standard);
@@ -1471,9 +1508,10 @@ select:focus-visible {
     max-width: 360px;
     text-align: center;
     padding: 32px 24px;
-    background: var(--glass-bg);
+    background: #FFFFFF;
     border: 1px solid var(--glass-border);
     border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     transform: translateY(20px);
     transition: transform var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized);
 }
@@ -1785,7 +1823,7 @@ select:focus-visible {
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(15, 12, 41, 0.95);
+    background: rgba(0, 0, 0, 0.32);
     z-index: 300;
     display: none;
     align-items: center;
@@ -1802,7 +1840,7 @@ select:focus-visible {
     position: absolute;
     top: 16px;
     right: 16px;
-    background: var(--glass-bg);
+    background: var(--md-sys-color-surface-container-high);
     border: none;
     color: var(--text-secondary);
     width: 36px;
@@ -1816,15 +1854,16 @@ select:focus-visible {
 }
 
 .close-modal-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--md-sys-color-surface-container-highest);
     color: var(--text-primary);
 }
 
 /* Quiz Modal */
 .quiz-modal-content {
-    background: var(--indigo-medium);
+    background: #FFFFFF;
     border-radius: var(--radius);
     border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     width: 100%;
     max-width: 450px;
     max-height: 80vh;
@@ -1985,9 +2024,10 @@ select:focus-visible {
 
 /* Achievements Modal */
 .achievements-modal-content {
-    background: var(--indigo-medium);
+    background: #FFFFFF;
     border-radius: var(--radius);
     border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     width: 100%;
     max-width: 450px;
     max-height: 80vh;
@@ -2367,9 +2407,10 @@ select:focus-visible {
 
 /* Learning Paths Modal */
 .paths-modal-content {
-    background: var(--indigo-medium);
+    background: #FFFFFF;
     border-radius: var(--radius);
     border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     width: 100%;
     max-width: 450px;
     max-height: 85vh;
@@ -2514,9 +2555,10 @@ select:focus-visible {
 
 /* Journal Modal */
 .journal-modal-content {
-    background: var(--indigo-medium);
+    background: #FFFFFF;
     border-radius: var(--radius);
     border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     width: 100%;
     max-width: 450px;
     max-height: 85vh;
@@ -2661,9 +2703,10 @@ select:focus-visible {
 
 /* Share Card Modal */
 .share-modal-content {
-    background: var(--indigo-medium);
+    background: #FFFFFF;
     border-radius: var(--radius);
     border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     width: 100%;
     max-width: 450px;
     max-height: 85vh;
@@ -2793,9 +2836,10 @@ select:focus-visible {
 
 /* Pilgrimage Modal */
 .pilgrimage-modal-content {
-    background: var(--indigo-medium);
+    background: #FFFFFF;
     border-radius: var(--radius);
     border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     width: 100%;
     max-width: 450px;
     max-height: 85vh;
@@ -2917,9 +2961,10 @@ select:focus-visible {
 
 /* Jayanti Calendar Modal */
 .jayanti-modal-content {
-    background: var(--indigo-medium);
+    background: #FFFFFF;
     border-radius: var(--radius);
     border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     width: 100%;
     max-width: 450px;
     max-height: 85vh;
