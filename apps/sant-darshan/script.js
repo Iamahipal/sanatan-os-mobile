@@ -448,8 +448,7 @@
     function renderTraditions() {
         const traditionsHtml = Object.values(TRADITIONS).map((tradition, index) => {
             const count = SAINTS.filter(s => s.tradition === tradition.id).length;
-            const isLast = index === Object.values(TRADITIONS).length - 1 && Object.values(TRADITIONS).length % 2 !== 0;
-            return `<div class="tradition-card ${isLast ? 'full-width' : ''}" style="--tradition-color: ${tradition.color}" data-tradition="${tradition.id}">
+            return `<div class="tradition-card" style="--tradition-color: ${tradition.color}" data-tradition="${tradition.id}">
                 <i class="fa-solid ${tradition.icon} tradition-icon"></i>
                 <div class="tradition-name">${tradition.name}</div>
                 <div class="tradition-name-hi">${tradition.nameHi}</div>
@@ -1698,6 +1697,62 @@
         if (closeJayantiBtn) closeJayantiBtn.addEventListener('click', closeJayanti);
     }
 
+    // ========== PHASE 3: INTERACTIONS & ALIVE FEEL ==========
+    function createRipple(event) {
+        const button = event.currentTarget;
+        const circle = document.createElement('span');
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+
+        const rect = button.getBoundingClientRect();
+
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${event.clientX - rect.left - radius}px`;
+        circle.style.top = `${event.clientY - rect.top - radius}px`;
+        circle.classList.add('ripple-wave');
+
+        const existingRipple = button.getElementsByClassName('ripple-wave')[0];
+        if (existingRipple) {
+            existingRipple.remove();
+        }
+
+        button.appendChild(circle);
+    }
+
+    function setupRippleEffects() {
+        const interactiveElements = document.querySelectorAll('.action-card, .btn-primary, .btn-secondary, .saint-card, .tradition-card, .header-btn, .close-modal-btn');
+        interactiveElements.forEach(el => {
+            el.classList.add('ripple-surface');
+            el.addEventListener('click', createRipple);
+        });
+    }
+
+    function setupScrollObserver() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        const animatedElements = document.querySelectorAll('.tradition-card, .action-card, .today-saint-card, .stats-section, .wisdom-quote-card');
+        animatedElements.forEach((el, index) => {
+            el.classList.add('reveal-on-scroll');
+            // Stagger animations automatically
+            if (index % 3 === 0) el.classList.add('delay-100');
+            if (index % 3 === 1) el.classList.add('delay-200');
+            if (index % 3 === 2) el.classList.add('delay-300');
+            observer.observe(el);
+        });
+    }
+
     function init() {
         renderTraditions();
         renderTodaysSaint();
@@ -1711,6 +1766,11 @@
         setupPhase4Listeners();
         updateAchievementsPreview();
         checkAchievements();
+
+        // Phase 3 Interactions
+        setupRippleEffects();
+        setupScrollObserver();
+
         setTimeout(showDailyDarshan, 500);
     }
 

@@ -148,6 +148,10 @@
     --md-sys-motion-duration-long1: 450ms;
     --md-sys-motion-duration-long2: 500ms;
 
+    /* Scroll Reveal */
+    --reveal-distance: 30px;
+    --reveal-duration: 0.6s;
+    --reveal-delay: 0.1s;
     /* ========== SPACING & SHAPE ========== */
     --md-sys-shape-corner-small: 8px;
     --md-sys-shape-corner-medium: 12px;
@@ -158,6 +162,56 @@
     --radius: var(--md-sys-shape-corner-large);
     --radius-sm: var(--md-sys-shape-corner-small);
     --safe-top: max(20px, env(safe-area-inset-top));
+}
+
+/* Ripple Effect */
+.ripple-surface {
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+    /* Force hardware accel */
+}
+
+.ripple-wave {
+    position: absolute;
+    border-radius: 50%;
+    background-color: currentColor;
+    opacity: 0;
+    transform: scale(0);
+    pointer-events: none;
+    animation: ripple-anim 0.6s linear;
+}
+
+@keyframes ripple-anim {
+    to {
+        transform: scale(4);
+        opacity: 0.12;
+    }
+}
+
+/* Scroll Reveal Classes */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+    transition: all var(--reveal-duration) var(--md-sys-motion-easing-emphasized);
+}
+
+.reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered Delays */
+.delay-100 {
+    transition-delay: 100ms;
+}
+
+.delay-200 {
+    transition-delay: 200ms;
+}
+
+.delay-300 {
+    transition-delay: 300ms;
 }
 
 * {
@@ -344,227 +398,58 @@ body {
     }
 }
 
-/* Header */
+/* Header - Glassmorphic */
 .app-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: var(--safe-top) 16px 12px;
-    background: #FFFFFF;
+    background: rgba(255, 255, 255, 0.8);
+    /* Translucent */
+    backdrop-filter: blur(12px);
+    /* Glass effect */
+    -webkit-backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 1px solid var(--glass-border);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
 }
 
-/* Desktop header: center content with max width */
-@media (min-width: 768px) {
-    .app-header {
-        padding: var(--safe-top) 32px 12px;
-    }
+.app-header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.header-btn {
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: var(--md-sys-color-surface-container);
-    border-radius: 50%;
-    color: var(--md-sys-color-on-surface);
-    font-size: var(--md-sys-typescale-body-large);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
-}
 
-.header-btn:hover {
-    background: var(--md-sys-color-surface-container-high);
-    transform: scale(1.05);
-}
-
-.header-title {
-    text-align: center;
-    flex: 1;
-}
-
-.header-title h1 {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: var(--md-sys-typescale-headline-small);
-    font-weight: var(--md-sys-typescale-weight-regular);
-    line-height: var(--md-sys-typescale-headline-line-height);
-    color: var(--md-sys-color-primary);
-}
-
-.header-subtitle {
-    font-size: var(--md-sys-typescale-label-small);
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Search Overlay */
-.search-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.98);
-    z-index: 200;
-    padding: var(--safe-top) 16px 16px;
-    display: flex;
-    flex-direction: column;
-    transition: opacity var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
-}
-
-.search-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius);
-    padding: 12px 16px;
-}
-
-.search-container .search-icon {
-    color: var(--text-muted);
-}
-
-.search-container input {
-    flex: 1;
-    background: none;
-    border: none;
-    outline: none;
-    color: var(--text-primary);
-    font-size: 1rem;
-    font-family: inherit;
-}
-
-.search-container input::placeholder {
-    color: var(--text-muted);
-}
-
-.close-search-btn {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-
-.search-results {
-    flex: 1;
-    overflow-y: auto;
-    padding-top: 16px;
-}
-
-/* Main Content */
-.main-content {
-    flex: 1;
-    padding: 16px;
-    padding-bottom: 100px;
-}
-
-.screen {
-    display: none;
-}
-
-.screen.active {
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Hero Section */
-.hero-section {
-    text-align: center;
-    padding: 30px 20px;
-    margin-bottom: 20px;
-}
-
-.hero-icon {
-    font-size: 3rem;
-    margin-bottom: 16px;
-    animation: gentlePulse 3s ease-in-out infinite;
-}
-
-@keyframes gentlePulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-}
-
-.hero-title {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 2rem;
-    font-weight: 400;
-    color: var(--saffron);
-    margin-bottom: 8px;
-}
-
-.hero-subtitle {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    max-width: 280px;
-    margin: 0 auto;
-    line-height: 1.5;
-}
-
-/* Today's Saint Card */
+/* Today's Saint Card - M3 Hero */
 .today-saint-card {
-    background: linear-gradient(135deg, rgba(255, 153, 51, 0.15) 0%, var(--glass-bg) 100%);
-    border: 1px solid rgba(255, 153, 51, 0.3);
-    border-radius: var(--radius);
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFFFFF 100%);
+    border: none;
+    border-radius: 28px;
+    /* Extra large for Hero */
+    margin-bottom: 32px;
     overflow: hidden;
-    animation: glowPulse 4s ease-in-out infinite;
+    box-shadow: 0 10px 30px -10px rgba(230, 81, 0, 0.15);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-@keyframes glowPulse {
-
-    0%,
-    100% {
-        box-shadow: 0 0 20px rgba(255, 153, 51, 0.1);
-    }
-
-    50% {
-        box-shadow: 0 0 30px rgba(255, 153, 51, 0.25);
-    }
+.today-saint-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px -10px rgba(230, 81, 0, 0.25);
 }
 
 .today-saint-header {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 16px;
-    background: rgba(255, 153, 51, 0.2);
+    padding: 16px 24px 0;
     font-size: 0.75rem;
-    color: var(--saffron);
+    font-weight: 600;
+    color: var(--md-sys-color-primary);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.1em;
 }
 
 .today-saint-header i {
@@ -584,15 +469,16 @@ body {
 .today-saint-content {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 16px;
+    gap: 20px;
+    padding: 24px;
     cursor: pointer;
-    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
 }
 
+
 .today-saint-content:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(230, 81, 0, 0.02);
 }
+
 
 .today-saint-avatar {
     width: 54px;
@@ -637,113 +523,159 @@ body {
 }
 
 /* Traditions Grid */
+/* Traditions Grid - Optimized for 4 items */
 .traditions-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
     margin-bottom: 30px;
 }
 
-/* Desktop: 3 columns */
-@media (min-width: 768px) {
+/* Tablet: 2x2 Grid */
+@media (min-width: 600px) {
     .traditions-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
+}
 
-    .tradition-card.full-width {
-        grid-column: span 1;
+/* Desktop: 4 Columns (All in one row) */
+@media (min-width: 1024px) {
+    .traditions-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
     }
 }
 
 .tradition-card {
     position: relative;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius);
-    padding: 24px 16px;
+    background: var(--md-sys-color-surface-container-low);
+    /* Remove borders for cleaner surface look */
+    border: none;
+    border-radius: 24px;
+    /* More rounded */
+    padding: 24px 20px;
     text-align: center;
     cursor: pointer;
-    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
+    transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
     overflow: hidden;
+    /* Soft Elevation */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
 .tradition-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--tradition-color, var(--saffron));
-    opacity: 0.8;
+    inset: 0;
+    background: linear-gradient(135deg, var(--tradition-color), transparent 80%);
+    opacity: 0.08;
+    transition: opacity 0.3s ease;
 }
 
 .tradition-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--tradition-color, var(--saffron));
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    background: var(--md-sys-color-surface-container);
 }
 
-.tradition-card.full-width {
-    grid-column: span 2;
+.tradition-card:hover::before {
+    opacity: 0.15;
 }
 
 .tradition-icon {
-    font-size: 2rem;
-    margin-bottom: 12px;
+    font-size: 2.5rem;
+    margin-bottom: 16px;
     color: var(--tradition-color, var(--saffron));
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    transition: transform 0.3s ease;
+}
+
+.tradition-card:hover .tradition-icon {
+    transform: scale(1.1);
 }
 
 .tradition-name {
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 1.15rem;
+    font-weight: 600;
     margin-bottom: 4px;
+    letter-spacing: -0.01em;
+    color: var(--md-sys-color-on-surface);
 }
 
 .tradition-name-hi {
     font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 12px;
 }
 
 .tradition-count {
     font-size: 0.75rem;
-    color: var(--text-muted);
-    background: rgba(255, 255, 255, 0.1);
-    padding: 4px 10px;
-    border-radius: 20px;
+    font-weight: 500;
+    color: var(--tradition-color);
+    background: rgba(255, 255, 255, 0.6);
+    padding: 6px 12px;
+    border-radius: 100px;
     display: inline-block;
+    backdrop-filter: blur(4px);
 }
 
 /* Stats Section */
+/* Stats Section - Premium Floating Pill */
 .stats-section {
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 20px;
-    background: var(--glass-bg);
-    border-radius: var(--radius);
-    border: 1px solid var(--glass-border);
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.85);
+    /* Slightly more opaque for surface feel */
+    border-radius: 100px;
+    /* Pill shape */
+    margin: 0 auto 30px;
+    /* Center and add spacing */
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    /* Soft shadow */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
 }
 
 .stat-item {
     text-align: center;
+    position: relative;
+    padding: 0 16px;
+}
+
+/* Add dividers between stats */
+.stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 24px;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .stat-number {
     display: block;
     font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--saffron);
+    font-weight: 700;
+    color: var(--md-sys-color-primary);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
 .stat-label {
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: var(--md-sys-color-on-surface-variant);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    margin-top: 4px;
+    display: block;
 }
 
 /* Tradition Header */
@@ -1797,59 +1729,94 @@ select:focus-visible {
     }
 }
 
+/* Action Cards (Feature Grid) - M3 Surface Style */
 .action-card {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius);
-    padding: 20px 16px;
+    background: var(--md-sys-color-surface-container-low);
+    border: none;
+    border-radius: 20px;
+    padding: 24px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     cursor: pointer;
-    transition: all var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
+    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.action-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    background: var(--md-sys-color-surface-container);
+}
+
+.action-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.action-card:hover::before {
+    opacity: 0.08;
 }
 
 .action-card i {
-    font-size: 1.8rem;
+    font-size: 2rem;
+    color: inherit;
+    /* Takes color from specific card class */
+    margin-bottom: 4px;
 }
 
 .action-card span {
     font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 1rem;
-    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
 }
 
 .action-card small {
-    font-size: 0.7rem;
-    color: var(--text-muted);
+    font-size: 0.75rem;
+    color: var(--md-sys-color-on-surface-variant);
+    font-weight: 500;
 }
 
+/* Feature Specific Colors (Surface Tints) */
 .quiz-card {
-    border-color: rgba(147, 112, 219, 0.3);
-}
-
-.quiz-card i {
     color: var(--md-sys-color-quiz);
-}
-
-.quiz-card:hover {
-    background: var(--md-sys-color-quiz-container);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #F3E5F5 0%, #FFFFFF 100%);
 }
 
 .achievements-card {
-    border-color: rgba(255, 215, 0, 0.3);
+    color: #F9A825;
+    /* Gold */
+    background: linear-gradient(135deg, #FFFDE7 0%, #FFFFFF 100%);
 }
 
-.achievements-card i {
-    color: var(--gold);
+.paths-card {
+    color: var(--md-sys-color-paths);
+    background: linear-gradient(135deg, #E8F5E9 0%, #FFFFFF 100%);
 }
 
-.achievements-card:hover {
-    background: rgba(255, 215, 0, 0.15);
-    transform: translateY(-2px);
+.journal-card {
+    color: #5E35B1;
+    /* Deep Purple */
+    background: linear-gradient(135deg, #EDE7F6 0%, #FFFFFF 100%);
+}
+
+.pilgrimage-card {
+    color: var(--md-sys-color-pilgrimage);
+    background: linear-gradient(135deg, #E0F7FA 0%, #FFFFFF 100%);
+}
+
+.jayanti-card {
+    color: var(--md-sys-color-jayanti);
+    background: linear-gradient(135deg, #FBE9E7 0%, #FFFFFF 100%);
 }
 
 /* Modal Overlay */
