@@ -2272,6 +2272,1136 @@ const SAINTS = [
         quotes: ['"Sit quietly; mind will settle."', '"Guru\'s feet are the boat."'],
         image: 'brahmananda.jpg'
     }
+,
+    {
+        "id": "akka_chandrabhaga",
+        "name": "Akka Chandrabhaga",
+        "nameLocal": "ಅಕ್ಕ ಚಂದ್ರಭಾಗಾ",
+        "nameHi": "अक्का चंद्रभागा",
+        "tradition": "hindu",
+        "sampradaya": "Veerashaiva / Lingayat",
+        "period": "c. 12th century CE",
+        "birthPlace": "Karnataka",
+        "biography": "Akka Chandrabhaga was a female Veerashaiva saint and contemporary of Akka Mahadevi in 12th-century Karnataka. Though fewer vachanas survive compared to her peers, she is remembered in oral tradition for her fierce devotion to Shiva and critique of patriarchal norms within religious spaces. She participated in the Anubhava Mantapa, the spiritual parliament founded by Basavanna, where women were granted equal voice in theological discourse. Her life exemplifies the radical gender equality embedded in early Lingayat thought, where spiritual merit—not birth or gender—determined one’s status. Akka Chandrabhaga represents the collective voice of women who shaped the Bhakti revolution through poetry and presence.",
+        "teachings": [
+            "Shiva sees no difference between male and female devotees.",
+            "True worship is inner purity, not ritual performance.",
+            "Speak your truth, even if your voice shakes."
+        ],
+        "works": [
+            "Vachanas (preserved in oral and manuscript traditions)"
+        ],
+        "quotes": [
+            "\"I am not a woman to you, O Shiva—I am Your own Self!\"",
+            "\"Let society call me mad; I am mad only for You.\""
+        ],
+        "image": "akka_chandrabhaga.jpg"
+    },
+    {
+        "id": "akka_lingamma",
+        "name": "Akka Lingamma",
+        "nameLocal": "ಅಕ್ಕ ಲಿಂಗಮ್ಮ",
+        "nameHi": "अक्का लिंगम्मा",
+        "tradition": "hindu",
+        "sampradaya": "Veerashaiva / Lingayat",
+        "period": "c. 12th century CE",
+        "birthPlace": "Karnataka",
+        "biography": "Akka Lingamma was another female vachanakara (poet-saint) of the 12th-century Veerashaiva movement. Her verses, though sparse in surviving records, emphasize the wearing of the Ishtalinga as a symbol of direct divine connection, rejecting temple intermediaries. She lived a life of renunciation, wandering with other sharanas (devotees), and challenged societal expectations of women’s roles. Her inclusion in Lingayat hagiographies affirms that the movement actively cultivated female spiritual leadership. Akka Lingamma’s legacy, like many women of her time, survives through community memory and devotional recitation rather than printed texts.",
+        "teachings": [
+            "The Ishtalinga on your neck is your true guru.",
+            "Renunciation is freedom from social bondage.",
+            "God is found in the company of fellow seekers."
+        ],
+        "works": [
+            "Vachanas (oral tradition)"
+        ],
+        "quotes": [
+            "\"This body is Yours, O Linga—do with it as You will.\"",
+            "\"I walk barefoot on the path of Shiva; what need have I for silks?\""
+        ],
+        "image": "akka_lingamma.jpg"
+    },
+    {
+        "id": "thalaparambil_mangalam",
+        "name": "Thalaparambil Mangalam",
+        "nameLocal": "തലപ്പരമ്പിൽ മംഗളം",
+        "nameHi": "थलपरम्बिल मंगलम",
+        "tradition": "hindu",
+        "sampradaya": "Kerala Folk Saint",
+        "period": "19th century CE",
+        "birthPlace": "Kozhikode, Kerala",
+        "biography": "Thalaparambil Mangalam was a Dalit woman mystic from Kerala revered for her trance states and healing rituals dedicated to the goddess Bhadrakali. Born into the Pulaya community, she defied caste restrictions by leading Theyyam performances—ritual dances where the performer becomes the deity—traditionally barred to lower castes. Her spiritual authority earned her respect across communities, and her shrine remains a site of folk healing. She embodies the syncretic folk spirituality of Kerala, where goddess worship empowers marginalized women as divine vessels.",
+        "teachings": [
+            "The Goddess speaks through the oppressed.",
+            "Ritual possession is divine communion.",
+            "Healing begins when caste walls fall."
+        ],
+        "works": [
+            "Oral mantras and Theyyam invocations"
+        ],
+        "quotes": [
+            "\"Amma enters me—caste vanishes in Her fire!\"",
+            "\"Do not fear spirits; fear injustice.\""
+        ],
+        "image": "thalaparambil_mangalam.jpg"
+    },
+    {
+        "id": "gurudev_kalicharan_brahmachari",
+        "name": "Gurudev Kalicharan Brahmachari",
+        "nameLocal": "गुरुदेव कालीचरण ब्रह्मचारी",
+        "nameHi": "गुरुदेव कालीचरण ब्रह्मचारी",
+        "tradition": "hindu",
+        "sampradaya": "Assamese Vaishnavism",
+        "period": "1899–1970 CE",
+        "birthPlace": "Sylhet, Assam (now Bangladesh)",
+        "biography": "Gurudev Kalicharan Brahmachari was a 20th-century Assamese saint, poet, and social reformer who revitalized Sankardeva’s Neo-Vaishnavite tradition. He composed over 500 borgeets (devotional songs) and established satras (monastic centers) to promote moral education and cultural preservation. A freedom fighter, he used bhakti as a tool for anti-colonial resistance and social unity. His ashram in Nagaon became a hub for interfaith dialogue and rural development. He emphasized that devotion must lead to service, making him a bridge between classical Vaishnavism and modern activism.",
+        "teachings": [
+            "Bhakti without social action is incomplete.",
+            "Preserve Assamese culture as spiritual duty.",
+            "Unity in diversity is Krishna’s true message."
+        ],
+        "works": [
+            "Borgeets",
+            "Namghosa Vyakhya (commentary)",
+            "Satra Dharma"
+        ],
+        "quotes": [
+            "\"Sing Krishna’s name, but also feed the hungry.\"",
+            "\"Our language, our songs, our faith—this is our dharma.\""
+        ],
+        "image": "kalicharan_brahmachari.jpg"
+    },
+    {
+        "id": "sri_sri_sita_ram_goswami",
+        "name": "Sita Ram Goswami",
+        "nameLocal": "सीताराम गोस्वामी",
+        "nameHi": "सीताराम गोस्वामी",
+        "tradition": "hindu",
+        "sampradaya": "Ramanandi Sampradaya",
+        "period": "19th century CE",
+        "birthPlace": "Ayodhya, Uttar Pradesh",
+        "biography": "Sita Ram Goswami was a 19th-century Ramanandi saint known for his scholarly defense of Rama worship during British colonial rule. He authored Sanskrit commentaries on the Ramayana and led public discourses that reinforced Hindu identity. His ashram in Ayodhya became a center for scriptural study and nationalist sentiment. He trained hundreds of sadhus in Vedic rituals and bhakti practices, ensuring the continuity of North Indian Vaishnavism amid social upheaval. His life reflects the quiet resilience of monastic orders in preserving dharma.",
+        "teachings": [
+            "Rama’s name is the shield of dharma in Kali Yuga.",
+            "Scriptural knowledge protects against cultural erosion.",
+            "Monastic discipline is the backbone of society."
+        ],
+        "works": [
+            "Ramayana Tika",
+            "Sitaram Stotram",
+            "Bhakti Prakash"
+        ],
+        "quotes": [
+            "\"Where Rama’s name is chanted, darkness flees.\"",
+            "\"A sadhu’s silence speaks louder than a king’s decree.\""
+        ],
+        "image": "sita_ram_goswami.jpg"
+    },
+    {
+        "id": "bhagat_punna",
+        "name": "Punna",
+        "nameLocal": "ਪੁੰਨਾ",
+        "nameHi": "पुन्ना",
+        "tradition": "sikh",
+        "sampradaya": "Bhagat / Nirguna Bhakti",
+        "period": "c. 14th century CE",
+        "birthPlace": "Multan, Punjab",
+        "biography": "Bhagat Punna was a 14th-century Muslim weaver-saint whose single hymn appears in the Guru Granth Sahib. His verse critiques ritual bathing in sacred rivers, arguing that true purity comes from inner devotion to the One God. As a contemporary of Sheikh Farid, he represents the urban artisan class that fueled the Nirguna Bhakti movement in medieval Punjab. His inclusion in Sikh scripture underscores the tradition’s commitment to universal devotion beyond religious labels.",
+        "teachings": [
+            "Ritual baths cannot cleanse a polluted heart.",
+            "God is near, not far in distant shrines.",
+            "Honest labor is worship when done with remembrance."
+        ],
+        "works": [
+            "1 hymn in Guru Granth Sahib"
+        ],
+        "quotes": [
+            "\"You bathe in the Ganges, but your mind is full of lies!\"",
+            "\"Wash your heart with the Name; that is the true river.\""
+        ],
+        "image": "punna.jpg"
+    },
+    {
+        "id": "bhagat_jaidev",
+        "name": "Jaidev",
+        "nameLocal": "जयदेव",
+        "nameHi": "जयदेव",
+        "tradition": "sikh",
+        "sampradaya": "Bhagat / Saguna Bhakti",
+        "period": "12th century CE",
+        "birthPlace": "Kenduli, Odisha",
+        "biography": "Jaidev was a 12th-century Odia poet-saint and author of the Gita Govinda, a lyrical masterpiece on Radha-Krishna love that influenced Bhakti movements across India. Two of his hymns are included in the Guru Granth Sahib, reflecting the pan-Indian reverence for his devotional poetry. A court poet of King Lakshman Sen, he later renounced royal life for Vrindavan. His work blends Sanskrit sophistication with emotional bhakti, shaping classical music and dance traditions like Odissi.",
+        "teachings": [
+            "Divine love is expressed through aesthetic rapture.",
+            "Radha’s separation is the soul’s longing for God.",
+            "Art is a valid path to spiritual realization."
+        ],
+        "works": [
+            "Gita Govinda",
+            "2 hymns in Guru Granth Sahib"
+        ],
+        "quotes": [
+            "\"O Krishna, Your flute calls the soul home!\"",
+            "\"In love’s pain, I find You.\""
+        ],
+        "image": "jaidev.jpg"
+    },
+    {
+        "id": "acharya_vadiraja",
+        "name": "Vadiraja Tirtha",
+        "nameLocal": "ವಾದಿರಾಜ ತೀರ್ಥ",
+        "nameHi": "वादिराज तीर्थ",
+        "tradition": "hindu",
+        "sampradaya": "Dvaita / Madhva",
+        "period": "1480–1600 CE",
+        "birthPlace": "Huvinakere, Karnataka",
+        "biography": "Vadiraja Tirtha was a 15th–16th century Dvaita philosopher, poet, and pontiff of the Sode Matha. A prolific writer, he composed polemical works against Advaita and Islam, devotional kirtanas, and travelogues like Tirtha Prabandha describing pilgrimage sites. He reformed temple administration and promoted Haridasa literature. His Teertha Prabandha is a valuable historical record of South Indian sacred geography. Vadiraja’s life blended intellectual rigor with devotional fervor, defending Dvaita while enriching Kannada culture.",
+        "teachings": [
+            "Vishnu is supreme; all else is dependent.",
+            "Pilgrimage purifies when done with right knowledge.",
+            "Debate must serve truth, not ego."
+        ],
+        "works": [
+            "Yukti Mallika",
+            "Tirtha Prabandha",
+            "Rukminisha Vijaya"
+        ],
+        "quotes": [
+            "\"Without Vishnu, the world is a desert.\"",
+            "\"The pen is my sword; truth is my shield.\""
+        ],
+        "image": "vadiraja_tirtha.jpg"
+    },
+    {
+        "id": "acharya_raghavendra_swami",
+        "name": "Raghavendra Swami",
+        "nameLocal": "ರಾಘವೇಂದ್ರ ಸ್ವಾಮಿ",
+        "nameHi": "राघवेन्द्र स्वामी",
+        "tradition": "hindu",
+        "sampradaya": "Dvaita / Madhva",
+        "period": "1595–1671 CE",
+        "birthPlace": "Bhuvanagiri, Tamil Nadu",
+        "biography": "Raghavendra Swami was a 17th-century Dvaita saint and successor in Madhvacharya’s lineage. Known for miracles and scholarship, he spent 13 years in meditation before becoming pontiff of Mantralayam Math. His Brindavana (samadhi) in Andhra Pradesh is a major pilgrimage site. He emphasized simple living, devotion to Hayagriva (horse-headed Vishnu), and accessibility of philosophy to common people. His life bridges Tamil and Telugu spiritual cultures, showing Dvaita’s pan-South Indian reach.",
+        "teachings": [
+            "Hayagriva grants wisdom to sincere seekers.",
+            "Miracles are grace, not siddhis for display.",
+            "Serve devotees; it pleases God most."
+        ],
+        "works": [
+            "Parimala (commentary on Jayatirtha’s works)",
+            "Sripadaraja Stotram"
+        ],
+        "quotes": [
+            "\"I am dust at the feet of Madhva’s followers.\"",
+            "\"Pray not for boons, but for devotion.\""
+        ],
+        "image": "raghavendra_swami.jpg"
+    },
+    {
+        "id": "acharya_jayatirtha",
+        "name": "Jayatirtha",
+        "nameLocal": "जयतीर्थ",
+        "nameHi": "जयतीर्थ",
+        "tradition": "hindu",
+        "sampradaya": "Dvaita / Madhva",
+        "period": "c. 1365–1388 CE",
+        "birthPlace": "Mangalwedha, Maharashtra",
+        "biography": "Jayatirtha, originally a Muslim ruler named Dhondupant, converted to Dvaita after debating Madhva scholars. Renamed Jayatirtha ('Victorious Pilgrim'), he became one of Madhva’s most brilliant commentators. His Nyaya Sudha and other works systematized Dvaita logic, earning him the title 'Teekacharya' (commentator par excellence). His life exemplifies how intellectual surrender can lead to spiritual transformation, bridging religious divides through reasoned devotion.",
+        "teachings": [
+            "Reason leads to faith when guided by grace.",
+            "Vishnu’s supremacy is provable by logic.",
+            "Conversion is not loss, but homecoming."
+        ],
+        "works": [
+            "Nyaya Sudha",
+            "Tattvaprakashika",
+            "Prameyadipika"
+        ],
+        "quotes": [
+            "\"I ruled a kingdom, but found truth at Madhva’s feet.\"",
+            "\"Logic is the ladder; devotion is the roof.\""
+        ],
+        "image": "jayatirtha.jpg"
+    },
+    {
+        "id": "acharya_padmanabha_tirtha",
+        "name": "Padmanabha Tirtha",
+        "nameLocal": "पद्मनाभ तीर्थ",
+        "nameHi": "पद्मनाभ तीर्थ",
+        "tradition": "hindu",
+        "sampradaya": "Dvaita / Madhva",
+        "period": "c. 1250–1320 CE",
+        "birthPlace": "Puntamba, Maharashtra",
+        "biography": "Padmanabha Tirtha was the direct disciple and successor of Madhvacharya, entrusted with spreading Dvaita philosophy beyond Karnataka. Originally a Advaita scholar named Shobhana Bhatta, he was defeated in debate by Madhva and converted. He wrote commentaries that clarified Madhva’s often terse sutras, making Dvaita accessible to wider audiences. His missionary work laid the foundation for Dvaita’s institutional growth across Maharashtra and Andhra.",
+        "teachings": [
+            "Guru’s word is the key to scripture.",
+            "Debate with humility opens the door to truth.",
+            "Dvaita is not dualism, but dependence on Vishnu."
+        ],
+        "works": [
+            "Commentaries on Madhva’s Brahma Sutra Bhashya",
+            "Sattarkavilasa"
+        ],
+        "quotes": [
+            "\"I came to refute, but stayed to serve.\"",
+            "\"Vishnu’s grace turns opponents into devotees.\""
+        ],
+        "image": "padmanabha_tirtha.jpg"
+    },
+    {
+        "id": "acharya_narahari_tirtha",
+        "name": "Narahari Tirtha",
+        "nameLocal": "नरहरि तीर्थ",
+        "nameHi": "नरहरि तीर्थ",
+        "tradition": "hindu",
+        "sampradaya": "Dvaita / Madhva",
+        "period": "c. 1243–1333 CE",
+        "birthPlace": "Odisha",
+        "biography": "Narahari Tirtha was a 13th–14th century Dvaita saint who served as a minister in the Eastern Ganga dynasty of Odisha before becoming a monk. He rescued ancient dance-drama manuscripts (precursors to Kuchipudi) and promoted temple arts as devotional practice. His political acumen helped protect Hindu institutions during Islamic incursions. He represents the rare blend of statesmanship and sainthood in medieval India, using power to preserve culture.",
+        "teachings": [
+            "Arts are offerings to Vishnu.",
+            "Power should serve dharma, not ego.",
+            "Preserve heritage as spiritual duty."
+        ],
+        "works": [
+            "Commentaries on Madhva’s works",
+            "Dance-drama reconstructions"
+        ],
+        "quotes": [
+            "\"A king’s throne is fleeting; a devotee’s heart is eternal.\"",
+            "\"Save the arts—they are Vishnu’s smile.\""
+        ],
+        "image": "narahari_tirtha.jpg"
+    },
+    {
+        "id": "buddhist_master_ratnamati",
+        "name": "Ratnamati",
+        "nameLocal": "रत्नमति",
+        "nameHi": "रत्नमति",
+        "tradition": "buddhist",
+        "sampradaya": "Yogachara / Mahayana",
+        "period": "c. 5th–6th century CE",
+        "birthPlace": "Magadha, Bihar",
+        "biography": "Ratnamati was a 5th–6th century Buddhist monk and translator who worked at the Shaolin Temple in China. He translated key Yogachara texts like the Dashabhumika Sutra from Sanskrit to Chinese, influencing East Asian Buddhism. A contemporary of Bodhidharma, he emphasized meditative absorption and bodhisattva ethics. His translations preserved Indian Mahayana thought during its decline in India, ensuring its survival abroad.",
+        "teachings": [
+            "Translation is dharma propagation.",
+            "The ten bhumis are stages of compassionate awakening.",
+            "Mind-only philosophy liberates from illusion."
+        ],
+        "works": [
+            "Chinese translation of Dashabhumika Sutra",
+            "Commentaries on Yogachara texts"
+        ],
+        "quotes": [
+            "\"Words are boats; cross the ocean, then leave them.\"",
+            "\"Compassion grows as self-grasping fades.\""
+        ],
+        "image": "ratnamati.jpg"
+    },
+    {
+        "id": "buddhist_master_paramartha",
+        "name": "Paramartha",
+        "nameLocal": "परमार्थ",
+        "nameHi": "परमार्थ",
+        "tradition": "buddhist",
+        "sampradaya": "Yogachara / Mahayana",
+        "period": "499–569 CE",
+        "birthPlace": "Ujjain, Madhya Pradesh",
+        "biography": "Paramartha was a 6th-century Indian Buddhist monk who traveled to China and translated over 60 texts, including Vasubandhu’s works. His rendering of the Mahayana-samparigraha-shastra introduced Yogachara to Chinese Buddhists. Despite political turmoil, he persisted in teaching, founding a school that influenced later Chan (Zen) thought. Paramartha’s life exemplifies the transnational mission of Indian Buddhist scholars to preserve and transmit dharma.",
+        "teachings": [
+            "True meaning (paramartha) transcends words.",
+            "Storehouse consciousness holds karmic seeds.",
+            "Translation requires both scholarship and devotion."
+        ],
+        "works": [
+            "Chinese translations of Yogachara texts",
+            "Commentaries on Abhidharma"
+        ],
+        "quotes": [
+            "\"The ultimate truth is silence; words point to it.\"",
+            "\"Even in exile, the Dharma flourishes.\""
+        ],
+        "image": "paramartha.jpg"
+    },
+    {
+        "id": "buddhist_master_vasumitra",
+        "name": "Vasumitra",
+        "nameLocal": "वसुमित्र",
+        "nameHi": "वसुमित्र",
+        "tradition": "buddhist",
+        "sampradaya": "Sarvastivada / Theravada",
+        "period": "c. 1st–2nd century CE",
+        "birthPlace": "Gandhara",
+        "biography": "Vasumitra was a 1st–2nd century Buddhist scholar who presided over the Fourth Buddhist Council under Kanishka. He defended Sarvastivada doctrine in the Mahavibhasa, a massive Abhidharma commentary. His work systematized Buddhist psychology and cosmology, influencing Central Asian Buddhism. Vasumitra represents the scholastic rigor of early Buddhist councils in preserving doctrinal unity.",
+        "teachings": [
+            "All dharmas exist in past, present, and future.",
+            "Abhidharma analysis reveals reality’s structure.",
+            "Councils protect the Dharma from fragmentation."
+        ],
+        "works": [
+            "Mahavibhasa (attributed)",
+            "Abhidharma treatises"
+        ],
+        "quotes": [
+            "\"The Dharma is a vast ocean; Abhidharma is its map.\"",
+            "\"Debate clarifies; compassion unites.\""
+        ],
+        "image": "vasumitra.jpg"
+    },
+    {
+        "id": "buddhist_master_ghosaka",
+        "name": "Ghosaka",
+        "nameLocal": "घोषक",
+        "nameHi": "घोषक",
+        "tradition": "buddhist",
+        "sampradaya": "Sarvastivada",
+        "period": "c. 1st century CE",
+        "birthPlace": "Kosambi, Uttar Pradesh",
+        "biography": "Ghosaka was a 1st-century Buddhist monk known for his generosity and scholarship. He built a monastery in Kosambi and contributed to Abhidharma literature. His life is recounted in the Ghosaka Jataka as a previous birth of the Buddha, highlighting his virtue. Ghosaka exemplifies the ideal lay-monastic patron who supports the Sangha through material and intellectual means.",
+        "teachings": [
+            "Generosity builds the foundation for wisdom.",
+            "Monasteries are gardens of dharma.",
+            "Scholarship serves liberation, not fame."
+        ],
+        "works": [
+            "Abhidharma commentaries (lost)"
+        ],
+        "quotes": [
+            "\"My wealth is for the Sangha; my mind is for the Dharma.\"",
+            "\"Build shelters for monks; they build shelters for truth.\""
+        ],
+        "image": "ghosaka.jpg"
+    },
+    {
+        "id": "buddhist_master_upali",
+        "name": "Upali",
+        "nameLocal": "उपालि",
+        "nameHi": "उपालि",
+        "tradition": "buddhist",
+        "sampradaya": "Theravada",
+        "period": "6th–5th century BCE",
+        "birthPlace": "Kapilavastu, Nepal",
+        "biography": "Upali was the Buddha’s barber who became the foremost expert on Vinaya (monastic discipline). At the First Buddhist Council, he recited the entire Vinaya Pitaka from memory, preserving the rules for monastic conduct. Born a Shudra, his mastery over discipline demonstrated that spiritual authority in Buddhism transcends caste. Upali’s legacy ensures ethical integrity in the Sangha across millennia.",
+        "teachings": [
+            "Discipline is the lifeblood of the Sangha.",
+            "Caste is irrelevant in the Dharma.",
+            "Memory preserves the Buddha’s words."
+        ],
+        "works": [
+            "Vinaya Pitaka (recited at First Council)"
+        ],
+        "quotes": [
+            "\"Rules are not chains; they are wings for liberation.\"",
+            "\"I was a barber; now I guard the Dharma.\""
+        ],
+        "image": "upali.jpg"
+    },
+    {
+        "id": "buddhist_master_ananda",
+        "name": "Ananda",
+        "nameLocal": "आनंद",
+        "nameHi": "आनंद",
+        "tradition": "buddhist",
+        "sampradaya": "Theravada",
+        "period": "6th–5th century BCE",
+        "birthPlace": "Kapilavastu, Nepal",
+        "biography": "Ananda was the Buddha’s cousin and personal attendant for 25 years. Known for his prodigious memory, he recited the Sutta Pitaka at the First Buddhist Council, preserving the Buddha’s discourses. He advocated for the ordination of women, leading to the establishment of the bhikkhuni sangha. Ananda’s humility and devotion made him beloved by all, embodying the ideal disciple who serves with love.",
+        "teachings": [
+            "Listening is the first step to wisdom.",
+            "Compassion includes advocating for the marginalized.",
+            "Service to the teacher is the highest learning."
+        ],
+        "works": [
+            "Sutta Pitaka (recited at First Council)"
+        ],
+        "quotes": [
+            "\"I have heard the Blessed One say...\"",
+            "\"Serve with love; learn through presence.\""
+        ],
+        "image": "ananda.jpg"
+    },
+    {
+        "id": "jain_acharya_silanka",
+        "name": "Silanka",
+        "nameLocal": "शीलांक",
+        "nameHi": "शीलांक",
+        "tradition": "jain",
+        "sampradaya": "Śvetāmbara Acharya",
+        "period": "c. 9th century CE",
+        "birthPlace": "Gujarat",
+        "biography": "Silanka was a 9th-century Śvetāmbara acharya who wrote the first complete commentary on the Ācārāṅga Sūtra, the oldest Jain text. His work preserved early monastic rules and ethical codes during a period of textual fragmentation. He emphasized non-violence in thought, word, and deed as the core of Jain practice. Silanka’s scholarship ensured the continuity of Śvetāmbara canon in medieval India.",
+        "teachings": [
+            "Non-violence begins in the mind.",
+            "Commentary protects scripture from misinterpretation.",
+            "Monastic discipline is the path to liberation."
+        ],
+        "works": [
+            "Commentary on Ācārāṅga Sūtra",
+            "Commentary on Sūtrakṛtāṅga"
+        ],
+        "quotes": [
+            "\"Even a thought of harm binds karma.\"",
+            "\"Scripture without understanding is a lamp without oil.\""
+        ],
+        "image": "silanka.jpg"
+    },
+    {
+        "id": "jain_acharya_devendra_suri",
+        "name": "Devendra Suri",
+        "nameLocal": "देवेन्द्र सूरि",
+        "nameHi": "देवेन्द्र सूरि",
+        "tradition": "jain",
+        "sampradaya": "Śvetāmbara Acharya",
+        "period": "c. 11th century CE",
+        "birthPlace": "Gujarat",
+        "biography": "Devendra Suri was an 11th-century Śvetāmbara scholar who wrote the Nandī-sūtra commentary and works on logic. He debated Buddhist and Hindu scholars, defending Jain epistemology. His emphasis on anekantavada (non-absolutism) promoted intellectual humility. Devendra Suri represents the golden age of Jain scholasticism in Gujarat, where monastic universities thrived.",
+        "teachings": [
+            "All views are partial; truth is multifaceted.",
+            "Logic must serve non-violence.",
+            "Debate with respect, not contempt."
+        ],
+        "works": [
+            "Nandī-sūtra commentary",
+            "Pramāṇa-naya-tattvālokālaṃkāra"
+        ],
+        "quotes": [
+            "\"The wise see many sides; the fool sees one.",
+            "\"Victory in debate is useless without compassion.\""
+        ],
+        "image": "devendra_suri.jpg"
+    },
+    {
+        "id": "jain_acharya_mallisena",
+        "name": "Mallisena",
+        "nameLocal": "मल्लिसेन",
+        "nameHi": "मल्लिसेन",
+        "tradition": "jain",
+        "sampradaya": "Digambara Acharya",
+        "period": "c. 13th century CE",
+        "birthPlace": "Karnataka",
+        "biography": "Mallisena was a 13th-century Digambara acharya who wrote the Syādvādamañjarī, a seminal work on Jain logic and anekantavada. He systematized the sevenfold predication (saptabhangi) to explain reality’s complexity. His work influenced later Indian philosophers across traditions. Mallisena’s life shows how Jain thought contributed to India’s broader intellectual heritage.",
+        "teachings": [
+            "Reality is indescribable in absolute terms.",
+            "Seven perspectives reveal truth’s depth.",
+            "Logic prevents dogmatism."
+        ],
+        "works": [
+            "Syādvādamañjarī",
+            "Commentaries on Kundakunda"
+        ],
+        "quotes": [
+            "\"To say ‘it is’ or ‘it is not’ is incomplete; truth is ‘somehow’.",
+            "\"The universe laughs at those who claim certainty.\""
+        ],
+        "image": "mallisena.jpg"
+    },
+    {
+        "id": "jain_acharya_prabhachandra",
+        "name": "Prabhachandra",
+        "nameLocal": "प्रभाचन्द्र",
+        "nameHi": "प्रभाचन्द्र",
+        "tradition": "jain",
+        "sampradaya": "Digambara Acharya",
+        "period": "c. 8th–9th century CE",
+        "birthPlace": "Karnataka",
+        "biography": "Prabhachandra was an 8th–9th century Digambara logician who wrote the Prameyakamalamartanda, a critique of Nyaya and Buddhist epistemology. He defended Jain omniscience and karma theory with rigorous dialectics. His work preserved Digambara thought during the rise of Advaita. Prabhachandra exemplifies the Jain commitment to rational defense of dharma.",
+        "teachings": [
+            "Omniscience is possible through karmic purification.",
+            "Critique others’ views fairly before refuting.",
+            "Knowledge without ethics is dangerous."
+        ],
+        "works": [
+            "Prameyakamalamartanda",
+            "Nyayakumudacandra"
+        ],
+        "quotes": [
+            "\"The Jina sees all; we see fragments.",
+            "\"Reason is the sword; compassion is the sheath.\""
+        ],
+        "image": "prabhachandra.jpg"
+    },
+    {
+        "id": "jain_acharya_vidyasagara",
+        "name": "Vidyasagara",
+        "nameLocal": "विद्यासागर",
+        "nameHi": "विद्यासागर",
+        "tradition": "jain",
+        "sampradaya": "Digambara Acharya",
+        "period": "1935–2023 CE",
+        "birthPlace": "Chittorgarh, Rajasthan",
+        "biography": "Acharya Vidyasagara was a 20th–21st century Digambara monk known for his extreme austerity, including kayotsarga (standing meditation) for hours. He revived interest in classical Jain texts and inspired thousands through his silent presence. His life demonstrated that ancient ascetic ideals remain viable in the modern world. He passed away in sallekhana (voluntary fasting unto death), upholding Jain principles to the end.",
+        "teachings": [
+            "Austerity purifies karma.",
+            "Silence is the highest teaching.",
+            "Live simply; desire nothing."
+        ],
+        "works": [
+            "Discourses on Tattvartha Sutra (oral)"
+        ],
+        "quotes": [
+            "\"I own nothing; not even this body.",
+            "\"Peace is found in letting go.\""
+        ],
+        "image": "vidyasagara.jpg"
+    },
+    {
+        "id": "tribal_saint_budhu_bhagat",
+        "name": "Budhu Bhagat",
+        "nameLocal": "बुधु भगत",
+        "nameHi": "बुधु भगत",
+        "tradition": "hindu",
+        "sampradaya": "Tribal Folk Saint",
+        "period": "1792–1832 CE",
+        "birthPlace": "Chotanagpur, Jharkhand",
+        "biography": "Budhu Bhagat was a tribal freedom fighter and spiritual leader of the Larka Kol tribe who led the 1831 Kol Rebellion against British land policies. Revered as a saint by his people, he combined indigenous nature worship with resistance to colonial exploitation. He declared himself a messenger of Singbonga (the Sun God) and mobilized tribes through spiritual oaths. His martyrdom made him a symbol of tribal dignity and eco-spiritual resistance.",
+        "teachings": [
+            "The forest is sacred; protect it.",
+            "Colonial laws violate divine order.",
+            "Unity among tribes is strength."
+        ],
+        "works": [
+            "Oral prophecies and war songs"
+        ],
+        "quotes": [
+            "\"Singbonga commands us to fight for our land!",
+            "\"Better to die free than live enslaved.\""
+        ],
+        "image": "budhu_bhagat.jpg"
+    },
+    {
+        "id": "tribal_saint_telanga_kharia",
+        "name": "Telanga Kharia",
+        "nameLocal": "तेलंगा खड़िया",
+        "nameHi": "तेलंगा खड़िया",
+        "tradition": "hindu",
+        "sampradaya": "Tribal Folk Saint",
+        "period": "1806–1880 CE",
+        "birthPlace": "Chotanagpur, Jharkhand",
+        "biography": "Telanga Kharia was a tribal leader and mystic who led the Kharia Rebellion (1850s–1860s) against British oppression. He established a parallel government based on tribal dharma and nature worship. Known for his charisma and strategic acumen, he united scattered tribes under a spiritual banner. His legacy lives in Jharkhand as a symbol of indigenous sovereignty and ecological spirituality.",
+        "teachings": [
+            "Land belongs to the earth, not the state.",
+            "Tribal law is divine law.",
+            "Resist injustice with courage."
+        ],
+        "works": [
+            "Oral codes of tribal governance"
+        ],
+        "quotes": [
+            "\"We are children of the soil; we will not be uprooted.",
+            "\"Our gods dwell in trees, not temples.\""
+        ],
+        "image": "telanga_kharia.jpg"
+    },
+    {
+        "id": "sant_gora_kumbhar",
+        "name": "Gora Kumbhar",
+        "nameLocal": "गोरा कुंभार",
+        "nameHi": "गोरा कुंभार",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 13th–14th century CE",
+        "birthPlace": "Satyapuri (Ter), Maharashtra",
+        "biography": "Gora Kumbhar was a 13th–14th century potter-saint of the Varkari tradition. A contemporary of Namdev, he tested Namdev’s devotion by breaking pots he had made, teaching him detachment. His abhangas emphasize seeing Vithoba in everyday work. As a Shudra artisan, his spiritual authority challenged caste hierarchies, proving that bhakti transcends occupation. His shrine in Ter remains a pilgrimage site for potters and devotees alike.",
+        "teachings": [
+            "Work is worship when offered to Vithoba.",
+            "Detachment is tested in daily life.",
+            "God is in the clay, the wheel, and the hand."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"I shape pots, but Vithoba shapes my soul.",
+            "\"Break my pots, but not my faith!\""
+        ],
+        "image": "gora_kumbhar.jpg"
+    },
+    {
+        "id": "sant_senaji",
+        "name": "Senaji",
+        "nameLocal": "सेनाजी",
+        "nameHi": "सेनाजी",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 13th century CE",
+        "birthPlace": "Maharashtra",
+        "biography": "Senaji was a 13th-century barber-saint of the Varkari tradition. His humble profession did not bar him from spiritual realization; his abhangas express deep devotion to Vithoba. He participated in the Pandharpur pilgrimage alongside Namdev and Jnaneswar. Senaji’s life affirms that in the Varkari path, caste and occupation are irrelevant before the grace of Vithoba.",
+        "teachings": [
+            "Shave egos, not just heads.",
+            "Vithoba’s name purifies all work.",
+            "Barber or Brahmin, all are equal at Pandharpur."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"My razor cuts hair; Vithoba’s grace cuts illusion.",
+            "\"I serve saints; that is my highest dharma.\""
+        ],
+        "image": "senaji.jpg"
+    },
+    {
+        "id": "sant_savata_mali",
+        "name": "Savata Mali",
+        "nameLocal": "सावता माळी",
+        "nameHi": "सावता माळी",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 13th–14th century CE",
+        "birthPlace": "Mangalwedha, Maharashtra",
+        "biography": "Savata Mali was a 13th–14th century gardener-saint of the Varkari tradition. His abhangas use gardening metaphors—watering, weeding, pruning—to describe spiritual practice. He taught that tending the garden of the heart with devotion yields the fruit of Vithoba’s grace. As a Mali (gardener), his inclusion in the Varkari canon highlights the movement’s embrace of all occupational groups.",
+        "teachings": [
+            "Water the heart with Vithoba’s name.",
+            "Uproot weeds of desire through discipline.",
+            "The garden of bhakti blooms in humility."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"I plant seeds of devotion; Vithoba gives the harvest.",
+            "\"A true gardener sees God in every leaf.\""
+        ],
+        "image": "savata_mali.jpg"
+    },
+    {
+        "id": "sant_kanhopatra",
+        "name": "Kanhopatra",
+        "nameLocal": "कान्होपात्रा",
+        "nameHi": "कान्होपात्रा",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 15th century CE",
+        "birthPlace": "Mangalvedhe, Maharashtra",
+        "biography": "Kanhopatra was a 15th-century Varkari saint born to a courtesan. Despite her social stigma, she attained spiritual fame through her abhangas dedicated to Vithoba. Legend says she merged with Vithoba’s idol at Pandharpur, achieving liberation. Her life challenges notions of purity and pollution, affirming that divine grace is available to all, regardless of birth or past. She is one of the few women in the Varkari tradition with a distinct hagiography.",
+        "teachings": [
+            "Vithoba’s grace erases all past sins.",
+            "Social shame cannot touch the soul’s purity.",
+            "Longing for God is the highest virtue."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"They call me fallen, but Vithoba lifts me high.",
+            "\"My body is theirs; my heart is Yours alone.\""
+        ],
+        "image": "kanhopatra.jpg"
+    },
+    {
+        "id": "sant_ukhande",
+        "name": "Ukhande",
+        "nameLocal": "उखंडे",
+        "nameHi": "उखंडे",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 14th century CE",
+        "birthPlace": "Maharashtra",
+        "biography": "Ukhande was a 14th-century Varkari saint from the Mang (Dalit) community. His abhangas speak of social oppression yet affirm Vithoba’s unconditional love. He walked the Pandharpur pilgrimage barefoot, singing of divine equality. Ukhande’s life, like Chokhamela’s, shows how the Varkari movement provided spiritual dignity to the marginalized.",
+        "teachings": [
+            "Vithoba’s feet are open to all castes.",
+            "Singing His name breaks chains of birth.",
+            "The road to Pandharpur is the path to freedom."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"They deny me water, but Vithoba gives me nectar.",
+            "\"My song is my weapon against injustice.\""
+        ],
+        "image": "ukhande.jpg"
+    },
+    {
+        "id": "sant_bhanudas",
+        "name": "Bhanudas",
+        "nameLocal": "भानुदास",
+        "nameHi": "भानुदास",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 15th–16th century CE",
+        "birthPlace": "Paithan, Maharashtra",
+        "biography": "Bhanudas was a 15th–16th century Varkari saint and great-grandfather of Eknath. He famously retrieved the Vithoba idol from Bidar, where it had been taken by a Muslim ruler, through devotion and diplomacy. His act preserved the central symbol of Varkari faith. His abhangas emphasize the importance of protecting sacred spaces. Bhanudas bridges the early and late Varkari periods, ensuring continuity of the tradition.",
+        "teachings": [
+            "Protect temples as centers of dharma.",
+            "Devotion can move rulers’ hearts.",
+            "Family lineage carries spiritual duty."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"Vithoba belongs to Pandharpur, not palaces.",
+            "\"Faith moves mountains—and idols.\""
+        ],
+        "image": "bhanudas.jpg"
+    },
+    {
+        "id": "sant_sopan",
+        "name": "Sopan",
+        "nameLocal": "सोपान",
+        "nameHi": "सोपान",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 13th century CE",
+        "birthPlace": "Apegaon, Maharashtra",
+        "biography": "Sopan was the younger brother of Jnaneswar and Muktabai, part of the saintly quartet of the Varkari tradition. Orphaned early, he composed abhangas expressing childlike devotion to Vithoba. His poetry is marked by simplicity and emotional depth. Sopan’s life, like his siblings’, exemplifies how familial bonds can become a crucible for collective spiritual realization.",
+        "teachings": [
+            "Childlike faith opens heaven’s gates.",
+            "Brotherhood in devotion is divine.",
+            "Vithoba is the father of orphans."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"I have no parents but Vithoba.",
+            "\"My brothers and sister are my path to God.\""
+        ],
+        "image": "sopan.jpg"
+    },
+    {
+        "id": "sant_narhari_soneri",
+        "name": "Narhari Soneri",
+        "nameLocal": "नरहरि सोनेरी",
+        "nameHi": "नरहरि सोनेरी",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 17th century CE",
+        "birthPlace": "Maharashtra",
+        "biography": "Narhari Soneri was a 17th-century goldsmith-saint of the Varkari tradition. His abhangas use metallurgical metaphors—melting, refining, molding—to describe the soul’s transformation through bhakti. He taught that just as gold is purified by fire, the heart is purified by devotion to Vithoba. His life shows how artisans integrated their craft into spiritual practice.",
+        "teachings": [
+            "Devotion is the fire that purifies the soul.",
+            "God is the goldsmith; we are the gold.",
+            "Work with integrity as offering to Vithoba."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"Melt my ego in the furnace of Your name.",
+            "\"I shape gold; You shape my destiny.\""
+        ],
+        "image": "narhari_soneri.jpg"
+    },
+    {
+        "id": "sant_ruhanbai",
+        "name": "Ruhanbai",
+        "nameLocal": "रुहानबाई",
+        "nameHi": "रुहानबाई",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 18th century CE",
+        "birthPlace": "Maharashtra",
+        "biography": "Ruhanbai was an 18th-century female Varkari saint whose abhangas express maternal love for Vithoba. Little is known of her life, but her poetry survives in oral tradition, emphasizing service and surrender. She represents the quiet continuity of women’s voices in the Varkari movement beyond the well-known figures like Janabai.",
+        "teachings": [
+            "Serve Vithoba as a mother serves her child.",
+            "Humility is the ornament of devotion.",
+            "The kitchen is a temple when cooked with love."
+        ],
+        "works": [
+            "Abhangas (oral tradition)"
+        ],
+        "quotes": [
+            "\"Let me feed You, O Vithoba, as a mother feeds her son.",
+            "\"My hands are rough, but my heart is soft for You.\""
+        ],
+        "image": "ruhanbai.jpg"
+    },
+    {
+        "id": "sant_tukaram_ii",
+        "name": "Tukaram II",
+        "nameLocal": "तुकाराम द्वितीय",
+        "nameHi": "तुकाराम द्वितीय",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 18th century CE",
+        "birthPlace": "Dehu, Maharashtra",
+        "biography": "Tukaram II was an 18th-century Varkari saint who claimed spiritual descent from the original Tukaram. He composed abhangas continuing the tradition of social critique and devotion. Though less famous, he represents the enduring legacy of Tukaram’s path, showing how saintly lineages inspire new generations of poets and reformers.",
+        "teachings": [
+            "Follow Tukaram’s path of fearless devotion.",
+            "Caste hypocrisy still exists; fight it with song.",
+            "Vithoba’s name is timeless."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"I am Tukaram’s shadow; his light guides me.",
+            "\"Sing for the poor; they are Vithoba’s favorites.\""
+        ],
+        "image": "tukaram_ii.jpg"
+    },
+    {
+        "id": "sant_yadavendra",
+        "name": "Yadavendra",
+        "nameLocal": "यादवेन्द्र",
+        "nameHi": "यादवेन्द्र",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 19th century CE",
+        "birthPlace": "Maharashtra",
+        "biography": "Yadavendra was a 19th-century Varkari saint who revitalized the tradition during British rule. He organized Pandharpur pilgrimages and composed abhangas on moral living. His work ensured the Varkari path remained relevant in colonial times, adapting its message to new social challenges while preserving its core devotional essence.",
+        "teachings": [
+            "Pilgrimage unites the community in faith.",
+            "Colonialism cannot destroy dharma.",
+            "Sing Vithoba’s name with pride."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"The British rule the land, but Vithoba rules our hearts.",
+            "\"Walk to Pandharpur; it is our spiritual army.\""
+        ],
+        "image": "yadavendra.jpg"
+    },
+    {
+        "id": "sant_gajanan_maharaj",
+        "name": "Gajanan Maharaj",
+        "nameLocal": "गजानन महाराज",
+        "nameHi": "गजानन महाराज",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint",
+        "period": "1878–1910 CE",
+        "birthPlace": "Parner, Maharashtra",
+        "biography": "Gajanan Maharaj was a 19th–20th century saint known for his miraculous powers and synthesis of Advaita and Bhakti. He lived in Shegaon, where he performed tapasya and helped devotees regardless of caste. His life is shrouded in mystery, with accounts of bilocation and healing. He represents the modern mahatma who embodies both yogic siddhis and compassionate service.",
+        "teachings": [
+            "Advaita and Bhakti are two sides of one truth.",
+            "Help all who come to you, without judgment.",
+            "Miracles are grace, not for display."
+        ],
+        "works": [
+            "None authored; teachings in oral tradition"
+        ],
+        "quotes": [
+            "\"I am neither here nor there; I am everywhere.",
+            "\"Ask, and it shall be given—but ask with faith.\""
+        ],
+        "image": "gajanan_maharaj.jpg"
+    },
+    {
+        "id": "sant_sai_baba_of_shirdi",
+        "name": "Sai Baba of Shirdi",
+        "nameLocal": "शिर्डी के साईं बाबा",
+        "nameHi": "शिर्डी के साईं बाबा",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint",
+        "period": "c. 1838–1918 CE",
+        "birthPlace": "Unknown (possibly Maharashtra or Telangana)",
+        "biography": "Sai Baba of Shirdi was a 19th–20th century saint who blended Hindu and Muslim practices, lighting lamps in both mosques and temples. He taught the unity of all religions, emphasizing shraddha (faith) and saburi (patience). His simple life in Shirdi attracted devotees from all backgrounds. Though his origins are mysterious, his message of love and tolerance resonates globally. His samadhi in Shirdi is one of India’s most visited shrines.",
+        "teachings": [
+            "All religions lead to the same God.",
+            "Faith and patience overcome all obstacles.",
+            "Share what you have; hoarding is sin."
+        ],
+        "works": [
+            "None authored; teachings in 'Shri Sai Satcharita'"
+        ],
+        "quotes": [
+            "\"Why fear when I am here?",
+            "\"Hands that give are holier than lips that pray.\""
+        ],
+        "image": "sai_baba.jpg"
+    },
+    {
+        "id": "sant_upasani_maharaj",
+        "name": "Upasani Maharaj",
+        "nameLocal": "उपासनी महाराज",
+        "nameHi": "उपासनी महाराज",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint",
+        "period": "1870–1941 CE",
+        "birthPlace": "Satana, Maharashtra",
+        "biography": "Upasani Maharaj was a 20th-century saint and disciple of Sai Baba of Shirdi. Known for his unconventional behavior—living in a cow dung hut, speaking harshly to disciples—he taught that true spirituality lies beyond social norms. He founded the Sakori ashram, where he elevated women’s status by appointing female trustees. His life challenges conventional saintliness, emphasizing inner transformation over external piety.",
+        "teachings": [
+            "Spirituality is beyond good and bad.",
+            "Women are equal in spiritual capacity.",
+            "Shock the ego to awaken the soul."
+        ],
+        "works": [
+            "Discourses compiled in 'Upasani Vak Sudha'"
+        ],
+        "quotes": [
+            "\"I am not a saint; I am a mirror.",
+            "\"Break your concepts; truth is beyond them.\""
+        ],
+        "image": "upasani_maharaj.jpg"
+    },
+    {
+        "id": "sant_meher_baba",
+        "name": "Meher Baba",
+        "nameLocal": "मेहर बाबा",
+        "nameHi": "मेहर बाबा",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint",
+        "period": "1894–1969 CE",
+        "birthPlace": "Poona, Maharashtra",
+        "biography": "Meher Baba was a 20th-century mystic who took a vow of silence in 1925 and communicated via alphabet board and hand gestures. He claimed to be the Avatar of the Age and traveled globally, attracting followers from all walks of life. His teachings, compiled in 'God Speaks', describe the soul’s journey through reincarnation to God-realization. He emphasized love, truth, and the unity of all beings, leaving a lasting impact on global spirituality.",
+        "teachings": [
+            "Don’t worry; don’t do anything; everything is My concern.",
+            "Love is the essence of all creation.",
+            "The goal of life is God-realization."
+        ],
+        "works": [
+            "God Speaks",
+            "Discourses"
+        ],
+        "quotes": [
+            "\"You are eternally free; realize it.",
+            "\"My silence speaks louder than words ever could.\""
+        ],
+        "image": "meher_baba.jpg"
+    },
+    {
+        "id": "sant_nisargadatta_maharaj",
+        "name": "Nisargadatta Maharaj",
+        "nameLocal": "निसर्गदत्त महाराज",
+        "nameHi": "निसर्गदत्त महाराज",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint / Advaita",
+        "period": "1897–1981 CE",
+        "birthPlace": "Mumbai, Maharashtra",
+        "biography": "Nisargadatta Maharaj was a 20th-century householder and cigarette shop owner who taught radical non-duality. A disciple of Siddharameshwar Maharaj, he emphasized the sense 'I am' as the gateway to Self-realization. His talks, compiled in 'I Am That', influenced Western seekers like Maurice Frydman. He taught that the Self is already free; suffering arises from misidentification with the body-mind. His life proves that enlightenment is possible amidst worldly duties.",
+        "teachings": [
+            "Hold onto the 'I am' without words.",
+            "You are not the body; you are the witness.",
+            "Freedom is your natural state; just stop imagining bondage."
+        ],
+        "works": [
+            "I Am That",
+            "Seeds of Consciousness"
+        ],
+        "quotes": [
+            "\"Go back to the source of 'I am' and abide there.",
+            "\"The seeker is the sought; the search is the obstacle.\""
+        ],
+        "image": "nisargadatta_maharaj.jpg"
+    },
+    {
+        "id": "sant_siddharameshwar_maharaj",
+        "name": "Siddharameshwar Maharaj",
+        "nameLocal": "सिद्धारामेश्वर महाराज",
+        "nameHi": "सिद्धारामेश्वर महाराज",
+        "tradition": "hindu",
+        "sampradaya": "Inchegiri Sampradaya / Advaita",
+        "period": "1888–1936 CE",
+        "birthPlace": "Pathri, Maharashtra",
+        "biography": "Siddharameshwar Maharaj was a 20th-century Advaita master and guru of Nisargadatta Maharaj. He taught the 'Vihangam Marg' (bird’s path)—direct realization of the Self without prolonged practice. His concise instructions, compiled in 'Master of Self-Realization', cut through conceptual thinking. He emphasized that the Self is ever-present; effort only creates duality. His lineage continues to influence non-dual seekers worldwide.",
+        "teachings": [
+            "The bird’s path is immediate recognition.",
+            "No practice is needed; just be.",
+            "The 'I am' is the bridge to the Absolute."
+        ],
+        "works": [
+            "Master of Self-Realization",
+            "Adhyatma Jnanacha Yogakanda"
+        ],
+        "quotes": [
+            "\"You are already That; stop searching.",
+            "\"The mind is the thief; catch it in the act.\""
+        ],
+        "image": "siddharameshwar_maharaj.jpg"
+    },
+    {
+        "id": "sant_pandurang_shastri_athavale",
+        "name": "Pandurang Shastri Athavale",
+        "nameLocal": "पांडुरंग शास्त्री आठवले",
+        "nameHi": "पांडुरंग शास्त्री आठवले",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint / Swadhyaya Movement",
+        "period": "1920–2003 CE",
+        "birthPlace": "Roha, Maharashtra",
+        "biography": "Pandurang Shastri Athavale, or Dadaji, founded the Swadhyaya Movement, which promotes self-study of scriptures as a tool for social transformation. Rejecting charity, he inspired 'devotional farming' and 'fishermen’s temples' where communities work collectively as worship. Awarded the Templeton Prize, he showed that Vedic values could address poverty without dependency. His life bridges ancient wisdom and modern development.",
+        "teachings": [
+            "Self-study (swadhyaya) leads to self-transformation.",
+            "Work as worship builds self-reliant communities.",
+            "God resides in collective labor done with devotion."
+        ],
+        "works": [
+            "Discourses on Bhagavad Gita and Upanishads"
+        ],
+        "quotes": [
+            "\"Don’t give fish; teach fishing as worship.",
+            "\"Society changes when individuals change.\""
+        ],
+        "image": "athavale.jpg"
+    },
+    {
+        "id": "sant_swami_tapaswananda",
+        "name": "Swami Tapaswananda",
+        "nameLocal": "स्वामी तपस्वानंद",
+        "nameHi": "स्वामी तपस्वानंद",
+        "tradition": "hindu",
+        "sampradaya": "Ramakrishna Mission",
+        "period": "1904–1991 CE",
+        "birthPlace": "Tamil Nadu",
+        "biography": "Swami Tapaswananda was a 20th-century Ramakrishna monk and scholar who served as vice-president of the Ramakrishna Order. He translated major Sanskrit texts like the Bhagavata Purana into English, making them accessible globally. His commentaries on Vedanta emphasized practical application in daily life. He bridged traditional scholarship and modern education, ensuring the relevance of Hindu philosophy in the academic world.",
+        "teachings": [
+            "Scriptural translation is seva to humanity.",
+            "Vedanta is not escape, but engaged wisdom.",
+            "Scholarship must lead to humility."
+        ],
+        "works": [
+            "English translation of Bhagavata Purana",
+            "Essentials of Hinduism",
+            "Sri Ramakrishna and His Unique Message"
+        ],
+        "quotes": [
+            "\"The Gita is a manual for living, not just dying.",
+            "\"Translate not just words, but spirit.\""
+        ],
+        "image": "tapaswananda.jpg"
+    },
+    {
+        "id": "sant_swami_gambhirananda",
+        "name": "Swami Gambhirananda",
+        "nameLocal": "स्वामी गंभीरानंद",
+        "nameHi": "स्वामी गंभीरानंद",
+        "tradition": "hindu",
+        "sampradaya": "Ramakrishna Mission",
+        "period": "1897–1981 CE",
+        "birthPlace": "West Bengal",
+        "biography": "Swami Gambhirananda was a 20th-century Ramakrishna monk and president of the Ramakrishna Order. A meticulous scholar, he edited critical editions of Vivekananda’s works and wrote histories of the Ramakrishna Movement. His administrative acumen stabilized the organization’s global expansion. He embodied the ideal of the scholar-administrator who serves dharma through quiet dedication.",
+        "teachings": [
+            "Accuracy in scholarship honors the guru.",
+            "Organization is necessary for dharma’s spread.",
+            "Lead with humility, not authority."
+        ],
+        "works": [
+            "History of the Ramakrishna Math and Mission",
+            "Editor of Complete Works of Swami Vivekananda"
+        ],
+        "quotes": [
+            "\"Preserve the legacy with care; it is not ours to own.",
+            "\"Service through administration is also yoga.\""
+        ],
+        "image": "gambhirananda.jpg"
+    },
+    {
+        "id": "sant_swami_vireswarananda",
+        "name": "Swami Vireswarananda",
+        "nameLocal": "स्वामी वीरेश्वरानंद",
+        "nameHi": "स्वामी वीरेश्वरानंद",
+        "tradition": "hindu",
+        "sampradaya": "Ramakrishna Mission",
+        "period": "1891–1985 CE",
+        "birthPlace": "West Bengal",
+        "biography": "Swami Vireswarananda was a 20th-century Ramakrishna monk who served as president of the Ramakrishna Order. He expanded the mission’s educational and relief work, establishing schools and hospitals across India. His leadership during post-independence challenges ensured the organization’s growth. He emphasized that service to humanity is the living expression of Vedanta.",
+        "teachings": [
+            "Education is empowerment through dharma.",
+            "Relief work is worship in action.",
+            "Adapt methods, but never compromise principles."
+        ],
+        "works": [
+            "Administrative reports and letters"
+        ],
+        "quotes": [
+            "\"Feed the hungry; that is your puja.",
+            "\"Build institutions that outlive you.\""
+        ],
+        "image": "vireswarananda.jpg"
+    }
 ];
 
 // Export for use in script.js
