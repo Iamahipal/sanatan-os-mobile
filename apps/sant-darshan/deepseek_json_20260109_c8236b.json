@@ -1,0 +1,364 @@
+[
+    {
+        "id": "vyasa",
+        "name": "Maharishi Veda Vyasa",
+        "nameLocal": "ବେଦବ୍ୟାସ",
+        "nameHi": "महर्षि वेद व्यास",
+        "tradition": "hindu",
+        "sampradaya": "Vedic Rishi",
+        "period": "c. 3000 BCE or Dwapara Yuga (Traditional)",
+        "birthPlace": "Unknown, traditionally on an island in the Yamuna",
+        "biography": "Veda Vyasa is a central and revered sage in Hindu tradition. His name means 'the compiler.' He is traditionally credited with classifying the four Vedas, composing the 18 Puranas, and authoring the monumental epic, the Mahabharata, which includes the Bhagavad Gita. Born to sage Parashara and Satyavati, he is also considered the grandfather of the Pandavas and Kauravas. His work was an act of divine compassion to preserve sacred knowledge for humanity in the Kali Yuga. He is often regarded as a Chiranjivi (immortal being) and an avatar of Lord Vishnu. His disciples included luminaries like Paila, Vaisampayana, Jaimini, and his son Shuka.",
+        "teachings": [
+            "The supreme duty of a human is to pursue Dharma (righteousness), Artha (prosperity), Kama (desire), and Moksha (liberation).",
+            "The world is a transient field of action; ultimate reality lies beyond the dualities of pleasure and pain, success and failure.",
+            "Compilation and dissemination of sacred knowledge is the highest service to humanity and God."
+        ],
+        "works": [
+            "Classified the Vedas into Rig, Yajur, Sama, and Atharva",
+            "Authored the Mahabharata",
+            "Composed the 18 Major Puranas",
+            "Authored the Brahma Sutras"
+        ],
+        "quotes": [
+            "\"From joy all beings are born; by joy they are sustained; and to joy they return.\"",
+            "\"One should never abandon truth, charity, penance, purity, forgiveness, and self-control.\""
+        ],
+        "image": "vyasa.jpg"
+    },
+    {
+        "id": "nammalvar",
+        "name": "Nammalvar",
+        "nameLocal": "நம்மாழ்வார்",
+        "nameHi": "नम्मालवार",
+        "tradition": "hindu",
+        "sampradaya": "Alvar",
+        "period": "c. 9th century CE",
+        "birthPlace": "Alwarthirunagiri, Tamil Nadu",
+        "biography": "Nammalvar is considered the greatest of the twelve Alvar saints of the Sri Vaishnava tradition. He was born into a family of cultivators but, from infancy, exhibited profound spiritual detachment. Legend says he spent the first sixteen years of his life in silent meditation under a tamarind tree without eating, speaking, or moving. His divine hymns, composed in Tamil, express intense, soulful devotion (bhakti) to Lord Vishnu, particularly in his form as Krishna. His works form the philosophical foundation of the Sri Vaishnava school. He is revered as an incarnation of Vishvaksena, the commander of Lord Vishnu's celestial army.",
+        "teachings": [
+            "Surrender (Prapatti) to Lord Vishnu is the supreme path to liberation.",
+            "The soul's innate nature is to be an eternal servant of God.",
+            "Divine grace is accessible to all, irrespective of caste or social status, through loving devotion."
+        ],
+        "works": [
+            "Tiruvaymoli (The Sacred Utterance) – 1102 verses",
+            "Tiruviruttam, Tiruvaciriyam, Periya Tiruvantati"
+        ],
+        "quotes": [
+            "\"My mind is my temple, and my devotion is the offering.\"",
+            "\"I have no other refuge but the feet of the Lord.\""
+        ],
+        "image": "nammalvar.jpg"
+    },
+    {
+        "id": "sundarar",
+        "name": "Sundarar",
+        "nameLocal": "சுந்தரர்",
+        "nameHi": "सुन्दरर",
+        "tradition": "hindu",
+        "sampradaya": "Nayanar",
+        "period": "c. 8th century CE",
+        "birthPlace": "Thirunavalur, Tamil Nadu",
+        "biography": "Sundarar is one of the most prominent of the 63 Nayanars, the Tamil Shaiva poet-saints. He is unique in beginning his hymns with the address \"Oh, ignorant one!\" directed at Lord Shiva himself, reflecting a relationship of intimate friendship. According to legend, Shiva intervened in his wedding, making him his eternal servant. Sundarar's hymns are part of the Tirumurai, the canonical texts of Tamil Shaivism, specifically the seventh volume, known as Thevaram. His life exemplifies the path of passionate devotion, where the devotee sees God as a close companion, capable of playful argument and boundless love.",
+        "teachings": [
+            "The Lord is a personal friend and companion to the sincere devotee.",
+            "Bhakti transcends ritual and erases all past karmas.",
+            "Singing the glories and names of Shiva with love is the easiest path to liberation."
+        ],
+        "works": [
+            "Composed 100 songs in the Tirumurai (7th Volume)"
+        ],
+        "quotes": [
+            "\"Oh, you who dwell in Thiruvarur! You are my kin, my lord! What shall I say? I am your servant.\""
+        ],
+        "image": "sundarar.jpg"
+    },
+    {
+        "id": "dnyaneshwar",
+        "name": "Sant Dnyaneshwar (Jñāneśvar)",
+        "nameLocal": "ज्ञानेश्वर",
+        "nameHi": "ज्ञानेश्वर",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "1275–1296 CE",
+        "birthPlace": "Apegaon, Maharashtra (on the banks of Godavari)",
+        "biography": "Sant Dnyaneshwar was a 13th-century Marathi saint, poet, philosopher, and yogi of the Nath and Varkari traditions. He is most revered for authoring the 'Dnyaneshwari' (Bhavarthadipika), a profound commentary on the Bhagavad Gita in Marathi verse, which made the epic's wisdom accessible to the common people. He also composed the 'Amrutanubhav' on non-dualistic philosophy. Born to parents who had renounced the world and later returned to household life, he and his siblings faced social ostracization. Despite this, he attained profound spiritual realization. He took Sanjivan Samadhi (voluntary entombment) at Alandi at the young age of 21.",
+        "teachings": [
+            "The path of knowledge (Jnana) and loving devotion (Bhakti) are inseparable and lead to the same goal.",
+            "The human body is a temple; self-realization is the true worship.",
+            "The Ultimate Reality is non-dual, and the individual soul (Atman) is one with the universal soul (Brahman)."
+        ],
+        "works": [
+            "Dnyaneshwari (Commentary on the Bhagavad Gita)",
+            "Amrutanubhav (The Nectar of Experience)",
+            "Abhangas (Devotional poems)"
+        ],
+        "quotes": [
+            "\"When knowledge is matured by devotion, it bears the fruit of liberation.\"",
+            "\"God is not far away in heaven; He resides within our own heart.\""
+        ],
+        "image": "dnyaneshwar.jpg"
+    },
+    {
+        "id": "kabir",
+        "name": "Sant Kabir",
+        "nameLocal": "कबीर",
+        "nameHi": "कबीर",
+        "tradition": "hindu",
+        "sampradaya": "Sant Tradition (Nirguna)",
+        "period": "1398/1440–1448/1518 CE",
+        "birthPlace": "Varanasi, Uttar Pradesh",
+        "biography": "Kabir was a revolutionary mystic poet and saint whose verses have deeply influenced the Bhakti movement. He was likely raised by a Muslim weaver family but was profoundly inspired by the Hindu Bhakti saint Ramananda. Kabir criticized superficial ritualism of both Hinduism and Islam, advocating a direct, personal experience of a formless God (Nirguna Brahman). His teachings emphasized the oneness of God, the irrelevance of caste and creed, and the importance of inner purity. His couplets (Dohas) are noted for their piercing wit, spiritual depth, and use of everyday imagery. His legacy is preserved by the Kabir Panth and his verses are included in the Sikh Guru Granth Sahib.",
+        "teachings": [
+            "God is one, without form (Nirguna), and is called by many names like Rama, Allah, Hari, Khuda.",
+            "Reject external rituals, idol worship, and pilgrimages; seek God within the heart.",
+            "The path of love and devotion, coupled with a truthful and simple life, is supreme.",
+            "The guru is essential to show the way to divine realization."
+        ],
+        "works": [
+            "Bijak (primary collection in East India)",
+            "Songs and poems in Guru Granth Sahib",
+            "Kabir Granthavali"
+        ],
+        "quotes": [
+            "\"If by bathing, one could reach God, then the fish would be the first to arrive.\"",
+            "\"The guest is inside you, and also inside me; you know the sprout is hidden inside the seed. We are all struggling; none of us has gone far. Let your arrogance go, and look around inside.\""
+        ],
+        "image": "kabir.jpg"
+    },
+    {
+        "id": "purandara_dasa",
+        "name": "Purandara Dasa",
+        "nameLocal": "ಪುರಂದರ ದಾಸ",
+        "nameHi": "पुरंदर दास",
+        "tradition": "hindu",
+        "sampradaya": "Haridasa",
+        "period": "1484–1564 CE",
+        "birthPlace": "Kshemapura, near Pune, Maharashtra (or possibly Purandharagad)",
+        "biography": "Purandara Dasa is revered as the 'Pitamaha' (grandfather) of Carnatic music. Originally a wealthy diamond merchant named Srinivasa Nayaka, a transformative spiritual experience led him to renounce his wealth and become a wandering Haridasa (servant of Hari/Vishnu) devotee. He was a disciple of the saint Vyasatirtha. He composed thousands of devotional songs (Kirtanas or Devaranamas) in Kannada and Sanskrit, simplifying complex philosophical concepts for the masses. He systematized the teaching of Carnatic music by creating foundational exercises (Sarali Varishalu) still used today. His songs praise Lord Vishnu, especially in his form as Vittala of Pandharpur, and expound the philosophy of Dvaita (dualism).",
+        "teachings": [
+            "Devotion to Lord Vittala (Krishna) is the sole path to salvation.",
+            "Wealth and worldly attachments are obstacles to spiritual progress; true wealth is the name of God.",
+            "Music is a powerful vehicle for expressing devotion and attaining God."
+        ],
+        "works": [
+            "Composed over 475,000 songs (only a few thousand survive)",
+            "Key compositions: 'Jagadoddharana', 'Venkatachala Nilayam', 'Bhagyada Lakshmi Baramma'",
+            "Founded the basic framework for Carnatic music pedagogy"
+        ],
+        "quotes": [
+            "\"Do not be proud of wealth, people, youth, or beauty; all are transient and will vanish in a moment.\"",
+            "\"Hari's name alone is your true wealth.\""
+        ],
+        "image": "purandara_dasa.jpg"
+    },
+    {
+        "id": "guru_nanak",
+        "name": "Guru Nanak Dev",
+        "nameLocal": "ਗੁਰੂ ਨਾਨਕ ਦੇਵ",
+        "nameHi": "गुरु नानक देव",
+        "tradition": "sikh",
+        "sampradaya": "Sikh Guru",
+        "period": "1469–1539 CE",
+        "birthPlace": "Rai Bhoi Ki Talwandi (now Nankana Sahib, Pakistan)",
+        "biography": "Guru Nanak Dev is the founder of Sikhism and the first of the ten Sikh Gurus. Born into a Hindu family, he showed a spiritual and inquisitive nature from childhood. After a profound mystical experience at age 30, he declared, \"There is no Hindu, no Muslim,\" and embarked on extensive journeys (Udasis) across India, Tibet, Arabia, and Persia, engaging in dialogues with religious leaders. He emphasized the oneness of a formless God (Ik Onkar), the equality of all humans, honest labor (Kirat Karo), sharing with others (Vand Chhako), and meditating on God's name (Naam Japo). He established the town of Kartarpur as a spiritual community and appointed his disciple Lehna as his successor, naming him Guru Angad Dev.",
+        "teachings": [
+            "Ik Onkar: There is one supreme, formless, timeless God.",
+            "Reject caste, idolatry, hypocrisy, and gender inequality.",
+            "Live a truthful, productive life as a householder while remembering God at all times.",
+            "The three pillars of Sikhism: Naam Japna (remember God), Kirat Karni (honest work), Vand Chakna (share with others)."
+        ],
+        "works": [
+            "Composed 974 hymns included in the Guru Granth Sahib",
+            "Founded Sikhism and established the first Sikh community"
+        ],
+        "quotes": [
+            "\"He who has no faith in himself can never have faith in God.\"",
+            "\"Even Kings and emperors with heaps of wealth and vast dominion cannot compare with an ant filled with the love of God.\""
+        ],
+        "image": "guru_nanak.jpg"
+    },
+    {
+        "id": "mahavira",
+        "name": "Lord Mahavira",
+        "nameLocal": "મહાવીર",
+        "nameHi": "भगवान महावीर",
+        "tradition": "jain",
+        "sampradaya": "Tirthankara",
+        "period": "599–527 BCE (Traditional dating)",
+        "birthPlace": "Kundagrama (near Vaishali, Bihar)",
+        "biography": "Mahavira is the 24th and last Tirthankara (ford-maker) of the present cosmic age in Jainism. Born as Prince Vardhamana to King Siddhartha and Queen Trishala, he renounced worldly life at age 30 in pursuit of spiritual awakening. For the next 12.5 years, he practiced intense meditation and severe austerities, conquering all attachments and aversions. He attained Kevala Jnana (omniscience) and spent the next 30 years teaching the eternal principles of Jain philosophy. He organized his followers into a four-fold order of monks (sadhu), nuns (sadhvi), and lay followers (shravak and shravika). He emphasized ahimsa (non-violence) as the supreme virtue and preached the path to liberation from the cycle of rebirth.",
+        "teachings": [
+            "Ahimsa Paramo Dharma: Non-violence in thought, word, and deed is the highest duty.",
+            "Anekantavada: Reality is complex and has multiple aspects; avoid absolutism.",
+            "Syadvada: Theory of conditioned predication ('maybe' or 'from a perspective').",
+            "The three jewels (Ratnatraya): Right Faith, Right Knowledge, Right Conduct.",
+            "Asceticism and detachment from karma are essential for liberation."
+        ],
+        "works": [
+            "Revived and reorganized Jain teachings and monastic order"
+        ],
+        "quotes": [
+            "\"Have compassion towards all living beings. Hatred leads to destruction.\"",
+            "\"A man is seated on top of a tree in the midst of a burning forest. He sees all living beings perish. But he doesn't realize that the same fate is soon to overtake him also. That man is fool.\""
+        ],
+        "image": "mahavira.jpg"
+    },
+    {
+        "id": "nagarjuna",
+        "name": "Acharya Nagarjuna",
+        "nameLocal": "नागार्जुन",
+        "nameHi": "नागार्जुन",
+        "tradition": "buddhist",
+        "sampradaya": "Madhyamaka",
+        "period": "c. 150–250 CE",
+        "birthPlace": "South India (possibly Andhra Pradesh or Karnataka)",
+        "biography": "Nagarjuna is one of the most important figures in Mahayana Buddhism, revered as a philosopher, monk, and alchemist. He is traditionally regarded as the founder of the Madhyamaka (Middle Way) school of philosophy. Nagarjuna systematized the doctrine of Shunyata (emptiness) based on the Prajnaparamita (Perfection of Wisdom) sutras. His seminal work, the Mūlamadhyamakakārikā, deconstructs all conceptual views to reveal the true nature of reality as empty of inherent, independent existence (svabhava). He demonstrated that phenomena arise dependently (pratityasamutpada) and that this dependent origination is itself emptiness. He is also credited with advancing teachings on Buddha-nature (Tathagatagarbha).",
+        "teachings": [
+            "Shunyata: All phenomena are empty of inherent, independent existence (svabhava).",
+            "Pratityasamutpada: Dependent origination is the middle way between existence and non-existence.",
+            "The ultimate truth (paramarthasatya) transcends all conceptual elaborations and dichotomies.",
+            "Compassion (karuna) and wisdom (prajna) are inseparable on the bodhisattva path."
+        ],
+        "works": [
+            "Mūlamadhyamakakārikā (Fundamental Verses on the Middle Way)",
+            "Vigrahavyavartani (The End of Disputes)",
+            "Ratnavali (Precious Garland)",
+            "Suhrllekha (Letter to a Friend)"
+        ],
+        "quotes": [
+            "\"Whatever is dependently co-arisen, that is explained to be emptiness.\"",
+            "\"There is no destruction and no production, no annihilated and no eternal, no singularity and no plurality, no coming and no going.\""
+        ],
+        "image": "nagarjuna.jpg"
+    },
+    {
+        "id": "mirabai",
+        "name": "Mirabai (Meera)",
+        "nameLocal": "मीराबाई",
+        "nameHi": "मीराबाई",
+        "tradition": "hindu",
+        "sampradaya": "Bhakti Movement (Rajput)",
+        "period": "1498–1547 CE (approx.)",
+        "birthPlace": "Merta, Rajasthan",
+        "biography": "Mirabai is the most famous woman saint of the Bhakti movement, celebrated for her ecstatic devotion to Lord Krishna as her divine lover and husband. A Rajput princess married into the royal family of Mewar, she faced persecution for her unwavering, public devotion, which defied royal norms. She considered herself married only to Krishna (Giridhara Gopala). Her life is a testament to defiant love for God, expressed through soulful bhajans (devotional songs) composed in Braj Bhasha. Tradition holds that she eventually left the palace, joined a community of saints, and merged with the deity in Dwarka. Her songs, filled with longing (viraha) and surrender, remain immensely popular across India.",
+        "teachings": [
+            "Unconditional, loving devotion (Bhakti) to Krishna is the sole purpose of life.",
+            "Worldly status, family ties, and social conventions are meaningless compared to divine love.",
+            "God is accessible to the lowly and the outcast who call upon him with a pure heart.",
+            "The path of the devotee is one of joyful surrender and unwavering faith amidst trials."
+        ],
+        "works": [
+            "Thousands of devotional poems (Padas or Bhajans) like \"Payoji Maine Ram Ratan Dhan Paayo,\" \"Mere To Giridhar Gopal\""
+        ],
+        "quotes": [
+            "\"I have felt the sway of the Lord's grace; my mind is entangled in the beauty of the lotus-eyed one.\"",
+            "\"O my mind, worship the lotus feet of the Lord Hari! All else is but a bundle of sorrows.\""
+        ],
+        "image": "mirabai.jpg"
+    },
+    {
+        "id": "srimanta_sankardev",
+        "name": "Srimanta Sankardev",
+        "nameLocal": "শ্রীমন্ত শংকৰদেৱ",
+        "nameHi": "श्रीमंत शंकरदेव",
+        "tradition": "hindu",
+        "sampradaya": "Ekasarana Dharma (Assamese Vaishnavism)",
+        "period": "1449–1568 CE",
+        "birthPlace": "Bordowa, Nagaon, Assam",
+        "biography": "Srimanta Sankardev was a 15th-16th century Assamese polymath: a saint-scholar, poet, playwright, social-religious reformer, and cultural icon. He founded the Ekasarana Dharma (Religion of Pure Devotion), a monotheistic, Vaishnavite tradition centered on the worship of Krishna. He rejected caste distinctions, idol worship, and complex rituals, emphasizing congregational worship through prayer (naam), listening to scriptures (kirtan), and community feasts (prasada). He created new literary and performing art forms like Borgeet (devotional songs), Ankia Naat (one-act plays), and Satriya dance to propagate his teachings. His movement unified the diverse communities of Assam and left an indelible mark on its culture.",
+        "teachings": [
+            "Supreme devotion to the one God, Vishnu/Krishna, as the sole means to liberation.",
+            "Complete surrender (sharanagati) to God, with no other deity or practice required.",
+            "Equality before God; rejection of caste barriers and elaborate rituals.",
+            "Use of local language (Assamese) and art forms for spiritual education."
+        ],
+        "works": [
+            "Kirtana Ghosha (collection of poetic prayers and narratives)",
+            "Gunamala, Bhakti Ratnavali",
+            "Composed Ankia Naat (plays like 'Chihna Yatra', 'Kaliya Daman')",
+            "Created Borgeet (devotional songs)"
+        ],
+        "quotes": [
+            "\"Do not discriminate between high and low; see all beings as equal, for the same Lord resides in all hearts.\"",
+            "\"The name of Hari is the boat to cross the ocean of worldly existence.\""
+        ],
+        "image": "srimanta_sankardev.jpg"
+    },
+    {
+        "id": "ramakrishna",
+        "name": "Sri Ramakrishna Paramahamsa",
+        "nameLocal": "রামকৃষ্ণ পরমহংস",
+        "nameHi": "रामकृष्ण परमहंस",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint",
+        "period": "1836–1886 CE",
+        "birthPlace": "Kamarpukur, Bengal Presidency",
+        "biography": "Sri Ramakrishna was a 19th-century mystic and saint who is regarded as a prophet of modern India. A priest at the Dakshineswar Kali Temple, he embarked on an intense spiritual quest, practicing not only the paths of Hinduism (Advaita Vedanta, Tantra, and intense Bhakti) but also of Islam and Christianity, ultimately declaring that all paths lead to the same God. His life was a testament to God-realization. He often experienced profound states of samadhi (spiritual ecstasy). His simple parables and teachings were recorded by his chief disciple, Swami Vivekananda, who later founded the Ramakrishna Mission to propagate his message of religious harmony, service to humanity as worship, and the divinity of the soul.",
+        "teachings": [
+            "Yato mat, tato path: \"As many faiths, so many paths.\" All religions lead to the same ultimate reality.",
+            "The goal of human life is to realize God, who can be realized through intense longing.",
+            "Serve Jiva as Shiva: See God in every human being; service to humanity is service to God.",
+            "God can be realized with form (Saguna) and without form (Nirguna)."
+        ],
+        "works": [
+            "His conversations were compiled as 'The Gospel of Sri Ramakrishna' by 'M' (Mahendranath Gupta)"
+        ],
+        "quotes": [
+            "\"He is born in vain who, having attained the human birth, so difficult to get, does not attempt to realize God in this very life.\"",
+            "\"If you must be mad, be mad not for wine, woman, or wealth, but for God.\""
+        ],
+        "image": "ramakrishna.jpg"
+    },
+    {
+        "id": "lalleshwari",
+        "name": "Lalleshwari (Lal Ded)",
+        "nameLocal": "लल्लेश्वरी / लल् देद",
+        "nameHi": "लल्लेश्वरी",
+        "tradition": "hindu",
+        "sampradaya": "Kashmiri Shaivism",
+        "period": "1320–1392 CE (approx.)",
+        "birthPlace": "Pandrethan, near Srinagar, Kashmir",
+        "biography": "Lalleshwari, popularly known as Lal Ded (Grandmother Lal), is a foundational figure in Kashmiri spirituality, revered by both Hindus and Muslims. She was a mystic poetess of the Kashmiri Shaivism tradition. Married into a dysfunctional family, she endured great hardship before renouncing worldly life to become a wandering ascetic. Her teachings are encapsulated in her mystical verses called 'Lal Vakhs' (Lal's Sayings), composed in the Kashmiri language. Her poetry uses everyday imagery to express profound non-dual (Advaita) philosophy, the experience of inner awakening, and criticism of ritualistic dogma. She is considered a spiritual ancestor to later saints like Nund Rishi (Sheikh Noor-ud-din Wali).",
+        "teachings": [
+            "The ultimate reality (Shiva) is within oneself; self-realization is the true pilgrimage.",
+            "Go beyond external rituals and scriptures to find the inner truth.",
+            "The body is the temple, and the mind is the priest; worship the inner God.",
+            "Embrace a simple, truthful life free from hypocrisy and ego."
+        ],
+        "works": [
+            "Lal Vakhs (about 285 verses are attributed to her)"
+        ],
+        "quotes": [
+            "\"I, Lalla, entered the gate of the mind's garden and saw Shiva united with Shakti. I was immersed in the lake of bliss.\"",
+            "\"What is the use of chanting mantras and counting beads? What is the use of austerities and rituals? Realize the Self within.\""
+        ],
+        "image": "lalleshwari.jpg"
+    },
+    {
+        "id": "karaikkal_ammaiyar",
+        "name": "Karaikkal Ammaiyar",
+        "nameLocal": "காரைக்கால் அம்மையார்",
+        "nameHi": "कारैक्काल अम्मैयार",
+        "tradition": "hindu",
+        "sampradaya": "Nayanar",
+        "period": "c. 6th century CE",
+        "birthPlace": "Karaikkal, Tamil Nadu",
+        "biography": "Karaikkal Ammaiyar is one of the three women among the 63 Nayanars and is arguably the earliest of the Tamil Shaiva saint-poets. According to legend, she was a devoted wife whose husband abandoned her in fear after witnessing her miraculous powers to produce mangoes through her devotion to Shiva. She then prayed to Shiva to take away her physical beauty, which she saw as the cause of her worldly attachment. Granted a ghoul-like form, she became a fervent devotee, singing and dancing at Shiva's abode, Mount Kailash, and later at Tiruvalankadu. Her poems are among the first compositions of the Tirumurai and are characterized by fierce devotion and vivid imagery of Shiva's cremation grounds.",
+        "teachings": [
+            "Supreme, unwavering devotion to Shiva transcends all worldly relationships and forms.",
+            "The body and beauty are transient; true beauty is the love for the eternal Lord.",
+            "Shiva is the sole refuge, master, and ultimate goal."
+        ],
+        "works": [
+            "Arputat Tiruvantati (150 verses)",
+            "Tiruvirattai Manimālai",
+            "Mutta Tiruppatikam"
+        ],
+        "quotes": [
+            "\"You who have the crescent moon in your red matted locks! My Lord who dwells in Tiruvalankadu! I am your servant, a woman from Karaikkal.\""
+        ],
+        "image": "karaikkal_ammaiyar.jpg"
+    }
+]
