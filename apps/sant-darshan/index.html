@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
-        rel="stylesheet">
+    <!-- Font Awesome for reliable icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts for text -->
     <link
         href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wdth,wght,ROND@8..144,75..125,100..900,0..100&family=Tiro+Devanagari+Sanskrit&display=swap"
         rel="stylesheet">
@@ -65,24 +65,24 @@
         <!-- Header -->
         <header class="app-header">
             <button id="back-btn" class="header-btn back-btn" aria-label="Back" style="visibility: hidden;">
-                <span class="material-symbols-outlined">arrow_back</span>
+                <i class="fa-solid fa-arrow-left"></i>
             </button>
             <div class="header-title">
                 <h1 id="page-title">संत दर्शन</h1>
                 <span id="page-subtitle" class="header-subtitle">Bharat Sant Darshan</span>
             </div>
             <button id="search-btn" class="header-btn" aria-label="Search">
-                <span class="material-symbols-outlined">search</span>
+                <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </header>
 
         <!-- Search Overlay -->
         <div id="search-overlay" class="search-overlay hidden">
             <div class="search-container">
-                <span class="material-symbols-outlined search-icon">search</span>
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 <input type="text" id="search-input" placeholder="Search saints..." autocomplete="off">
                 <button id="close-search" class="close-search-btn">
-                    <span class="material-symbols-outlined">close</span>
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             <div id="search-results" class="search-results"></div>
@@ -144,32 +144,32 @@
                 <!-- Action Buttons -->
                 <div class="home-actions">
                     <button id="open-quiz-btn" class="action-card quiz-card">
-                        <span class="material-symbols-outlined">quiz</span>
+                        <i class="fa-solid fa-brain"></i>
                         <span>ज्ञान परीक्षा</span>
                         <small>Test Your Knowledge</small>
                     </button>
                     <button id="open-achievements-btn" class="action-card achievements-card">
-                        <span class="material-symbols-outlined">emoji_events</span>
+                        <i class="fa-solid fa-trophy"></i>
                         <span>उपलब्धियाँ</span>
                         <small id="achievements-preview">0 Unlocked</small>
                     </button>
                     <button id="open-paths-btn" class="action-card paths-card">
-                        <span class="material-symbols-outlined">route</span>
+                        <i class="fa-solid fa-road"></i>
                         <span>मार्ग</span>
                         <small>Learning Paths</small>
                     </button>
                     <button id="open-journal-btn" class="action-card journal-card">
-                        <span class="material-symbols-outlined">auto_stories</span>
+                        <i class="fa-solid fa-book-open"></i>
                         <span>दैनिक चिंतन</span>
                         <small>Daily Journal</small>
                     </button>
                     <button id="open-pilgrimage-btn" class="action-card pilgrimage-card">
-                        <span class="material-symbols-outlined">temple_hindu</span>
+                        <i class="fa-solid fa-map-location-dot"></i>
                         <span>तीर्थ</span>
                         <small>Sacred Places</small>
                     </button>
                     <button id="open-jayanti-btn" class="action-card jayanti-card">
-                        <span class="material-symbols-outlined">event</span>
+                        <i class="fa-solid fa-calendar-days"></i>
                         <span>जयंती</span>
                         <small>Jayanti Calendar</small>
                     </button>
@@ -209,8 +209,7 @@
             <div class="quiz-header">
                 <h2>📝 ज्ञान परीक्षा</h2>
                 <span class="quiz-progress">Question <span id="quiz-current">1</span>/5</span>
-                <button class="close-modal-btn" id="close-quiz"><span
-                        class="material-symbols-outlined">close</span></button>
+                <button class="close-modal-btn" id="close-quiz"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="quiz-body">
                 <div class="quiz-question" id="quiz-question"></div>
@@ -241,8 +240,7 @@
                 <h2>🏆 उपलब्धियाँ</h2>
                 <span class="achievements-count"><span id="unlocked-count">0</span>/<span
                         id="total-badges">14</span></span>
-                <button class="close-modal-btn" id="close-achievements"><span
-                        class="material-symbols-outlined">close</span></button>
+                <button class="close-modal-btn" id="close-achievements"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="achievements-body" id="achievements-list">
                 <!-- Achievements rendered by JS -->
@@ -266,8 +264,7 @@
         <div class="paths-modal-content">
             <div class="paths-header">
                 <h2>🛤️ आध्यात्मिक मार्ग</h2>
-                <button class="close-modal-btn" id="close-paths"><span
-                        class="material-symbols-outlined">close</span></button>
+                <button class="close-modal-btn" id="close-paths"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="paths-body" id="paths-list">
                 <!-- Paths rendered by JS -->
@@ -281,8 +278,7 @@
             <div class="journal-header">
                 <h2>📔 दैनिक चिंतन</h2>
                 <span class="journal-date" id="journal-date"></span>
-                <button class="close-modal-btn" id="close-journal"><span
-                        class="material-symbols-outlined">close</span></button>
+                <button class="close-modal-btn" id="close-journal"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="journal-body">
                 <div class="journal-prompt-card">
@@ -309,8 +305,7 @@
         <div class="share-modal-content">
             <div class="share-header">
                 <h2>🎨 Share Quote</h2>
-                <button class="close-modal-btn" id="close-share"><span
-                        class="material-symbols-outlined">close</span></button>
+                <button class="close-modal-btn" id="close-share"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="share-body">
                 <div class="card-preview-container">
@@ -322,10 +317,9 @@
                     <button class="style-btn" data-style="dark">Dark</button>
                 </div>
                 <div class="share-actions">
-                    <button class="btn-secondary" id="download-card"><span
-                            class="material-symbols-outlined">download</span>
+                    <button class="btn-secondary" id="download-card"><i class="fa-solid fa-download"></i>
                         Download</button>
-                    <button class="btn-primary" id="share-card"><span class="material-symbols-outlined">share</span>
+                    <button class="btn-primary" id="share-card"><i class="fa-solid fa-share-nodes"></i>
                         Share</button>
                 </div>
             </div>
@@ -336,8 +330,7 @@
         <div class="pilgrimage-modal-content">
             <div class="pilgrimage-header">
                 <h2>🗺️ तीर्थ स्थल</h2>
-                <button class="close-modal-btn" id="close-pilgrimage"><span
-                        class="material-symbols-outlined">close</span></button>
+                <button class="close-modal-btn" id="close-pilgrimage"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="pilgrimage-body" id="pilgrimage-list">
                 <!-- Places rendered by JS -->
@@ -350,8 +343,7 @@
         <div class="jayanti-modal-content">
             <div class="jayanti-header">
                 <h2>🗓️ जयंती कैलेंडर</h2>
-                <button class="close-modal-btn" id="close-jayanti"><span
-                        class="material-symbols-outlined">close</span></button>
+                <button class="close-modal-btn" id="close-jayanti"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="jayanti-upcoming">
                 <h3 id="jayanti-month-title">Upcoming Jayantis</h3>
