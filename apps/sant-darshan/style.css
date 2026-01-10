@@ -321,6 +321,62 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
+/* Header Buttons - Back and Search */
+.header-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s var(--md-sys-motion-easing-standard);
+    box-shadow: var(--shadow-xs);
+    color: var(--text-primary);
+}
+
+.header-btn:hover {
+    background: var(--md-sys-color-surface-container);
+    box-shadow: var(--shadow-sm);
+    transform: scale(1.05);
+}
+
+.header-btn:active {
+    transform: scale(0.95);
+}
+
+.header-btn:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+}
+
+.header-btn i {
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+/* Header Title */
+.header-title {
+    flex: 1;
+    text-align: center;
+}
+
+.header-title h1 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.header-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
 /* Progress Banner - Header Gap Fix */
 #progress-banner,
 .progress-banner {
