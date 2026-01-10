@@ -1,0 +1,157 @@
+/**
+ * Sant Darshan App - Pilgrimage & Sacred Places Styles
+ */
+
+/* ===== REGION FILTER ===== */
+
+.region-filter {
+    margin-bottom: var(--space-4);
+}
+
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.filter-chip {
+    padding: var(--space-2) var(--space-3);
+    background: var(--surface-container);
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-standard);
+    white-space: nowrap;
+}
+
+.filter-chip:hover {
+    background: var(--surface-variant);
+}
+
+.filter-chip.active {
+    background: var(--primary-container);
+    border-color: var(--primary-color);
+    color: var(--primary-dark);
+    font-weight: var(--font-medium);
+}
+
+/* ===== PLACES COUNT ===== */
+
+.places-count {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-4);
+}
+
+.places-count i {
+    color: var(--primary-color);
+}
+
+/* ===== PLACES LIST ===== */
+
+.places-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+/* ===== PLACE CARD ===== */
+
+.place-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-container-low);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.place-card:hover {
+    background: var(--surface-container);
+}
+
+.place-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-container);
+    border-radius: var(--radius-lg);
+    color: var(--primary-color);
+    font-size: var(--text-lg);
+    flex-shrink: 0;
+}
+
+.place-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.place-name {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.place-location {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--primary-color);
+    margin-bottom: var(--space-1);
+}
+
+.place-location i {
+    font-size: 10px;
+}
+
+.place-description {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-2);
+}
+
+.place-saints {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+}
+
+.saint-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    background: var(--surface-variant);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.saint-tag:hover {
+    background: var(--primary-container);
+    color: var(--primary-dark);
+}
+
+.saint-tag i {
+    font-size: 10px;
+    color: var(--primary-color);
+}
+
+.place-arrow {
+    color: var(--text-tertiary);
+    padding: var(--space-2);
+}

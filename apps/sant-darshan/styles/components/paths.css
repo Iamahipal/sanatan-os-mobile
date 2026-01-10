@@ -1,0 +1,331 @@
+/**
+ * Sant Darshan App - Learning Paths Styles
+ */
+
+/* ===== PATHS OVERVIEW ===== */
+
+.paths-overview {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--primary-container);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-5);
+}
+
+.overview-stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex: 1;
+}
+
+.overview-stat .stat-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    color: var(--primary-color);
+    font-size: var(--text-lg);
+}
+
+.overview-stat .stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.overview-stat .stat-value {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--primary-dark);
+}
+
+.overview-stat .stat-label {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+}
+
+/* ===== PATHS SECTIONS ===== */
+
+.active-path-section,
+.paths-section {
+    margin-bottom: var(--space-5);
+}
+
+/* ===== PATH CARD ===== */
+
+.paths-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.path-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--surface-container-low);
+    border-radius: var(--radius-xl);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.path-card:hover {
+    background: var(--surface-container);
+}
+
+.path-card.active {
+    border-color: var(--primary-color);
+    background: var(--primary-container);
+}
+
+.path-card.completed {
+    border-color: var(--success-color);
+}
+
+.path-icon {
+    font-size: var(--text-2xl);
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-variant);
+    border-radius: var(--radius-xl);
+    flex-shrink: 0;
+}
+
+.path-card.active .path-icon {
+    background: var(--surface);
+}
+
+.path-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.path-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.path-description {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-2);
+}
+
+.path-meta {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+}
+
+.path-steps,
+.path-duration {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+}
+
+.path-steps i,
+.path-duration i {
+    font-size: 10px;
+}
+
+.path-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+}
+
+.path-progress .progress-bar {
+    flex: 1;
+    height: 6px;
+}
+
+.path-progress .progress-text {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+}
+
+.path-status {
+    color: var(--text-tertiary);
+}
+
+.path-card.in-progress .path-status {
+    color: var(--primary-color);
+}
+
+.path-card.completed .path-status {
+    color: var(--success-color);
+}
+
+/* ===== PATH DETAIL ===== */
+
+.path-header {
+    text-align: center;
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--divider);
+    margin-bottom: var(--space-5);
+}
+
+.path-header-icon {
+    font-size: 48px;
+    margin-bottom: var(--space-3);
+}
+
+.path-header-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.path-header-title-hi {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    font-family: var(--font-hindi);
+    margin-bottom: var(--space-3);
+}
+
+.path-header-description {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.path-detail-progress {
+    margin-bottom: var(--space-5);
+}
+
+.path-detail-progress .progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+}
+
+/* ===== PATH STEPS ===== */
+
+.path-steps-section {
+    margin-bottom: var(--space-5);
+}
+
+.steps-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.step-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-container-low);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--divider);
+}
+
+.step-card.current {
+    border-color: var(--primary-color);
+    background: var(--primary-container);
+}
+
+.step-card.completed {
+    border-color: var(--success-color);
+}
+
+.step-card.locked {
+    opacity: 0.6;
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-variant);
+    border-radius: var(--radius-full);
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+}
+
+.step-card.current .step-number {
+    background: var(--primary-color);
+    color: white;
+}
+
+.step-card.completed .step-number {
+    background: var(--success-color);
+    color: white;
+}
+
+.step-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.step-title {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.step-description {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+}
+
+.step-saint-link {
+    margin-top: var(--space-2);
+    padding: var(--space-1) var(--space-2);
+}
+
+/* ===== PATH ACTIONS ===== */
+
+.path-actions {
+    margin-top: var(--space-5);
+}
+
+.path-complete-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: var(--success-container);
+    color: var(--success-color);
+    border-radius: var(--radius-xl);
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    margin-top: var(--space-5);
+}
+
+.path-complete-banner i {
+    font-size: var(--text-xl);
+}

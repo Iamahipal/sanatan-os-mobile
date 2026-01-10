@@ -23,6 +23,15 @@ import HomeScreen from './screens/home.js';
 import SaintsListScreen from './screens/saints-list.js';
 import SaintDetailScreen from './screens/saint-detail.js';
 
+// Modals
+import QuizModal from './modals/quiz.js';
+import AchievementsModal from './modals/achievements.js';
+import JournalModal from './modals/journal.js';
+import PathsModal from './modals/paths.js';
+import ShareCardModal from './modals/share-card.js';
+import PilgrimageModal from './modals/pilgrimage.js';
+import JayantiModal from './modals/jayanti.js';
+
 // Data
 import { loadData } from './data/index.js';
 import { SCREENS, APP_NAME, APP_VERSION } from './data/constants.js';
@@ -109,9 +118,19 @@ class SantDarshanApp {
      * Register screen renderers with router
      */
     registerScreens() {
+        // Screens
         router.registerScreen(SCREENS.HOME, HomeScreen);
         router.registerScreen(SCREENS.SAINTS_LIST, SaintsListScreen);
         router.registerScreen(SCREENS.SAINT_DETAIL, SaintDetailScreen);
+
+        // Modals
+        router.registerModal('quiz', QuizModal);
+        router.registerModal('achievements', AchievementsModal);
+        router.registerModal('journal', JournalModal);
+        router.registerModal('paths', PathsModal);
+        router.registerModal('share-card', ShareCardModal);
+        router.registerModal('pilgrimage', PilgrimageModal);
+        router.registerModal('jayanti', JayantiModal);
     }
 
     /**
