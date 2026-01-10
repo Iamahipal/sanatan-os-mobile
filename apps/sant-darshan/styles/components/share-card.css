@@ -1,0 +1,271 @@
+/**
+ * Sant Darshan App - Share Card Styles
+ */
+
+/* ===== STYLE SELECTOR ===== */
+
+.style-selector {
+    margin-bottom: var(--space-5);
+}
+
+.style-options {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.style-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: var(--space-2) var(--space-3);
+    background: var(--surface-container);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.style-btn:hover {
+    background: var(--surface-variant);
+}
+
+.style-btn.selected {
+    border-color: var(--primary-color);
+    background: var(--primary-container);
+    color: var(--primary-dark);
+}
+
+/* ===== CARD PREVIEW ===== */
+
+.card-preview-container {
+    padding: var(--space-4);
+    background: var(--surface-variant);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-5);
+}
+
+.share-card-preview {
+    display: flex;
+    justify-content: center;
+}
+
+/* ===== SHARE CARD BASE ===== */
+
+.share-card {
+    width: 280px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+/* ===== CLASSIC STYLE ===== */
+
+.share-card-classic {
+    background: var(--surface);
+}
+
+.share-card-classic .share-card-header {
+    padding: var(--space-5);
+    text-align: center;
+    color: white;
+}
+
+.share-card-classic .share-card-avatar {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--space-3);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+}
+
+.share-card-classic .share-card-name {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-1);
+}
+
+.share-card-classic .share-card-name-hi {
+    font-size: var(--text-sm);
+    opacity: 0.9;
+    font-family: var(--font-hindi);
+}
+
+.share-card-classic .share-card-body {
+    padding: var(--space-4);
+}
+
+.share-card-classic .share-card-quote {
+    font-size: var(--text-sm);
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-3);
+}
+
+.share-card-classic .share-card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-xs);
+}
+
+.share-card-classic .share-card-tradition {
+    color: var(--primary-color);
+    font-weight: var(--font-medium);
+}
+
+.share-card-classic .share-card-period {
+    color: var(--text-tertiary);
+}
+
+.share-card-classic .share-card-footer {
+    padding: var(--space-2) var(--space-4);
+    background: var(--surface-variant);
+    text-align: center;
+}
+
+.share-card-classic .share-card-branding {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    font-weight: var(--font-medium);
+}
+
+/* ===== MINIMAL STYLE ===== */
+
+.share-card-minimal {
+    background: var(--surface);
+    padding: var(--space-6);
+    text-align: center;
+}
+
+.share-card-minimal .share-card-name {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.share-card-minimal .share-card-name-hi {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    font-family: var(--font-hindi);
+    margin-bottom: var(--space-4);
+}
+
+.share-card-minimal .share-card-quote {
+    font-size: var(--text-base);
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+}
+
+.share-card-minimal .share-card-branding {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+}
+
+/* ===== QUOTE STYLE ===== */
+
+.share-card-quote-style {
+    background: var(--surface);
+    padding: var(--space-6);
+    text-align: center;
+}
+
+.share-card-quote-style .share-card-quote-icon {
+    font-size: var(--text-3xl);
+    color: var(--primary-light);
+    margin-bottom: var(--space-3);
+}
+
+.share-card-quote-style .share-card-quote-large {
+    font-size: var(--text-lg);
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+}
+
+.share-card-quote-style .share-card-attribution {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.share-card-quote-style .share-card-name {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--primary-color);
+}
+
+.share-card-quote-style .share-card-name-hi {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    font-family: var(--font-hindi);
+}
+
+/* ===== GRADIENT STYLE ===== */
+
+.share-card-gradient {
+    padding: var(--space-6);
+    text-align: center;
+    color: white;
+}
+
+.share-card-gradient .share-card-avatar-large {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-4);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-2xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+}
+
+.share-card-gradient .share-card-name-large {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-1);
+}
+
+.share-card-gradient .share-card-name-hi-large {
+    font-size: var(--text-base);
+    opacity: 0.9;
+    font-family: var(--font-hindi);
+    margin-bottom: var(--space-4);
+}
+
+.share-card-gradient .share-card-quote {
+    font-size: var(--text-sm);
+    font-style: italic;
+    opacity: 0.9;
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+}
+
+.share-card-gradient .share-card-branding-light {
+    font-size: var(--text-xs);
+    opacity: 0.7;
+    font-weight: var(--font-medium);
+}
+
+/* ===== SHARE OPTIONS ===== */
+
+.share-options {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.share-options .share-btn {
+    flex: 1;
+}

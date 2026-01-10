@@ -1,0 +1,199 @@
+/**
+ * Sant Darshan App - Achievements Styles
+ */
+
+/* ===== ACHIEVEMENTS SUMMARY ===== */
+
+.achievements-summary {
+    display: flex;
+    justify-content: space-around;
+    padding: var(--space-4);
+    background: var(--primary-container);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-4);
+}
+
+.achievements-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.achievements-stat .stat-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--primary-dark);
+}
+
+.achievements-stat .stat-label {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ===== ACHIEVEMENTS PROGRESS ===== */
+
+.achievements-progress {
+    margin-bottom: var(--space-6);
+}
+
+.achievements-progress .progress-text {
+    display: block;
+    text-align: right;
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    margin-top: var(--space-1);
+}
+
+/* ===== ACHIEVEMENTS SECTION ===== */
+
+.achievements-section {
+    margin-bottom: var(--space-6);
+}
+
+.achievements-section:last-child {
+    margin-bottom: 0;
+}
+
+.achievements-section .section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+}
+
+.achievements-section .section-title i {
+    color: var(--primary-color);
+}
+
+/* ===== ACHIEVEMENTS LIST ===== */
+
+.achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+/* ===== ACHIEVEMENT CARD ===== */
+
+.achievement-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-container-low);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--divider);
+}
+
+.achievement-card.unlocked {
+    background: var(--surface-container);
+    border-color: var(--primary-light);
+}
+
+.achievement-card.locked {
+    opacity: 0.7;
+}
+
+.achievement-icon {
+    font-size: var(--text-2xl);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-variant);
+    border-radius: var(--radius-lg);
+    flex-shrink: 0;
+}
+
+.achievement-card.unlocked .achievement-icon {
+    background: var(--primary-container);
+}
+
+.achievement-icon.locked {
+    filter: grayscale(1);
+    opacity: 0.5;
+}
+
+.achievement-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.achievement-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.achievement-description {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-2);
+}
+
+.achievement-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.achievement-progress .progress-bar {
+    flex: 1;
+    height: 6px;
+}
+
+.achievement-progress .progress-text {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    min-width: 32px;
+    text-align: right;
+}
+
+.achievement-date {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-xs);
+    color: var(--success-color);
+}
+
+.achievement-date i {
+    font-size: 10px;
+}
+
+/* ===== ACHIEVEMENT POINTS ===== */
+
+.achievement-points {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-2);
+    background: var(--surface-variant);
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+}
+
+.achievement-card.unlocked .achievement-points {
+    background: var(--primary-container);
+}
+
+.points-value {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--primary-color);
+}
+
+.points-label {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+}
