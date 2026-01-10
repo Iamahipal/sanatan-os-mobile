@@ -1,0 +1,56 @@
+{
+    "name": "Sant Darshan - भारत संत दर्शन",
+    "short_name": "Sant Darshan",
+    "description": "Explore the spiritual wisdom of India's greatest saints across Hindu, Sikh, Jain, and Buddhist traditions.",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#FFFBFE",
+    "theme_color": "#E65100",
+    "orientation": "portrait-primary",
+    "categories": [
+        "education",
+        "lifestyle",
+        "books"
+    ],
+    "icons": [
+        {
+            "src": "icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "Today's Saint",
+            "short_name": "Today",
+            "description": "View today's featured saint",
+            "url": "./index.html?action=today",
+            "icons": [
+                {
+                    "src": "icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Quiz",
+            "short_name": "Quiz",
+            "description": "Test your spiritual knowledge",
+            "url": "./index.html?action=quiz",
+            "icons": [
+                {
+                    "src": "icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ]
+}
