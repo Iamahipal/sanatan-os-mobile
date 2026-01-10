@@ -1,0 +1,246 @@
+/**
+ * Sant Darshan App - Progress & Indicators
+ */
+
+/* ===== PROGRESS BANNER ===== */
+
+.progress-banner {
+    background: var(--primary-container);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.progress-banner-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.progress-ring-container {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+}
+
+.progress-ring {
+    width: 100%;
+    height: 100%;
+}
+
+.progress-ring-bg {
+    stroke: rgba(0, 0, 0, 0.1);
+}
+
+.progress-ring-circle {
+    stroke: var(--primary-color);
+    transition: stroke-dashoffset var(--duration-slow) var(--ease-decelerate);
+}
+
+.progress-ring-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-percent {
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--primary-dark);
+}
+
+.progress-info {
+    flex: 1;
+}
+
+.progress-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.progress-subtitle {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+}
+
+.progress-streak {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--primary-color);
+    font-weight: var(--font-medium);
+    margin-top: var(--space-2);
+}
+
+.progress-streak i {
+    color: #FF5722;
+}
+
+/* ===== LOADING SPINNER ===== */
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--surface-variant);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spinner-sm {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+}
+
+.loading-spinner-lg {
+    width: 60px;
+    height: 60px;
+    border-width: 4px;
+}
+
+/* ===== SKELETON LOADING ===== */
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--surface-variant) 25%,
+        var(--surface-container) 50%,
+        var(--surface-variant) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-sm);
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-text {
+    height: 1em;
+    margin-bottom: var(--space-2);
+}
+
+.skeleton-text-sm {
+    height: 0.75em;
+    width: 60%;
+}
+
+.skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+}
+
+.skeleton-card {
+    height: 80px;
+    border-radius: var(--radius-lg);
+}
+
+/* ===== PROGRESS BAR ===== */
+
+.progress-bar {
+    height: 8px;
+    background: var(--surface-variant);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: var(--radius-full);
+    transition: width var(--duration-normal) var(--ease-decelerate);
+}
+
+/* ===== PATH PROGRESS DOTS ===== */
+
+.path-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.path-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--surface-variant);
+    transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.path-dot.completed {
+    background: var(--success-color);
+}
+
+.path-dot.current {
+    background: var(--primary-color);
+    transform: scale(1.25);
+}
+
+/* ===== ACHIEVEMENT PROGRESS ===== */
+
+.achievement-progress {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.achievement-progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+}
+
+/* ===== CALENDAR HEATMAP ===== */
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-1);
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    background: var(--surface-variant);
+    border-radius: var(--radius-sm);
+}
+
+.calendar-day.has-entry {
+    background: var(--primary-container);
+    color: var(--primary-dark);
+    font-weight: var(--font-medium);
+}
+
+.calendar-day.today {
+    border: 2px solid var(--primary-color);
+}
+
+.calendar-day.today.has-entry {
+    background: var(--primary-color);
+    color: white;
+}

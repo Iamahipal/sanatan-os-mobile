@@ -1,0 +1,202 @@
+/**
+ * Sant Darshan App - Form Styles
+ */
+
+/* ===== INPUT BASE ===== */
+
+.input,
+input[type="text"],
+input[type="email"],
+input[type="search"],
+textarea {
+    width: 100%;
+    height: var(--input-height);
+    padding: var(--input-padding);
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    background: var(--surface-bright);
+    border: 1px solid var(--input-border);
+    border-radius: var(--input-radius);
+    transition: border-color var(--duration-fast) var(--ease-standard),
+                box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.input:focus,
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-container);
+}
+
+.input::placeholder,
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-tertiary);
+}
+
+textarea {
+    height: auto;
+    min-height: 100px;
+    resize: vertical;
+    line-height: var(--leading-relaxed);
+}
+
+/* ===== SEARCH INPUT ===== */
+
+.search-input-wrapper {
+    position: relative;
+}
+
+.search-input-wrapper .search-icon {
+    position: absolute;
+    left: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+}
+
+.search-input-wrapper input {
+    padding-left: calc(var(--space-4) + 24px);
+}
+
+/* ===== NOTE INPUT ===== */
+
+.note-input {
+    width: 100%;
+    min-height: 80px;
+    padding: var(--space-3);
+    font-size: var(--text-sm);
+    background: var(--surface-container-low);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-md);
+    resize: vertical;
+    transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.note-input:focus {
+    border-color: var(--primary-color);
+    background: var(--surface-bright);
+}
+
+.add-note-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.add-note-btn {
+    align-self: flex-end;
+}
+
+/* ===== NOTES LIST ===== */
+
+.notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.notes-empty {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    text-align: center;
+    padding: var(--space-6);
+}
+
+.note-card {
+    padding: var(--space-3);
+    background: var(--surface-container-low);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--divider);
+}
+
+.note-text {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.note-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-3);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--divider);
+}
+
+.note-date {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+}
+
+.note-delete {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    color: var(--text-tertiary);
+    transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.note-delete:hover {
+    background: var(--error-light);
+    color: white;
+}
+
+/* ===== FORM GROUPS ===== */
+
+.form-group {
+    margin-bottom: var(--space-4);
+}
+
+.form-label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+}
+
+.form-help {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    margin-top: var(--space-1);
+}
+
+.form-error {
+    font-size: var(--text-xs);
+    color: var(--error-color);
+    margin-top: var(--space-1);
+}
+
+/* ===== CHECKBOX & RADIO ===== */
+
+.checkbox-group,
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.checkbox-label,
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    cursor: pointer;
+}
+
+.checkbox-label input,
+.radio-label input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary-color);
+}

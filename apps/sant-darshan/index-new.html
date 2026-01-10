@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Sant Darshan - Discover the lives and teachings of India's spiritual masters across Hindu, Sikh, Jain, and Buddhist traditions.">
+    <meta name="theme-color" content="#E85D04">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <title>Sant Darshan</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <div class="app-container">
+        <!-- App Header -->
+        <header class="app-header" role="banner">
+            <div class="header-left">
+                <button id="back-btn" class="header-btn" style="display: none" aria-label="Go back">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="header-center">
+                <h1 id="page-title" class="page-title">Sant Darshan</h1>
+            </div>
+            <div class="header-right">
+                <button id="search-btn" class="header-btn" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content" class="main-content" role="main">
+            <!-- Home Screen -->
+            <section id="home-screen" class="screen active" aria-label="Home">
+                <div class="screen-content">
+                    <!-- Content rendered by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Saints List Screen -->
+            <section id="saints-list-screen" class="screen" aria-label="Saints List">
+                <div class="screen-content">
+                    <!-- Content rendered by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Saint Detail Screen -->
+            <section id="saint-detail-screen" class="screen" aria-label="Saint Details">
+                <div class="screen-content">
+                    <!-- Content rendered by JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Search Overlay -->
+        <div id="search-overlay" class="search-overlay" role="dialog" aria-label="Search" aria-modal="true">
+            <div class="search-header">
+                <input id="search-input" type="search" class="search-input" placeholder="Search saints..." autocomplete="off">
+                <button id="search-close" class="search-close" aria-label="Close search">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="search-results" class="search-results">
+                <!-- Search results rendered by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Modals Container -->
+        <div id="modals-container">
+            <!-- Daily Darshan Modal -->
+            <div id="daily-darshan-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="daily-darshan-title">
+                <!-- Rendered by JavaScript -->
+            </div>
+
+            <!-- Quiz Modal -->
+            <div id="quiz-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
+                <!-- Rendered by JavaScript -->
+            </div>
+
+            <!-- Achievements Modal -->
+            <div id="achievements-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="achievements-title">
+                <!-- Rendered by JavaScript -->
+            </div>
+
+            <!-- Learning Paths Modal -->
+            <div id="paths-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="paths-title">
+                <!-- Rendered by JavaScript -->
+            </div>
+
+            <!-- Journal Modal -->
+            <div id="journal-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="journal-title">
+                <!-- Rendered by JavaScript -->
+            </div>
+
+            <!-- Share Card Modal -->
+            <div id="share-card-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="share-card-title">
+                <!-- Rendered by JavaScript -->
+            </div>
+
+            <!-- Pilgrimage Modal -->
+            <div id="pilgrimage-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="pilgrimage-title">
+                <!-- Rendered by JavaScript -->
+            </div>
+
+            <!-- Jayanti Calendar Modal -->
+            <div id="jayanti-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="jayanti-title">
+                <!-- Rendered by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Toast Container -->
+        <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true">
+            <!-- Toasts rendered by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Data Scripts (loaded first) -->
+    <script src="saints-data.js"></script>
+    <script src="phase2-data.js"></script>
+
+    <!-- Make data available globally for the module system -->
+    <script>
+        // Expose data to global scope for module consumption
+        window.SAINTS = typeof SAINTS !== 'undefined' ? SAINTS : [];
+        window.TRADITIONS = typeof TRADITIONS !== 'undefined' ? TRADITIONS : {};
+        window.SAINT_STORIES = typeof SAINT_STORIES !== 'undefined' ? SAINT_STORIES : {};
+        window.SAINT_CONNECTIONS = typeof SAINT_CONNECTIONS !== 'undefined' ? SAINT_CONNECTIONS : {};
+        window.SAINT_PLACES = typeof SAINT_PLACES !== 'undefined' ? SAINT_PLACES : {};
+        window.SAINT_JAYANTIS = typeof SAINT_JAYANTIS !== 'undefined' ? SAINT_JAYANTIS : [];
+        window.LEARNING_PATHS = typeof LEARNING_PATHS !== 'undefined' ? LEARNING_PATHS : [];
+        window.JOURNAL_PROMPTS = typeof JOURNAL_PROMPTS !== 'undefined' ? JOURNAL_PROMPTS : [];
+    </script>
+
+    <!-- Application Entry Point (ES Module) -->
+    <script type="module" src="src/main.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker registered'))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>
