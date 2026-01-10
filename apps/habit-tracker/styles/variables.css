@@ -1,0 +1,54 @@
+/* Niyam Design System Tokens */
+:root {
+    /* ===== ELEVATION SYSTEM (Light Theme Base) ===== */
+    --bg-level-0: #FFFFFF;
+    --bg-level-1: #F5F5F7;
+    --bg-level-2: #E5E5EA;
+    --bg-level-3: #D1D1D6;
+
+    /* ===== TEXT HIERARCHY ===== */
+    --text-primary: #1D1D1F;
+    --text-secondary: rgba(60, 60, 67, 0.6);
+    --text-tertiary: rgba(60, 60, 67, 0.3);
+
+    /* ===== ACCENT COLORS ===== */
+    --primary: #0A84FF;
+    --primary-dark: #0056B3;
+    --danger: #FF453A;
+    --success: #32D74B;
+    --warning: #FF9F0A;
+
+    /* ===== SPACING (4pt grid) ===== */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    /* ===== BORDER RADIUS ===== */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 999px;
+
+    /* ===== SHADOWS ===== */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    /* ===== TYPOGRAPHY ===== */
+    --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Dark Theme Overrides (Default for Niyam) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-level-0: #000000;
+        --bg-level-1: #1C1C1E;
+        --bg-level-2: #2C2C2E;
+        --bg-level-3: #3A3A3C;
+
+        --text-primary: #FFFFFF;
+        --text-secondary: rgba(235, 235, 245, 0.6);
+        --text-tertiary: rgba(235, 235, 245, 0.3);
+    }
+}
