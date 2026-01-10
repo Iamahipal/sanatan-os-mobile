@@ -1,132 +1,239 @@
+/**
+ * SettingsScreen - App Settings
+ * Theme, data management, and account
+ */
+
 import { Component } from '../core/Component.js';
-import { Router } from '../core/Router.js';
-import { store } from '../core/Store.js';
+import { Store } from '../core/Store.js';
+import { Router, navigate } from '../core/Router.js';
 import { StorageService } from '../services/StorageService.js';
-import { AuthService } from '../services/AuthService.js';
+import { ThemeService } from '../services/ThemeService.js';
+import { EventBus, Events } from '../core/EventBus.js';
 
 export class SettingsScreen extends Component {
     template() {
-        // We'll read the store state locally or trust the component to re-render on changes
-        const { theme } = store.get();
-        // Simple logic for toggle state
-        const isDark = theme === 'dark';
+        const isDark = ThemeService.isDark();
+        const user = Store.getProperty('user');
 
         return `
-            <div class="settings-screen" style="padding: 16px;">
-                <header class="app-header" style="margin-bottom: 24px; display: flex; align-items: center;">
-                    <button id="back-btn" class="header-btn" style="margin-right: 16px;">
-                        ←
+            <div class="screen settings-screen active">
+                <header class="app-header">
+                    <button id="back-btn" class="header-btn" aria-label="Go back">
+                        <i data-lucide="chevron-left"></i>
                     </button>
-                    <h1 style="font-size: 1.5rem; font-weight: 700;">Settings</h1>
+                    <h1 class="header-title">Settings</h1>
+                    <div style="width: 40px;"></div>
                 </header>
-
-                <!-- Theme Section -->
-                <div class="card">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                             <div class="btn-icon" style="background: var(--bg-level-2); margin-right: 12px;">
-                                <span>🎨</span>
-                             </div>
-                             <span>Dark Mode</span>
+                
+                <main class="screen-content">
+                    <!-- Appearance -->
+                    <div class="form-section">
+                        <div class="form-section-title">Appearance</div>
+                        <div class="card">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <div class="settings-icon">🌙</div>
+                                    <span>Dark Mode</span>
+                                </div>
+                                <button id="theme-toggle" 
+                                        class="toggle ${isDark ? 'active' : ''}"
+                                        role="switch"
+                                        aria-checked="${isDark}"
+                                        aria-label="Toggle dark mode">
+                                </button>
+                            </div>
                         </div>
-                        <button id="theme-toggle" class="toggle-btn ${isDark ? 'active' : ''}" 
-                            style="width: 50px; height: 30px; background: ${isDark ? 'var(--success)' : 'var(--bg-level-3)'}; border-radius: 99px; position: relative; transition: background 0.3s;">
-                            <span style="position: absolute; top: 2px; left: ${isDark ? '22px' : '2px'}; width: 26px; height: 26px; background: white; border-radius: 50%; transition: left 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></span>
-                        </button>
                     </div>
-                </div>
-
-                <!-- Data Section -->
-                <div class="card">
-                    <h3 style="margin-bottom: 16px; font-size: 0.9rem; text-transform: uppercase; color: var(--text-secondary);">Data Management</h3>
                     
-                    <button id="export-btn" class="settings-item flex items-center justify-between" style="width: 100%; padding: 12px 0; border-bottom: 1px solid var(--bg-level-2);">
-                        <span>Export Data (JSON)</span>
-                        <span>↓</span>
-                    </button>
+                    <!-- Data -->
+                    <div class="form-section">
+                        <div class="form-section-title">Data Management</div>
+                        <div class="settings-list">
+                            <button id="export-btn" class="settings-item">
+                                <div class="settings-item-left">
+                                    <div class="settings-icon">📤</div>
+                                    <span>Export Data</span>
+                                </div>
+                                <i data-lucide="download"></i>
+                            </button>
+                            
+                            <button id="import-btn" class="settings-item">
+                                <div class="settings-item-left">
+                                    <div class="settings-icon">📥</div>
+                                    <span>Import Data</span>
+                                </div>
+                                <i data-lucide="upload"></i>
+                            </button>
+                            
+                            <button id="reset-btn" class="settings-item settings-danger">
+                                <div class="settings-item-left">
+                                    <div class="settings-icon">⚠️</div>
+                                    <span style="color: var(--danger);">Reset All Data</span>
+                                </div>
+                                <i data-lucide="trash-2"></i>
+                            </button>
+                        </div>
+                    </div>
                     
-                    <button id="reset-btn" class="settings-item flex items-center justify-between" style="width: 100%; padding: 12px 0; color: var(--danger);">
-                        <span>Reset All Data</span>
-                        <span>⚠</span>
-                    </button>
-                </div>
+                    <!-- Account -->
+                    <div class="form-section">
+                        <div class="form-section-title">Account</div>
+                        <div class="card" id="account-section">
+                            ${user ? this.renderSignedIn(user) : this.renderSignedOut()}
+                        </div>
+                    </div>
+                    
+                    <!-- About -->
+                    <div class="form-section">
+                        <div class="form-section-title">About</div>
+                        <div class="settings-list">
+                            <a href="https://sanatan.app" target="_blank" class="settings-item">
+                                <div class="settings-item-left">
+                                    <div class="settings-icon">🌐</div>
+                                    <span>Sanatan OS</span>
+                                </div>
+                                <i data-lucide="external-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="app-version">
+                        Niyam v2.0.0<br>
+                        Made with 🙏 for Sanatan OS
+                    </div>
+                </main>
+                
+                <!-- Hidden file input for import -->
+                <input type="file" id="import-input" accept=".json" style="display: none;">
+            </div>
+        `;
+    }
 
-                 <!-- Auth Section -->
-                <div class="card">
-                     <h3 style="margin-bottom: 16px; font-size: 0.9rem; text-transform: uppercase; color: var(--text-secondary);">Account</h3>
-                     <div id="auth-status">
-                        <!-- Rendered in afterRender -->
-                     </div>
+    renderSignedIn(user) {
+        return `
+            <div class="flex items-center gap-3" style="margin-bottom: 16px;">
+                <img src="${user.photoURL || ''}" 
+                     alt="Profile"
+                     style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-level-2);">
+                <div>
+                    <div style="font-weight: 600;">${user.displayName || 'User'}</div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">${user.email}</div>
                 </div>
+            </div>
+            <button id="signout-btn" class="btn btn-secondary" style="width: 100%;">
+                Sign Out
+            </button>
+        `;
+    }
 
-                <div style="text-align: center; margin-top: 32px; color: var(--text-tertiary); font-size: 0.8rem;">
-                    Niyam v2.0.0
-                </div>
+    renderSignedOut() {
+        return `
+            <div style="text-align: center; padding: 16px 0;">
+                <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                    Sign in to sync your habits across devices
+                </p>
+                <button id="signin-btn" class="btn btn-primary" style="width: 100%;">
+                    <i data-lucide="user"></i>
+                    Sign in with Google
+                </button>
             </div>
         `;
     }
 
     afterRender() {
-        this.find('#back-btn').addEventListener('click', () => Router.navigate('/'));
+        // Back button
+        this.on('#back-btn', 'click', () => Router.back());
 
-        // Theme Toggle
-        this.find('#theme-toggle').addEventListener('click', () => {
-            const current = store.get().theme;
-            const next = current === 'dark' ? 'light' : 'dark';
-            store.set('theme', next);
-            // Effect handling should ideally be in main.js or a ThemeService, 
-            // but we will do a quick dirty hack here for instant feedback if store subscription isn't driving CSS yet
-            document.body.className = next === 'dark' ? '' : 'theme-light';
-            this.update();
+        // Theme toggle
+        this.on('#theme-toggle', 'click', (e) => {
+            ThemeService.toggle();
+            e.target.classList.toggle('active', ThemeService.isDark());
+            e.target.setAttribute('aria-checked', ThemeService.isDark());
         });
 
         // Export
-        this.find('#export-btn').addEventListener('click', () => {
-            const data = StorageService.load();
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `niyam-backup-${new Date().toISOString().slice(0, 10)}.json`;
-            a.click();
+        this.on('#export-btn', 'click', () => this.exportData());
+
+        // Import
+        this.on('#import-btn', 'click', () => {
+            this.find('#import-input').click();
         });
+
+        this.on('#import-input', 'change', (e) => this.importData(e));
 
         // Reset
-        this.find('#reset-btn').addEventListener('click', () => {
-            if (confirm('Are you sure? This will delete ALL your habits and history.')) {
-                localStorage.clear();
-                window.location.reload();
-            }
-        });
+        this.on('#reset-btn', 'click', () => this.resetData());
 
-        // Auth Status
-        this.renderAuthStatus();
+        // Sign in/out
+        const signinBtn = this.find('#signin-btn');
+        if (signinBtn) {
+            signinBtn.addEventListener('click', () => this.signIn());
+        }
+
+        const signoutBtn = this.find('#signout-btn');
+        if (signoutBtn) {
+            signoutBtn.addEventListener('click', () => this.signOut());
+        }
+
+        // Init icons
+        if (window.lucide) {
+            lucide.createIcons();
+        }
     }
 
-    renderAuthStatus() {
-        const user = store.get().user;
-        const container = this.find('#auth-status');
+    exportData() {
+        const json = StorageService.export();
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
 
-        if (user) {
-            container.innerHTML = `
-                <div class="flex items-center" style="margin-bottom: 12px;">
-                    <img src="${user.photoURL || ''}" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; background: #eee;">
-                    <div>${user.displayName || user.email}</div>
-                </div>
-                <button id="signout-btn" style="color: var(--primary);">Sign Out</button>
-            `;
-            container.querySelector('#signout-btn').addEventListener('click', () => {
-                AuthService.signOut();
-                // Auth listener in main.js will update store, and we might need to re-render
-                setTimeout(() => this.renderAuthStatus(), 500);
-            });
-        } else {
-            container.innerHTML = `
-                <button id="signin-btn" class="btn-primary" style="width: 100%;">Sign in with Google</button>
-            `;
-            container.querySelector('#signin-btn').addEventListener('click', () => {
-                AuthService.signIn();
-            });
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `niyam-backup-${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+
+        URL.revokeObjectURL(url);
+        EventBus.emit(Events.TOAST_SHOW, { message: 'Data exported!' });
+    }
+
+    importData(e) {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const success = StorageService.import(event.target.result);
+            if (success) {
+                EventBus.emit(Events.TOAST_SHOW, { message: 'Data imported! Reloading...' });
+                setTimeout(() => location.reload(), 1500);
+            } else {
+                EventBus.emit(Events.TOAST_SHOW, { message: 'Import failed. Invalid file.' });
+            }
+        };
+        reader.readAsText(file);
+
+        // Reset input
+        e.target.value = '';
+    }
+
+    resetData() {
+        if (confirm('⚠️ This will DELETE ALL your habits and data. This cannot be undone!\n\nAre you sure?')) {
+            if (confirm('Really delete everything?')) {
+                StorageService.clear();
+                Store.reset();
+                EventBus.emit(Events.TOAST_SHOW, { message: 'All data cleared. Reloading...' });
+                setTimeout(() => location.reload(), 1500);
+            }
         }
+    }
+
+    signIn() {
+        // Firebase auth would go here
+        EventBus.emit(Events.TOAST_SHOW, { message: 'Sign in coming soon!' });
+    }
+
+    signOut() {
+        Store.set('user', null);
+        this.update();
+        EventBus.emit(Events.TOAST_SHOW, { message: 'Signed out' });
     }
 }

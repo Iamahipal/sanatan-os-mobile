@@ -1,0 +1,168 @@
+/**
+ * Niyam Design Tokens
+ * Core design system variables
+ */
+
+:root {
+    /* ===== COLOR SYSTEM ===== */
+
+    /* Primary Brand */
+    --primary: #0A84FF;
+    --primary-light: #409CFF;
+    --primary-dark: #0066CC;
+
+    /* Semantic Colors */
+    --success: #30D158;
+    --warning: #FF9F0A;
+    --danger: #FF453A;
+
+    /* Habit Colors Palette */
+    --habit-blue: #007AFF;
+    --habit-indigo: #5856D6;
+    --habit-purple: #AF52DE;
+    --habit-pink: #FF2D55;
+    --habit-red: #FF3B30;
+    --habit-orange: #FF9500;
+    --habit-yellow: #FFCC00;
+    --habit-green: #34C759;
+    --habit-mint: #00C7BE;
+    --habit-teal: #30B0C7;
+    --habit-cyan: #5AC8FA;
+    --habit-gray: #8E8E93;
+
+    /* ===== SURFACES (Light Theme) ===== */
+    --bg-level-0: #FFFFFF;
+    --bg-level-1: #F5F5F7;
+    --bg-level-2: #E5E5EA;
+    --bg-level-3: #D1D1D6;
+
+    /* Text Colors (Light Theme) */
+    --text-primary: #1C1C1E;
+    --text-secondary: #6C6C70;
+    --text-tertiary: #AEAEB2;
+    --text-on-primary: #FFFFFF;
+
+    /* Borders */
+    --border-default: rgba(0, 0, 0, 0.08);
+    --border-strong: rgba(0, 0, 0, 0.15);
+
+    /* ===== DARK THEME ===== */
+    --dark-bg-level-0: #000000;
+    --dark-bg-level-1: #1C1C1E;
+    --dark-bg-level-2: #2C2C2E;
+    --dark-bg-level-3: #3A3A3C;
+
+    --dark-text-primary: #FFFFFF;
+    --dark-text-secondary: #EBEBF5;
+    --dark-text-tertiary: rgba(235, 235, 245, 0.6);
+
+    --dark-border-default: rgba(255, 255, 255, 0.08);
+    --dark-border-strong: rgba(255, 255, 255, 0.15);
+
+    /* ===== TYPOGRAPHY ===== */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-sanskrit: 'Tiro Devanagari Sanskrit', 'Noto Sans Devanagari', serif;
+
+    /* Font Sizes (Mobile-first) */
+    --text-xs: 0.75rem;
+    /* 12px */
+    --text-sm: 0.875rem;
+    /* 14px */
+    --text-base: 1rem;
+    /* 16px */
+    --text-lg: 1.125rem;
+    /* 18px */
+    --text-xl: 1.25rem;
+    /* 20px */
+    --text-2xl: 1.5rem;
+    /* 24px */
+    --text-3xl: 1.875rem;
+    /* 30px */
+
+    /* Font Weights */
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+
+    /* Line Heights */
+    --leading-tight: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+
+    /* ===== SPACING ===== */
+    --space-1: 0.25rem;
+    /* 4px */
+    --space-2: 0.5rem;
+    /* 8px */
+    --space-3: 0.75rem;
+    /* 12px */
+    --space-4: 1rem;
+    /* 16px */
+    --space-5: 1.25rem;
+    /* 20px */
+    --space-6: 1.5rem;
+    /* 24px */
+    --space-8: 2rem;
+    /* 32px */
+    --space-10: 2.5rem;
+    /* 40px */
+    --space-12: 3rem;
+    /* 48px */
+
+    /* ===== RADII ===== */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+
+    /* ===== SHADOWS ===== */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+
+    /* ===== MOTION (M3 Tokens) ===== */
+    --duration-short: 150ms;
+    --duration-medium: 300ms;
+    --duration-long: 500ms;
+    --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+    --easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+    --easing-decelerate: cubic-bezier(0, 0, 0, 1);
+
+    /* ===== LAYOUT ===== */
+    --header-height: 56px;
+    --bottom-nav-height: 80px;
+    --fab-size: 56px;
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ===== DARK THEME OVERRIDE ===== */
+[data-theme="dark"],
+.theme-dark {
+    --bg-level-0: var(--dark-bg-level-0);
+    --bg-level-1: var(--dark-bg-level-1);
+    --bg-level-2: var(--dark-bg-level-2);
+    --bg-level-3: var(--dark-bg-level-3);
+
+    --text-primary: var(--dark-text-primary);
+    --text-secondary: var(--dark-text-secondary);
+    --text-tertiary: var(--dark-text-tertiary);
+
+    --border-default: var(--dark-border-default);
+    --border-strong: var(--dark-border-strong);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --duration-short: 0ms;
+        --duration-medium: 0ms;
+        --duration-long: 0ms;
+    }
+}

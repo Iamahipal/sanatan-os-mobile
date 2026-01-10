@@ -1,129 +1,281 @@
+/**
+ * DashboardScreen - Main Habit View
+ * Shows daily habits with week picker and quote
+ */
+
 import { Component } from '../core/Component.js';
-import { store } from '../core/Store.js';
-import { HabitCard } from '../components/HabitCard.js';
-import { YearProgress } from '../components/YearProgress.js';
+import { Store } from '../core/Store.js';
+import { navigate } from '../core/Router.js';
+import { EventBus, Events } from '../core/EventBus.js';
+import { HabitService } from '../services/HabitService.js';
 import { QuoteService } from '../services/QuoteService.js';
+import { DateUtils } from '../utils/DateUtils.js';
 
 export class DashboardScreen extends Component {
+    constructor() {
+        super();
+        this.selectedDate = Store.getProperty('selectedDate') || new Date();
+    }
+
     template() {
         const quote = QuoteService.getDailyQuote();
+        const habits = HabitService.getAll().filter(h => !h.archived);
 
         return `
-            <div class="dashboard-screen">
-                <header class="app-header" style="background: var(--bg-level-0); padding: 16px;">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary);">
-                                ${new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
-                            </div>
-                            <h1 style="font-size: 1.8rem; font-weight: 700;">My Habits</h1>
-                        </div>
-                        <button id="year-progress-btn" class="header-btn" style="margin-right: 8px; width: 32px; height: 32px; border-radius: 50%; border: none; background: var(--bg-level-2); display: flex; align-items: center; justify-content: center;">
-                             📅
-                        </button>
-                        <button id="settings-btn" class="avatar" style="width: 32px; height: 32px; background: var(--bg-level-2); border-radius: 50%; border: none; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                             ⚙️
+            <div class="screen dashboard-screen active">
+                <!-- Header -->
+                <header class="app-header">
+                    <div>
+                        <div class="date-label">${DateUtils.format(new Date(), 'long')}</div>
+                        <h1 class="header-title">My Habits</h1>
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="settings-btn" class="header-btn" aria-label="Settings">
+                            <i data-lucide="settings"></i>
                         </button>
                     </div>
                 </header>
                 
-                <div id="year-progress-container" style="display: none; background: var(--bg-level-1); border-radius: 12px; margin: 0 16px 16px 16px;">
-                    <!-- YearProgress component rendered here -->
-                </div>
-
-                <!-- Daily Prana -->
-                <div class="card" style="margin: 16px; background: linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 100%); color: white; border: 1px solid rgba(255,255,255,0.1);">
-                    <div style="font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1.1rem; margin-bottom: 8px;">
-                        ${quote.sanskrit}
-                    </div>
-                    <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 12px;">
-                        ${quote.english}
-                    </div>
-                    <div style="font-size: 0.75rem; opacity: 0.5;">
-                        — ${quote.source}
+                <!-- Week Picker -->
+                <div class="week-picker" id="week-picker">
+                    <div class="week-days">
+                        ${this.renderWeekDays()}
                     </div>
                 </div>
-
-                <main style="flex: 1; overflow-y: auto; padding: 16px; padding-bottom: 100px;">
-                    <div id="habit-list-container" style="display: flex; flex-direction: column; gap: 16px;">
-                        <!-- Habits rendered here -->
+                
+                <!-- Prana Quote -->
+                ${quote ? `
+                    <div class="card prana-card" style="margin: 0 16px 16px;">
+                        <div class="prana-sanskrit">${quote.sanskrit}</div>
+                        <div class="prana-translation">${quote.english}</div>
+                        <div class="prana-source">— ${quote.source}</div>
+                    </div>
+                ` : ''}
+                
+                <!-- Main Content -->
+                <main class="screen-content" id="main-content">
+                    <div class="habit-list" id="habit-list">
+                        ${habits.length > 0
+                ? habits.map(h => this.renderHabitCard(h)).join('')
+                : this.renderEmptyState()
+            }
                     </div>
                 </main>
                 
-                <button id="add-fab" class="btn-primary" 
-                    style="position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: var(--shadow-md);">
-                    +
+                <!-- FAB -->
+                <button id="add-fab" class="btn btn-fab" aria-label="Add new habit">
+                    <i data-lucide="plus"></i>
+                </button>
+                
+                <!-- Bottom Nav -->
+                <nav class="bottom-nav">
+                    <button class="nav-tab active" data-view="grid">
+                        <i data-lucide="grid-3x3"></i>
+                        <span>Grid</span>
+                    </button>
+                    <button class="nav-tab" data-view="list">
+                        <i data-lucide="list"></i>
+                        <span>List</span>
+                    </button>
+                    <button class="nav-tab" data-view="stats">
+                        <i data-lucide="bar-chart-3"></i>
+                        <span>Stats</span>
+                    </button>
+                </nav>
+            </div>
+        `;
+    }
+
+    renderWeekDays() {
+        const weekDays = DateUtils.getWeekDays(new Date());
+        const today = DateUtils.getToday();
+        const selectedKey = DateUtils.getDateKey(this.selectedDate);
+
+        return weekDays.map(day => {
+            const key = DateUtils.getDateKey(day);
+            const isToday = DateUtils.isSameDay(day, today);
+            const isSelected = key === selectedKey;
+
+            return `
+                <div class="week-day ${isToday ? 'today' : ''} ${isSelected ? 'selected' : ''}" 
+                     data-date="${key}"
+                     role="button"
+                     aria-label="${DateUtils.format(day, 'long')}"
+                     aria-pressed="${isSelected}">
+                    <span class="day-name">${DateUtils.getDayName(day, 'short')}</span>
+                    <span class="day-num">${day.getDate()}</span>
+                </div>
+            `;
+        }).join('');
+    }
+
+    renderHabitCard(habit) {
+        const dateKey = DateUtils.getDateKey(this.selectedDate);
+        const entry = habit.entries?.[dateKey];
+        const isCompleted = entry?.status === 'completed';
+        const isSkipped = entry?.status === 'skipped';
+        const streak = HabitService.calculateStreak(habit);
+
+        return `
+            <div class="habit-card" 
+                 data-habit-id="${habit.id}"
+                 style="--habit-color: ${habit.color}">
+                <div class="habit-header">
+                    <div class="habit-info">
+                        <div class="habit-icon" style="background: ${habit.color}">
+                            <i data-lucide="${habit.icon}"></i>
+                        </div>
+                        <div>
+                            <div class="habit-name">${habit.name}</div>
+                            <div class="habit-streak">
+                                ${streak > 0
+                ? `<span class="streak-fire">🔥</span> ${streak} day streak`
+                : 'Start your streak!'}
+                            </div>
+                        </div>
+                    </div>
+                    <button class="habit-toggle ${isCompleted ? 'completed' : ''} ${isSkipped ? 'skipped' : ''}"
+                            data-action="toggle"
+                            data-habit-id="${habit.id}"
+                            aria-label="Toggle ${habit.name}">
+                        ${isCompleted ? '✓' : isSkipped ? '−' : '○'}
+                    </button>
+                </div>
+                <div class="habit-grid">
+                    ${this.renderHeatmap(habit)}
+                </div>
+            </div>
+        `;
+    }
+
+    renderHeatmap(habit) {
+        const today = new Date();
+        const cells = [];
+
+        // Last 52 days
+        for (let i = 51; i >= 0; i--) {
+            const date = DateUtils.addDays(today, -i);
+            const key = DateUtils.getDateKey(date);
+            const entry = habit.entries?.[key];
+            const isCompleted = entry?.status === 'completed';
+
+            cells.push(`
+                <div class="grid-cell ${isCompleted ? 'level-4' : ''}" 
+                     title="${DateUtils.format(date, 'short')}"></div>
+            `);
+        }
+
+        return cells.join('');
+    }
+
+    renderEmptyState() {
+        return `
+            <div class="empty-state">
+                <div class="empty-icon">✨</div>
+                <h2 class="empty-title">No habits yet</h2>
+                <p class="empty-text">Create your first habit to start building consistency.</p>
+                <button id="create-first-btn" class="btn btn-primary">
+                    Create First Habit
                 </button>
             </div>
         `;
     }
 
     afterRender() {
-        const container = this.find('#habit-list-container');
+        // Settings
+        this.on('#settings-btn', 'click', () => navigate('/settings'));
 
-        // Subscription
-        this.unsubscribe = store.subscribe('habits', (habits) => {
-            this.renderHabits(habits, container);
-        });
+        // FAB
+        this.on('#add-fab', 'click', () => navigate('/add-habit'));
 
-        // Year Progress Toggle
-        const ypContainer = this.find('#year-progress-container');
-        const ypComponent = new YearProgress();
-        ypContainer.innerHTML = ypComponent.template(); // Simple render for now
-
-        this.find('#year-progress-btn').addEventListener('click', () => {
-            const isHidden = ypContainer.style.display === 'none';
-            ypContainer.style.display = isHidden ? 'block' : 'none';
-        });
-
-        // Settings Button
-        this.find('#settings-btn').addEventListener('click', () => {
-            import('../core/Router.js').then(({ Router }) => {
-                Router.navigate('/settings');
-            });
-        });
-
-        // Initial Render
-        const { habits } = store.get();
-        this.renderHabits(habits, container);
-
-        // Add Button
-        this.find('#add-fab').addEventListener('click', () => {
-            import('../core/Router.js').then(({ Router }) => {
-                Router.navigate('/add-habit');
-            });
-        });
-    }
-
-    async renderHabits(habits, container) {
-        if (!container) return;
-        container.innerHTML = '';
-
-        if (habits.length === 0) {
-            container.innerHTML = `
-                <div style="text-align: center; padding: 48px 0; color: var(--text-secondary);">
-                    <div style="font-size: 48px; margin-bottom: 16px;">✨</div>
-                    <p>No habits yet. Create your first one!</p>
-                </div>
-            `;
-            return;
+        // Empty state button
+        const createBtn = this.find('#create-first-btn');
+        if (createBtn) {
+            createBtn.addEventListener('click', () => navigate('/add-habit'));
         }
 
-        // Create instances of HabitCard
-        for (const habit of habits) {
-            const card = new HabitCard(habit);
-            const element = card.render();
+        // Week day selection
+        this.delegate('click', '.week-day', (e, el) => {
+            const dateKey = el.dataset.date;
+            this.selectedDate = new Date(dateKey + 'T00:00:00');
+            Store.set('selectedDate', this.selectedDate);
+            this.refreshHabits();
+            this.refreshWeekPicker();
+        });
 
-            // Add click listener for details
-            element.addEventListener('click', () => {
-                store.set('currentHabitId', habit.id);
-                // Dynamically import router again if needed or rely on global/module scope
-                import('../core/Router.js').then(({ Router }) => {
-                    Router.navigate('/habit-details');
+        // Habit card click (open details)
+        this.delegate('click', '.habit-card', (e, el) => {
+            // Don't navigate if toggle button was clicked
+            if (e.target.closest('[data-action="toggle"]')) return;
+
+            const habitId = el.dataset.habitId;
+            Store.set('currentHabitId', habitId);
+            navigate('/habit-details');
+        });
+
+        // Toggle button
+        this.delegate('click', '[data-action="toggle"]', (e, el) => {
+            e.stopPropagation();
+            const habitId = el.dataset.habitId;
+            this.toggleHabit(habitId);
+        });
+
+        // Listen for habit changes
+        const unsubscribe = EventBus.on(Events.HABIT_TOGGLED, () => {
+            this.refreshHabits();
+        });
+        this.registerCleanup(unsubscribe);
+
+        // Init Lucide icons
+        this.initIcons();
+    }
+
+    toggleHabit(habitId) {
+        const newStatus = HabitService.toggle(habitId, this.selectedDate);
+
+        // Add animation class
+        const card = this.find(`[data-habit-id="${habitId}"]`);
+        if (card && newStatus === 'completed') {
+            card.classList.add('just-completed');
+            setTimeout(() => card.classList.remove('just-completed'), 600);
+        }
+
+        // Show toast for milestone
+        const habit = HabitService.getById(habitId);
+        if (habit && newStatus === 'completed') {
+            const streak = HabitService.calculateStreak(habit);
+            const milestone = HabitService.getMilestone(streak);
+            if (milestone && streak === milestone.days) {
+                EventBus.emit(Events.TOAST_SHOW, {
+                    message: `${milestone.emoji} ${milestone.name}!`,
+                    duration: 3000
                 });
-            });
+            }
+        }
+    }
 
-            container.appendChild(element);
+    refreshHabits() {
+        const list = this.find('#habit-list');
+        if (!list) return;
+
+        const habits = HabitService.getAll().filter(h => !h.archived);
+        list.innerHTML = habits.length > 0
+            ? habits.map(h => this.renderHabitCard(h)).join('')
+            : this.renderEmptyState();
+
+        this.initIcons();
+    }
+
+    refreshWeekPicker() {
+        const picker = this.find('.week-days');
+        if (picker) {
+            picker.innerHTML = this.renderWeekDays();
+        }
+    }
+
+    initIcons() {
+        if (window.lucide) {
+            setTimeout(() => lucide.createIcons(), 10);
         }
     }
 }

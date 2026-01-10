@@ -1,92 +1,202 @@
+/**
+ * HabitDetailsScreen - Habit Statistics View
+ * Shows detailed stats, calendar, and history
+ */
+
 import { Component } from '../core/Component.js';
-import { Router } from '../core/Router.js';
-import { store } from '../core/Store.js';
+import { Store } from '../core/Store.js';
+import { Router, navigate } from '../core/Router.js';
 import { HabitService } from '../services/HabitService.js';
-import { StatsService } from '../services/StatsService.js';
 import { DateUtils } from '../utils/DateUtils.js';
 
 export class HabitDetailsScreen extends Component {
-    template() {
-        const state = store.get();
-        const habitId = state.currentHabitId;
-        const habit = state.habits.find(h => h.id === habitId);
+    constructor() {
+        super();
+        const habitId = Store.getProperty('currentHabitId');
+        this.habit = habitId ? HabitService.getById(habitId) : null;
+    }
 
-        if (!habit) {
-            return `<div style="padding: 20px;">Habit not found</div>`;
+    template() {
+        if (!this.habit) {
+            return `
+                <div class="screen active" style="display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center;">
+                        <p>Habit not found</p>
+                        <button id="back-btn" class="btn btn-primary mt-4">Go Back</button>
+                    </div>
+                </div>
+            `;
         }
 
-        const streak = HabitService.calculateStreak(habit);
-        const totalCheckins = Object.keys(habit.entries).length;
+        const streak = HabitService.calculateStreak(this.habit);
+        const stats = HabitService.getStats(this.habit, 'month');
+        const yearStats = HabitService.getStats(this.habit, 'year');
+        const allStats = HabitService.getStats(this.habit, 'all');
 
         return `
-            <div class="habit-details-screen" style="padding: 16px;">
-                <header class="app-header" style="margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between;">
-                    <button id="back-btn" class="header-btn">←</button>
-                    <h1 style="font-size: 1.2rem; font-weight: 700;">Details</h1>
-                     <button id="delete-btn" class="header-btn" style="color: var(--danger);">🗑️</button>
+            <div class="screen habit-detail-screen active">
+                <!-- Header -->
+                <header class="app-header">
+                    <button id="back-btn" class="header-btn" aria-label="Go back">
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+                    <h1 class="header-title">${this.habit.name}</h1>
+                    <button id="edit-btn" class="header-btn" aria-label="Edit habit">
+                        <i data-lucide="edit-2"></i>
+                    </button>
                 </header>
-
-                <div style="text-align: center; margin-bottom: 32px;">
-                    <div style="width: 64px; height: 64px; background: ${habit.color}; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 32px; color: white;">
-                        <span>${habit.icon.charAt(0).toUpperCase()}</span>
+                
+                <main class="screen-content">
+                    <!-- Streak Card -->
+                    <div class="card" style="text-align: center; background: ${this.habit.color}; color: white; margin-bottom: 16px;">
+                        <div style="font-size: 48px; font-weight: 700;">${streak}</div>
+                        <div style="font-size: 14px; opacity: 0.9;">Day Streak</div>
+                        ${streak > 0 ? `<div style="margin-top: 8px;">🔥 Keep it going!</div>` : ''}
                     </div>
-                    <h2 style="font-size: 1.8rem;">${habit.name}</h2>
-                    <div style="color: var(--text-secondary);">
-                        Currently on a <strong style="color: var(--primary);">${streak} day streak</strong>
+                    
+                    <!-- Stats Grid -->
+                    <div class="card" style="margin-bottom: 16px;">
+                        <h3 style="margin-bottom: 16px; font-size: 14px; text-transform: uppercase; color: var(--text-tertiary);">
+                            Statistics
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center;">
+                            <div>
+                                <div style="font-size: 24px; font-weight: 700; color: ${this.habit.color};">${stats.rate}%</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">This Month</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 24px; font-weight: 700; color: ${this.habit.color};">${yearStats.completed}</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">This Year</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 24px; font-weight: 700; color: ${this.habit.color};">${allStats.completed}</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">Total</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Stats Grid -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
-                    <div class="card" style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 700; color: ${habit.color};">${totalCheckins}</div>
-                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Total Check-ins</div>
+                    
+                    <!-- Contribution Graph -->
+                    <div class="card" style="margin-bottom: 16px;">
+                        <h3 style="margin-bottom: 16px; font-size: 14px; text-transform: uppercase; color: var(--text-tertiary);">
+                            Last 365 Days
+                        </h3>
+                        <div class="contribution-graph" style="--habit-color: ${this.habit.color}">
+                            ${this.renderYearGrid()}
+                        </div>
                     </div>
-                    <div class="card" style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 700; color: ${habit.color};">Best</div>
-                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Streak Logic TBD</div>
+                    
+                    <!-- Recent History -->
+                    <div class="card">
+                        <h3 style="margin-bottom: 16px; font-size: 14px; text-transform: uppercase; color: var(--text-tertiary);">
+                            Recent Activity
+                        </h3>
+                        <div class="history-list">
+                            ${this.renderRecentHistory()}
+                        </div>
                     </div>
-                </div>
-
-                <!-- History Calendar Placeholder -->
-                <div class="card">
-                     <h3 style="margin-bottom: 16px;">History (Last 30 Days)</h3>
-                     <div class="calendar-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;">
-                        ${this.renderRecentHistory(habit)}
-                     </div>
-                </div>
+                    
+                    <!-- Actions -->
+                    <div style="margin-top: 24px;">
+                        <button id="archive-btn" class="btn btn-ghost" style="width: 100%; color: var(--text-secondary);">
+                            <i data-lucide="archive"></i>
+                            Archive Habit
+                        </button>
+                    </div>
+                </main>
             </div>
         `;
     }
 
-    renderRecentHistory(habit) {
-        // Simple visual of last 28 days
-        const days = [];
+    renderYearGrid() {
         const today = new Date();
-        for (let i = 27; i >= 0; i--) {
-            const d = new Date(today);
-            d.setDate(today.getDate() - i);
-            const key = DateUtils.getDateKey(d);
-            const isDone = habit.entries[key]?.status === 'completed';
+        const cells = [];
 
-            days.push(`
-                <div style="aspect-ratio: 1; border-radius: 4px; background: ${isDone ? habit.color : 'var(--bg-level-3)'}; opacity: ${isDone ? 1 : 0.3}; font-size: 10px; display: flex; align-items: center; justify-content: center;">
-                   ${d.getDate()}
-                </div>
+        for (let i = 364; i >= 0; i--) {
+            const date = DateUtils.addDays(today, -i);
+            const key = DateUtils.getDateKey(date);
+            const entry = this.habit.entries?.[key];
+            const isCompleted = entry?.status === 'completed';
+
+            cells.push(`
+                <div class="grid-cell ${isCompleted ? 'level-4' : ''}" 
+                     title="${DateUtils.format(date, 'short')}"></div>
             `);
         }
-        return days.join('');
+
+        return `
+            <div class="habit-grid" style="grid-template-columns: repeat(52, 1fr);">
+                ${cells.join('')}
+            </div>
+        `;
+    }
+
+    renderRecentHistory() {
+        const entries = [];
+        const today = new Date();
+
+        // Get last 14 days
+        for (let i = 0; i < 14; i++) {
+            const date = DateUtils.addDays(today, -i);
+            const key = DateUtils.getDateKey(date);
+            const entry = this.habit.entries?.[key];
+
+            if (entry?.status) {
+                entries.push({
+                    date,
+                    status: entry.status,
+                    note: entry.note
+                });
+            }
+        }
+
+        if (entries.length === 0) {
+            return '<div style="text-align: center; color: var(--text-tertiary); padding: 16px;">No activity yet</div>';
+        }
+
+        return entries.map(e => `
+            <div class="flex justify-between items-center" style="padding: 8px 0; border-bottom: 1px solid var(--border-default);">
+                <div>
+                    <div style="font-weight: 500;">${DateUtils.format(e.date, 'relative')}</div>
+                    ${e.note ? `<div style="font-size: 12px; color: var(--text-secondary);">${e.note}</div>` : ''}
+                </div>
+                <div style="color: ${e.status === 'completed' ? 'var(--success)' : 'var(--text-tertiary)'};">
+                    ${e.status === 'completed' ? '✓ Done' : '− Skipped'}
+                </div>
+            </div>
+        `).join('');
     }
 
     afterRender() {
-        this.find('#back-btn').addEventListener('click', () => Router.navigate('/'));
-
-        this.find('#delete-btn').addEventListener('click', () => {
-            if (confirm('Delete this habit permanently?')) {
-                const habitId = store.get().currentHabitId;
-                HabitService.deleteHabit(habitId);
-                Router.navigate('/');
-            }
+        // Back button
+        this.on('#back-btn', 'click', () => {
+            Store.set('currentHabitId', null);
+            Router.back();
         });
+
+        // Edit button
+        const editBtn = this.find('#edit-btn');
+        if (editBtn) {
+            editBtn.addEventListener('click', () => {
+                Store.set('editingHabitId', this.habit.id);
+                navigate('/edit-habit');
+            });
+        }
+
+        // Archive button
+        const archiveBtn = this.find('#archive-btn');
+        if (archiveBtn) {
+            archiveBtn.addEventListener('click', () => {
+                if (confirm(`Archive "${this.habit.name}"? You can restore it later.`)) {
+                    HabitService.archive(this.habit.id);
+                    Store.set('currentHabitId', null);
+                    navigate('/');
+                }
+            });
+        }
+
+        // Init icons
+        if (window.lucide) {
+            lucide.createIcons();
+        }
     }
 }
