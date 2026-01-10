@@ -49,87 +49,88 @@
     --md-sys-typescale-tracking-normal: 0;
     --md-sys-typescale-tracking-wide: 0.04em;
 
-    /* ========== M3 COLOR TOKENS - LIGHT THEME ========== */
-    /* Primary (Saffron-based) */
-    --md-sys-color-primary: #E65100;
+    /* ========== M3 COLOR TOKENS - REDESIGNED ========== */
+    /* Primary - Warm Saffron (Spiritual significance) */
+    --md-sys-color-primary: #E85D04;
     --md-sys-color-on-primary: #FFFFFF;
-    --md-sys-color-primary-container: #FFE0B2;
-    --md-sys-color-on-primary-container: #331500;
+    --md-sys-color-primary-container: #FFF4ED;
+    --md-sys-color-on-primary-container: #2D1600;
+    --md-sys-color-primary-muted: #FFAB76;
 
-    /* Secondary (Blue) */
-    --md-sys-color-secondary: #1565C0;
+    /* Secondary - Muted Saffron */
+    --md-sys-color-secondary: #BF4B00;
     --md-sys-color-on-secondary: #FFFFFF;
-    --md-sys-color-secondary-container: #BBDEFB;
-    --md-sys-color-on-secondary-container: #001d36;
+    --md-sys-color-secondary-container: #FFE8D6;
+    --md-sys-color-on-secondary-container: #2D1600;
 
-    /* Tertiary (Gold) */
-    --md-sys-color-tertiary: #F9A825;
-    --md-sys-color-on-tertiary: #1a1a1a;
+    /* Tertiary - Warm Brown */
+    --md-sys-color-tertiary: #8B5A2B;
+    --md-sys-color-on-tertiary: #FFFFFF;
 
-    /* Surface/Background - M3 Light Theme */
-    --md-sys-color-surface: #FFFBFE;
-    --md-sys-color-surface-dim: #DED8E1;
-    --md-sys-color-surface-bright: #FFFBFE;
-    --md-sys-color-on-surface: #1C1B1F;
-    --md-sys-color-surface-variant: #E7E0EC;
-    --md-sys-color-on-surface-variant: #49454F;
+    /* Surface/Background - Warm Whites */
+    --md-sys-color-surface: #FDFBF7;
+    --md-sys-color-surface-dim: #F5F0E8;
+    --md-sys-color-surface-bright: #FFFFFF;
+    --md-sys-color-on-surface: #1A1A1A;
+    --md-sys-color-surface-variant: #F8F4EE;
+    --md-sys-color-on-surface-variant: #6B6B6B;
     --md-sys-color-surface-container-lowest: #FFFFFF;
-    --md-sys-color-surface-container-low: #F7F2FA;
-    --md-sys-color-surface-container: #F3EDF7;
-    --md-sys-color-surface-container-high: #ECE6F0;
-    --md-sys-color-surface-container-highest: #E6E0E9;
+    --md-sys-color-surface-container-low: #FDFBF7;
+    --md-sys-color-surface-container: #FAF7F2;
+    --md-sys-color-surface-container-high: #F5F0E8;
+    --md-sys-color-surface-container-highest: #EFE9E0;
 
-    /* Outline */
-    --md-sys-color-outline: #79747E;
-    --md-sys-color-outline-variant: #CAC4D0;
+    /* Outline - Subtle */
+    --md-sys-color-outline: rgba(0, 0, 0, 0.12);
+    --md-sys-color-outline-variant: rgba(0, 0, 0, 0.06);
 
     /* Error/Success */
-    --md-sys-color-error: #B3261E;
+    --md-sys-color-error: #BA1A1A;
     --md-sys-color-on-error: #FFFFFF;
     --md-sys-color-success: #2E7D32;
 
-    /* Extended M3 Feature Colors */
-    --md-sys-color-quiz: #7B1FA2;
-    --md-sys-color-on-quiz: #FFFFFF;
-    --md-sys-color-quiz-container: #F3E5F5;
-    --md-sys-color-paths: #2E7D32;
-    --md-sys-color-on-paths: #FFFFFF;
-    --md-sys-color-paths-container: #E8F5E9;
-    --md-sys-color-journal: #7B1FA2;
-    --md-sys-color-on-journal: #FFFFFF;
-    --md-sys-color-journal-container: #F3E5F5;
-    --md-sys-color-pilgrimage: #00838F;
-    --md-sys-color-on-pilgrimage: #FFFFFF;
-    --md-sys-color-pilgrimage-container: #E0F7FA;
-    --md-sys-color-jayanti: #E64A19;
-    --md-sys-color-on-jayanti: #FFFFFF;
-    --md-sys-color-jayanti-container: #FBE9E7;
+    /* ========== UNIFIED FEATURE COLORS (All saffron-based) ========== */
+    --md-sys-color-feature: var(--md-sys-color-primary);
+    --md-sys-color-on-feature: #FFFFFF;
+    --md-sys-color-feature-container: #FFFFFF;
 
-    /* ========== LEGACY COLOR ALIASES ========== */
-    /* Updated for light theme */
+    /* ========== NEW SPACING SCALE ========== */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+
+    /* ========== NEW SHADOW TOKENS (Apple-like subtle) ========== */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.03);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.08);
+
+    /* ========== LEGACY ALIASES (Updated) ========== */
     --saffron: var(--md-sys-color-primary);
-    --saffron-dark: #BF360C;
-    --ochre: #E65100;
+    --saffron-dark: #BF4B00;
+    --ochre: #E85D04;
     --terracotta: #D84315;
-    --indigo-deep: #1A237E;
-    --indigo-medium: #303F9F;
-    --gold: var(--md-sys-color-tertiary);
-    --lotus-pink: #C2185B;
+    --gold: #D4A574;
 
-    /* Tradition Colors */
-    --hindu-color: #E65100;
-    --sikh-color: #1565C0;
-    --jain-color: #F9A825;
+    /* Tradition Colors - All harmonious with saffron */
+    --hindu-color: #E85D04;
+    --sikh-color: #0077B6;
+    --jain-color: #D4A574;
+    --buddhist-color: #7C5CBF;
 
-    /* Clean Surface Effects (replacing glass) */
+    /* Clean Surface */
     --glass-bg: #FFFFFF;
-    --glass-border: #E0E0E0;
-    --glass-shadow: rgba(0, 0, 0, 0.08);
+    --glass-border: rgba(0, 0, 0, 0.06);
+    --glass-shadow: rgba(0, 0, 0, 0.04);
 
-    /* Text - Light Theme */
-    --text-primary: #1C1B1F;
-    --text-secondary: #49454F;
-    --text-muted: #79747E;
+    /* Text */
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-muted: #9B9B9B;
 
     /* ========== M3 MOTION TOKENS ========== */
     --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
@@ -152,14 +153,16 @@
     --reveal-distance: 30px;
     --reveal-duration: 0.6s;
     --reveal-delay: 0.1s;
-    /* ========== SPACING & SHAPE ========== */
+
+    /* ========== SHAPE TOKENS ========== */
     --md-sys-shape-corner-small: 8px;
     --md-sys-shape-corner-medium: 12px;
     --md-sys-shape-corner-large: 16px;
-    --md-sys-shape-corner-extra-large: 28px;
+    --md-sys-shape-corner-extra-large: 20px;
+    --md-sys-shape-corner-full: 100px;
 
-    /* Legacy aliases */
-    --radius: var(--md-sys-shape-corner-large);
+    /* Legacy */
+    --radius: var(--md-sys-shape-corner-extra-large);
     --radius-sm: var(--md-sys-shape-corner-small);
     --safe-top: max(20px, env(safe-area-inset-top));
 }
@@ -444,18 +447,17 @@ body {
     }
 }
 
+/* Tradition Cards - Clean White Design */
 .tradition-card {
     position: relative;
-    background: var(--md-sys-color-surface-container-low);
-    border: none;
-    border-radius: 24px;
-    padding: 24px 20px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--md-sys-shape-corner-extra-large);
+    padding: var(--space-md) var(--space-sm);
     text-align: center;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
-    overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    /* Consistent sizing for uniform layout */
+    transition: all 0.25s var(--md-sys-motion-easing-standard);
+    box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -463,121 +465,105 @@ body {
     min-height: 180px;
 }
 
-.tradition-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--tradition-color), transparent 80%);
-    opacity: 0.08;
-    transition: opacity 0.3s ease;
-}
-
 .tradition-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    background: var(--md-sys-color-surface-container);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(232, 93, 4, 0.2);
 }
 
-.tradition-card:hover::before {
-    opacity: 0.15;
+.tradition-card:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-xs);
 }
 
+/* Tradition Icon - Unified saffron */
 .tradition-icon {
-    font-size: 2.5rem;
-    margin-bottom: 16px;
-    color: var(--tradition-color, var(--saffron));
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-    transition: transform 0.3s ease;
+    font-size: 2.25rem;
+    margin-bottom: var(--space-sm);
+    color: var(--md-sys-color-primary);
+    transition: transform 0.2s ease;
 }
 
 .tradition-card:hover .tradition-icon {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
+/* Tradition Name */
 .tradition-name {
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: 600;
     margin-bottom: 4px;
     letter-spacing: -0.01em;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-primary);
 }
 
 .tradition-name-hi {
     font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 0.95rem;
-    color: var(--md-sys-color-on-surface-variant);
-    margin-bottom: 16px;
-    min-height: 1.2em;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
 }
 
+/* Tradition Count Badge - Unified */
 .tradition-count {
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--tradition-color);
-    background: rgba(255, 255, 255, 0.9);
+    color: var(--md-sys-color-primary);
+    background: var(--md-sys-color-primary-container);
     padding: 8px 16px;
-    border-radius: 100px;
+    border-radius: var(--md-sys-shape-corner-full);
     display: inline-block;
-    backdrop-filter: blur(4px);
     margin-top: auto;
-    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Stats Section */
-/* Stats Section - Premium Floating Pill */
+/* Stats Section - Clean Card */
 .stats-section {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    gap: 20px;
-    padding: 16px 24px;
-    background: rgba(255, 255, 255, 0.85);
-    /* Slightly more opaque for surface feel */
-    border-radius: 100px;
-    /* Pill shape */
-    margin: 0 auto 30px;
-    /* Center and add spacing */
-    max-width: 600px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    /* Soft shadow */
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: #FFFFFF;
+    border-radius: var(--md-sys-shape-corner-full);
+    margin: 0 auto var(--space-lg);
+    max-width: 500px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .stat-item {
     text-align: center;
     position: relative;
-    padding: 0 16px;
+    padding: 0 var(--space-sm);
 }
 
-/* Add dividers between stats */
+/* Dividers between stats */
 .stat-item:not(:last-child)::after {
     content: '';
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    height: 24px;
+    height: 20px;
     width: 1px;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.08);
 }
 
 .stat-number {
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--md-sys-color-primary);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    line-height: 1.3;
 }
 
 .stat-label {
-    font-size: 0.75rem;
-    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.7rem;
+    color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     font-weight: 500;
-    margin-top: 4px;
+    margin-top: 2px;
     display: block;
 }
 
@@ -1616,110 +1602,81 @@ select:focus-visible {
    PHASE 2 - Quiz, Achievements, Stories
    ============================================ */
 
-/* Home Action Buttons */
+/* Home Action Buttons - Clean Grid */
 .home-actions {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin: 20px 0;
+    gap: var(--space-sm);
+    margin: var(--space-xl) 0;
 }
 
 /* Desktop: 3 columns for action buttons */
 @media (min-width: 768px) {
     .home-actions {
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        gap: var(--space-sm);
     }
 }
 
-/* Action Cards (Feature Grid) - M3 Surface Style */
+/* Action Cards - Clean White Unified Design */
 .action-card {
-    background: var(--md-sys-color-surface-container-low);
-    border: none;
-    border-radius: 20px;
-    padding: 24px 16px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--md-sys-shape-corner-extra-large);
+    padding: var(--space-md);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: var(--space-xs);
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+    transition: all 0.25s var(--md-sys-motion-easing-standard);
     text-align: center;
     position: relative;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    box-shadow: var(--shadow-sm);
 }
 
 .action-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-    background: var(--md-sys-color-surface-container);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(232, 93, 4, 0.2);
 }
 
-.action-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: currentColor;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+.action-card:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-xs);
 }
 
-.action-card:hover::before {
-    opacity: 0.08;
-}
-
+/* Icon - Unified Saffron Color */
 .action-card i {
-    font-size: 2rem;
-    color: inherit;
-    /* Takes color from specific card class */
-    margin-bottom: 4px;
+    font-size: 1.75rem;
+    color: var(--md-sys-color-primary);
+    margin-bottom: var(--space-xs);
 }
 
+/* Hindi Title */
 .action-card span {
     font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-primary);
+    line-height: 1.3;
 }
 
+/* English Subtitle */
 .action-card small {
     font-size: 0.75rem;
-    color: var(--md-sys-color-on-surface-variant);
-    font-weight: 500;
+    color: var(--text-muted);
+    font-weight: 400;
 }
 
-/* Feature Specific Colors (Surface Tints) */
-.quiz-card {
-    color: var(--md-sys-color-quiz);
-    background: linear-gradient(135deg, #F3E5F5 0%, #FFFFFF 100%);
-}
-
-.achievements-card {
-    color: #F9A825;
-    /* Gold */
-    background: linear-gradient(135deg, #FFFDE7 0%, #FFFFFF 100%);
-}
-
-.paths-card {
-    color: var(--md-sys-color-paths);
-    background: linear-gradient(135deg, #E8F5E9 0%, #FFFFFF 100%);
-}
-
-.journal-card {
-    color: #5E35B1;
-    /* Deep Purple */
-    background: linear-gradient(135deg, #EDE7F6 0%, #FFFFFF 100%);
-}
-
-.pilgrimage-card {
-    color: var(--md-sys-color-pilgrimage);
-    background: linear-gradient(135deg, #E0F7FA 0%, #FFFFFF 100%);
-}
-
+/* All Feature Cards - Same White Background (No gradients) */
+.quiz-card,
+.achievements-card,
+.paths-card,
+.journal-card,
+.pilgrimage-card,
 .jayanti-card {
-    color: var(--md-sys-color-jayanti);
-    background: linear-gradient(135deg, #FBE9E7 0%, #FFFFFF 100%);
+    background: #FFFFFF;
 }
 
 /* Modal Overlay */
