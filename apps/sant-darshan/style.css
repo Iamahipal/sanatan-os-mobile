@@ -1741,7 +1741,7 @@ select:focus-visible {
     font-weight: 400;
 }
 
-/* All Feature Cards - Same White Background (No gradients) */
+/* All Feature Cards - Same White Background, Same Saffron Icons */
 .quiz-card,
 .achievements-card,
 .paths-card,
@@ -1749,6 +1749,20 @@ select:focus-visible {
 .pilgrimage-card,
 .jayanti-card {
     background: #FFFFFF;
+}
+
+/* Force ALL action card icons to saffron - ultra specific */
+.quiz-card i,
+.achievements-card i,
+.paths-card i,
+.journal-card i,
+.pilgrimage-card i,
+.jayanti-card i,
+.action-card i,
+.action-card .fa-solid,
+.action-card .fa-regular,
+.action-card [class^="fa-"] {
+    color: #E85D04 !important;
 }
 
 /* Modal Overlay */
