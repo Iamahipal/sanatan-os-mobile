@@ -238,6 +238,15 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+/* Screen Visibility - Critical for navigation */
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
 /* Prana Background - Hidden for light theme */
 .prana-bg {
     display: none;

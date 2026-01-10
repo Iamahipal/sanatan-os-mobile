@@ -603,6 +603,7 @@
         elements.homeScreen.classList.remove('active');
         elements.saintsListScreen.classList.remove('active');
         elements.saintDetailScreen.classList.remove('active');
+
         switch (screenName) {
             case 'home':
                 elements.homeScreen.classList.add('active');
@@ -616,6 +617,9 @@
                 elements.saintDetailScreen.classList.add('active');
                 break;
         }
+
+        // Scroll to top of main content area after screen switch
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function navigateBack() {
