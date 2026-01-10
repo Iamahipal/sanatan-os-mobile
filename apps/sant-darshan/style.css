@@ -321,8 +321,20 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
+/* Progress Banner - Header Gap Fix */
+#progress-banner,
+.progress-banner {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--md-sys-color-primary-container);
+    border-radius: var(--md-sys-shape-corner-large);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
 
-/* Today's Saint Card - M3 Hero */
+
 .today-saint-card {
     background: linear-gradient(135deg, #FFF3E0 0%, #FFFFFF 100%);
     border: none;
@@ -525,7 +537,7 @@ body {
     padding: var(--space-sm) var(--space-md);
     background: #FFFFFF;
     border-radius: var(--md-sys-shape-corner-full);
-    margin: 0 auto var(--space-lg);
+    margin: var(--space-lg) auto;
     max-width: 500px;
     box-shadow: var(--shadow-sm);
     border: 1px solid rgba(0, 0, 0, 0.06);
@@ -567,7 +579,7 @@ body {
     display: block;
 }
 
-/* Tradition Header */
+/* Tradition Header - Hide when empty */
 .tradition-header {
     display: flex;
     align-items: center;
@@ -577,6 +589,10 @@ body {
     border-radius: var(--radius);
     border: 1px solid var(--glass-border);
     margin-bottom: 16px;
+}
+
+.tradition-header:empty {
+    display: none;
 }
 
 .tradition-header-icon {
@@ -1649,7 +1665,7 @@ select:focus-visible {
 /* Icon - Unified Saffron Color */
 .action-card i {
     font-size: 1.75rem;
-    color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-primary) !important;
     margin-bottom: var(--space-xs);
 }
 
