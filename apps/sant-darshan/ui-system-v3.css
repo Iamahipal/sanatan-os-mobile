@@ -143,13 +143,6 @@
    Search bar at top of tradition view
    ============================================ */
 
-/* Saints List Screen Structure */
-#saints-list-screen {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
 /* Search Container - Sticky below header */
 .saints-search-container {
     position: sticky;
@@ -771,7 +764,299 @@ input:focus-visible {
 }
 
 /* ============================================
-   12. SMOOTH SCROLL & ANIMATIONS
+   12. GLOBAL SEARCH OVERLAY - FULL SCREEN
+   Professional search experience
+   ============================================ */
+
+/* Search Overlay - Full screen */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    background: var(--md-sys-color-surface, #FDFBF7);
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.search-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Search Container - Top bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px clamp(16px, 4vw, 24px);
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.search-container .search-icon {
+    color: var(--md-sys-color-primary, #E85D04);
+    font-size: 1.125rem;
+    flex-shrink: 0;
+}
+
+/* Search Input - Main global search */
+.search-container input,
+#search-input {
+    flex: 1;
+    padding: 14px 16px;
+    background: var(--md-sys-color-surface-container, #FAF7F2);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: 1rem;
+    color: var(--text-primary, #1A1A1A);
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.search-container input:focus,
+#search-input:focus {
+    outline: none;
+    border-color: var(--md-sys-color-primary, #E85D04);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(232, 93, 4, 0.1);
+}
+
+.search-container input::placeholder,
+#search-input::placeholder {
+    color: var(--text-muted, #9B9B9B);
+}
+
+/* Close Search Button */
+.close-search-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.04);
+    border: none;
+    border-radius: 12px;
+    color: var(--text-secondary, #6B6B6B);
+    cursor: pointer;
+    font-size: 1.125rem;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.close-search-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--text-primary, #1A1A1A);
+}
+
+/* Search Results Container */
+.search-results {
+    flex: 1;
+    overflow-y: auto;
+    padding: clamp(16px, 4vw, 24px);
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Search Results - Empty/Minimal State */
+.search-results:empty::before {
+    content: '';
+}
+
+.search-results p {
+    text-align: center;
+    color: var(--text-muted, #9B9B9B);
+    padding: 60px 20px;
+    font-size: 0.9375rem;
+}
+
+/* Search Result Cards */
+.search-results .saint-card {
+    margin-bottom: 12px !important;
+}
+
+/* ============================================
+   13. SCREEN VISIBILITY - CRITICAL
+   Ensure proper screen switching
+   ============================================ */
+
+/* Base screen state - hidden */
+.screen {
+    display: none !important;
+}
+
+/* Active screen - shown */
+.screen.active {
+    display: block !important;
+}
+
+/* Override for saints-list to use flex layout when active */
+#saints-list-screen.active {
+    display: flex !important;
+    flex-direction: column;
+}
+
+/* Saint detail screen when active */
+#saint-detail-screen.active {
+    display: block !important;
+}
+
+/* Home screen when active */
+#home-screen.active {
+    display: block !important;
+}
+
+/* ============================================
+   14. SAINT DETAIL SCREEN - FIX LAYOUT
+   Remove whitespace, proper structure
+   ============================================ */
+
+#saint-detail-screen {
+    min-height: 100vh;
+}
+
+.saint-detail-content {
+    padding-bottom: 40px;
+}
+
+/* Hero Section - Proper padding, no extra space */
+.saint-hero {
+    text-align: center;
+    padding: clamp(24px, 5vw, 40px) clamp(16px, 4vw, 24px);
+    margin: 0 calc(-1 * clamp(16px, 4vw, 24px));
+    margin-bottom: clamp(20px, 4vw, 28px);
+    background: linear-gradient(180deg,
+        rgba(var(--tradition-color-rgb, 232, 93, 4), 0.04) 0%,
+        transparent 100%);
+    position: relative;
+}
+
+/* Remove any pseudo-elements causing issues */
+.saint-hero::before,
+.saint-hero::after {
+    display: none !important;
+}
+
+/* Saint Avatar Large */
+.saint-avatar-large {
+    width: clamp(80px, 18vw, 100px);
+    height: clamp(80px, 18vw, 100px);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 600;
+    color: white;
+    margin: 0 auto 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Saint Detail Name */
+.saint-detail-name {
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 600;
+    color: var(--text-primary, #1A1A1A);
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+.saint-detail-name-local {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--md-sys-color-primary, #E85D04);
+    margin-bottom: 16px;
+}
+
+/* Tags */
+.saint-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.saint-tag {
+    padding: 6px 14px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 100px;
+    font-size: clamp(0.6875rem, 1.8vw, 0.8125rem);
+    color: var(--text-secondary, #6B6B6B);
+    font-weight: 500;
+}
+
+/* Favorite Button */
+.favorite-btn {
+    position: absolute;
+    top: 16px;
+    right: clamp(16px, 4vw, 24px);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+    color: var(--text-muted, #9B9B9B);
+    cursor: pointer;
+    font-size: 1.125rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.favorite-btn:hover {
+    transform: scale(1.05);
+}
+
+.favorite-btn.active {
+    color: #E53935;
+    background: #FFEBEE;
+    border-color: transparent;
+}
+
+/* Quote Block */
+.quote-block {
+    background: linear-gradient(135deg, rgba(232, 93, 4, 0.04) 0%, rgba(232, 93, 4, 0.08) 100%);
+    border-radius: 20px;
+    padding: clamp(20px, 4vw, 28px);
+    margin-bottom: clamp(20px, 4vw, 24px);
+    position: relative;
+}
+
+.quote-text {
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--text-primary, #1A1A1A);
+    margin-bottom: 12px;
+}
+
+.quote-source {
+    font-size: clamp(0.8125rem, 2vw, 0.875rem);
+    color: var(--md-sys-color-primary, #E85D04);
+    font-weight: 500;
+}
+
+/* Detail Sections */
+.detail-section {
+    margin-bottom: clamp(24px, 5vw, 32px);
+}
+
+.detail-section-content {
+    font-size: clamp(0.9375rem, 2.2vw, 1rem);
+    line-height: 1.7;
+    color: var(--text-secondary, #4A4A4A);
+}
+
+/* ============================================
+   15. SMOOTH SCROLL & ANIMATIONS
    ============================================ */
 
 html {
