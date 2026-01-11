@@ -495,6 +495,18 @@
     background: var(--habit-color, var(--primary));
 }
 
+/* Missed day - faded red for days habit was due but not done */
+.grid-cell.level-missed {
+    background: var(--danger);
+    opacity: 0.4;
+}
+
+/* Skipped day - orange */
+.grid-cell.level-skipped {
+    background: var(--warning);
+    opacity: 0.6;
+}
+
 /* ===== LIST VIEW ===== */
 
 .list-item {
