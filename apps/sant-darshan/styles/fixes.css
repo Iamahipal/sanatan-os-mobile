@@ -1,0 +1,466 @@
+/**
+ * Sant Darshan App - UI Fixes & Material Design 3 Improvements
+ * Addresses spacing, consistency, and modern design patterns
+ */
+
+/* ===== MATERIAL DESIGN 3 STATE LAYERS ===== */
+
+/* State layer for interactive elements */
+.state-layer {
+    position: relative;
+    overflow: hidden;
+}
+
+.state-layer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-standard);
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.state-layer:hover::before {
+    opacity: 0.08;
+}
+
+.state-layer:focus-visible::before {
+    opacity: 0.12;
+}
+
+.state-layer:active::before {
+    opacity: 0.12;
+}
+
+/* ===== UNIFIED ACTION CARDS ===== */
+
+/* Reset all action card variants to unified style */
+.action-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+    padding: var(--space-4) 0;
+}
+
+@media (max-width: 600px) {
+    .action-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Unified action card - Material Design 3 filled tonal style */
+.action-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-4);
+    background: var(--surface-container-low);
+    border-radius: var(--radius-xl); /* Consistent radius */
+    border: 1px solid transparent; /* No colored borders */
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-standard);
+    text-align: center;
+    min-height: 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Remove all variant-specific colored borders */
+.action-card[data-action="quiz"],
+.action-card[data-action="achievements"],
+.action-card[data-action="paths"],
+.action-card[data-action="journal"],
+.action-card[data-action="pilgrimage"],
+.action-card[data-action="jayanti"] {
+    border-color: transparent;
+    border-left: none;
+}
+
+/* Modern hover state - subtle elevation + tint */
+.action-card:hover {
+    background: var(--surface-container);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(232, 93, 4, 0.08);
+}
+
+.action-card:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Action card icon - unified saffron */
+.action-card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-2xl);
+    color: var(--primary-color);
+    background: none; /* Remove background, icon only */
+}
+
+/* Action card text */
+.action-card-title {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    font-family: var(--font-hindi);
+    margin-bottom: var(--space-1);
+}
+
+.action-card-subtitle {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    font-weight: var(--font-normal);
+}
+
+/* ===== TODAY'S SAINT CARD - MODERN STYLE ===== */
+
+.today-saint-card {
+    background: var(--surface-container);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-standard);
+    border: 1px solid var(--divider);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Modern hover - no gradient glow */
+.today-saint-card:hover {
+    background: var(--surface-container-high);
+    border-color: var(--primary-light);
+    box-shadow: 0 4px 16px rgba(232, 93, 4, 0.1);
+}
+
+/* Remove old gradient glow effect */
+.today-saint-card::before {
+    display: none !important;
+}
+
+.today-saint-card:hover::after {
+    display: none !important;
+}
+
+/* Today saint header label */
+.today-saint-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+}
+
+.today-saint-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.today-saint-label-hi {
+    font-family: var(--font-hindi);
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+/* Chevron arrow */
+.today-saint-card .saint-arrow {
+    position: absolute;
+    right: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.today-saint-card:hover .saint-arrow {
+    transform: translateY(-50%) translateX(4px);
+    color: var(--primary-color);
+}
+
+/* ===== STATS SECTION - FIXED SPACING ===== */
+
+.stats-section {
+    padding: var(--space-5) 0; /* Equal top and bottom */
+    margin: var(--space-4) 0; /* Equal margins */
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 0;
+    background: var(--surface-container-low);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4) var(--space-6);
+    border: 1px solid var(--divider);
+}
+
+.stat-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-4);
+    position: relative;
+}
+
+/* Divider between stats */
+.stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 32px;
+    width: 1px;
+    background: var(--divider);
+}
+
+.stat-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ===== SECTION SPACING CONSISTENCY ===== */
+
+.home-section {
+    margin-bottom: var(--space-6);
+}
+
+.home-section:last-child {
+    margin-bottom: var(--space-4);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+    padding: 0 var(--space-1);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--primary-color);
+}
+
+.section-title i {
+    font-size: var(--text-sm);
+}
+
+/* ===== TRADITION CARDS - IMPROVED ===== */
+
+.traditions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+}
+
+@media (max-width: 600px) {
+    .traditions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.tradition-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-5) var(--space-3);
+    background: var(--surface-bright);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--divider);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-standard);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Tradition gradient top accent */
+.tradition-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--tradition-gradient, var(--hindu-gradient));
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.tradition-card:hover::before {
+    opacity: 1;
+}
+
+.tradition-card:hover {
+    border-color: var(--tradition-color, var(--primary-color));
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+/* ===== FAVORITES SECTION ===== */
+
+.favorites-scroll {
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    padding: var(--space-2) 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.favorites-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.favorite-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    min-width: 80px;
+    cursor: pointer;
+    border-radius: var(--radius-lg);
+    transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.favorite-card:hover {
+    background: var(--surface-container-low);
+}
+
+/* ===== PROGRESS CARD ===== */
+
+.progress-card {
+    background: var(--surface-container-low);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    margin-bottom: var(--space-5);
+    border: 1px solid var(--divider);
+}
+
+.progress-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+}
+
+.progress-ring-container {
+    position: relative;
+}
+
+.progress-text {
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    color: var(--primary-color);
+}
+
+.progress-info h3 {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.progress-info p {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+}
+
+.progress-bar-container {
+    height: 6px;
+    background: var(--surface-variant);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    border-radius: var(--radius-full);
+    transition: width var(--duration-slow) var(--ease-decelerate);
+}
+
+/* ===== RESPONSIVE IMPROVEMENTS ===== */
+
+@media (max-width: 480px) {
+    .action-cards-grid {
+        gap: var(--space-2);
+    }
+
+    .action-card {
+        padding: var(--space-4) var(--space-3);
+        min-height: 100px;
+    }
+
+    .action-card-icon {
+        width: 40px;
+        height: 40px;
+        font-size: var(--text-xl);
+    }
+
+    .stats-container {
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .stat-value {
+        font-size: var(--text-xl);
+    }
+}
+
+/* ===== TOUCH TARGETS ===== */
+
+/* Ensure minimum 44px touch targets */
+.action-card,
+.tradition-card,
+.favorite-card,
+.saint-card,
+.today-saint-card {
+    min-height: 44px;
+}
+
+button,
+[role="button"],
+a {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* ===== FOCUS STATES FOR ACCESSIBILITY ===== */
+
+.action-card:focus-visible,
+.tradition-card:focus-visible,
+.today-saint-card:focus-visible,
+.saint-card:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
