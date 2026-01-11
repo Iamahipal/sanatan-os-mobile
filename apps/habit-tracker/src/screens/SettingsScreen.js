@@ -151,8 +151,8 @@ export class SettingsScreen extends Component {
     }
 
     afterRender() {
-        // Back button
-        this.on('#back-btn', 'click', () => Router.back());
+        // Back button - always go to dashboard
+        this.on('#back-btn', 'click', () => navigate('/'));
 
         // Theme toggle
         this.on('#theme-toggle', 'click', (e) => {

@@ -59,7 +59,10 @@ class RouterClass {
      */
     handleHashChange() {
         const hash = window.location.hash.slice(1) || '/';
-        this.navigateTo(hash);
+        // Avoid re-navigation if we're already on this route
+        if (hash !== this.currentRoute) {
+            this.navigateTo(hash, false);
+        }
     }
 
     /**
@@ -75,14 +78,14 @@ class RouterClass {
 
         if (!route) {
             console.warn(`Route not found: ${path}, redirecting to /`);
-            this.navigateTo('/');
+            window.location.hash = '#/';
             return;
         }
 
         // Auth guard
         if (route.requiresAuth && !Store.getProperty('user')) {
             console.warn('Route requires auth, redirecting to /');
-            this.navigateTo('/');
+            window.location.hash = '#/';
             return;
         }
 
@@ -107,13 +110,17 @@ class RouterClass {
                 await screen.mount();
             }
 
+            // Track previous route for back navigation
+            if (this.currentRoute && this.currentRoute !== path) {
+                this.previousRoute = this.currentRoute;
+            }
+
             // Update state
             this.currentRoute = path;
-            this.history.push(path);
 
-            // Update browser history
-            if (addToHistory && path !== '/') {
-                history.pushState({ route: path }, '', `#${path}`);
+            // Update browser history (only for forward navigation)
+            if (addToHistory && path !== this.previousRoute) {
+                window.history.pushState({ route: path }, '', `#${path}`);
             }
 
             // Update document title
@@ -129,15 +136,15 @@ class RouterClass {
     }
 
     /**
-     * Navigate back
+     * Navigate back - uses browser history for proper back navigation
      */
     back() {
-        if (this.history.length > 1) {
-            this.history.pop(); // Remove current
-            const previous = this.history.pop(); // Get previous (will be re-added)
-            this.navigateTo(previous);
+        // If we have a previous route and it's not onboarding, go there
+        if (this.previousRoute && this.previousRoute !== '/onboarding') {
+            window.history.back();
         } else {
-            this.navigateTo('/');
+            // Otherwise go to dashboard
+            window.location.hash = '#/';
         }
     }
 
