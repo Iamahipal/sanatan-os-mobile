@@ -14,19 +14,22 @@ export class OnboardingScreen extends Component {
         this.currentSlide = 0;
         this.slides = [
             {
-                icon: 'heart-handshake',
+                icon: 'sparkles',
+                color: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
                 title: 'Welcome to Niyam',
-                description: 'Build a better you with beautiful streaks, powerful insights, and daily rituals that stick.'
+                description: 'Build life-changing habits with beautiful streaks and insights.'
             },
             {
-                icon: 'check-circle-2',
-                title: 'Track Every Day',
-                description: 'One tap to mark done. Watch your streaks grow and never break the chain.'
+                icon: 'target',
+                color: 'linear-gradient(135deg, #10B981 0%, #34D399 100%)',
+                title: 'Track Daily',
+                description: 'One tap to log. Never break the chain.'
             },
             {
-                icon: 'trending-up',
-                title: 'See Your Growth',
-                description: 'Beautiful grids reveal your progress over weeks, months, and years.'
+                icon: 'bar-chart-3',
+                color: 'linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%)',
+                title: 'See Growth',
+                description: 'Visual progress over weeks, months, and years.'
             }
         ];
     }
@@ -38,7 +41,7 @@ export class OnboardingScreen extends Component {
                     ${this.slides.map((slide, i) => `
                         <div class="onboarding-slide ${i === 0 ? 'active' : ''}" data-slide="${i}">
                             <div class="slide-content">
-                                <div class="slide-icon">
+                                <div class="slide-icon-container" style="background: ${slide.color};">
                                     <i data-lucide="${slide.icon}"></i>
                                 </div>
                                 <h1>${slide.title}</h1>

@@ -34,13 +34,14 @@
 /* ===== ONBOARDING SCREEN ===== */
 
 .onboarding-screen {
-    background: linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 100%);
+    background: var(--bg-primary);
     position: relative;
     overflow: hidden;
 }
 
-.onboarding-screen::before,
-.onboarding-screen::after {
+/* Subtle gradient orbs - only in dark mode */
+.theme-dark .onboarding-screen::before,
+.theme-dark .onboarding-screen::after {
     content: '';
     position: absolute;
     border-radius: 50%;
@@ -49,7 +50,7 @@
     pointer-events: none;
 }
 
-.onboarding-screen::before {
+.theme-dark .onboarding-screen::before {
     width: 300px;
     height: 300px;
     background: var(--primary);
@@ -58,7 +59,7 @@
     animation: float 8s ease-in-out infinite;
 }
 
-.onboarding-screen::after {
+.theme-dark .onboarding-screen::after {
     width: 250px;
     height: 250px;
     background: var(--habit-purple);
@@ -98,12 +99,14 @@
     opacity: 0;
     transform: translateX(30px);
     transition: opacity var(--duration-medium) var(--easing-standard),
-        transform var(--duration-medium) var(--easing-emphasized);
+        transform var(--duration-medium) var(--easing-standard);
+    pointer-events: none;
 }
 
 .onboarding-slide.active {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .onboarding-slide.exit {
@@ -113,41 +116,61 @@
 
 .slide-content {
     text-align: center;
-    color: white;
     max-width: 320px;
     z-index: 1;
 }
 
+/* Premium Icon Container with Gradient */
+.slide-icon-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto var(--space-6);
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.slide-icon-container svg {
+    width: 48px;
+    height: 48px;
+    color: white;
+}
+
+/* Fallback for old class */
 .slide-icon {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto var(--space-8);
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    border-radius: var(--radius-xl);
+    width: 100px;
+    height: 100px;
+    margin: 0 auto var(--space-6);
+    background: var(--primary);
+    border-radius: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .slide-icon svg {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     color: white;
 }
 
 .slide-content h1 {
-    font-size: var(--text-2xl);
-    color: white;
-    margin-bottom: var(--space-4);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
     text-align: center;
 }
 
 .slide-content p {
-    font-size: var(--text-base);
-    color: rgba(255, 255, 255, 0.8);
-    line-height: var(--leading-relaxed);
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.5;
     text-align: center;
+    max-width: 280px;
+    margin: 0 auto;
 }
 
 .onboarding-nav {

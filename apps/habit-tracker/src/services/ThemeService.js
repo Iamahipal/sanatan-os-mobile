@@ -47,7 +47,7 @@ export const ThemeService = {
      * @returns {string}
      */
     getCurrent() {
-        return Store.getProperty('theme') || 'dark';
+        return Store.getProperty('theme') || 'light';
     },
 
     /**
