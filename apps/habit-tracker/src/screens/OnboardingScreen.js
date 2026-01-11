@@ -14,17 +14,17 @@ export class OnboardingScreen extends Component {
         this.currentSlide = 0;
         this.slides = [
             {
-                icon: '🙏',
+                icon: 'heart-handshake',
                 title: 'Welcome to Niyam',
                 description: 'Build a better you with beautiful streaks, powerful insights, and daily rituals that stick.'
             },
             {
-                icon: '✅',
+                icon: 'check-circle-2',
                 title: 'Track Every Day',
                 description: 'One tap to mark done. Watch your streaks grow and never break the chain.'
             },
             {
-                icon: '📊',
+                icon: 'trending-up',
                 title: 'See Your Growth',
                 description: 'Beautiful grids reveal your progress over weeks, months, and years.'
             }
@@ -38,7 +38,9 @@ export class OnboardingScreen extends Component {
                     ${this.slides.map((slide, i) => `
                         <div class="onboarding-slide ${i === 0 ? 'active' : ''}" data-slide="${i}">
                             <div class="slide-content">
-                                <div class="slide-icon">${slide.icon}</div>
+                                <div class="slide-icon">
+                                    <i data-lucide="${slide.icon}"></i>
+                                </div>
                                 <h1>${slide.title}</h1>
                                 <p>${slide.description}</p>
                             </div>
@@ -47,7 +49,7 @@ export class OnboardingScreen extends Component {
                 </div>
                 
                 <div class="onboarding-nav">
-                    <button class="nav-btn skip-btn" id="skip-btn" aria-label="Skip onboarding">
+                    <button class="skip-btn" id="skip-btn" aria-label="Skip onboarding">
                         Skip
                     </button>
                     
@@ -57,8 +59,8 @@ export class OnboardingScreen extends Component {
                         `).join('')}
                     </div>
                     
-                    <button class="nav-btn next-btn" id="next-btn" aria-label="Next slide">
-                        →
+                    <button class="next-btn" id="next-btn" aria-label="Next slide">
+                        <i data-lucide="arrow-right"></i>
                     </button>
                 </div>
             </div>
@@ -80,6 +82,11 @@ export class OnboardingScreen extends Component {
 
         // Swipe support
         this.setupSwipe();
+
+        // Initialize Lucide icons
+        if (window.lucide) {
+            lucide.createIcons();
+        }
     }
 
     setupSwipe() {
@@ -125,11 +132,16 @@ export class OnboardingScreen extends Component {
         // Update button
         const nextBtn = this.find('#next-btn');
         if (index === this.slides.length - 1) {
-            nextBtn.textContent = '✓';
+            nextBtn.innerHTML = '<i data-lucide="check"></i>';
             nextBtn.setAttribute('aria-label', 'Complete onboarding');
         } else {
-            nextBtn.textContent = '→';
+            nextBtn.innerHTML = '<i data-lucide="arrow-right"></i>';
             nextBtn.setAttribute('aria-label', 'Next slide');
+        }
+
+        // Re-initialize icons
+        if (window.lucide) {
+            lucide.createIcons();
         }
 
         this.currentSlide = index;

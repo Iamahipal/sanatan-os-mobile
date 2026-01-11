@@ -15,6 +15,7 @@ export class DashboardScreen extends Component {
     constructor() {
         super();
         this.selectedDate = Store.getProperty('selectedDate') || new Date();
+        this.currentView = 'grid'; // 'grid', 'list', or 'stats'
     }
 
     template() {
@@ -226,6 +227,14 @@ export class DashboardScreen extends Component {
         });
         this.registerCleanup(unsubscribe);
 
+        // Nav tab click handlers for view switching
+        this.delegate('click', '.nav-tab', (e, el) => {
+            const view = el.dataset.view;
+            if (view && view !== this.currentView) {
+                this.switchView(view);
+            }
+        });
+
         // Init Lucide icons
         this.initIcons();
     }
@@ -277,5 +286,145 @@ export class DashboardScreen extends Component {
         if (window.lucide) {
             setTimeout(() => lucide.createIcons(), 10);
         }
+    }
+
+    switchView(view) {
+        this.currentView = view;
+
+        // Update nav tabs
+        this.findAll('.nav-tab').forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.view === view);
+        });
+
+        // Update content
+        const list = this.find('#habit-list');
+        if (!list) return;
+
+        const habits = HabitService.getAll().filter(h => !h.archived);
+
+        if (view === 'list') {
+            list.innerHTML = habits.length > 0
+                ? this.renderListView(habits)
+                : this.renderEmptyState();
+        } else if (view === 'stats') {
+            list.innerHTML = this.renderStatsView(habits);
+        } else {
+            // Grid view (default)
+            list.innerHTML = habits.length > 0
+                ? habits.map(h => this.renderHabitCard(h)).join('')
+                : this.renderEmptyState();
+        }
+
+        this.initIcons();
+    }
+
+    renderListView(habits) {
+        return habits.map(habit => {
+            const dateKey = DateUtils.getDateKey(this.selectedDate);
+            const entry = habit.entries?.[dateKey];
+            const isCompleted = entry?.status === 'completed';
+            const isSkipped = entry?.status === 'skipped';
+            const streak = HabitService.calculateStreak(habit);
+
+            return `
+                <div class="list-item" 
+                     data-habit-id="${habit.id}"
+                     style="--habit-color: ${habit.color}">
+                    <div class="list-item-left">
+                        <button class="habit-toggle ${isCompleted ? 'completed' : ''} ${isSkipped ? 'skipped' : ''}"
+                                data-action="toggle"
+                                data-habit-id="${habit.id}"
+                                style="background: ${isCompleted ? habit.color : 'var(--bg-level-2)'}"
+                                aria-label="Toggle ${habit.name}">
+                            ${isCompleted ? '✓' : isSkipped ? '−' : '○'}
+                        </button>
+                        <div class="list-item-info">
+                            <div class="list-item-name">${habit.name}</div>
+                            <div class="list-item-streak">
+                                ${streak > 0 ? `🔥 ${streak} day streak` : 'Start today!'}
+                            </div>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" style="color: var(--text-tertiary)"></i>
+                </div>
+            `;
+        }).join('');
+    }
+
+    renderStatsView(habits) {
+        const totalHabits = habits.length;
+        const today = DateUtils.getDateKey(new Date());
+
+        // Calculate today's completion
+        let completedToday = 0;
+        habits.forEach(habit => {
+            if (habit.entries?.[today]?.status === 'completed') {
+                completedToday++;
+            }
+        });
+
+        // Calculate overall stats
+        let totalCompletions = 0;
+        let longestStreak = 0;
+
+        habits.forEach(habit => {
+            const entries = habit.entries || {};
+            totalCompletions += Object.values(entries).filter(e => e.status === 'completed').length;
+            const streak = HabitService.calculateStreak(habit);
+            if (streak > longestStreak) longestStreak = streak;
+        });
+
+        const completionRate = totalHabits > 0 ? Math.round((completedToday / totalHabits) * 100) : 0;
+
+        return `
+            <div class="stats-container">
+                <div class="stats-header">
+                    <h2>Today's Progress</h2>
+                    <div class="stats-progress-ring">
+                        <span class="stats-percentage">${completionRate}%</span>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--habit-blue)">
+                            <i data-lucide="check-circle-2"></i>
+                        </div>
+                        <div class="stat-value">${completedToday}/${totalHabits}</div>
+                        <div class="stat-label">Completed Today</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--habit-orange)">
+                            <i data-lucide="flame"></i>
+                        </div>
+                        <div class="stat-value">${longestStreak}</div>
+                        <div class="stat-label">Best Streak</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--habit-green)">
+                            <i data-lucide="trophy"></i>
+                        </div>
+                        <div class="stat-value">${totalCompletions}</div>
+                        <div class="stat-label">Total Completions</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--habit-purple)">
+                            <i data-lucide="target"></i>
+                        </div>
+                        <div class="stat-value">${totalHabits}</div>
+                        <div class="stat-label">Active Habits</div>
+                    </div>
+                </div>
+                
+                ${totalHabits === 0 ? `
+                    <div class="stats-empty">
+                        <p>Create habits to see your statistics!</p>
+                    </div>
+                ` : ''}
+            </div>
+        `;
     }
 }
