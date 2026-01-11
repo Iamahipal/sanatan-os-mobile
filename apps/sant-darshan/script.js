@@ -317,8 +317,52 @@
         todaySaintCard: document.getElementById('today-saint-card'),
         wisdomQuote: document.getElementById('wisdom-quote'),
         favoritesSection: document.getElementById('favorites-section'),
-        favoritesCarousel: document.getElementById('favorites-carousel')
+        favoritesCarousel: document.getElementById('favorites-carousel'),
+        saintsSearchInput: document.getElementById('saints-search-input'),
+        saintsSearchClear: document.getElementById('saints-search-clear'),
+        saintsCount: document.getElementById('saints-count')
     };
+
+    // ========== SAINTS LIST SEARCH ==========
+    let saintsSearchQuery = '';
+
+    function setupSaintsListSearch() {
+        if (!elements.saintsSearchInput) return;
+
+        elements.saintsSearchInput.addEventListener('input', function(e) {
+            saintsSearchQuery = e.target.value.trim().toLowerCase();
+            updateSaintsSearchClear();
+            if (currentTradition) {
+                renderSaintsList(currentTradition.id);
+            }
+        });
+
+        if (elements.saintsSearchClear) {
+            elements.saintsSearchClear.addEventListener('click', function() {
+                saintsSearchQuery = '';
+                elements.saintsSearchInput.value = '';
+                updateSaintsSearchClear();
+                if (currentTradition) {
+                    renderSaintsList(currentTradition.id);
+                }
+                elements.saintsSearchInput.focus();
+            });
+        }
+    }
+
+    function updateSaintsSearchClear() {
+        if (elements.saintsSearchClear) {
+            elements.saintsSearchClear.classList.toggle('visible', saintsSearchQuery.length > 0);
+        }
+    }
+
+    function clearSaintsSearch() {
+        saintsSearchQuery = '';
+        if (elements.saintsSearchInput) {
+            elements.saintsSearchInput.value = '';
+        }
+        updateSaintsSearchClear();
+    }
 
     // ========== RENDER FUNCTIONS ==========
     function renderFavoritesSection() {
@@ -464,6 +508,7 @@
     function showTradition(traditionId) {
         currentTradition = TRADITIONS[traditionId];
         currentFilter = 'all';
+        clearSaintsSearch(); // Clear search when entering tradition
         navigationStack.push('home');
         elements.pageTitle.textContent = currentTradition.nameHi;
         elements.pageSubtitle.textContent = currentTradition.name;
@@ -496,6 +541,32 @@
     function renderSaintsList(traditionId) {
         let saints = SAINTS.filter(s => s.tradition === traditionId);
         if (currentFilter !== 'all') saints = saints.filter(s => s.sampradaya === currentFilter);
+
+        // Apply search filter
+        if (saintsSearchQuery) {
+            saints = saints.filter(saint => {
+                const searchIn = [
+                    saint.name,
+                    saint.nameHi,
+                    saint.nameLocal,
+                    saint.sampradaya,
+                    saint.birthPlace,
+                    saint.period
+                ].filter(Boolean).join(' ').toLowerCase();
+                return searchIn.includes(saintsSearchQuery);
+            });
+        }
+
+        // Update count display
+        const totalInTradition = SAINTS.filter(s => s.tradition === traditionId).length;
+        if (elements.saintsCount) {
+            if (saintsSearchQuery || currentFilter !== 'all') {
+                elements.saintsCount.textContent = `Showing ${saints.length} of ${totalInTradition} saints`;
+            } else {
+                elements.saintsCount.textContent = `${totalInTradition} saints`;
+            }
+        }
+
         const saintsHtml = saints.map(saint => {
             const explored = isExplored(saint.id);
             return `<div class="saint-card ${explored ? 'explored' : ''}" data-saint="${saint.id}">
@@ -509,7 +580,7 @@
                 <i class="fa-solid fa-chevron-right saint-arrow"></i>
             </div>`;
         }).join('');
-        elements.saintsList.innerHTML = saintsHtml || '<p style="text-align:center; color: var(--text-muted);">No saints found</p>';
+        elements.saintsList.innerHTML = saintsHtml || '<p style="text-align:center; color: var(--text-muted); padding: 40px 20px;">No saints found matching your search.</p>';
         elements.saintsList.querySelectorAll('.saint-card').forEach(card => {
             card.addEventListener('click', () => showSaintDetail(card.dataset.saint));
         });
@@ -1768,6 +1839,7 @@
         setupPhase2Listeners();
         setupPhase3Listeners();
         setupPhase4Listeners();
+        setupSaintsListSearch(); // Setup search in saints list
         updateAchievementsPreview();
         checkAchievements();
 
