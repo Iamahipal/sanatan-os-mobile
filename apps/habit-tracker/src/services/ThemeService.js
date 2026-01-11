@@ -12,10 +12,9 @@ export const ThemeService = {
      * Initialize theme from stored preference or system
      */
     init() {
-        // Get stored theme or detect system preference
+        // Get stored theme - default to light if not set
         const stored = Store.getProperty('theme');
-        const system = this.getSystemTheme();
-        const theme = stored || system;
+        const theme = stored || 'light';
 
         this.apply(theme);
 
