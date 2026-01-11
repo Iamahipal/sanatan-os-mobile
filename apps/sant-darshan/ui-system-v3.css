@@ -1,0 +1,787 @@
+/* ============================================
+   SANT DARSHAN - PROFESSIONAL UI SYSTEM v3
+   Material Design 3 + Dynamic Responsive Layout
+   ============================================ */
+
+/* ============================================
+   1. DYNAMIC CONTAINER SYSTEM
+   Proper max-widths for all screen sizes
+   ============================================ */
+
+/* Base container - centers content with proper max-widths */
+.app-container,
+.main-content,
+.app-content,
+#main-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: clamp(16px, 4vw, 24px);
+    padding-right: clamp(16px, 4vw, 24px);
+}
+
+/* Desktop: Constrain width for readability */
+@media (min-width: 768px) {
+    .app-container,
+    .main-content,
+    .app-content,
+    #main-content {
+        max-width: 720px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .app-container,
+    .main-content,
+    .app-content,
+    #main-content {
+        max-width: 800px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .app-container,
+    .main-content,
+    .app-content,
+    #main-content {
+        max-width: 900px;
+    }
+}
+
+/* Full-width sections within constrained container */
+.full-width-section {
+    margin-left: calc(-1 * clamp(16px, 4vw, 24px));
+    margin-right: calc(-1 * clamp(16px, 4vw, 24px));
+    padding-left: clamp(16px, 4vw, 24px);
+    padding-right: clamp(16px, 4vw, 24px);
+}
+
+/* ============================================
+   2. MD3 TYPOGRAPHY HIERARCHY
+   Display > Headline > Title > Body > Label
+   ============================================ */
+
+/* App Title - Display */
+.app-title,
+.page-title-main {
+    font-family: 'Google Sans Flex', 'Tiro Devanagari Sanskrit', serif;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-primary, #1A1A1A);
+}
+
+/* Section Headers - Headline */
+.section-title,
+.detail-section-title {
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0;
+    color: var(--md-sys-color-primary, #E85D04);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: clamp(12px, 3vw, 16px);
+}
+
+.section-title i,
+.detail-section-title i {
+    font-size: 0.9em;
+}
+
+/* Card Titles - Title */
+.card-title,
+.saint-name,
+.tradition-name {
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary, #1A1A1A);
+}
+
+/* Body Text */
+.body-text,
+.saint-meta,
+.description {
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text-secondary, #6B6B6B);
+}
+
+/* Labels - Small text */
+.label-text,
+.badge-text,
+.filter-chip {
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: clamp(0.6875rem, 1.8vw, 0.8125rem);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+}
+
+/* Hindi Text */
+[lang="hi"],
+.hindi-text,
+.name-hi,
+.saint-name-local,
+.tradition-name-hi {
+    font-family: 'Tiro Devanagari Sanskrit', 'Noto Sans Devanagari', serif;
+}
+
+/* ============================================
+   3. SAINTS LIST WITH SEARCH
+   Search bar at top of tradition view
+   ============================================ */
+
+/* Saints List Screen Structure */
+#saints-list-screen {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Search Container - Sticky below header */
+.saints-search-container {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(253, 251, 247, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 12px clamp(16px, 4vw, 24px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    margin: 0 calc(-1 * clamp(16px, 4vw, 24px));
+}
+
+.saints-search-wrapper {
+    position: relative;
+    max-width: 100%;
+}
+
+.saints-search-input {
+    width: 100%;
+    padding: 12px 16px 12px 44px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: 0.9375rem;
+    color: var(--text-primary, #1A1A1A);
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.saints-search-input:focus {
+    outline: none;
+    border-color: var(--md-sys-color-primary, #E85D04);
+    box-shadow: 0 0 0 3px rgba(232, 93, 4, 0.1);
+}
+
+.saints-search-input::placeholder {
+    color: var(--text-muted, #9B9B9B);
+}
+
+.saints-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted, #9B9B9B);
+    font-size: 0.9375rem;
+    pointer-events: none;
+}
+
+.saints-search-clear {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.06);
+    border: none;
+    border-radius: 50%;
+    color: var(--text-secondary, #6B6B6B);
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.saints-search-clear.visible {
+    display: flex;
+}
+
+/* Search Results Count */
+.saints-count {
+    font-size: 0.75rem;
+    color: var(--text-muted, #9B9B9B);
+    margin-top: 8px;
+    padding-left: 4px;
+}
+
+/* ============================================
+   4. TRADITION HEADER - CLEANER
+   ============================================ */
+
+.tradition-header {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 3vw, 16px);
+    padding: clamp(16px, 4vw, 20px) 0;
+    margin-bottom: clamp(8px, 2vw, 12px);
+}
+
+.tradition-header-icon {
+    width: clamp(48px, 10vw, 56px);
+    height: clamp(48px, 10vw, 56px);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    flex-shrink: 0;
+}
+
+.tradition-header-text h2 {
+    font-size: clamp(1.125rem, 3vw, 1.375rem);
+    font-weight: 600;
+    color: var(--text-primary, #1A1A1A);
+    margin-bottom: 4px;
+}
+
+.tradition-header-text p {
+    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
+    color: var(--text-secondary, #6B6B6B);
+    line-height: 1.4;
+}
+
+/* ============================================
+   5. FILTER CHIPS - MD3 STYLE
+   ============================================ */
+
+#sampradaya-filter,
+.sampradaya-filter {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 0 12px 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-bottom: clamp(12px, 3vw, 16px);
+}
+
+#sampradaya-filter::-webkit-scrollbar,
+.sampradaya-filter::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-chip {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 100px;
+    font-size: clamp(0.75rem, 2vw, 0.8125rem);
+    font-weight: 500;
+    color: var(--text-secondary, #6B6B6B);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.filter-chip:hover {
+    background: rgba(232, 93, 4, 0.04);
+    border-color: rgba(232, 93, 4, 0.2);
+}
+
+.filter-chip.active {
+    background: var(--tradition-color, var(--md-sys-color-primary, #E85D04));
+    border-color: transparent;
+    color: #FFFFFF;
+}
+
+/* ============================================
+   6. SAINT CARDS - REFINED
+   ============================================ */
+
+.saint-card {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 3vw, 16px);
+    padding: clamp(12px, 3vw, 16px);
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+    margin-bottom: clamp(8px, 2vw, 12px);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.saint-card:hover {
+    border-color: rgba(232, 93, 4, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+}
+
+.saint-card:active {
+    transform: translateY(0);
+}
+
+.saint-avatar {
+    width: clamp(44px, 10vw, 52px);
+    height: clamp(44px, 10vw, 52px);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.9375rem, 2.5vw, 1.125rem);
+    font-weight: 600;
+    color: white;
+    flex-shrink: 0;
+}
+
+.saint-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.saint-name {
+    font-size: clamp(0.9375rem, 2.5vw, 1rem);
+    font-weight: 600;
+    color: var(--text-primary, #1A1A1A);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.saint-name-local {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: clamp(0.8125rem, 2vw, 0.875rem);
+    color: var(--text-muted, #9B9B9B);
+    margin-bottom: 4px;
+}
+
+.saint-meta {
+    font-size: clamp(0.6875rem, 1.8vw, 0.75rem);
+    color: var(--text-secondary, #6B6B6B);
+}
+
+.saint-arrow {
+    color: var(--text-muted, #9B9B9B);
+    font-size: 0.875rem;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+/* Badges */
+.explored-badge,
+.new-badge {
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.explored-badge {
+    background: rgba(46, 125, 50, 0.1);
+    color: #2E7D32;
+}
+
+.new-badge {
+    background: rgba(232, 93, 4, 0.1);
+    color: var(--md-sys-color-primary, #E85D04);
+}
+
+/* ============================================
+   7. HOME SCREEN - REFINED LAYOUT
+   ============================================ */
+
+/* Progress Card */
+.progress-card,
+.spiritual-journey-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: clamp(16px, 4vw, 20px);
+    margin-bottom: clamp(20px, 4vw, 24px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 3vw, 16px);
+}
+
+.progress-ring-wrapper {
+    flex-shrink: 0;
+}
+
+.progress-info h3 {
+    font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+    font-weight: 600;
+    color: var(--text-primary, #1A1A1A);
+    margin-bottom: 4px;
+}
+
+.progress-info p {
+    font-size: clamp(0.8125rem, 2vw, 0.875rem);
+    color: var(--text-secondary, #6B6B6B);
+}
+
+/* Today's Saint */
+.today-saint-card {
+    background: linear-gradient(135deg, rgba(232, 93, 4, 0.04) 0%, rgba(232, 93, 4, 0.08) 100%);
+    border: 1px solid rgba(232, 93, 4, 0.12);
+    border-radius: 20px;
+    padding: clamp(14px, 3vw, 18px);
+    margin-bottom: clamp(20px, 4vw, 24px);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.today-saint-card:hover {
+    background: linear-gradient(135deg, rgba(232, 93, 4, 0.06) 0%, rgba(232, 93, 4, 0.12) 100%);
+    border-color: rgba(232, 93, 4, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(232, 93, 4, 0.1);
+}
+
+.today-saint-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--md-sys-color-primary, #E85D04);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+}
+
+/* Traditions Grid */
+.traditions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(12px, 3vw, 16px);
+    margin-bottom: clamp(20px, 4vw, 24px);
+}
+
+@media (min-width: 600px) {
+    .traditions-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.tradition-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: clamp(20px, 4vw, 24px) clamp(12px, 3vw, 16px);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.tradition-card:hover {
+    border-color: var(--tradition-color, rgba(232, 93, 4, 0.2));
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+}
+
+.tradition-icon {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    margin-bottom: 12px;
+}
+
+.tradition-name {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    font-weight: 600;
+    color: var(--text-primary, #1A1A1A);
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.tradition-name-hi {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: clamp(0.75rem, 2vw, 0.8125rem);
+    color: var(--text-muted, #9B9B9B);
+    margin-bottom: 12px;
+}
+
+.saint-count {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(232, 93, 4, 0.08);
+    border-radius: 100px;
+    font-size: clamp(0.6875rem, 1.8vw, 0.8125rem);
+    font-weight: 500;
+    color: var(--md-sys-color-primary, #E85D04);
+}
+
+/* Stats Section */
+.stats-bar {
+    display: flex;
+    justify-content: center;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: clamp(16px, 4vw, 20px);
+    margin-bottom: clamp(20px, 4vw, 24px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 0 clamp(8px, 2vw, 16px);
+    position: relative;
+}
+
+.stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 32px;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.stat-value {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    font-weight: 700;
+    color: var(--md-sys-color-primary, #E85D04);
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: clamp(0.625rem, 1.5vw, 0.75rem);
+    color: var(--text-muted, #9B9B9B);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* Action Cards Grid */
+.action-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(12px, 3vw, 16px);
+    margin-bottom: clamp(20px, 4vw, 24px);
+}
+
+@media (min-width: 600px) {
+    .action-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.action-card {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-radius: 20px !important;
+    padding: clamp(18px, 4vw, 24px) clamp(12px, 3vw, 16px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    /* Reset any colored borders */
+    border-left: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+.action-card:hover {
+    border-color: rgba(232, 93, 4, 0.15) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+}
+
+.action-card i {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: #E85D04 !important;
+    margin-bottom: 4px;
+}
+
+.action-card span {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: clamp(0.9375rem, 2.5vw, 1rem);
+    font-weight: 500;
+    color: var(--text-primary, #1A1A1A);
+}
+
+.action-card small {
+    font-size: clamp(0.6875rem, 1.8vw, 0.8125rem);
+    color: var(--text-muted, #9B9B9B);
+}
+
+/* Remove pseudo-elements from action cards */
+.action-card::before,
+.action-card::after {
+    display: none !important;
+}
+
+/* Wisdom Quote */
+.wisdom-quote-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: clamp(20px, 4vw, 28px);
+    margin-bottom: clamp(32px, 6vw, 48px);
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.wisdom-quote-icon {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    color: var(--md-sys-color-primary, #E85D04);
+    opacity: 0.7;
+    margin-bottom: 12px;
+}
+
+.wisdom-quote-text {
+    font-style: italic;
+    font-size: clamp(0.9375rem, 2.5vw, 1.0625rem);
+    line-height: 1.6;
+    color: var(--text-primary, #1A1A1A);
+    margin-bottom: 12px;
+}
+
+.wisdom-quote-source {
+    font-size: clamp(0.8125rem, 2vw, 0.875rem);
+    color: var(--text-muted, #9B9B9B);
+    font-weight: 500;
+}
+
+/* ============================================
+   8. HEADER - STICKY & CLEAN
+   ============================================ */
+
+.app-header,
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(253, 251, 247, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* ============================================
+   9. DAILY DARSHAN MODAL - CLEAN
+   ============================================ */
+
+.daily-darshan-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+}
+
+.daily-darshan-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.darshan-content {
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    padding: clamp(28px, 6vw, 36px) clamp(24px, 5vw, 32px);
+    background: #FFFFFF;
+    border-radius: 24px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.daily-darshan-modal.active .darshan-content {
+    transform: translateY(0) scale(1);
+}
+
+/* ============================================
+   10. ACHIEVEMENT TOAST - WARM THEME
+   ============================================ */
+
+.achievement-toast-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(135deg, #FFFBF8 0%, #FFF4ED 100%);
+    border: 1px solid rgba(232, 93, 4, 0.15);
+    border-radius: 16px;
+    padding: 16px 24px;
+    box-shadow: 0 8px 32px rgba(232, 93, 4, 0.12);
+}
+
+.achievement-toast .toast-title {
+    font-size: 0.625rem;
+    color: var(--md-sys-color-primary, #E85D04);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+.achievement-toast .toast-name {
+    font-size: 1rem;
+    color: var(--text-primary, #1A1A1A);
+    font-weight: 600;
+}
+
+/* ============================================
+   11. FOCUS STATES - ACCESSIBILITY
+   ============================================ */
+
+button:focus-visible,
+a:focus-visible,
+.tradition-card:focus-visible,
+.action-card:focus-visible,
+.saint-card:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary, #E85D04);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   12. SMOOTH SCROLL & ANIMATIONS
+   ============================================ */
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

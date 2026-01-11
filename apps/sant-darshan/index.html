@@ -38,7 +38,7 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="ui-fixes-v2.css">
+    <link rel="stylesheet" href="ui-system-v3.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -219,6 +219,19 @@
                 <div id="tradition-header" class="tradition-header">
                     <!-- Dynamic tradition header -->
                 </div>
+
+                <!-- Search in Saints List -->
+                <div class="saints-search-container">
+                    <div class="saints-search-wrapper">
+                        <i class="fa-solid fa-search saints-search-icon"></i>
+                        <input type="text" id="saints-search-input" class="saints-search-input" placeholder="Search saints..." autocomplete="off">
+                        <button type="button" id="saints-search-clear" class="saints-search-clear" aria-label="Clear search">
+                            <i class="fa-solid fa-times"></i>
+                        </button>
+                    </div>
+                    <div id="saints-count" class="saints-count"></div>
+                </div>
+
                 <div id="sampradaya-filter" class="sampradaya-filter">
                     <!-- Sampradaya filters will be rendered by JS -->
                 </div>
