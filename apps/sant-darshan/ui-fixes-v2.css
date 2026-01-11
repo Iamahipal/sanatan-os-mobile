@@ -1,0 +1,631 @@
+/* ============================================
+   SANT DARSHAN - UI/UX FIXES v2
+   Comprehensive fixes for consistency & MD3
+   ============================================ */
+
+/* ============================================
+   1. DAILY DARSHAN POPUP - COMPLETE REDESIGN
+   Responsive, clean, modern
+   ============================================ */
+
+.daily-darshan-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 16px;
+}
+
+.daily-darshan-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.darshan-content {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    padding: clamp(24px, 5vw, 40px) clamp(20px, 4vw, 32px);
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 24px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.daily-darshan-modal.active .darshan-content {
+    transform: translateY(0) scale(1);
+}
+
+/* Greeting */
+.darshan-header {
+    margin-bottom: clamp(20px, 4vw, 28px);
+}
+
+.darshan-header .greeting {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Google Sans Flex', 'Tiro Devanagari Sanskrit', serif;
+    font-size: clamp(1.4rem, 4vw, 1.75rem);
+    color: var(--md-sys-color-primary, #E85D04);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.darshan-header .date {
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
+    color: var(--text-muted, #9B9B9B);
+    font-weight: 400;
+}
+
+/* Saint Feature */
+.today-saint-feature {
+    margin-bottom: clamp(20px, 4vw, 28px);
+}
+
+.today-saint-feature .saint-avatar-large {
+    width: clamp(72px, 15vw, 96px);
+    height: clamp(72px, 15vw, 96px);
+    border-radius: 20px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 600;
+    color: white;
+}
+
+.today-saint-feature .saint-name {
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    font-weight: 600;
+    color: var(--text-primary, #1A1A1A);
+    margin-bottom: 6px;
+}
+
+.today-saint-feature .saint-period {
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    color: var(--text-muted, #9B9B9B);
+}
+
+/* Quote */
+.daily-quote {
+    background: rgba(232, 93, 4, 0.06);
+    border-left: 3px solid var(--md-sys-color-primary, #E85D04);
+    padding: clamp(12px, 3vw, 18px);
+    margin-bottom: clamp(16px, 3vw, 24px);
+    border-radius: 0 12px 12px 0;
+    text-align: left;
+}
+
+.daily-quote p {
+    font-style: italic;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    line-height: 1.6;
+    color: var(--text-primary, #1A1A1A);
+    margin: 0;
+}
+
+/* Reflection Prompt */
+.reflection-prompt {
+    margin-bottom: clamp(20px, 4vw, 28px);
+}
+
+.reflection-prompt h4 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted, #9B9B9B);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.reflection-prompt p {
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    color: var(--text-secondary, #6B6B6B);
+    line-height: 1.5;
+}
+
+/* Buttons - Improved */
+.darshan-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.darshan-actions .btn-primary {
+    padding: clamp(14px, 3vw, 16px) 24px;
+    background: var(--md-sys-color-primary, #E85D04);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 100px;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(232, 93, 4, 0.3);
+}
+
+.darshan-actions .btn-primary:hover {
+    background: #BF4B00;
+    box-shadow: 0 4px 12px rgba(232, 93, 4, 0.4);
+    transform: translateY(-1px);
+}
+
+.darshan-actions .btn-secondary {
+    padding: clamp(12px, 2.5vw, 14px) 24px;
+    background: transparent;
+    color: var(--text-secondary, #6B6B6B);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 100px;
+    font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.darshan-actions .btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   2. ACTION CARDS - UNIFIED CONSISTENT DESIGN
+   Same border-radius, no colored borders
+   ============================================ */
+
+/* Reset all action card variants */
+.action-card,
+.quiz-card,
+.achievements-card,
+.paths-card,
+.journal-card,
+.pilgrimage-card,
+.jayanti-card {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-radius: 20px !important; /* UNIFIED radius */
+    padding: clamp(16px, 4vw, 24px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+    text-align: center;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    /* Remove any colored left borders */
+    border-left: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Unified hover state */
+.action-card:hover,
+.quiz-card:hover,
+.achievements-card:hover,
+.paths-card:hover,
+.journal-card:hover,
+.pilgrimage-card:hover,
+.jayanti-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-color: rgba(232, 93, 4, 0.15) !important;
+}
+
+/* Icons - All Saffron */
+.action-card i,
+.quiz-card i,
+.achievements-card i,
+.paths-card i,
+.journal-card i,
+.pilgrimage-card i,
+.jayanti-card i {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: #E85D04 !important;
+    margin-bottom: 4px;
+}
+
+/* Title - Hindi */
+.action-card span,
+.action-card .hindi-title {
+    font-family: 'Google Sans Flex', 'Tiro Devanagari Sanskrit', serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+    font-weight: 500;
+    color: var(--text-primary, #1A1A1A);
+    line-height: 1.3;
+}
+
+/* Subtitle - English */
+.action-card small {
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    color: var(--text-muted, #9B9B9B);
+    font-weight: 400;
+}
+
+/* Action Cards Grid - Consistent Spacing */
+.action-cards,
+.action-cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(12px, 3vw, 16px);
+    padding: 0;
+    margin: clamp(16px, 4vw, 24px) 0;
+}
+
+@media (max-width: 480px) {
+    .action-cards,
+    .action-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+/* ============================================
+   3. ACHIEVEMENT TOAST - WARM THEME (NOT DARK)
+   Match app aesthetic - saffron/warm colors
+   ============================================ */
+
+.achievement-toast {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-120px);
+    z-index: 600;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+    pointer-events: none;
+}
+
+.achievement-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* NEW: Warm theme instead of dark */
+.achievement-toast-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    /* Warm gradient instead of dark purple */
+    background: linear-gradient(135deg, #FFF8F3 0%, #FFF4ED 100%);
+    border: 1px solid rgba(232, 93, 4, 0.2);
+    border-radius: 16px;
+    padding: 16px 24px;
+    box-shadow: 0 8px 32px rgba(232, 93, 4, 0.15);
+    min-width: 280px;
+    max-width: 90vw;
+}
+
+.achievement-toast .achievement-icon {
+    font-size: 2.2rem;
+    animation: achievementBounce 0.6s ease;
+}
+
+@keyframes achievementBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.achievement-toast .toast-title {
+    font-size: 0.65rem;
+    color: var(--md-sys-color-primary, #E85D04);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.achievement-toast .toast-name {
+    font-size: 1.05rem;
+    color: var(--text-primary, #1A1A1A);
+    font-weight: 600;
+}
+
+/* ============================================
+   4. WISDOM QUOTE CARD - PROPER SPACING
+   ============================================ */
+
+.wisdom-quote-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: clamp(20px, 4vw, 28px);
+    margin: clamp(20px, 4vw, 28px) 0 clamp(24px, 5vw, 32px) 0; /* Added bottom margin */
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.wisdom-quote-icon {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    margin-bottom: 12px;
+    color: var(--md-sys-color-primary, #E85D04);
+    opacity: 0.7;
+}
+
+.wisdom-quote-text {
+    font-style: italic;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    line-height: 1.7;
+    color: var(--text-primary, #1A1A1A);
+    margin-bottom: 12px;
+}
+
+.wisdom-quote-source {
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
+    color: var(--text-muted, #9B9B9B);
+    font-weight: 500;
+}
+
+/* ============================================
+   5. STATS SECTION - EQUAL SPACING
+   ============================================ */
+
+.stats-bar,
+.stats-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: clamp(16px, 3vw, 20px) clamp(20px, 4vw, 32px);
+    margin: clamp(20px, 4vw, 28px) 0; /* EQUAL top and bottom */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 0 clamp(8px, 2vw, 16px);
+    position: relative;
+}
+
+/* Dividers */
+.stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 32px;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.stat-value {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    font-weight: 700;
+    color: var(--md-sys-color-primary, #E85D04);
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: clamp(0.6rem, 2vw, 0.75rem);
+    color: var(--text-muted, #9B9B9B);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* ============================================
+   6. TRADITION CARDS - CONSISTENT
+   ============================================ */
+
+.tradition-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px; /* Same as action cards */
+    padding: clamp(20px, 4vw, 28px) clamp(12px, 3vw, 16px);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.tradition-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--tradition-color, rgba(232, 93, 4, 0.15));
+}
+
+.tradition-card .tradition-icon {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    margin-bottom: 12px;
+}
+
+.tradition-card .tradition-name {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    font-weight: 600;
+    color: var(--text-primary, #1A1A1A);
+    margin-bottom: 4px;
+}
+
+.tradition-card .tradition-name-hi {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
+    color: var(--text-muted, #9B9B9B);
+    margin-bottom: 12px;
+}
+
+.tradition-card .saint-count {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(232, 93, 4, 0.08);
+    border-radius: 100px;
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    font-weight: 500;
+    color: var(--md-sys-color-primary, #E85D04);
+}
+
+/* ============================================
+   7. TODAY'S SAINT CARD - CLEANER
+   ============================================ */
+
+.today-saint-card {
+    background: rgba(232, 93, 4, 0.04);
+    border: 1px solid rgba(232, 93, 4, 0.1);
+    border-radius: 20px;
+    padding: clamp(16px, 3vw, 20px);
+    margin: clamp(16px, 3vw, 20px) 0;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.today-saint-card:hover {
+    background: rgba(232, 93, 4, 0.08);
+    border-color: rgba(232, 93, 4, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(232, 93, 4, 0.1);
+}
+
+/* Label */
+.today-saint-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--md-sys-color-primary, #E85D04);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+/* ============================================
+   8. PROGRESS CARD - TOP SECTION
+   ============================================ */
+
+.progress-card,
+.spiritual-journey-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: clamp(16px, 3vw, 20px);
+    margin-bottom: clamp(16px, 3vw, 20px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* ============================================
+   9. SECTION SPACING - CONSISTENT
+   ============================================ */
+
+.section,
+.home-section {
+    margin-bottom: clamp(24px, 5vw, 32px);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: clamp(12px, 3vw, 16px);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    font-weight: 600;
+    color: var(--md-sys-color-primary, #E85D04);
+}
+
+/* ============================================
+   10. GLOBAL SPACING & CONTAINER
+   ============================================ */
+
+.main-content,
+.app-content {
+    padding: clamp(16px, 4vw, 24px);
+    padding-bottom: clamp(32px, 6vw, 48px); /* Extra bottom padding */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Desktop responsiveness */
+@media (min-width: 768px) {
+    .main-content,
+    .app-content {
+        padding: 32px;
+        padding-bottom: 64px;
+    }
+
+    .darshan-content {
+        max-width: 440px;
+    }
+}
+
+/* ============================================
+   11. HEADER FIXES
+   ============================================ */
+
+.header,
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(253, 251, 247, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* ============================================
+   12. FOCUS STATES - ACCESSIBILITY
+   ============================================ */
+
+.action-card:focus-visible,
+.tradition-card:focus-visible,
+.today-saint-card:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary, #E85D04);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   13. REMOVE OLD COLORED BORDERS
+   Override any specific colored borders
+   ============================================ */
+
+/* Remove any leftover colored borders from specific cards */
+.action-card[data-action],
+.quiz-card,
+.achievements-card,
+.paths-card,
+.journal-card,
+.pilgrimage-card,
+.jayanti-card {
+    border-left-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Remove ::before and ::after pseudo-elements that add colors */
+.action-card::before,
+.action-card::after,
+.quiz-card::before,
+.quiz-card::after,
+.achievements-card::before,
+.achievements-card::after,
+.paths-card::before,
+.paths-card::after,
+.journal-card::before,
+.journal-card::after,
+.pilgrimage-card::before,
+.pilgrimage-card::after,
+.jayanti-card::before,
+.jayanti-card::after {
+    display: none !important;
+}
