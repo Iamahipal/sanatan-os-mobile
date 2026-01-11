@@ -297,6 +297,12 @@ export class DashboardScreen extends Component {
             tab.classList.toggle('active', tab.dataset.view === view);
         });
 
+        // Show/hide FAB - only visible on Grid view
+        const fab = this.find('#add-fab');
+        if (fab) {
+            fab.style.display = view === 'grid' ? 'flex' : 'none';
+        }
+
         // Update content
         const list = this.find('#habit-list');
         if (!list) return;
