@@ -26,13 +26,23 @@ export class SettingsScreen extends Component {
                 </header>
                 
                 <main class="screen-content">
+                    <!-- Account (now at top) -->
+                    <div class="form-section">
+                        <div class="form-section-title">Account</div>
+                        <div class="card" id="account-section">
+                            ${user ? this.renderSignedIn(user) : this.renderSignedOut()}
+                        </div>
+                    </div>
+                    
                     <!-- Appearance -->
                     <div class="form-section">
                         <div class="form-section-title">Appearance</div>
                         <div class="card">
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center gap-3">
-                                    <div class="settings-icon">🌙</div>
+                                    <div class="settings-icon-modern">
+                                        <i data-lucide="${isDark ? 'moon' : 'sun'}"></i>
+                                    </div>
                                     <span>Dark Mode</span>
                                 </div>
                                 <button id="theme-toggle" 
@@ -45,41 +55,39 @@ export class SettingsScreen extends Component {
                         </div>
                     </div>
                     
-                    <!-- Data -->
+                    <!-- Data Management -->
                     <div class="form-section">
                         <div class="form-section-title">Data Management</div>
                         <div class="settings-list">
                             <button id="export-btn" class="settings-item">
                                 <div class="settings-item-left">
-                                    <div class="settings-icon">📤</div>
+                                    <div class="settings-icon-modern export">
+                                        <i data-lucide="download"></i>
+                                    </div>
                                     <span>Export Data</span>
                                 </div>
-                                <i data-lucide="download"></i>
+                                <i data-lucide="chevron-right"></i>
                             </button>
                             
                             <button id="import-btn" class="settings-item">
                                 <div class="settings-item-left">
-                                    <div class="settings-icon">📥</div>
+                                    <div class="settings-icon-modern import">
+                                        <i data-lucide="upload"></i>
+                                    </div>
                                     <span>Import Data</span>
                                 </div>
-                                <i data-lucide="upload"></i>
+                                <i data-lucide="chevron-right"></i>
                             </button>
                             
                             <button id="reset-btn" class="settings-item settings-danger">
                                 <div class="settings-item-left">
-                                    <div class="settings-icon">⚠️</div>
+                                    <div class="settings-icon-modern danger">
+                                        <i data-lucide="trash-2"></i>
+                                    </div>
                                     <span style="color: var(--danger);">Reset All Data</span>
                                 </div>
-                                <i data-lucide="trash-2"></i>
+                                <i data-lucide="chevron-right"></i>
                             </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Account -->
-                    <div class="form-section">
-                        <div class="form-section-title">Account</div>
-                        <div class="card" id="account-section">
-                            ${user ? this.renderSignedIn(user) : this.renderSignedOut()}
                         </div>
                     </div>
                     
@@ -89,7 +97,9 @@ export class SettingsScreen extends Component {
                         <div class="settings-list">
                             <a href="https://sanatan.app" target="_blank" class="settings-item">
                                 <div class="settings-item-left">
-                                    <div class="settings-icon">🌐</div>
+                                    <div class="settings-icon-modern about">
+                                        <i data-lucide="globe"></i>
+                                    </div>
                                     <span>Sanatan OS</span>
                                 </div>
                                 <i data-lucide="external-link"></i>
@@ -98,7 +108,7 @@ export class SettingsScreen extends Component {
                     </div>
                     
                     <div class="app-version">
-                        Niyam v2.0.0<br>
+                        Niyam v2.1.0<br>
                         Made with 🙏 for Sanatan OS
                     </div>
                 </main>

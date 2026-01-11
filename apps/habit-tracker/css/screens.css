@@ -436,10 +436,19 @@
     content: '✓';
 }
 
+.habit-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+.habit-toggle:active {
+    transform: scale(0.9);
+}
+
 /* Contribution Grid */
 .habit-grid {
     display: grid;
-    grid-template-columns: repeat(52, 1fr);
+    grid-template-columns: repeat(45, 1fr);
     gap: 2px;
     margin-top: var(--space-2);
 }
@@ -706,6 +715,45 @@
     display: flex;
     align-items: center;
     gap: var(--space-3);
+}
+
+.settings-item-left svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text-secondary);
+}
+
+/* Modern Settings Icons with Gradients */
+.settings-icon-modern {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--habit-purple) 100%);
+}
+
+.settings-icon-modern svg {
+    width: 18px;
+    height: 18px;
+}
+
+.settings-icon-modern.export {
+    background: linear-gradient(135deg, var(--habit-blue) 0%, #007AFF 100%);
+}
+
+.settings-icon-modern.import {
+    background: linear-gradient(135deg, var(--habit-green) 0%, #30D158 100%);
+}
+
+.settings-icon-modern.danger {
+    background: linear-gradient(135deg, var(--danger) 0%, #FF453A 100%);
+}
+
+.settings-icon-modern.about {
+    background: linear-gradient(135deg, var(--habit-orange) 0%, #FF9F0A 100%);
 }
 
 .settings-icon {

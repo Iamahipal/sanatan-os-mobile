@@ -10,11 +10,21 @@ import { HabitService } from '../services/HabitService.js';
 import { EventBus, Events } from '../core/EventBus.js';
 
 const ICONS = [
-    'sun', 'moon', 'star', 'heart', 'zap', 'flame', 'droplet', 'leaf',
-    'flower-2', 'mountain', 'waves', 'cloud', 'coffee', 'apple',
-    'dumbbell', 'bike', 'footprints', 'clock', 'book-open', 'pen-tool',
-    'music', 'headphones', 'camera', 'palette', 'laptop', 'smartphone',
-    'gamepad-2', 'target', 'trophy', 'medal', 'gift', 'sparkles', 'brain'
+    // Lifestyle & Wellness
+    'sun', 'moon', 'star', 'heart', 'sparkles', 'flame', 'droplet', 'leaf',
+    'flower-2', 'mountain', 'waves', 'cloud', 'rainbow', 'sunrise', 'sunset',
+    // Health & Fitness
+    'dumbbell', 'bike', 'footprints', 'heart-pulse', 'salad', 'apple', 'glass-water',
+    'bed', 'alarm-clock', 'pill', 'stethoscope', 'activity',
+    // Productivity & Work
+    'book-open', 'pen-tool', 'notebook', 'graduation-cap', 'briefcase',
+    'clock', 'calendar', 'check-circle', 'target', 'trophy', 'medal', 'award',
+    // Creative & Fun
+    'music', 'headphones', 'camera', 'palette', 'brush', 'mic', 'guitar',
+    // Tech & Digital
+    'laptop', 'smartphone', 'gamepad-2', 'wifi', 'zap', 'rocket',
+    // Spiritual & Mindfulness
+    'brain', 'smile', 'coffee', 'gift', 'home', 'users', 'hand-heart', 'lotus'
 ];
 
 const COLORS = [
@@ -263,9 +273,9 @@ export class HabitFormScreen extends Component {
             deleteBtn.addEventListener('click', () => this.delete());
         }
 
-        // Init icons
+        // Init icons with delay for proper rendering
         if (window.lucide) {
-            lucide.createIcons();
+            setTimeout(() => lucide.createIcons(), 50);
         }
     }
 

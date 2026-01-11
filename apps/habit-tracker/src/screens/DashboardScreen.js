@@ -138,8 +138,9 @@ export class DashboardScreen extends Component {
                     <button class="habit-toggle ${isCompleted ? 'completed' : ''} ${isSkipped ? 'skipped' : ''}"
                             data-action="toggle"
                             data-habit-id="${habit.id}"
+                            style="${isCompleted ? `background: ${habit.color}; color: white;` : isSkipped ? 'background: var(--warning); color: white;' : ''}"
                             aria-label="Toggle ${habit.name}">
-                        ${isCompleted ? '✓' : isSkipped ? '−' : '○'}
+                        <i data-lucide="${isCompleted ? 'check' : isSkipped ? 'minus' : 'circle'}"></i>
                     </button>
                 </div>
                 <div class="habit-grid">
@@ -149,12 +150,12 @@ export class DashboardScreen extends Component {
         `;
     }
 
-    renderHeatmap(habit) {
+    renderHeatmap(habit, compact = true) {
         const today = new Date();
         const cells = [];
+        const days = compact ? 90 : 365; // Show 90 days on card, 365 in details
 
-        // Last 52 days
-        for (let i = 51; i >= 0; i--) {
+        for (let i = days - 1; i >= 0; i--) {
             const date = DateUtils.addDays(today, -i);
             const key = DateUtils.getDateKey(date);
             const entry = habit.entries?.[key];
