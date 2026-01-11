@@ -388,7 +388,7 @@ export class DashboardScreen extends Component {
                 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: var(--habit-blue)">
+                        <div class="stat-icon" style="background: rgba(255, 107, 53, 0.15); color: var(--primary)">
                             <i data-lucide="check-circle-2"></i>
                         </div>
                         <div class="stat-value">${completedToday}/${totalHabits}</div>
@@ -396,7 +396,7 @@ export class DashboardScreen extends Component {
                     </div>
                     
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: var(--habit-orange)">
+                        <div class="stat-icon" style="background: rgba(255, 107, 53, 0.15); color: var(--primary)">
                             <i data-lucide="flame"></i>
                         </div>
                         <div class="stat-value">${longestStreak}</div>
@@ -404,7 +404,7 @@ export class DashboardScreen extends Component {
                     </div>
                     
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: var(--habit-green)">
+                        <div class="stat-icon" style="background: rgba(48, 209, 88, 0.15); color: var(--success)">
                             <i data-lucide="trophy"></i>
                         </div>
                         <div class="stat-value">${totalCompletions}</div>
@@ -412,7 +412,7 @@ export class DashboardScreen extends Component {
                     </div>
                     
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: var(--habit-purple)">
+                        <div class="stat-icon" style="background: rgba(255, 107, 53, 0.15); color: var(--primary)">
                             <i data-lucide="target"></i>
                         </div>
                         <div class="stat-value">${totalHabits}</div>
