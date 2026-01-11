@@ -6,10 +6,10 @@
 :root {
     /* ===== COLOR SYSTEM ===== */
 
-    /* Primary Brand */
-    --primary: #0A84FF;
-    --primary-light: #409CFF;
-    --primary-dark: #0066CC;
+    /* Primary Brand - Warm Saffron */
+    --primary: #FF6B35;
+    --primary-light: #FF8C5A;
+    --primary-dark: #E55A2B;
 
     /* Semantic Colors */
     --success: #30D158;
