@@ -185,9 +185,9 @@ export class SettingsScreen extends Component {
             signoutBtn.addEventListener('click', () => this.signOut());
         }
 
-        // Init icons
+        // Init icons with delay for proper rendering
         if (window.lucide) {
-            lucide.createIcons();
+            setTimeout(() => lucide.createIcons(), 50);
         }
     }
 
