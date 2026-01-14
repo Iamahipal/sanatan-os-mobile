@@ -4,347 +4,557 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0a0612">
+    <meta name="theme-color" content="#FDFBF7">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Sadhana Guru - Your Digital Accountability</title>
+    <meta name="description" content="Sadhana Guru - Digital spiritual accountability companion">
+    <title>Sadhana Guru | साधना गुरु</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
         rel="stylesheet">
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
-
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/screens.css">
 </head>
 
 <body>
     <div class="app-container">
-        <!-- State 1: Invocation Screen (Before Sankalpa) -->
+
+        <!-- ===== INVOCATION SCREEN ===== -->
         <div class="screen invocation-screen active" id="invocationScreen">
-            <div class="fire-background">
-                <div class="fire-particle"></div>
-                <div class="fire-particle"></div>
-                <div class="fire-particle"></div>
-                <div class="fire-particle"></div>
-                <div class="fire-particle"></div>
+            <div class="invocation-symbol">🕉️</div>
+            <h1 class="invocation-title text-sanskrit">साधना गुरु</h1>
+            <p class="invocation-subtitle">The Path of Truth</p>
+
+            <div class="invocation-witness">
+                <div class="witness-item">
+                    <span>🔥</span>
+                    <span>Agni</span>
+                </div>
+                <div class="witness-item">
+                    <span>💨</span>
+                    <span>Vayu</span>
+                </div>
+                <div class="witness-item">
+                    <span>👁️</span>
+                    <span>Sakshi</span>
+                </div>
             </div>
 
-            <div class="invocation-content">
-                <div class="sacred-symbol">🕉️</div>
-                <h1 class="invocation-title">साधना गुरु</h1>
-                <p class="invocation-subtitle">The Path of Truth</p>
-
-                <div class="invocation-text">
-                    <p>Before the witness of</p>
-                    <div class="witness-icons">
-                        <span class="witness">🔥 Agni</span>
-                        <span class="witness">💨 Vayu</span>
-                        <span class="witness">👁️ Antaryami</span>
-                    </div>
-                    <p class="solemn-text">Proceed only if you seek <strong>Satya</strong> (Truth) over comfort.</p>
-                </div>
-
-                <div class="quote-box">
-                    <p>"सत्यमेव जयते"</p>
-                    <span>Truth alone triumphs — Mundaka Upanishad</span>
-                </div>
-
-                <button class="proceed-btn" id="proceedToSankalpa">
-                    <i data-lucide="flame"></i>
-                    I Seek the Path of Truth
-                </button>
-
-                <a href="../../index.html" class="back-link">
-                    <i data-lucide="arrow-left"></i>
-                    Return Home
-                </a>
+            <div class="invocation-quote">
+                <p class="invocation-quote-text text-sanskrit">सत्यमेव जयते</p>
+                <p class="invocation-quote-source">Truth alone triumphs — Mundaka Upanishad</p>
             </div>
+
+            <button class="btn btn-primary btn-lg btn-block invocation-cta" id="proceedBtn">
+                I Seek the Path of Truth
+            </button>
+
+            <a href="../../index.html" class="invocation-back">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="15,18 9,12 15,6" />
+                </svg>
+                Return Home
+            </a>
         </div>
 
-        <!-- State 2: Sankalpa Patra (Digital Vow) -->
+        <!-- ===== SANKALPA (VOW) SCREEN ===== -->
         <div class="screen sankalpa-screen" id="sankalpaScreen">
-            <header class="app-header">
-                <button class="header-btn" id="backToInvocation">
-                    <i data-lucide="chevron-left"></i>
+            <header class="header">
+                <button class="header-btn" id="sankalpaBackBtn">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <polyline points="15,18 9,12 15,6" />
+                    </svg>
                 </button>
                 <div class="header-center">
-                    <h1 class="header-title">संकल्प पत्र</h1>
+                    <h1 class="header-title text-sanskrit">संकल्प पत्र</h1>
                     <span class="header-subtitle">Sacred Digital Vow</span>
                 </div>
                 <div class="header-btn invisible"></div>
             </header>
 
             <div class="sankalpa-content">
-                <div class="scroll-container">
+                <div class="sankalpa-scroll">
                     <div class="scroll-header">
                         <span class="scroll-ornament">☙</span>
-                        <span class="scroll-title">SACRED VOW</span>
+                        <span class="scroll-title">Sacred Vow</span>
                         <span class="scroll-ornament">❧</span>
                     </div>
 
-                    <div class="vow-text">
-                        <p class="vow-intro">I, entering this path of <strong>Sadhana</strong>:</p>
+                    <p class="vow-intro">I, entering this path of <strong>Sadhana</strong>:</p>
 
-                        <ol class="vow-list">
-                            <li>Accept that <strong>Truth (Satya)</strong> is the foundation of all spiritual progress.
-                            </li>
-                            <li>Understand that falsifying progress poisons my own <strong>Karma</strong>.</li>
-                            <li>Surrender to corrective measures (<strong>Prayaschita</strong>) when I falter.</li>
-                            <li>Invoke <strong>Ishwara</strong> as the ultimate witness to this vow.</li>
-                        </ol>
-                    </div>
+                    <ol class="vow-list">
+                        <li>Accept that <strong>Truth (Satya)</strong> is the foundation of all spiritual progress.</li>
+                        <li>Understand that falsifying progress poisons my own <strong>Karma</strong>.</li>
+                        <li>Commit to honest reflection on the <strong>quality</strong> of my practice.</li>
+                        <li>Invoke <strong>Sakshi</strong> (witness consciousness) to observe my journey.</li>
+                    </ol>
 
-                    <!-- Signature Area -->
-                    <div class="signature-section">
+                    <div class="sankalpa-signature">
                         <label class="signature-label">
-                            <i data-lucide="pen-tool"></i>
-                            Sign Your Name (with your finger)
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                                <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                                <path d="M2 2l7.586 7.586" />
+                            </svg>
+                            Sign with your finger
                         </label>
-                        <div class="signature-pad-container">
-                            <canvas id="signaturePad" class="signature-pad"></canvas>
-                            <button class="clear-signature" id="clearSignature">
-                                <i data-lucide="eraser"></i>
+                        <div class="signature-container">
+                            <canvas id="signatureCanvas" class="signature-pad"></canvas>
+                            <button class="signature-clear" id="clearSignatureBtn">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M20 5H9l-7 7 7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z" />
+                                    <line x1="18" y1="9" x2="12" y2="15" />
+                                    <line x1="12" y1="9" x2="18" y2="15" />
+                                </svg>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Date & Muhurta -->
-                    <div class="timestamp-section">
+                    <div class="timestamp-row">
                         <div class="timestamp-item">
-                            <span class="ts-label">Date</span>
-                            <span class="ts-value" id="currentDate"></span>
+                            <span class="timestamp-label">Date</span>
+                            <span class="timestamp-value" id="vowDate">--</span>
                         </div>
                         <div class="timestamp-item">
-                            <span class="ts-label">Muhurta</span>
-                            <span class="ts-value" id="currentMuhurta"></span>
+                            <span class="timestamp-label">Muhurta</span>
+                            <span class="timestamp-value" id="vowMuhurta">--</span>
                         </div>
-                    </div>
-
-                    <!-- Fire Animation Container -->
-                    <div class="agni-witness">
-                        <div class="agni-flame" id="agniFlame">
-                            <div class="flame-core"></div>
-                            <div class="flame-outer"></div>
-                        </div>
-                        <p class="agni-text">Witnessed by Agni</p>
                     </div>
                 </div>
+            </div>
 
-                <button class="take-vow-btn" id="takeVowBtn" disabled>
-                    <i data-lucide="check-circle"></i>
+            <div class="sankalpa-footer">
+                <button class="btn btn-primary btn-block btn-lg" id="sealVowBtn" disabled>
                     Seal My Vow
                 </button>
             </div>
         </div>
 
-        <!-- State 3: Main Dashboard (After Vow) -->
-        <div class="screen dashboard-screen" id="dashboardScreen">
-            <header class="app-header">
+        <!-- ===== MAIN SCREEN ===== -->
+        <div class="screen main-screen" id="mainScreen">
+            <header class="header">
                 <a href="../../index.html" class="header-btn">
-                    <i data-lucide="chevron-left"></i>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <polyline points="15,18 9,12 15,6" />
+                    </svg>
                 </a>
                 <div class="header-center">
-                    <h1 class="header-title">साधना गुरु</h1>
-                    <span class="header-subtitle">Day <span id="dayCount">1</span></span>
+                    <h1 class="header-title text-sanskrit">साधना गुरु</h1>
+                    <span class="header-subtitle">Day <span id="daysOnPath">1</span></span>
                 </div>
                 <button class="header-btn" id="settingsBtn">
-                    <i data-lucide="settings"></i>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
                 </button>
             </header>
 
-            <main class="dashboard-main">
-                <!-- Karmic Tree Section -->
-                <section class="tree-section">
-                    <div class="tree-container" id="karmicTree">
-                        <div class="tree-roots">
-                            <span class="root-label">सत्य (Truth)</span>
-                        </div>
-                        <div class="tree-trunk"></div>
-                        <div class="tree-canopy">
-                            <div class="branch branch-1"></div>
-                            <div class="branch branch-2"></div>
-                            <div class="branch branch-3"></div>
-                            <div class="leaf-cluster" id="leafCluster"></div>
-                        </div>
-                        <div class="tree-fruits" id="treeFruits"></div>
+            <main class="main-content">
+                <!-- Date Header -->
+                <div class="date-header">
+                    <div class="date-muhurta" id="currentMuhurta">Pratha Muhurta</div>
+                    <div class="date-display" id="currentDate">Tuesday, 14 January 2026</div>
+                </div>
+
+                <!-- Phase Indicator -->
+                <div class="phase-indicator" id="phaseIndicator">
+                    <div class="phase-icon">🌅</div>
+                    <div class="phase-info">
+                        <div class="phase-name">Pratah - Morning</div>
+                        <div class="phase-desc">Set your intentions for today</div>
                     </div>
-                    <div class="tree-stats">
-                        <div class="stat">
-                            <span class="stat-value" id="truthScore">100</span>
-                            <span class="stat-label">Satya Score</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value" id="streakDays">0</span>
-                            <span class="stat-label">Day Streak</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value" id="completedTasks">0</span>
-                            <span class="stat-label">Completed</span>
-                        </div>
+                </div>
+
+                <!-- Daily Intention Card -->
+                <div class="intention-card" id="intentionCard">
+                    <div class="intention-prompt" id="intentionPrompt">
+                        <span class="intention-icon">🎯</span>
+                        <span class="intention-text">Set your intention for today</span>
+                        <svg class="intention-arrow" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <polyline points="9,6 15,12 9,18" />
+                        </svg>
                     </div>
-                </section>
+                    <div class="intention-display hidden" id="intentionDisplay">
+                        <span class="intention-label">Today's Sankalpa</span>
+                        <span class="intention-word" id="intentionWord"></span>
+                    </div>
+                </div>
 
-                <!-- Daily Sadhana -->
-                <section class="sadhana-section">
-                    <h3 class="section-title">
-                        <i data-lucide="sun"></i>
-                        Today's Sadhana
-                    </h3>
+                <!-- Stats Summary -->
+                <div class="summary-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="statDone">0</div>
+                        <div class="stat-label">Done</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="statFocused">0</div>
+                        <div class="stat-label">Focused</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="statTotal">5</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                </div>
 
-                    <div class="sadhana-list" id="sadhanaList">
-                        <!-- Brahma Muhurta -->
-                        <div class="sadhana-item" data-id="brahma">
-                            <div class="sadhana-icon">🌅</div>
-                            <div class="sadhana-info">
-                                <h4>Brahma Muhurta Wake-up</h4>
-                                <p>Rise before sunrise (4:30 - 5:30 AM)</p>
-                            </div>
-                            <button class="verify-btn" data-type="time">
-                                <i data-lucide="check"></i>
-                            </button>
-                        </div>
-
-                        <!-- Surya Namaskar -->
-                        <div class="sadhana-item" data-id="surya">
-                            <div class="sadhana-icon">🙏</div>
-                            <div class="sadhana-info">
-                                <h4>Surya Namaskar</h4>
-                                <p>12 rounds minimum</p>
-                            </div>
-                            <button class="verify-btn" data-type="count">
-                                <i data-lucide="check"></i>
-                            </button>
-                        </div>
-
-                        <!-- Meditation -->
-                        <div class="sadhana-item" data-id="dhyana">
-                            <div class="sadhana-icon">🧘</div>
-                            <div class="sadhana-info">
-                                <h4>Dhyana (Meditation)</h4>
-                                <p>20 minutes minimum</p>
-                            </div>
-                            <button class="verify-btn" data-type="timer">
-                                <i data-lucide="check"></i>
-                            </button>
-                        </div>
-
-                        <!-- Japa -->
-                        <div class="sadhana-item" data-id="japa">
-                            <div class="sadhana-icon">📿</div>
-                            <div class="sadhana-info">
-                                <h4>Japa (Mantra)</h4>
-                                <p>108 repetitions</p>
-                            </div>
-                            <button class="verify-btn" data-type="count">
-                                <i data-lucide="check"></i>
-                            </button>
-                        </div>
-
-                        <!-- Digital Fast -->
-                        <div class="sadhana-item" data-id="digital">
-                            <div class="sadhana-icon">📵</div>
-                            <div class="sadhana-info">
-                                <h4>Digital Brahmacharya</h4>
-                                <p>No social media before 10 AM</p>
-                            </div>
-                            <button class="verify-btn" data-type="honor">
-                                <i data-lucide="check"></i>
-                            </button>
-                        </div>
+                <!-- Practices Section -->
+                <section class="practices-section">
+                    <div class="section-header">
+                        <svg class="section-icon" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                        <h3 class="section-title">Today's Practices</h3>
+                    </div>
+                    <div class="practices-list" id="practicesList">
+                        <!-- Dynamically rendered -->
                     </div>
                 </section>
 
-                <!-- Antaryami Question -->
-                <section class="antaryami-section" id="antaryamiSection">
-                    <div class="antaryami-card">
-                        <div class="antaryami-header">
-                            <span class="eye-icon">👁️</span>
-                            <span>Antaryami's Question</span>
-                        </div>
-                        <p class="antaryami-question" id="antaryamiQuestion">
-                            When you marked Brahma Muhurta complete, were you truly awake before 5:30 AM?
-                        </p>
-                        <div class="truth-buttons">
-                            <button class="truth-btn yes" id="truthYes">
-                                <i data-lucide="check"></i>
-                                Yes, Truthfully
-                            </button>
-                            <button class="truth-btn no" id="truthNo">
-                                <i data-lucide="x"></i>
-                                I Must Confess
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Daily Quote -->
-                <section class="quote-section">
-                    <div class="daily-quote">
-                        <p class="quote-text" id="dailyQuote">"When your mind dwells on the senses, attachment arises.
-                            From attachment comes desire."</p>
-                        <span class="quote-source">— Bhagavad Gita 2.62</span>
-                    </div>
-                </section>
+                <!-- Quote Section -->
+                <div class="quote-card">
+                    <p class="quote-text" id="quoteText">"The soul is neither born, nor does it ever die."</p>
+                    <span class="quote-source" id="quoteSource">— Bhagavad Gita 2.20</span>
+                </div>
             </main>
 
-            <!-- Bottom Nav -->
+            <!-- Bottom Navigation -->
             <nav class="bottom-nav">
-                <button class="nav-item active" data-tab="home">
-                    <i data-lucide="home"></i>
+                <button class="nav-item active" data-tab="today">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9,22 9,12 15,12 15,22" />
+                    </svg>
                     <span>Today</span>
                 </button>
-                <button class="nav-item" data-tab="history">
-                    <i data-lucide="calendar"></i>
-                    <span>History</span>
-                </button>
-                <button class="nav-item" data-tab="tree">
-                    <i data-lucide="tree-deciduous"></i>
-                    <span>My Tree</span>
+                <button class="nav-item" data-tab="drishti">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    <span>Drishti</span>
                 </button>
                 <button class="nav-item" data-tab="vow">
-                    <i data-lucide="scroll"></i>
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14,2 14,8 20,8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                    </svg>
                     <span>My Vow</span>
+                </button>
+                <button class="nav-item" data-tab="settings">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                    <span>Settings</span>
                 </button>
             </nav>
         </div>
 
-        <!-- Confession Modal -->
-        <div class="modal confession-modal" id="confessionModal">
-            <div class="modal-backdrop"></div>
-            <div class="modal-content">
-                <div class="confession-header">
-                    <span class="confession-icon">🔥</span>
-                    <h3>Prayaschita - Confession</h3>
+        <!-- ===== DRISHTI (VIEW) SCREEN ===== -->
+        <div class="screen drishti-screen" id="drishtiScreen">
+            <header class="header">
+                <button class="header-btn" id="drishtiBackBtn">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <polyline points="15,18 9,12 15,6" />
+                    </svg>
+                </button>
+                <div class="header-center">
+                    <h1 class="header-title">Drishti</h1>
+                    <span class="header-subtitle">Weekly Insight</span>
                 </div>
-                <p class="confession-intro">Honesty heals. Confess your lapse to cleanse your Karma.</p>
+                <div class="header-btn invisible"></div>
+            </header>
 
-                <textarea class="confession-input" id="confessionText"
-                    placeholder="What happened? Be specific and honest... (minimum 50 characters)"></textarea>
-
-                <div class="confession-counter">
-                    <span id="charCount">0</span>/50 characters
+            <main class="drishti-content">
+                <!-- Week Navigator -->
+                <div class="week-nav">
+                    <button class="week-nav-btn" id="weekPrevBtn">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <polyline points="15,18 9,12 15,6" />
+                        </svg>
+                    </button>
+                    <div class="week-display" id="weekDisplay">
+                        <div class="week-label">Week of</div>
+                        <div class="week-dates">12 Jan - 18 Jan</div>
+                    </div>
+                    <button class="week-nav-btn" id="weekNextBtn">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <polyline points="9,6 15,12 9,18" />
+                        </svg>
+                    </button>
                 </div>
 
-                <div class="prayaschita-penalty">
-                    <p>Your Prayaschita:</p>
-                    <div class="penalty-details" id="penaltyDetails">
-                        <span class="penalty-item">🍃 Tree loses 5 leaves</span>
-                        <span class="penalty-item">🙏 10 Surya Namaskars required</span>
+                <!-- Weekly Grid -->
+                <div class="weekly-grid" id="weeklyGrid">
+                    <!-- Dynamically rendered -->
+                </div>
+
+                <!-- Weekly Summary -->
+                <div class="weekly-summary" id="weeklySummary">
+                    <div class="summary-title">This Week</div>
+                    <p class="summary-text">No entries recorded yet. Start your practice today.</p>
+                </div>
+
+                <!-- Quality Distribution -->
+                <section class="quality-distribution" id="qualityDistribution">
+                    <div class="distribution-bar"></div>
+                    <div class="distribution-legend"></div>
+                </section>
+
+                <!-- Legend -->
+                <div class="card" style="padding: var(--space-4);">
+                    <div class="section-header" style="margin-bottom: var(--space-3);">
+                        <h3 class="section-title text-sm">Quality Legend</h3>
+                    </div>
+                    <div class="flex gap-4" style="flex-wrap: wrap;">
+                        <span class="quality-badge focused">🧘 Focused</span>
+                        <span class="quality-badge mechanical">⚙️ Mechanical</span>
+                        <span class="quality-badge distracted">🌀 Distracted</span>
+                        <span class="quality-badge missed">⏭️ Missed</span>
                     </div>
                 </div>
+            </main>
+        </div>
 
-                <button class="accept-penalty-btn" id="acceptPenalty" disabled>
-                    Accept & Atone
+    </div>
+
+    <!-- ===== MODALS ===== -->
+
+    <!-- Entry Modal -->
+    <div class="modal" id="entryModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="entry-practice-icon">🧘</span>
+                <h2 class="modal-title entry-practice-name">Practice</h2>
+                <button class="modal-close">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
                 </button>
+            </div>
+
+            <div class="flex gap-2 mb-4">
+                <button class="btn btn-primary flex-1" id="markDoneBtn">Done</button>
+                <button class="btn btn-secondary flex-1" id="markMissedBtn">Missed</button>
+            </div>
+
+            <!-- Done Section -->
+            <div class="entry-done-section">
+                <p class="text-sm text-secondary mb-4">How was the quality of your practice?</p>
+
+                <div class="quality-options">
+                    <div class="quality-option focused" data-quality="focused">
+                        <div class="quality-option-icon">🧘</div>
+                        <div class="quality-option-text">
+                            <div class="quality-option-title">Focused</div>
+                            <div class="quality-option-desc">Fully present and engaged</div>
+                        </div>
+                    </div>
+                    <div class="quality-option mechanical" data-quality="mechanical">
+                        <div class="quality-option-icon">⚙️</div>
+                        <div class="quality-option-text">
+                            <div class="quality-option-title">Mechanical</div>
+                            <div class="quality-option-desc">Did it, but mind wandered</div>
+                        </div>
+                    </div>
+                    <div class="quality-option distracted" data-quality="distracted">
+                        <div class="quality-option-icon">🌀</div>
+                        <div class="quality-option-text">
+                            <div class="quality-option-title">Distracted</div>
+                            <div class="quality-option-desc">Struggled to stay present</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Missed Section -->
+            <div class="entry-missed-section" style="display: none;">
+                <p class="text-sm text-secondary mb-4">What happened?</p>
+
+                <div class="reason-options">
+                    <button class="reason-chip" data-reason="forgot">Forgot</button>
+                    <button class="reason-chip" data-reason="tired">Too tired</button>
+                    <button class="reason-chip" data-reason="time">No time</button>
+                    <button class="reason-chip" data-reason="unwell">Unwell</button>
+                    <button class="reason-chip" data-reason="other">Other</button>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block" id="saveEntryBtn">Save Entry</button>
+        </div>
+    </div>
+
+    <!-- Vow Modal -->
+    <div class="modal" id="vowModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>📜</span>
+                <h2 class="modal-title">My Sacred Vow</h2>
+                <button class="modal-close">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="text-center">
+                <p class="text-secondary text-sm mb-4 vow-modal-date">Sealed on: --</p>
+                <img class="vow-modal-signature" src="" alt="Signature"
+                    style="display: none; max-width: 100%; height: 80px; object-fit: contain; background: var(--color-surface-dim); border-radius: var(--radius-lg); padding: var(--space-3); margin-bottom: var(--space-4);">
+                <div class="summary-stats" style="margin-bottom: 0;">
+                    <div class="stat-item">
+                        <div class="stat-value vow-modal-days">1</div>
+                        <div class="stat-label">Days on Path</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>⚙️</span>
+                <h2 class="modal-title">Settings</h2>
+                <button class="modal-close">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="settings-list">
+                <div class="settings-item">
+                    <span>Reminders</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="reminderToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="settings-item danger" id="resetVowBtn">
+                    <span>🔥 Reset My Vow</span>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <polyline points="9,6 15,12 9,18" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Intention Modal -->
+    <div class="modal" id="intentionModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content intention-modal-content">
+            <div class="modal-header">
+                <span>🎯</span>
+                <h2 class="modal-title">Daily Sankalpa</h2>
+                <button class="modal-close">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <p class="text-secondary text-sm mb-4">Choose one word to guide your day. This becomes your lens for all
+                action.</p>
+
+            <div class="intention-suggestions" id="intentionSuggestions">
+                <button class="intention-chip" data-word="Focus">Focus</button>
+                <button class="intention-chip" data-word="Stillness">Stillness</button>
+                <button class="intention-chip" data-word="Patience">Patience</button>
+                <button class="intention-chip" data-word="Gratitude">Gratitude</button>
+                <button class="intention-chip" data-word="Surrender">Surrender</button>
+                <button class="intention-chip" data-word="Presence">Presence</button>
+                <button class="intention-chip" data-word="Discipline">Discipline</button>
+                <button class="intention-chip" data-word="Love">Love</button>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="input-group">
+                <label class="input-label">Or write your own</label>
+                <input type="text" class="input" id="intentionInput" placeholder="One word..." maxlength="20">
+            </div>
+
+            <button class="btn btn-primary btn-block" id="saveIntentionBtn">Set Intention</button>
+        </div>
+    </div>
+
+    <!-- Reflection Modal -->
+    <div class="modal" id="reflectionModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>🌙</span>
+                <h2 class="modal-title">Evening Simran</h2>
+                <button class="modal-close">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <p class="text-secondary text-sm mb-4">Take a moment to reflect on your day. What did you notice about
+                yourself?</p>
+
+            <div class="reflection-intention mb-4" id="reflectionIntention">
+                <span class="text-sm text-tertiary">Your intention was:</span>
+                <span class="text-lg font-semibold text-primary" id="reflectionIntentionWord">—</span>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Your reflection (optional)</label>
+                <textarea class="input textarea" id="reflectionInput"
+                    placeholder="What did you notice? Any insights?..." rows="4"></textarea>
+            </div>
+
+            <button class="btn btn-primary btn-block" id="saveReflectionBtn">Complete Day</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/core/State.js"></script>
+    <script src="js/core/Storage.js"></script>
+    <script src="js/core/Time.js"></script>
+    <script src="js/screens/Vow.js"></script>
+    <script src="js/screens/Main.js"></script>
+    <script src="js/screens/Drishti.js"></script>
     <script src="js/app.js"></script>
 </body>
 
