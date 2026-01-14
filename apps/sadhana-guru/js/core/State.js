@@ -11,13 +11,13 @@ const State = {
         signature: null,
         vowDate: null,
 
-        // Practices (default sankalpas)
+        // Practices (default sankalpas with implementation intentions)
         practices: [
-            { id: 'brahma', name: 'Brahma Muhurta', desc: 'Rise before sunrise (4:30 - 5:30 AM)', icon: '🌅', anchor: 'On waking' },
-            { id: 'surya', name: 'Surya Namaskar', desc: '12 rounds minimum', icon: '🙏', anchor: 'After freshening up' },
-            { id: 'dhyana', name: 'Dhyana', desc: '20 minutes meditation', icon: '🧘', anchor: 'After Surya Namaskar' },
-            { id: 'japa', name: 'Japa', desc: '108 mantra repetitions', icon: '📿', anchor: 'After meditation' },
-            { id: 'digital', name: 'Digital Brahmacharya', desc: 'No social media before 10 AM', icon: '📵', anchor: 'Until 10 AM' }
+            { id: 'brahma', name: 'Brahma Muhurta', desc: 'Rise before sunrise (4:30 - 5:30 AM)', icon: '🌅', anchor: 'On waking', intention: null },
+            { id: 'surya', name: 'Surya Namaskar', desc: '12 rounds minimum', icon: '🙏', anchor: 'After freshening up', intention: null },
+            { id: 'dhyana', name: 'Dhyana', desc: '20 minutes meditation', icon: '🧘', anchor: 'After Surya Namaskar', intention: null },
+            { id: 'japa', name: 'Japa', desc: '108 mantra repetitions', icon: '📿', anchor: 'After meditation', intention: null },
+            { id: 'digital', name: 'Digital Brahmacharya', desc: 'No social media before 10 AM', icon: '📵', anchor: 'Until 10 AM', intention: null }
         ],
 
         // Today's data

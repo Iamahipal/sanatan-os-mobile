@@ -610,11 +610,127 @@
         </div>
     </div>
 
+    <!-- Implementation Intentions Modal (If-Then Planning) -->
+    <div class="modal" id="intentionPlanModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>🎯</span>
+                <h2 class="modal-title">If-Then Plan</h2>
+                <button class="modal-close">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="intention-plan-practice mb-4">
+                <span class="intention-plan-icon" id="intentionPlanIcon">🧘</span>
+                <span class="intention-plan-name" id="intentionPlanName">Practice</span>
+            </div>
+
+            <p class="text-secondary text-sm mb-4">
+                Create an "if-then" plan. Research shows this <strong>doubles</strong> your success rate by making the
+                behavior automatic.
+            </p>
+
+            <div class="if-then-builder">
+                <div class="if-section">
+                    <label class="if-label">IF</label>
+                    <select class="input" id="ifTrigger">
+                        <option value="">Choose a trigger...</option>
+                        <option value="I wake up">I wake up</option>
+                        <option value="I finish brushing my teeth">I finish brushing my teeth</option>
+                        <option value="I drink my morning chai/coffee">I drink my morning chai/coffee</option>
+                        <option value="I sit at my desk">I sit at my desk</option>
+                        <option value="I feel stressed">I feel stressed</option>
+                        <option value="The sun sets">The sun sets</option>
+                        <option value="I return home from work">I return home from work</option>
+                        <option value="custom">Write my own...</option>
+                    </select>
+                    <input type="text" class="input hidden" id="ifTriggerCustom" placeholder="Write your trigger...">
+                </div>
+
+                <div class="then-section">
+                    <label class="then-label">THEN</label>
+                    <div class="then-action" id="thenAction">I will do this practice</div>
+                </div>
+            </div>
+
+            <div class="if-then-preview card-primary mb-4" id="ifThenPreview">
+                <p class="text-center text-sm text-devanagari">
+                    "IF <span id="previewIf">___</span>, THEN I will <span id="previewThen">___</span>."
+                </p>
+            </div>
+
+            <button class="btn btn-primary btn-block" id="saveIntentionPlanBtn">Set Implementation Intention</button>
+        </div>
+    </div>
+
+    <!-- Kshana Modal (Micro-Moment Fallback) -->
+    <div class="modal" id="kshanaModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content kshana-content">
+            <div class="kshana-header">
+                <span class="kshana-icon">🌸</span>
+                <h2 class="kshana-title">Kshana</h2>
+                <p class="kshana-subtitle">The smallest moment still counts</p>
+            </div>
+
+            <p class="text-secondary text-sm text-center mb-4">
+                Can't do the full practice? Choose a micro-moment instead:
+            </p>
+
+            <div class="kshana-options" id="kshanaOptions">
+                <!-- Dynamically rendered based on practice -->
+            </div>
+
+            <div class="kshana-wisdom">
+                <p class="text-sanskrit text-sm">"One conscious breath is better than no breath."</p>
+            </div>
+
+            <button class="btn btn-ghost btn-block" id="skipKshanaBtn">Not now</button>
+        </div>
+    </div>
+
+    <!-- Sakshi Insights Card (Pattern Display) -->
+    <div class="modal" id="sakshiModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content sakshi-content">
+            <div class="modal-header">
+                <span>🪞</span>
+                <h2 class="modal-title">Sakshi</h2>
+                <button class="modal-close">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <p class="text-sm text-secondary mb-4">
+                The Witness observes without judgment. Here is what has been noticed:
+            </p>
+
+            <div class="sakshi-patterns" id="sakshiPatterns">
+                <!-- Dynamically rendered patterns -->
+            </div>
+
+            <div class="sakshi-footer">
+                <p class="text-xs text-tertiary text-center">
+                    These are observations, not evaluations. Notice what arises.
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="js/core/State.js"></script>
     <script src="js/core/Storage.js"></script>
     <script src="js/core/Time.js"></script>
     <script src="js/core/GuruVakya.js"></script>
+    <script src="js/core/Sakshi.js"></script>
     <script src="js/screens/Vow.js"></script>
     <script src="js/screens/Main.js"></script>
     <script src="js/screens/Drishti.js"></script>

@@ -633,6 +633,165 @@ const MainScreen = {
             missed: tap.missedDays,
             isComplete: tap.currentDay > 66
         };
+    },
+
+    // ===== PHASE 4A: DIGITAL GURU FEATURES =====
+
+    /**
+     * Open Implementation Intention (If-Then) modal
+     */
+    openIntentionPlanModal(practiceId) {
+        const modal = document.getElementById('intentionPlanModal');
+        const practices = State.getProperty('practices');
+        const practice = practices.find(p => p.id === practiceId);
+
+        if (!modal || !practice) return;
+
+        // Populate modal
+        document.getElementById('intentionPlanIcon').textContent = practice.icon;
+        document.getElementById('intentionPlanName').textContent = practice.name;
+        document.getElementById('thenAction').textContent = `I will do ${practice.name}`;
+        document.getElementById('previewThen').textContent = practice.name;
+        document.getElementById('previewIf').textContent = '___';
+
+        // Reset form
+        document.getElementById('ifTrigger').value = practice.intention?.trigger || '';
+        document.getElementById('ifTriggerCustom').value = '';
+        document.getElementById('ifTriggerCustom').classList.add('hidden');
+
+        // Store current practice
+        modal.dataset.practiceId = practiceId;
+
+        // Show modal
+        modal.classList.add('active');
+        this._bindIfThenEvents(modal, practice);
+    },
+
+    _bindIfThenEvents(modal, practice) {
+        const triggerSelect = document.getElementById('ifTrigger');
+        const customInput = document.getElementById('ifTriggerCustom');
+        const previewIf = document.getElementById('previewIf');
+        const saveBtn = document.getElementById('saveIntentionPlanBtn');
+        const closeBtn = modal.querySelector('.modal-close');
+        const backdrop = modal.querySelector('.modal-backdrop');
+
+        // Trigger selection
+        triggerSelect.onchange = () => {
+            if (triggerSelect.value === 'custom') {
+                customInput.classList.remove('hidden');
+                customInput.focus();
+                previewIf.textContent = customInput.value || '___';
+            } else {
+                customInput.classList.add('hidden');
+                previewIf.textContent = triggerSelect.value || '___';
+            }
+        };
+
+        customInput.oninput = () => {
+            previewIf.textContent = customInput.value || '___';
+        };
+
+        // Save
+        saveBtn.onclick = () => {
+            const trigger = triggerSelect.value === 'custom'
+                ? customInput.value
+                : triggerSelect.value;
+
+            if (!trigger) {
+                App.showToast('Please select or write a trigger');
+                return;
+            }
+
+            // Save intention to practice
+            const practices = State.getProperty('practices');
+            const idx = practices.findIndex(p => p.id === modal.dataset.practiceId);
+            if (idx >= 0) {
+                practices[idx].intention = { trigger, then: practice.name };
+                State.set({ practices });
+            }
+
+            App.showToast('🎯 Implementation intention set!');
+            modal.classList.remove('active');
+            this._renderPractices();
+        };
+
+        // Close handlers
+        closeBtn.onclick = () => modal.classList.remove('active');
+        backdrop.onclick = () => modal.classList.remove('active');
+    },
+
+    /**
+     * Open Kshana (micro-moment) modal
+     */
+    openKshanaModal(practiceId) {
+        const modal = document.getElementById('kshanaModal');
+        const optionsContainer = document.getElementById('kshanaOptions');
+        const skipBtn = document.getElementById('skipKshanaBtn');
+        const backdrop = modal.querySelector('.modal-backdrop');
+
+        if (!modal) return;
+
+        // Get micro-moment options
+        const options = Sakshi.getKshanaOptions(practiceId);
+
+        optionsContainer.innerHTML = options.map((opt, i) => `
+            <button class="kshana-option" data-idx="${i}">
+                <span class="kshana-option-icon">${opt.icon}</span>
+                <span class="kshana-option-text">${opt.text}</span>
+            </button>
+        `).join('');
+
+        // Bind option clicks
+        optionsContainer.querySelectorAll('.kshana-option').forEach(btn => {
+            btn.onclick = () => {
+                // Mark as micro-done
+                const todayEntries = State.getProperty('todayEntries');
+                todayEntries[practiceId] = {
+                    done: true,
+                    quality: 'focused',
+                    micro: true,
+                    timestamp: new Date().toISOString()
+                };
+                State.set({ todayEntries });
+
+                App.showToast('🌸 Kshana recorded');
+                modal.classList.remove('active');
+                this._renderPractices();
+                this._updateStats();
+            };
+        });
+
+        skipBtn.onclick = () => modal.classList.remove('active');
+        backdrop.onclick = () => modal.classList.remove('active');
+
+        modal.classList.add('active');
+    },
+
+    /**
+     * Open Sakshi (pattern witness) modal
+     */
+    openSakshiModal() {
+        const modal = document.getElementById('sakshiModal');
+        const patternsContainer = document.getElementById('sakshiPatterns');
+        const closeBtn = modal.querySelector('.modal-close');
+        const backdrop = modal.querySelector('.modal-backdrop');
+
+        if (!modal) return;
+
+        // Analyze patterns
+        const patterns = Sakshi.analyzePatterns();
+
+        patternsContainer.innerHTML = patterns.map(p => `
+            <div class="sakshi-pattern">
+                <div class="sakshi-pattern-text">${p.text}</div>
+                <div class="sakshi-pattern-meta">${p.meta}</div>
+            </div>
+        `).join('');
+
+        closeBtn.onclick = () => modal.classList.remove('active');
+        backdrop.onclick = () => modal.classList.remove('active');
+
+        modal.classList.add('active');
     }
 };
 

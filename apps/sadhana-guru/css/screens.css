@@ -1039,3 +1039,176 @@
 .summary-attention {
     color: var(--color-distracted);
 }
+
+/* ===== IMPLEMENTATION INTENTIONS (IF-THEN) ===== */
+.intention-plan-practice {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background: var(--color-surface-dim);
+    border-radius: var(--radius-lg);
+}
+
+.intention-plan-icon {
+    font-size: var(--text-2xl);
+}
+
+.intention-plan-name {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+}
+
+.if-then-builder {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.if-section,
+.then-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.if-label,
+.then-label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.if-label {
+    color: var(--color-primary);
+}
+
+.then-label {
+    color: var(--color-success);
+}
+
+.then-action {
+    padding: var(--space-3);
+    background: var(--color-success-subtle);
+    border: 1px solid var(--color-success);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-base);
+    color: var(--color-success);
+    font-weight: var(--weight-medium);
+}
+
+.if-then-preview {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+}
+
+.if-then-preview span {
+    font-weight: var(--weight-bold);
+    color: var(--color-primary);
+}
+
+/* ===== KSHANA (MICRO-MOMENTS) ===== */
+.kshana-content {
+    text-align: center;
+}
+
+.kshana-header {
+    margin-bottom: var(--space-4);
+}
+
+.kshana-icon {
+    font-size: var(--text-4xl);
+    display: block;
+    margin-bottom: var(--space-2);
+}
+
+.kshana-title {
+    font-family: var(--font-sanskrit);
+    font-size: var(--text-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-1);
+}
+
+.kshana-subtitle {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+}
+
+.kshana-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.kshana-option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface-dim);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+}
+
+.kshana-option:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-subtle);
+}
+
+.kshana-option-icon {
+    font-size: var(--text-xl);
+}
+
+.kshana-option-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+}
+
+.kshana-wisdom {
+    padding: var(--space-4);
+    background: var(--color-surface-dim);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+}
+
+/* ===== SAKSHI (WITNESS PATTERNS) ===== */
+.sakshi-content {
+    background: linear-gradient(180deg, var(--color-surface-elevated) 0%, var(--color-surface-dim) 100%);
+}
+
+.sakshi-patterns {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.sakshi-pattern {
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface-elevated);
+    border-left: 3px solid var(--color-border-primary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.sakshi-pattern-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-primary);
+    line-height: var(--leading-relaxed);
+}
+
+.sakshi-pattern-meta {
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+    margin-top: var(--space-1);
+}
+
+.sakshi-footer {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+}
