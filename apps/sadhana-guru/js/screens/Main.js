@@ -20,6 +20,7 @@ const MainScreen = {
         this._bindEvents();
         this._bindIntentionEvents();
         this._bindReflectionEvents();
+        this._bindTapasyaEvents();
     },
 
     /**
@@ -31,23 +32,34 @@ const MainScreen = {
 
         const practices = State.getProperty('practices');
         const entries = State.getProperty('todayEntries');
+        const tapasya = State.getProperty('tapasya') || {};
 
         container.innerHTML = practices.map(practice => {
             const entry = entries[practice.id];
             const isDone = entry?.done === true;
             const isMissed = entry?.done === false;
             const quality = entry?.quality || '';
+            const tap = tapasya[practice.id];
+            const isTapasya = tap && tap.currentDay <= 66;
 
             let statusClass = '';
             if (isDone) statusClass = 'completed';
             else if (isMissed) statusClass = 'missed';
 
+            // Tapasya badge
+            let tapasyaBadge = '';
+            if (isTapasya) {
+                const progress = Math.round((tap.currentDay / 66) * 100);
+                tapasyaBadge = `<span class="tapasya-badge">🔥 Day ${tap.currentDay}/66</span>`;
+            }
+
             return `
-                <div class="practice-item ${statusClass}" data-id="${practice.id}">
+                <div class="practice-item ${statusClass} ${isTapasya ? 'tapasya-active' : ''}" data-id="${practice.id}">
                     <div class="practice-icon">${practice.icon}</div>
                     <div class="practice-info">
                         <div class="practice-name">${practice.name}</div>
-                        <div class="practice-desc">${practice.desc}</div>
+                        <div class="practice-anchor">${practice.anchor || practice.desc}</div>
+                        ${tapasyaBadge}
                         ${quality ? `<span class="quality-badge ${quality}">${quality}</span>` : ''}
                     </div>
                     <button class="practice-action" ${entry ? 'disabled' : ''}>
@@ -59,16 +71,41 @@ const MainScreen = {
             `;
         }).join('');
 
-        // Bind click events
+        // Bind click events and long press for Tapasya
         container.querySelectorAll('.practice-item').forEach(item => {
             const btn = item.querySelector('.practice-action');
+            const id = item.dataset.id;
+            let pressTimer = null;
+
+            // Click on action button opens entry modal
             if (btn && !btn.disabled) {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    const id = item.dataset.id;
                     this._openEntryModal(id);
                 });
             }
+
+            // Long press on item opens Tapasya modal
+            item.addEventListener('mousedown', (e) => {
+                if (e.target === btn) return;
+                pressTimer = setTimeout(() => {
+                    this.openTapasyaModal(id);
+                }, 800);
+            });
+
+            item.addEventListener('mouseup', () => clearTimeout(pressTimer));
+            item.addEventListener('mouseleave', () => clearTimeout(pressTimer));
+
+            // Touch events for mobile
+            item.addEventListener('touchstart', (e) => {
+                if (e.target === btn) return;
+                pressTimer = setTimeout(() => {
+                    this.openTapasyaModal(id);
+                }, 800);
+            }, { passive: true });
+
+            item.addEventListener('touchend', () => clearTimeout(pressTimer));
+            item.addEventListener('touchcancel', () => clearTimeout(pressTimer));
         });
     },
 
@@ -481,6 +518,121 @@ const MainScreen = {
         modal.classList.remove('active');
 
         App.showToast('🌙 Day complete. Rest well.');
+    },
+
+    // ===== PHASE 2: TAPASYA MODE (66-DAY COMMITMENT) =====
+
+    currentTapasyaPractice: null,
+
+    /**
+     * Initialize Tapasya handlers
+     */
+    _bindTapasyaEvents() {
+        const modal = document.getElementById('tapasyaModal');
+        if (!modal) return;
+
+        document.getElementById('startTapasyaBtn')?.addEventListener('click', () => {
+            this._startTapasya(modal);
+        });
+
+        modal.querySelector('.modal-backdrop').onclick = () => modal.classList.remove('active');
+        modal.querySelector('.modal-close').onclick = () => modal.classList.remove('active');
+    },
+
+    /**
+     * Open Tapasya modal for a practice (long press or special action)
+     */
+    openTapasyaModal(practiceId) {
+        const practices = State.getProperty('practices');
+        const practice = practices.find(p => p.id === practiceId);
+        const tapasya = State.getProperty('tapasya') || {};
+
+        if (!practice) return;
+
+        // Check if already in Tapasya
+        if (tapasya[practiceId]) {
+            App.showToast('Already in Tapasya for this practice');
+            return;
+        }
+
+        this.currentTapasyaPractice = practiceId;
+
+        const modal = document.getElementById('tapasyaModal');
+        if (!modal) return;
+
+        document.getElementById('tapasyaPracticeIcon').textContent = practice.icon;
+        document.getElementById('tapasyaPracticeName').textContent = practice.name;
+
+        modal.classList.add('active');
+    },
+
+    /**
+     * Start Tapasya for current practice
+     */
+    _startTapasya(modal) {
+        if (!this.currentTapasyaPractice) return;
+
+        const tapasya = State.getProperty('tapasya') || {};
+
+        tapasya[this.currentTapasyaPractice] = {
+            startDate: new Date().toISOString(),
+            currentDay: 1,
+            automaticityScores: [],
+            completedDays: 0,
+            missedDays: 0
+        };
+
+        State.set({ tapasya });
+        modal.classList.remove('active');
+        this._renderPractices();
+
+        App.showToast('🔥 Tapasya begun! 66 days to mastery.');
+    },
+
+    /**
+     * Update Tapasya progress when practice is completed
+     */
+    updateTapasyaProgress(practiceId, completed) {
+        const tapasya = State.getProperty('tapasya') || {};
+        const tap = tapasya[practiceId];
+
+        if (!tap) return;
+
+        // Update progress
+        if (completed) {
+            tap.completedDays++;
+        } else {
+            tap.missedDays++;
+        }
+
+        // Increment day counter
+        tap.currentDay++;
+
+        // Check if complete
+        if (tap.currentDay > 66) {
+            App.showToast('🎉 Tapasya complete! Practice is now part of you.');
+            delete tapasya[practiceId];
+        }
+
+        State.set({ tapasya });
+    },
+
+    /**
+     * Get Tapasya summary for a practice
+     */
+    getTapasyaSummary(practiceId) {
+        const tapasya = State.getProperty('tapasya') || {};
+        const tap = tapasya[practiceId];
+
+        if (!tap) return null;
+
+        return {
+            day: tap.currentDay,
+            progress: Math.round((tap.currentDay / 66) * 100),
+            completed: tap.completedDays,
+            missed: tap.missedDays,
+            isComplete: tap.currentDay > 66
+        };
     }
 };
 

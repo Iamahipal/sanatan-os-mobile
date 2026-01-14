@@ -792,3 +792,50 @@
 .hidden {
     display: none !important;
 }
+
+/* ===== TAPASYA MODAL ===== */
+.tapasya-practice-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--color-surface-dim);
+    border-radius: var(--radius-lg);
+}
+
+.tapasya-practice-icon {
+    font-size: var(--text-2xl);
+}
+
+.tapasya-practice-name {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+}
+
+.tapasya-commitment {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+}
+
+.tapasya-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+}
+
+.tapasya-info-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.tapasya-info-icon {
+    font-size: var(--text-lg);
+}
+
+.tapasya-info-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+}
