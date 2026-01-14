@@ -67,7 +67,17 @@ p {
 }
 
 .text-sanskrit {
-    font-family: var(--font-serif);
+    font-family: var(--font-sanskrit);
+}
+
+.text-hindi {
+    font-family: var(--font-hindi);
+}
+
+/* Combined Devanagari styling */
+.text-devanagari {
+    font-family: var(--font-hindi);
+    line-height: var(--leading-relaxed);
 }
 
 .text-primary {

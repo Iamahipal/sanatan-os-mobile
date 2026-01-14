@@ -48,26 +48,34 @@
     --color-border-primary: rgba(230, 126, 34, 0.3);
 
     /* ===== TYPOGRAPHY ===== */
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-serif: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', serif;
 
-    /* Font Sizes */
-    --text-xs: 0.75rem;
-    /* 12px */
-    --text-sm: 0.875rem;
-    /* 14px */
-    --text-base: 1rem;
-    /* 16px */
-    --text-lg: 1.125rem;
-    /* 18px */
-    --text-xl: 1.25rem;
-    /* 20px */
-    --text-2xl: 1.5rem;
-    /* 24px */
-    --text-3xl: 1.875rem;
-    /* 30px */
-    --text-4xl: 2.25rem;
-    /* 36px */
+    /* Font Families - Google Flexible Fonts */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-hindi: 'Noto Sans Devanagari', 'Noto Serif Devanagari', sans-serif;
+    --font-sanskrit: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', serif;
+    --font-serif: var(--font-sanskrit);
+
+    /* Fluid Font Sizes - Google Flexible Typography using clamp() */
+    /* Formula: clamp(min, preferred, max) */
+    /* Scales fluidly between 320px and 480px viewport */
+    --text-xs: clamp(0.6875rem, 0.625rem + 0.25vw, 0.75rem);
+    /* 11px → 12px */
+    --text-sm: clamp(0.8125rem, 0.75rem + 0.25vw, 0.875rem);
+    /* 13px → 14px */
+    --text-base: clamp(0.9375rem, 0.875rem + 0.25vw, 1rem);
+    /* 15px → 16px */
+    --text-lg: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+    /* 17px → 18px */
+    --text-xl: clamp(1.1875rem, 1.125rem + 0.25vw, 1.25rem);
+    /* 19px → 20px */
+    --text-2xl: clamp(1.375rem, 1.25rem + 0.5vw, 1.5rem);
+    /* 22px → 24px */
+    --text-3xl: clamp(1.625rem, 1.5rem + 0.5vw, 1.875rem);
+    /* 26px → 30px */
+    --text-4xl: clamp(2rem, 1.75rem + 1vw, 2.25rem);
+    /* 32px → 36px */
+    --text-5xl: clamp(2.5rem, 2rem + 2vw, 3rem);
+    /* 40px → 48px */
 
     /* Font Weights */
     --weight-normal: 400;
@@ -75,10 +83,11 @@
     --weight-semibold: 600;
     --weight-bold: 700;
 
-    /* Line Heights */
-    --leading-tight: 1.25;
+    /* Line Heights - Optimized for Hindi/Sanskrit */
+    --leading-tight: 1.3;
     --leading-normal: 1.5;
     --leading-relaxed: 1.75;
+    --leading-loose: 2;
 
     /* ===== SPACING ===== */
     --space-1: 0.25rem;
