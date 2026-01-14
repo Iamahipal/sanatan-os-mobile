@@ -285,14 +285,20 @@
                 </button>
                 <div class="header-center">
                     <h1 class="header-title">Drishti</h1>
-                    <span class="header-subtitle">Weekly Insight</span>
+                    <span class="header-subtitle">The View</span>
                 </div>
                 <div class="header-btn invisible"></div>
             </header>
 
             <main class="drishti-content">
-                <!-- Week Navigator -->
-                <div class="week-nav">
+                <!-- View Toggle -->
+                <div class="view-toggle" id="viewToggle">
+                    <button class="view-toggle-btn active" data-view="week">Week</button>
+                    <button class="view-toggle-btn" data-view="month">Month</button>
+                </div>
+
+                <!-- Week/Month Navigator -->
+                <div class="week-nav" id="dateNav">
                     <button class="week-nav-btn" id="weekPrevBtn">
                         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                             viewBox="0 0 24 24">
@@ -313,6 +319,11 @@
 
                 <!-- Weekly Grid -->
                 <div class="weekly-grid" id="weeklyGrid">
+                    <!-- Dynamically rendered -->
+                </div>
+
+                <!-- Guru Vakya (Wisdom) -->
+                <div class="guru-vakya-container" id="guruVakya">
                     <!-- Dynamically rendered -->
                 </div>
 
@@ -603,6 +614,7 @@
     <script src="js/core/State.js"></script>
     <script src="js/core/Storage.js"></script>
     <script src="js/core/Time.js"></script>
+    <script src="js/core/GuruVakya.js"></script>
     <script src="js/screens/Vow.js"></script>
     <script src="js/screens/Main.js"></script>
     <script src="js/screens/Drishti.js"></script>

@@ -1,0 +1,146 @@
+[
+    {
+        "pattern": "low_consistency",
+        "context": "When user has missed multiple days",
+        "quotes": [
+            {
+                "text": "The mind is restless, O Arjuna, turbulent, strong and obstinate. But it can be controlled by practice and detachment.",
+                "source": "Bhagavad Gita 6.34-35"
+            },
+            {
+                "text": "Yoga is not lost for one who has fallen. He is reborn in the house of the pure and prosperous.",
+                "source": "Bhagavad Gita 6.41"
+            },
+            {
+                "text": "Neither in this world nor the next is there destruction for him. No one who does good ever comes to grief.",
+                "source": "Bhagavad Gita 6.40"
+            }
+        ]
+    },
+    {
+        "pattern": "mechanical_quality",
+        "context": "When user consistently marks practices as mechanical",
+        "quotes": [
+            {
+                "text": "Whatever you do, whatever you eat, whatever you offer, do it as an offering to Me.",
+                "source": "Bhagavad Gita 9.27"
+            },
+            {
+                "text": "Perform your duty with a steady mind, abandoning attachment to success or failure.",
+                "source": "Bhagavad Gita 2.48"
+            },
+            {
+                "text": "Action without attachment is the secret of yoga. Let the work be your meditation.",
+                "source": "Bhagavad Gita 3.19"
+            }
+        ]
+    },
+    {
+        "pattern": "high_focus",
+        "context": "When user has many focused practices",
+        "quotes": [
+            {
+                "text": "Yoga is skill in action.",
+                "source": "Bhagavad Gita 2.50"
+            },
+            {
+                "text": "When meditation is mastered, the mind is unwavering like the flame of a lamp in a windless place.",
+                "source": "Bhagavad Gita 6.19"
+            },
+            {
+                "text": "The self-controlled man, moving among objects with senses under restraint, attains serenity.",
+                "source": "Bhagavad Gita 2.64"
+            }
+        ]
+    },
+    {
+        "pattern": "consistent",
+        "context": "When user has been consistent for a week+",
+        "quotes": [
+            {
+                "text": "Little by little, through patience and repeated effort, the mind will become stilled.",
+                "source": "Bhagavad Gita 6.25"
+            },
+            {
+                "text": "Established in yoga, perform actions. Success and failure are the same.",
+                "source": "Bhagavad Gita 2.48"
+            },
+            {
+                "text": "What seems like poison at first, but tastes like nectar in the end — that is sattvic happiness.",
+                "source": "Bhagavad Gita 18.37"
+            }
+        ]
+    },
+    {
+        "pattern": "new_journey",
+        "context": "For users in their first week",
+        "quotes": [
+            {
+                "text": "The journey of a thousand miles begins with a single step.",
+                "source": "Lao Tzu"
+            },
+            {
+                "text": "In this path, no effort is ever lost. Even a little practice protects from great fear.",
+                "source": "Bhagavad Gita 2.40"
+            },
+            {
+                "text": "Set your heart upon your work, but never on its reward.",
+                "source": "Bhagavad Gita 2.47"
+            }
+        ]
+    },
+    {
+        "pattern": "evening",
+        "context": "Evening reflection time",
+        "quotes": [
+            {
+                "text": "At the end of the day, let the Witness observe without judgment.",
+                "source": "Yoga Sutras"
+            },
+            {
+                "text": "Calmly contemplate, observe the breath, and rest in the space between thoughts.",
+                "source": "Vigyan Bhairav Tantra"
+            },
+            {
+                "text": "He who sees inaction in action, and action in inaction, is wise among men.",
+                "source": "Bhagavad Gita 4.18"
+            }
+        ]
+    },
+    {
+        "pattern": "morning",
+        "context": "Morning practice time",
+        "quotes": [
+            {
+                "text": "Brahma Muhurta is the time of Brahma — creation energy is at its peak.",
+                "source": "Ashtanga Hridayam"
+            },
+            {
+                "text": "The early morning has gold in its mouth.",
+                "source": "Sanskrit Proverb"
+            },
+            {
+                "text": "One who rises at Brahma Muhurta protects their life like the Lotus protects its purity in muddy water.",
+                "source": "Ayurveda"
+            }
+        ]
+    },
+    {
+        "pattern": "tapasya_midway",
+        "context": "User is in the middle of 66-day tapasya",
+        "quotes": [
+            {
+                "text": "Tapas burns away impurities, revealing the jewel within.",
+                "source": "Yoga Sutras 2.43"
+            },
+            {
+                "text": "By austerity, study, and surrender to Ishvara, kriya yoga is practiced.",
+                "source": "Yoga Sutras 2.1"
+            },
+            {
+                "text": "The heated gold becomes pure. The heated soul becomes divine.",
+                "source": "Upanishads"
+            }
+        ]
+    }
+]
