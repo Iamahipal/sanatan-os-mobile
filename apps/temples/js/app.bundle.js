@@ -239,15 +239,24 @@ class App {
         const view = template.content.cloneNode(true);
         const listContainer = view.getElementById('temple-list');
         const countEl = view.getElementById('temple-count');
+        const titleEl = view.getElementById('section-title');
+
+        // Filter to show only Jyotirlingas by default, sorted by order
+        const jyotirlingas = this.templesIndex
+            .filter(t => t.category === 'jyotirlinga')
+            .sort((a, b) => (a.order || 0) - (b.order || 0));
 
         // Update temple count dynamically
-        const count = this.templesIndex.length;
+        const count = jyotirlingas.length;
         if (countEl) {
             countEl.textContent = `${count} temple${count !== 1 ? 's' : ''}`;
         }
+        if (titleEl) {
+            titleEl.textContent = '12 Jyotirlingas';
+        }
 
         // Render Cards
-        this.templesIndex.forEach(temple => {
+        jyotirlingas.forEach(temple => {
             const card = document.createElement('div');
             card.className = 'temple-card';
             card.setAttribute('role', 'button');
@@ -658,3 +667,40 @@ class App {
 
 // Initialize
 window.app = new App();
+
+// Global filter function for category buttons
+window.filterTemples = function (category) {
+    // Update category card active states
+    document.querySelectorAll('.category-card').forEach(card => {
+        card.classList.toggle('active', card.dataset.category === category);
+    });
+
+    // Update badge states
+    document.querySelectorAll('.category-card').forEach(card => {
+        const badge = card.querySelector('.category-badge');
+        if (badge) {
+            if (card.dataset.category === category && category === 'jyotirlinga') {
+                badge.classList.add('active');
+                badge.classList.remove('coming');
+                badge.textContent = 'Explore';
+            } else if (card.dataset.category === 'jyotirlinga') {
+                badge.classList.remove('active');
+                badge.classList.add('active');
+                badge.textContent = 'Explore';
+            } else {
+                badge.classList.remove('active');
+                badge.classList.add('coming');
+                badge.textContent = 'Coming Soon';
+            }
+        }
+    });
+
+    // Show alert for coming soon categories
+    if (category !== 'jyotirlinga') {
+        alert(`🙏 ${category === 'char-dham' ? 'Char Dham Yatra' : '51 Shakti Peethas'} pilgrimage data is coming soon!\n\nExplore the 12 Jyotirlingas now available.`);
+        return;
+    }
+
+    // Refresh icons
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+};

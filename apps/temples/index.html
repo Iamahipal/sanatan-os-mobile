@@ -110,35 +110,55 @@
 
             <!-- Main Content -->
             <main class="home-content">
-                <!-- Temples Section -->
-                <section class="content-section">
+                <!-- Pilgrimage Categories Section - TOP -->
+                <section class="content-section pilgrimage-categories">
                     <div class="section-header">
-                        <h2 class="section-title">Featured Temples</h2>
-                        <span class="section-count" id="temple-count">4 temples</span>
+                        <h2 class="section-title">Sacred Pilgrimages</h2>
                     </div>
-                    <div class="temple-grid" id="temple-list">
-                        <!-- Temple Cards Injected Here -->
+                    <div class="category-grid">
+                        <button class="category-card" data-category="char-dham" onclick="filterTemples('char-dham')">
+                            <div class="category-icon">
+                                <i data-lucide="mountain"></i>
+                            </div>
+                            <div class="category-info">
+                                <span class="category-name">Char Dham Yatra</span>
+                                <span class="category-count">4 Dhams</span>
+                            </div>
+                            <span class="category-badge coming">Coming Soon</span>
+                        </button>
+                        <button class="category-card active" data-category="jyotirlinga"
+                            onclick="filterTemples('jyotirlinga')">
+                            <div class="category-icon">
+                                <i data-lucide="flame"></i>
+                            </div>
+                            <div class="category-info">
+                                <span class="category-name">12 Jyotirlingas</span>
+                                <span class="category-count">12 Temples</span>
+                            </div>
+                            <span class="category-badge active">Explore</span>
+                        </button>
+                        <button class="category-card" data-category="shakti-peetha"
+                            onclick="filterTemples('shakti-peetha')">
+                            <div class="category-icon">
+                                <i data-lucide="star"></i>
+                            </div>
+                            <div class="category-info">
+                                <span class="category-name">51 Shakti Peethas</span>
+                                <span class="category-count">51 Temples</span>
+                            </div>
+                            <span class="category-badge coming">Coming Soon</span>
+                        </button>
                     </div>
                 </section>
 
-                <!-- Coming Soon Section (placeholder for future) -->
-                <section class="content-section coming-soon">
+                <!-- Temples Section -->
+                <section class="content-section">
                     <div class="section-header">
-                        <h2 class="section-title">Coming Soon</h2>
+                        <h2 class="section-title" id="section-title">12 Jyotirlingas</h2>
+                        <span class="section-count" id="temple-count">12 temples</span>
                     </div>
-                    <div class="coming-soon-grid">
-                        <div class="coming-card">
-                            <i data-lucide="mountain"></i>
-                            <span>Char Dham Yatra</span>
-                        </div>
-                        <div class="coming-card">
-                            <i data-lucide="compass"></i>
-                            <span>12 Jyotirlingas</span>
-                        </div>
-                        <div class="coming-card">
-                            <i data-lucide="star"></i>
-                            <span>51 Shakti Peethas</span>
-                        </div>
+                    <div class="temple-grid" id="temple-list">
+                        <!-- Temple Cards Injected Here -->
                     </div>
                 </section>
             </main>
