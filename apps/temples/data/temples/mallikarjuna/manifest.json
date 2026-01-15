@@ -1,32 +1,115 @@
 {
     "id": "mallikarjuna",
     "name": "Mallikarjuna",
-    "sanskrit_name": "श्री मल्लिकार्जुन",
+    "name_local": "मल्लिकार्जुन",
+    "sanskrit_name": "श्री मल्लिकार्जुन स्वामी",
+    "alternate_names": [
+        "Sri Mallikarjuna Swamy",
+        "Chenchu Mallayya",
+        "Sriparvata Swamy"
+    ],
+    "historical_names": [
+        "Siridhan",
+        "Srigiri",
+        "Sriparvata",
+        "Setagiri"
+    ],
     "location": {
         "city": "Srisailam",
+        "district": "Nandyal",
         "state": "Andhra Pradesh",
+        "country": "India",
         "coordinates": {
             "lat": 16.0745,
             "lng": 78.8682
-        }
+        },
+        "elevation_meters": 457,
+        "river": "Krishna (Pathalaganga)",
+        "mountain_range": "Nallamala Range, Eastern Ghats",
+        "forest_reserve": "Nagarjunasagar-Srisailam Tiger Reserve"
     },
+    "hero_image": "data/temples/mallikarjuna/images/hero.png",
+    "thumbnail": "data/temples/mallikarjuna/images/thumbnail.png",
     "deity": {
-        "name": "Lord Shiva",
-        "aspect": "Jyotirlinga",
-        "form_title": "Mallikarjuna (Lord White as Jasmine)"
+        "primary": "Lord Mallikarjuna (Shiva)",
+        "form": "Swayambhu Jyotirlinga",
+        "consort": "Goddess Bhramaramba",
+        "form_title": "The Lord White as Jasmine"
     },
-    "temple_type": "Jyotirlinga",
-    "significance": "Second of the 12 Jyotirlingas, one of the most sacred Shiva temples. Also a Shakti Peetha where Goddess Bhramaramba resides.",
-    "established_date": "Ancient, renovated by Vijayanagara kings",
-    "best_time": "October to February, Maha Shivaratri",
-    "darshan_hours": "4:30 AM - 10:00 PM",
+    "significance": {
+        "type": [
+            "Jyotirlinga",
+            "Shakti Peetha",
+            "Mahakshetra"
+        ],
+        "jyotirlinga_number": 2,
+        "shakti_peetha_number": 6,
+        "shakti_peetha_part": "Neck (Greeva) of Goddess Sati",
+        "philosophy": "Ardhanarishvara - The inseparable union of Shiva (Consciousness) and Shakti (Energy)",
+        "unique_distinction": "The ONLY Mahakshetra housing both a Jyotirlinga and a Maha Shakti Peetha within the same precinct"
+    },
+    "description": "The Sri Mallikarjuna Swamy Temple at Srisailam represents one of the most profound theological convergences in Hindu spirituality. Situated atop the Nallamala range at 457 meters elevation, this temple complex holds a singular distinction—it is the only Mahakshetra that houses both a Jyotirlinga of Lord Shiva and a Maha Shakti Peetha of Goddess Parvati within the same precinct. Known as 'Kailasa on Earth', the temple overlooks the deep gorges of the Krishna River, creating a landscape where rugged geology, verdant biodiversity, and ancient architecture merge into divine splendor.",
+    "secret_hook": "Here, where Shiva resides to stay near his exiled son Kartikeya, and where Shakti slew the demon Arunasura as a swarm of bees, the cosmic parents of the universe await their children's return.",
+    "stats": {
+        "age_years": 2000,
+        "daily_visitors": "15,000-25,000",
+        "annual_visitors": "8 million",
+        "temple_area_hectares": 2,
+        "prakaram_dimensions": "183m x 152m",
+        "wall_height_meters": 8.5,
+        "carved_relief_stones": 3200,
+        "steps_to_river": 852
+    },
+    "timings": {
+        "opening": "04:30 AM",
+        "closing": "10:00 PM",
+        "break": "1:00 PM - 3:30 PM (Alankara)",
+        "sparsha_darshan": "6:00 AM - 1:00 PM (ticketed)",
+        "abhishekam_time": "Morning hours"
+    },
+    "established": {
+        "era": "Ancient (Satavahana Period, 2nd Century CE)",
+        "earliest_inscription": "Satavahana Period (2nd Century CE)",
+        "major_construction": "Vijayanagara Period (14th-16th Century CE)",
+        "renovated_by": [
+            "Satavahanas",
+            "Ikshvakus",
+            "Chalukyas",
+            "Kakatiyas",
+            "Reddi Kings",
+            "Vijayanagara Empire",
+            "Marathas"
+        ]
+    },
+    "best_time": {
+        "season": "October to February",
+        "avoid": "Peak summer (April-May)",
+        "special_periods": [
+            "Maha Shivaratri (Feb/March)",
+            "Ugadi (March/April)",
+            "Karthika Masam (Nov/Dec)"
+        ]
+    },
     "festivals": [
-        "Maha Shivaratri",
-        "Ugadi",
-        "Navratri",
-        "Karthika Pournami"
+        "Maha Shivaratri (11 days)",
+        "Ugadi - Nandi Kamba Festival",
+        "Kumbhotsavam (for Bhramaramba)",
+        "Karthika Deepotsavam",
+        "Navratri"
     ],
-    "age_years": 2000,
-    "daily_visitors": "15,000-25,000",
-    "annual_visitors": "8 million"
+    "tribal_connection": {
+        "tribe": "Chenchu",
+        "relationship": "Son-in-law (Alludu)",
+        "local_name": "Chenchu Mallayya",
+        "special_rights": [
+            "Sparsha Darshan privileges",
+            "Right to drag temple chariot",
+            "Entry to sanctum for specific rituals"
+        ]
+    },
+    "administration": {
+        "managed_by": "Srisaila Devasthanam",
+        "department": "Andhra Pradesh Endowments Department",
+        "website": "https://srisailadevasthanam.org"
+    }
 }

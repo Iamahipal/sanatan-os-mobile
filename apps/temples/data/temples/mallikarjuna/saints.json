@@ -1,0 +1,62 @@
+[
+    {
+        "id": "shankaracharya",
+        "name": "Adi Shankaracharya",
+        "title": "The Great Advaita Philosopher",
+        "period": "8th Century CE",
+        "image": "data/temples/mallikarjuna/images/shankaracharya.png",
+        "connection": "Composed the Shivananda Lahari at Srisailam",
+        "story": "The great Advaita philosopher Adi Shankaracharya visited Srisailam during his spiritual journey across India. Moved by the divine presence at this sacred confluence of Shiva and Shakti, he composed the Shivananda Lahari (Waves of Auspicious Bliss)—100 verses celebrating the divine.\n\nThe very first verse pays homage to the Srisailam deities:\n\n'Kala'bhyam chudalankrita-sasi kalabhyam nijatapah-\nphalabhyam bhakteshu prakatita-phalabhyam bhavatu me.'\n\n'I prostrate to Shiva and Parvati... whose matted crests are adorned by the crescent moon... who are the fruits of each other's penance.'",
+        "contribution": "Shankaracharya is also credited with installing the Sri Chakra before the Bhramaramba shrine. He did this to balance and pacify the fierce (Ugra) energy of the Goddess, transforming her manifestation into a benevolent form accessible for worship.",
+        "legacy": [
+            "Shivananda Lahari (100 verses)",
+            "Sri Chakra installation",
+            "Establishing Srisailam in pan-Indian pilgrimage consciousness"
+        ]
+    },
+    {
+        "id": "akka_mahadevi",
+        "name": "Akka Mahadevi",
+        "title": "The Radical Bhakti Poet",
+        "period": "12th Century CE",
+        "image": "data/temples/mallikarjuna/images/akka_mahadevi.png",
+        "connection": "Considered Mallikarjuna her eternal husband; attained samadhi here",
+        "story": "Akka Mahadevi was a radical Virashaiva poet-saint from Karnataka who rejected all societal conventions for the love of Shiva. She considered Lord Mallikarjuna her eternal husband, calling him Chenna Mallikarjuna—'The Beautiful Lord White as Jasmine.'\n\nRenouncing everything including clothing, she wandered to Srisailam as a naked ascetic. She spent her final years in deep penance in the Akka Mahadevi Caves—natural caverns located 10 km upstream on the Krishna River. These caves feature a natural rock arch (200x16 ft) extending 150 meters deep, with a natural Shiva Linga at the end of the tunnel.\n\nHer Vachanas (devotional poems) composed at Srisailam are masterpieces of Kannada Bhakti literature:\n\n'I saw the haughty master, Mallikarjuna... and seeing, I quell today the famine in my eyes.'",
+        "contribution": "Akka Mahadevi established Srisailam as a site of radical devotion that transcends social norms. Her caves remain a powerful pilgrimage site for those seeking spiritual liberation.",
+        "legacy": [
+            "Vachanas (devotional poems)",
+            "Akka Mahadevi Caves pilgrimage",
+            "Symbol of feminine spiritual independence"
+        ]
+    },
+    {
+        "id": "hemareddy_mallamma",
+        "name": "Hemareddy Mallamma",
+        "title": "The Persevering Devotee",
+        "period": "14th Century CE",
+        "image": "data/temples/mallikarjuna/images/mallamma.png",
+        "connection": "Local saint revered for devotion despite persecution",
+        "story": "Hemareddy Mallamma was a local woman whose devotion to Shiva persisted despite severe mistreatment by her in-laws. Despite their attempts to obstruct her worship, she continued her daily rituals with unwavering faith.\n\nLegend says her tears of devotion—shed during particularly cruel treatment—created a perennial water source near the temple that flows to this day. This spring is considered sacred.\n\nHer story represents the power of devotion in ordinary lives, especially for women facing family opposition to their spiritual practices.",
+        "contribution": "A dedicated Hemareddy Mallamma Temple now stands near the main complex, celebrating her perseverance and offering hope to devotees facing obstacles in their spiritual path.",
+        "legacy": [
+            "Hemareddy Mallamma Temple",
+            "Sacred spring",
+            "Symbol of devotional perseverance"
+        ]
+    },
+    {
+        "id": "allama_prabhu",
+        "name": "Allama Prabhu",
+        "title": "The Mystic Guide",
+        "period": "12th Century CE",
+        "image": "data/temples/mallikarjuna/images/allama.png",
+        "connection": "Guided Akka Mahadevi to Srisailam",
+        "story": "Allama Prabhu, the mystic contemporary of Basavanna and a key figure of the Virashaiva movement, is linked to the Kadalivanam caves near Srisailam. He is said to have guided Akka Mahadevi to the sacred groves where she could pursue her final penance.\n\nThe Navanatha Charitra also mentions Srisailam as a center for Nath Yogis and Siddhas interested in alchemy and yoga. Allama Prabhu's connection reinforces the site's importance to esoteric traditions beyond mainstream temple worship.",
+        "contribution": "Allama Prabhu connected Srisailam to the broader Virashaiva movement of Karnataka, creating a lasting spiritual corridor between the two regions.",
+        "legacy": [
+            "Kadalivanam connection",
+            "Virashaiva pilgrimage tradition",
+            "Nath Yogi presence"
+        ]
+    }
+]

@@ -1,26 +1,99 @@
 {
     "primary_deity": {
         "name": "Lord Mallikarjuna",
-        "form": "Jyotirlinga - Infinite Pillar of Light",
-        "consort": "Goddess Bhramaramba (Shakti Peetha)",
-        "meaning": "The Lord who is white and pure as the Jasmine flower (Mallika)"
+        "form": "Swayambhu Jyotirlinga",
+        "alternate_names": [
+            "Chenchu Mallayya",
+            "Sriparvata Swamy",
+            "Chenna Mallikarjuna"
+        ],
+        "meaning_of_name": "The Lord adorned with Jasmine (Mallika = jasmine, Arjuna = white/pure)",
+        "iconography": "Swayambhu Linga—relatively small and flat, protruding only a few inches above the peetham. This archaic form suggests ancient natural origins.",
+        "consort": "Goddess Bhramaramba"
+    },
+    "consort_deity": {
+        "name": "Goddess Bhramaramba",
+        "form": "Ashtabhuja (Eight-armed) Shakti",
+        "meaning_of_name": "The Mother of Bees (Bhramara = bee, Amba = mother)",
+        "iconography": "Depicted in eight-armed form as Mahishasura Mardini and Bhramari, adorned in silk and gold",
+        "shakti_peetha_part": "Neck (Greeva) of Goddess Sati",
+        "shakti_peetha_number": 6,
+        "sri_chakra": "Installed by Adi Shankaracharya to pacify her fierce energy"
+    },
+    "theology": {
+        "dual_sanctity": {
+            "jyotirlinga_number": 2,
+            "shakti_peetha_number": 6,
+            "unique_distinction": "The ONLY Mahakshetra housing both a Jyotirlinga and a Maha Shakti Peetha within the same precinct"
+        },
+        "ardhanarishvara_principle": {
+            "description": "Srisailam manifests the inseparable union of Shiva (Purusha/Consciousness) and Shakti (Prakriti/Energy) rendered into stone and ritual",
+            "shiva_represents": "Purusha—the passive, unmanifest reality, pure consciousness",
+            "shakti_represents": "Prakriti—the active, kinetic force, manifesting energy"
+        },
+        "tantric_significance": "Their coexistence makes Srisailam a potent center for Tantra, where the goal is the union of Shiva and Shakti within the practitioner. The Sri Chakra and the bee symbolism (connected to Ajna Chakra vibration) attract tantric practitioners."
     },
     "mythology": {
-        "origin_story": "After a dispute between Kartikeya and Ganesha about marriage, Kartikeya left for Krauncha mountain in displeasure. Shiva and Parvati followed their son to console him and were so pleased with his tapasya that they decided to permanently reside here. Parvati offered jasmine garlands to Shiva, giving him the name Mallikarjuna.",
-        "cosmic_significance": "Srisailam is unique as both a Jyotirlinga and Shakti Peetha. The Shiva Purana ranks it as the second Jyotirlinga, representing the complete union of Shiva (consciousness) and Shakti (energy). This duality makes it one of the most spiritually complete pilgrimage sites in Hinduism."
+        "origin_story": "When Kartikeya renounced Kailasa after the marriage dispute with Ganesha, Shiva and Parvati followed him out of love. Respecting his desire for solitude, they chose to reside nearby—Shiva as Mallikarjuna, Parvati as Bhramaramba. The name 'Mallikarjuna' came from Princess Chandravati's worship with wild jasmine flowers.",
+        "cosmic_significance": "Srisailam is sanctified by divine parental love. Shiva visits Kartikeya on Amavasya (New Moon), Parvati visits on Poornima (Full Moon). The site embodies eternal love that transcends conflict."
     },
     "sacred_mantras": [
         {
             "name": "Mallikarjuna Dhyana Mantra",
-            "sanskrit": "श्री शैले शिखरे विभाति मल्लिकार्जुनो नाम लिङ्गम्",
-            "meaning": "On the Srishailam peak shines the Linga named Mallikarjuna",
-            "benefit": "Chanting this mantra invokes the blessings of Lord Mallikarjuna for spiritual elevation and removal of obstacles"
+            "sanskrit": "ॐ श्री मल्लिकार्जुनाय नमः",
+            "transliteration": "Om Shri Mallikarjunaya Namah",
+            "meaning": "Salutations to the Lord adorned with Jasmine",
+            "benefit": "Invokes the grace of Mallikarjuna for spiritual elevation and family harmony"
         },
         {
-            "name": "Mahamrityunjaya Mantra",
-            "sanskrit": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात्",
-            "meaning": "We worship the three-eyed one, fragrant and nourishing. Like a ripe fruit from its stem, may we be freed from death unto immortality.",
-            "benefit": "Protection from untimely death, healing, and spiritual liberation"
+            "name": "Bhramaramba Stuti",
+            "sanskrit": "ॐ श्री भ्रामरांबायै नमः",
+            "transliteration": "Om Shri Bhramarambayai Namah",
+            "meaning": "Salutations to the Mother of Bees",
+            "benefit": "Protection, shakti awakening, and victory over obstacles"
+        },
+        {
+            "name": "Shivananda Lahari (Opening)",
+            "sanskrit": "कला'भ्यां चूडालङ्कृतससि कला'भ्यां निजतपः-फला'भ्यां भक्तेषु प्रकतित-फला'भ्यां भवतु मे।",
+            "composed_by": "Adi Shankaracharya at Srisailam",
+            "meaning": "I prostrate to Shiva and Parvati, whose matted crests are adorned by the crescent moon, who are the fruits of each other's penance."
+        },
+        {
+            "name": "Panchakshari Mantra",
+            "sanskrit": "ॐ नमः शिवाय",
+            "transliteration": "Om Namah Shivaya",
+            "meaning": "Salutations to the Auspicious One",
+            "benefit": "Universal Shiva mantra, especially powerful at Jyotirlingas"
+        }
+    ],
+    "worship_aspects": {
+        "for_mallikarjuna": {
+            "primary_ritual": "Rudrabhishekam",
+            "offering": "Bilva leaves, milk, water from Pathalaganga",
+            "symbolism": "Cooling of the fiery Linga with sacred substances"
+        },
+        "for_bhramaramba": {
+            "primary_ritual": "Kumkumarchana",
+            "offering": "Vermilion (kumkum), flowers, coconuts",
+            "symbolism": "Fertility, power, and dynamic shakti"
+        }
+    },
+    "special_blessings": [
+        {
+            "blessing": "Family Reconciliation",
+            "reason": "Site sanctified by Shiva and Parvati's love for their estranged son"
+        },
+        {
+            "blessing": "Protection from Evil",
+            "reason": "Bhramaramba slew the demon Arunasura here"
+        },
+        {
+            "blessing": "Shakti Awakening",
+            "reason": "Dual sanctity of Jyotirlinga and Shakti Peetha"
+        },
+        {
+            "blessing": "Moksha (Liberation)",
+            "reason": "Shikhara Darshan tradition promises destruction of rebirth cycle"
         }
     ]
 }
