@@ -7,6 +7,56 @@
     {
         "type": "image",
         "url": "data/temples/mallikarjuna/images/thumbnail.png",
-        "caption": "Temple Gopuram at Sunset"
+        "caption": "Sacred Mallikarjuna Shiva Linga with Jasmine Garlands"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/mallikarjuna/images/bhramaramba.png",
+        "caption": "Goddess Bhramaramba - The Mother of Bees"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/mallikarjuna/images/prakaram_reliefs.png",
+        "caption": "Ancient Carvings on the Prakaram Wall"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/mallikarjuna/images/pathalaganga.png",
+        "caption": "852 Steps to Pathalaganga (Krishna River)"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/mallikarjuna/images/shivaratri.png",
+        "caption": "Maha Shivaratri Celebrations"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/mallikarjuna/images/sparsha_darshan.png",
+        "caption": "Sparsha Darshan - Touching the Sacred Linga"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/mallikarjuna/images/akka_caves.png",
+        "caption": "Akka Mahadevi Caves"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/mallikarjuna/images/kartikeya_legend.png",
+        "caption": "Lord Kartikeya on Krauncha Mountain"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/mallikarjuna/images/chandravati.png",
+        "caption": "Princess Chandravati Offering Jasmine"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/mallikarjuna/images/chenchu_mallayya.png",
+        "caption": "Shiva's Wedding to the Chenchu Bride"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/mallikarjuna/images/shankaracharya.png",
+        "caption": "Adi Shankaracharya at Srisailam"
     }
 ]
