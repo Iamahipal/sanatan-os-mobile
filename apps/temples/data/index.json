@@ -1,0 +1,34 @@
+[
+    {
+        "id": "kashi-vishwanath",
+        "name": "Kashi Vishwanath",
+        "name_local": "काशी विश्वनाथ",
+        "location": "Varanasi, UP",
+        "thumbnail": "data/temples/kashi-vishwanath/images/thumbnail.png",
+        "short_desc": "The City of Light where Shiva himself whispers the Taraka Mantra."
+    },
+    {
+        "id": "tirupati",
+        "name": "Tirupati Balaji",
+        "name_local": "तिरुमला तिरुपति",
+        "location": "Tirumala, AP",
+        "thumbnail": "data/temples/tirupati/images/thumbnail.png",
+        "short_desc": "The richest temple in the world, abode of Lord Venkateswara."
+    },
+    {
+        "id": "kedarnath",
+        "name": "Kedarnath",
+        "name_local": "केदारनाथ",
+        "location": "Rudraprayag, UK",
+        "thumbnail": "data/temples/kedarnath/images/thumbnail.png",
+        "short_desc": "The highest of the 12 Jyotirlingas, amidst the mighty Himalayas."
+    },
+    {
+        "id": "somnath",
+        "name": "Somnath",
+        "name_local": "सोमनाथ",
+        "location": "Veraval, Gujarat",
+        "thumbnail": "data/temples/somnath/images/thumbnail.png",
+        "short_desc": "The first Jyotirlinga, the eternal shrine that withstood 17 attacks."
+    }
+]

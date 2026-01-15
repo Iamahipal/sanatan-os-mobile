@@ -1,0 +1,26 @@
+{
+    "primary_deity": {
+        "name": "Lord Bhimashankar",
+        "form": "Jyotirlinga - Fierce Protector",
+        "consort": "Goddess Kamalaja",
+        "meaning": "The Fierce Shiva who destroyed the demon Bhima"
+    },
+    "mythology": {
+        "origin_story": "The demon Bhima, learning of his father Kumbhakarna's death at Rama's hands, performed penance to gain power for revenge. He terrorized the three worlds until Shiva intervened. After a cosmic battle on these hills, Shiva destroyed the demon and agreed to reside here permanently as Bhimashankar. His battle-sweat formed the Bhima River.",
+        "cosmic_significance": "Bhimashankar represents Shiva's protective fierce aspect—the destroyer of evil who protects his devotees. The temple's location in pristine forest emphasizes Shiva's connection to wild nature and the untamed aspects of existence."
+    },
+    "sacred_mantras": [
+        {
+            "name": "Bhimashankar Dhyana Mantra",
+            "sanskrit": "ॐ भीमशंकराय नमः",
+            "meaning": "Salutations to Bhimashankar, the fierce Lord Shiva",
+            "benefit": "Grants protection from enemies, removal of fear, and victory over obstacles"
+        },
+        {
+            "name": "Rudra Gayatri",
+            "sanskrit": "ॐ तत्पुरुषाय विद्महे महादेवाय धीमहि तन्नो रुद्रः प्रचोदयात्",
+            "meaning": "May we know that Supreme Being; may we meditate upon that Great God; may Rudra inspire us.",
+            "benefit": "Invokes Shiva's fierce protective energy and spiritual strength"
+        }
+    ]
+}

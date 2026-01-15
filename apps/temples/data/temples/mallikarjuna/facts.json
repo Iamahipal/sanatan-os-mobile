@@ -1,0 +1,62 @@
+[
+    {
+        "id": "origin",
+        "category": "Legend",
+        "title": "The Divine Wedding at Srisailam",
+        "hook": "Where Shiva and Parvati were reunited after their son's marriage, making this doubly sacred",
+        "full_story": "According to the Shiva Purana, after Lord Kartikeya's marriage, a dispute arose about who would marry first between Kartikeya and Ganesha. When Ganesha won through wisdom, an upset Kartikeya left for the Krauncha mountain. To bring peace, Shiva and Parvati visited him here, and pleased by their son's tapasya, they decided to permanently reside at Srisailam as Mallikarjuna and Bhramaramba. The jasmine (mallika) garlands offered by Parvati gave Shiva the name Mallikarjuna.",
+        "source": "Shiva Purana, Srisailam Sthala Purana",
+        "image": "data/temples/mallikarjuna/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "shakti",
+        "category": "Significance",
+        "title": "Double Divinity: Jyotirlinga and Shakti Peetha",
+        "hook": "The only site in India where a Jyotirlinga and major Shakti Peetha coexist",
+        "full_story": "Srisailam holds the extraordinary distinction of being both one of the 12 Jyotirlingas and one of the 18 Maha Shakti Peethas. Here, Goddess Bhramaramba (She who is worshipped by bees) resides alongside Lord Mallikarjuna. This dual sanctity makes Srisailam one of the most complete pilgrimage destinations in Hinduism—devotees can worship both the masculine and feminine divine principles in one sacred complex.",
+        "source": "Devi Bhagavatam, Shiva Purana",
+        "image": "data/temples/mallikarjuna/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "architecture",
+        "category": "Architecture",
+        "title": "Fortress Temple on the Nallamala Hills",
+        "hook": "A 2-acre temple fortress surrounded by thick forest and the Krishna River gorge",
+        "full_story": "The Mallikarjuna temple complex spans over 2 acres, protected by massive stone walls that give it a fortress-like appearance. Built in the Dravidian style with later additions by the Vijayanagara and Reddi kings, the temple features intricate carvings, a towering gopuram, and a magnificent inner sanctum. Set atop the Nallamala hills at 457 meters, the temple is surrounded by dense forest that is home to the Nagarjunasagar-Srisailam Tiger Reserve.",
+        "source": "Archaeological Survey of India records",
+        "image": "data/temples/mallikarjuna/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "mystery",
+        "category": "Mystery",
+        "title": "The Sacred Akka Mahadevi Caves",
+        "hook": "Where the saint-poetess merged with the divine light of Shiva",
+        "full_story": "Near the temple lie caves associated with Akka Mahadevi, the 12th-century Veerashaiva saint who renounced everything worldly to seek union with Shiva. It is believed that she attained Aikya (oneness with Shiva) in these caves at age 25. Pilgrims visit these sacred caves to meditate and seek the same spiritual intensity that drove this remarkable devotee to abandon all worldly attachments for divine love.",
+        "source": "Veerashaiva traditions, Karnataka history",
+        "image": "data/temples/mallikarjuna/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "tradition",
+        "category": "Tradition",
+        "title": "The Sacred Shikhara Darshan",
+        "hook": "Seeing the temple tower from afar is considered as meritorious as the darshan itself",
+        "full_story": "A unique tradition at Srisailam holds that even a glimpse of the temple shikhara (tower) from a distance carries immense spiritual merit. The Shiva Purana states that those who see the Srisailam temple from the surrounding hills with devotion receive the same blessings as those who perform direct worship. This reflects the temple's powerful spiritual aura that extends far beyond its physical boundaries.",
+        "source": "Shiva Purana, local traditions",
+        "image": "data/temples/mallikarjuna/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "experience",
+        "category": "Experience",
+        "title": "The Pathalaganga Sacred Bath",
+        "hook": "Bathe in the underground Ganga before ascending to Lord Mallikarjuna",
+        "full_story": "Before entering the main temple, many devotees take a sacred dip at Pathalaganga, where the Krishna River flows through a gorge near the temple. According to legend, Goddess Ganga flows here underground, joining with the Krishna. A cable car now connects this bathing ghat to the temple above, making the traditional practice of purifying oneself in sacred waters before darshan accessible to all pilgrims.",
+        "source": "Temple traditions, pilgrim practices",
+        "image": "data/temples/mallikarjuna/images/thumbnail.png",
+        "verified": true
+    }
+]

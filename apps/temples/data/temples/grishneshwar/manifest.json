@@ -1,0 +1,31 @@
+{
+    "id": "grishneshwar",
+    "name": "Grishneshwar",
+    "sanskrit_name": "श्री घृष्णेश्वर",
+    "location": {
+        "city": "Ellora, Aurangabad",
+        "state": "Maharashtra",
+        "coordinates": {
+            "lat": 20.0263,
+            "lng": 75.1797
+        }
+    },
+    "deity": {
+        "name": "Lord Shiva",
+        "aspect": "Jyotirlinga",
+        "form_title": "Grishneshwar (Lord of Compassion)"
+    },
+    "temple_type": "Jyotirlinga",
+    "significance": "Twelfth of the 12 Jyotirlingas, completing the sacred circuit. Located near the UNESCO World Heritage Ellora Caves. Smallest but highly revered Jyotirlinga.",
+    "established_date": "Ancient site, current temple from 18th century (rebuilt by Ahilyabai Holkar)",
+    "best_time": "October to March, Maha Shivaratri",
+    "darshan_hours": "5:30 AM - 9:30 PM",
+    "festivals": [
+        "Maha Shivaratri",
+        "Shravan Somvar",
+        "Kartik Purnima"
+    ],
+    "age_years": 300,
+    "daily_visitors": "5,000-10,000",
+    "annual_visitors": "3 million"
+}

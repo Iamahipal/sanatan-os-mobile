@@ -1,0 +1,26 @@
+{
+    "primary_deity": {
+        "name": "Lord Ramanathaswamy",
+        "form": "Jyotirlinga - Established by Lord Rama",
+        "consort": "Goddess Parvatavarthini (Parvati)",
+        "meaning": "The Lord Worshipped by Rama, combining the grace of Shiva and Vishnu"
+    },
+    "mythology": {
+        "origin_story": "Before crossing to Lanka to rescue Sita, Lord Rama sought to worship Lord Shiva to prepare for the battle against Ravana. He installed a lingam made of sand by Sita (Ramalingam) when Hanuman's journey to Kailash took longer than expected. This makes Rameshwaram unique—a Jyotirlinga established by an avatar of Vishnu, uniting the great divine streams of Vaishnavism and Shaivism.",
+        "cosmic_significance": "Rameshwaram represents the beautiful unity of Shiva and Vishnu worship in Hinduism. When Vishnu's avatar Rama worships Shiva, it demonstrates that the divine is ultimately one. This temple embodies the spirit of reconciliation and the understanding that different paths lead to the same ultimate truth."
+    },
+    "sacred_mantras": [
+        {
+            "name": "Ramanathaswamy Dhyana Mantra",
+            "sanskrit": "ॐ श्री रामनाथाय नमः",
+            "meaning": "Salutations to Lord Ramanathaswamy",
+            "benefit": "Invokes the combined blessings of Shiva and Rama—spiritual liberation and dharmic protection"
+        },
+        {
+            "name": "Shiva-Rama Unity Mantra",
+            "sanskrit": "श्री राम जय राम जय जय राम | ॐ नमः शिवाय",
+            "meaning": "Glory to Lord Rama | Salutations to Lord Shiva",
+            "benefit": "Chanting both mantras recognizes the unity of the divine"
+        }
+    ]
+}

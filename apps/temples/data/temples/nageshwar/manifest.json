@@ -1,0 +1,31 @@
+{
+    "id": "nageshwar",
+    "name": "Nageshwar",
+    "sanskrit_name": "श्री नागेश्वर",
+    "location": {
+        "city": "Dwarka",
+        "state": "Gujarat",
+        "coordinates": {
+            "lat": 22.3434,
+            "lng": 68.9749
+        }
+    },
+    "deity": {
+        "name": "Lord Shiva",
+        "aspect": "Jyotirlinga",
+        "form_title": "Nageshwar (Lord of Serpents)"
+    },
+    "temple_type": "Jyotirlinga",
+    "significance": "Ninth of the 12 Jyotirlingas. Represents Shiva as the Lord of Serpents. Located near the Char Dham site of Dwarka.",
+    "established_date": "Ancient, renovated multiple times",
+    "best_time": "October to March, Maha Shivaratri, Nag Panchami",
+    "darshan_hours": "5:00 AM - 9:00 PM",
+    "festivals": [
+        "Maha Shivaratri",
+        "Nag Panchami",
+        "Shravan Somvar"
+    ],
+    "age_years": 2000,
+    "daily_visitors": "5,000-10,000",
+    "annual_visitors": "3 million"
+}

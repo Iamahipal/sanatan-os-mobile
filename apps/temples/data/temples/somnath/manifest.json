@@ -1,0 +1,49 @@
+{
+    "id": "somnath",
+    "name": "Somnath",
+    "name_local": "सोमनाथ",
+    "name_gujarati": "સોમનાથ",
+    "official_name": "Shree Somnath Jyotirlinga Temple",
+    "deity": {
+        "primary": "Lord Shiva",
+        "form": "Someshwara / Somnath (Lord of the Moon)",
+        "manifestation": "Jyotirlinga - First of the 12",
+        "consort": "Parvati (as Parvata Devi nearby)",
+        "mythology_link": "Where the Moon (Soma) worshipped Shiva to cure his curse"
+    },
+    "location": {
+        "city": "Veraval",
+        "state": "Gujarat",
+        "coords": [
+            20.8880,
+            70.4012
+        ],
+        "sacred_geography": "On the western coast of India at Prabhas Patan, where the legendary river Saraswati meets the Arabian Sea. The temple faces the ocean with unobstructed view—'From here to the South Pole, there is no land' says the Arrow Pillar.",
+        "access": "420 km from Ahmedabad, 80 km from Junagadh"
+    },
+    "significance": {
+        "type": [
+            "Jyotirlinga",
+            "Swayambhu",
+            "Tirtha"
+        ],
+        "jyotirlinga_number": 1,
+        "rank": "First and most attacked of the 12 Jyotirlingas",
+        "philosophy": "Somnath represents eternal resilience. Destroyed 17 times across 1000 years, rebuilt 18 times. The invaders are forgotten; Shiva remains. This temple teaches that truth cannot be permanently destroyed.",
+        "scriptural_reference": "Shiva Purana, Skanda Purana"
+    },
+    "stats": {
+        "age_years": 2000,
+        "reconstructions": 18,
+        "destructions": 17,
+        "current_temple_built": 1951,
+        "architect": "Sardar Vallabhbhai Patel initiated reconstruction",
+        "height_feet": 155,
+        "gold_kalash_kg": 1000,
+        "daily_visitors": "15,000-20,000",
+        "annual_visitors": "75 lakh+"
+    },
+    "hero_image": "data/temples/somnath/images/hero.png",
+    "description": "Somnath is not just a temple—it's a statement of civilizational resilience. The first and most sacred of the twelve Jyotirlingas has been destroyed by invaders 17 times, yet stands rebuilt for the 18th time, more magnificent than ever. From Mahmud of Ghazni's notorious raid in 1024 CE to the final reconstruction championed by Sardar Patel in 1951, Somnath has witnessed more violence than any sacred site on Earth—and survived. Today it stands on the edge of the Arabian Sea, exactly where the legend says Soma (the Moon God) prayed to Shiva to cure his curse. Every sunset, thousands watch the Aarti as the sun sinks into the ocean behind the temple.",
+    "secret_hook": "In 1024, Mahmud of Ghazni broke open the Shivalinga expecting treasure inside—and found nothing but empty space. What was the temple actually guarding?"
+}

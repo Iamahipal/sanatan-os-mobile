@@ -1,0 +1,31 @@
+{
+    "id": "vaidyanath",
+    "name": "Vaidyanath",
+    "sanskrit_name": "श्री वैद्यनाथ",
+    "location": {
+        "city": "Deoghar",
+        "state": "Jharkhand",
+        "coordinates": {
+            "lat": 24.4851,
+            "lng": 86.6946
+        }
+    },
+    "deity": {
+        "name": "Lord Shiva",
+        "aspect": "Jyotirlinga",
+        "form_title": "Vaidyanath (Lord of Physicians, Divine Healer)"
+    },
+    "temple_type": "Jyotirlinga",
+    "significance": "Eighth of the 12 Jyotirlingas. Known as Baidyanath Dham, the 'Physician of Gods'. Famous for granting healing and liberation from diseases.",
+    "established_date": "Ancient, current structure from 17th century",
+    "best_time": "July to March, Shravan month (Kanwar Yatra), Maha Shivaratri",
+    "darshan_hours": "4:00 AM - 9:00 PM",
+    "festivals": [
+        "Maha Shivaratri",
+        "Shravan Somvar",
+        "Shravani Mela (Kanwar Yatra)"
+    ],
+    "age_years": 400,
+    "daily_visitors": "20,000-50,000",
+    "annual_visitors": "10 million"
+}

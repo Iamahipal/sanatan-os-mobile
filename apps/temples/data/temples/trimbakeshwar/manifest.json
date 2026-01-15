@@ -1,0 +1,32 @@
+{
+    "id": "trimbakeshwar",
+    "name": "Trimbakeshwar",
+    "sanskrit_name": "श्री त्र्यंबकेश्वर",
+    "location": {
+        "city": "Trimbak, Nashik",
+        "state": "Maharashtra",
+        "coordinates": {
+            "lat": 19.9322,
+            "lng": 73.5297
+        }
+    },
+    "deity": {
+        "name": "Lord Shiva",
+        "aspect": "Jyotirlinga",
+        "form_title": "Trimbakeshwar (Three-Eyed Lord)"
+    },
+    "temple_type": "Jyotirlinga",
+    "significance": "Seventh of the 12 Jyotirlingas. Features a unique three-faced Linga representing the Trimurti. Source of the sacred Godavari River.",
+    "established_date": "Ancient site, current structure by Peshwa Bajirao (18th century)",
+    "best_time": "July to March, Shravan month, Sinhastha Kumbh (every 12 years)",
+    "darshan_hours": "5:30 AM - 9:00 PM",
+    "festivals": [
+        "Maha Shivaratri",
+        "Shravan Somvar",
+        "Sinhastha Kumbh",
+        "Narali Purnima"
+    ],
+    "age_years": 300,
+    "daily_visitors": "10,000-20,000",
+    "annual_visitors": "5 million"
+}

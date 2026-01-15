@@ -1,0 +1,26 @@
+{
+    "primary_deity": {
+        "name": "Lord Trimbakeshwar",
+        "form": "Jyotirlinga - Three-Faced Trimurti Lingam",
+        "consort": "Goddess Parvati",
+        "meaning": "The Three-Eyed Lord (Shiva), Master of the three aspects of cosmic existence"
+    },
+    "mythology": {
+        "origin_story": "Sage Gautama, falsely accused of killing a cow, performed intense penance to Lord Shiva to bring the purifying Ganga to this region. Pleased with his devotion, Shiva commanded Ganga to descend as the Godavari. Shiva himself then manifested as the Trimbakeshwar Jyotirlinga to bless all who would visit this source of the sacred river.",
+        "cosmic_significance": "The three-faced lingam uniquely represents the Trimurti—Brahma, Vishnu, and Shiva—making this Jyotirlinga a complete representation of the cosmic creative, preservative, and transformative powers. Worshipping here is said to equal worship of all three aspects of the divine in one act."
+    },
+    "sacred_mantras": [
+        {
+            "name": "Trimbakeshwar Dhyana Mantra",
+            "sanskrit": "ॐ त्र्यंबकेश्वराय नमः",
+            "meaning": "Salutations to the Three-Eyed Lord",
+            "benefit": "Grants cosmic awareness, protection, and the combined blessings of the Trimurti"
+        },
+        {
+            "name": "Mahamrityunjaya Mantra",
+            "sanskrit": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात्",
+            "meaning": "We worship the three-eyed one, fragrant and nourishing. May we be liberated from death unto immortality.",
+            "benefit": "This mantra is specifically associated with Trimbakeshwar. Protection from untimely death and spiritual liberation."
+        }
+    ]
+}

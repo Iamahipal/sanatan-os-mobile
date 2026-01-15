@@ -1,0 +1,1880 @@
+/* Digital Yatra - Divine Light Design System - COMPLETE */
+:root {
+    /* Semantic Colors - Light Mode (Sattvic) */
+    --system-bg: #FFFFFF;
+    --system-bg-secondary: #F2F2F7;
+    --system-bg-tertiary: #FAFAFA;
+
+    --label-primary: #1C1C1E;
+    --label-secondary: rgba(60, 60, 67, 0.6);
+    --label-tertiary: rgba(60, 60, 67, 0.3);
+
+    --separator: #E5E5EA;
+    --tint-color: #FF9500;
+    --tint-subtle: rgba(255, 149, 0, 0.12);
+
+    /* Sacred Gold Tones */
+    --gold-light: #FFF9E6;
+    --gold-medium: #FFE8CC;
+    --gold-accent: #FFB800;
+    --gold-deep: #D4A400;
+
+    /* Saffron Spectrum */
+    --saffron-subtle: #FFF5E6;
+    --saffron-light: #FFE0B2;
+    --saffron-medium: #FF9500;
+    --saffron-deep: #E86A00;
+
+    /* Spiritual Accents */
+    --maroon-sacred: #8B0000;
+    --cream-parchment: #FFFBF0;
+    --incense-smoke: rgba(139, 69, 19, 0.08);
+
+    /* Status Colors */
+    --reality-blue: #E6F2FF;
+    --tip-green: #E6FFE6;
+    --warning-amber: #FFF3E0;
+
+    /* Material Blurs */
+    --material-thick: rgba(255, 255, 255, 0.92);
+    --material-thin: rgba(255, 255, 255, 0.75);
+
+    /* Typography */
+    --font-ui: 'Google Sans', 'Google Sans Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-sacred: 'Tiro Devanagari Sanskrit', Georgia, serif;
+
+    /* Spacing */
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+
+    /* Motion Tokens */
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 400ms;
+    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
+    --ease-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--system-bg);
+    color: var(--label-primary);
+    font-family: var(--font-ui);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.large-title {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--label-primary);
+}
+
+.title-1 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.title-2 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.headline {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.body-text {
+    font-size: 17px;
+    color: var(--label-secondary);
+}
+
+.caption-1 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--label-tertiary);
+}
+
+/* ===== LAYOUT ===== */
+.view-container {
+    min-height: 100vh;
+    background: var(--system-bg);
+}
+
+/* ===== HOME PAGE ===== */
+
+/* Hero Banner - Premium Spiritual Design */
+.home-hero {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .home-hero {
+        height: 420px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .home-hero {
+        height: 500px;
+    }
+}
+
+.home-hero .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 40%;
+    filter: brightness(0.75);
+    transform: scale(1.02);
+    transition: transform 8s var(--ease-decelerate);
+}
+
+/* Subtle parallax zoom on load */
+.home-hero:hover .hero-bg {
+    transform: scale(1.06);
+}
+
+/* Spiritual gradient overlay */
+.home-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 100, 0, 0.15) 0%,
+            transparent 50%,
+            rgba(139, 69, 19, 0.2) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Bottom fade for content readability */
+.home-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.6) 0%,
+            transparent 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.home-hero .hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .home-hero .hero-content {
+        padding: 48px;
+    }
+}
+
+.hero-eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--tint-color);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Breathing glow animation for eyebrow */
+.hero-eyebrow::before {
+    content: 'ॐ';
+    font-family: var(--font-sacred);
+    font-size: 18px;
+    color: var(--tint-color);
+    animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+.hero-headline {
+    font-family: var(--font-sacred);
+    font-size: clamp(28px, 6vw, 56px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: white;
+    margin-bottom: 16px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+    .hero-headline {
+        font-size: clamp(36px, 5vw, 56px);
+    }
+}
+
+@media (min-width: 1200px) {
+    .hero-headline {
+        font-size: 56px;
+    }
+}
+
+.hero-subline {
+    font-size: clamp(14px, 2vw, 18px);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 520px;
+    line-height: 1.6;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 768px) {
+    .hero-subline {
+        font-size: 17px;
+    }
+}
+
+/* Home Content */
+.home-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 20px 100px;
+}
+
+@media (min-width: 768px) {
+    .home-content {
+        padding: 48px 32px 120px;
+    }
+}
+
+/* Content Sections */
+.content-section {
+    margin-bottom: 48px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding: 0 4px;
+    position: relative;
+}
+
+/* Decorative sacred line */
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 4px;
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--tint-color), transparent);
+    border-radius: 2px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--label-primary);
+    letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+    .section-title {
+        font-size: 28px;
+    }
+}
+
+.section-count {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--label-tertiary);
+    background: var(--system-bg-secondary);
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+/* Temple Grid - Premium Responsive */
+.temple-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 640px) {
+    .temple-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .temple-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .temple-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+    }
+}
+
+/* Stagger animation for temple cards */
+.temple-card {
+    animation: fadeInUp 0.6s var(--ease-decelerate) backwards;
+}
+
+.temple-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.temple-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.temple-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.temple-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Coming Soon Section */
+.coming-soon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+@media (min-width: 1400px) {
+    .temple-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Coming Soon Section */
+.coming-soon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+@media (min-width: 768px) {
+    .coming-soon-grid {
+        gap: 16px;
+    }
+}
+
+.coming-card {
+    background: var(--system-bg);
+    border: 1px solid var(--separator);
+    border-radius: 20px;
+    padding: 28px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    transition: all var(--duration-normal) var(--ease-standard);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle shimmer effect */
+.coming-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 149, 0, 0.05),
+            transparent);
+    transition: left 0.6s var(--ease-standard);
+}
+
+.coming-card:hover::before {
+    left: 100%;
+}
+
+.coming-card:hover {
+    background: var(--tint-subtle);
+    border-color: var(--tint-color);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(255, 149, 0, 0.15);
+}
+
+.coming-card svg {
+    width: 32px;
+    height: 32px;
+    color: var(--tint-color);
+    filter: drop-shadow(0 2px 4px rgba(255, 149, 0, 0.2));
+}
+
+.coming-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--label-secondary);
+}
+
+@media (min-width: 768px) {
+    .coming-card {
+        padding: 36px 24px;
+        border-radius: 24px;
+    }
+
+    .coming-card svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .coming-card span {
+        font-size: 15px;
+    }
+}
+
+/* Nav Title */
+.nav-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--label-primary);
+}
+
+/* ===== NAVIGATION ===== */
+.nav-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--material-thick);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--separator);
+    padding-top: var(--safe-area-top);
+}
+
+.nav-bar {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 16px;
+}
+
+/* Transparent Header Variant (for portal view) */
+.nav-header--transparent {
+    background: transparent;
+    border: none;
+    position: fixed;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.back-btn {
+    position: absolute;
+    left: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--tint-color);
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.back-btn:hover {
+    opacity: 0.8;
+}
+
+/* Light Back Button Variant (for dark backgrounds) */
+.back-btn--light {
+    color: white;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== TEMPLE CARDS ===== */
+.temple-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 320px;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: transform var(--duration-normal) var(--ease-standard),
+        box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+@media (min-width: 768px) {
+    .temple-card {
+        height: 340px;
+    }
+}
+
+.temple-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 24px 56px rgba(0, 0, 0, 0.18),
+        0 0 0 1px rgba(255, 149, 0, 0.2);
+}
+
+.temple-card:active {
+    transform: scale(0.98);
+    transition-duration: var(--duration-fast);
+}
+
+.card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform var(--duration-slow) var(--ease-decelerate);
+}
+
+.temple-card:hover .card-bg {
+    transform: scale(1.08);
+}
+
+/* Shine effect on hover */
+.temple-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.15) 50%,
+            transparent 70%);
+    transform: translateX(-100%);
+    transition: transform var(--duration-slow) var(--ease-standard);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.temple-card:hover::before {
+    transform: translateX(100%);
+}
+
+.card-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.5) 40%,
+            rgba(0, 0, 0, 0.1) 70%,
+            transparent 100%);
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    color: white;
+}
+
+.card-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 8px;
+}
+
+.card-location svg {
+    width: 14px;
+    height: 14px;
+}
+
+.card-title {
+    font-family: var(--font-sacred);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ===== PORTAL VIEW ===== */
+.portal-hero {
+    position: relative;
+    width: 100%;
+    height: 55vh;
+    min-height: 350px;
+    overflow: hidden;
+}
+
+.hero-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.8) 0%,
+            rgba(0, 0, 0, 0.4) 40%,
+            transparent 70%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+    padding-bottom: 40px;
+}
+
+.hero-title-group {
+    color: white;
+}
+
+.hero-super {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+}
+
+.hero-h1 {
+    font-family: var(--font-sacred);
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1.1;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Portal Sheet */
+.portal-sheet {
+    position: relative;
+    margin-top: -24px;
+    background: var(--system-bg);
+    border-radius: 24px 24px 0 0;
+    min-height: 50vh;
+    padding-bottom: 40px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    overflow-x: hidden;
+}
+
+/* ===== SEGMENTED CONTROL - Premium ===== */
+.segmented-control {
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+    background: linear-gradient(180deg, var(--cream-parchment), var(--system-bg));
+    border-bottom: 1px solid var(--separator);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.segmented-control::-webkit-scrollbar {
+    display: none;
+}
+
+.segment-btn {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--label-secondary);
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all var(--duration-normal) var(--ease-standard);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@media (min-width: 480px) {
+    .segment-btn {
+        padding: 12px 16px;
+        font-size: 14px;
+        border-radius: 12px;
+    }
+}
+
+.segment-btn:hover:not(.active) {
+    background: var(--tint-subtle);
+    color: var(--tint-color);
+}
+
+.segment-btn:active {
+    transform: scale(0.96);
+}
+
+.segment-btn.active {
+    background: linear-gradient(135deg, var(--saffron-medium), var(--saffron-deep));
+    color: white;
+    box-shadow: 0 4px 16px rgba(255, 149, 0, 0.3);
+}
+
+/* Module Containers */
+.module-container {
+    display: none;
+    padding: 24px;
+    animation: fadeIn 0.3s ease;
+}
+
+.module-container.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== DEITY BADGE - Premium Spiritual ===== */
+.deity-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, var(--gold-light), var(--cream-parchment));
+    border-bottom: 2px solid var(--gold-medium);
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.deity-badge::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--saffron-medium), transparent);
+}
+
+.deity-icon {
+    font-size: 28px;
+    filter: drop-shadow(0 2px 4px rgba(255, 149, 0, 0.3));
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+.deity-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.deity-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--label-primary);
+}
+
+.deity-form {
+    font-size: 13px;
+    color: var(--label-secondary);
+}
+
+.significance-tag {
+    padding: 6px 14px;
+    background: linear-gradient(135deg, var(--saffron-medium), var(--saffron-deep));
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(255, 149, 0, 0.3);
+}
+
+/* ===== STATS ROW - Enhanced ===== */
+.stat-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 12px;
+    margin-bottom: 24px;
+    background: var(--system-bg-secondary);
+    border-radius: 16px;
+    position: relative;
+}
+
+.stat-item {
+    text-align: center;
+    flex: 1;
+    position: relative;
+    padding: 0 12px;
+}
+
+/* Dividers between stats */
+.stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: var(--separator);
+}
+
+.stat-icon {
+    font-size: 20px;
+    margin-bottom: 8px;
+    display: block;
+    opacity: 0.9;
+}
+
+.stat-val {
+    display: block;
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--saffron-medium), var(--saffron-deep));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--label-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===== OVERVIEW TEXT - Enhanced ===== */
+.overview-text {
+    line-height: 1.8;
+}
+
+.overview-text p {
+    margin-bottom: 20px;
+    color: var(--label-secondary);
+    font-size: 16px;
+}
+
+/* Drop cap for first paragraph */
+.overview-text p:first-child::first-letter {
+    float: left;
+    font-family: var(--font-sacred);
+    font-size: 3.5em;
+    line-height: 0.8;
+    padding-right: 12px;
+    padding-top: 4px;
+    color: var(--saffron-medium);
+}
+
+.overview-text p:last-child,
+.secret-hook {
+    color: var(--label-primary);
+    font-weight: 500;
+    font-style: italic;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--saffron-subtle), var(--gold-light));
+    border-left: 4px solid var(--saffron-medium);
+    border-radius: 0 12px 12px 0;
+    margin-top: 20px;
+}
+
+/* ===== MANTRA CARD - Premium Parchment ===== */
+.mantra-card {
+    background: linear-gradient(135deg, var(--cream-parchment), var(--gold-light));
+    border: 2px solid var(--gold-medium);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    margin: 24px 0;
+    position: relative;
+    box-shadow: 0 8px 24px var(--incense-smoke);
+}
+
+/* Decorative corners */
+.mantra-card::before,
+.mantra-card::after {
+    content: '॥';
+    position: absolute;
+    font-family: var(--font-sacred);
+    font-size: 24px;
+    color: var(--gold-deep);
+    opacity: 0.5;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.mantra-card::before {
+    left: 16px;
+}
+
+.mantra-card::after {
+    right: 16px;
+}
+
+.mantra-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--label-tertiary);
+    margin-bottom: 16px;
+}
+
+.mantra-text {
+    display: block;
+    font-family: var(--font-sacred);
+    font-size: 32px;
+    color: var(--maroon-sacred);
+    text-shadow: 0 2px 8px rgba(139, 0, 0, 0.15);
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.mantra-meaning {
+    display: block;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--label-secondary);
+}
+
+/* ===== PHILOSOPHY BLOCK ===== */
+.philosophy-block {
+    background: var(--system-bg-secondary);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 24px;
+    border-left: 4px solid var(--saffron-medium);
+}
+
+.philosophy-block h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--saffron-deep);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.philosophy-block h4::before {
+    content: '🕉️';
+    font-size: 18px;
+}
+
+.philosophy-block p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--label-secondary);
+}
+
+/* ===== FACT DECK ===== */
+.fact-deck {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.fact-card {
+    background: var(--system-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 149, 0, 0.08);
+    border: 1px solid var(--separator);
+    transition: transform var(--duration-normal) var(--ease-standard),
+        box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.fact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 149, 0, 0.15);
+}
+
+.fact-image {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Gradient overlay on fact images */
+.fact-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            transparent 60%,
+            rgba(0, 0, 0, 0.4) 100%);
+}
+
+.fact-content {
+    padding: 24px;
+    position: relative;
+}
+
+/* Premium decorative element */
+.fact-content::before {
+    content: '॥';
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: var(--font-sacred);
+    font-size: 24px;
+    color: var(--tint-subtle);
+    opacity: 0.5;
+}
+
+.fact-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, var(--tint-color), #E86A00);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(255, 149, 0, 0.3);
+}
+
+.fact-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--label-primary);
+    margin-bottom: 10px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+.fact-hook {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--tint-color);
+    font-style: italic;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--tint-subtle);
+    line-height: 1.5;
+}
+
+.fact-desc {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--label-secondary);
+    margin-bottom: 16px;
+}
+
+.fact-source {
+    font-size: 12px;
+    color: var(--label-tertiary);
+    font-style: italic;
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: var(--system-bg-secondary);
+    border-radius: 8px;
+    border-left: 3px solid var(--tint-color);
+}
+
+/* ===== MEDIA GALLERY ===== */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.media-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--system-bg-secondary);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.media-item:hover {
+    transform: scale(1.02);
+}
+
+.media-item:active {
+    transform: scale(0.98);
+}
+
+.media-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.play-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.play-icon svg {
+    width: 48px;
+    height: 48px;
+    color: white;
+}
+
+/* ===== ENHANCED TEMPLE CONTENT ===== */
+
+/* Hero Local Name */
+.hero-local {
+    font-family: var(--font-sacred);
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 4px;
+    display: block;
+}
+
+/* Deity Badge */
+.deity-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--tint-subtle);
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.deity-icon {
+    font-size: 28px;
+}
+
+.deity-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.deity-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--label-primary);
+}
+
+.deity-form {
+    font-size: 14px;
+    color: var(--label-secondary);
+}
+
+.significance-tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tint-color);
+    background: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Secret Hook */
+.secret-hook {
+    color: var(--label-primary);
+    font-weight: 500;
+    font-style: italic;
+    padding: 16px;
+    background: var(--system-bg-secondary);
+    border-left: 4px solid var(--tint-color);
+    border-radius: 0 12px 12px 0;
+    margin-top: 16px;
+}
+
+/* Mantra Card */
+.mantra-card {
+    background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+    margin: 24px 0;
+    border: 1px solid rgba(255, 149, 0, 0.2);
+}
+
+.mantra-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--label-tertiary);
+    display: block;
+    margin-bottom: 12px;
+}
+
+.mantra-text {
+    font-family: var(--font-sacred);
+    font-size: 32px;
+    color: var(--label-primary);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.mantra-meaning {
+    font-size: 14px;
+    color: var(--label-secondary);
+    font-style: italic;
+}
+
+/* Philosophy Block */
+.philosophy-block {
+    background: var(--system-bg-secondary);
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 24px;
+}
+
+.philosophy-block h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--tint-color);
+    margin-bottom: 12px;
+}
+
+.philosophy-block p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--label-secondary);
+}
+
+/* ===== GUIDE INVITATION - Positive Spiritual ===== */
+.guide-invitation {
+    background: linear-gradient(135deg, var(--gold-light), var(--cream-parchment));
+    padding: 24px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    border: 2px solid var(--gold-medium);
+    box-shadow: 0 4px 16px rgba(255, 183, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Divine glow */
+.guide-invitation::before {
+    content: '🙏';
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 32px;
+    opacity: 0.4;
+    animation: divine-glow 3s ease-in-out infinite;
+}
+
+@keyframes divine-glow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.6;
+    }
+}
+
+.guide-invitation h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--saffron-deep);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.guide-invitation p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--label-primary);
+    padding-right: 40px;
+}
+
+/* ===== GUIDE BLESSING FOOTER ===== */
+.guide-blessing {
+    background: linear-gradient(135deg, var(--saffron-subtle), var(--gold-light));
+    padding: 24px;
+    border-radius: 20px;
+    margin-top: 24px;
+    text-align: center;
+    border: 2px solid var(--gold-medium);
+}
+
+.guide-blessing p {
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--maroon-sacred);
+    font-weight: 500;
+}
+
+.guide-section {
+    margin-bottom: 32px;
+}
+
+.guide-section h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--label-primary);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--separator);
+}
+
+.guide-subsection {
+    margin-bottom: 24px;
+    padding-left: 20px;
+    border-left: 3px solid var(--saffron-light);
+}
+
+.guide-subsection h5 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--label-primary);
+    margin-bottom: 12px;
+}
+
+.guide-subsection p {
+    font-size: 14px;
+    color: var(--label-secondary);
+    line-height: 1.6;
+    margin-bottom: 6px;
+}
+
+.guide-subsection ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.guide-subsection li {
+    font-size: 14px;
+    color: var(--label-secondary);
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    background: var(--system-bg-secondary);
+    border-radius: 12px;
+    border-left: 3px solid var(--tip-green);
+}
+
+.guide-subsection li:last-child {
+    margin-bottom: 0;
+}
+
+.skip-list li {
+    color: #C62828;
+    border-left-color: #FFCDD2;
+    background: #FFF5F5;
+}
+
+/* ===== BENEFIT CARD - Positive Spiritual ===== */
+.benefit-card {
+    background: linear-gradient(135deg, var(--system-bg), var(--gold-light));
+    padding: 24px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--gold-medium);
+    box-shadow: 0 4px 16px rgba(255, 183, 0, 0.1);
+}
+
+.benefit-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--saffron-deep);
+    margin-bottom: 12px;
+}
+
+.benefit-desc {
+    font-size: 15px;
+    color: var(--label-secondary);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.benefit-experience {
+    font-size: 14px;
+    color: var(--label-primary);
+    background: var(--cream-parchment);
+    padding: 14px 16px;
+    border-radius: 12px;
+    border-left: 3px solid var(--saffron-medium);
+}
+
+/* Legacy support for old format */
+.benefit-claim {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--label-primary);
+    font-style: italic;
+    margin-bottom: 12px;
+}
+
+.benefit-reality {
+    font-size: 14px;
+    color: var(--label-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.benefit-tip {
+    font-size: 13px;
+    color: #2E7D32;
+    background: var(--tip-green);
+    padding: 12px 16px;
+    border-radius: 12px;
+    border-left: 3px solid #4CAF50;
+}
+
+/* Budget Grid */
+.budget-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.budget-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: var(--system-bg-secondary);
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.budget-item span:first-child {
+    color: var(--label-secondary);
+    text-transform: capitalize;
+}
+
+.budget-item span:last-child {
+    font-weight: 600;
+    color: var(--label-primary);
+}
+
+@media (min-width: 768px) {
+    .mantra-text {
+        font-size: 42px;
+    }
+
+    .budget-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ===== LOADING STATES ===== */
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    text-align: center;
+    color: var(--label-secondary);
+}
+
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--separator);
+    border-top-color: var(--tint-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== ERROR STATES ===== */
+.error-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    min-height: 50vh;
+}
+
+.error-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.error-state h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--label-primary);
+    margin-bottom: 8px;
+}
+
+.error-state p {
+    font-size: 15px;
+    color: var(--label-secondary);
+    margin-bottom: 24px;
+    max-width: 280px;
+}
+
+.retry-btn,
+.back-btn-error {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-family: var(--font-ui);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-standard);
+    margin: 4px;
+}
+
+.retry-btn {
+    background: var(--tint-color);
+    color: white;
+}
+
+.retry-btn:hover {
+    background: #E68600;
+}
+
+.back-btn-error {
+    background: var(--system-bg-secondary);
+    color: var(--label-primary);
+}
+
+.back-btn-error:hover {
+    background: var(--separator);
+}
+
+.retry-btn svg,
+.back-btn-error svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ===== EMPTY STATES ===== */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    opacity: 0.6;
+}
+
+.empty-state p {
+    font-size: 15px;
+    color: var(--label-secondary);
+}
+
+/* ===== LIGHTBOX ===== */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn var(--duration-normal) var(--ease-decelerate);
+    cursor: zoom-out;
+}
+
+.lightbox.closing {
+    animation: fadeOut var(--duration-normal) var(--ease-accelerate) forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    cursor: default;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -48px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox-close svg {
+    width: 24px;
+    height: 24px;
+}
+
+.lightbox-image {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.lightbox-video {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 8px;
+}
+
+/* ===== MEDIA HINT ===== */
+.media-hint {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--label-secondary);
+    font-size: 13px;
+}
+
+/* ===== FOCUS STYLES ===== */
+.temple-card:focus-visible,
+.segment-btn:focus-visible,
+.media-item:focus-visible,
+.retry-btn:focus-visible,
+.back-btn-error:focus-visible,
+.lightbox-close:focus-visible {
+    outline: 3px solid var(--tint-color);
+    outline-offset: 2px;
+}
+
+/* Skip to main content link for screen readers */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    background: var(--tint-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 0 0 8px 8px;
+    z-index: 9999;
+    transition: top var(--duration-fast) var(--ease-standard);
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* ===== UTILITIES ===== */
+.om-loader {
+    color: var(--tint-color);
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .spinner {
+        animation: none;
+        border-top-color: var(--tint-color);
+        opacity: 0.7;
+    }
+}
+
+/* ===== DARK MODE ===== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Semantic Colors - Dark Mode */
+        --system-bg: #1C1C1E;
+        --system-bg-secondary: #2C2C2E;
+        --system-bg-tertiary: #3A3A3C;
+
+        --label-primary: #FFFFFF;
+        --label-secondary: rgba(235, 235, 245, 0.6);
+        --label-tertiary: rgba(235, 235, 245, 0.3);
+
+        --separator: #38383A;
+        --tint-color: #FF9F0A;
+        --tint-subtle: rgba(255, 159, 10, 0.18);
+
+        /* Material Blurs - Dark */
+        --material-thick: rgba(28, 28, 30, 0.92);
+        --material-thin: rgba(28, 28, 30, 0.75);
+    }
+
+    /* Dark mode specific overrides */
+    .mantra-card {
+        background: linear-gradient(135deg, #3a2f20, #2d261d);
+        border-color: rgba(255, 159, 10, 0.3);
+    }
+
+    .guide-warning {
+        background: linear-gradient(135deg, #3a2f20, #352a1c);
+    }
+
+    .guide-warning h4 {
+        color: #FFB74D;
+    }
+
+    .guide-warning p {
+        color: #BCAAA4;
+    }
+
+    .significance-tag {
+        background: var(--system-bg-tertiary);
+    }
+
+    .fact-card {
+        background: var(--system-bg-secondary);
+    }
+
+    .skip-list li {
+        color: #EF9A9A;
+    }
+}

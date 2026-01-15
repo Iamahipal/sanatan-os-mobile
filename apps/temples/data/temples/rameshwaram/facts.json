@@ -1,0 +1,62 @@
+[
+    {
+        "id": "rama",
+        "category": "Legend",
+        "title": "Lord Rama Worships Lord Shiva",
+        "hook": "Before crossing to Lanka, Rama installed and worshipped a Shivalinga here",
+        "full_story": "After building the legendary bridge to Lanka and before his battle with Ravana, Lord Rama wished to worship Lord Shiva to atone for the brahmahatya dosha (sin of killing Brahmins) he would incur by killing Ravana. He sent Hanuman to fetch a lingam from Kailash, but when Hanuman was delayed, Sita built a lingam from sand. This is the Ramalingam. When Hanuman arrived with the Kailash lingam (Vishwalingam), Rama, to honor his devotion, declared it would be worshipped first.",
+        "source": "Ramayana, Skanda Purana",
+        "image": "data/temples/rameshwaram/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "wells",
+        "category": "Experience",
+        "title": "The 22 Sacred Wells (Theerthas)",
+        "hook": "Bathe in all 22 holy wells for complete purification before darshan",
+        "full_story": "Inside the Ramanathaswamy temple are 22 sacred wells (theerthas) created by Lord Rama's arrows, each drawing water from different sacred rivers of India. Pilgrims bathe in all 22 wells before darshan—a unique purification ritual. Temple attendants draw buckets of water and pour them over devotees in sequence. Each well is believed to cure different ailments and wash different sins. Completing the circuit sanctifies body and soul.",
+        "source": "Temple traditions",
+        "image": "data/temples/rameshwaram/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "corridor",
+        "category": "Architecture",
+        "title": "India's Longest Temple Corridor",
+        "hook": "Walk through 1,212 meters of magnificently carved pillared corridors",
+        "full_story": "The Ramanathaswamy temple boasts the longest temple corridor in India at 1,212 meters. The third corridor alone stretches 197 meters with over 1,000 granite pillars, each intricately carved. Walking through these corridors is a meditation in stone—the Dravidian craftsmanship represents centuries of devoted artistry. The corridors connect various shrines and lead pilgrims through a stone-carved universe of Hindu mythology.",
+        "source": "Archaeological Survey of India",
+        "image": "data/temples/rameshwaram/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "chardham",
+        "category": "Pilgrimage",
+        "title": "Southern Anchor of the Char Dham",
+        "hook": "Complete the sacred four corners of India with this southernmost Dham",
+        "full_story": "Rameshwaram is the southern pillar of the sacred Char Dham circuit, joining Badrinath (north), Dwarkadhish (west), and Jagannath Puri (east). Adi Shankaracharya established these four dhams to unite India spiritually. Completing the Char Dham yatra is considered one of Hinduism's greatest achievements. Many pilgrims, especially in their later years, undertake this pan-India journey with Rameshwaram as the climactic southern destination.",
+        "source": "Hindu pilgrimage traditions",
+        "image": "data/temples/rameshwaram/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "adams",
+        "category": "Mystery",
+        "title": "Ram Setu: The Ancient Bridge",
+        "hook": "The underwater rock formation linking India to Sri Lanka—built by Rama's army",
+        "full_story": "From Rameshwaram, the legendary Ram Setu (Adam's Bridge) extends toward Sri Lanka. This chain of limestone shoals visible in satellite images is believed to be the bridge built by the Vanara army to reach Lanka. While scientists debate its origin, devotees see it as proof of the Ramayana's historical reality. Standing at Dhanushkodi point, pilgrims can gaze toward Sri Lanka, imagining Rama's army crossing.",
+        "source": "Ramayana, Geological surveys",
+        "image": "data/temples/rameshwaram/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "pitru",
+        "category": "Tradition",
+        "title": "Sacred Site for Ancestral Rites",
+        "hook": "Perform Shraddha for ancestors at this extremely auspicious location",
+        "full_story": "Rameshwaram is one of India's most important sites for performing Shraddha (ancestral rites). The confluence of the sea sanctified by Rama's presence makes offerings here extraordinarily potent. Pilgrims perform rites at Agni Theertham on the beach, offering pindas (rice balls) to liberate ancestral souls. Completing both the 22-well bath and ancestral rites fulfills major karmic and familial obligations.",
+        "source": "Hindu ritual traditions",
+        "image": "data/temples/rameshwaram/images/thumbnail.png",
+        "verified": true
+    }
+]

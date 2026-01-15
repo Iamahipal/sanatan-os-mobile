@@ -1,0 +1,32 @@
+{
+    "id": "mahakaleshwar",
+    "name": "Mahakaleshwar",
+    "sanskrit_name": "श्री महाकालेश्वर",
+    "location": {
+        "city": "Ujjain",
+        "state": "Madhya Pradesh",
+        "coordinates": {
+            "lat": 23.1828,
+            "lng": 75.7682
+        }
+    },
+    "deity": {
+        "name": "Lord Shiva",
+        "aspect": "Jyotirlinga",
+        "form_title": "Mahakal (Lord of Time and Death)"
+    },
+    "temple_type": "Jyotirlinga",
+    "significance": "Third of the 12 Jyotirlingas. The only Dakshinamurti (south-facing) Jyotirlinga. Famous for the sacred Bhasma Aarti performed with cremation ashes.",
+    "established_date": "Ancient, rebuilt in 18th century by Marathas",
+    "best_time": "October to March, Maha Shivaratri, Shravan month",
+    "darshan_hours": "4:00 AM - 11:00 PM",
+    "festivals": [
+        "Maha Shivaratri",
+        "Shravan Somvar",
+        "Navratri",
+        "Bhasma Aarti daily"
+    ],
+    "age_years": 2000,
+    "daily_visitors": "40,000-60,000",
+    "annual_visitors": "15 million"
+}

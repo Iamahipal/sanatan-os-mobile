@@ -1,0 +1,31 @@
+{
+    "id": "bhimashankar",
+    "name": "Bhimashankar",
+    "sanskrit_name": "श्री भीमाशंकर",
+    "location": {
+        "city": "Pune District",
+        "state": "Maharashtra",
+        "coordinates": {
+            "lat": 19.0719,
+            "lng": 73.5356
+        }
+    },
+    "deity": {
+        "name": "Lord Shiva",
+        "aspect": "Jyotirlinga",
+        "form_title": "Bhimashankar (The Fierce Shiva)"
+    },
+    "temple_type": "Jyotirlinga",
+    "significance": "Sixth of the 12 Jyotirlingas. Set in the lush Sahyadri mountains, home to the Indian Giant Squirrel. Lord Shiva defeated the demon Bhima here.",
+    "established_date": "13th century Hemadpanthi structure, ancient sacred site",
+    "best_time": "July to February, Maha Shivaratri",
+    "darshan_hours": "5:00 AM - 9:30 PM",
+    "festivals": [
+        "Maha Shivaratri",
+        "Shravan Somvar",
+        "Tripuri Purnima"
+    ],
+    "age_years": 800,
+    "daily_visitors": "3,000-8,000",
+    "annual_visitors": "2 million"
+}

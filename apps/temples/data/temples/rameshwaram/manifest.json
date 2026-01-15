@@ -1,0 +1,32 @@
+{
+    "id": "rameshwaram",
+    "name": "Rameshwaram",
+    "sanskrit_name": "श्री रामनाथस्वामी",
+    "location": {
+        "city": "Rameshwaram",
+        "state": "Tamil Nadu",
+        "coordinates": {
+            "lat": 9.2885,
+            "lng": 79.3173
+        }
+    },
+    "deity": {
+        "name": "Lord Shiva",
+        "aspect": "Jyotirlinga",
+        "form_title": "Ramanathaswamy (Lord Worshipped by Rama)"
+    },
+    "temple_type": "Jyotirlinga",
+    "significance": "Eleventh of the 12 Jyotirlingas. Established by Lord Rama himself after defeating Ravana. Famous for 22 sacred wells and the longest temple corridor in India.",
+    "established_date": "Ancient, expanded by Pandya and Nayak rulers (12th-17th century)",
+    "best_time": "October to April, Maha Shivaratri, Arudra Darshan",
+    "darshan_hours": "5:00 AM - 1:00 PM, 3:00 PM - 9:00 PM",
+    "festivals": [
+        "Maha Shivaratri",
+        "Arudra Darshan",
+        "Navratri",
+        "Thai Poosam"
+    ],
+    "age_years": 1000,
+    "daily_visitors": "15,000-30,000",
+    "annual_visitors": "8 million"
+}

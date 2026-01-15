@@ -1,0 +1,31 @@
+{
+    "id": "omkareshwar",
+    "name": "Omkareshwar",
+    "sanskrit_name": "श्री ओंकारेश्वर",
+    "location": {
+        "city": "Khandwa",
+        "state": "Madhya Pradesh",
+        "coordinates": {
+            "lat": 22.2451,
+            "lng": 76.1531
+        }
+    },
+    "deity": {
+        "name": "Lord Shiva",
+        "aspect": "Jyotirlinga",
+        "form_title": "Omkareshwar (Lord of the Sacred Om)"
+    },
+    "temple_type": "Jyotirlinga",
+    "significance": "Fourth of the 12 Jyotirlingas. The island itself is shaped like the sacred Om symbol. Actually contains two Jyotirlingas: Omkareshwar and Amareshwar.",
+    "established_date": "Ancient, significant structures from 11th century",
+    "best_time": "October to March, Maha Shivaratri, Kartik Purnima",
+    "darshan_hours": "5:00 AM - 9:00 PM",
+    "festivals": [
+        "Maha Shivaratri",
+        "Kartik Purnima",
+        "Shravan month"
+    ],
+    "age_years": 1500,
+    "daily_visitors": "5,000-15,000",
+    "annual_visitors": "3 million"
+}

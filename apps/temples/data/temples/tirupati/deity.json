@@ -1,0 +1,94 @@
+{
+    "name": "Venkateswara",
+    "meaning": "Lord Who Destroys Sins",
+    "other_names": [
+        "Balaji",
+        "Srinivasa",
+        "Govinda",
+        "Venkatachalapathi",
+        "Tirumalesa",
+        "Ezhumalaiyan"
+    ],
+    "epithets": [
+        "Kaliyuga Varada - Boon-Giver of Kaliyuga",
+        "Periya Perumal - The Great Lord",
+        "Maha Vishnu - The Great Preserver",
+        "Padmavathi Vallabha - Beloved of Padmavathi",
+        "Srinivasa - Abode of Lakshmi",
+        "Varadaraja - King of Boons"
+    ],
+    "iconography": {
+        "form_here": "Standing posture (sthanika) on lotus, four-armed. The idol is entirely black (due to camphor and kasturi application over centuries), standing 6 feet tall without pedestal. Uniquely, the eyes appear differently to different devotees.",
+        "symbolism": {
+            "shankha": "Conch - represents primordial sound (Om)",
+            "chakra": "Discus - represents the mind, time-cycle, and protection",
+            "right_lower_hand": "Varada mudra - blessing/boon-giving posture",
+            "left_lower_hand": "Kati hasta - hand on hip, signifying world support",
+            "namam": "Vertical forehead mark - represents Vishnu's footprint",
+            "eyes": "Said to appear open/closed based on devotee's faith"
+        },
+        "special_ornaments": {
+            "neela_devi_hair": "Deity wears wig of donated hair since original was damaged",
+            "vaksha_sthala_lakshmi": "Lakshmi's form is embedded on the chest",
+            "kaustubha": "Legendary gem worn on chest"
+        }
+    },
+    "mythology": {
+        "origin_story": "In Satya Yuga, the sages of Bhrigu lineage cursed both Brahma and Shiva (for pride), leaving only Vishnu as the supreme worshipable god. When Bhrigu tested Vishnu by kicking his chest, Lakshmi (who resides there) was insulted and left for Earth. Vishnu followed, taking birth as Srinivasa, eventually settling in Tirumala to be near Lakshmi (who incarnated as Padmavati).",
+        "key_episodes": [
+            {
+                "title": "The Kubera Loan",
+                "story": "To marry Padmavati (incarnation of Lakshmi), Vishnu needed enormous wedding funds. He borrowed from Kubera—god of wealth—at interest. This 'debt' is symbolically being repaid through devotee donations until the end of Kaliyuga."
+            },
+            {
+                "title": "Neela Devi's Hair",
+                "story": "A shepherd's axe accidentally struck Vishnu's head, causing a bald patch. Neela Devi, a Gandharva princess, sacrificed her own hair to cover it. In gratitude, Vishnu allowed devotees to offer hair forevermore. Hence the tonsure tradition."
+            },
+            {
+                "title": "The Ant-Hill Manifestation",
+                "story": "Vishnu stood motionless in meditation for so long that anthills grew over him. A cowherd's cow poured milk over the anthill daily. When the king investigated, he found the divine form—Swayambhu (self-manifested)."
+            }
+        ]
+    },
+    "worship": {
+        "primary_mantra": {
+            "sanskrit": "ॐ नमो वेङ्कटेशाय",
+            "transliteration": "Om Namo Venkatesaya",
+            "translation": "I bow to Lord Venkateswara",
+            "meaning": "A simple invocation connecting the devotee to the Lord Who Destroys Sins"
+        },
+        "popular_chant": {
+            "text": "Govinda! Govinda!",
+            "context": "Shouted by pilgrims throughout the darshan queue. Govinda = one who gives pleasure to cows/senses = Vishnu/Krishna"
+        },
+        "offerings": [
+            "Hair (most significant - symbolizes ego sacrifice)",
+            "Gold and silver ornaments",
+            "Cash donations (to repay the cosmic debt)",
+            "Silks and vastra (clothing for deity)",
+            "Laddus made with ghee, gram flour, cardamom"
+        ],
+        "festivals": [
+            {
+                "name": "Brahmotsavam",
+                "timing": "September (9 days)",
+                "significance": "Main annual festival. Deity processes on different vahanas (mounts). Millions attend."
+            },
+            {
+                "name": "Vaikuntha Ekadashi",
+                "timing": "December/January",
+                "significance": "Gates of heaven (Vaikuntha) open. Passing through the temple's Vaikuntha Dwaram grants liberation."
+            },
+            {
+                "name": "Thai Poosam",
+                "timing": "January/February",
+                "significance": "Constellation when Vishnu's energy is at peak. Major crowd surge."
+            }
+        ]
+    },
+    "philosophy": {
+        "core_teaching": "Balaji represents accessible grace. Unlike stern, renunciation-focused traditions, Tirupati theology says: 'Come as you are. Ask for what you need. God understands material struggles.' This is 'Kaliyuga Dharma'—in the age of moral decline, sincere devotion alone is sufficient for divine help.",
+        "the_transaction": "Some criticize Tirupati as 'transactional' devotion. Temple philosophy embraces this: 'Yes, devotees make deals. Yes, they come for wishes. The point is—they come. God doesn't require purity of motivation. Interface with the divine, through any door, transforms over time.'",
+        "surrender": "Sharanagati (absolute surrender) is the ultimate teaching. The long queues, the brief darshan, the sacrifice of hair—all are designed to break ego and enforce surrender. By the time you reach the deity, you've given up control. That's the point."
+    }
+}

@@ -1,0 +1,62 @@
+[
+    {
+        "id": "godavari",
+        "category": "Origin",
+        "title": "Source of the Sacred Godavari",
+        "hook": "The Ganges of the South originates from the Brahmagiri hill behind this temple",
+        "full_story": "Sage Gautama performed intense penance here, and Lord Shiva blessed him by making the Godavari River descend from heaven to this spot. The river flows from Brahmagiri hill behind the temple, traveling 1,465 km to the Bay of Bengal. Called Dakshin Ganga (Ganges of the South), the Godavari is considered equally sacred. Pilgrims take a holy dip at Kushavarta Kund, where the river emerges pure from underground.",
+        "source": "Shiva Purana, Brahmanda Purana",
+        "image": "data/temples/trimbakeshwar/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "trimukha",
+        "category": "Mystery",
+        "title": "The Three-Faced Linga of the Trimurti",
+        "hook": "The only Shivalinga with three faces representing Brahma, Vishnu, and Shiva",
+        "full_story": "The Trimbakeshwar Jyotirlinga is unique—a small three-faced lingam representing the cosmic trinity: Brahma (Creator), Vishnu (Preserver), and Shiva (Transformer). This Trimurti symbolism is found nowhere else among the Jyotirlingas. The lingam is covered with a silver crown and adorned with precious gems. Devotees are allowed to touch the lingam during specific times, an intimate connection with the divine rare at such major temples.",
+        "source": "Temple traditions, Shiva Purana",
+        "image": "data/temples/trimbakeshwar/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "kalsarp",
+        "category": "Tradition",
+        "title": "Center of Kalsarpa Dosh Puja",
+        "hook": "The most powerful location to remove the feared Kalsarpa Dosh from one's horoscope",
+        "full_story": "Trimbakeshwar is renowned as the primary center for performing Kalsarpa Dosh, Narayan Nagbali, and Tripindi Shraddha pujas. These rituals, performed only by the temple's Tamrapatradhari Brahmins who hold copper-plate hereditary rights, are believed to neutralize planetary afflictions and liberate ancestral souls. Devotees from across India come specifically for these rituals, which can only be performed at this sacred site.",
+        "source": "Vedic ritual traditions",
+        "image": "data/temples/trimbakeshwar/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "architecture",
+        "category": "Architecture",
+        "title": "Maratha Architectural Masterpiece",
+        "hook": "Built over 30 years by Peshwa Bajirao I, featuring intricate black stone carvings",
+        "full_story": "The current temple structure was built by Peshwa Bajirao I between 1755 and 1786. Constructed entirely of black basalt, it features exquisite carvings, including depictions of Shiva's cosmic dance, celestial beings, and intricate geometric patterns. The temple has three entrances representing the Trimurti. Though not as ancient as the sacred site itself, the architecture represents the finest of Maratha temple building.",
+        "source": "Archaeological Survey of India",
+        "image": "data/temples/trimbakeshwar/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "sinhastha",
+        "category": "Experience",
+        "title": "Sinhastha Kumbh Mela",
+        "hook": "Every 12 years, millions gather when Jupiter enters Leo for the sacred bath",
+        "full_story": "The Sinhastha (Simhastha) Kumbh Mela occurs every 12 years at Trimbakeshwar when Jupiter enters the Leo constellation. During this period, millions of pilgrims, including thousands of Naga Sadhus, descend upon Nashik and Trimbakeshwar for sacred bathing in the Godavari. This is one of the four Kumbh locations and offers an unparalleled opportunity to witness ancient Hindu traditions in their full glory.",
+        "source": "Kumbh Mela records, astrological traditions",
+        "image": "data/temples/trimbakeshwar/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "rudrabhishek",
+        "category": "Tradition",
+        "title": "The Sacred Rudrabhishek Ritual",
+        "hook": "Vedic ceremonies performed on the Trimurti Linga since ancient times",
+        "full_story": "Trimbakeshwar is one of the most important centers for Rudrabhishek puja—the elaborate Vedic bathing ceremony of the Shivalinga with milk, honey, ghee, and sacred waters while chanting Rudra mantras. The ritual here is particularly powerful due to the unique Trimurti lingam. The morning abhishek, when devotees can directly touch the lingam, offers an intimate divine connection available at few other temples in India.",
+        "source": "Vedic traditions, temple records",
+        "image": "data/temples/trimbakeshwar/images/thumbnail.png",
+        "verified": true
+    }
+]

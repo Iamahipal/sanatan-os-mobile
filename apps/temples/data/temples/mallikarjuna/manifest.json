@@ -1,0 +1,32 @@
+{
+    "id": "mallikarjuna",
+    "name": "Mallikarjuna",
+    "sanskrit_name": "श्री मल्लिकार्जुन",
+    "location": {
+        "city": "Srisailam",
+        "state": "Andhra Pradesh",
+        "coordinates": {
+            "lat": 16.0745,
+            "lng": 78.8682
+        }
+    },
+    "deity": {
+        "name": "Lord Shiva",
+        "aspect": "Jyotirlinga",
+        "form_title": "Mallikarjuna (Lord White as Jasmine)"
+    },
+    "temple_type": "Jyotirlinga",
+    "significance": "Second of the 12 Jyotirlingas, one of the most sacred Shiva temples. Also a Shakti Peetha where Goddess Bhramaramba resides.",
+    "established_date": "Ancient, renovated by Vijayanagara kings",
+    "best_time": "October to February, Maha Shivaratri",
+    "darshan_hours": "4:30 AM - 10:00 PM",
+    "festivals": [
+        "Maha Shivaratri",
+        "Ugadi",
+        "Navratri",
+        "Karthika Pournami"
+    ],
+    "age_years": 2000,
+    "daily_visitors": "15,000-25,000",
+    "annual_visitors": "8 million"
+}

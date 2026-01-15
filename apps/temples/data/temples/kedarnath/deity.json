@@ -1,0 +1,94 @@
+{
+    "name": "Kedareshwara",
+    "meaning": "Lord of the Field (Also: Lord of Kedar Peak)",
+    "other_names": [
+        "Kedaranatha",
+        "Girisha",
+        "Sadashiva",
+        "Bholenath",
+        "Nagesh"
+    ],
+    "epithets": [
+        "Bholenath - The Innocent Lord (grants wishes without thinking)",
+        "Girisha - Lord of the Mountains",
+        "Sadashiva - The Eternal Shiva",
+        "Nagendra - Lord of Serpents",
+        "Gaurishankara - Parvati's Lord",
+        "Mahayogi - The Great Ascetic"
+    ],
+    "iconography": {
+        "form_here": "Unlike typical Shiva temples, Kedarnath has no carved Lingam. The object of worship is a triangular rock formation (resembling a buffalo's hump) protruding from the ground. This is the 'Swayambhu' manifestation—natural, uncarved, primordial.",
+        "symbolism": {
+            "triangular_shape": "Represents the primordial mountain (Meru) or the hump of the buffalo-form Shiva",
+            "rough_surface": "Unpolished—left as Shiva emerged, emphasizing the natural/wild aspect of the deity",
+            "no_carving": "Affirms this is Swayambhu (self-manifested), not man-made",
+            "ghee_coating": "Constantly anointed with ghee—absorbed by the rock, never drips (devotees say)",
+            "touch_permitted": "Unlike most Jyotirlingas, devotees can directly touch this manifestation"
+        },
+        "surrounding_forms": {
+            "nandi": "Outside facing the sanctum (as in all Shiva temples)",
+            "panchmukhi": "Five-faced Shiva form at one corner",
+            "adi_shankaracharya_samadhi": "Behind the temple—marks his final resting place"
+        }
+    },
+    "mythology": {
+        "origin_story": "After the Kurukshetra war of Mahabharata, the Pandavas were guilt-ridden for killing their own family. They sought Shiva to absolve them. But Shiva, seeing the immense negative karma involved, did not want to grant easy forgiveness. He fled north, deeper into the Himalayas, transforming into a buffalo to hide among cattle herds. The Pandavas pursued. At Guptakashi, they spotted him and chased. Shiva dove into the earth—but Bhima grabbed the humped back. That hump remains as the Kedarnath Jyotirlinga. The other body parts surfaced at four other locations in the Garhwal Himalayas.",
+        "key_episodes": [
+            {
+                "title": "Why Shiva Fled",
+                "story": "The Mahabharata war killed millions, including gurus, sons, and grandfathers. Even though the Pandavas fought for dharma, the karma of so much death clung to them. Shiva understood that simply granting absolution would be too easy—they needed to EARN it through pursuit, hardship, and eventual surrender. The chase across the Himalayas WAS the purification process."
+            },
+            {
+                "title": "Shankaracharya's Reconstruction",
+                "story": "By the 8th century CE, the original Kedarnath shrine had fallen into neglect. Adi Shankaracharya, on his mission to revive Hinduism across India, rebuilt the temple using massive interlocking stones. He established the priest lineage that still serves today. Then, his work complete, he walked behind the temple into the glacial wilderness and was never seen again—or so the tradition says."
+            },
+            {
+                "title": "The Protecting Boulder",
+                "story": "In the 2013 floods, a massive boulder (now called Bhim Shila) stood directly behind the temple, splitting the raging Mandakini river around the structure. The boulder was deposited by glacial activity 16,000 years ago—but it had never been noticed until it saved the temple. Devotees believe it was always meant to protect this spot, placed there by divine will long before the temple was built."
+            }
+        ]
+    },
+    "worship": {
+        "primary_mantra": {
+            "sanskrit": "ॐ नमः शिवाय",
+            "transliteration": "Om Namah Shivaya",
+            "translation": "I bow to Shiva",
+            "meaning": "The universal Shiva mantra. At Kedarnath, repeating this throughout the trek is considered equivalent to performing extensive pujas."
+        },
+        "kedar_specific": {
+            "text": "केदारेश्वराय नमः",
+            "transliteration": "Kedareshwaraya Namah",
+            "meaning": "Salutations to the Lord of Kedar"
+        },
+        "offerings": [
+            "Bilva leaves (sacred to Shiva)",
+            "Pure ghee (absorbed by the rock form)",
+            "Raw milk",
+            "Gangajal (brought from Gangotri is most sacred)",
+            "Rudraksha beads",
+            "Bhasma (sacred ash)"
+        ],
+        "festivals": [
+            {
+                "name": "Temple Opening (Akshaya Tritiya)",
+                "timing": "April/May",
+                "significance": "After 6 months of closure, the temple reopens. Massive crowds. First darshan considered extremely auspicious."
+            },
+            {
+                "name": "Temple Closing (Bhai Dooj)",
+                "timing": "November",
+                "significance": "Deity is moved to Ukhimath for winter. Emotional ceremonies as priests extinguish the flame."
+            },
+            {
+                "name": "Maha Shivaratri",
+                "timing": "February/March",
+                "significance": "Celebrated at Ukhimath during temple closure. Huge night-long worship."
+            }
+        ]
+    },
+    "philosophy": {
+        "core_teaching": "At Kedarnath, Shiva teaches through difficulty. The high altitude, the harsh conditions, the demanding trek—these are not obstacles separating you from God. They ARE the teaching. In comfortable temples, the ego comes to God as a consumer. At Kedarnath, the ego is broken on the journey. What remains to receive darshan is something more authentic.",
+        "the_ascetic_ideal": "Kedarnath represents Shiva as the Mahayogi—the great ascetic who lives in isolation, needs nothing, and embodies the principle that liberation comes through renunciation rather than accumulation. Coming to this frozen peak is practicing that renunciation: you leave the comfort of home, surrender your body to difficulty, and arrive with nothing but your intention.",
+        "forgiveness_teaching": "The original myth is about the Pandavas seeking forgiveness for violence. Shiva doesn't grant it easily—he makes them work. This teaches: genuine transformation requires genuine effort. Grace is not a reward for showing up—it's the response to sincere struggle. At Kedarnath, you earn what you receive."
+    }
+}

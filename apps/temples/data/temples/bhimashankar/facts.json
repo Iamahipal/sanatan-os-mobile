@@ -1,0 +1,62 @@
+[
+    {
+        "id": "bhima_demon",
+        "category": "Legend",
+        "title": "Slayer of the Demon Bhima",
+        "hook": "Where Shiva's sweat became the river Bhima after an epic battle",
+        "full_story": "The demon Bhima, son of Kumbhakarna, performed intense penance to gain power from Brahma. He then terrorized the gods and sages. When he imprisoned his own father's killer Kamakshya, the gods sought Shiva's intervention. A fierce battle ensued on these hills. After destroying the demon, Shiva was requested by the sages to permanently reside here. The sweat from his cosmic battle formed the Bhima River. Thus began the sanctity of Bhimashankar.",
+        "source": "Shiva Purana, local traditions",
+        "image": "data/temples/bhimashankar/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "wildlife",
+        "category": "Experience",
+        "title": "Wildlife Sanctuary of the Sacred Forest",
+        "hook": "The temple sits inside a protected wildlife sanctuary—home to the rare Shekru (Indian Giant Squirrel)",
+        "full_story": "Bhimashankar temple is uniquely located within the Bhimashankar Wildlife Sanctuary, a protected forest of ancient trees and rare fauna. The forest is home to the Shekru (Indian Giant Squirrel), Maharashtra's state animal. Leopards, sambar deer, and countless bird species inhabit these sacred woods. The journey through this pristine forest to reach the temple is itself a spiritual experience—nature worship preceding divine darshan.",
+        "source": "Maharashtra Forest Department",
+        "image": "data/temples/bhimashankar/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "hemadpanthi",
+        "category": "Architecture",
+        "title": "Hemadpanthi Architecture in Stone",
+        "hook": "A masterpiece of medieval Maratha temple architecture built without mortar",
+        "full_story": "The Bhimashankar temple exemplifies Hemadpanthi architecture—a style developed in the 13th century using interlocking stone blocks without mortar. The structure features ornate stone carvings, a shikhara rising above the Sahyadri mists, and detailed panels depicting Hindu mythology. Later additions by Maratha noble Nana Phadnavis enhanced its grandeur. The temple's setting amid lush green mountains makes it one of India's most scenic pilgrimage sites.",
+        "source": "Archaeological Survey of India",
+        "image": "data/temples/bhimashankar/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "monsoon",
+        "category": "Experience",
+        "title": "Monsoon Magic at the Sacred Peak",
+        "hook": "During monsoons, the temple floats above the clouds in an ethereal mist",
+        "full_story": "The Sahyadri Mountains receive heavy monsoon rainfall, and Bhimashankar at 3,250 feet often rises above the clouds during this season. The temple appears suspended in mist, waterfalls cascade around the sanctuary, and the forest comes alive with verdant beauty. Many pilgrims specifically visit during the rains to experience this otherworldly atmosphere where the boundary between earthly and divine seems to dissolve.",
+        "source": "Pilgrim traditions",
+        "image": "data/temples/bhimashankar/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "trek",
+        "category": "Pilgrimage",
+        "title": "The Sacred Trek from Khandas",
+        "hook": "A challenging 5-kilometer forest trek that pilgrims undertake barefoot",
+        "full_story": "Devotees can reach Bhimashankar by road, but the traditional approach is the 5-kilometer trek from Khandas village through dense forest. Many pilgrims undertake this barefoot as an act of devotion. The path passes through ancient trees, small waterfalls, and offers panoramic views of the Sahyadri ranges. This physical journey mirrors the spiritual journey—requiring effort, persistence, and surrender to reach the divine.",
+        "source": "Pilgrimage traditions",
+        "image": "data/temples/bhimashankar/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "origin",
+        "category": "Tradition",
+        "title": "Source of the Sacred Bhima River",
+        "hook": "The temple marks the origin of the Bhima River, a sacred tributary of the Krishna",
+        "full_story": "The Bhima River originates near the temple and flows 861 kilometers to join the Krishna River. Like the Ganga to Kashi, the Bhima is sacred to this region's people. The river's name connects to the legend of Shiva's perspiration after his battle with the demon Bhima. Taking a dip at the temple's kund before darshan is considered highly purifying, especially during the Shravan month.",
+        "source": "Shiva Purana, geographical records",
+        "image": "data/temples/bhimashankar/images/thumbnail.png",
+        "verified": true
+    }
+]
