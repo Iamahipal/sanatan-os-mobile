@@ -374,6 +374,122 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* TTS Audio Controls */
+        .tts-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            background: var(--surface-elevated);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-4);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .tts-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .tts-btn.play {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tts-btn.play:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .tts-btn.play.speaking {
+            background: #DC2626;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 98, 42, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 12px rgba(212, 98, 42, 0);
+            }
+        }
+
+        .tts-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .tts-speed {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .tts-speed-label {
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .tts-speed-select {
+            padding: var(--space-2) var(--space-3);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-size: var(--text-sm);
+            font-family: var(--font-main);
+            cursor: pointer;
+        }
+
+        .tts-lang-toggle {
+            display: flex;
+            background: var(--surface-container);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .tts-lang-btn {
+            padding: var(--space-2) var(--space-3);
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: var(--text-xs);
+            font-weight: var(--font-medium);
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .tts-lang-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tts-status {
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+            text-align: center;
+            margin-top: var(--space-2);
+        }
+
+        .tts-status.speaking {
+            color: var(--primary);
+            font-weight: var(--font-medium);
+        }
     </style>
 </head>
 
@@ -573,13 +689,146 @@
                 verseReader.classList.add('active');
             }
 
+            // ========== TTS (Text-to-Speech) Engine ==========
+            let isSpeaking = false;
+            let currentUtterance = null;
+            let ttsLang = 'hi-IN'; // Default: Hindi for Sanskrit
+            let ttsSpeed = 0.85;   // Slightly slower for clarity
+            let currentChapterNum = 1;
+
+            function speakVerse() {
+                const v = currentVerses[currentVerseIndex];
+                if (!v) return;
+
+                // Stop if already speaking
+                if (isSpeaking) {
+                    stopSpeaking();
+                    return;
+                }
+
+                // Check if browser supports speech synthesis
+                if (!('speechSynthesis' in window)) {
+                    alert('Sorry, your browser does not support text-to-speech.');
+                    return;
+                }
+
+                isSpeaking = true;
+                updateTTSUI();
+
+                // Prepare texts
+                const sanskritText = v.sanskrit ? v.sanskrit.replace(/।।[\d.]+।।/g, '') : '';
+                const translationText = v.translation || v.meaning || '';
+
+                // Create speech queue
+                const speeches = [];
+
+                // Add Sanskrit (read in Hindi voice)
+                if (sanskritText && ttsLang === 'hi-IN') {
+                    const sanskritUtterance = new SpeechSynthesisUtterance(sanskritText);
+                    sanskritUtterance.lang = 'hi-IN';
+                    sanskritUtterance.rate = ttsSpeed;
+                    sanskritUtterance.pitch = 1.0;
+                    speeches.push(sanskritUtterance);
+                }
+
+                // Add Translation (read in English - Indian accent)
+                if (translationText) {
+                    const transUtterance = new SpeechSynthesisUtterance(translationText);
+                    transUtterance.lang = ttsLang === 'hi-IN' ? 'en-IN' : 'en-IN';
+                    transUtterance.rate = ttsSpeed;
+                    transUtterance.pitch = 1.0;
+                    speeches.push(transUtterance);
+                }
+
+                // Chain speeches
+                let currentIndex = 0;
+
+                function speakNext() {
+                    if (currentIndex >= speeches.length || !isSpeaking) {
+                        stopSpeaking();
+                        return;
+                    }
+
+                    currentUtterance = speeches[currentIndex];
+                    currentUtterance.onend = () => {
+                        currentIndex++;
+                        // Small pause between Sanskrit and Translation
+                        setTimeout(speakNext, 500);
+                    };
+                    currentUtterance.onerror = () => {
+                        stopSpeaking();
+                    };
+
+                    speechSynthesis.speak(currentUtterance);
+                }
+
+                speakNext();
+            }
+
+            function stopSpeaking() {
+                isSpeaking = false;
+                speechSynthesis.cancel();
+                currentUtterance = null;
+                updateTTSUI();
+            }
+
+            function updateTTSUI() {
+                const playBtn = document.getElementById('tts-play-btn');
+                const statusEl = document.getElementById('tts-status');
+
+                if (playBtn) {
+                    if (isSpeaking) {
+                        playBtn.classList.add('speaking');
+                        playBtn.innerHTML = '<i data-lucide="square"></i>';
+                    } else {
+                        playBtn.classList.remove('speaking');
+                        playBtn.innerHTML = '<i data-lucide="play"></i>';
+                    }
+                    lucide.createIcons();
+                }
+
+                if (statusEl) {
+                    if (isSpeaking) {
+                        statusEl.textContent = '🔊 Speaking...';
+                        statusEl.classList.add('speaking');
+                    } else {
+                        statusEl.textContent = 'Tap play to listen';
+                        statusEl.classList.remove('speaking');
+                    }
+                }
+            }
+
             function renderVerseReader() {
                 const v = currentVerses[currentVerseIndex];
                 if (!v) return;
 
+                // Stop any ongoing speech when changing verses
+                stopSpeaking();
+
                 document.getElementById('reader-verse-num').textContent = `Verse ${v.verse}`;
 
                 readerContent.innerHTML = `
+                    <!-- TTS Controls -->
+                    <div class="tts-controls">
+                        <button class="tts-btn play" id="tts-play-btn" aria-label="Play">
+                            <i data-lucide="play"></i>
+                        </button>
+                        <div class="tts-speed">
+                            <span class="tts-speed-label">Speed</span>
+                            <select class="tts-speed-select" id="tts-speed-select">
+                                <option value="0.7">0.7x</option>
+                                <option value="0.85" selected>0.85x</option>
+                                <option value="1">1x</option>
+                                <option value="1.15">1.15x</option>
+                            </select>
+                        </div>
+                        <div class="tts-lang-toggle">
+                            <button class="tts-lang-btn active" data-lang="hi-IN">हिंदी</button>
+                            <button class="tts-lang-btn" data-lang="en-IN">English</button>
+                        </div>
+                    </div>
+                    <div class="tts-status" id="tts-status">Tap play to listen</div>
+
                     <div class="reader-sanskrit">${v.sanskrit || 'Sanskrit not available'}</div>
                     ${v.transliteration ? `<div class="reader-transliteration">${v.transliteration}</div>` : ''}
                     <div class="reader-meaning">
@@ -594,21 +843,50 @@
                     ` : ''}
                 `;
 
+                lucide.createIcons();
+
+                // Attach TTS event listeners
+                document.getElementById('tts-play-btn').onclick = speakVerse;
+
+                document.getElementById('tts-speed-select').onchange = (e) => {
+                    ttsSpeed = parseFloat(e.target.value);
+                };
+
+                document.querySelectorAll('.tts-lang-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.tts-lang-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        ttsLang = btn.dataset.lang;
+                    };
+                });
+
                 document.getElementById('prev-verse').disabled = currentVerseIndex === 0;
                 document.getElementById('next-verse').disabled = currentVerseIndex >= currentVerses.length - 1;
             }
 
             document.getElementById('prev-verse').onclick = () => {
-                if (currentVerseIndex > 0) { currentVerseIndex--; renderVerseReader(); }
+                if (currentVerseIndex > 0) {
+                    stopSpeaking();
+                    currentVerseIndex--;
+                    renderVerseReader();
+                }
             };
 
             document.getElementById('next-verse').onclick = () => {
-                if (currentVerseIndex < currentVerses.length - 1) { currentVerseIndex++; renderVerseReader(); }
+                if (currentVerseIndex < currentVerses.length - 1) {
+                    stopSpeaking();
+                    currentVerseIndex++;
+                    renderVerseReader();
+                }
             };
 
-            document.getElementById('close-reader').onclick = () => verseReader.classList.remove('active');
+            document.getElementById('close-reader').onclick = () => {
+                stopSpeaking();
+                verseReader.classList.remove('active');
+            };
 
             document.getElementById('back-to-chapters').onclick = () => {
+                stopSpeaking();
                 verseView.classList.remove('active');
                 mainHeader.style.display = 'flex';
                 chapterView.style.display = 'block';
