@@ -3,40 +3,31 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Krishna Vaani - कृष्ण वाणी</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#FDFBF7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <!-- Preload critical assets -->
-    <link rel="preload" href="krishna-bg.jpg" as="image">
+    <title>Krishna Vaani - कृष्ण वाणी</title>
+    <meta name="description" content="Receive divine guidance from Lord Krishna through the wisdom of Bhagavad Gita.">
+
+    <!-- Fonts - Google Sans Flex + Tiro Devanagari Sanskrit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- Critical CSS to prevent flash of unstyled content -->
-    <style>
-        /* Start with black background, hidden container */
-        html,
-        body {
-            background: #000;
-        }
-
-        .app-container {
-            visibility: hidden;
-        }
-
-        .app-container.ready {
-            visibility: visible;
-        }
-    </style>
-
-    <link rel="stylesheet" href="style.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Tiro+Devanagari+Sanskrit&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
         rel="stylesheet">
+
+    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="app-container" style="visibility: hidden;">
+    <div class="app-container">
         <!-- Header -->
         <header class="app-header">
             <a href="../../index.html" class="header-btn back-btn" aria-label="Back">
@@ -44,7 +35,7 @@
             </a>
             <div class="header-center">
                 <h1 class="header-title">कृष्ण वाणी</h1>
-                <span class="header-subtitle">Voice of Krishna</span>
+                <p class="header-subtitle">Voice of Krishna</p>
             </div>
             <a href="library.html" class="header-btn" aria-label="Open Library">
                 <i data-lucide="book-open"></i>
@@ -67,15 +58,15 @@
                         How to find peace?
                     </button>
                     <button class="suggestion-chip" data-question="What is my purpose in life?">
-                        <i data-lucide="compass" class="chip-icon" style="color: #FFB347;"></i>
+                        <i data-lucide="compass" class="chip-icon" style="color: #E85D04;"></i>
                         What is my purpose?
                     </button>
                     <button class="suggestion-chip" data-question="How do I deal with anxiety and fear?">
-                        <i data-lucide="shield" class="chip-icon" style="color: #87CEEB;"></i>
+                        <i data-lucide="shield" class="chip-icon" style="color: #0077B6;"></i>
                         Overcoming fear
                     </button>
                     <button class="suggestion-chip" data-question="How to let go of anger?">
-                        <i data-lucide="flower-2" class="chip-icon" style="color: #DDA0DD;"></i>
+                        <i data-lucide="flower-2" class="chip-icon" style="color: #7C5CBF;"></i>
                         Letting go of anger
                     </button>
                 </div>
@@ -196,44 +187,15 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="js/gita-data-complete.js"></script>
     <script src="js/gita-data.js"></script>
     <script src="js/gemini-brain.js"></script>
     <script src="js/chat-engine.js"></script>
     <script>
-        // Function to reveal app
-        function revealApp() {
-            lucide.createIcons();
-            document.querySelector('.app-container').style.visibility = 'visible';
-        }
-
-        // Wait for fonts AND background image, with fallback timeout
-        const bgImage = new Image();
-        bgImage.src = 'krishna-bg.jpg';
-
-        // Fallback: reveal after 2 seconds max regardless
-        const fallbackTimer = setTimeout(revealApp, 2000);
-
-        Promise.all([
-            document.fonts.ready,
-            new Promise(resolve => {
-                if (bgImage.complete) resolve();
-                else {
-                    bgImage.onload = resolve;
-                    bgImage.onerror = resolve; // Reveal even if image fails
-                }
-            })
-        ]).then(() => {
-            clearTimeout(fallbackTimer);
-            revealApp();
-        }).catch(() => {
-            clearTimeout(fallbackTimer);
-            revealApp();
-        });
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
-
-    <!-- Liquid Glass Effect -->
-    <script src="js/liquid-glass.js"></script>
 </body>
 
 </html>
