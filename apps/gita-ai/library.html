@@ -442,6 +442,28 @@
     <script>
         lucide.createIcons();
 
+        // Gita Chapter Names (18 Yogas)
+        const CHAPTER_NAMES = {
+            1: { sanskrit: 'अर्जुन विषाद योग', english: 'Arjuna\'s Dilemma' },
+            2: { sanskrit: 'सांख्य योग', english: 'Path of Knowledge' },
+            3: { sanskrit: 'कर्म योग', english: 'Path of Action' },
+            4: { sanskrit: 'ज्ञान योग', english: 'Path of Wisdom' },
+            5: { sanskrit: 'कर्म संन्यास योग', english: 'Path of Renunciation' },
+            6: { sanskrit: 'ध्यान योग', english: 'Path of Meditation' },
+            7: { sanskrit: 'विज्ञान योग', english: 'Knowledge & Wisdom' },
+            8: { sanskrit: 'अक्षर ब्रह्म योग', english: 'Path to Brahman' },
+            9: { sanskrit: 'राज विद्या योग', english: 'Royal Knowledge' },
+            10: { sanskrit: 'विभूति योग', english: 'Divine Glories' },
+            11: { sanskrit: 'विश्वरूप दर्शन योग', english: 'Universal Form' },
+            12: { sanskrit: 'भक्ति योग', english: 'Path of Devotion' },
+            13: { sanskrit: 'क्षेत्र क्षेत्रज्ञ योग', english: 'Field & Knower' },
+            14: { sanskrit: 'गुणत्रय विभाग योग', english: 'Three Gunas' },
+            15: { sanskrit: 'पुरुषोत्तम योग', english: 'Supreme Person' },
+            16: { sanskrit: 'दैवासुर संपद योग', english: 'Divine & Demonic' },
+            17: { sanskrit: 'श्रद्धात्रय विभाग योग', english: 'Three Faiths' },
+            18: { sanskrit: 'मोक्ष संन्यास योग', english: 'Liberation' }
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             const mainHeader = document.getElementById('main-header');
             const chapterGrid = document.getElementById('chapter-grid');
@@ -471,7 +493,13 @@
                     DATA.verses.forEach(v => {
                         const cNum = parseInt(v.chapter);
                         if (!map.has(cNum)) {
-                            map.set(cNum, { chapter: cNum, title: `Chapter ${cNum}`, titleEnglish: '', verses: [] });
+                            const names = CHAPTER_NAMES[cNum] || { sanskrit: '', english: '' };
+                            map.set(cNum, {
+                                chapter: cNum,
+                                title: names.sanskrit,
+                                titleEnglish: names.english,
+                                verses: []
+                            });
                         }
                         map.get(cNum).verses.push(v);
                     });
@@ -483,16 +511,18 @@
                     return;
                 }
 
-                chapterGrid.innerHTML = chapters.map(ch => `
+                chapterGrid.innerHTML = chapters.map(ch => {
+                    const names = CHAPTER_NAMES[ch.chapter] || { sanskrit: ch.title, english: '' };
+                    return `
                     <div class="chapter-card" data-chapter="${ch.chapter}">
                         <div class="chapter-num">Chapter ${ch.chapter}</div>
-                        <div class="chapter-title">${ch.title || 'Untitled'}</div>
+                        <div class="chapter-title">${names.english || names.sanskrit || 'Untitled'}</div>
                         <div class="chapter-meta">
                             <i data-lucide="book-open"></i>
                             <span>${ch.verses ? ch.verses.length : 0} verses</span>
                         </div>
                     </div>
-                `).join('');
+                `}).join('');
 
                 lucide.createIcons();
 
@@ -511,8 +541,9 @@
                 }
                 currentVerses = verses.sort((a, b) => a.verse - b.verse);
 
+                const names = CHAPTER_NAMES[chapter.chapter] || { sanskrit: '', english: '' };
                 document.getElementById('current-chapter-title').textContent = `Chapter ${chapter.chapter}`;
-                document.getElementById('current-chapter-subtitle').textContent = chapter.titleEnglish || chapter.title || '';
+                document.getElementById('current-chapter-subtitle').textContent = names.english || names.sanskrit || '';
 
                 verseContainer.innerHTML = currentVerses.map((v, i) => `
                     <div class="verse-item" data-index="${i}">
