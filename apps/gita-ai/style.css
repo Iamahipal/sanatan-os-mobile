@@ -162,37 +162,17 @@ body {
 }
 
 /* ============================================
-   APP CONTAINER
+   APP CONTAINER - Mobile Optimized (Full Width)
    ============================================ */
 .app-container {
     display: flex;
     flex-direction: column;
     height: 100vh;
     height: 100dvh;
-    max-width: 480px;
-    margin: 0 auto;
+    width: 100%;
     position: relative;
     background: var(--md-sys-color-surface);
     overflow: hidden;
-}
-
-/* Desktop: Phone frame effect */
-@media (min-width: 481px) {
-    body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        background: var(--md-sys-color-surface-dim);
-    }
-
-    .app-container {
-        height: calc(100vh - 40px);
-        max-height: 900px;
-        border-radius: var(--md-sys-shape-corner-extra-large);
-        border: 1px solid var(--md-sys-color-outline-variant);
-        box-shadow: var(--shadow-lg);
-    }
 }
 
 /* ============================================
@@ -296,6 +276,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -408,6 +389,7 @@ body {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -442,7 +424,7 @@ body {
     margin: 0;
 }
 
-.message.krishna .message-content p + p {
+.message.krishna .message-content p+p {
     margin-top: var(--space-xs);
 }
 
@@ -465,9 +447,17 @@ body {
     margin: var(--space-sm) 0 var(--space-xs) 0;
 }
 
-.message.krishna .message-content h2 { font-size: 1.2rem; }
-.message.krishna .message-content h3 { font-size: 1.1rem; }
-.message.krishna .message-content h4 { font-size: 1rem; }
+.message.krishna .message-content h2 {
+    font-size: 1.2rem;
+}
+
+.message.krishna .message-content h3 {
+    font-size: 1.1rem;
+}
+
+.message.krishna .message-content h4 {
+    font-size: 1rem;
+}
 
 .message.krishna .message-content ul {
     margin: var(--space-xs) 0;
@@ -566,14 +556,23 @@ body {
     animation: typingBounce 1.4s ease-in-out infinite;
 }
 
-.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
 
 @keyframes typingBounce {
-    0%, 80%, 100% {
+
+    0%,
+    80%,
+    100% {
         transform: translateY(0);
         opacity: 0.4;
     }
+
     40% {
         transform: translateY(-8px);
         opacity: 1;
@@ -717,6 +716,7 @@ body {
         opacity: 0;
         transform: scale(0.95) translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -906,12 +906,12 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background: var(--md-sys-color-primary);
     border-color: var(--md-sys-color-primary);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     transform: translateX(22px);
 }
 
@@ -1112,6 +1112,7 @@ input:checked + .slider:before {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
