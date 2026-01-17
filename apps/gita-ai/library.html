@@ -23,29 +23,13 @@
 
     <style>
         /* ============================================
-           LIBRARY PAGE STYLES
+           LIBRARY PAGE - Refined
            ============================================ */
-        .library-header {
-            padding: var(--space-5) var(--space-4);
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .library-title {
-            font-size: var(--text-2xl);
-            font-weight: var(--font-semibold);
-            color: var(--text-primary);
-            margin-bottom: var(--space-1);
-        }
-
-        .library-subtitle {
-            font-size: var(--text-sm);
-            color: var(--text-tertiary);
-        }
-
         .library-content {
             flex: 1;
             overflow-y: auto;
             padding: var(--space-4);
+            padding-bottom: calc(var(--safe-bottom) + var(--space-8));
         }
 
         /* Chapter Grid */
@@ -58,20 +42,19 @@
         .chapter-card {
             background: var(--surface-elevated);
             border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius-lg);
             padding: var(--space-4);
             cursor: pointer;
-            transition: all var(--duration-normal) var(--ease-out);
+            transition: all var(--duration-fast) var(--ease-out);
         }
 
         .chapter-card:hover {
             border-color: var(--primary);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
         }
 
         .chapter-card:active {
-            transform: translateY(0);
+            transform: scale(0.98);
         }
 
         .chapter-num {
@@ -79,7 +62,7 @@
             font-weight: var(--font-semibold);
             color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             margin-bottom: var(--space-2);
         }
 
@@ -96,6 +79,8 @@
             color: var(--text-secondary);
             margin-bottom: var(--space-3);
             line-height: 1.4;
+            display: none;
+            /* Hide for cleaner look */
         }
 
         .chapter-meta {
@@ -127,27 +112,51 @@
         .verse-header {
             display: flex;
             align-items: center;
-            gap: var(--space-4);
-            padding: var(--space-4);
-            background: var(--surface-elevated);
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-4);
+            background: var(--surface);
             border-bottom: 1px solid var(--border-subtle);
         }
 
+        .verse-back-btn {
+            width: 36px;
+            height: 36px;
+            background: var(--surface-container);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .verse-back-btn:hover {
+            background: var(--surface-container-high);
+        }
+
+        .verse-back-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
         .verse-header-info h2 {
-            font-size: var(--text-lg);
+            font-size: var(--text-base);
             font-weight: var(--font-semibold);
             color: var(--text-primary);
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
 
         .verse-header-info p {
-            font-size: var(--text-sm);
-            color: var(--text-secondary);
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
         }
 
         .verse-list-container {
             flex: 1;
             overflow-y: auto;
+            padding-bottom: calc(var(--safe-bottom) + var(--space-6));
         }
 
         .verse-item {
@@ -175,7 +184,7 @@
         }
 
         .verse-item-arrow {
-            color: var(--text-tertiary);
+            color: var(--text-disabled);
         }
 
         .verse-item-arrow svg {
@@ -189,9 +198,12 @@
             color: var(--primary);
             margin-bottom: var(--space-2);
             line-height: 1.6;
-            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
 
         .verse-preview-trans {
@@ -226,18 +238,18 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: var(--space-4);
-            background: var(--surface-elevated);
-            border-bottom: 1px solid var(--border-subtle);
+            padding: var(--space-3) var(--space-4);
+            padding-top: calc(var(--safe-top) + var(--space-3));
+            background: var(--surface);
         }
 
         .reader-close-btn {
             width: 40px;
             height: 40px;
-            background: transparent;
+            background: var(--surface-container);
             border: none;
             border-radius: var(--radius-md);
-            color: var(--text-secondary);
+            color: var(--text-primary);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -246,8 +258,12 @@
         }
 
         .reader-close-btn:hover {
-            background: var(--surface-container);
-            color: var(--text-primary);
+            background: var(--surface-container-high);
+        }
+
+        .reader-close-btn svg {
+            width: 20px;
+            height: 20px;
         }
 
         .reader-nav {
@@ -259,10 +275,10 @@
         .nav-btn {
             width: 36px;
             height: 36px;
-            background: transparent;
-            border: 1px solid var(--border-default);
-            border-radius: var(--radius-md);
-            color: var(--text-secondary);
+            background: var(--surface-container);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -271,8 +287,7 @@
         }
 
         .nav-btn:hover:not(:disabled) {
-            background: var(--surface-container);
-            color: var(--text-primary);
+            background: var(--surface-container-high);
         }
 
         .nav-btn:disabled {
@@ -294,18 +309,19 @@
         .reader-content {
             flex: 1;
             overflow-y: auto;
-            padding: var(--space-6) var(--space-4);
+            padding: var(--space-4);
+            padding-bottom: calc(var(--safe-bottom) + var(--space-8));
         }
 
         .reader-sanskrit {
             font-family: var(--font-sanskrit);
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             color: var(--primary);
-            line-height: 2;
+            line-height: 1.9;
             text-align: center;
             padding: var(--space-5);
             background: var(--primary-container);
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius-lg);
             margin-bottom: var(--space-5);
         }
 
@@ -313,7 +329,7 @@
             font-style: italic;
             color: var(--text-secondary);
             text-align: center;
-            line-height: 1.8;
+            line-height: 1.7;
             font-size: var(--text-sm);
             margin-bottom: var(--space-5);
         }
@@ -321,7 +337,7 @@
         .reader-meaning {
             padding: var(--space-4);
             background: var(--surface-elevated);
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-md);
             border-left: 3px solid var(--primary);
             margin-bottom: var(--space-4);
         }
@@ -331,7 +347,7 @@
             font-weight: var(--font-semibold);
             color: var(--text-tertiary);
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             margin-bottom: var(--space-2);
             display: block;
         }
@@ -340,16 +356,16 @@
         .reader-commentary p {
             font-size: var(--text-base);
             color: var(--text-primary);
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         .reader-commentary {
             padding: var(--space-4);
             background: var(--surface-dim);
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-md);
         }
 
-        /* Loading State */
+        /* Loading */
         .loading-state {
             display: flex;
             flex-direction: column;
@@ -357,6 +373,7 @@
             justify-content: center;
             padding: var(--space-10);
             color: var(--text-tertiary);
+            grid-column: span 2;
         }
 
         .loading-state svg {
@@ -376,8 +393,8 @@
 
 <body>
     <div class="app-container">
-        <!-- Header -->
-        <header class="app-header">
+        <!-- Main Header - Only one! -->
+        <header class="app-header" id="main-header">
             <a href="index.html" class="header-btn" aria-label="Back">
                 <i data-lucide="arrow-left"></i>
             </a>
@@ -385,9 +402,7 @@
                 <h1 class="header-title">गीता ग्रंथ</h1>
                 <p class="header-subtitle">Scripture Library</p>
             </div>
-            <button class="header-btn" id="search-btn" aria-label="Search">
-                <i data-lucide="search"></i>
-            </button>
+            <div style="width: 44px;"></div> <!-- Spacer for alignment -->
         </header>
 
         <!-- Chapter Grid View -->
@@ -395,7 +410,7 @@
             <div class="chapter-grid" id="chapter-grid">
                 <div class="loading-state">
                     <i data-lucide="loader-2"></i>
-                    <span>Loading chapters...</span>
+                    <span>Loading...</span>
                 </div>
             </div>
         </div>
@@ -403,7 +418,7 @@
         <!-- Verse List View -->
         <div id="verse-view" class="verse-list-view">
             <div class="verse-header">
-                <button class="header-btn" id="back-to-chapters">
+                <button class="verse-back-btn" id="back-to-chapters" aria-label="Back">
                     <i data-lucide="arrow-left"></i>
                 </button>
                 <div class="verse-header-info">
@@ -417,15 +432,15 @@
         <!-- Verse Reader Modal -->
         <div id="verse-reader" class="verse-reader-modal">
             <div class="reader-header">
-                <button class="reader-close-btn" id="close-reader">
+                <button class="reader-close-btn" id="close-reader" aria-label="Close">
                     <i data-lucide="x"></i>
                 </button>
                 <div class="reader-nav">
-                    <button class="nav-btn" id="prev-verse">
+                    <button class="nav-btn" id="prev-verse" aria-label="Previous">
                         <i data-lucide="chevron-left"></i>
                     </button>
                     <span class="reader-verse-num" id="reader-verse-num">Verse 1</span>
-                    <button class="nav-btn" id="next-verse">
+                    <button class="nav-btn" id="next-verse" aria-label="Next">
                         <i data-lucide="chevron-right"></i>
                     </button>
                 </div>
@@ -442,6 +457,7 @@
         lucide.createIcons();
 
         document.addEventListener('DOMContentLoaded', () => {
+            const mainHeader = document.getElementById('main-header');
             const chapterGrid = document.getElementById('chapter-grid');
             const chapterView = document.getElementById('chapter-view');
             const verseView = document.getElementById('verse-view');
@@ -485,7 +501,6 @@
                     <div class="chapter-card" data-chapter="${ch.chapter}">
                         <div class="chapter-num">Chapter ${ch.chapter}</div>
                         <div class="chapter-title">${ch.title || 'Untitled'}</div>
-                        <div class="chapter-subtitle">${ch.titleEnglish || ''}</div>
                         <div class="chapter-meta">
                             <i data-lucide="book-open"></i>
                             <span>${ch.verses ? ch.verses.length : 0} verses</span>
@@ -511,7 +526,7 @@
                 currentVerses = verses.sort((a, b) => a.verse - b.verse);
 
                 document.getElementById('current-chapter-title').textContent = `Chapter ${chapter.chapter}`;
-                document.getElementById('current-chapter-subtitle').textContent = chapter.titleEnglish || '';
+                document.getElementById('current-chapter-subtitle').textContent = chapter.titleEnglish || chapter.title || '';
 
                 verseContainer.innerHTML = currentVerses.map((v, i) => `
                     <div class="verse-item" data-index="${i}">
@@ -530,6 +545,7 @@
                     item.onclick = () => openVerseReader(parseInt(item.dataset.index));
                 });
 
+                mainHeader.style.display = 'none';
                 chapterView.style.display = 'none';
                 verseView.classList.add('active');
             }
@@ -577,6 +593,7 @@
 
             document.getElementById('back-to-chapters').onclick = () => {
                 verseView.classList.remove('active');
+                mainHeader.style.display = 'flex';
                 chapterView.style.display = 'block';
             };
         });

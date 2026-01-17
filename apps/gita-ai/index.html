@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
     <title>Krishna Vaani</title>
-    <meta name="description" content="Receive divine guidance from Lord Krishna through the wisdom of Bhagavad Gita.">
+    <meta name="description" content="Divine guidance from Lord Krishna through Bhagavad Gita wisdom.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,19 +30,19 @@
     <div class="app-container">
         <!-- Header -->
         <header class="app-header">
-            <a href="../../index.html" class="header-btn" aria-label="Back to home">
+            <a href="../../index.html" class="header-btn" aria-label="Home">
                 <i data-lucide="arrow-left"></i>
             </a>
             <div class="header-center">
                 <h1 class="header-title">कृष्ण वाणी</h1>
                 <p class="header-subtitle">Divine Guidance</p>
             </div>
-            <a href="library.html" class="header-btn" aria-label="Scripture Library">
+            <a href="library.html" class="header-btn" aria-label="Library">
                 <i data-lucide="book-open"></i>
             </a>
         </header>
 
-        <!-- Main Chat Container -->
+        <!-- Chat Container -->
         <main class="chat-container">
             <!-- Welcome Screen -->
             <div id="welcome-screen" class="welcome-screen">
@@ -50,9 +50,9 @@
                     <div class="welcome-icon">
                         <span>🙏</span>
                     </div>
-                    <h2 class="welcome-title">How can I guide you today?</h2>
+                    <h2 class="welcome-title">How can I guide you?</h2>
                     <p class="welcome-subtitle">
-                        I am here to share the timeless wisdom of Bhagavad Gita to help you navigate life's challenges.
+                        I share the wisdom of Bhagavad Gita to help you navigate life's challenges.
                     </p>
                 </div>
 
@@ -60,23 +60,39 @@
                     <p class="suggestions-label">Suggested topics</p>
 
                     <button class="suggestion-chip" data-question="How do I find peace in difficult times?">
-                        <i data-lucide="heart" class="chip-icon" style="color: #E11D48;"></i>
-                        <span>Finding inner peace</span>
+                        <svg class="chip-icon" style="color: #DC2626;" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                        </svg>
+                        Finding inner peace
                     </button>
 
                     <button class="suggestion-chip" data-question="What is my purpose in life according to the Gita?">
-                        <i data-lucide="compass" class="chip-icon" style="color: #D4622A;"></i>
-                        <span>Discovering life's purpose</span>
+                        <svg class="chip-icon" style="color: #D4622A;" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                        </svg>
+                        Life's purpose
                     </button>
 
                     <button class="suggestion-chip" data-question="How do I deal with anxiety and fear?">
-                        <i data-lucide="shield" class="chip-icon" style="color: #0284C7;"></i>
-                        <span>Overcoming fear and anxiety</span>
+                        <svg class="chip-icon" style="color: #0284C7;" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                        </svg>
+                        Overcoming fear
                     </button>
 
                     <button class="suggestion-chip" data-question="How to let go of anger and resentment?">
-                        <i data-lucide="leaf" class="chip-icon" style="color: #059669;"></i>
-                        <span>Releasing anger</span>
+                        <svg class="chip-icon" style="color: #16A34A;" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+                        </svg>
+                        Releasing anger
                     </button>
                 </div>
             </div>
@@ -99,7 +115,7 @@
         <div class="input-container">
             <div class="input-wrapper">
                 <textarea id="user-input" placeholder="Ask anything..." rows="1" maxlength="2000"></textarea>
-                <button id="send-btn" class="send-btn" disabled aria-label="Send message">
+                <button id="send-btn" class="send-btn" disabled aria-label="Send">
                     <i data-lucide="arrow-up"></i>
                 </button>
             </div>
@@ -118,25 +134,23 @@
                 <div class="modal-body">
                     <div class="setting-section">
                         <h4><i data-lucide="key"></i> API Key</h4>
-                        <p class="setting-desc">Optional: Provide your own Gemini API key</p>
+                        <p class="setting-desc">Optional: Use your own Gemini API key</p>
                         <div class="api-key-input-wrap">
                             <input type="password" id="api-key-input" placeholder="Paste API key...">
                             <button id="toggle-key-visibility" class="toggle-visibility-btn">
                                 <i data-lucide="eye"></i>
                             </button>
                         </div>
-                        <button id="save-api-key" class="save-key-btn">
-                            <i data-lucide="check"></i> Save
-                        </button>
+                        <button id="save-api-key" class="save-key-btn">Save</button>
                         <a href="https://aistudio.google.com/app/apikey" target="_blank" class="get-key-link">
-                            <i data-lucide="external-link"></i> Get free key from Google
+                            <i data-lucide="external-link"></i> Get free key
                         </a>
                     </div>
 
                     <div class="setting-section">
-                        <h4><i data-lucide="trash-2"></i> Clear History</h4>
+                        <h4><i data-lucide="trash-2"></i> History</h4>
                         <button id="clear-chat" class="clear-chat-btn">
-                            <i data-lucide="trash-2"></i> Delete all messages
+                            <i data-lucide="trash-2"></i> Clear all messages
                         </button>
                     </div>
                 </div>
@@ -149,7 +163,7 @@
                 <div class="setup-header">
                     <span class="setup-icon">ॐ</span>
                     <h2>Welcome</h2>
-                    <p>To begin, please provide your Gemini API key</p>
+                    <p>Set up your Gemini API key to begin</p>
                 </div>
                 <div class="setup-body">
                     <div class="setup-step">
@@ -168,11 +182,9 @@
                             <input type="password" id="setup-api-key" placeholder="AIza..." class="setup-input">
                         </div>
                     </div>
-                    <button id="start-journey" class="start-btn" disabled>
-                        <i data-lucide="sparkles"></i> Get Started
-                    </button>
+                    <button id="start-journey" class="start-btn" disabled>Get Started</button>
                     <p class="privacy-note">
-                        <i data-lucide="shield-check"></i> Stored locally, never shared
+                        <i data-lucide="shield-check"></i> Stored locally only
                     </p>
                 </div>
             </div>
