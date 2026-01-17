@@ -210,22 +210,113 @@
     }
 
     // === ADD MESSAGE TO UI ===
-    function addMessage(type, content) {
+    function addMessage(type, content, useTypewriter = true) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${type}`;
 
-        // No avatar - cleaner layout
-        messageDiv.innerHTML = `
-            <div class="message-content">${content}</div>
-        `;
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'message-content';
+        messageDiv.appendChild(contentDiv);
 
         elements.chatMessages.appendChild(messageDiv);
+
+        if (type === 'krishna' && useTypewriter) {
+            // Typewriter effect for Krishna's responses
+            typewriterEffect(contentDiv, content);
+        } else {
+            // Instant for user messages
+            contentDiv.innerHTML = content;
+        }
+
         scrollToBottom();
 
         // Re-init Lucide icons if needed
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
+    }
+
+    // === TYPEWRITER STREAMING EFFECT ===
+    function typewriterEffect(element, htmlContent) {
+        // Parse HTML to extract text and preserve structure
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = htmlContent;
+
+        // Get all text nodes and their content
+        const textContent = tempDiv.textContent || tempDiv.innerText;
+        const words = textContent.split(/(\s+)/); // Split by whitespace, keeping spaces
+
+        let currentIndex = 0;
+        let displayedText = '';
+
+        // Create a cursor element
+        const cursor = document.createElement('span');
+        cursor.className = 'typewriter-cursor';
+        cursor.textContent = '▊';
+        cursor.style.cssText = `
+            animation: cursorBlink 0.8s infinite;
+            color: var(--primary);
+            font-weight: 300;
+            margin-left: 2px;
+        `;
+
+        // Add cursor animation if not exists
+        if (!document.getElementById('typewriter-styles')) {
+            const style = document.createElement('style');
+            style.id = 'typewriter-styles';
+            style.textContent = `
+                @keyframes cursorBlink {
+                    0%, 50% { opacity: 1; }
+                    51%, 100% { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Speed settings (words per interval)
+        const baseDelay = 30; // milliseconds between words
+        const variableDelay = 20; // random variation
+
+        function typeNextWord() {
+            if (currentIndex < words.length) {
+                displayedText += words[currentIndex];
+                currentIndex++;
+
+                // Render partial content with cursor
+                element.innerHTML = formatPartialText(displayedText);
+                element.appendChild(cursor);
+
+                scrollToBottom();
+
+                // Variable speed for natural feel
+                const delay = baseDelay + Math.random() * variableDelay;
+
+                // Pause slightly longer on punctuation
+                const lastChar = displayedText.slice(-1);
+                const extraDelay = '.!?'.includes(lastChar) ? 200 :
+                    ',;:'.includes(lastChar) ? 80 : 0;
+
+                setTimeout(typeNextWord, delay + extraDelay);
+            } else {
+                // Done typing - show full formatted content, remove cursor
+                element.innerHTML = htmlContent;
+
+                // Re-init Lucide icons if any
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }
+        }
+
+        // Start typing
+        typeNextWord();
+    }
+
+    // === FORMAT PARTIAL TEXT ===
+    function formatPartialText(text) {
+        // Simple formatting for partial text during typing
+        // Wrap in paragraph tags for consistency
+        return `<p>${text.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</p>`;
     }
 
     // === LOAD EXISTING CHAT ===
@@ -241,7 +332,7 @@
                 const content = msg.role === 'user' ?
                     `<p>${msg.content}</p>` :
                     krishnaBrain.formatResponse(msg.content);
-                addMessage(type, content);
+                addMessage(type, content, false); // No typewriter for history
             }
         }
     }
