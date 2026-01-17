@@ -265,16 +265,16 @@
             bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
-            background: #E85D04;
+            background: #1A1A19;
             color: white;
             padding: 12px 24px;
             border-radius: 100px;
             font-size: 0.875rem;
-            font-family: 'Google Sans Flex', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-weight: 500;
-            box-shadow: 0 4px 12px rgba(232, 93, 4, 0.3);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             z-index: 9999;
-            animation: fadeInUp 0.3s cubic-bezier(0.2, 0, 0, 1), fadeOut 0.3s ease 2.5s forwards;
+            animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1), fadeOut 0.3s ease 2.5s forwards;
         `;
 
         document.body.appendChild(toast);

@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#FDFBF7">
+    <meta name="theme-color" content="#FAFAF9">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <title>Krishna Vaani - कृष्ण वाणी</title>
+    <title>Krishna Vaani</title>
     <meta name="description" content="Receive divine guidance from Lord Krishna through the wisdom of Bhagavad Gita.">
 
-    <!-- Fonts - Google Sans Flex + Tiro Devanagari Sanskrit -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
         rel="stylesheet">
 
     <!-- Icons -->
@@ -30,52 +30,59 @@
     <div class="app-container">
         <!-- Header -->
         <header class="app-header">
-            <a href="../../index.html" class="header-btn back-btn" aria-label="Back">
-                <i data-lucide="chevron-left"></i>
+            <a href="../../index.html" class="header-btn" aria-label="Back to home">
+                <i data-lucide="arrow-left"></i>
             </a>
             <div class="header-center">
                 <h1 class="header-title">कृष्ण वाणी</h1>
-                <p class="header-subtitle">Voice of Krishna</p>
+                <p class="header-subtitle">Divine Guidance</p>
             </div>
-            <a href="library.html" class="header-btn" aria-label="Open Library">
+            <a href="library.html" class="header-btn" aria-label="Scripture Library">
                 <i data-lucide="book-open"></i>
             </a>
         </header>
 
         <!-- Main Chat Container -->
         <main class="chat-container">
-            <!-- Welcome Screen (shown initially) -->
+            <!-- Welcome Screen -->
             <div id="welcome-screen" class="welcome-screen">
                 <div class="welcome-content">
-                    <h2 class="welcome-title">Hare Krishna</h2>
-                    <p class="welcome-subtitle">I am here to guide you with the eternal wisdom of the Bhagavad Gita</p>
+                    <div class="welcome-icon">
+                        <span>🙏</span>
+                    </div>
+                    <h2 class="welcome-title">How can I guide you today?</h2>
+                    <p class="welcome-subtitle">
+                        I am here to share the timeless wisdom of Bhagavad Gita to help you navigate life's challenges.
+                    </p>
                 </div>
 
                 <div class="suggested-questions">
-                    <p class="suggestions-label">Ask me anything...</p>
+                    <p class="suggestions-label">Suggested topics</p>
+
                     <button class="suggestion-chip" data-question="How do I find peace in difficult times?">
-                        <i data-lucide="heart" class="chip-icon" style="color: #FF6B9D;"></i>
-                        How to find peace?
+                        <i data-lucide="heart" class="chip-icon" style="color: #E11D48;"></i>
+                        <span>Finding inner peace</span>
                     </button>
-                    <button class="suggestion-chip" data-question="What is my purpose in life?">
-                        <i data-lucide="compass" class="chip-icon" style="color: #E85D04;"></i>
-                        What is my purpose?
+
+                    <button class="suggestion-chip" data-question="What is my purpose in life according to the Gita?">
+                        <i data-lucide="compass" class="chip-icon" style="color: #D4622A;"></i>
+                        <span>Discovering life's purpose</span>
                     </button>
+
                     <button class="suggestion-chip" data-question="How do I deal with anxiety and fear?">
-                        <i data-lucide="shield" class="chip-icon" style="color: #0077B6;"></i>
-                        Overcoming fear
+                        <i data-lucide="shield" class="chip-icon" style="color: #0284C7;"></i>
+                        <span>Overcoming fear and anxiety</span>
                     </button>
-                    <button class="suggestion-chip" data-question="How to let go of anger?">
-                        <i data-lucide="flower-2" class="chip-icon" style="color: #7C5CBF;"></i>
-                        Letting go of anger
+
+                    <button class="suggestion-chip" data-question="How to let go of anger and resentment?">
+                        <i data-lucide="leaf" class="chip-icon" style="color: #059669;"></i>
+                        <span>Releasing anger</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Chat Messages Area -->
-            <div id="chat-messages" class="chat-messages">
-                <!-- Messages will be inserted here -->
-            </div>
+            <!-- Chat Messages -->
+            <div id="chat-messages" class="chat-messages"></div>
 
             <!-- Typing Indicator -->
             <div id="typing-indicator" class="typing-indicator" style="display: none;">
@@ -84,103 +91,88 @@
                     <span></span>
                     <span></span>
                 </div>
-                <span class="typing-text">Krishna is contemplating...</span>
+                <span class="typing-text">Krishna is responding...</span>
             </div>
         </main>
 
         <!-- Input Area -->
         <div class="input-container">
             <div class="input-wrapper">
-                <textarea id="user-input" placeholder="Share what's on your mind..." rows="1"
-                    maxlength="2000"></textarea>
-                <button id="send-btn" class="send-btn" disabled>
-                    <i data-lucide="send"></i>
+                <textarea id="user-input" placeholder="Ask anything..." rows="1" maxlength="2000"></textarea>
+                <button id="send-btn" class="send-btn" disabled aria-label="Send message">
+                    <i data-lucide="arrow-up"></i>
                 </button>
             </div>
-            <p class="input-hint">Press Enter to send • Shift+Enter for new line</p>
+            <p class="input-hint">Enter to send · Shift+Enter for new line</p>
         </div>
 
         <!-- Settings Modal -->
         <div id="settings-modal" class="modal-overlay">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>⚙️ Settings</h3>
-                    <button id="close-settings" class="close-btn">
+                    <h3>Settings</h3>
+                    <button id="close-settings" class="close-btn" aria-label="Close">
                         <i data-lucide="x"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- API Key Section -->
                     <div class="setting-section">
-                        <h4><i data-lucide="key"></i> Gemini API Key</h4>
-                        <p class="setting-desc">Enter your free Gemini API key to enable Krishna's wisdom</p>
+                        <h4><i data-lucide="key"></i> API Key</h4>
+                        <p class="setting-desc">Optional: Provide your own Gemini API key</p>
                         <div class="api-key-input-wrap">
-                            <input type="password" id="api-key-input" placeholder="Paste your API key here...">
+                            <input type="password" id="api-key-input" placeholder="Paste API key...">
                             <button id="toggle-key-visibility" class="toggle-visibility-btn">
                                 <i data-lucide="eye"></i>
                             </button>
                         </div>
                         <button id="save-api-key" class="save-key-btn">
-                            <i data-lucide="save"></i> Save Key
+                            <i data-lucide="check"></i> Save
                         </button>
                         <a href="https://aistudio.google.com/app/apikey" target="_blank" class="get-key-link">
-                            <i data-lucide="external-link"></i> Get Free API Key from Google
+                            <i data-lucide="external-link"></i> Get free key from Google
                         </a>
                     </div>
 
-                    <!-- Theme Section -->
                     <div class="setting-section">
-                        <h4><i data-lucide="palette"></i> Appearance</h4>
-                        <div class="theme-toggle">
-                            <span>Dark Mode</span>
-                            <label class="switch">
-                                <input type="checkbox" id="dark-mode-toggle">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Clear Chat -->
-                    <div class="setting-section">
-                        <h4><i data-lucide="trash-2"></i> Chat History</h4>
+                        <h4><i data-lucide="trash-2"></i> Clear History</h4>
                         <button id="clear-chat" class="clear-chat-btn">
-                            <i data-lucide="trash-2"></i> Clear All Conversations
+                            <i data-lucide="trash-2"></i> Delete all messages
                         </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- API Key Setup Modal (First Time) -->
+        <!-- API Setup Modal -->
         <div id="api-setup-modal" class="modal-overlay">
             <div class="modal-content api-setup">
                 <div class="setup-header">
                     <span class="setup-icon">ॐ</span>
-                    <h2>Welcome to Krishna Vaani</h2>
-                    <p>To receive divine guidance, please provide your Gemini API key</p>
+                    <h2>Welcome</h2>
+                    <p>To begin, please provide your Gemini API key</p>
                 </div>
                 <div class="setup-body">
                     <div class="setup-step">
                         <span class="step-number">1</span>
                         <div class="step-content">
-                            <p>Get your free API key from Google AI Studio</p>
+                            <p>Get your free API key</p>
                             <a href="https://aistudio.google.com/app/apikey" target="_blank" class="action-link">
-                                <i data-lucide="external-link"></i> Open Google AI Studio
+                                <i data-lucide="external-link"></i> Google AI Studio
                             </a>
                         </div>
                     </div>
                     <div class="setup-step">
                         <span class="step-number">2</span>
                         <div class="step-content">
-                            <p>Paste your API key below</p>
+                            <p>Paste your key below</p>
                             <input type="password" id="setup-api-key" placeholder="AIza..." class="setup-input">
                         </div>
                     </div>
                     <button id="start-journey" class="start-btn" disabled>
-                        <i data-lucide="sparkles"></i> Start Your Spiritual Journey
+                        <i data-lucide="sparkles"></i> Get Started
                     </button>
                     <p class="privacy-note">
-                        <i data-lucide="shield"></i> Your API key is stored locally and never shared
+                        <i data-lucide="shield-check"></i> Stored locally, never shared
                     </p>
                 </div>
             </div>
@@ -193,7 +185,6 @@
     <script src="js/gemini-brain.js"></script>
     <script src="js/chat-engine.js"></script>
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
     </script>
 </body>

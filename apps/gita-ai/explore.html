@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#FDFBF7">
-    <title>Verse Explorer - Krishna Vaani</title>
+    <meta name="theme-color" content="#FAFAF9">
+    <title>Verse Explorer</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
         rel="stylesheet">
 
     <!-- Icons -->
@@ -23,29 +23,37 @@
 
     <style>
         /* ============================================
-           EXPLORER PAGE - M3 Design
+           EXPLORER PAGE STYLES
            ============================================ */
-        .explore-container {
+        .explore-content {
             flex: 1;
             overflow-y: auto;
-            padding: var(--space-sm);
+            padding: var(--space-4);
         }
 
+        /* Search Box */
         .search-box {
             display: flex;
             align-items: center;
-            gap: var(--space-xs);
-            background: var(--md-sys-color-surface-container-lowest);
-            border: 1px solid var(--md-sys-color-outline);
-            border-radius: var(--md-sys-shape-corner-medium);
-            padding: var(--space-sm);
-            margin-bottom: var(--space-md);
-            transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+            gap: var(--space-3);
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-xl);
+            padding: var(--space-3) var(--space-4);
+            margin-bottom: var(--space-5);
+            transition: all var(--duration-fast) var(--ease-out);
         }
 
         .search-box:focus-within {
-            border-color: var(--md-sys-color-primary);
-            box-shadow: 0 0 0 3px rgba(232, 93, 4, 0.1);
+            border-color: var(--primary);
+            box-shadow: var(--focus-ring);
+        }
+
+        .search-box svg {
+            color: var(--text-tertiary);
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
         }
 
         .search-box input {
@@ -53,239 +61,267 @@
             background: transparent;
             border: none;
             color: var(--text-primary);
-            font-size: var(--md-sys-typescale-body-large);
+            font-size: var(--text-base);
             font-family: var(--font-main);
         }
 
         .search-box input::placeholder {
-            color: var(--text-muted);
+            color: var(--text-disabled);
         }
 
         .search-box input:focus {
             outline: none;
         }
 
-        .search-box svg {
-            color: var(--text-muted);
-            width: 20px;
-            height: 20px;
-        }
-
-        .tabs {
-            display: flex;
-            gap: var(--space-xs);
-            margin-bottom: var(--space-md);
-            overflow-x: auto;
-            padding-bottom: 4px;
-        }
-
-        .tab {
-            padding: var(--space-xs) var(--space-sm);
-            background: var(--md-sys-color-surface-container);
-            border: 1px solid var(--md-sys-color-outline-variant);
-            border-radius: var(--md-sys-shape-corner-full);
-            color: var(--text-secondary);
-            font-size: var(--md-sys-typescale-label-large);
-            font-weight: 500;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
-        }
-
-        .tab:hover {
-            background: var(--md-sys-color-surface-container-high);
-        }
-
-        .tab.active {
-            background: var(--md-sys-color-primary);
-            border-color: var(--md-sys-color-primary);
-            color: var(--md-sys-color-on-primary);
-        }
-
-        .chapter-card {
-            background: var(--md-sys-color-surface-container-lowest);
-            border: 1px solid var(--md-sys-color-outline-variant);
-            border-radius: var(--md-sys-shape-corner-large);
-            padding: var(--space-sm);
-            margin-bottom: var(--space-sm);
-            cursor: pointer;
-            transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
-        }
-
-        .chapter-card:hover {
-            border-color: var(--md-sys-color-primary);
-            box-shadow: var(--shadow-hover);
-            transform: translateX(4px);
-        }
-
-        .chapter-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: var(--space-xs);
-        }
-
-        .chapter-number {
-            font-size: var(--md-sys-typescale-label-small);
-            color: var(--md-sys-color-primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .chapter-name {
-            font-family: var(--font-sanskrit);
-            font-size: 1.3rem;
-            color: var(--text-primary);
-            margin: 4px 0;
-        }
-
-        .chapter-name-en {
-            font-size: var(--md-sys-typescale-body-medium);
-            color: var(--text-secondary);
-        }
-
-        .chapter-meta {
-            font-size: var(--md-sys-typescale-body-small);
-            color: var(--text-muted);
-            display: flex;
-            gap: var(--space-sm);
-            margin-top: var(--space-xs);
-        }
-
-        .verses-list {
-            display: none;
-        }
-
-        .verses-list.active {
-            display: block;
-        }
-
-        .verse-item {
-            background: var(--md-sys-color-surface-container-lowest);
-            border: 1px solid var(--md-sys-color-outline-variant);
-            border-radius: var(--md-sys-shape-corner-medium);
-            padding: var(--space-sm);
-            margin-bottom: var(--space-sm);
-        }
-
-        .verse-ref {
-            font-size: var(--md-sys-typescale-label-medium);
-            color: var(--md-sys-color-primary);
-            font-weight: 600;
-            margin-bottom: var(--space-xs);
-        }
-
-        .verse-sanskrit-text {
-            font-family: var(--font-sanskrit);
-            font-size: 1.1rem;
-            color: var(--md-sys-color-primary);
-            line-height: 1.7;
-            margin-bottom: var(--space-xs);
-        }
-
-        .verse-translation-text {
-            font-size: var(--md-sys-typescale-body-large);
-            color: var(--text-primary);
-            line-height: 1.6;
-            margin-bottom: var(--space-xs);
-        }
-
-        .verse-explanation {
-            font-size: var(--md-sys-typescale-body-medium);
-            color: var(--text-secondary);
-            line-height: 1.5;
-            padding-left: var(--space-sm);
-            border-left: 2px solid var(--md-sys-color-primary);
-        }
-
-        .verse-themes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: var(--space-sm);
-        }
-
-        .theme-tag {
-            padding: 4px 10px;
-            background: var(--md-sys-color-primary-container);
-            border-radius: var(--md-sys-shape-corner-full);
-            font-size: var(--md-sys-typescale-label-small);
-            color: var(--md-sys-color-primary);
-            text-transform: capitalize;
-            font-weight: 500;
-        }
-
-        .back-to-chapters {
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            color: var(--text-secondary);
-            font-size: var(--md-sys-typescale-body-medium);
-            margin-bottom: var(--space-sm);
-            cursor: pointer;
-            transition: color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
-        }
-
-        .back-to-chapters svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .back-to-chapters:hover {
-            color: var(--md-sys-color-primary);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: var(--space-xl) var(--space-md);
-            color: var(--text-muted);
-        }
-
-        .empty-state svg {
-            width: 48px;
-            height: 48px;
-            margin-bottom: var(--space-sm);
-            opacity: 0.5;
-        }
-
+        /* Daily Wisdom Card */
         .daily-wisdom {
-            background: var(--md-sys-color-primary-container);
-            border: 1px solid rgba(232, 93, 4, 0.2);
-            border-radius: var(--md-sys-shape-corner-large);
-            padding: var(--space-md);
-            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--primary-container) 0%, #FFF 100%);
+            border: 1px solid rgba(212, 98, 42, 0.15);
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+            margin-bottom: var(--space-5);
             text-align: center;
         }
 
         .daily-label {
-            font-size: var(--md-sys-typescale-label-medium);
-            color: var(--md-sys-color-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--text-xs);
+            font-weight: var(--font-semibold);
+            color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: var(--space-sm);
-            font-weight: 600;
+            letter-spacing: 0.08em;
+            margin-bottom: var(--space-3);
         }
 
         .daily-verse {
             font-family: var(--font-sanskrit);
             font-size: 1.2rem;
             color: var(--text-primary);
-            line-height: 1.6;
-            margin-bottom: var(--space-sm);
+            line-height: 1.8;
+            margin-bottom: var(--space-3);
         }
 
         .daily-translation {
-            font-size: var(--md-sys-typescale-body-medium);
+            font-size: var(--text-sm);
             color: var(--text-secondary);
             font-style: italic;
+            line-height: 1.6;
+            margin-bottom: var(--space-2);
         }
 
         .daily-ref {
-            font-size: var(--md-sys-typescale-body-small);
-            color: var(--md-sys-color-primary);
-            margin-top: var(--space-xs);
-            font-weight: 500;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--primary);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+            overflow-x: auto;
+            padding-bottom: var(--space-1);
+        }
+
+        .tab {
+            padding: var(--space-2) var(--space-4);
+            background: transparent;
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-full);
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .tab:hover {
+            background: var(--surface-container);
+        }
+
+        .tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--on-primary);
+        }
+
+        /* Chapter List */
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .chapter-item {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            padding: var(--space-4);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-out);
+        }
+
+        .chapter-item:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .chapter-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-2);
+        }
+
+        .chapter-item-num {
+            font-size: var(--text-xs);
+            font-weight: var(--font-semibold);
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .chapter-item-name {
+            font-family: var(--font-sanskrit);
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-1) 0;
+        }
+
+        .chapter-item-name-en {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-2);
+        }
+
+        .chapter-item-summary {
+            font-size: var(--text-sm);
+            color: var(--text-tertiary);
+            line-height: 1.5;
+            margin-bottom: var(--space-3);
+        }
+
+        .chapter-item-meta {
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .chapter-item-meta svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Verse Results */
+        .verse-result {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            margin-bottom: var(--space-3);
+        }
+
+        .verse-result-ref {
+            font-size: var(--text-xs);
+            font-weight: var(--font-semibold);
+            color: var(--primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .verse-result-sanskrit {
+            font-family: var(--font-sanskrit);
+            font-size: var(--text-base);
+            color: var(--primary);
+            line-height: 1.8;
+            margin-bottom: var(--space-2);
+        }
+
+        .verse-result-trans {
+            font-size: var(--text-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: var(--space-2);
+        }
+
+        .verse-result-explanation {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            line-height: 1.5;
+            padding-left: var(--space-3);
+            border-left: 2px solid var(--primary-light);
+            margin-bottom: var(--space-3);
+        }
+
+        .verse-themes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .theme-tag {
+            padding: var(--space-1) var(--space-3);
+            background: var(--primary-container);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
+            font-weight: var(--font-medium);
+            color: var(--primary);
+            text-transform: capitalize;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: var(--space-10) var(--space-4);
+            color: var(--text-tertiary);
+        }
+
+        .empty-state svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: var(--space-3);
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            font-size: var(--text-sm);
+        }
+
+        /* Back button */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-4);
+            cursor: pointer;
+            transition: color var(--duration-fast);
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Search Results Container */
+        #search-results {
+            display: none;
+        }
+
+        .results-header {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-4);
         }
     </style>
 </head>
@@ -294,12 +330,12 @@
     <div class="app-container">
         <!-- Header -->
         <header class="app-header">
-            <a href="index.html" class="header-btn back-btn" aria-label="Back">
-                <i data-lucide="chevron-left"></i>
+            <a href="index.html" class="header-btn" aria-label="Back">
+                <i data-lucide="arrow-left"></i>
             </a>
             <div class="header-center">
-                <h1 class="header-title">श्लोक संग्रह</h1>
-                <p class="header-subtitle">Verse Explorer</p>
+                <h1 class="header-title">खोजें</h1>
+                <p class="header-subtitle">Explore Verses</p>
             </div>
             <a href="index.html" class="header-btn" aria-label="Chat">
                 <i data-lucide="message-circle"></i>
@@ -307,16 +343,19 @@
         </header>
 
         <!-- Explorer Content -->
-        <main class="explore-container">
+        <main class="explore-content">
             <!-- Search -->
             <div class="search-box">
                 <i data-lucide="search"></i>
-                <input type="text" id="search-input" placeholder="Search verses by keyword...">
+                <input type="text" id="search-input" placeholder="Search verses...">
             </div>
 
             <!-- Daily Wisdom -->
             <div class="daily-wisdom" id="daily-wisdom">
-                <div class="daily-label">✨ Today's Wisdom</div>
+                <div class="daily-label">
+                    <i data-lucide="sparkles" style="width:14px;height:14px;"></i>
+                    Today's Wisdom
+                </div>
                 <div class="daily-verse" id="daily-verse-text"></div>
                 <div class="daily-translation" id="daily-translation-text"></div>
                 <div class="daily-ref" id="daily-ref-text"></div>
@@ -325,29 +364,14 @@
             <!-- Tabs -->
             <div class="tabs">
                 <button class="tab active" data-view="chapters">All Chapters</button>
-                <button class="tab" data-view="favorites">❤️ Favorites</button>
+                <button class="tab" data-view="favorites">Favorites</button>
             </div>
 
-            <!-- Chapters List -->
-            <div id="chapters-list" class="chapters-list">
-                <!-- Populated by JS -->
-            </div>
-
-            <!-- Verses List (hidden initially) -->
-            <div id="verses-list" class="verses-list">
-                <div class="back-to-chapters" id="back-btn">
-                    <i data-lucide="arrow-left"></i>
-                    <span>All Chapters</span>
-                </div>
-                <div id="verses-content">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
+            <!-- Chapter List -->
+            <div id="chapters-list" class="chapter-list"></div>
 
             <!-- Search Results -->
-            <div id="search-results" style="display: none;">
-                <!-- Populated by JS -->
-            </div>
+            <div id="search-results"></div>
         </main>
     </div>
 
@@ -355,16 +379,13 @@
     <script>
         lucide.createIcons();
 
-        // DOM Elements
         const chaptersListEl = document.getElementById('chapters-list');
-        const versesListEl = document.getElementById('verses-list');
-        const versesContentEl = document.getElementById('verses-content');
         const searchInput = document.getElementById('search-input');
         const searchResults = document.getElementById('search-results');
-        const backBtn = document.getElementById('back-btn');
+        const dailyWisdom = document.getElementById('daily-wisdom');
         const tabs = document.querySelectorAll('.tab');
 
-        // Show daily wisdom
+        // Daily Wisdom
         function showDailyWisdom() {
             const verse = GITA_DATA.getRandomVerse();
             if (verse) {
@@ -374,59 +395,34 @@
             }
         }
 
-        // Render chapters list
+        // Render chapters
         function renderChapters() {
             const chapters = GITA_DATA.getChapters();
             chaptersListEl.innerHTML = chapters.map(ch => `
-                <div class="chapter-card" data-chapter="${ch.chapter}">
-                    <div class="chapter-header">
-                        <div>
-                            <div class="chapter-number">Chapter ${ch.chapter}</div>
-                            <div class="chapter-name">${ch.title}</div>
-                            <div class="chapter-name-en">${ch.titleEnglish}</div>
-                        </div>
+                <div class="chapter-item" data-chapter="${ch.chapter}">
+                    <div class="chapter-item-header">
+                        <span class="chapter-item-num">Chapter ${ch.chapter}</span>
                     </div>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">${ch.summary}</p>
-                    <div class="chapter-meta">
-                        <span>📖 ${ch.verseCount} verses available</span>
+                    <div class="chapter-item-name">${ch.title}</div>
+                    <div class="chapter-item-name-en">${ch.titleEnglish}</div>
+                    <div class="chapter-item-summary">${ch.summary}</div>
+                    <div class="chapter-item-meta">
+                        <i data-lucide="book-open"></i>
+                        <span>${ch.verseCount} verses</span>
                     </div>
                 </div>
             `).join('');
-
-            document.querySelectorAll('.chapter-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const chNum = parseInt(card.dataset.chapter);
-                    showChapterVerses(chNum);
-                });
-            });
-        }
-
-        // Show verses for a chapter
-        function showChapterVerses(chapterNum) {
-            const chapter = GITA_DATA.chapters.find(c => c.chapter === chapterNum);
-            if (!chapter) return;
-
-            versesContentEl.innerHTML = `
-                <h3 style="margin-bottom: 16px; color: var(--md-sys-color-primary);">
-                    Chapter ${chapter.chapter}: ${chapter.titleEnglish}
-                </h3>
-                ${chapter.verses.map(verse => renderVerseCard(verse)).join('')}
-            `;
-
-            chaptersListEl.style.display = 'none';
-            document.getElementById('daily-wisdom').style.display = 'none';
-            versesListEl.classList.add('active');
             lucide.createIcons();
         }
 
-        // Render single verse card
+        // Render verse card
         function renderVerseCard(verse) {
             return `
-                <div class="verse-item">
-                    <div class="verse-ref">📖 Verse ${verse.ref}</div>
-                    <div class="verse-sanskrit-text">${verse.sanskrit}</div>
-                    <div class="verse-translation-text">"${verse.translation}"</div>
-                    <div class="verse-explanation">${verse.explanation}</div>
+                <div class="verse-result">
+                    <div class="verse-result-ref">📖 Verse ${verse.ref}</div>
+                    <div class="verse-result-sanskrit">${verse.sanskrit}</div>
+                    <div class="verse-result-trans">"${verse.translation}"</div>
+                    <div class="verse-result-explanation">${verse.explanation}</div>
                     <div class="verse-themes">
                         ${verse.themes.map(t => `<span class="theme-tag">${t}</span>`).join('')}
                     </div>
@@ -434,15 +430,7 @@
             `;
         }
 
-        // Back to chapters
-        backBtn.addEventListener('click', () => {
-            versesListEl.classList.remove('active');
-            chaptersListEl.style.display = 'block';
-            document.getElementById('daily-wisdom').style.display = 'block';
-            searchResults.style.display = 'none';
-        });
-
-        // Search functionality
+        // Search
         let searchTimeout;
         searchInput.addEventListener('input', (e) => {
             clearTimeout(searchTimeout);
@@ -450,7 +438,8 @@
 
             if (query.length < 2) {
                 searchResults.style.display = 'none';
-                chaptersListEl.style.display = 'block';
+                chaptersListEl.style.display = 'flex';
+                dailyWisdom.style.display = 'block';
                 return;
             }
 
@@ -459,15 +448,9 @@
 
                 if (results.length > 0) {
                     searchResults.innerHTML = `
-                        <p style="margin-bottom: 16px; color: var(--text-secondary);">
-                            Found ${results.length} verse${results.length > 1 ? 's' : ''} for "${query}"
-                        </p>
+                        <p class="results-header">Found ${results.length} verse${results.length > 1 ? 's' : ''}</p>
                         ${results.map(v => renderVerseCard(v)).join('')}
                     `;
-                    searchResults.style.display = 'block';
-                    chaptersListEl.style.display = 'none';
-                    versesListEl.classList.remove('active');
-                    document.getElementById('daily-wisdom').style.display = 'none';
                 } else {
                     searchResults.innerHTML = `
                         <div class="empty-state">
@@ -475,9 +458,10 @@
                             <p>No verses found for "${query}"</p>
                         </div>
                     `;
-                    searchResults.style.display = 'block';
-                    chaptersListEl.style.display = 'none';
                 }
+                searchResults.style.display = 'block';
+                chaptersListEl.style.display = 'none';
+                dailyWisdom.style.display = 'none';
                 lucide.createIcons();
             }, 300);
         });
@@ -488,15 +472,13 @@
                 tabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
 
-                const view = tab.dataset.view;
-                if (view === 'chapters') {
+                if (tab.dataset.view === 'chapters') {
                     renderChapters();
-                } else if (view === 'favorites') {
+                } else {
                     chaptersListEl.innerHTML = `
                         <div class="empty-state">
                             <i data-lucide="heart"></i>
-                            <p>No favorite verses yet</p>
-                            <p style="font-size: 0.85rem; margin-top: 8px;">Tap ❤️ on any verse to add to favorites</p>
+                            <p>No favorites yet</p>
                         </div>
                     `;
                     lucide.createIcons();
@@ -504,7 +486,7 @@
             });
         });
 
-        // Initialize
+        // Init
         showDailyWisdom();
         renderChapters();
     </script>
