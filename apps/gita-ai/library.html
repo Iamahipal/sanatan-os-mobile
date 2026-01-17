@@ -18,9 +18,6 @@
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- ResponsiveVoice TTS - Better quality voices (free tier: 10K chars/day) -->
-    <script src="https://code.responsivevoice.org/responsivevoice.js?key=FREE"></script>
-
     <!-- Base Styles -->
     <link rel="stylesheet" href="style.css">
 
@@ -692,12 +689,27 @@
                 verseReader.classList.add('active');
             }
 
-            // ========== TTS (Text-to-Speech) Engine - ResponsiveVoice ==========
-            let isSpeaking = false;
-            let ttsLang = 'hindi'; // Default: Hindi for Sanskrit
-            let ttsSpeed = 0.9;    // ResponsiveVoice rate (0.5 - 1.5)
+            // ========== TTS (Text-to-Speech) Engine - Google Cloud TTS ==========
+            const GOOGLE_TTS_API_KEY = 'AIzaSyDELjX_b5n3ed4tU3PR6fBeoP0lyaI-9bc';
+            const GOOGLE_TTS_ENDPOINT = 'https://texttospeech.googleapis.com/v1/text:synthesize';
 
-            function speakVerse() {
+            let isSpeaking = false;
+            let currentAudio = null;
+            let ttsLang = 'hindi'; // Default: Hindi for Sanskrit
+            let ttsSpeed = 1.0;    // Google TTS rate (0.25 - 4.0, 1.0 is normal)
+
+            // Google Cloud TTS Voice Options (Premium Wavenet voices)
+            const VOICES = {
+                hindi: {
+                    sanskrit: { languageCode: 'hi-IN', name: 'hi-IN-Wavenet-D', ssmlGender: 'FEMALE' },
+                    translation: { languageCode: 'hi-IN', name: 'hi-IN-Wavenet-C', ssmlGender: 'MALE' }
+                },
+                english: {
+                    translation: { languageCode: 'en-IN', name: 'en-IN-Wavenet-A', ssmlGender: 'FEMALE' }
+                }
+            };
+
+            async function speakVerse() {
                 const v = currentVerses[currentVerseIndex];
                 if (!v) return;
 
@@ -707,64 +719,83 @@
                     return;
                 }
 
-                // Check if ResponsiveVoice is available
-                if (typeof responsiveVoice === 'undefined') {
-                    // Fallback to browser speech
+                isSpeaking = true;
+                updateTTSUI('loading');
+
+                try {
+                    // Prepare texts
+                    const sanskritText = v.sanskrit ? v.sanskrit.replace(/।।[\d.]+।।/g, '').trim() : '';
+                    const translationText = (v.translation || v.meaning || '').trim();
+
+                    if (ttsLang === 'hindi' && sanskritText) {
+                        // Play Sanskrit first, then Translation
+                        await playGoogleTTS(sanskritText, VOICES.hindi.sanskrit);
+                        if (translationText && isSpeaking) {
+                            await new Promise(r => setTimeout(r, 500)); // Pause
+                            await playGoogleTTS(translationText, VOICES.hindi.translation);
+                        }
+                    } else if (translationText) {
+                        // English only
+                        await playGoogleTTS(translationText, VOICES.english.translation);
+                    }
+                } catch (error) {
+                    console.error('TTS Error:', error);
+                    updateTTSUI('error');
+                    // Fallback to browser TTS
                     speakWithBrowserTTS(v);
                     return;
                 }
 
-                isSpeaking = true;
-                updateTTSUI();
-
-                // Prepare texts
-                const sanskritText = v.sanskrit ? v.sanskrit.replace(/।।[\d.]+।।/g, '').trim() : '';
-                const translationText = (v.translation || v.meaning || '').trim();
-
-                // Speak Sanskrit first (in Hindi), then Translation
-                if (sanskritText && ttsLang === 'hindi') {
-                    responsiveVoice.speak(sanskritText, "Hindi Female", {
-                        rate: ttsSpeed,
-                        pitch: 1,
-                        onend: () => {
-                            // After Sanskrit, speak Translation in Indian English
-                            if (translationText) {
-                                setTimeout(() => {
-                                    responsiveVoice.speak(translationText, "Hindi Male", {
-                                        rate: ttsSpeed,
-                                        pitch: 1,
-                                        onend: () => stopSpeaking(),
-                                        onerror: () => stopSpeaking()
-                                    });
-                                }, 600); // Pause between Sanskrit and Translation
-                            } else {
-                                stopSpeaking();
-                            }
-                        },
-                        onerror: () => stopSpeaking()
-                    });
-                } else if (translationText) {
-                    // English only mode
-                    responsiveVoice.speak(translationText, "UK English Female", {
-                        rate: ttsSpeed,
-                        pitch: 1,
-                        onend: () => stopSpeaking(),
-                        onerror: () => stopSpeaking()
-                    });
-                } else {
-                    stopSpeaking();
-                }
+                stopSpeaking();
             }
 
-            // Fallback for when ResponsiveVoice is not loaded
+            async function playGoogleTTS(text, voice) {
+                const requestBody = {
+                    input: { text: text },
+                    voice: {
+                        languageCode: voice.languageCode,
+                        name: voice.name,
+                        ssmlGender: voice.ssmlGender
+                    },
+                    audioConfig: {
+                        audioEncoding: 'MP3',
+                        speakingRate: ttsSpeed,
+                        pitch: 0
+                    }
+                };
+
+                const response = await fetch(`${GOOGLE_TTS_ENDPOINT}?key=${GOOGLE_TTS_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`TTS API error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const audioContent = data.audioContent;
+
+                // Play the audio
+                return new Promise((resolve, reject) => {
+                    currentAudio = new Audio(`data:audio/mp3;base64,${audioContent}`);
+                    currentAudio.onended = resolve;
+                    currentAudio.onerror = reject;
+                    updateTTSUI('speaking');
+                    currentAudio.play().catch(reject);
+                });
+            }
+
+            // Fallback for when Google TTS fails
             function speakWithBrowserTTS(v) {
                 if (!('speechSynthesis' in window)) {
-                    alert('Text-to-speech is not available. Please check your internet connection.');
+                    alert('Text-to-speech is not available.');
                     return;
                 }
 
                 isSpeaking = true;
-                updateTTSUI();
+                updateTTSUI('speaking');
 
                 const text = v.translation || v.meaning || v.sanskrit || '';
                 const utterance = new SpeechSynthesisUtterance(text);
@@ -777,37 +808,47 @@
 
             function stopSpeaking() {
                 isSpeaking = false;
-                if (typeof responsiveVoice !== 'undefined') {
-                    responsiveVoice.cancel();
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio = null;
                 }
                 if ('speechSynthesis' in window) {
                     speechSynthesis.cancel();
                 }
-                updateTTSUI();
+                updateTTSUI('idle');
             }
 
-            function updateTTSUI() {
+            function updateTTSUI(state = 'idle') {
                 const playBtn = document.getElementById('tts-play-btn');
                 const statusEl = document.getElementById('tts-status');
 
                 if (playBtn) {
-                    if (isSpeaking) {
+                    playBtn.classList.remove('speaking', 'loading');
+                    if (state === 'speaking') {
                         playBtn.classList.add('speaking');
                         playBtn.innerHTML = '<i data-lucide="square"></i>';
+                    } else if (state === 'loading') {
+                        playBtn.classList.add('loading');
+                        playBtn.innerHTML = '<i data-lucide="loader-2"></i>';
                     } else {
-                        playBtn.classList.remove('speaking');
                         playBtn.innerHTML = '<i data-lucide="play"></i>';
                     }
                     lucide.createIcons();
                 }
 
                 if (statusEl) {
-                    if (isSpeaking) {
+                    statusEl.classList.remove('speaking', 'loading', 'error');
+                    if (state === 'speaking') {
                         statusEl.textContent = '🔊 Speaking...';
                         statusEl.classList.add('speaking');
+                    } else if (state === 'loading') {
+                        statusEl.textContent = '⏳ Loading voice...';
+                        statusEl.classList.add('loading');
+                    } else if (state === 'error') {
+                        statusEl.textContent = '⚠️ Voice error, using fallback';
+                        statusEl.classList.add('error');
                     } else {
                         statusEl.textContent = 'Tap play to listen';
-                        statusEl.classList.remove('speaking');
                     }
                 }
             }
