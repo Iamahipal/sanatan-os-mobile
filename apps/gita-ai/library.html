@@ -18,6 +18,9 @@
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- ResponsiveVoice TTS - Better quality voices (free tier: 10K chars/day) -->
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=FREE"></script>
+
     <!-- Base Styles -->
     <link rel="stylesheet" href="style.css">
 
@@ -689,12 +692,10 @@
                 verseReader.classList.add('active');
             }
 
-            // ========== TTS (Text-to-Speech) Engine ==========
+            // ========== TTS (Text-to-Speech) Engine - ResponsiveVoice ==========
             let isSpeaking = false;
-            let currentUtterance = null;
-            let ttsLang = 'hi-IN'; // Default: Hindi for Sanskrit
-            let ttsSpeed = 0.85;   // Slightly slower for clarity
-            let currentChapterNum = 1;
+            let ttsLang = 'hindi'; // Default: Hindi for Sanskrit
+            let ttsSpeed = 0.9;    // ResponsiveVoice rate (0.5 - 1.5)
 
             function speakVerse() {
                 const v = currentVerses[currentVerseIndex];
@@ -706,9 +707,10 @@
                     return;
                 }
 
-                // Check if browser supports speech synthesis
-                if (!('speechSynthesis' in window)) {
-                    alert('Sorry, your browser does not support text-to-speech.');
+                // Check if ResponsiveVoice is available
+                if (typeof responsiveVoice === 'undefined') {
+                    // Fallback to browser speech
+                    speakWithBrowserTTS(v);
                     return;
                 }
 
@@ -716,59 +718,71 @@
                 updateTTSUI();
 
                 // Prepare texts
-                const sanskritText = v.sanskrit ? v.sanskrit.replace(/।।[\d.]+।।/g, '') : '';
-                const translationText = v.translation || v.meaning || '';
+                const sanskritText = v.sanskrit ? v.sanskrit.replace(/।।[\d.]+।।/g, '').trim() : '';
+                const translationText = (v.translation || v.meaning || '').trim();
 
-                // Create speech queue
-                const speeches = [];
+                // Speak Sanskrit first (in Hindi), then Translation
+                if (sanskritText && ttsLang === 'hindi') {
+                    responsiveVoice.speak(sanskritText, "Hindi Female", {
+                        rate: ttsSpeed,
+                        pitch: 1,
+                        onend: () => {
+                            // After Sanskrit, speak Translation in Indian English
+                            if (translationText) {
+                                setTimeout(() => {
+                                    responsiveVoice.speak(translationText, "Hindi Male", {
+                                        rate: ttsSpeed,
+                                        pitch: 1,
+                                        onend: () => stopSpeaking(),
+                                        onerror: () => stopSpeaking()
+                                    });
+                                }, 600); // Pause between Sanskrit and Translation
+                            } else {
+                                stopSpeaking();
+                            }
+                        },
+                        onerror: () => stopSpeaking()
+                    });
+                } else if (translationText) {
+                    // English only mode
+                    responsiveVoice.speak(translationText, "UK English Female", {
+                        rate: ttsSpeed,
+                        pitch: 1,
+                        onend: () => stopSpeaking(),
+                        onerror: () => stopSpeaking()
+                    });
+                } else {
+                    stopSpeaking();
+                }
+            }
 
-                // Add Sanskrit (read in Hindi voice)
-                if (sanskritText && ttsLang === 'hi-IN') {
-                    const sanskritUtterance = new SpeechSynthesisUtterance(sanskritText);
-                    sanskritUtterance.lang = 'hi-IN';
-                    sanskritUtterance.rate = ttsSpeed;
-                    sanskritUtterance.pitch = 1.0;
-                    speeches.push(sanskritUtterance);
+            // Fallback for when ResponsiveVoice is not loaded
+            function speakWithBrowserTTS(v) {
+                if (!('speechSynthesis' in window)) {
+                    alert('Text-to-speech is not available. Please check your internet connection.');
+                    return;
                 }
 
-                // Add Translation (read in English - Indian accent)
-                if (translationText) {
-                    const transUtterance = new SpeechSynthesisUtterance(translationText);
-                    transUtterance.lang = ttsLang === 'hi-IN' ? 'en-IN' : 'en-IN';
-                    transUtterance.rate = ttsSpeed;
-                    transUtterance.pitch = 1.0;
-                    speeches.push(transUtterance);
-                }
+                isSpeaking = true;
+                updateTTSUI();
 
-                // Chain speeches
-                let currentIndex = 0;
-
-                function speakNext() {
-                    if (currentIndex >= speeches.length || !isSpeaking) {
-                        stopSpeaking();
-                        return;
-                    }
-
-                    currentUtterance = speeches[currentIndex];
-                    currentUtterance.onend = () => {
-                        currentIndex++;
-                        // Small pause between Sanskrit and Translation
-                        setTimeout(speakNext, 500);
-                    };
-                    currentUtterance.onerror = () => {
-                        stopSpeaking();
-                    };
-
-                    speechSynthesis.speak(currentUtterance);
-                }
-
-                speakNext();
+                const text = v.translation || v.meaning || v.sanskrit || '';
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'hi-IN';
+                utterance.rate = ttsSpeed;
+                utterance.onend = () => stopSpeaking();
+                utterance.onerror = () => stopSpeaking();
+                speechSynthesis.speak(utterance);
             }
 
             function stopSpeaking() {
                 isSpeaking = false;
-                speechSynthesis.cancel();
-                currentUtterance = null;
+                if (typeof responsiveVoice !== 'undefined') {
+                    responsiveVoice.cancel();
+                }
+                if ('speechSynthesis' in window) {
+                    speechSynthesis.cancel();
+                }
                 updateTTSUI();
             }
 
@@ -816,15 +830,14 @@
                         <div class="tts-speed">
                             <span class="tts-speed-label">Speed</span>
                             <select class="tts-speed-select" id="tts-speed-select">
-                                <option value="0.7">0.7x</option>
-                                <option value="0.85" selected>0.85x</option>
-                                <option value="1">1x</option>
-                                <option value="1.15">1.15x</option>
+                                <option value="0.7">Slow</option>
+                                <option value="0.9" selected>Normal</option>
+                                <option value="1.1">Fast</option>
                             </select>
                         </div>
                         <div class="tts-lang-toggle">
-                            <button class="tts-lang-btn active" data-lang="hi-IN">हिंदी</button>
-                            <button class="tts-lang-btn" data-lang="en-IN">English</button>
+                            <button class="tts-lang-btn active" data-lang="hindi">हिंदी</button>
+                            <button class="tts-lang-btn" data-lang="english">English</button>
                         </div>
                     </div>
                     <div class="tts-status" id="tts-status">Tap play to listen</div>
