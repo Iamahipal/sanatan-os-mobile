@@ -1004,6 +1004,9 @@
                 return null;
             }
 
+            // Track where verse reader was opened from
+            let openedFromFavorites = false;
+
             function openFavoriteVerse(chapter, verse) {
                 // Load the chapter's verses first
                 let chapterData;
@@ -1020,6 +1023,7 @@
                 currentVerseIndex = currentVerses.findIndex(v => parseInt(v.verse) === parseInt(verse));
                 if (currentVerseIndex === -1) currentVerseIndex = 0;
 
+                openedFromFavorites = true; // Track origin
                 renderVerseReader();
                 favoritesView.style.display = 'none';
                 verseReader.classList.add('active');
@@ -1120,6 +1124,7 @@
 
             function openVerseReader(index) {
                 currentVerseIndex = index;
+                openedFromFavorites = false; // Reset - opened from chapter view
                 renderVerseReader();
                 verseReader.classList.add('active');
             }
@@ -1401,6 +1406,15 @@
             document.getElementById('close-reader').onclick = () => {
                 stopSpeaking();
                 verseReader.classList.remove('active');
+
+                // Return to the correct view based on where we came from
+                if (openedFromFavorites) {
+                    openedFromFavorites = false; // Reset flag
+                    showFavoritesView();
+                } else {
+                    // Show verse list view (normal flow)
+                    verseView.style.display = 'flex';
+                }
             };
 
             document.getElementById('back-to-chapters').onclick = () => {
