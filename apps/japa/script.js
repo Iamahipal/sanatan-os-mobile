@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Name Selector
     const nameSelectorBtn = document.getElementById('name-selector-btn');
     const selectedNameEl = document.getElementById('selected-name');
-    const deityNameText = document.getElementById('deity-name-text'); // Centered display
+    const deityNameText = document.getElementById('deity-name-text'); // Centered display (hidden)
+    const counterDeityName = document.getElementById('counter-deity-name'); // Counter display
     const nameModal = document.getElementById('name-modal');
     const nameOptions = document.querySelectorAll('.name-option');
 
@@ -384,9 +385,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const text = state.language === 'hi' ? deity.text_hi : deity.text_en;
         selectedNameEl.textContent = text;
 
-        // Also update the centered deity name display
+        // Also update the centered deity name display (hidden on home)
         if (deityNameText) {
             deityNameText.textContent = text;
+        }
+
+        // Update counter deity name display
+        if (counterDeityName) {
+            counterDeityName.textContent = text;
         }
     }
 

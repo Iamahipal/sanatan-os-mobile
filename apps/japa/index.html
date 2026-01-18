@@ -56,14 +56,14 @@
             </button>
         </header>
 
-        <!-- Level Badge -->
-        <div id="level-badge" class="level-badge">
+        <!-- Level Badge - Hidden on home, only visible in settings -->
+        <div id="level-badge" class="level-badge hidden-on-home">
             <i data-lucide="sparkles" class="level-icon-svg"></i>
             <span id="level-text" class="level-text">Aarambh</span>
         </div>
 
-        <!-- Large Centered Deity Name (Static) -->
-        <div class="deity-name-display">
+        <!-- Large Centered Deity Name - Hidden normally, shows on mala complete -->
+        <div class="deity-name-display hidden-on-home" id="deity-celebration">
             <span id="deity-name-text" class="deity-name-text">श्री राधा</span>
         </div>
 
@@ -82,18 +82,18 @@
 
         <!-- Mala Section -->
         <div class="mala-section">
+            <!-- Counter shows deity name and mala count -->
             <div class="counter-display">
-                <div class="counter-item">
-                    <span class="counter-label">BEAD</span>
-                    <span id="bead-count" class="counter-value">0</span>
-                </div>
+                <span id="counter-deity-name" class="counter-deity-name">श्री राधा</span>
                 <div class="counter-divider"></div>
                 <div class="counter-item">
-                    <span class="counter-label">MALA</span>
                     <span id="mala-count" class="counter-value">0</span>
+                    <span class="counter-label">MALA</span>
                 </div>
             </div>
             <div id="mala-container" class="mala-container"></div>
+            <!-- Hidden bead count for JS logic -->
+            <span id="bead-count" class="hidden-count">0</span>
         </div>
 
         <!-- Divine Flash -->

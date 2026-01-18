@@ -185,18 +185,11 @@ body {
     overscroll-behavior: none;
 }
 
-/* MOBILE: Divine Krishna background image */
+/* MOBILE: Divine Krishna background image - CLEAR, no overlay */
 @media (max-width: 600px) {
     body {
-        background:
-            /* Light overlay for readability */
-            linear-gradient(180deg,
-                rgba(255, 255, 255, 0.1) 0%,
-                rgba(255, 255, 255, 0.05) 50%,
-                rgba(255, 255, 255, 0.15) 100%),
-            /* The deity image */
-            var(--bg-image);
-
+        /* Direct image, no overlay for maximum clarity */
+        background: var(--bg-image);
         background-size: cover;
         background-position: center top;
         background-repeat: no-repeat;
@@ -390,7 +383,7 @@ body.page-enter {
         0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* ===== HEADER BUTTONS - GLASS PILLS ===== */
+/* ===== HEADER BUTTONS - ROUNDED RECTANGLE (Krishna Vaani style) ===== */
 
 .header-btn {
     display: flex;
@@ -398,7 +391,8 @@ body.page-enter {
     justify-content: center;
     width: 44px;
     height: 44px;
-    border-radius: 22px;
+    /* Rounded rectangle, not circle */
+    border-radius: 12px;
     border: none;
     cursor: pointer;
     text-decoration: none;
@@ -430,7 +424,7 @@ body.page-enter {
     left: 0;
     right: 0;
     height: 50%;
-    border-radius: 22px 22px 0 0;
+    border-radius: 12px 12px 0 0;
     background: linear-gradient(180deg,
             rgba(255, 255, 255, 0.25) 0%,
             rgba(255, 255, 255, 0.05) 100%);
@@ -1571,4 +1565,41 @@ body.page-enter {
 
 .confirm-btn-delete:active {
     transform: scale(0.97);
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Hidden on home page - shown only in modals/settings */
+.hidden-on-home {
+    display: none !important;
+}
+
+/* Hidden count for JS logic */
+.hidden-count {
+    display: none;
+}
+
+/* ===== COUNTER DEITY NAME ===== */
+
+.counter-deity-name {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+    padding-right: 8px;
+}
+
+/* Simplify counter for deity name + mala only */
+.counter-display .counter-item {
+    flex-direction: column-reverse;
+    gap: 2px;
+}
+
+.counter-display .counter-value {
+    font-size: 1.5rem;
+}
+
+.counter-display .counter-label {
+    font-size: 0.55rem;
 }
