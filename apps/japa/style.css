@@ -1573,33 +1573,3 @@ body.page-enter {
 .hidden-on-home {
     display: none !important;
 }
-
-/* Hidden count for JS logic */
-.hidden-count {
-    display: none;
-}
-
-/* ===== COUNTER DEITY NAME ===== */
-
-.counter-deity-name {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--accent);
-    white-space: nowrap;
-    padding-right: 8px;
-}
-
-/* Simplify counter for deity name + mala only */
-.counter-display .counter-item {
-    flex-direction: column-reverse;
-    gap: 2px;
-}
-
-.counter-display .counter-value {
-    font-size: 1.5rem;
-}
-
-.counter-display .counter-label {
-    font-size: 0.55rem;
-}
