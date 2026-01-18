@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset
     const resetData = document.getElementById('reset-data');
+    const confirmModal = document.getElementById('confirm-modal');
+    const confirmCancel = document.getElementById('confirm-cancel');
+    const confirmDelete = document.getElementById('confirm-delete');
 
     // Reminder
     const reminderToggleBtn = document.getElementById('reminder-toggle-btn');
@@ -55,13 +58,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Audio
+    // Audio with graceful fallback for offline/failed loads
     const sounds = {
         bell: document.getElementById('bell-sound'),
         conch: document.getElementById('conch-sound'),
         bowl: document.getElementById('bowl-sound'),
         chime: document.getElementById('chime-sound')
     };
+
+    // Track which sounds loaded successfully
+    const soundsLoaded = { bell: false, conch: false, bowl: false, chime: false };
+    Object.entries(sounds).forEach(([name, audio]) => {
+        if (audio) {
+            audio.addEventListener('canplaythrough', () => { soundsLoaded[name] = true; });
+            audio.addEventListener('error', () => {
+                console.warn(`[Audio] Failed to load ${name} sound - will use vibration fallback`);
+                soundsLoaded[name] = false;
+            });
+        }
+    });
+
+    // Helper to play sound (no vibration fallback - haptics only on mala completion)
+    function playSound(soundType) {
+        const audio = sounds[soundType];
+        if (audio && soundsLoaded[soundType]) {
+            audio.currentTime = 0;
+            audio.play().catch(() => { });
+        }
+        // Note: No vibration fallback here - haptic feedback is in completeMala() only
+    }
 
     // === Deity Data (7 deities = 7 themes) ===
     const DEITIES = {
@@ -86,9 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Constants ===
     const TOTAL_BEADS = 108;
     const BEAD_COUNT = 54;
-    const GRID_COLS = 4;
-    const GRID_ROWS = 5;
-    const TOTAL_SLOTS = GRID_COLS * GRID_ROWS;
 
     // === State ===
     let state = {
@@ -106,14 +128,11 @@ document.addEventListener('DOMContentLoaded', () => {
         reminderTime: '06:00'
     };
 
-    let availableSlots = [];
-    let occupiedSlots = {};
     let malaRotation = 0;
     let lastTapTime = 0;
 
     // === Initialize ===
     loadState();
-    initGridSlots();
     createMalaBeads();
     updateDisplay();
     updateUI();
@@ -135,6 +154,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: false });
     }
+
+    // Keyboard support (Spacebar / Enter = count japa)
+    document.addEventListener('keydown', (e) => {
+        // Only trigger if no modal is open
+        const anyModalOpen = nameModal.classList.contains('active') ||
+            settingsModal.classList.contains('active');
+
+        if (!anyModalOpen && (e.code === 'Space' || e.code === 'Enter')) {
+            e.preventDefault();
+            handleTap(e);
+        }
+    });
 
     // Name selector
     nameSelectorBtn.addEventListener('click', () => nameModal.classList.add('active'));
@@ -196,45 +227,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Reset
-    resetData.addEventListener('click', resetAllData);
+    // Reset - Show confirmation modal
+    resetData.addEventListener('click', () => {
+        settingsModal.classList.remove('active'); // Close settings first
+        confirmModal.classList.add('active');
+    });
+
+    // Confirmation modal - Cancel
+    confirmCancel.addEventListener('click', () => {
+        confirmModal.classList.remove('active');
+    });
+
+    // Confirmation modal - Delete (confirm)
+    confirmDelete.addEventListener('click', () => {
+        confirmModal.classList.remove('active');
+        resetAllData();
+    });
+
+    // Close confirm modal on backdrop click
+    confirmModal.addEventListener('click', (e) => {
+        if (e.target === confirmModal) confirmModal.classList.remove('active');
+    });
 
     // Reminder
     initReminder();
     reminderToggleBtn.addEventListener('click', toggleReminder);
     reminderTimeInput.addEventListener('change', updateReminderTime);
 
-    // === Grid System ===
-    function initGridSlots() {
-        availableSlots = [];
-        for (let i = 0; i < TOTAL_SLOTS; i++) availableSlots.push(i);
-        shuffleArray(availableSlots);
-    }
-
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-    }
-
-    function getSlotPosition(slotId) {
-        const row = Math.floor(slotId / GRID_COLS);
-        const col = slotId % GRID_COLS;
-        const cellWidth = 100 / GRID_COLS;
-        const cellHeight = 100 / GRID_ROWS;
-
-        // Add padding to keep text inside screen (5% from edges)
-        const paddingX = 8;
-        const paddingY = 5;
-        const offsetX = paddingX + (Math.random() * 0.3 + 0.2) * (cellWidth - paddingX * 2);
-        const offsetY = paddingY + (Math.random() * 0.3 + 0.2) * (cellHeight - paddingY * 2);
-
-        const left = Math.min(Math.max(col * cellWidth + offsetX, 5), 85); // Clamp 5-85%
-        const top = Math.min(Math.max(row * cellHeight + offsetY, 3), 90); // Clamp 3-90%
-
-        return { left: `${left}%`, top: `${top}%` };
-    }
+    // Note: Floating mantra functions removed - deity name now displayed statically in center
 
     // === Core Tap Handler ===
     function handleTap(e) {
@@ -249,8 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDailyStats();
 
         rotateMala();
-        // Removed: spawnMantraInSlot() - deity name now static in center
-        // Removed: navigator.vibrate(8) - vibration only at 108
 
         if (state.beadCount >= TOTAL_BEADS) {
             completeMala();
@@ -259,48 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDisplay();
         updateLevelBadge();
         saveState();
-    }
-
-    function spawnMantraInSlot() {
-        if (availableSlots.length === 0) freeOldestSlot();
-
-        const slotId = availableSlots.pop();
-        const position = getSlotPosition(slotId);
-
-        const deity = DEITIES[state.currentDeity];
-        const text = state.language === 'hi' ? deity.text_hi : deity.text_en;
-
-        const el = document.createElement('div');
-        el.className = 'floating-mantra';
-        el.textContent = text;
-        el.style.left = position.left;
-        el.style.top = position.top;
-
-        canvas.appendChild(el);
-
-        const timeoutId = setTimeout(() => freeSlot(slotId, el), 3500);
-        occupiedSlots[slotId] = { element: el, timeoutId };
-    }
-
-    function freeSlot(slotId, element) {
-        if (element?.parentNode) element.remove();
-        delete occupiedSlots[slotId];
-        availableSlots.push(slotId);
-    }
-
-    function freeOldestSlot() {
-        const slotIds = Object.keys(occupiedSlots);
-        if (slotIds.length > 0) {
-            const oldestId = parseInt(slotIds[0]);
-            const slot = occupiedSlots[oldestId];
-            clearTimeout(slot.timeoutId);
-            if (slot.element) {
-                slot.element.style.opacity = '0';
-                setTimeout(() => slot.element?.remove(), 150);
-            }
-            delete occupiedSlots[oldestId];
-            availableSlots.push(oldestId);
-        }
     }
 
     // === Mala Functions ===
@@ -341,9 +317,9 @@ document.addEventListener('DOMContentLoaded', () => {
         state.beadCount = 0;
         state.malaCount++;
 
-        if (!state.isMuted && sounds[state.soundType]) {
-            sounds[state.soundType].currentTime = 0;
-            sounds[state.soundType].play().catch(() => { });
+        // Play sound using graceful fallback helper
+        if (!state.isMuted) {
+            playSound(state.soundType);
         }
 
         if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
@@ -363,20 +339,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         malaCountEl.classList.add('pulse');
         setTimeout(() => malaCountEl.classList.remove('pulse'), 400);
-
-        clearAllMantras();
-    }
-
-    function clearAllMantras() {
-        Object.keys(occupiedSlots).forEach(slotId => {
-            clearTimeout(occupiedSlots[slotId].timeoutId);
-            if (occupiedSlots[slotId].element) occupiedSlots[slotId].element.style.opacity = '0';
-        });
-        setTimeout(() => {
-            Object.values(occupiedSlots).forEach(s => s.element?.remove());
-            occupiedSlots = {};
-            initGridSlots();
-        }, 200);
     }
 
     // === Settings ===
@@ -429,10 +391,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function resetAllData() {
-        if (confirm('Are you sure? This will delete all your Japa history.')) {
-            localStorage.removeItem('naamjapa_premium');
-            location.reload();
-        }
+        // Called after user confirms via modal
+        localStorage.removeItem('naamjapa_premium');
+        location.reload();
     }
 
     // === Display ===
@@ -453,24 +414,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateDailyStats() {
         const today = new Date().toISOString().split('T')[0];
-        if (!state.dailyStats[today]) state.dailyStats[today] = 0;
+        const isFirstTapToday = !state.dailyStats[today];
+
+        if (isFirstTapToday) {
+            state.dailyStats[today] = 0;
+            // Update streak when user taps for first time today
+            updateStreak(today);
+        }
+
         state.dailyStats[today]++;
         state.lastActiveDate = today;
     }
 
-    function checkStreak() {
-        const today = new Date();
-        const todayStr = today.toISOString().split('T')[0];
-        if (state.lastActiveDate === todayStr) return;
-
-        const yesterday = new Date(today);
+    function updateStreak(today) {
+        // Calculate yesterday's date
+        const todayDate = new Date(today);
+        const yesterday = new Date(todayDate);
         yesterday.setDate(yesterday.getDate() - 1);
         const yesterdayStr = yesterday.toISOString().split('T')[0];
 
-        if (state.lastActiveDate === yesterdayStr && state.dailyStats[yesterdayStr] > 0) {
+        if (state.lastActiveDate === yesterdayStr) {
+            // User was active yesterday - continue streak
             state.currentStreak++;
-        } else if (state.lastActiveDate !== todayStr) {
+        } else if (state.lastActiveDate === today) {
+            // Already counted today, do nothing
+        } else if (state.lastActiveDate === null) {
+            // First time user - start streak at 1
+            state.currentStreak = 1;
+        } else {
+            // Missed one or more days - reset streak to 1 (today counts)
+            state.currentStreak = 1;
+        }
+
+        saveState();
+    }
+
+    function checkStreak() {
+        // Called on page load to verify streak is still valid
+        const today = new Date().toISOString().split('T')[0];
+
+        // If user already has activity today, streak is valid
+        if (state.dailyStats[today] && state.dailyStats[today] > 0) {
+            return; // Streak already counted for today
+        }
+
+        // Check if streak should be reset (no activity yesterday)
+        const todayDate = new Date();
+        const yesterday = new Date(todayDate);
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+        // If last active was before yesterday, streak is broken
+        if (state.lastActiveDate &&
+            state.lastActiveDate !== today &&
+            state.lastActiveDate !== yesterdayStr) {
             state.currentStreak = 0;
+            saveState();
         }
     }
 
@@ -613,31 +612,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initialize Firebase and get FCM token
         try {
-            // Firebase config
-            const firebaseConfig = {
-                apiKey: "AIzaSyCbpJn70aedORd6dycc88jxSqM178U91ig",
-                authDomain: "sanatan-os-push.firebaseapp.com",
-                projectId: "sanatan-os-push",
-                storageBucket: "sanatan-os-push.firebasestorage.app",
-                messagingSenderId: "840881978014",
-                appId: "1:840881978014:web:a3d8d5d30f274ecc719ae7b"
-            };
-
-            // Initialize Firebase (if not already)
+            // Initialize Firebase (if not already) - config from firebase-config.js
             if (!firebase.apps.length) {
-                firebase.initializeApp(firebaseConfig);
+                firebase.initializeApp(FIREBASE_CONFIG);
             }
 
             // Register Firebase messaging service worker
-            const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+            // Note: Service worker must be at the root of the app's scope
+            // If app is hosted at /apps/japa/, the SW should be at /apps/japa/firebase-messaging-sw.js
+            const swPath = './firebase-messaging-sw.js';
+            const registration = await navigator.serviceWorker.register(swPath);
             console.log('Firebase SW registered:', registration);
 
             // Get messaging instance
             const messaging = firebase.messaging();
 
-            // Get FCM token
+            // Get FCM token - VAPID key from firebase-config.js
             const fcmToken = await messaging.getToken({
-                vapidKey: 'BJMOkIPRrC2PEwqO__cjoBT1zObmuzOXuJLPyAK1DjqFSHvMAE1RTf3vjMNpJ6zetEjfcxST0O3IxxjJTkTzYo0',
+                vapidKey: FCM_VAPID_KEY,
                 serviceWorkerRegistration: registration
             });
 
@@ -715,89 +707,4 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
     }
-    // === SANGHA: Silent Solidarity ===
-    // Shows live count of users currently chanting
-    function initSangha() {
-        try {
-            const sanghaCountEl = document.getElementById('sangha-count');
-            const sanghaBar = document.getElementById('sangha-bar');
-
-            if (!sanghaCountEl || !sanghaBar) {
-                console.log('[Sangha] UI elements not found, skipping');
-                return;
-            }
-
-            // Firebase config (same as messaging)
-            const firebaseConfig = {
-                apiKey: "AIzaSyCbpJn70aedORd6dycc88jxSqM178U91ig",
-                authDomain: "sanatan-os-push.firebaseapp.com",
-                projectId: "sanatan-os-push",
-                storageBucket: "sanatan-os-push.firebasestorage.app",
-                messagingSenderId: "840881978014",
-                appId: "1:840881978014:web:a3d8d5d30f274ecc719ae7b",
-                databaseURL: "https://sanatan-os-push-default-rtdb.firebaseio.com"
-            };
-
-            // Initialize Firebase if not already done
-            if (!firebase.apps.length) {
-                firebase.initializeApp(firebaseConfig);
-            }
-
-            const database = firebase.database();
-            const presenceRef = database.ref('sangha/japa/online');
-            const myPresenceRef = presenceRef.push();
-
-            // Track connection state
-            const connectedRef = database.ref('.info/connected');
-            connectedRef.on('value', (snap) => {
-                if (snap.val() === true) {
-                    // I'm connected - add myself
-                    myPresenceRef.set(true).catch(err => {
-                        console.warn('[Sangha] Write failed:', err.message);
-                    });
-
-                    // Remove me when I disconnect
-                    myPresenceRef.onDisconnect().remove();
-
-                    console.log('[Sangha] Connected to presence system');
-                }
-            }, (error) => {
-                console.warn('[Sangha] Connection error:', error.message);
-                sanghaBar.style.display = 'none';
-            });
-
-            // Listen for changes in online count
-            presenceRef.on('value', (snapshot) => {
-                const count = snapshot.numChildren();
-                sanghaCountEl.textContent = count;
-
-                // Glow effect based on count
-                if (count > 10) {
-                    sanghaBar.classList.add('glow-strong');
-                    sanghaBar.classList.remove('glow-medium');
-                } else if (count > 5) {
-                    sanghaBar.classList.add('glow-medium');
-                    sanghaBar.classList.remove('glow-strong');
-                } else {
-                    sanghaBar.classList.remove('glow-medium', 'glow-strong');
-                }
-
-                console.log(`[Sangha] ${count} souls chanting`);
-            }, (error) => {
-                console.warn('[Sangha] Read error:', error.message);
-                sanghaBar.style.display = 'none';
-            });
-
-        } catch (err) {
-            console.error('[Sangha] Init failed:', err.message);
-            // Hide the sangha bar if there's an error
-            const sanghaBar = document.getElementById('sangha-bar');
-            if (sanghaBar) sanghaBar.style.display = 'none';
-        }
-    }
-
-    // Initialize Sangha after a short delay to not block main UI
-    // TEMPORARILY DISABLED - Firebase Realtime Database needs to be created first
-    // setTimeout(initSangha, 1500);
-    console.log('[Sangha] Disabled - Firebase Realtime Database not configured');
 });

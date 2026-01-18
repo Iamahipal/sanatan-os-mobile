@@ -725,6 +725,81 @@
         </div>
     </div>
 
+    <!-- Pratibimba Modal (Weekly Reflection Prompt) -->
+    <div class="modal" id="pratibimbaModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content pratibimba-content">
+            <div class="pratibimba-header">
+                <span class="pratibimba-icon">🪷</span>
+                <h2 class="pratibimba-title">Pratibimba</h2>
+                <p class="pratibimba-subtitle">Weekly Reflection</p>
+            </div>
+
+            <div class="pratibimba-prompt-container">
+                <p class="pratibimba-prompt" id="pratibimbaPrompt">
+                    What did you notice in your practice this week?
+                </p>
+            </div>
+
+            <textarea class="textarea pratibimba-response" id="pratibimbaResponse"
+                placeholder="Write your reflection..." rows="4"></textarea>
+
+            <div class="pratibimba-actions">
+                <button class="btn btn-ghost" id="skipPratibimbaBtn">Sit with it</button>
+                <button class="btn btn-primary" id="savePratibimbaBtn">Save Reflection</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Digital Mauna Banner (Smart Silence) -->
+    <div class="mauna-banner hidden" id="maunaBanner">
+        <div class="mauna-content">
+            <span class="mauna-icon" id="maunaIcon">🌅</span>
+            <div class="mauna-text">
+                <h3 class="mauna-title" id="maunaTitle">Pradosha Kaal</h3>
+                <p class="mauna-message" id="maunaMessage">The twilight transition.</p>
+            </div>
+            <button class="mauna-dismiss" id="maunaDismiss">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Adaptive Challenge Modal -->
+    <div class="modal" id="challengeModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>🔥</span>
+                <h2 class="modal-title">Ready to Deepen?</h2>
+                <button class="modal-close">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <p class="text-secondary text-sm mb-4">
+                Your consistency is remarkable. Consider deepening one practice:
+            </p>
+
+            <div class="challenge-practice mb-4">
+                <span class="challenge-practice-icon" id="challengePracticeIcon">🧘</span>
+                <span class="challenge-practice-name" id="challengePracticeName">Practice</span>
+            </div>
+
+            <div class="challenge-options" id="challengeOptions">
+                <!-- Dynamically rendered -->
+            </div>
+
+            <button class="btn btn-ghost btn-block" id="skipChallengeBtn">Not now, continue as is</button>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="js/core/State.js"></script>
     <script src="js/core/Storage.js"></script>

@@ -1,0 +1,73 @@
+/* ===================================================
+   JAPA APP - LIQUID GLASS DESIGN SYSTEM
+   Based on Apple iOS 26 Liquid Glass principles
+   =================================================== */
+
+/**
+ * DESIGN LOGIC: "Glass floats, content grounds"
+ * 
+ * ✅ USE LIQUID GLASS FOR:
+ *    - Navigation bars (header)
+ *    - Floating badges/pills (level badge)
+ *    - Modals & bottom sheets (settings, picker)
+ *    - Info panels (counter display)
+ *    - Control toolbars (sound options grid)
+ * 
+ * ❌ DO NOT USE GLASS FOR:
+ *    - Primary content (deity name)
+ *    - Active/selected buttons (need solid feedback)
+ *    - Stats numbers (must be crisp)
+ *    - Text-heavy content (readability)
+ *    - Icons (sharp edges)
+ *    - Mala beads (3D solid objects)
+ * 
+ * LAYER HIERARCHY:
+ *    1. Background (solid gradient + ambient glow)
+ *    2. Content (solid - beads, deity name)
+ *    3. Glass UI (translucent panels, navigation)
+ *    4. Overlays (modals with deep blur)
+ */
+
+:root {
+    /* === GLASS LAYERS === */
+
+    /* For floating UI chrome (nav, badges) */
+    --glass-ui: rgba(255, 255, 255, 0.12);
+    --glass-ui-hover: rgba(255, 255, 255, 0.18);
+    --glass-ui-border: rgba(255, 255, 255, 0.2);
+
+    /* For deep overlays (modals) */
+    --glass-overlay: rgba(255, 255, 255, 0.15);
+    --glass-overlay-border: rgba(255, 255, 255, 0.25);
+
+    /* For interactive controls (buttons in glass panels) */
+    --glass-control: rgba(255, 255, 255, 0.08);
+    --glass-control-hover: rgba(255, 255, 255, 0.12);
+
+    /* === SOLID LAYERS === */
+
+    /* Active/selected states - NO transparency */
+    --solid-active: var(--accent);
+    --solid-active-text: #000000;
+
+    /* Content backgrounds */
+    --solid-card: rgba(0, 0, 0, 0.25);
+    --solid-card-border: rgba(255, 255, 255, 0.1);
+
+    /* === BLUR DEPTHS === */
+
+    --blur-nav: 20px;
+    /* Navigation bars */
+    --blur-badge: 24px;
+    /* Floating badges */
+    --blur-panel: 32px;
+    /* Info panels */
+    --blur-modal: 48px;
+    /* Modal overlays */
+
+    /* === SPECULAR HIGHLIGHTS === */
+
+    --specular-strong: rgba(255, 255, 255, 0.35);
+    --specular-medium: rgba(255, 255, 255, 0.2);
+    --specular-subtle: rgba(255, 255, 255, 0.1);
+}

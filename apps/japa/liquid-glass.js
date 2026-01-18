@@ -1,7 +1,9 @@
 /**
- * Liquid Glass Effect for Japa App
- * Adapted from SanatanOS main liquid-glass.js
- * Creates beautiful distortion/refraction effect on glass elements
+ * Apple Liquid Glass Effect for Japa App
+ * Enhanced with iOS 26 Liquid Glass principles:
+ * - Real-time lensing (light bending)
+ * - Specular highlights
+ * - Physics-based interactions
  */
 
 (function () {
@@ -14,7 +16,8 @@
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
         || window.innerWidth <= 480;
 
-    // Utility functions
+    // === UTILITY FUNCTIONS ===
+
     function smoothStep(a, b, t) {
         t = Math.max(0, Math.min(1, (t - a) / (b - a)));
         return t * t * (3 - 2 * t);
@@ -24,43 +27,55 @@
         return Math.sqrt(x * x + y * y);
     }
 
+    // Signed Distance Function for rounded rectangle
     function roundedRectSDF(x, y, width, height, radius) {
         const qx = Math.abs(x) - width + radius;
         const qy = Math.abs(y) - height + radius;
         return Math.min(Math.max(qx, qy), 0) + length(Math.max(qx, 0), Math.max(qy, 0)) - radius;
     }
 
-    function texture(x, y) {
-        return { type: 't', x, y };
-    }
+    // === LIQUID GLASS FILTER CREATION ===
 
-    // Create SVG filter for liquid glass effect
-    function createLiquidGlassFilter(id, width, height, intensity = 1.0) {
-        const canvasDPI = 1;
+    function createLiquidGlassFilter(id, width, height, config = {}) {
+        const {
+            intensity = 1.2,
+            edgeRefraction = 0.9,
+            centerBulge = 0.35,
+            cornerRadius = 0.18
+        } = config;
 
+        const canvasDPI = window.devicePixelRatio > 1 ? 1.5 : 1;
         const canvas = document.createElement('canvas');
-        canvas.width = width * canvasDPI;
-        canvas.height = height * canvasDPI;
+        canvas.width = Math.round(width * canvasDPI);
+        canvas.height = Math.round(height * canvasDPI);
         canvas.style.display = 'none';
         const context = canvas.getContext('2d');
 
-        // Fragment shader with edge refraction
+        // Fragment shader - creates lensing displacement map
         const fragment = (uv) => {
             const ix = uv.x - 0.5;
             const iy = uv.y - 0.5;
 
-            const distanceToEdge = roundedRectSDF(ix, iy, 0.42, 0.42, 0.15);
-            const edgeRefract = smoothStep(0.0, -0.15, distanceToEdge) * 0.8;
+            // Distance to rounded rectangle edge
+            const distToEdge = roundedRectSDF(ix, iy, 0.40, 0.40, cornerRadius);
+
+            // Edge refraction - light bends more near edges
+            const edgeRefract = smoothStep(0.0, -0.18, distToEdge) * edgeRefraction;
+
+            // Center bulge - glass curves inward slightly
             const centerDist = length(ix, iy);
-            const centerBulge = smoothStep(0.5, 0, centerDist) * 0.3;
-            const totalDisplacement = (edgeRefract + centerBulge) * intensity;
-            const scale = 1.0 - totalDisplacement * 0.4;
-            return texture(ix * scale + 0.5, iy * scale + 0.5);
+            const centerEffect = smoothStep(0.5, 0, centerDist) * centerBulge;
+
+            // Combined displacement
+            const totalDisplacement = (edgeRefract + centerEffect) * intensity;
+            const scale = 1.0 - totalDisplacement * 0.45;
+
+            return { x: ix * scale + 0.5, y: iy * scale + 0.5 };
         };
 
         // Generate displacement map
-        const w = width * canvasDPI;
-        const h = height * canvasDPI;
+        const w = canvas.width;
+        const h = canvas.height;
         const data = new Uint8ClampedArray(w * h * 4);
         let maxScale = 0;
         const rawValues = [];
@@ -75,7 +90,7 @@
             rawValues.push(dx, dy);
         }
 
-        maxScale = Math.max(maxScale * 0.6, 5);
+        maxScale = Math.max(maxScale * 0.65, 6);
 
         let index = 0;
         for (let i = 0; i < data.length; i += 4) {
@@ -120,7 +135,9 @@
         feDisplacementMap.setAttribute('in2', 'displacementMap');
         feDisplacementMap.setAttribute('xChannelSelector', 'R');
         feDisplacementMap.setAttribute('yChannelSelector', 'G');
-        const scaleValue = isMobile ? Math.round(maxScale * 1.5) : Math.round(maxScale * 1.2);
+
+        // Higher scale for more visible distortion
+        const scaleValue = isMobile ? Math.round(maxScale * 1.8) : Math.round(maxScale * 1.5);
         feDisplacementMap.setAttribute('scale', scaleValue.toString());
 
         filter.appendChild(feImage);
@@ -131,7 +148,8 @@
         return svg;
     }
 
-    // Initialize liquid glass effect for Japa app elements
+    // === INITIALIZE LIQUID GLASS ===
+
     function initLiquidGlass() {
         if (prefersReducedMotion) {
             console.log('🔇 Liquid Glass disabled: User prefers reduced motion');
@@ -144,11 +162,32 @@
         const existingStyle = document.getElementById('japa-liquid-glass-styles');
         if (existingStyle) existingStyle.remove();
 
-        // Create filters for Japa app elements - higher intensity for visible distortion
+        // Filter configurations for different element sizes
         const filterConfigs = [
-            { id: 'japa-glass-btn', width: 40, height: 40, intensity: 1.0 },
-            { id: 'japa-glass-badge', width: 140, height: 40, intensity: 1.0 },
-            { id: 'japa-glass-counter', width: 260, height: 80, intensity: 1.2 }
+            {
+                id: 'glass-btn',
+                width: 44,
+                height: 44,
+                config: { intensity: 1.3, cornerRadius: 0.5 }
+            },
+            {
+                id: 'glass-badge',
+                width: 160,
+                height: 48,
+                config: { intensity: 1.2, cornerRadius: 0.4 }
+            },
+            {
+                id: 'glass-counter',
+                width: 280,
+                height: 90,
+                config: { intensity: 1.4, cornerRadius: 0.3 }
+            },
+            {
+                id: 'glass-modal',
+                width: 400,
+                height: 200,
+                config: { intensity: 1.0, cornerRadius: 0.15, edgeRefraction: 0.7 }
+            }
         ];
 
         // Create container for SVG filters
@@ -156,8 +195,8 @@
         container.id = 'japa-liquid-glass-filters';
         container.style.cssText = 'position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;';
 
-        filterConfigs.forEach(config => {
-            const svg = createLiquidGlassFilter(config.id, config.width, config.height, config.intensity);
+        filterConfigs.forEach(({ id, width, height, config }) => {
+            const svg = createLiquidGlassFilter(id, width, height, config);
             container.appendChild(svg);
         });
 
@@ -167,78 +206,154 @@
         const style = document.createElement('style');
         style.id = 'japa-liquid-glass-styles';
         style.textContent = `
-      /* Japa Liquid Glass - GPU Accelerated */
-      
-      /* Header Buttons - no centering needed, just GPU acceleration */
-      .header-btn {
-        backdrop-filter: url(#japa-glass-btn) blur(12px) saturate(1.3) brightness(1.05);
-        -webkit-backdrop-filter: url(#japa-glass-btn) blur(12px) saturate(1.3) brightness(1.05);
-        transform: translateZ(0);
-        backface-visibility: hidden;
-      }
-      
-      /* Level Badge - MUST preserve translateX(-50%) for centering */
-      .level-badge {
-        backdrop-filter: url(#japa-glass-badge) blur(12px) saturate(1.3) brightness(1.05);
-        -webkit-backdrop-filter: url(#japa-glass-badge) blur(12px) saturate(1.3) brightness(1.05);
-        transform: translateX(-50%) translateZ(0);
-        backface-visibility: hidden;
-      }
-      
-      /* Counter Display - MUST preserve translateX(-50%) for centering */
-      .counter-display {
-        backdrop-filter: url(#japa-glass-counter) blur(12px) saturate(1.3) brightness(1.05);
-        -webkit-backdrop-filter: url(#japa-glass-counter) blur(12px) saturate(1.3) brightness(1.05);
-        transform: translateX(-50%) translateZ(0);
-        backface-visibility: hidden;
-      }
-      
-      /* Light refraction overlay - top gradient */
-      .header-btn::before,
-      .level-badge::before,
-      .counter-display::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 60%;
-        border-radius: inherit;
-        background: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.22) 0%,
-          rgba(255, 255, 255, 0.08) 40%,
-          transparent 100%);
-        pointer-events: none;
-        z-index: 1;
-      }
-      
-      /* Inner edge highlight for depth */
-      .header-btn::after,
-      .level-badge::after,
-      .counter-display::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        box-shadow: 
-          inset 0 1px 1px rgba(255, 255, 255, 0.2),
-          inset 0 -1px 1px rgba(0, 0, 0, 0.1),
-          inset 1px 0 1px rgba(255, 255, 255, 0.05),
-          inset -1px 0 1px rgba(0, 0, 0, 0.05);
-        pointer-events: none;
-        z-index: 2;
-      }
-    `;
+            /* === APPLE LIQUID GLASS - GPU ACCELERATED === */
+            
+            /* Header Buttons - Circular glass */
+            .header-btn {
+                backdrop-filter: url(#glass-btn) blur(16px) saturate(1.6) brightness(1.08);
+                -webkit-backdrop-filter: url(#glass-btn) blur(16px) saturate(1.6) brightness(1.08);
+                transform: translateZ(0);
+                will-change: transform;
+            }
+            
+            /* Level Badge - Pill glass */
+            .level-badge {
+                backdrop-filter: url(#glass-badge) blur(28px) saturate(1.7) brightness(1.08);
+                -webkit-backdrop-filter: url(#glass-badge) blur(28px) saturate(1.7) brightness(1.08);
+                transform: translateX(-50%) translateZ(0);
+                will-change: transform;
+            }
+            
+            /* Counter Display - Large glass panel */
+            .counter-display {
+                backdrop-filter: url(#glass-counter) blur(32px) saturate(1.8) brightness(1.1);
+                -webkit-backdrop-filter: url(#glass-counter) blur(32px) saturate(1.8) brightness(1.1);
+                transform: translateX(-50%) translateZ(0);
+                will-change: transform;
+            }
+            
+            /* Modal Content - Full sheet glass */
+            .modal-content {
+                backdrop-filter: url(#glass-modal) blur(48px) saturate(2) brightness(1.05);
+                -webkit-backdrop-filter: url(#glass-modal) blur(48px) saturate(2) brightness(1.05);
+                will-change: transform;
+            }
+            
+            /* Specular highlight overlay - top gradient */
+            .header-btn::before,
+            .level-badge::before,
+            .counter-display::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 55%;
+                border-radius: inherit;
+                background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.28) 0%,
+                    rgba(255, 255, 255, 0.12) 35%,
+                    transparent 100%);
+                pointer-events: none;
+                z-index: 1;
+            }
+            
+            /* Inner shadow for depth */
+            .header-btn::after,
+            .level-badge::after,
+            .counter-display::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border-radius: inherit;
+                box-shadow: 
+                    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+                    inset 0 -1px 2px rgba(0, 0, 0, 0.08);
+                pointer-events: none;
+                z-index: 2;
+            }
+            
+            /* Interactive press feedback */
+            .header-btn:active::before,
+            .level-badge:active::before,
+            .counter-display:active::before {
+                background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.35) 0%,
+                    rgba(255, 255, 255, 0.15) 50%,
+                    transparent 100%);
+            }
+        `;
         document.head.appendChild(style);
 
-        console.log('✨ Japa Liquid Glass effect initialized');
+        console.log('✨ Apple Liquid Glass effect initialized');
     }
 
-    // Wait for DOM to be ready
+    // === INTERACTIVE RIPPLE EFFECT ===
+
+    function addRippleEffect() {
+        const tapArea = document.getElementById('japa-canvas');
+        if (!tapArea) return;
+
+        tapArea.addEventListener('pointerdown', (e) => {
+            if (prefersReducedMotion) return;
+
+            const rect = tapArea.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const ripple = document.createElement('div');
+            ripple.style.cssText = `
+                position: absolute;
+                left: ${x}px;
+                top: ${y}px;
+                width: 20px;
+                height: 20px;
+                margin: -10px;
+                border-radius: 50%;
+                background: radial-gradient(circle, 
+                    var(--deity-color) 0%, 
+                    transparent 70%);
+                opacity: 0.6;
+                pointer-events: none;
+                animation: rippleExpand 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+                z-index: 3;
+            `;
+
+            tapArea.appendChild(ripple);
+
+            ripple.addEventListener('animationend', () => ripple.remove());
+        });
+
+        // Add ripple keyframes
+        if (!document.getElementById('ripple-keyframes')) {
+            const keyframes = document.createElement('style');
+            keyframes.id = 'ripple-keyframes';
+            keyframes.textContent = `
+                @keyframes rippleExpand {
+                    0% {
+                        transform: scale(1);
+                        opacity: 0.5;
+                    }
+                    100% {
+                        transform: scale(15);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(keyframes);
+        }
+    }
+
+    // === INIT ON DOM READY ===
+
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initLiquidGlass);
+        document.addEventListener('DOMContentLoaded', () => {
+            initLiquidGlass();
+            addRippleEffect();
+        });
     } else {
         initLiquidGlass();
+        addRippleEffect();
     }
 
 })();

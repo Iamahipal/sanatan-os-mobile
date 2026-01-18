@@ -1,0 +1,74 @@
+[
+    {
+        "context": "early_journey",
+        "condition": "daysOnPath < 7",
+        "prompts": [
+            "What drew you to begin this practice?",
+            "What do you hope will be different in 66 days?",
+            "What is the smallest step you can take tomorrow?"
+        ]
+    },
+    {
+        "context": "consistency_building",
+        "condition": "daysOnPath >= 7 && completionRate >= 0.6",
+        "prompts": [
+            "Notice what time of day feels most natural for practice.",
+            "What environment supports your deepest focus?",
+            "When you resist practice, what is the resistance protecting?"
+        ]
+    },
+    {
+        "context": "struggling",
+        "condition": "completionRate < 0.4",
+        "prompts": [
+            "What is one practice you could do in just 2 minutes?",
+            "Is there something you need to release before you can begin?",
+            "What would your practice look like if it were effortless?"
+        ]
+    },
+    {
+        "context": "mechanical_quality",
+        "condition": "mechanicalRate > 0.5",
+        "prompts": [
+            "What would it feel like to approach practice with curiosity?",
+            "Where in your body do you feel the practice most?",
+            "Can you practice without expecting anything in return?"
+        ]
+    },
+    {
+        "context": "focused_quality",
+        "condition": "focusedRate > 0.6",
+        "prompts": [
+            "What has shifted since you began?",
+            "How does your focused state carry into daily life?",
+            "What is practice teaching you about yourself?"
+        ]
+    },
+    {
+        "context": "tapasya_midway",
+        "condition": "tapasyaDay >= 21 && tapasyaDay <= 45",
+        "prompts": [
+            "The middle is where most quit. What keeps you here?",
+            "Is the practice becoming easier, or are you becoming stronger?",
+            "What identity is forming through this discipline?"
+        ]
+    },
+    {
+        "context": "tapasya_final",
+        "condition": "tapasyaDay > 50",
+        "prompts": [
+            "The end approaches. What will you carry forward?",
+            "How has this commitment changed your relationship with discipline?",
+            "What practice calls to you next?"
+        ]
+    },
+    {
+        "context": "default",
+        "condition": "always",
+        "prompts": [
+            "What did you notice in your practice this week?",
+            "What quality of attention did you bring to your sadhana?",
+            "What is arising that wants to be seen?"
+        ]
+    }
+]
