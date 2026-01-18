@@ -166,23 +166,42 @@ body {
     height: 100dvh;
     overflow: hidden;
 
-    /* Divine deity background image */
+    /* DESKTOP: Clean abstract golden gradient (no image) */
     background:
-        /* Light overlay for readability */
+        /* Golden ambient glow */
+        radial-gradient(ellipse 80% 50% at 50% 80%,
+            rgba(196, 150, 26, 0.25) 0%,
+            transparent 60%),
+        /* Warm light from top */
+        radial-gradient(ellipse 100% 80% at 50% -20%,
+            rgba(255, 200, 100, 0.15) 0%,
+            transparent 50%),
+        /* Base warm cream gradient */
         linear-gradient(180deg,
-            rgba(255, 255, 255, 0.1) 0%,
-            rgba(255, 255, 255, 0.05) 50%,
-            rgba(255, 255, 255, 0.2) 100%),
-        /* The deity image */
-        var(--bg-image);
-
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+            #f5f0e8 0%,
+            #e8e0d5 100%);
 
     /* Prevent overscroll */
     overscroll-behavior: none;
+}
+
+/* MOBILE: Divine Krishna background image */
+@media (max-width: 600px) {
+    body {
+        background:
+            /* Light overlay for readability */
+            linear-gradient(180deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.15) 100%),
+            /* The deity image */
+            var(--bg-image);
+
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
 }
 
 /* Page entrance - subtle scale */
