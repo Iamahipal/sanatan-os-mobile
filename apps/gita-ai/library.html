@@ -599,6 +599,90 @@
         .tts-lang-btn:not(.active):hover {
             background: var(--surface-container);
         }
+
+        /* Favorites View Styles */
+        .favorites-chapter-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .favorites-chapter-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-4);
+            background: var(--primary-container);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-2);
+        }
+
+        .favorites-chapter-num {
+            font-weight: var(--font-semibold);
+            color: var(--primary);
+            font-size: var(--text-sm);
+        }
+
+        .favorites-chapter-name {
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+        }
+
+        .favorite-verse-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-2);
+            cursor: pointer;
+            text-align: left;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .favorite-verse-item:hover {
+            background: var(--surface-container);
+            border-color: var(--primary);
+        }
+
+        .fav-verse-num {
+            font-weight: var(--font-semibold);
+            color: var(--text-primary);
+            font-size: var(--text-sm);
+            white-space: nowrap;
+        }
+
+        .fav-verse-preview {
+            flex: 1;
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .favorite-verse-item svg {
+            width: 18px;
+            height: 18px;
+            color: var(--text-tertiary);
+            flex-shrink: 0;
+        }
+
+        #show-favorites-btn {
+            position: relative;
+        }
+
+        #show-favorites-btn.has-favorites::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            background: #EF4444;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
@@ -613,7 +697,9 @@
                 <h1 class="header-title">गीता ग्रंथ</h1>
                 <p class="header-subtitle">Scripture Library</p>
             </div>
-            <div style="width: 44px;"></div>
+            <button class="header-btn" id="show-favorites-btn" aria-label="My Favorites">
+                <i data-lucide="heart"></i>
+            </button>
         </header>
 
         <!-- Chapter Grid View -->
@@ -638,6 +724,20 @@
                 </div>
             </div>
             <div class="verse-list-container" id="verse-list-container"></div>
+        </div>
+
+        <!-- Favorites View -->
+        <div id="favorites-view" class="verse-list-view">
+            <div class="verse-header">
+                <button class="verse-back-btn" id="back-from-favorites" aria-label="Back">
+                    <i data-lucide="arrow-left"></i>
+                </button>
+                <div class="verse-header-info">
+                    <h2>❤️ My Favorites</h2>
+                    <p id="favorites-count">0 saved verses</p>
+                </div>
+            </div>
+            <div class="verse-list-container" id="favorites-container"></div>
         </div>
 
         <!-- Verse Reader Modal -->
@@ -801,6 +901,133 @@
 
             // Attach favorite button click handler
             document.getElementById('favorite-btn').onclick = toggleFavorite;
+
+            // ========== Favorites View ==========
+            const favoritesView = document.getElementById('favorites-view');
+            const favoritesContainer = document.getElementById('favorites-container');
+
+            function showFavoritesView() {
+                mainHeader.style.display = 'none';
+                chapterView.style.display = 'none';
+                verseView.style.display = 'none';
+                favoritesView.style.display = 'flex';
+                renderFavorites();
+            }
+
+            function hideFavoritesView() {
+                favoritesView.style.display = 'none';
+                mainHeader.style.display = 'flex';
+                chapterView.style.display = 'flex';
+            }
+
+            function renderFavorites() {
+                const favorites = getFavorites();
+                document.getElementById('favorites-count').textContent =
+                    `${favorites.length} saved verse${favorites.length !== 1 ? 's' : ''}`;
+
+                if (favorites.length === 0) {
+                    favoritesContainer.innerHTML = `
+                        <div style="text-align: center; padding: 60px 20px; color: var(--text-secondary);">
+                            <i data-lucide="heart" style="width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.3;"></i>
+                            <p style="font-size: 16px; margin-bottom: 8px;">No favorites yet</p>
+                            <p style="font-size: 14px;">Tap the ❤️ heart on any verse to save it here</p>
+                        </div>
+                    `;
+                    lucide.createIcons();
+                    return;
+                }
+
+                // Group favorites by chapter
+                const grouped = {};
+                favorites.forEach(key => {
+                    const [chapter, verse] = key.split('.');
+                    if (!grouped[chapter]) grouped[chapter] = [];
+                    grouped[chapter].push(verse);
+                });
+
+                let html = '';
+                Object.keys(grouped).sort((a, b) => parseInt(a) - parseInt(b)).forEach(chapterNum => {
+                    const chapterNames = CHAPTER_NAMES[chapterNum] || { sanskrit: '', english: '' };
+                    html += `
+                        <div class="favorites-chapter-group">
+                            <div class="favorites-chapter-header">
+                                <span class="favorites-chapter-num">Chapter ${chapterNum}</span>
+                                <span class="favorites-chapter-name">${chapterNames.english}</span>
+                            </div>
+                    `;
+
+                    grouped[chapterNum].sort((a, b) => parseInt(a) - parseInt(b)).forEach(verseNum => {
+                        // Find the verse data
+                        const verseData = findVerseData(chapterNum, verseNum);
+                        const preview = verseData ?
+                            (verseData.translation || verseData.meaning || '').substring(0, 80) + '...' :
+                            'Verse ' + verseNum;
+
+                        html += `
+                            <button class="favorite-verse-item" data-chapter="${chapterNum}" data-verse="${verseNum}">
+                                <div class="fav-verse-num">Verse ${verseNum}</div>
+                                <div class="fav-verse-preview">${preview}</div>
+                                <i data-lucide="chevron-right"></i>
+                            </button>
+                        `;
+                    });
+
+                    html += '</div>';
+                });
+
+                favoritesContainer.innerHTML = html;
+                lucide.createIcons();
+
+                // Attach click handlers
+                document.querySelectorAll('.favorite-verse-item').forEach(item => {
+                    item.onclick = () => {
+                        const chapter = parseInt(item.dataset.chapter);
+                        const verse = parseInt(item.dataset.verse);
+                        openFavoriteVerse(chapter, verse);
+                    };
+                });
+            }
+
+            function findVerseData(chapter, verse) {
+                if (DATA.verses) {
+                    return DATA.verses.find(v =>
+                        parseInt(v.chapter) === parseInt(chapter) &&
+                        parseInt(v.verse) === parseInt(verse)
+                    );
+                }
+                if (DATA.chapters) {
+                    const ch = DATA.chapters.find(c => parseInt(c.chapter) === parseInt(chapter));
+                    if (ch && ch.verses) {
+                        return ch.verses.find(v => parseInt(v.verse) === parseInt(verse));
+                    }
+                }
+                return null;
+            }
+
+            function openFavoriteVerse(chapter, verse) {
+                // Load the chapter's verses first
+                let chapterData;
+                if (DATA.chapters) {
+                    chapterData = DATA.chapters.find(c => parseInt(c.chapter) === parseInt(chapter));
+                    if (chapterData) {
+                        currentVerses = chapterData.verses || [];
+                    }
+                } else if (DATA.verses) {
+                    currentVerses = DATA.verses.filter(v => parseInt(v.chapter) === parseInt(chapter));
+                }
+
+                currentChapter = chapter;
+                currentVerseIndex = currentVerses.findIndex(v => parseInt(v.verse) === parseInt(verse));
+                if (currentVerseIndex === -1) currentVerseIndex = 0;
+
+                renderVerseReader();
+                favoritesView.style.display = 'none';
+                verseReader.classList.add('active');
+            }
+
+            // Attach favorites view handlers
+            document.getElementById('show-favorites-btn').onclick = showFavoritesView;
+            document.getElementById('back-from-favorites').onclick = hideFavoritesView;
 
             if (!DATA) {
                 chapterGrid.innerHTML = `<p style="text-align:center; padding:20px; grid-column: span 2;">Library Empty</p>`;
