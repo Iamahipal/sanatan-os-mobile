@@ -696,16 +696,32 @@
             let isSpeaking = false;
             let currentAudio = null;
             let ttsLang = 'hindi'; // Default: Hindi for Sanskrit
-            let ttsSpeed = 1.0;    // Google TTS rate (0.25 - 4.0, 1.0 is normal)
+            let ttsSpeed = 0.92;   // Slightly slower for spiritual, contemplative feel
 
-            // Google Cloud TTS Voice Options (Premium Wavenet voices)
+            // Google Cloud TTS Voice Options (Neural2 - Google's best, most natural)
+            // Settings tuned for spiritual, calming delivery
             const VOICES = {
                 hindi: {
-                    sanskrit: { languageCode: 'hi-IN', name: 'hi-IN-Wavenet-D', ssmlGender: 'FEMALE' },
-                    translation: { languageCode: 'hi-IN', name: 'hi-IN-Wavenet-C', ssmlGender: 'MALE' }
+                    sanskrit: {
+                        languageCode: 'hi-IN',
+                        name: 'hi-IN-Neural2-D',  // Neural2 Female - most natural Hindi
+                        ssmlGender: 'FEMALE',
+                        pitch: -1.0  // Slightly lower pitch for gravitas
+                    },
+                    translation: {
+                        languageCode: 'hi-IN',
+                        name: 'hi-IN-Neural2-B',  // Neural2 Male - warm, clear
+                        ssmlGender: 'MALE',
+                        pitch: -0.5
+                    }
                 },
                 english: {
-                    translation: { languageCode: 'en-IN', name: 'en-IN-Wavenet-A', ssmlGender: 'FEMALE' }
+                    translation: {
+                        languageCode: 'en-IN',
+                        name: 'en-IN-Neural2-A',  // Neural2 Indian English Female
+                        ssmlGender: 'FEMALE',
+                        pitch: 0
+                    }
                 }
             };
 
@@ -760,7 +776,7 @@
                     audioConfig: {
                         audioEncoding: 'MP3',
                         speakingRate: ttsSpeed,
-                        pitch: 0
+                        pitch: voice.pitch || 0  // Use voice-specific pitch
                     }
                 };
 
