@@ -583,26 +583,11 @@ body.page-enter {
     margin-top: 60px;
     touch-action: manipulation;
 
-    /* Ambient deity glow */
-    background: radial-gradient(ellipse 80% 60% at 50% 80%,
-            var(--deity-glow) 0%,
-            transparent 60%);
+    /* No background overlay - keep clean */
+    background: transparent;
 }
 
-/* Subtle bottom light */
-.japa-canvas::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    background: linear-gradient(0deg,
-            var(--deity-glow) 0%,
-            transparent 100%);
-    opacity: 0.6;
-    pointer-events: none;
-}
+/* No deity glow overlay */
 
 /* ===== MALA COMPLETE CELEBRATION ===== */
 
