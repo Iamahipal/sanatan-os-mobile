@@ -357,7 +357,7 @@ body.page-enter {
     }
 }
 
-/* ===== HEADER - CLEAN SIMPLE BAR (Krishna Vaani style) ===== */
+/* ===== HEADER - SOLID (Krishna Vaani style) ===== */
 
 .app-header {
     display: flex;
@@ -369,14 +369,11 @@ body.page-enter {
     position: relative;
     z-index: 50;
 
-    /* Simple semi-transparent background - no blur for performance */
-    background: rgba(255, 255, 255, 0.85);
-
-    /* Optional: subtle bottom border */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    /* Solid surface background - matches Krishna Vaani */
+    background: #FAFAF9;
 }
 
-/* ===== HEADER BUTTONS - SIMPLE (Krishna Vaani style) ===== */
+/* ===== HEADER BUTTONS (Krishna Vaani style) ===== */
 
 .header-btn {
     display: flex;
@@ -389,16 +386,16 @@ body.page-enter {
     cursor: pointer;
     text-decoration: none;
 
-    /* Simple solid background - no blur for performance */
-    background: rgba(240, 240, 238, 0.9);
-    color: var(--text);
+    /* Krishna Vaani surface-container color */
+    background: #F0EFED;
+    color: #1A1A19;
 
     /* Simple transition */
     transition: all 0.15s ease-out;
 }
 
 .header-btn:hover {
-    background: rgba(232, 231, 229, 1);
+    background: #E8E7E5;
 }
 
 .header-btn:active {
@@ -863,14 +860,12 @@ body.page-enter {
     }
 }
 
-/* ===== MODALS - LIQUID GLASS PANELS ===== */
+/* ===== MODALS - SOLID PANELS (Krishna Vaani style) ===== */
 
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(var(--blur-subtle));
-    -webkit-backdrop-filter: blur(var(--blur-subtle));
+    background: rgba(0, 0, 0, 0.5);
     display: none;
     justify-content: center;
     align-items: flex-end;
@@ -889,19 +884,15 @@ body.page-enter {
     padding: 24px;
     padding-bottom: calc(24px + var(--safe-bottom));
 
-    /* Crystal Clear Glass */
-    background: var(--glass-frost);
-    backdrop-filter: blur(var(--blur-extreme)) saturate(2);
-    -webkit-backdrop-filter: blur(var(--blur-extreme)) saturate(2);
-    border: 1px solid var(--glass-border-light);
-    border-bottom: none;
-    border-radius: 32px 32px 0 0;
+    /* SOLID white background - Krishna Vaani style */
+    background: #FFFFFF;
+    border: none;
+    border-radius: 24px 24px 0 0;
 
-    box-shadow:
-        0 -8px 40px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
 
-    animation: modalSlideUp 0.4s var(--spring-bounce);
+    /* Smooth slide-up animation */
+    animation: modalSlideUp 0.35s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @keyframes modalSlideUp {
@@ -925,7 +916,7 @@ body.page-enter {
     transform: translateX(-50%);
     width: 40px;
     height: 4px;
-    background: var(--glass-border);
+    background: rgba(0, 0, 0, 0.12);
     border-radius: 2px;
 }
 
@@ -935,18 +926,18 @@ body.page-enter {
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .modal-header h2 {
     font-size: 1.15rem;
     font-weight: 600;
-    color: var(--text);
+    color: #1A1A19;
 }
 
 .close-btn {
-    background: var(--glass-clear);
-    border: 1px solid var(--glass-border);
+    background: #F0EFED;
+    border: none;
     border-radius: 50%;
     width: 36px;
     height: 36px;
@@ -954,12 +945,11 @@ body.page-enter {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s var(--spring-bounce);
+    transition: all 0.15s ease-out;
 }
 
 .close-btn:hover {
-    background: var(--glass-frost);
-    transform: scale(1.1);
+    background: #E8E7E5;
 }
 
 .close-btn:active {
@@ -975,7 +965,7 @@ body.page-enter {
 .name-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 }
 
 .name-option {
@@ -1027,17 +1017,15 @@ body.page-enter {
 .accordion {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }
 
 .accordion-item {
-    /* Light glass - readable on bright backgrounds */
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(20px);
+    /* Solid surface-container - Krishna Vaani style */
+    background: #F0EFED;
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: none;
 }
 
 .accordion-header {
@@ -1048,7 +1036,7 @@ body.page-enter {
     background: none;
     border: none;
     padding: 16px 20px;
-    color: var(--text);
+    color: #1A1A19;
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
@@ -1058,11 +1046,13 @@ body.page-enter {
 }
 
 .accordion-header:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.03);
 }
 
+/* Content spacing - add margin-top to create gap from header */
 .accordion-content {
-    padding: 0 20px 20px;
+    padding: 4px 20px 20px;
+    margin-top: 0;
 }
 
 .accordion-content.collapsed {
@@ -1074,26 +1064,23 @@ body.page-enter {
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 12px;
+    margin-top: 8px;
     margin-bottom: 16px;
 }
 
 .stat-card {
-    /* Light background for clarity */
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 16px;
+    /* Solid white background */
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 14px;
     padding: 16px 12px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .stat-card.streak-card {
-    background: linear-gradient(135deg,
-            rgba(255, 100, 0, 0.15),
-            rgba(255, 50, 0, 0.08));
-    border-color: rgba(255, 100, 0, 0.3);
+    background: linear-gradient(135deg, #FFF5F0, #FFEDE8);
+    border-color: rgba(212, 98, 42, 0.15);
 }
 
 .stat-number {
@@ -1102,12 +1089,11 @@ body.page-enter {
     font-weight: 700;
     color: var(--accent);
     line-height: 1.2;
-    /* Remove text shadow for light theme */
 }
 
 .stat-label {
     font-size: 0.6rem;
-    color: var(--text-muted);
+    color: #5C5C5A;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-top: 4px;
@@ -1116,12 +1102,12 @@ body.page-enter {
 /* ===== CHART ===== */
 
 .chart-section {
-    /* Light background for data visualization */
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 16px;
+    /* Solid white background */
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 14px;
     padding: 16px;
+    margin-top: 8px;
 }
 
 .chart-section.tall-chart .chart-container {
@@ -1174,21 +1160,22 @@ body.page-enter {
 
 .option-row {
     display: flex;
-    gap: 10px;
+    gap: 12px;
+    margin-top: 8px;
 }
 
 .option-btn {
     flex: 1;
-    padding: 12px;
-    /* Light glass button */
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 14px;
+    /* Solid white button - Krishna Vaani style */
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 12px;
-    color: var(--text);
+    color: #1A1A19;
     cursor: pointer;
     font-size: 0.95rem;
     font-family: inherit;
-    transition: all 0.25s var(--spring-bounce);
+    transition: all 0.15s ease-out;
 }
 
 .option-btn:active {
@@ -1197,17 +1184,16 @@ body.page-enter {
 
 .option-btn.active {
     background: var(--accent);
-    color: #000;
+    color: #FFFFFF;
     border-color: var(--accent);
     font-weight: 600;
-    box-shadow: 0 0 20px var(--accent-soft);
 }
 
 .sound-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 12px;
+    gap: 12px;
+    margin-top: 16px;
 }
 
 .sound-option {
@@ -1216,15 +1202,15 @@ body.page-enter {
     justify-content: center;
     gap: 8px;
     padding: 14px 10px;
-    /* Simple button, not glass */
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    /* Solid white - Krishna Vaani style */
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 12px;
-    color: var(--text);
+    color: #1A1A19;
     cursor: pointer;
     font-size: 0.9rem;
     font-family: inherit;
-    transition: all 0.25s var(--spring-bounce);
+    transition: all 0.15s ease-out;
 }
 
 .sound-option:active {
@@ -1232,16 +1218,10 @@ body.page-enter {
 }
 
 .sound-option.active {
-    /* SOLID active state - not glass */
     border-color: var(--accent);
-    background: linear-gradient(135deg,
-            var(--accent) 0%,
-            color-mix(in srgb, var(--accent) 85%, #000) 100%);
-    color: #000;
+    background: var(--accent);
+    color: #FFFFFF;
     font-weight: 600;
-    box-shadow:
-        0 4px 12px var(--accent-soft),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 /* ===== REMINDER ===== */
