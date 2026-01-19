@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const malaContainer = document.getElementById('mala-container');
     const malaComplete = document.getElementById('mala-complete');
     const completeCount = document.getElementById('complete-count');
+    const completeDeityName = document.getElementById('complete-deity-name');
 
     // Name Selector
     const nameSelectorBtn = document.getElementById('name-selector-btn');
@@ -334,9 +335,15 @@ document.addEventListener('DOMContentLoaded', () => {
         divineFlash.classList.add('active');
         setTimeout(() => divineFlash.classList.remove('active'), 1000);
 
+        // Update deity name in completion popup
+        const deity = DEITIES[state.currentDeity];
+        if (completeDeityName) {
+            completeDeityName.textContent = state.language === 'hi' ? deity.text_hi : deity.text_en;
+        }
+
         completeCount.textContent = `(${state.malaCount})`;
         malaComplete.classList.add('active');
-        setTimeout(() => malaComplete.classList.remove('active'), 2000);
+        setTimeout(() => malaComplete.classList.remove('active'), 2500);
 
         malaCountEl.classList.add('pulse');
         setTimeout(() => malaCountEl.classList.remove('pulse'), 400);

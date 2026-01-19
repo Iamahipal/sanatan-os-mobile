@@ -1,5 +1,8 @@
-/* ===== APPLE LIQUID GLASS DESIGN SYSTEM ===== */
-/* Japa App - LIGHT THEME with Divine Deity Background */
+/* ===== KRISHNA VAANI FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap');
+
+/* ===== JAPA APP DESIGN SYSTEM ===== */
+/* LIGHT THEME with Divine Deity Background */
 
 :root {
     /* === LIQUID GLASS - LIGHT MODE === */
@@ -160,7 +163,7 @@
 /* ===== BODY - DIVINE LIGHT BACKGROUND ===== */
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Outfit', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     color: var(--text);
     height: 100vh;
     height: 100dvh;
@@ -588,22 +591,17 @@ body.page-enter {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    padding: 32px 48px;
+    gap: 8px;
+    padding: 36px 56px;
 
-    /* Frosted Glass Panel */
-    background: var(--glass-frost);
-    backdrop-filter: blur(var(--blur-extreme)) saturate(1.8);
-    -webkit-backdrop-filter: blur(var(--blur-extreme)) saturate(1.8);
-    border: 1px solid var(--glass-border-light);
-    border-radius: 28px;
+    /* Solid white panel - Krishna Vaani style */
+    background: #FFFFFF;
+    border: none;
+    border-radius: 24px;
 
-    box-shadow:
-        var(--shadow-deep),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25),
-        0 0 60px var(--accent-soft);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 
-    animation: celebrateBounce 0.5s var(--spring-bounce);
+    animation: celebrateBounce 0.5s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @keyframes celebrateBounce {
@@ -616,16 +614,29 @@ body.page-enter {
     }
 }
 
-.complete-text {
-    font-size: 1.4rem;
+/* Deity name - large Sanskrit font */
+.complete-deity-name {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 2rem;
     font-weight: 600;
     color: var(--accent);
-    text-shadow: 0 0 20px var(--accent-soft);
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* Subtitle text */
+.complete-text {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #5C5C5A;
+    margin-top: 4px;
 }
 
 .complete-count {
-    font-size: 1rem;
-    color: var(--text-muted);
+    font-size: 0.9rem;
+    color: #8A8A87;
+    margin-top: 4px;
 }
 
 /* ===== MALA SECTION ===== */
