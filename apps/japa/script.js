@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function rotateMala() {
         malaRotation += (360 / TOTAL_BEADS);
         malaContainer.style.transform = `translateX(-50%) rotate(${malaRotation}deg)`;
-        malaContainer.querySelectorAll('.bead').forEach(b => b.classList.remove('complete-bead'));
+        // Removed expensive querySelectorAll on every tap - only clear on mala complete
     }
 
     function completeMala() {
@@ -406,7 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateDisplay() {
         beadCountEl.textContent = state.beadCount;
         malaCountEl.textContent = state.malaCount;
-        updateSelectedName();
+        // Note: updateSelectedName only called when deity changes, not every tap
     }
 
     function updateLevelBadge() {
@@ -537,8 +537,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (stored) state = { ...state, ...JSON.parse(stored) };
     }
 
+    // Debounced save - don't write localStorage on every tap
+    let saveTimeout = null;
     function saveState() {
-        localStorage.setItem('naamjapa_premium', JSON.stringify(state));
+        // Clear pending save
+        if (saveTimeout) clearTimeout(saveTimeout);
+        // Debounce: save after 500ms of no taps
+        saveTimeout = setTimeout(() => {
+            localStorage.setItem('naamjapa_premium', JSON.stringify(state));
+        }, 500);
     }
 
     // === Reminder System ===
