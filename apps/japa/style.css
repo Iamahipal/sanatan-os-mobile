@@ -647,7 +647,7 @@ body.page-enter {
     overflow: hidden;
 }
 
-/* ===== COUNTER DISPLAY - CRYSTAL GLASS ===== */
+/* ===== COUNTER DISPLAY - LIQUID GLASS ===== */
 
 .counter-display {
     position: absolute;
@@ -656,77 +656,38 @@ body.page-enter {
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 24px;
     z-index: 20;
 
-    /* === APPLE LIQUID GLASS EFFECT === */
+    /* === LIQUID GLASS BASE === */
+    /* Semi-transparent with subtle tint */
+    background: rgba(255, 255, 255, 0.25);
 
-    /* Base: Semi-transparent with high saturation */
-    background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.85) 0%,
-            rgba(255, 255, 255, 0.65) 50%,
-            rgba(255, 255, 255, 0.75) 100%);
+    /* Border acts as glass edge refraction */
+    border: 1px solid rgba(255, 255, 255, 0.35);
 
-    /* Deep blur with high saturation for liquid crystal effect */
-    backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
-    -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
+    padding: 14px 36px;
+    border-radius: 28px;
 
-    /* Subtle refraction border */
-    border: 1px solid rgba(255, 255, 255, 0.6);
-
-    padding: 16px 40px;
-    border-radius: 32px;
-
-    /* Multi-layer shadows for floating glass depth */
+    /* Inner shadow for glass depth - like the reference */
     box-shadow:
-        /* Outer soft shadow */
-        0 8px 32px rgba(0, 0, 0, 0.12),
-        0 2px 8px rgba(0, 0, 0, 0.08),
-        /* Inner top highlight (specular) */
-        inset 0 2px 4px rgba(255, 255, 255, 0.9),
-        /* Inner bottom subtle shadow */
-        inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+        /* Glass inner shadow */
+        inset 0 4px 20px rgba(0, 0, 0, 0.06),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+        /* Outer floating shadow */
+        0 8px 32px rgba(0, 0, 0, 0.12);
 
-    /* Smooth appearance */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Note: backdrop-filter is applied by liquid-glass.js */
 }
 
-/* Top shine layer - simulates light refraction */
-.counter-display::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 55%;
-    border-radius: 32px 32px 100px 100px;
-    background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.5) 0%,
-            rgba(255, 255, 255, 0.2) 40%,
-            transparent 100%);
-    pointer-events: none;
-}
-
-/* Bottom subtle reflection */
-.counter-display::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 10%;
-    right: 10%;
-    height: 30%;
-    border-radius: 100px 100px 32px 32px;
-    background: linear-gradient(0deg,
-            rgba(255, 255, 255, 0.15) 0%,
-            transparent 100%);
-    pointer-events: none;
-}
-
+/* Counter items */
 .counter-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 60px;
+    min-width: 55px;
+    position: relative;
+    z-index: 5;
 }
 
 .counter-label {
@@ -734,7 +695,7 @@ body.page-enter {
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: rgba(0, 0, 0, 0.45);
+    color: rgba(60, 60, 60, 0.7);
     font-weight: 500;
     margin-bottom: 2px;
 }
@@ -746,20 +707,20 @@ body.page-enter {
     color: var(--accent);
     line-height: 1;
     font-variant-numeric: tabular-nums;
-    /* Subtle text shadow for depth */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 .counter-divider {
     width: 1px;
-    height: 44px;
+    height: 40px;
     background: linear-gradient(180deg,
             transparent 0%,
-            rgba(0, 0, 0, 0.1) 30%,
+            rgba(0, 0, 0, 0.12) 30%,
             rgba(0, 0, 0, 0.15) 50%,
-            rgba(0, 0, 0, 0.1) 70%,
+            rgba(0, 0, 0, 0.12) 70%,
             transparent 100%);
-    margin: 0 8px;
+    position: relative;
+    z-index: 5;
 }
 
 /* Counter pulse animation */
