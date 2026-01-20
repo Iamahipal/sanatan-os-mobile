@@ -1,26 +1,67 @@
 {
-    "primary_deity": {
-        "name": "Lord Vaidyanath",
-        "form": "Jyotirlinga - The Divine Healer",
-        "consort": "Goddess Parvati (Jayaa Durga)",
-        "meaning": "Lord of Physicians, the Divine Healer who cures all ailments of body and soul"
+    "name": "Vaidyanath / Baidyanath",
+    "meaning": "Lord of Physicians / Divine Healer",
+    "other_names": [
+        "Baidyanath",
+        "Baba Dham",
+        "Deoghar Jyotirlinga"
+    ],
+    "epithets": [
+        "Vaidya Raja - King of Physicians",
+        "Maha Vaidya - Supreme Doctor",
+        "Ravana Anugrahit - Blessed by Ravana's Devotion",
+        "Kanwar Dham - Destination of Kanwar Pilgrimage"
+    ],
+    "iconography": {
+        "form_here": "The Vaidyanath lingam is one of the largest Jyotirlingas, housed in a cramped but intensely sacred sanctum. The lingam is not perfectly shaped—tradition says it was damaged when Ravana dropped it. This 'imperfection' is part of its mystique.",
+        "symbolism": {
+            "healing_aspect": "Shiva as Vaidyanath represents cosmic medicine—the cure for samsara itself. Physical healing is the outer layer; spiritual liberation is the true healing offered here.",
+            "ravana_connection": "Even the demon king found grace through devotion. This teaches that sincere worship transcends the worshipper's nature.",
+            "kanwar_tradition": "Millions walking with Ganga water represents collective devotion—individual effort amplified by shared sacred purpose"
+        }
     },
     "mythology": {
-        "origin_story": "Ravana, the mighty king of Lanka, performed fierce penance to obtain Shiva's blessing. When Shiva seemed unmoved, Ravana began severing his own heads as offerings. Moved by this extreme devotion, Shiva appeared, healed all ten heads, and became known as Vaidyanath—the Divine Physician. Though Ravana was granted his boon, the lingam was destined to remain at Deoghar.",
-        "cosmic_significance": "Vaidyanath represents Shiva's compassionate, healing aspect. While Shiva is often portrayed as the transformer through destruction, here he appears as the physician who restores wholeness. This Jyotirlinga teaches that divine grace transcends moral judgment—even Ravana received healing through sincere devotion."
+        "origin_story": "Ravana, the mighty demon king, was an extraordinary Shiva devotee. He performed intense tapas at this spot, and when his austerities injured his arms, Shiva personally healed him—becoming known as Vaidyanath, the Divine Physician. Pleased by Ravana's devotion, Shiva agreed to be taken to Lanka. But the gods, alarmed at Shiva leaving Bharat, tricked Ravana into setting down the lingam here—where it remains forever rooted.",
+        "key_episodes": [
+            {
+                "title": "Ravana's Supreme Devotion",
+                "story": "Despite being a demon, Ravana was Shiva's greatest devotee. He composed the Shiva Tandava Stotram, lifted Mount Kailash, and performed unmatched austerities. At Vaidyanath, he cut off his heads as offerings until Shiva appeared."
+            },
+            {
+                "title": "The Lingam That Cannot Be Moved",
+                "story": "When Ravana tried to carry the lingam to Lanka, Vishnu tricked him into setting it down. Since then, countless attempts to move the lingam have failed—it is rooted to the earth by divine will."
+            }
+        ]
     },
-    "sacred_mantras": [
-        {
-            "name": "Vaidyanath Dhyana Mantra",
+    "worship": {
+        "primary_mantra": {
             "sanskrit": "ॐ वैद्यनाथाय नमः",
-            "meaning": "Salutations to the Lord of Physicians",
-            "benefit": "Invokes divine healing energy for physical ailments, mental disturbances, and spiritual diseases"
+            "transliteration": "Om Vaidyanathaya Namah",
+            "translation": "Salutations to the Lord of Physicians",
+            "meaning": "Invokes Shiva's healing aspect for physical and spiritual wellness"
         },
-        {
-            "name": "Maha Mrityunjaya Mantra",
-            "sanskrit": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात्",
-            "meaning": "The Great Death-Conquering Mantra",
-            "benefit": "Especially powerful at Vaidyanath for healing terminal illnesses and protecting from untimely death"
-        }
-    ]
+        "offerings": [
+            "Ganga jal (sacred water)",
+            "Bilva leaves",
+            "Milk",
+            "Bel fruit",
+            "Dhatura flowers"
+        ],
+        "festivals": [
+            {
+                "name": "Shravan Mela / Kanwar Yatra",
+                "timing": "July-August",
+                "significance": "20 million+ Kanwariyas bring Ganga water from Sultanganj; world's largest annual pilgrimage"
+            },
+            {
+                "name": "Maha Shivaratri",
+                "timing": "February/March",
+                "significance": "Massive gathering with all-night worship"
+            }
+        ]
+    },
+    "philosophy": {
+        "core_teaching": "Vaidyanath teaches that divine grace transcends human judgment. If Shiva could heal and bless Ravana, who are we to limit divine compassion? True devotion is recognized regardless of the devotee's worldly nature.",
+        "healing_principle": "The Lord is the ultimate physician—healing body, mind, and soul. Those who surrender completely receive healing at all levels."
+    }
 }

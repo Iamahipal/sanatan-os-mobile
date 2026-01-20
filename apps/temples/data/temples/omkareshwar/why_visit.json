@@ -1,24 +1,58 @@
 {
-    "spiritual_invitation": "🙏 Welcome, seeker of the primordial truth. You have arrived at Omkareshwar, where the sacred sound that created the universe is made manifest in stone and water. This Om-shaped island in the divine Narmada is where Shiva revealed himself as the Lord of the cosmic vibration. Feel the ancient resonance in every stone, every ripple—you stand at the source of all sound.",
-    "blessings": [
+    "spiritual_invitation": "Welcome to Omkareshwar, where the sacred Narmada cradles an island shaped like the cosmic symbol Om (ॐ). Here, the primordial sound that birthed the universe has taken geographical form. As you cross the waters to Mandhata Island, you enter a space where heaven and earth merge, where the vibration of creation still echoes.",
+    "spiritual_benefits": [
         {
-            "title": "Attunement to Cosmic Vibration",
-            "blessing": "May the primordial Om that pervades this sacred island align your consciousness with the fundamental frequency of existence",
-            "significance": "Omkareshwar is the physical manifestation of Om—the first sound of creation. Worshipping here is said to harmonize the devotee's inner vibration with the cosmic sound.",
-            "experience": "Chant Om while circumambulating the island, feeling the resonance between your voice and the sacred geography"
+            "blessing": "Connection to Primordial Sound",
+            "significance": "Om is the first sound of creation, the vibration from which all existence emerged. Worshipping where Om has taken geographical form connects you to this original creative power. Many devotees report enhanced meditation experiences here.",
+            "experience": "Sit by the Narmada at dawn or dusk and chant Om 108 times. The river, island, and your consciousness align with the cosmic vibration."
         },
         {
-            "title": "Double Divine Blessing",
-            "blessing": "May both Omkareshwar and Amareshwar shower their combined grace upon you",
-            "significance": "This is the only location with two Jyotirlingas. Visiting both completes a unique spiritual circuit unavailable anywhere else on Earth.",
-            "experience": "Perform darshan at both Omkareshwar and Amareshwar temples to receive the complete blessing of this sacred island"
+            "blessing": "Complete Pilgrimage (Sarva Tirtha)",
+            "significance": "Ancient texts state that visiting all 68 tirthas on Mandhata Island equals visiting every sacred site in India. The island is a microcosm of all pilgrimage compressed into one place.",
+            "experience": "Perform the 7 km Parikrama (circumambulation) of the island, offering prayers at each of the ancient shrines along the way."
         },
         {
-            "title": "Narmada's Purifying Grace",
-            "blessing": "May the sacred Narmada, the only river whose circumambulation grants moksha, purify your soul",
-            "significance": "The Narmada is considered even more purifying than the Ganga. Mere sight of it is said to cleanse karma; bathing here multiplies the blessing thousandfold.",
-            "experience": "Take a sacred dip in the Narmada at the ghats and collect a smooth Banalinga pebble as divine prasad"
+            "blessing": "Dual Darshan - Form and Formless",
+            "significance": "This is the only place with two Jyotirlingas: Omkareshwar (formless Shiva as Om) and Mamleshwar (Shiva with form). Visiting both gives darshan of Shiva's complete nature—beyond all dualities.",
+            "experience": "Visit BOTH temples in the same pilgrimage. Meditate on how the same divine appears as formless sound and as formed stone."
+        },
+        {
+            "blessing": "Narmada's Liberation Power",
+            "significance": "The Narmada is called 'darshan-mukti' river—mere sight of her grants liberation. Every stone in the Narmada is a natural Shivling. Bathing here combines river moksha with Jyotirlinga darshan.",
+            "experience": "Take a holy dip at the ghat before temple darshan. Collect a Narmada pebble (Banalinga) as a natural Shivling for your home."
         }
     ],
-    "pilgrimage_blessing": "As you leave this sacred Om-shaped island, may the eternal vibration of creation resonate within you always. The Narmada's waters have purified you; the twin Jyotirlingas have blessed you. Carry the sound of Om in your heart, knowing that wherever you go, you carry a piece of this primordial sacred space within. 🙏 ॐ ओंकारेश्वराय नमः"
+    "practical_guide": {
+        "best_time": {
+            "season": "October to March offers pleasant weather. Avoid April-June due to extreme heat.",
+            "auspicious_days": "Kartik Purnima (November) sees the largest gathering. Maha Shivaratri is spectacular with all-night Om chanting.",
+            "sacred_hour": "Pre-dawn (4-6 AM) darshan is most peaceful. Evening aarti on the ghats is magical."
+        },
+        "sacred_rituals": [
+            "Dual Jyotirlinga Darshan - Visit both Omkareshwar and Mamleshwar temples",
+            "Narmada Snan - Sacred bath in the holy river before darshan",
+            "Island Parikrama - 7 km circumambulation covering 68 shrines",
+            "Boat Ride - The ferry crossing itself is a sacred experience",
+            "Siddhnath Cave - Visit the ancient cave temple on the island"
+        ],
+        "darshan_options": {
+            "general": "Free darshan at both temples for all devotees",
+            "special_puja": "₹151 - ₹1,100 for various ritual options",
+            "rudrabhishek": "₹501 - ₹2,500 for elaborate worship"
+        },
+        "preparation": {
+            "physical": "Parikrama involves walking; wear comfortable footwear",
+            "spiritual": "Begin chanting Om as you approach Omkareshwar. Let the vibration prepare your consciousness.",
+            "practical": "Multiple dharamshalas available. Best to stay overnight to cover both temples and parikrama."
+        }
+    },
+    "who_will_be_blessed": [
+        "Seekers exploring meditation and mantra practice",
+        "Those beginning or completing a Jyotirlinga pilgrimage",
+        "Devotees drawn to the Narmada's spiritual power",
+        "Pilgrims seeking a complete tirtha in a single destination",
+        "Those wanting to experience Shiva in both form and formless aspects",
+        "Spiritual seekers interested in sacred geography and cosmic symbolism"
+    ],
+    "pilgrimage_blessing": "As you return across the Narmada's sacred waters, carry the vibration of Om in your heart. May the primordial sound that shapes the cosmos now shape your destiny. May Omkareshwar's dual blessing—form and formless—dissolve all dualities in your consciousness. The river continues to flow, the island continues to resonate, and you are forever connected to this eternal pilgrimage. 🙏 ॐ ॐकारेश्वराय नमः"
 }

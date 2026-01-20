@@ -663,44 +663,44 @@ class App {
         div.textContent = str;
         return div.innerHTML;
     }
+
+    // Filter temples by category
+    filterTemples(category) {
+        // Update category card active states
+        document.querySelectorAll('.category-card').forEach(card => {
+            const isActive = card.dataset.category === category;
+            card.classList.toggle('active', isActive);
+
+            // Update badge states
+            const badge = card.querySelector('.category-badge');
+            if (badge) {
+                const isJyotirlinga = card.dataset.category === 'jyotirlinga';
+                if (isJyotirlinga) {
+                    badge.className = 'category-badge active';
+                    badge.textContent = 'Explore';
+                } else {
+                    badge.className = 'category-badge coming';
+                    badge.textContent = 'Coming Soon';
+                }
+            }
+        });
+
+        // Show alert for coming soon categories
+        if (category !== 'jyotirlinga') {
+            const categoryName = category === 'char-dham' ? 'Char Dham Yatra' : '51 Shakti Peethas';
+            alert(`🙏 ${categoryName} pilgrimage data is coming soon!\n\nExplore the 12 Jyotirlingas now available.`);
+            return;
+        }
+
+        // Refresh icons
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
 }
 
 // Initialize
 window.app = new App();
 
-// Global filter function for category buttons
+// Global filter function wrapper for HTML onclick handlers
 window.filterTemples = function (category) {
-    // Update category card active states
-    document.querySelectorAll('.category-card').forEach(card => {
-        card.classList.toggle('active', card.dataset.category === category);
-    });
-
-    // Update badge states
-    document.querySelectorAll('.category-card').forEach(card => {
-        const badge = card.querySelector('.category-badge');
-        if (badge) {
-            if (card.dataset.category === category && category === 'jyotirlinga') {
-                badge.classList.add('active');
-                badge.classList.remove('coming');
-                badge.textContent = 'Explore';
-            } else if (card.dataset.category === 'jyotirlinga') {
-                badge.classList.remove('active');
-                badge.classList.add('active');
-                badge.textContent = 'Explore';
-            } else {
-                badge.classList.remove('active');
-                badge.classList.add('coming');
-                badge.textContent = 'Coming Soon';
-            }
-        }
-    });
-
-    // Show alert for coming soon categories
-    if (category !== 'jyotirlinga') {
-        alert(`🙏 ${category === 'char-dham' ? 'Char Dham Yatra' : '51 Shakti Peethas'} pilgrimage data is coming soon!\n\nExplore the 12 Jyotirlingas now available.`);
-        return;
-    }
-
-    // Refresh icons
-    if (typeof lucide !== 'undefined') lucide.createIcons();
+    window.app.filterTemples(category);
 };

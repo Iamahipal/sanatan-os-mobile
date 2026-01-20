@@ -1,24 +1,58 @@
 {
-    "spiritual_invitation": "🙏 Welcome to Bhimashankar, where the fierce protective energy of Lord Shiva pulses through ancient forests and misty peaks. Here in the sacred Sahyadris, the Lord who conquered the demon Bhima awaits to protect you from all fears and obstacles. The journey through these pristine woods is itself a meditation—let nature prepare your heart for the divine darshan ahead.",
-    "blessings": [
+    "spiritual_invitation": "Welcome to Bhimashankar, where the fierce protective energy of Lord Shiva pulses through ancient forests and misty peaks. Here in the sacred Sahyadris, the Lord who conquered the demon Bhima awaits to shield you from all fears. The journey through these pristine woods is itself a meditation—let nature prepare your heart for divine darshan.",
+    "spiritual_benefits": [
         {
-            "title": "Protection from All Enemies",
-            "blessing": "May the fierce energy of Bhimashankar shield you from all adversaries, both external and internal",
-            "significance": "Shiva manifested here specifically to protect devotees from demonic forces. His fierce aspect grants courage and victory over enemies.",
-            "experience": "Offer prayers visualizing all obstacles in your life dissolving before the Lord's protective power"
+            "blessing": "Divine Protection from All Adversaries",
+            "significance": "Shiva manifested here specifically to protect devotees from demonic forces. His fierce Rudra aspect grants courage, strength, and victory over enemies—both external and internal. Those facing opposition, legal battles, or persistent obstacles find special grace here.",
+            "experience": "Offer prayers visualizing all obstacles in your life dissolving before the Lord's protective fire. The focused intensity of this small sanctum amplifies your intentions powerfully."
         },
         {
-            "title": "Harmony with Nature",
-            "blessing": "May your connection with the natural world deepen, recognizing the divine in all creation",
-            "significance": "The temple's location within a wildlife sanctuary reminds us that Shiva dwells in nature. True spirituality includes reverence for all life.",
-            "experience": "Walk mindfully through the forest trail, observing the sacred trees and wildlife as manifestations of the divine"
+            "blessing": "Healing Through Nature Connection",
+            "significance": "This is the only Jyotirlinga located within a wildlife sanctuary. The pristine forest environment offers a unique form of spiritual healing—the peace of nature combined with divine presence. Many visitors report deep mental clarity after the trek through these woods.",
+            "experience": "Begin your pilgrimage at dawn. Walk mindfully through the forest trail, observing the sacred trees and wildlife. The Giant Squirrels (Shekru) are considered Shiva's messengers—consider yourself blessed if you spot one."
         },
         {
-            "title": "Purification of the Soul",
-            "blessing": "May the sacred Bhima River, born of Shiva's cosmic energy, cleanse all impurities from your being",
-            "significance": "The Bhima River originates near the temple from Shiva's own essence. Its waters carry extraordinary purifying power.",
-            "experience": "Take a sacred dip in the temple kund before darshan, especially during Shravan month"
+            "blessing": "Purification at the River Source",
+            "significance": "The Bhima River originates from Shiva's own cosmic energy during his battle with demon Bhima. Taking water from this source carries extraordinary purifying power. The river that flows through Maharashtra begins with the Lord's own essence.",
+            "experience": "Visit the Moksha Kund near the temple. Taking a sacred dip here, especially during Shravan month, is said to cleanse lifetimes of karma."
+        },
+        {
+            "blessing": "Awakening of Courage (Veerya)",
+            "significance": "Bhimashankar specifically awakens spiritual courage. In a world that often requires us to stand against injustice or face difficult situations, the Lord's fierce blessing provides inner strength. This is not aggressive energy but protective power.",
+            "experience": "Sit in meditation facing the sanctum after darshan. Invoke Lord Bhimashankar's protection for any situation where you need courage to act rightly."
         }
     ],
-    "pilgrimage_blessing": "As you descend from these sacred hills, carry with you the fierce protective grace of Bhimashankar. Like the mighty Sahyadri mountains, may you stand firm against all adversity. The Lord who conquered demons now guards your journey through life. Go forth with courage, wrapped in divine protection. 🙏 ॐ भीमशंकराय नमः"
+    "practical_guide": {
+        "best_time": {
+            "season": "October to February offers clearest skies and comfortable trekking weather. July-September (monsoon) is spectacular but trails can be slippery.",
+            "auspicious_days": "Maha Shivaratri sees the largest crowds—devotees trek overnight through the forest. Shravan Mondays are especially sacred.",
+            "sacred_hour": "Early morning (5-7 AM) darshan is most powerful—the mist-covered sanctum creates an ethereal atmosphere."
+        },
+        "sacred_rituals": [
+            "Morning Abhishek - Sacred bathing of the Jyotirlinga with milk, water, and bilva leaves",
+            "Rudrabhishek - Elaborate ritual available for special occasions",
+            "Pradakshina - Circumambulating the temple while chanting Om Namah Shivaya",
+            "Shani Darshan - Visit the powerful Shani temple in the complex for Saturn-related prayers",
+            "Forest Walk - Walking mindfully to and from the temple as a form of moving meditation"
+        ],
+        "darshan_options": {
+            "general": "Free darshan for all devotees",
+            "special_puja": "₹251 - ₹1,100 for various ritual options",
+            "rudrabhishek": "₹501 - ₹2,100 for personal abhishek"
+        },
+        "preparation": {
+            "physical": "The trek involves climbing; wear comfortable footwear. Start early to avoid afternoon heat.",
+            "spiritual": "Begin chanting Om Bhimashankaraya Namah from the base of the mountain. Let the journey be part of worship.",
+            "practical": "Carry light snacks and water. Basic facilities available near temple. Stay options in Khandas village."
+        }
+    },
+    "who_will_be_blessed": [
+        "Those facing powerful adversaries or opposition in life",
+        "Nature lovers seeking the divine in wilderness",
+        "Devotees wanting an adventurous pilgrimage with trekking",
+        "Those seeking to overcome fear and develop courage",
+        "Wildlife enthusiasts hoping to spot the sacred Giant Squirrel",
+        "Shiva devotees drawn to his fierce Rudra aspect"
+    ],
+    "pilgrimage_blessing": "As you descend from these sacred hills, carry with you the fierce protective grace of Bhimashankar. Like the mighty Sahyadri mountains, may you stand firm against all adversity. Like the Bhima River born of divine energy, may your life flow with purpose and power. The Lord who conquered demons now guards your journey through life. Go forth with courage, wrapped in divine protection. 🙏 ॐ भीमशंकराय नमः"
 }

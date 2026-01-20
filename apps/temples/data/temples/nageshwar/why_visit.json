@@ -1,24 +1,46 @@
 {
-    "spiritual_invitation": "🙏 Welcome to Nageshwar, the sacred abode of the Lord of Serpents near Krishna's holy city of Dwarka. Here Shiva emerged to protect the devoted Supriya, demonstrating that sincere devotion is stronger than any demonic force. The serpent coiled around Shiva's neck represents kundalini—the divine energy awaiting awakening within you. May Nageshwar ignite your inner spiritual fire.",
-    "blessings": [
+    "spiritual_invitation": "Welcome to Nageshwar, where Shiva manifests as the Lord of Serpents—protector of devotees in their darkest hours. Near the sacred city of Dwarka, this Jyotirlinga emerged from pure devotion. Whatever threatens to poison your life, bring it here to the Remover of Venom.",
+    "spiritual_benefits": [
         {
-            "title": "Freedom from Fear",
-            "blessing": "May Nageshwar, who destroyed the demon Daruka, remove all fears from your heart",
-            "significance": "Shiva manifested here specifically to rescue devotees from demonic terror. He protects from all fears—physical, psychological, and spiritual.",
-            "experience": "Pray before the Jyotirlinga, surrendering all your fears, knowing the Lord who defeated demons will surely handle your troubles"
+            "blessing": "Protection from Serpent Curses",
+            "significance": "Nageshwar specifically removes Kala Sarpa dosha and other serpent-related afflictions in the horoscope. Those with snake-related fears, dreams, or karmic issues find relief here.",
+            "experience": "Offer milk to the Jyotirlinga while praying for removal of all serpent karma. Many perform special pujas for Kala Sarpa Dosha Shanti."
         },
         {
-            "title": "Serpent Blessings",
-            "blessing": "May the Lord of Nagas remove all serpent-related afflictions and fears from you",
-            "significance": "Nageshwar is especially powerful for protecting from snake bites and curing Kaal Sarpa Dosh. Serpents also represent kundalini energy.",
-            "experience": "Worship on Nag Panchami is especially potent, or request a special Nag Puja from the temple priests"
+            "blessing": "Faith in Adversity",
+            "significance": "Supriya's story teaches that devotion during difficulty is most powerful. If you're facing impossible circumstances, worship here strengthens your ability to maintain faith.",
+            "experience": "Meditate on Supriya's example. Whatever 'prison' you face—illness, debt, conflict—continue your practice. Divine intervention comes to the steadfast."
         },
         {
-            "title": "Dwarka Pilgrimage Merit",
-            "blessing": "May your combined visit to Nageshwar and Dwarkadhish grant double divine merit",
-            "significance": "Visiting both the Jyotirlinga and nearby Char Dham site multiplies the pilgrimage's spiritual benefits.",
-            "experience": "Complete darshan at both Nageshwar and Dwarkadhish temples during your visit"
+            "blessing": "Combined Pilgrimage Merit",
+            "significance": "Nageshwar is traditionally combined with Dwarka (Krishna), Bet Dwarka, and Somnath. This circuit offers blessings from both Shaiva and Vaishnava traditions—complete divine grace.",
+            "experience": "Plan a Saurashtra pilgrimage covering Dwarka, Bet Dwarka, Nageshwar, and Somnath for maximum spiritual benefit."
         }
     ],
-    "pilgrimage_blessing": "As you depart Nageshwar near the sacred coast of Dwarka, carry with you the protection of the Lord of Serpents. Like the kundalini serpent that rises toward enlightenment, may your consciousness elevate. The serpents adorning Shiva now guard your path. Go forth fearless, knowing the Lord who defeated demons walks with you. 🙏 ॐ नागेश्वराय नमः"
+    "practical_guide": {
+        "best_time": {
+            "season": "October to March for pleasant coastal weather",
+            "auspicious_days": "Nag Panchami sees special celebrations. Maha Shivaratri is major.",
+            "sacred_hour": "Morning darshan (5-8 AM) is most peaceful"
+        },
+        "sacred_rituals": [
+            "Rudrabhishek - Sacred bathing of the lingam",
+            "Kala Sarpa Shanti Puja - For serpent-related afflictions",
+            "Nag Puja - Serpent worship (especially on Nag Panchami)",
+            "Giant Statue Darshan - The 82-foot Shiva murti"
+        ],
+        "darshan_options": {
+            "general": "Free darshan for all devotees",
+            "special_puja": "₹251 - ₹1,500 for various ritual options",
+            "kala_sarpa_puja": "₹1,100 - ₹5,100 for dosha removal"
+        }
+    },
+    "who_will_be_blessed": [
+        "Those with Kala Sarpa Dosha or serpent-related fears",
+        "Devotees facing seemingly impossible circumstances",
+        "Pilgrims combining Dwarka and Saurashtra temples",
+        "Those seeking protection from 'poisonous' influences in life",
+        "Anyone inspired by the story of unwavering faith"
+    ],
+    "pilgrimage_blessing": "May Nageshwar, Lord of Serpents, remove all venom from your life—physical poison, emotional toxicity, karmic curses. Like Supriya, may your faith be unshakeable in adversity. May the serpent energy that coils within you rise in blessing, not in fear. 🙏 ॐ नागेश्वराय नमः"
 }

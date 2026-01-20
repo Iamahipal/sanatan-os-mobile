@@ -1,26 +1,96 @@
 {
-    "primary_deity": {
-        "name": "Lord Omkareshwar",
-        "form": "Jyotirlinga - Manifestation of Primordial Sound",
-        "consort": "Goddess Parvati",
-        "meaning": "The Lord of the Sacred Om, the primordial cosmic vibration"
+    "name": "Omkareshwar / Omkar Mandhata",
+    "meaning": "Lord of the Primordial Sound Om / Om-Shaped Lord",
+    "other_names": [
+        "Omkar Mandhata",
+        "Omkareshwara",
+        "Amaleshwar (the second Jyotirlinga here)"
+    ],
+    "epithets": [
+        "Pranava Swarupa - Embodiment of Om",
+        "Nada Brahma - The Sound that is God",
+        "Mandhata Nath - Lord of Mandhata Island",
+        "Dvaidha Murti - The Lord of Dual Form"
+    ],
+    "iconography": {
+        "form_here": "The Omkareshwar Jyotirlinga is naturally formed, set in a garbhagriha (sanctum) that opens to the east. The lingam is small but the spiritual energy is immense. Interestingly, the full pilgrimage includes darshan of BOTH Jyotirlingas—Omkareshwar on the island and Mamleshwar on the bank.",
+        "symbolism": {
+            "om_island": "The island's Om shape represents the primordial vibration—the sound from which all creation emerged. Geography itself becomes sacred symbol.",
+            "twin_forms": "Two Jyotirlingas represent Shiva's formless (Nirguna) and formed (Saguna) aspects existing simultaneously",
+            "narmada_flow": "River Narmada flowing around the island represents the cosmic waters that carry souls to liberation",
+            "68_shrines": "The 68 tirthas on the island represent the completeness of pilgrimage—visiting all is considered equivalent to visiting all sacred sites in India"
+        },
+        "special_features": {
+            "ancient_temple": "Current temple structure from the medieval period, built over more ancient foundations",
+            "gauri_somnath": "Temple to Goddess Gauri adjacent to the main shrine",
+            "siddhnath_temple": "Cave temple with centuries-old spiritual energy",
+            "parikrama_path": "7 km circumambulation route around the island"
+        }
     },
     "mythology": {
-        "origin_story": "The Shiva Purana narrates that the Devas and Asuras once had a dispute about who worshipped Shiva with greater devotion. Shiva, pleased by both, manifested as two Jyotirlingas on this Om-shaped island—Omkareshwar for the Devas and Amareshwar for the Asuras. The island's natural Om shape is said to have formed when Shiva uttered the primordial sound at creation.",
-        "cosmic_significance": "Om is the first sound of creation, the vibration from which the universe emerged. Omkareshwar represents this cosmic principle—the Shivalinga here is the physical manifestation of the divine sound. Worshipping here is said to align the devotee with the fundamental frequency of existence."
+        "origin_story": "In ancient times, both the Devas (celestial beings) and the Asuras (demons) were engaged in devotion to Shiva on the banks of the Narmada. The Devas worshipped on Mandhata Island while the Asuras performed their rituals on the opposite bank. Both parties pleased Lord Shiva with their intense tapas. When Shiva appeared to grant boons, a dispute arose—both claimed the Lord for themselves. Shiva, in his infinite wisdom, manifested in two forms: as Omkareshwar (the formless Om principle) on the island for the Devas, and as Mamleshwar (Amaleshwar) on the southern bank for the Asuras. Thus, this became the only place on Earth with two Jyotirlingas.",
+        "key_episodes": [
+            {
+                "title": "Mandhata's Great Penance",
+                "story": "The island is named after King Mandhata of the Ikshvaku dynasty, an ancestor of Lord Rama. Mandhata performed severe penance here for thousands of years, seeking Shiva's grace. The Lord, pleased by his devotion, blessed the king and the entire island became charged with spiritual power. The mountain on the island is still called Mandhata Parvat."
+            },
+            {
+                "title": "Vindhya's Pride Humbled",
+                "story": "The Vindhya mountain range once began to grow endlessly, seeking to surpass Mount Meru. The sage Agastya was sent to stop him. Before leaving for the south, Agastya worshipped at Omkareshwar. The Lord's blessing gave him the power to humble Vindhya, who remains bowed to this day awaiting Agastya's return."
+            },
+            {
+                "title": "The Sound of Creation",
+                "story": "When the universe emerged from cosmic dissolution, the first vibration was Om. This primordial sound took physical form as Omkareshwar—the Lord embodying Om itself. Sages say that meditating here, one can hear the original Om still resonating in the ether."
+            }
+        ]
     },
-    "sacred_mantras": [
-        {
-            "name": "Omkareshwar Dhyana Mantra",
-            "sanskrit": "ॐ ओंकारेश्वराय नमः",
-            "meaning": "Salutations to the Lord of the Sacred Om",
-            "benefit": "Attunes the consciousness to the primordial cosmic vibration, bringing clarity and spiritual alignment"
+    "worship": {
+        "primary_mantra": {
+            "sanskrit": "ॐ ॐकारेश्वराय नमः",
+            "transliteration": "Om Omkareshwaraya Namah",
+            "translation": "Salutations to the Lord of Om",
+            "meaning": "Invokes Shiva as the embodiment of the primordial cosmic sound"
         },
-        {
-            "name": "Pranava Mantra",
-            "sanskrit": "ॐ",
-            "meaning": "The primordial sound of creation",
-            "benefit": "The foundation of all mantras. Chanting Om at Omkareshwar is said to be especially powerful for meditation and spiritual awakening."
-        }
-    ]
+        "additional_mantras": [
+            {
+                "name": "Pranava Mantra",
+                "sanskrit": "ॐ",
+                "benefit": "The simplest and most powerful—chanting Om here is especially potent"
+            },
+            {
+                "name": "Omkar Dhyana Shloka",
+                "sanskrit": "ओंकारं बिंदुसंयुक्तं नित्यं ध्यायंति योगिनः",
+                "benefit": "Meditation mantra connecting to the Om principle"
+            }
+        ],
+        "offerings": [
+            "Bilva leaves",
+            "Narmada water (most sacred)",
+            "White flowers",
+            "Bhasma (sacred ash)",
+            "Narmada Shivlings (pebbles naturally formed as lingams)"
+        ],
+        "festivals": [
+            {
+                "name": "Kartik Purnima",
+                "timing": "November full moon",
+                "significance": "Massive congregation; devotees circumambulate the island"
+            },
+            {
+                "name": "Maha Shivaratri",
+                "timing": "February/March",
+                "significance": "All-night worship; the island echoes with Om chanting"
+            },
+            {
+                "name": "Narmada Jayanti",
+                "timing": "January/February",
+                "significance": "Birthday of the sacred river; special rituals at the ghat"
+            }
+        ]
+    },
+    "philosophy": {
+        "core_teaching": "Omkareshwar teaches that the divine can be approached through sound. Om is not merely a word but the vibrational essence of reality itself. The island being shaped like Om suggests that sacred geometry is woven into creation—the universe is structured on divine patterns.",
+        "duality_unity": "The presence of two Jyotirlingas teaches that apparent duality (Devas and Asuras, form and formless) is resolved in Shiva. True pilgrimage here requires visiting BOTH shrines—recognizing that the divine transcends all divisions.",
+        "narmada_significance": "The Narmada is considered the only river whose mere sight grants liberation (darshan-mukti). Every pebble in the Narmada is a natural Shivling. Bathing in these waters while chanting Om is considered equivalent to thousands of other pilgrimage acts."
+    }
 }

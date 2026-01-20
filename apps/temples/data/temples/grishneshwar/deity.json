@@ -1,26 +1,74 @@
 {
-    "primary_deity": {
-        "name": "Lord Grishneshwar",
-        "form": "Jyotirlinga - Lord of Compassion",
-        "consort": "Goddess Parvati",
-        "meaning": "The Lord who removes grief, the God of Compassion and Forgiveness"
+    "name": "Grishneshwar / Ghushmeshwar",
+    "meaning": "Lord of Compassion / Lord who honored Ghushma",
+    "other_names": [
+        "Ghushmeshwar",
+        "Ghrishneshwar",
+        "Ghrushmesha",
+        "Kusumeshwar"
+    ],
+    "epithets": [
+        "Dwadash Jyotirlinga - The Twelfth Light",
+        "Ghushma Priya - Beloved of Ghushma",
+        "Ellora Nath - Lord near Ellora",
+        "Purna Avatar - The Complete Manifestation"
+    ],
+    "iconography": {
+        "form_here": "The Grishneshwar lingam is set in a modest sanctum within the smallest of the twelve Jyotirlinga temples. Despite its size, the east-facing lingam radiates powerful energy. The temple's red stone construction (Hemadpanthi style) is architecturally significant.",
+        "symbolism": {
+            "twelfth_position": "As the final Jyotirlinga, Grishneshwar represents completion. Devotees who visit all twelve have circumambulated the sacred geography of Shiva's light-manifestations.",
+            "small_size": "The smallest temple housing a Jyotirlinga teaches that divine power is not proportional to material grandeur. Size is irrelevant to sanctity.",
+            "ellora_presence": "Adjacent to Ellora's caves, Grishneshwar sits in a landscape where three religions (Hindu, Buddhist, Jain) created masterpieces. Unity of devotion transcends sectarian lines.",
+            "forgiveness_teaching": "Ghushma's story—continuing worship despite repeated destruction of her lingam—embodies forgiveness as the highest spiritual practice"
+        }
     },
     "mythology": {
-        "origin_story": "Ghushma daily made Shivalingas and worshipped them despite persecution from her stepmother-in-law, who eventually killed her son. When Ghushma continued her devotion without faltering, Shiva appeared, restored her son, and offered to punish her tormentor. Ghushma asked for forgiveness for her enemy instead. Moved by such divine compassion, Shiva remained as Grishneshwar—literally, the Lord who takes away grief.",
-        "cosmic_significance": "While other Jyotirlingas represent power, victory, or fierce protection, Grishneshwar uniquely embodies Shiva's compassionate, forgiving nature. The temple teaches that true devotion brings not revenge but the capacity for mercy—the highest spiritual attainment."
+        "origin_story": "A pious Brahmin woman named Ghushma worshipped Shiva daily, creating a lingam from earth and offering her prayers. Her sister-in-law, jealous of Ghushma's devotion and her husband's love, repeatedly destroyed the lingam and threw it into a nearby tank. Ghushma discovered this but never complained—she simply made a new lingam each day and continued her worship without anger. After 101 such destructions, Shiva appeared. So moved was he by Ghushma's devotion AND her forgiveness that he manifested as a Jyotirlinga and named this site Ghushmeshwar (later Grishneshwar) in her honor.",
+        "key_episodes": [
+            {
+                "title": "The Jealous Sister-in-Law",
+                "story": "Ghushma's devotion brought blessings to her household. Her childless sister-in-law, consumed by envy, secretly destroyed her daily worship. Rather than confront her, Ghushma chose the path of forgiveness—continuing her practice without bitterness."
+            },
+            {
+                "title": "101 Days of Patience",
+                "story": "For 101 days, Ghushma's lingam was destroyed and thrown away. For 101 days, she recreated it without complaint. This superhuman patience attracted divine attention—Shiva decided that such devotion deserved permanent manifestation."
+            },
+            {
+                "title": "Ahilyabai Holkar's Temple",
+                "story": "The current temple was built by the legendary Maratha queen Ahilyabai Holkar in the 18th century. She rebuilt or renovated numerous temples across India, and Grishneshwar was among her finest achievements."
+            }
+        ]
     },
-    "sacred_mantras": [
-        {
-            "name": "Grishneshwar Dhyana Mantra",
-            "sanskrit": "ॐ घृष्णेश्वराय नमः",
-            "meaning": "Salutations to the Lord who removes grief",
-            "benefit": "Grants the ability to forgive, heals emotional wounds, and releases grudges"
+    "worship": {
+        "primary_mantra": {
+            "sanskrit": "ॐ घुश्मेश्वराय नमः",
+            "transliteration": "Om Ghushmeshwaraya Namah",
+            "translation": "Salutations to the Lord of Ghushma",
+            "meaning": "Invokes Shiva's compassion and rewards patient, forgiving devotion"
         },
-        {
-            "name": "Shiva Karuna Mantra",
-            "sanskrit": "ॐ नमः शिवाय",
-            "meaning": "Salutations to the Auspicious Lord",
-            "benefit": "Invokes Shiva's compassionate presence and protective grace"
-        }
-    ]
+        "offerings": [
+            "Bilva leaves",
+            "Flowers",
+            "Milk",
+            "Water",
+            "Sacred ash"
+        ],
+        "festivals": [
+            {
+                "name": "Maha Shivaratri",
+                "timing": "February/March",
+                "significance": "Major celebration marking nightlong worship"
+            },
+            {
+                "name": "Shravan Month",
+                "timing": "July/August",
+                "significance": "Mondays especially crowded; local Maharashtrian devotion peaks"
+            }
+        ]
+    },
+    "philosophy": {
+        "core_teaching": "Grishneshwar teaches that forgiveness is the highest devotion. Ghushma could have confronted her tormentor, could have harbored anger, could have appealed for justice. Instead, she chose to continue her worship without bitterness. This purity of heart—devotion unmarred by resentment—is what drew Shiva's manifestation.",
+        "completion_symbolism": "As the twelfth Jyotirlinga, Grishneshwar represents spiritual completion. The number 12 is sacred—12 adityas, 12 months, 12 rashis. Visiting all twelve Jyotirlingas is a complete pilgrimage through Shiva's light-forms on Earth.",
+        "art_and_devotion": "The proximity to Ellora—with its Buddhist, Hindu, and Jain caves—suggests that all sacred art, regardless of tradition, participates in the same devotional impulse. Devotees here can witness the full spectrum of Indian spirituality carved in stone."
+    }
 }

@@ -1,31 +1,46 @@
 {
     "id": "bhimashankar",
     "name": "Bhimashankar",
-    "sanskrit_name": "श्री भीमाशंकर",
-    "location": {
-        "city": "Pune District",
-        "state": "Maharashtra",
-        "coordinates": {
-            "lat": 19.0719,
-            "lng": 73.5356
-        }
-    },
+    "name_local": "भीमाशंकर",
+    "name_marathi": "भीमाशंकर",
+    "official_name": "Shri Bhimashankar Jyotirlinga Temple",
     "deity": {
-        "name": "Lord Shiva",
-        "aspect": "Jyotirlinga",
-        "form_title": "Bhimashankar (The Fierce Shiva)"
+        "primary": "Lord Shiva",
+        "form": "Bhimashankar (The Fierce Protector)",
+        "manifestation": "Jyotirlinga - Sixth of the 12",
+        "consort": "Goddess Kamalaja",
+        "mythology_link": "Where Shiva destroyed the demon Bhima and agreed to reside permanently"
     },
-    "temple_type": "Jyotirlinga",
-    "significance": "Sixth of the 12 Jyotirlingas. Set in the lush Sahyadri mountains, home to the Indian Giant Squirrel. Lord Shiva defeated the demon Bhima here.",
-    "established_date": "13th century Hemadpanthi structure, ancient sacred site",
-    "best_time": "July to February, Maha Shivaratri",
-    "darshan_hours": "5:00 AM - 9:30 PM",
-    "festivals": [
-        "Maha Shivaratri",
-        "Shravan Somvar",
-        "Tripuri Purnima"
-    ],
-    "age_years": 800,
-    "daily_visitors": "3,000-8,000",
-    "annual_visitors": "2 million"
+    "location": {
+        "city": "Khed Taluka",
+        "state": "Maharashtra",
+        "coords": [
+            19.0719,
+            73.5356
+        ],
+        "sacred_geography": "Nestled in the pristine Sahyadri mountain range at 3,250 feet, within the Bhimashankar Wildlife Sanctuary. The temple sits at the source of the Bhima River, surrounded by ancient mist forests home to the rare Indian Giant Squirrel (Shekru).",
+        "access": "110 km from Pune, 220 km from Mumbai. Trek route available from Khandas village."
+    },
+    "significance": {
+        "type": [
+            "Jyotirlinga",
+            "Wildlife Sanctuary",
+            "River Source"
+        ],
+        "jyotirlinga_number": 6,
+        "rank": "Sixth Jyotirlinga, set amidst the most pristine natural environment",
+        "philosophy": "Bhimashankar embodies Shiva's fierce protective aspect. The temple's remote forest location teaches that the divine dwells in untamed nature—beyond human settlements, in the wild heart of creation. Here, Shiva the Destroyer becomes Shiva the Protector.",
+        "scriptural_reference": "Shiva Purana, Bhima Purana"
+    },
+    "stats": {
+        "age_years": 800,
+        "altitude_feet": 3250,
+        "daily_visitors": "3,000-8,000",
+        "annual_visitors": "20 lakh+",
+        "architecture": "Hemadpanthi style (13th century Yadava period)",
+        "unique_feature": "Only Jyotirlinga located inside a wildlife sanctuary"
+    },
+    "hero_image": "data/temples/bhimashankar/images/hero.png",
+    "description": "Hidden in the misty Sahyadri mountains, Bhimashankar is perhaps the most naturally beautiful of all Jyotirlingas. The sixth sacred light of Shiva manifested here after a cosmic battle with the demon Bhima—son of Kumbhakarna. When Bhima's tyranny threatened all three worlds, Shiva descended in his fierce Rudra form, destroyed the demon, and at the request of sages, agreed to remain forever as Bhimashankar. The sweat that poured from Shiva's body during battle became the Bhima River, which originates near the temple. Today, the 13th-century Hemadpanthi temple stands surrounded by dense forests, home to the famous Indian Giant Squirrel and countless species of flora and fauna. Pilgrims climb through morning mist and ancient trees to reach the sanctum—making this one of the most meditative journeys to any Jyotirlinga.",
+    "secret_hook": "The Bhimashankar forest is home to the rare Shekru (Indian Giant Squirrel), which locals believe are sacred messengers of Shiva. Why does this particular creature guard only this Jyotirlinga?"
 }

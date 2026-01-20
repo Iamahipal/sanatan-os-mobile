@@ -1,24 +1,59 @@
 {
-    "spiritual_invitation": "🙏 Welcome to Trimbakeshwar, where the sacred Godavari begins her journey and the Trimurti manifests in one divine lingam. You stand at the source of the Ganga of the South, near the peaks of Brahmagiri. Here, the three cosmic powers—Creation, Preservation, and Transformation—unite in a single sacred symbol. May the third eye of Lord Trimbakeshwar open within you.",
-    "blessings": [
+    "spiritual_invitation": "Welcome to Trimbakeshwar, where the three cosmic forces merge into one sacred form. At the source of the mighty Godavari, in the shadow of Brahmagiri mountain, stands the only Jyotirlinga revealing the Trimurti—Brahma, Vishnu, and Shiva in unified presence. Here, the Mahamrityunjaya Mantra echoes across the ages.",
+    "spiritual_benefits": [
         {
-            "title": "Trimurti's Complete Blessing",
-            "blessing": "May the combined grace of Brahma, Vishnu, and Shiva be showered upon you through this unique three-faced lingam",
-            "significance": "The Trimbakeshwar lingam uniquely represents all three cosmic functions. Worshipping here grants the complete blessing of the Hindu trinity.",
-            "experience": "During morning abhishek, devotees can touch the Trimurti lingam directly—an intimate connection with the cosmic trinity"
+            "blessing": "Trimurti Darshan - Vision of Unified God",
+            "significance": "Nowhere else can you see Brahma, Vishnu, and Shiva in a single Jyotirlinga. This darshan transcends sectarian divisions—whether you are a Shaiva, Vaishnava, or devotee of Brahma, here all paths unite.",
+            "experience": "During special occasions, the silver masks are removed for direct darshan of the three faces. Ask temple authorities about timings."
         },
         {
-            "title": "Liberation of Ancestors",
-            "blessing": "May your ancestors be liberated and may ancestral blessings flow to you",
-            "significance": "Trimbakeshwar is the premier center for ancestral rituals. Narayan Nagbali and Tripindi Shraddha performed here are believed to liberate souls across generations.",
-            "experience": "Consider performing Shraddha or ancestral rites if guided by a proper priest here"
+            "blessing": "Mahamrityunjaya - Conquering Death",
+            "significance": "This is the home of the Maha Mrityunjaya Mantra. Chanting it here carries special power for healing, protection from accidents, longevity, and freedom from fear of death. Many come for healing prayers.",
+            "experience": "Participate in or sponsor a Mahamrityunjaya Japa. The mantra recited here carries the blessing of its origin point."
         },
         {
-            "title": "Purification in the Godavari",
-            "blessing": "May the sacred waters of Godavari at her source cleanse all sins and purify your entire lineage",
-            "significance": "The Godavari is born here from Brahmagiri. Bathing at Kushavarta Kund is said to wash away even the gravest karma.",
-            "experience": "Take a sacred dip at Kushavarta Kund before temple darshan, especially during Shravan month"
+            "blessing": "Godavari Source - Purification at the Origin",
+            "significance": "The Godavari begins here at Kushavarta Kund. Bathing at a river's source is considered supremely purifying—yoo u're in the purest waters before any worldly contact.",
+            "experience": "Take a holy dip at Kushavarta at dawn. The experience of bathing where the great river is born is profoundly transformative."
+        },
+        {
+            "blessing": "Ancestral Liberation (Pitru Moksha)",
+            "significance": "Trimbakeshwar is one of the very few sites where Narayan Nagbali and Tripindi Shraddha can be performed—powerful rituals for liberating ancestral souls from karmic bondage.",
+            "experience": "If you carry ancestral karma or wish to free departed family, consult a temple priest about these special rituals."
         }
     ],
-    "pilgrimage_blessing": "As you leave the sacred precincts of Trimbakeshwar, may the three eyes of the Lord illuminate your path—the eye of the sun (action), the eye of the moon (emotion), and the eye of fire (spiritual wisdom). The sacred Godavari flows from this spot to bless millions; so too may blessings flow from your visit to uplift your entire lineage. 🙏 ॐ त्र्यंबकेश्वराय नमः"
+    "practical_guide": {
+        "best_time": {
+            "season": "October to March for pleasant weather. Monsoon brings fog and mist—beautiful but wet.",
+            "auspicious_days": "Maha Shivaratri is peak time. Shravan Mondays are very crowded. Kumbh Mela (every 12 years) is extraordinary but extremely crowded.",
+            "sacred_hour": "Early morning (4-6 AM) for peaceful darshan. Evening aarti (6-7 PM) is powerful."
+        },
+        "sacred_rituals": [
+            "Mahamrityunjaya Japa - Recitation of the death-conquering mantra",
+            "Laghu Rudrabhishek - Abbreviated sacred bathing of the lingam",
+            "Kushavarta Snan - Holy dip at the Godavari source",
+            "Narayan Nagbali - Ancestral liberation rites (if needed)",
+            "Brahmagiri Pradakshina - Circumambulation of the sacred mountain"
+        ],
+        "darshan_options": {
+            "general": "Free darshan for all devotees",
+            "special_puja": "₹251 - ₹1,100 for various ritual options",
+            "mahamrityunjaya_havan": "₹1,100 - ₹5,100 for fire ceremony",
+            "narayan_nagbali": "Multi-day ritual with separate fees; consult temple"
+        },
+        "preparation": {
+            "physical": "Brahmagiri circumambulation is 36 km—serious trekking. Temple darshan is easy.",
+            "spiritual": "Begin Mahamrityunjaya mantra practice before visiting. Even basic familiarity deepens the experience.",
+            "practical": "Many dharamshalas in Trimbak town. Nashik (28 km) has more hotel options."
+        }
+    },
+    "who_will_be_blessed": [
+        "Those seeking healing from illness or accidents",
+        "Devotees wishing to transcend fear of death",
+        "Families needing ancestral liberation rituals",
+        "Pilgrims wanting to experience Kumbh Mela (during the festival years)",
+        "Those drawn to the unity beyond religious divisions",
+        "Seekers of the Mahamrityunjaya Mantra's blessing"
+    ],
+    "pilgrimage_blessing": "As you leave Trimbakeshwar, may the Three-Faced Lord bless you threefold—with creative power, protective grace, and liberating wisdom. May the Godavari that began here flow through your life as a stream of purification. May the Mahamrityunjaya Mantra shield you from untimely death and grant you liberation at the right time. Har Har Mahadev! 🙏 ॐ त्र्यंबकं यजामहे"
 }
