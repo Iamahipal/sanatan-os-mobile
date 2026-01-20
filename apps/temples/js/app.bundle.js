@@ -347,7 +347,7 @@ class App {
                     <img src="${data.hero_image}" class="hero-media" alt="${this.escapeHtml(data.name)} temple">
                     <div class="hero-overlay">
                         <div class="hero-title-group">
-                            <span class="hero-super">${this.escapeHtml(data.location.city)} • ${this.escapeHtml(data.location.state)}</span>
+                            <span class="hero-super"><i data-lucide="map-pin"></i> ${this.escapeHtml(data.location.city)} • ${this.escapeHtml(data.location.state)}</span>
                             <h1 class="hero-h1">${this.escapeHtml(data.name)}</h1>
                             ${data.name_local ? `<span class="hero-local">${this.escapeHtml(data.name_local)}</span>` : ''}
                         </div>
@@ -358,7 +358,7 @@ class App {
                 <div class="portal-sheet">
                     <!-- Deity Badge -->
                     <div class="deity-badge">
-                        <span class="deity-icon">🙏</span>
+                        <span class="deity-icon"><i data-lucide="flame"></i></span>
                         <div class="deity-info">
                             <span class="deity-name">${this.escapeHtml(deityName)}</span>
                             ${deityForm ? `<span class="deity-form">${this.escapeHtml(deityForm)}</span>` : ''}
@@ -378,14 +378,17 @@ class App {
                     <div id="mod-overview" class="module-container active" role="tabpanel" aria-labelledby="tab-overview">
                         <div class="stat-row">
                             <div class="stat-item">
+                                <span class="stat-icon"><i data-lucide="calendar"></i></span>
                                 <span class="stat-val">${ageYears}+</span>
                                 <span class="stat-label">Years Old</span>
                             </div>
                             <div class="stat-item">
+                                <span class="stat-icon"><i data-lucide="users"></i></span>
                                 <span class="stat-val">${typeof dailyVisitors === 'string' ? dailyVisitors : dailyVisitors.toLocaleString()}</span>
-                                <span class="stat-label">Daily Visitors</span>
+                                <span class="stat-label">Daily</span>
                             </div>
                             <div class="stat-item">
+                                <span class="stat-icon"><i data-lucide="sparkles"></i></span>
                                 <span class="stat-val">#${data.significance?.jyotirlinga_number || '—'}</span>
                                 <span class="stat-label">Jyotirlinga</span>
                             </div>
@@ -398,7 +401,7 @@ class App {
 
                         ${deity ? `
                         <div class="mantra-card">
-                            <span class="mantra-label">Primary Mantra</span>
+                            <span class="mantra-label"><i data-lucide="audio-lines"></i> Sacred Mantra</span>
                             <span class="mantra-text">${this.escapeHtml(mantra)}</span>
                             <span class="mantra-meaning">${this.escapeHtml(deity.worship?.primary_mantra?.translation || '')}</span>
                         </div>
@@ -406,7 +409,7 @@ class App {
 
                         ${data.significance?.philosophy ? `
                         <div class="philosophy-block">
-                            <h4>Spiritual Significance</h4>
+                            <h4><i data-lucide="book-open"></i> Spiritual Significance</h4>
                             <p>${this.escapeHtml(data.significance.philosophy)}</p>
                         </div>
                         ` : ''}
@@ -429,11 +432,12 @@ class App {
                     <!-- MODULE: Guide (Why Visit) -->
                     <div id="mod-guide" class="module-container" role="tabpanel" aria-labelledby="tab-guide">
                         <div id="guide-mount">
-                            ${whyVisit ? this.renderGuide(whyVisit) : '<div class="empty-state"><span class="empty-icon">📝</span><p>Practical guide coming soon...</p></div>'}
+                            ${whyVisit ? this.renderGuide(whyVisit) : '<div class="empty-state"><i data-lucide="scroll-text" class="empty-icon"></i><p>Practical guide coming soon...</p></div>'}
                         </div>
                     </div>
                 </div>
             `;
+
 
             // Load Component Data
             const factDeck = new FactDeck(`data/temples/${id}/facts.json`);
@@ -468,19 +472,19 @@ class App {
     renderGuide(data) {
         let html = '';
 
-        // Spiritual Invitation at top (replaces warning)
+        // Spiritual Invitation at top
         if (data.spiritual_invitation) {
             html += `
                 <div class="guide-invitation">
-                    <h4>🙏 Divine Welcome</h4>
+                    <h4><i data-lucide="heart-handshake"></i> Divine Welcome</h4>
                     <p>${this.escapeHtml(data.spiritual_invitation)}</p>
                 </div>
             `;
         }
 
-        // Spiritual Blessings (new positive format)
+        // Spiritual Blessings
         if (data.spiritual_benefits?.length) {
-            html += '<div class="guide-section"><h4>✨ Sacred Blessings</h4>';
+            html += '<div class="guide-section"><h4><i data-lucide="sparkles"></i> Sacred Blessings</h4>';
             data.spiritual_benefits.forEach(benefit => {
                 const title = benefit.blessing || benefit.claim || 'Sacred Blessing';
                 const desc = benefit.significance || benefit.reality || '';
@@ -489,7 +493,7 @@ class App {
                     <div class="benefit-card">
                         <div class="benefit-title">${this.escapeHtml(title)}</div>
                         <div class="benefit-desc">${this.escapeHtml(desc)}</div>
-                        ${tip ? `<div class="benefit-experience">🪷 ${this.escapeHtml(tip)}</div>` : ''}
+                        ${tip ? `<div class="benefit-experience"><i data-lucide="flower-2"></i> ${this.escapeHtml(tip)}</div>` : ''}
                     </div>
                 `;
             });
@@ -499,11 +503,11 @@ class App {
         // Practical Guide
         if (data.practical_guide) {
             const pg = data.practical_guide;
-            html += '<div class="guide-section"><h4>📿 Pilgrimage Guide</h4>';
+            html += '<div class="guide-section"><h4><i data-lucide="compass"></i> Pilgrimage Guide</h4>';
 
             if (pg.best_time) {
                 html += `<div class="guide-subsection">
-                    <h5>🕐 Auspicious Times</h5>
+                    <h5><i data-lucide="clock"></i> Auspicious Times</h5>
                     <p><strong>Season:</strong> ${this.escapeHtml(pg.best_time.season || pg.best_time)}</p>
                     ${pg.best_time.auspicious_days ? `<p><strong>Sacred Days:</strong> ${this.escapeHtml(pg.best_time.auspicious_days)}</p>` : ''}
                     ${pg.best_time.day ? `<p><strong>Day:</strong> ${this.escapeHtml(pg.best_time.day)}</p>` : ''}
@@ -514,14 +518,14 @@ class App {
             if (pg.sacred_rituals?.length || pg.rituals_worth_doing?.length) {
                 const rituals = pg.sacred_rituals || pg.rituals_worth_doing;
                 html += `<div class="guide-subsection">
-                    <h5>🪔 Sacred Rituals</h5>
-                    <ul>${rituals.map(r => `<li>🙏 ${this.escapeHtml(r)}</li>`).join('')}</ul>
+                    <h5><i data-lucide="flame"></i> Sacred Rituals</h5>
+                    <ul>${rituals.map(r => `<li>${this.escapeHtml(r)}</li>`).join('')}</ul>
                 </div>`;
             }
 
             if (pg.darshan_options) {
                 html += `<div class="guide-subsection">
-                    <h5>🛕 Darshan Options</h5>
+                    <h5><i data-lucide="eye"></i> Darshan Options</h5>
                     <div class="budget-grid">
                         ${Object.entries(pg.darshan_options).map(([k, v]) => `
                             <div class="budget-item">
@@ -535,7 +539,7 @@ class App {
 
             if (pg.preparation) {
                 html += `<div class="guide-subsection">
-                    <h5>🎋 Preparation</h5>
+                    <h5><i data-lucide="backpack"></i> Preparation</h5>
                     ${Object.entries(pg.preparation).map(([k, v]) => `<p><strong>${k.charAt(0).toUpperCase() + k.slice(1)}:</strong> ${this.escapeHtml(v)}</p>`).join('')}
                 </div>`;
             }
@@ -547,8 +551,8 @@ class App {
         if (data.who_will_be_blessed?.length || data.who_should_visit?.length) {
             const blessed = data.who_will_be_blessed || data.who_should_visit;
             html += `<div class="guide-section">
-                <h4>💫 This Pilgrimage Awaits</h4>
-                <ul>${blessed.map(w => `<li>✨ ${this.escapeHtml(w)}</li>`).join('')}</ul>
+                <h4><i data-lucide="star"></i> This Pilgrimage Awaits</h4>
+                <ul>${blessed.map(w => `<li>${this.escapeHtml(w)}</li>`).join('')}</ul>
             </div>`;
         }
 
@@ -563,6 +567,7 @@ class App {
 
         return html;
     }
+
 
     // Lightbox implementation
     openLightbox(url, type) {
