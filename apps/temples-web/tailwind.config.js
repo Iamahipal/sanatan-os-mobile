@@ -8,7 +8,7 @@ export default {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: '#9D5C00', // Deep Saffron (WCAG compliant)
+                    DEFAULT: '#B94E00', // Richer Deep Saffron
                     foreground: '#FFFFFF',
                     container: '#FFDCB8',
                     'on-container': '#321300',
@@ -18,6 +18,10 @@ export default {
                     foreground: '#FFFFFF',
                     container: '#FFDCC5',
                     'on-container': '#2B1708',
+                },
+                tertiary: {
+                    DEFAULT: '#D4AF37', // Divine Gold
+                    foreground: '#211A14',
                 },
                 surface: {
                     DEFAULT: '#FFF8F5', // Off-white cream
@@ -36,6 +40,8 @@ export default {
             fontFamily: {
                 serif: ['"Playfair Display"', 'Georgia', 'serif'],
                 sans: ['"Outfit"', 'sans-serif'],
+                decorative: ['"Cinzel Decorative"', 'serif'],
+                sanskrit: ['"Tiro Devanagari Sanskrit"', 'serif'],
             },
             borderRadius: {
                 'lg': '16px',

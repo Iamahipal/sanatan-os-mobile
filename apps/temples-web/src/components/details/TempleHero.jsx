@@ -28,7 +28,9 @@ export default function TempleHero({ temple }) {
                 className="absolute inset-0 z-0 h-[120%]"
             >
                 <img
-                    src={temple.hero_image}
+                    src={temple.hero_image?.startsWith('http') || temple.hero_image?.startsWith('/')
+                        ? temple.hero_image
+                        : `/${temple.hero_image}`}
                     alt={temple.name}
                     className="w-full h-full object-cover"
                 />
@@ -68,8 +70,8 @@ export default function TempleHero({ temple }) {
                     <button
                         onClick={() => togglePlay(mantraTrack)}
                         className={`group flex items-center gap-3 px-6 py-4 rounded-full shadow-elevation-3 transition-all active:scale-95 ${isCurrentTrackPlaying
-                                ? 'bg-primary-container text-primary-on-container ring-2 ring-primary'
-                                : 'bg-primary text-primary-foreground hover:shadow-elevation-4 hover:scale-105'
+                            ? 'bg-primary-container text-primary-on-container ring-2 ring-primary'
+                            : 'bg-primary text-primary-foreground hover:shadow-elevation-4 hover:scale-105'
                             }`}
                     >
                         <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isCurrentTrackPlaying ? 'bg-primary/20' : 'bg-white/20'}`}>

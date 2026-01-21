@@ -22,7 +22,8 @@ export function useTemples() {
                 const processTemples = data.map(t => ({
                     ...t,
                     // Ensure path starts with / so it's absolute to domain root
-                    thumbnail: t.thumbnail.startsWith('/') ? t.thumbnail : `/${t.thumbnail}`
+                    thumbnail: t.thumbnail.startsWith('/') ? t.thumbnail : `/${t.thumbnail}`,
+                    image: t.thumbnail.startsWith('/') ? t.thumbnail : `/${t.thumbnail}`
                 }));
 
                 setTemples(processTemples);

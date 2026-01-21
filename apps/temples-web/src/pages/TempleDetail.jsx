@@ -13,6 +13,13 @@ export default function TempleDetail() {
     const navigate = useNavigate();
     const { temples, loading } = useTemples();
     const [temple, setTemple] = useState(null);
+    const [details, setDetails] = useState({
+        deity: null,
+        manifest: null,
+        facts: [],
+        rituals: null,
+        loading: true
+    });
     const [activeTab, setActiveTab] = useState('overview');
 
     useEffect(() => {
@@ -20,6 +27,36 @@ export default function TempleDetail() {
             const found = temples.find(t => t.id === id);
             if (found) {
                 setTemple(found);
+
+                const fetchData = async () => {
+                    try {
+                        // Fetch core data files
+                        const [deityRes, manifestRes, factsRes] = await Promise.all([
+                            fetch(`/data/temples/${id}/deity.json`).then(r => r.ok ? r.json() : null),
+                            fetch(`/data/temples/${id}/manifest.json`).then(r => r.ok ? r.json() : null),
+                            fetch(`/data/temples/${id}/facts.json`).then(r => r.ok ? r.json() : [])
+                        ]);
+
+                        // Try to fetch rituals if exists
+                        let ritualsRes = null;
+                        try {
+                            const r = await fetch(`/data/temples/${id}/rituals.json`);
+                            if (r.ok) ritualsRes = await r.json();
+                        } catch (e) { }
+
+                        setDetails({
+                            deity: deityRes,
+                            manifest: manifestRes,
+                            facts: factsRes || [],
+                            rituals: ritualsRes,
+                            loading: false
+                        });
+                    } catch (error) {
+                        console.error("Failed to load details", error);
+                        setDetails(prev => ({ ...prev, loading: false }));
+                    }
+                };
+                fetchData();
             }
         }
     }, [id, temples]);
@@ -27,8 +64,16 @@ export default function TempleDetail() {
     // Handle Tab Scroll Logic
     const handleTabChange = (tabId) => {
         setActiveTab(tabId);
-        // Determine offset based on layout (hero height + sticky header)
-        // Done in component via scrollIntoView, but state tracks active
+        const element = document.getElementById(tabId);
+        if (element) {
+            const headerOffset = 100;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
     };
 
     if (loading || !temple) {
@@ -39,6 +84,9 @@ export default function TempleDetail() {
         );
     }
 
+    // Merge basic index data with detailed manifest data key
+    const mergedTemple = { ...temple, ...(details.manifest || {}) };
+
     return (
         <div className="bg-surface min-h-screen pb-20">
             <button
@@ -48,11 +96,11 @@ export default function TempleDetail() {
                 <ArrowLeft size={24} />
             </button>
 
-            <TempleHero temple={temple} onPlayChant={() => console.log('Play')} />
+            <TempleHero temple={mergedTemple} />
 
-            <InfoTabs activeTab={activeTab} onTabChange={setActiveTab} />
+            <InfoTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
-            <TempleContent temple={temple} />
+            <TempleContent temple={mergedTemple} details={details} />
         </div>
     );
 }

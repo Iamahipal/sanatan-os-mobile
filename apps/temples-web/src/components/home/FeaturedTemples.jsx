@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import TempleCard from '../ui/TempleCard';
 import { useTemples } from '../../hooks/useTemples';
 import { motion } from 'framer-motion';
 
 export default function FeaturedTemples() {
     const { temples, loading } = useTemples();
+    const navigate = useNavigate();
 
     // Loading Skeleton
     if (loading) {
@@ -90,7 +92,7 @@ export default function FeaturedTemples() {
                         >
                             <TempleCard
                                 {...temple}
-                                onClick={() => console.log('Navigate to:', temple.id)}
+                                onClick={() => navigate(`/temples/${temple.id}`)}
                             />
                         </motion.div>
                     ))}

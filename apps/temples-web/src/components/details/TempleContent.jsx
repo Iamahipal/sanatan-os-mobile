@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Sparkles, Moon, Clock, Map } from 'lucide-react';
 
@@ -21,87 +21,105 @@ const Section = ({ id, title, icon: Icon, children }) => {
     );
 };
 
-export default function TempleContent({ temple }) {
-    // We need to fetch the detailed JSONs (deity.json, etc) or assuming they are passed merged.
-    // For this step, we will assume 'temple' object has basic data, and we might need to fetch more
-    // OR we rely on the migrated data structure where 'index.json' might not have deep details.
+export default function TempleContent({ temple, details }) {
+    if (!details) return null;
+    const { deity, manifest, facts, rituals } = details;
 
-    // Actually, useTemples hook fetches index.json. We might need to fetch sub-files.
-    // For simplicity in this iteration, we'll map the basic data we have and placeholders
-    // for the deep data, or assume 'temple' prop will eventually have it.
-
-    // Let's assume for Somnath we have the deep data in the 'temple' prop if we updated the hook
-    // or we fetch it here. To proceed fast, I will fetch the extra details here if needed.
-
-    // WAIT: The user wants "is content accurate". The JSONs exist.
-    // Let's assume we will fetch them in the parent or here. 
-    // For now, let's build the layout expecting the data structure.
+    // Helper to get stats safely
+    const stats = manifest?.stats || {};
+    const jyotirlingaNum = manifest?.significance?.jyotirlinga_number || "•";
 
     return (
         <div className="max-w-4xl mx-auto px-6 py-12">
 
             {/* Overview Section */}
-            <Section id="overview" title="The Eternal Shrine" icon={Sparkles}>
+            <Section id="overview" title={manifest?.name || temple.name} icon={Sparkles}>
                 <p className="text-xl leading-relaxed text-surface-on-variant mb-8 font-light">
-                    {temple.description}
+                    {manifest?.description || temple.description}
                 </p>
                 <div className="grid md:grid-cols-3 gap-6 mb-8">
                     <div className="p-6 bg-surface-container rounded-2xl">
-                        <div className="text-4xl font-serif text-primary mb-2">1st</div>
+                        <div className="text-4xl font-serif text-primary mb-2">
+                            {jyotirlingaNum}
+                            <span className="text-base align-super opacity-60">st</span>
+                        </div>
                         <div className="text-sm uppercase tracking-wider font-bold opacity-70">Jyotirlinga</div>
                     </div>
-                    <div className="p-6 bg-surface-container rounded-2xl">
-                        <div className="text-4xl font-serif text-primary mb-2">17</div>
-                        <div className="text-sm uppercase tracking-wider font-bold opacity-70">Reconstructions</div>
-                    </div>
-                    <div className="p-6 bg-surface-container rounded-2xl">
-                        <div className="text-4xl font-serif text-primary mb-2">∞</div>
-                        <div className="text-sm uppercase tracking-wider font-bold opacity-70">Resilience</div>
-                    </div>
+                    {stats.reconstructions && (
+                        <div className="p-6 bg-surface-container rounded-2xl">
+                            <div className="text-4xl font-serif text-primary mb-2">{stats.reconstructions}</div>
+                            <div className="text-sm uppercase tracking-wider font-bold opacity-70">Reconstructions</div>
+                        </div>
+                    )}
+                    {(stats.age_years || stats.altitude_feet) && (
+                        <div className="p-6 bg-surface-container rounded-2xl">
+                            <div className="text-4xl font-serif text-primary mb-2">
+                                {stats.age_years ? `${stats.age_years}+` : stats.altitude_feet}
+                            </div>
+                            <div className="text-sm uppercase tracking-wider font-bold opacity-70">
+                                {stats.age_years ? 'Years Old' : 'Feet Altitude'}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </Section>
 
             {/* Deity Section */}
-            <Section id="deity" title="Someshwara" icon={Moon}>
-                <div className="prose prose-lg prose-p:text-surface-on-variant prose-headings:font-serif">
-                    <h3>The Lord of the Moon</h3>
-                    <p>
-                        Legend says that Chandra (the Moon God) was cursed to wane into nothingness.
-                        It was here at Prabhas Patan that he worshipped Lord Shiva for six months.
-                        Shiva appeared, cured him (giving us the waxing and waning cycle), and resided here as Somnath—the Lord of the Moon.
-                    </p>
-                    <blockquote>
-                        "He who worships me here shall be freed from the diseases of the body and the afflictions of the mind."
-                    </blockquote>
-                </div>
-            </Section>
+            {deity && (
+                <Section id="deity" title={deity.name} icon={Moon}>
+                    <div className="prose prose-lg prose-p:text-surface-on-variant prose-headings:font-serif">
+                        <h3>{deity.meaning || `The Form of ${deity.primary}`}</h3>
+                        <p>{deity.mythology?.origin_story}</p>
+
+                        {deity.mythology?.quote && (
+                            <blockquote>{deity.mythology.quote}</blockquote>
+                        )}
+
+                        {/* Fallback to iconography if no quote */}
+                        {!deity.mythology?.quote && deity.iconography?.form_here && (
+                            <p className="italic mt-4 border-l-4 border-primary pl-4">{deity.iconography.form_here}</p>
+                        )}
+                    </div>
+                </Section>
+            )}
 
             {/* Rituals Section */}
             <Section id="rituals" title="Sacred Rituals" icon={Clock}>
                 <div className="bg-surface-container-low rounded-3xl p-8 border border-outline-variant/50">
-                    <ul className="space-y-6">
-                        <li className="flex justify-between items-center pb-4 border-b border-outline-variant/20">
-                            <span className="font-medium">Mangala Aarti</span>
-                            <span className="font-bold text-primary">7:00 AM</span>
-                        </li>
-                        <li className="flex justify-between items-center pb-4 border-b border-outline-variant/20">
-                            <span className="font-medium">Mahapooja</span>
-                            <span className="font-bold text-primary">12:00 PM</span>
-                        </li>
-                        <li className="flex justify-between items-center">
-                            <span className="font-medium">Evening Aarti</span>
-                            <span className="font-bold text-primary">7:00 PM</span>
-                        </li>
-                    </ul>
+                    {rituals ? (
+                        <ul className="space-y-6">
+                            {rituals.daily_schedule && rituals.daily_schedule.map((item, idx) => (
+                                <li key={idx} className="flex justify-between items-center pb-4 border-b border-outline-variant/20 last:border-0 last:pb-0">
+                                    <span className="font-medium">{item.name || item.event}</span>
+                                    <span className="font-bold text-primary">{item.time}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <div className="space-y-4">
+                            <p className="text-surface-on-variant">
+                                {deity?.worship?.festivals?.map(f => f.name).join(", ") || "Daily worship is performed according to Vedic traditions."}
+                            </p>
+                            {deity?.worship?.primary_mantra && (
+                                <div className="p-4 bg-surface-container rounded-xl">
+                                    <p className="font-serif text-lg text-primary text-center">"{deity.worship.primary_mantra.transliteration}"</p>
+                                    <p className="text-center text-sm opacity-70 mt-1">{deity.worship.primary_mantra.translation}</p>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
             </Section>
 
             {/* Guide Section */}
             <Section id="guide" title="Pilgrim's Guide" icon={Map}>
                 <p className="text-lg text-surface-on-variant mb-6">
-                    Located in Veraval, Gujarat, the temple stands majestically on the shore of the Arabian Sea.
-                    The nearest airport is Diu (85km) or Rajkot (200km).
+                    {manifest?.location?.sacred_geography || temple.location.city}
                 </p>
+                <div className="mb-6 p-4 bg-secondary-container/20 rounded-lg">
+                    <h4 className="font-bold mb-2">How to Reach</h4>
+                    <p className="text-sm opacity-80">{manifest?.location?.access}</p>
+                </div>
                 <button className="px-8 py-3 bg-secondary-container text-secondary-on-container rounded-full font-medium hover:bg-secondary/20 transition-colors">
                     Get Directions
                 </button>
