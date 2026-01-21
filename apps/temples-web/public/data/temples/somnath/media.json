@@ -1,0 +1,22 @@
+[
+    {
+        "type": "image",
+        "url": "data/temples/somnath/images/somnath_sunset_aarti.png",
+        "caption": "Majestic Sunset Aarti at Somnath"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/somnath/images/somnath_night_illumination.png",
+        "caption": "Temple Illuminated Under Crescent Moon"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/somnath/images/somnath_ocean_view.png",
+        "caption": "Somnath Temple and Arabian Sea"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/somnath/images/hero.png",
+        "caption": "Eternal Shrine of Lord Somnath"
+    }
+]

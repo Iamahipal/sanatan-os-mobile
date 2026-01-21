@@ -1,0 +1,45 @@
+{
+    "id": "nageshwar",
+    "name": "Nageshwar",
+    "name_local": "नागेश्वर",
+    "name_gujarati": "નાગેશ્વર",
+    "official_name": "Shri Nageshwar Jyotirlinga Temple",
+    "deity": {
+        "primary": "Lord Shiva",
+        "form": "Nageshwar (Lord of Serpents)",
+        "manifestation": "Jyotirlinga - Tenth of the 12",
+        "consort": "Goddess Parvati (as Nageshwari)",
+        "mythology_link": "Where Shiva protected devotee Supriya from the demon Daruka"
+    },
+    "location": {
+        "city": "Dwarka",
+        "state": "Gujarat",
+        "coords": [
+            22.3285,
+            68.9780
+        ],
+        "sacred_geography": "Located between Dwarka and Bet Dwarka, near the sacred city of Lord Krishna. The 82-foot tall Shiva statue in the temple complex is among India's largest.",
+        "access": "17 km from Dwarka, 145 km from Jamnagar, 460 km from Ahmedabad"
+    },
+    "significance": {
+        "type": [
+            "Jyotirlinga",
+            "Naganath Tirtha",
+            "Krishna Region"
+        ],
+        "jyotirlinga_number": 10,
+        "rank": "Tenth Jyotirlinga, protector of devotees from serpent curses and poison",
+        "philosophy": "Nageshwar teaches that sincere devotion provides protection even in the darkest circumstances. The devotee Supriya, imprisoned by a demon, continued his worship—and Shiva destroyed the demon to save him. Devotion in adversity attracts divine intervention.",
+        "scriptural_reference": "Shiva Purana, Nageshwar Mahatmya"
+    },
+    "stats": {
+        "age_years": 1500,
+        "statue_height_feet": 82,
+        "daily_visitors": "5,000-12,000",
+        "annual_visitors": "20 lakh+",
+        "unique_feature": "Giant 82-foot Shiva statue; near Krishna's Dwarka"
+    },
+    "hero_image": "data/temples/nageshwar/images/hero.png",
+    "description": "Near the sacred city of Dwarka, where Lord Krishna established his kingdom, rises another form of the divine—Nageshwar, the Lord of Serpents. This Jyotirlinga emerged to protect the devotee Supriya from the demon Daruka. Despite being imprisoned and tortured, Supriya continued chanting 'Om Namah Shivaya'—and Shiva manifested in brilliant light, destroyed the demon, and remained as Nageshwar. The temple houses an 82-foot statue of Lord Shiva in meditation—one of the largest in India. Pilgrims often combine Nageshwar with Dwarka and Bet Dwarka for a complete Saurashtra pilgrimage. The temple's location near the sea adds to its sacred atmosphere, and darshan here is said to remove all serpent-related curses and protect from poison.",
+    "secret_hook": "Why is the Lord of Serpents located near Krishna's Dwarka? Some texts hint that Nageshwar protects the underwater remnants of the original Dwarka—guarding Krishna's sunken city for its prophesied re-emergence."
+}

@@ -1,0 +1,62 @@
+[
+    {
+        "id": "moon",
+        "category": "Origin",
+        "title": "The Moon's Blessing at Somnath",
+        "hook": "Where Lord Shiva restored the Moon's radiance and became Somnath—Lord of the Moon",
+        "full_story": "According to the Shiva Purana, the Moon god (Soma/Chandra) married the 27 Nakshatras (lunar mansions). When an imbalance arose, the Moon's light began to fade. A devoted Soma prayed to Shiva for 6 months at the sacred spot now called Prabhas. Pleased with this devotion, Shiva blessed Soma, restoring his light in a beautiful cycle of waxing and waning that we still see today. Shiva manifested as Somnath (Lord of the Moon) at this spot, forming the first Jyotirlinga. The name Prabhas means 'lustrous'—referring to the Moon's restored divine light.",
+        "source": "Shiva Purana, Rudra Samhita",
+        "image": "data/temples/somnath/images/somnath_night_illumination.png",
+        "verified": true
+    },
+    {
+        "id": "resilience",
+        "category": "History",
+        "title": "Eternal Dharma: The Indestructible Faith",
+        "hook": "Rebuilt 17 times across the ages—a testament to the immortal spirit of Sanatan Dharma",
+        "full_story": "Somnath's history is the greatest testament to the resilience of faith. Through the ages, the temple has been rebuilt 17 times by devoted rulers and communities. The Chalukyas, Paramaras, Marathas, and finally independent India—all contributed reconstructions. In 1947, Deputy PM Sardar Patel visited and declared: 'The Somnath temple signifies that the power of creation is always greater than the power of destruction.' President Rajendra Prasad inaugurated the new temple in 1951. Today, Somnath stands as a symbol of eternal Dharma that no force can extinguish.",
+        "source": "Archaeological Survey of India, Temple Trust records",
+        "image": "data/temples/somnath/images/somnath_ocean_view.png",
+        "verified": true
+    },
+    {
+        "id": "arrow",
+        "category": "Architecture",
+        "title": "The Arrow Pillar: Ancient Wisdom",
+        "hook": "A Sanskrit inscription marking India's sacred geography—straight line to the South Pole",
+        "full_story": "Near the temple stands the 'Baan Stambha' (Arrow Pillar), inscribed with Sanskrit text: 'The point where you stand is the first point of the Indian landmass as you travel south. From here to the Dakshini Dhruv (South Pole), there is no interruption by any landmass.' This is geographically accurate—a straight line south from Somnath across the Indian Ocean reaches Antarctica without hitting significant landmass. Erected centuries ago, this pillar demonstrates the sophisticated geographical knowledge of ancient India and the sacred significance of Somnath's coastal location.",
+        "source": "Temple inscriptions, Geographic analysis",
+        "image": "data/temples/somnath/images/somnath_ocean_view.png",
+        "verified": true
+    },
+    {
+        "id": "krishna",
+        "category": "Legend",
+        "title": "Lord Krishna's Sacred Departure",
+        "hook": "The holy site where Lord Krishna completed his divine mission on Earth",
+        "full_story": "Prabhas Patan, where Somnath stands, is also the sacred site of Lord Krishna's Maha-Nirvana—his divine departure from Earth. After completing his mission of establishing Dharma, Krishna sat in meditation in the forest. His earthly form gracefully returned to Vaikuntha. The spot, called Bhalka Tirtha, is 5 km from Somnath and is one of the holiest sites for Krishna devotees. Many pilgrims visit both sacred locations on the same yatra, honoring both Shiva and Vishnu's manifestations at this blessed place.",
+        "source": "Bhagavata Purana, Mahabharata",
+        "image": "data/temples/somnath/images/somnath_sunset_aarti.png",
+        "verified": true
+    },
+    {
+        "id": "aarti",
+        "category": "Experience",
+        "title": "The Ocean Aarti: Fire Meeting Sea",
+        "hook": "The only Jyotirlinga where sunset Aarti faces the open Arabian Sea",
+        "full_story": "Every evening, as the sun sets over the Arabian Sea, Somnath's magnificent Aarti ritual takes place with the ocean as its backdrop. Thousands gather on the temple steps, facing west as priests perform the sacred fire ceremony. The temple is deliberately oriented so the setting sun aligns with the main sanctum. As flames are waved and bells ring, the golden disc sinks into the water before the temple. Many describe this as India's most spectacular Aarti—fire, ocean, sunset, and millennia of spiritual history converging in a single transcendent moment.",
+        "source": "Temple schedule, Pilgrim accounts",
+        "image": "data/temples/somnath/images/somnath_sunset_aarti.png",
+        "verified": true
+    },
+    {
+        "id": "triveni",
+        "category": "Pilgrimage",
+        "title": "Triveni Sangam: Sacred Confluence",
+        "hook": "Three sacred rivers meet near Somnath—a powerful site for ancestral rites",
+        "full_story": "Just 10 km from Somnath lies Triveni Sangam, the sacred confluence of the Hiran, Kapila, and the underground Saraswati rivers. This is considered one of the most auspicious locations for performing Shraddha (ancestral rites) and Pind Daan. The confluence is believed to be extraordinarily purifying, with the mystical Saraswati river adding special spiritual significance. Many pilgrims combine their Somnath darshan with rituals at this sacred sangam, honoring both the divine and their ancestors.",
+        "source": "Regional pilgrimage traditions",
+        "image": "data/temples/somnath/images/somnath_night_illumination.png",
+        "verified": true
+    }
+]

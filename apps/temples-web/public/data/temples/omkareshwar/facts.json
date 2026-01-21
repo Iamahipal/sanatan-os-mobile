@@ -1,0 +1,62 @@
+[
+    {
+        "id": "om_island",
+        "category": "Mystery",
+        "title": "The Om-Shaped Island",
+        "hook": "The only place on Earth where an island naturally forms the sacred Om symbol",
+        "full_story": "Omkareshwar is built on Mandhata Island in the Narmada River, which from above reveals the shape of the sacred Hindu symbol ॐ (Om). This is not human construction but a natural geological formation. The island is created by the Narmada River splitting into two channels around it. This divine coincidence—the holiest sound in Hinduism manifested as land—makes Omkareshwar profoundly sacred. Many believe the island itself is a visible reminder of the primordial sound that created the universe.",
+        "source": "Geographical surveys, Shiva Purana",
+        "image": "data/temples/omkareshwar/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "two_lingas",
+        "category": "Significance",
+        "title": "Two Jyotirlingas on One Island",
+        "hook": "The only place where two of the twelve Jyotirlingas exist together",
+        "full_story": "Uniquely, the Mandhata Island hosts two Jyotirlingas: Omkareshwar on the southern side of the island and Amareshwar (also called Mamaleshwar) on the northern side. Some traditions count these as separate Jyotirlingas, while others consider them one. The Shiva Purana mentions that Shiva was so pleased with the devotion shown here that he manifested twice. Pilgrims traditionally visit both temples to complete their darshan.",
+        "source": "Shiva Purana, Skanda Purana",
+        "image": "data/temples/omkareshwar/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "narmada",
+        "category": "Experience",
+        "title": "Narmada Parikrama: The Five-Month Walk",
+        "hook": "Devotees walk 2,600 km along both banks of the Narmada, with Omkareshwar as the sacred midpoint",
+        "full_story": "The Narmada Parikrama is one of Hinduism's most demanding pilgrimages—a 2,600 km barefoot walk along both banks of the Narmada River taking 3-5 months. Omkareshwar marks the spiritual midpoint of this journey. Pilgrims who complete the entire circuit are said to attain moksha. Even visiting Omkareshwar is considered partial completion of this sacred journey. The Narmada is the only river whose circumambulation grants liberation.",
+        "source": "Narmada pilgrimage traditions",
+        "image": "data/temples/omkareshwar/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "vindhya",
+        "category": "Legend",
+        "title": "Where the Vindhya Mountain's Pride Was Humbled",
+        "hook": "The spot where Agastya muni tamed the arrogant Vindhya mountain range",
+        "full_story": "Legend says the Vindhya mountain once grew so tall in pride that it blocked the sun's path. Sage Agastya, at the gods' request, asked Vindhya to bow so he could pass to the south, promising to return. He never did, and Vindhya remains bowed to this day. The sage performed intense penance at Omkareshwar to please Shiva. This story connects the temple to the power of humility and the conquest of ego—central themes in the Shaiva path.",
+        "source": "Shiva Purana, Skanda Purana",
+        "image": "data/temples/omkareshwar/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "architecture",
+        "category": "Architecture",
+        "title": "Chalukyan Grandeur on Sacred Waters",
+        "hook": "11th-century stone carvings rise majestically from the Narmada waters",
+        "full_story": "The Omkareshwar temple showcases exquisite medieval architecture, with significant portions dating to the Paramara and Chandella dynasties (10th-11th century). The five-storied shikhara features intricate carvings of deities, mythological scenes, and geometric patterns. The temple appears to emerge from the river itself, creating stunning reflections in the sacred Narmada waters. The stone craftsmanship represents the zenith of Central Indian temple architecture.",
+        "source": "Archaeological Survey of India",
+        "image": "data/temples/omkareshwar/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "tradition",
+        "category": "Tradition",
+        "title": "The Sacred Stone Reverences",
+        "hook": "Every stone on this island is considered sacred—worshipped as Shiva himself",
+        "full_story": "A unique tradition holds that every pebble and stone on Mandhata Island is a natural Shivalinga. The island is literally made of sacred stones. Pilgrims are forbidden from removing any stone, however small. Local tradition says the entire island is Shiva's body manifested in stone. This reverence extends to the Narmada's pebbles themselves—smooth river stones from the Narmada are worshipped as Banalinga (self-manifested Shivalingas) across India.",
+        "source": "Local traditions, Narmada scripture",
+        "image": "data/temples/omkareshwar/images/thumbnail.png",
+        "verified": true
+    }
+]
