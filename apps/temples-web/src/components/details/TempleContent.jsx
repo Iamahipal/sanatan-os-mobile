@@ -12,7 +12,7 @@ const Section = ({ id, title, icon: Icon, children }) => {
                 <div className="p-3 rounded-xl bg-secondary-container text-secondary-on-container">
                     <Icon size={24} />
                 </div>
-                <h2 className="font-serif text-3xl md:text-4xl text-surface-foreground">{title}</h2>
+                <h2 className="font-decorative text-3xl md:text-4xl text-surface-foreground tracking-wide">{title}</h2>
             </div>
             <div className="pl-4 md:pl-16 border-l-2 border-outline-variant/30">
                 {children}
@@ -90,8 +90,8 @@ export default function TempleContent({ temple, details }) {
                         <ul className="space-y-6">
                             {rituals.daily_schedule && rituals.daily_schedule.map((item, idx) => (
                                 <li key={idx} className="flex justify-between items-center pb-4 border-b border-outline-variant/20 last:border-0 last:pb-0">
-                                    <span className="font-medium">{item.name || item.event}</span>
-                                    <span className="font-bold text-primary">{item.time}</span>
+                                    <span className="font-medium font-serif text-lg">{item.name || item.event}</span>
+                                    <span className="font-bold text-tertiary font-sans tracking-wide">{item.time}</span>
                                 </li>
                             ))}
                         </ul>
@@ -101,9 +101,9 @@ export default function TempleContent({ temple, details }) {
                                 {deity?.worship?.festivals?.map(f => f.name).join(", ") || "Daily worship is performed according to Vedic traditions."}
                             </p>
                             {deity?.worship?.primary_mantra && (
-                                <div className="p-4 bg-surface-container rounded-xl">
-                                    <p className="font-serif text-lg text-primary text-center">"{deity.worship.primary_mantra.transliteration}"</p>
-                                    <p className="text-center text-sm opacity-70 mt-1">{deity.worship.primary_mantra.translation}</p>
+                                <div className="p-6 bg-surface-container rounded-xl border border-primary/10">
+                                    <p className="font-sanskrit text-2xl text-primary text-center mb-2 leading-relaxed">"{deity.worship.primary_mantra.transliteration}"</p>
+                                    <p className="text-center text-sm opacity-70 italic font-serif">{deity.worship.primary_mantra.translation}</p>
                                 </div>
                             )}
                         </div>

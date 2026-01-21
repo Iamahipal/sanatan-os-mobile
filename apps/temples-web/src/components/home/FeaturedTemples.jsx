@@ -60,7 +60,7 @@ export default function FeaturedTemples() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="font-serif text-4xl md:text-5xl text-surface-foreground"
+                        className="font-decorative text-4xl md:text-5xl text-surface-foreground"
                     >
                         Featured Temples
                     </motion.h2>

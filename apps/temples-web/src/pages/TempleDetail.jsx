@@ -91,7 +91,7 @@ export default function TempleDetail() {
         <div className="bg-surface min-h-screen pb-20">
             <button
                 onClick={() => navigate(-1)}
-                className="fixed top-6 left-6 z-50 w-12 h-12 rounded-full bg-black/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-black/40 transition-all hover:scale-105"
+                className="fixed top-6 left-6 z-50 w-12 h-12 rounded-full glass-panel border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all hover:scale-105 shadow-xl"
             >
                 <ArrowLeft size={24} />
             </button>

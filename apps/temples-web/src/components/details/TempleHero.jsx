@@ -42,21 +42,23 @@ export default function TempleHero({ temple }) {
                 style={{ opacity }}
                 className="relative z-10 h-full flex flex-col justify-end pb-24 px-6 md:px-12 max-w-7xl mx-auto"
             >
+                <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent pointer-events-none" />
+
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="flex items-center gap-2 text-white/80 mb-4"
+                    className="relative flex items-center gap-3 text-white/90 mb-4 ml-1"
                 >
-                    <MapPin size={18} />
-                    <span className="uppercase tracking-widest text-sm font-medium">{temple.location.city}, {temple.location.state}</span>
+                    <MapPin size={16} className="text-tertiary" />
+                    <span className="uppercase tracking-[0.2em] text-xs font-bold font-sans">{temple.location.city}, {temple.location.state}</span>
                 </motion.div>
 
                 <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-bold leading-none mb-6 drop-shadow-lg"
+                    className="relative font-decorative text-6xl md:text-8xl lg:text-9xl text-white mb-8 drop-shadow-2xl leading-[0.9]"
                 >
                     {temple.name}
                 </motion.h1>
@@ -65,23 +67,23 @@ export default function TempleHero({ temple }) {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
-                    className="flex flex-wrap gap-4"
+                    className="relative flex flex-wrap gap-4"
                 >
                     <button
                         onClick={() => togglePlay(mantraTrack)}
-                        className={`group flex items-center gap-3 px-6 py-4 rounded-full shadow-elevation-3 transition-all active:scale-95 ${isCurrentTrackPlaying
-                            ? 'bg-primary-container text-primary-on-container ring-2 ring-primary'
-                            : 'bg-primary text-primary-foreground hover:shadow-elevation-4 hover:scale-105'
+                        className={`group flex items-center gap-3 px-8 py-4 rounded-full transition-all duration-300 ${isCurrentTrackPlaying
+                            ? 'bg-tertiary text-surface-foreground ring-2 ring-white/50 shadow-[0_0_30px_rgba(212,175,55,0.4)]'
+                            : 'bg-white text-surface-foreground hover:bg-tertiary hover:scale-105 shadow-xl'
                             }`}
                     >
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isCurrentTrackPlaying ? 'bg-primary/20' : 'bg-white/20'}`}>
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isCurrentTrackPlaying ? 'bg-black/10' : 'bg-surface-variant'}`}>
                             {isCurrentTrackPlaying ? (
                                 <Pause size={16} fill="currentColor" />
                             ) : (
                                 <Play size={16} fill="currentColor" />
                             )}
                         </div>
-                        <span className="font-medium tracking-wide">
+                        <span className="font-bold tracking-wide text-sm uppercase">
                             {isCurrentTrackPlaying ? 'Pause Chant' : 'Listen to Chant'}
                         </span>
                         {isCurrentTrackPlaying && (
@@ -93,7 +95,7 @@ export default function TempleHero({ temple }) {
                         )}
                     </button>
 
-                    <button className="px-6 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full hover:bg-white/20 transition-colors uppercase tracking-widest text-xs font-bold">
+                    <button className="px-8 py-4 glass-panel border-white/20 hover:border-tertiary/50 text-white rounded-full hover:bg-white/10 transition-all uppercase tracking-widest text-xs font-bold shadow-lg">
                         Virtual Darshan
                     </button>
                 </motion.div>

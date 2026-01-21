@@ -33,11 +33,13 @@ export default function HeroSection() {
                 style={{ y: textY, opacity }}
                 className="relative h-full flex flex-col items-center justify-center px-4 md:px-8 text-center z-10"
             >
+                <div className="absolute inset-0 bg-gradient-to-t from-surface/20 to-transparent pointer-events-none" />
+
                 <motion.span
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, ease: "circOut" }}
-                    className="inline-block py-2 px-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-[0.2em] mb-8 hover:bg-white/20 transition-colors cursor-default"
+                    className="inline-block py-2 px-6 rounded-full glass-panel border-tertiary/30 text-tertiary text-xs font-bold font-decorative tracking-[0.3em] uppercase mb-8 hover:bg-white/10 transition-colors cursor-default backdrop-blur-md"
                 >
                     Sanatan Yatra
                 </motion.span>
@@ -46,16 +48,16 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2, ease: "circOut" }}
-                    className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-medium mb-8 leading-tight drop-shadow-lg"
+                    className="font-decorative text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-tight drop-shadow-2xl"
                 >
-                    Discover the <span className="text-secondary-container italic decoration-2 decoration-primary underline-offset-8">Divine</span>
+                    Discover the <span className="text-tertiary italic drop-shadow-lg">Divine</span>
                 </motion.h1>
 
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                    className="text-white/90 text-lg md:text-2xl max-w-3xl mb-12 font-light leading-relaxed tracking-wide"
+                    className="text-white/90 text-lg md:text-2xl max-w-3xl mb-12 font-serif italic leading-relaxed tracking-wide drop-shadow-md"
                 >
                     Embark on a spiritual journey through the most sacred temples of India.
                     Experience the peace, history, and ancient wisdom.

@@ -11,3 +11,13 @@
     @apply h-full bg-surface text-surface-foreground font-sans antialiased overflow-x-hidden;
   }
 }
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg;
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
