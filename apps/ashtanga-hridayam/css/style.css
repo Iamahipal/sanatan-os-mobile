@@ -174,8 +174,10 @@ body {
 
 /* ===== Hero Section ===== */
 .hero {
-    padding: 32px 20px 40px;
-    background: linear-gradient(180deg, var(--md-primary-container) 0%, var(--md-surface) 100%);
+    padding: 48px 20px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, var(--md-surface) 100%),
+        url('../images/hero.png') center/cover no-repeat;
+    position: relative;
 }
 
 .hero-title {
@@ -321,6 +323,14 @@ body {
 
 .dosha-card[data-dosha="kapha"] .dosha-icon {
     background: #E0F2F1;
+}
+
+.dosha-icon-img {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+    box-shadow: var(--elevation-2);
 }
 
 .dosha-name {
