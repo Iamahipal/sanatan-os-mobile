@@ -10,7 +10,7 @@ export default function MainLayout() {
     return (
         <div className="min-h-screen bg-surface flex flex-col md:flex-row">
             {/* Desktop Navigation */}
-            <NavigationRail activeTab={activeTab} onTabChange={setActiveTab} />
+            <NavigationRail />
 
             {/* Main Content Area */}
             <main className="flex-1 w-full md:pl-20 pb-20 md:pb-0 transition-all duration-300">
@@ -18,13 +18,13 @@ export default function MainLayout() {
                     {/* 
                 We use Outlet for routing content. 
             */}
-                    <Outlet context={{ activeTab }} />
+                    <Outlet />
                     <Footer />
                 </div>
             </main>
 
             {/* Mobile Navigation */}
-            <BottomBar activeTab={activeTab} onTabChange={setActiveTab} />
+            <BottomBar />
         </div>
     );
 }

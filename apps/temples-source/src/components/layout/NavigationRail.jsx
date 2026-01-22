@@ -1,36 +1,40 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Home, Search, Heart, Menu } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
-const NavItem = ({ icon: Icon, label, active, onClick }) => {
+const NavItem = ({ icon: Icon, label, to }) => {
+    const location = useLocation();
+    const isActive = location.pathname === to || (to !== '/' && location.pathname.startsWith(to));
+
     return (
-        <button
-            onClick={onClick}
+        <Link
+            to={to}
             className={cn(
                 "group flex flex-col items-center gap-1 p-2 w-full transition-colors",
-                active ? "text-primary font-medium" : "text-surface-on-variant hover:text-primary"
+                isActive ? "text-primary font-medium" : "text-surface-on-variant hover:text-primary"
             )}
         >
             <div
                 className={cn(
                     "flex items-center justify-center w-14 h-8 rounded-full transition-all duration-300",
-                    active ? "bg-secondary-container" : "group-hover:bg-surface-variant"
+                    isActive ? "bg-secondary-container" : "group-hover:bg-surface-variant"
                 )}
             >
                 <Icon
                     size={24}
                     className={cn(
                         "transition-colors",
-                        active ? "text-secondary-on-container" : "text-surface-on-variant"
+                        isActive ? "text-secondary-on-container" : "text-surface-on-variant"
                     )}
                 />
             </div>
             <span className="text-xs tracking-wide">{label}</span>
-        </button>
+        </Link>
     );
 };
 
-export default function NavigationRail({ activeTab, onTabChange }) {
+export default function NavigationRail() {
     return (
         <nav className="hidden md:flex flex-col w-20 h-full bg-surface-container-low border-r border-outline-variant py-8 fixed left-0 top-0 z-50">
             <div className="flex flex-col gap-8 items-center w-full">
@@ -43,26 +47,22 @@ export default function NavigationRail({ activeTab, onTabChange }) {
                     <NavItem
                         icon={Home}
                         label="Home"
-                        active={activeTab === 'home'}
-                        onClick={() => onTabChange('home')}
+                        to="/"
                     />
                     <NavItem
                         icon={Search}
                         label="Temples"
-                        active={activeTab === 'search'}
-                        onClick={() => onTabChange('search')}
+                        to="/temples" // Or just '/' if search is on home page
                     />
                     <NavItem
                         icon={Heart}
                         label="Saved"
-                        active={activeTab === 'saved'}
-                        onClick={() => onTabChange('saved')}
+                        to="/saved"
                     />
                     <NavItem
                         icon={Menu}
                         label="More"
-                        active={activeTab === 'more'}
-                        onClick={() => onTabChange('more')}
+                        to="/more"
                     />
                 </div>
             </div>
