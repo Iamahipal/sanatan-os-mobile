@@ -8,23 +8,22 @@ export function useTemples() {
     useEffect(() => {
         async function fetchTemples() {
             try {
-                const response = await fetch('/data/index.json');
+                // Use relative path for fetching data in sub-directory deployment
+                const response = await fetch(`${import.meta.env.BASE_URL}data/index.json`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch temples data');
                 }
                 const data = await response.json();
-                // Since we are in the 'temples-web' app but data paths might be relative to the old app,
-                // we might need to adjust thumbnail paths if they are not just 'data/...' but relative.
-                // Assuming data/index.json contains paths like "data/temples/somnath/..."
-                // In our new structure, public/data is the root.
-                // So a path "data/temples/somnath/image.png" becomes "/data/temples/somnath/image.png".
 
-                const processTemples = data.map(t => ({
-                    ...t,
-                    // Ensure path starts with / so it's absolute to domain root
-                    thumbnail: t.thumbnail.startsWith('/') ? t.thumbnail : `/${t.thumbnail}`,
-                    image: t.thumbnail.startsWith('/') ? t.thumbnail : `/${t.thumbnail}`
-                }));
+                // Prepend base URL to image paths so they resolve correctly
+                const processTemples = data.map(t => {
+                    const cleanPath = t.thumbnail.startsWith('/') ? t.thumbnail.slice(1) : t.thumbnail;
+                    return {
+                        ...t,
+                        thumbnail: `${import.meta.env.BASE_URL}${cleanPath}`,
+                        image: `${import.meta.env.BASE_URL}${cleanPath}`
+                    };
+                });
 
                 setTemples(processTemples);
             } catch (err) {
