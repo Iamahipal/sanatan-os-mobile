@@ -1,0 +1,456 @@
+/* ============================================
+   Ashtanga Hridayam - Ayurvedic Remedies App
+   ============================================ */
+
+:root {
+    --color-bg: #0D0D0D;
+    --color-surface: #1A1A1A;
+    --color-surface-elevated: #242424;
+    --color-primary: #4CAF50;
+    --color-primary-dark: #388E3C;
+    --color-accent: #81C784;
+    --color-gold: #D4AF37;
+    --color-text: #F5F5F5;
+    --color-text-secondary: #B0B0B0;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --font-decorative: 'Cinzel Decorative', serif;
+    --font-sans: 'Outfit', sans-serif;
+    --font-sanskrit: 'Tiro Devanagari Sanskrit', serif;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.app-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    position: sticky;
+    top: 0;
+    background: rgba(13, 13, 13, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.back-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: var(--color-surface-elevated);
+    transform: scale(1.05);
+}
+
+.header-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.sanskrit-title {
+    font-family: var(--font-sanskrit);
+    font-size: 14px;
+    color: var(--color-gold);
+    letter-spacing: 1px;
+}
+
+.english-title {
+    font-family: var(--font-decorative);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Hero */
+.hero {
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(13, 13, 13, 0) 100%);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.hero-title {
+    font-family: var(--font-decorative);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 12px;
+}
+
+.hero-title .highlight {
+    color: var(--color-primary);
+}
+
+.hero-subtitle {
+    color: var(--color-text-secondary);
+    font-size: 15px;
+}
+
+/* Search */
+.search-section {
+    padding: 20px;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    color: var(--color-text-secondary);
+}
+
+.search-input {
+    width: 100%;
+    padding: 16px 16px 16px 48px;
+    font-size: 16px;
+    font-family: var(--font-sans);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    color: var(--color-text);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.search-input::placeholder {
+    color: var(--color-text-secondary);
+}
+
+/* Section Titles */
+.section-title {
+    font-family: var(--font-decorative);
+    font-size: 18px;
+    font-weight: 400;
+    padding: 0 20px;
+    margin-bottom: 16px;
+    color: var(--color-text);
+}
+
+/* Dosha Grid */
+.categories-section {
+    padding: 24px 0;
+}
+
+.dosha-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 0 20px;
+}
+
+.dosha-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-sans);
+}
+
+.dosha-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 24px rgba(76, 175, 80, 0.15);
+}
+
+.dosha-card[data-dosha="vata"]:hover {
+    border-color: #64B5F6;
+}
+
+.dosha-card[data-dosha="pitta"]:hover {
+    border-color: #FF7043;
+}
+
+.dosha-card[data-dosha="kapha"]:hover {
+    border-color: #4DB6AC;
+}
+
+.dosha-icon {
+    font-size: 28px;
+}
+
+.dosha-name {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.dosha-desc {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Remedies Grid */
+.popular-section {
+    padding: 24px 0;
+}
+
+.remedies-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 20px;
+}
+
+.remedy-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.remedy-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-gold);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.1);
+}
+
+.remedy-card .emoji {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.remedy-card .name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: var(--color-text);
+}
+
+.remedy-card .sanskrit {
+    font-family: var(--font-sanskrit);
+    font-size: 12px;
+    color: var(--color-gold);
+    margin-bottom: 8px;
+}
+
+.remedy-card .symptoms {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+}
+
+/* Results Section */
+.results-section {
+    padding: 24px 0;
+}
+
+.results-container {
+    padding: 0 20px;
+}
+
+/* Hidden */
+.hidden {
+    display: none !important;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--color-surface);
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+#modal-body {
+    padding: 24px;
+}
+
+.modal-header {
+    margin-bottom: 24px;
+}
+
+.modal-header .emoji {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.modal-header h2 {
+    font-family: var(--font-decorative);
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.modal-header .sanskrit {
+    font-family: var(--font-sanskrit);
+    color: var(--color-gold);
+    font-size: 16px;
+}
+
+.modal-section {
+    margin-bottom: 24px;
+}
+
+.modal-section h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.modal-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.modal-section li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-section li:last-child {
+    border-bottom: none;
+}
+
+.modal-section li::before {
+    content: "🌿";
+    font-size: 14px;
+}
+
+.modal-section p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+
+.source-tag {
+    display: inline-block;
+    background: var(--color-surface-elevated);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-top: 8px;
+}
+
+.source-tag strong {
+    color: var(--color-gold);
+}
+
+/* Disclaimer */
+.disclaimer {
+    padding: 20px;
+    margin: 24px 20px;
+    background: rgba(255, 152, 0, 0.1);
+    border: 1px solid rgba(255, 152, 0, 0.3);
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+.disclaimer strong {
+    color: #FFB74D;
+}
+
+/* Responsive */
+@media (min-width: 600px) {
+    .hero-title {
+        font-size: 36px;
+    }
+
+    .remedies-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .modal-content {
+        border-radius: var(--radius-lg);
+        margin: auto;
+        max-height: 80vh;
+    }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashtanga Hridayam - Ayurvedic Remedies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Outfit:wght@300;400;500;600&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <a href="../../index.html" class="back-btn" aria-label="Back to SanatanOS">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
+                </svg>
+            </a>
+            <div class="header-title">
+                <span class="sanskrit-title">अष्टाङ्ग हृदयम्</span>
+                <span class="english-title">Ashtanga Hridayam</span>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Ancient Wisdom for<br><span class="highlight">Modern Healing</span></h1>
+                <p class="hero-subtitle">Discover Ayurvedic remedies from the sacred text of Vagbhata</p>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                    </svg>
+                </div>
+                <input type="text" id="symptom-search" class="search-input" placeholder="Describe your ailment (e.g., headache, digestion)...">
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="results-section hidden">
+            <h2 class="section-title">Recommended Remedies</h2>
+            <div id="results-container" class="results-container"></div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories-section">
+            <h2 class="section-title">Browse by Dosha</h2>
+            <div class="dosha-grid">
+                <button class="dosha-card" data-dosha="vata" onclick="filterByDosha('vata')">
+                    <div class="dosha-icon">💨</div>
+                    <span class="dosha-name">Vata</span>
+                    <span class="dosha-desc">Air & Space</span>
+                </button>
+                <button class="dosha-card" data-dosha="pitta" onclick="filterByDosha('pitta')">
+                    <div class="dosha-icon">🔥</div>
+                    <span class="dosha-name">Pitta</span>
+                    <span class="dosha-desc">Fire & Water</span>
+                </button>
+                <button class="dosha-card" data-dosha="kapha" onclick="filterByDosha('kapha')">
+                    <div class="dosha-icon">🌊</div>
+                    <span class="dosha-name">Kapha</span>
+                    <span class="dosha-desc">Water & Earth</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Popular Remedies Section -->
+        <section class="popular-section">
+            <h2 class="section-title">Common Remedies</h2>
+            <div id="popular-container" class="remedies-grid"></div>
+        </section>
+
+        <!-- Remedy Detail Modal -->
+        <div id="remedy-modal" class="modal hidden">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <div id="modal-body"></div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <footer class="disclaimer">
+            <p>⚠️ <strong>Disclaimer:</strong> This information is for educational purposes only and is not intended to replace professional medical advice. Consult a qualified Ayurvedic practitioner or physician before starting any treatment.</p>
+        </footer>
+    </div>
+
+    <script src="data/remedies.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
