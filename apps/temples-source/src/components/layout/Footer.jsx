@@ -4,17 +4,17 @@ import { Sparkles, Heart } from 'lucide-react';
 
 export default function Footer() {
     return (
-        <footer className="bg-surface-container-high py-16 text-surface-foreground border-t border-outline-variant/20">
-            <div className="container mx-auto px-6 md:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <footer className="bg-surface-container-high py-10 md:py-16 text-surface-foreground border-t border-outline-variant/20">
+            <div className="container mx-auto px-4 md:px-12">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-12">
 
                     {/* Brand Section */}
-                    <div className="col-span-1 md:col-span-2 space-y-4">
+                    <div className="col-span-2 space-y-3 md:space-y-4">
                         <div className="flex items-center gap-2 text-primary">
-                            <Sparkles size={24} />
-                            <span className="font-decorative text-2xl font-bold tracking-wider">Sanatan Yatra</span>
+                            <Sparkles size={20} className="md:w-6 md:h-6" />
+                            <span className="font-decorative text-xl md:text-2xl font-bold tracking-wider">Sanatan Yatra</span>
                         </div>
-                        <p className="font-serif text-lg text-surface-on-variant max-w-sm leading-relaxed">
+                        <p className="font-serif text-sm md:text-lg text-surface-on-variant max-w-sm leading-relaxed">
                             A digital pilgrimage to the eternal abodes of Shiva. Discover the stories, rituals, and divine energy of the 12 Jyotirlingas.
                         </p>
                     </div>

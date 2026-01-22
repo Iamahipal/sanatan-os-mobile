@@ -6,10 +6,10 @@ import { cn } from '../../utils/cn';
 export default function TempleCard({ id, name, location, image, description, onClick }) {
     return (
         <motion.div
-            whileHover={{ y: -12, scale: 1.02 }}
+            whileHover={{ y: -8, scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
             onClick={onClick}
-            className="group relative flex-shrink-0 w-[320px] md:w-[360px] h-[480px] md:h-[520px] bg-surface-container-low rounded-[32px] overflow-hidden cursor-pointer shadow-elevation-1 hover:shadow-[0_0_30px_rgba(212,175,55,0.25)] border border-white/10 hover:border-tertiary/40 transition-all duration-500"
+            className="group relative flex-shrink-0 w-[260px] sm:w-[280px] md:w-[320px] h-[380px] sm:h-[420px] md:h-[480px] bg-surface-container-low rounded-[24px] md:rounded-[32px] overflow-hidden cursor-pointer shadow-elevation-1 hover:shadow-[0_0_30px_rgba(212,175,55,0.25)] border border-white/10 hover:border-tertiary/40 transition-all duration-500"
         >
             {/* Image Container - Taller Aspect Ratio */}
             <div className="h-[65%] w-full overflow-hidden relative">
@@ -29,12 +29,12 @@ export default function TempleCard({ id, name, location, image, description, onC
             </div>
 
             {/* Content */}
-            <div className="p-6 md:p-8 flex flex-col justify-between h-[35%] relative">
+            <div className="p-4 sm:p-6 md:p-8 flex flex-col justify-between h-[35%] relative">
                 {/* Decorative Element */}
-                <div className="absolute top-0 right-8 w-12 h-1 bg-tertiary rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-y-1 shadow-[0_4px_12px_rgba(212,175,55,0.4)]"></div>
+                <div className="absolute top-0 right-6 md:right-8 w-10 md:w-12 h-1 bg-tertiary rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-y-1 shadow-[0_4px_12px_rgba(212,175,55,0.4)]"></div>
 
                 <div>
-                    <h3 className="font-decorative text-3xl text-surface-foreground leading-none mb-3 group-hover:text-tertiary transition-colors">
+                    <h3 className="font-decorative text-xl sm:text-2xl md:text-3xl text-surface-foreground leading-none mb-2 group-hover:text-tertiary transition-colors">
                         {name}
                     </h3>
                     <p className="text-surface-on-variant text-sm line-clamp-2 leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity font-serif">
