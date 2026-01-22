@@ -1,0 +1,44 @@
+{
+    "id": "kashi-vishwanath",
+    "name": "Kashi Vishwanath",
+    "name_local": "काशी विश्वनाथ",
+    "name_sanskrit": "काशीविश्वनाथः",
+    "deity": {
+        "primary": "Lord Shiva",
+        "form": "Vishwanatha (Lord of the Universe)",
+        "manifestation": "Jyotirlinga (Self-manifested Lingam of Light)",
+        "consort": "Annapurna Devi (Goddess of Food)",
+        "ganas": "Nandi, Bhringi"
+    },
+    "location": {
+        "city": "Varanasi",
+        "state": "Uttar Pradesh",
+        "coords": [
+            25.3109,
+            83.0107
+        ],
+        "sacred_geography": "On the western bank of the Ganga, between the sacred rivers Varuna and Asi, at the spot where Shiva's Jyotirlinga first pierced the earth",
+        "nearest_ghat": "Dashashwamedh Ghat (1.2 km)"
+    },
+    "significance": {
+        "type": [
+            "Jyotirlinga",
+            "Swayambhu",
+            "Moksha-Kshetra"
+        ],
+        "jyotirlinga_number": 12,
+        "philosophy": "Kashi is not just a city - it is believed to rest on Shiva's Trishul, existing outside the cycle of creation and destruction. Death here grants instant Moksha.",
+        "scriptural_reference": "Kashi Khanda of Skanda Purana"
+    },
+    "stats": {
+        "age_years": 3500,
+        "reconstructions": 6,
+        "daily_visitors": "50,000-100,000",
+        "annual_visitors": "3 crore+",
+        "temple_area_sqft": 54000,
+        "gold_on_dome_kg": 820
+    },
+    "hero_image": "data/temples/kashi-vishwanath/images/hero.png",
+    "description": "Kashi Vishwanath is not merely a temple—it is the spiritual center of the universe according to Hindu cosmology. Standing in the oldest continuously inhabited city on Earth, this temple marks the exact spot where Lord Shiva's infinite column of light (Jyotirlinga) first manifested. The current structure, built in 1780 by Ahilyabai Holkar, rises from centuries of destruction and rebirth. For devotees, to die in Kashi is to achieve Moksha—liberation from the cycle of rebirth.",
+    "secret_hook": "The original Shivalinga was never destroyed. In 1669, the head priest jumped into the Gyanvapi well clutching it, hiding it from invaders. Some believe it remains there to this day..."
+}

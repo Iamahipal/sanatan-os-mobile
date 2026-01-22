@@ -1,0 +1,12 @@
+[
+    {
+        "type": "image",
+        "url": "data/temples/grishneshwar/images/hero.png",
+        "caption": "Grishneshwar Temple, Ellora"
+    },
+    {
+        "type": "image",
+        "url": "data/temples/grishneshwar/images/thumbnail.png",
+        "caption": "Temple near Ellora Caves"
+    }
+]

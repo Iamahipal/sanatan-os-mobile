@@ -1,0 +1,132 @@
+[
+    {
+        "id": "somnath",
+        "name": "Somnath",
+        "name_local": "सोमनाथ",
+        "location": "Veraval, Gujarat",
+        "thumbnail": "data/temples/somnath/images/hero.png",
+        "short_desc": "The first Jyotirlinga, the eternal shrine that withstood 17 attacks.",
+        "category": "jyotirlinga",
+        "order": 1
+    },
+    {
+        "id": "mallikarjuna",
+        "name": "Mallikarjuna",
+        "name_local": "मल्लिकार्जुन",
+        "location": "Srisailam, AP",
+        "thumbnail": "data/temples/mallikarjuna/images/hero.png",
+        "short_desc": "Where Jyotirlinga and Shakti Peetha unite in divine harmony.",
+        "category": "jyotirlinga",
+        "order": 2
+    },
+    {
+        "id": "mahakaleshwar",
+        "name": "Mahakaleshwar",
+        "name_local": "महाकालेश्वर",
+        "location": "Ujjain, MP",
+        "thumbnail": "data/temples/mahakaleshwar/images/hero.png",
+        "short_desc": "The Lord of Time, famous for the sacred Bhasma Aarti.",
+        "category": "jyotirlinga",
+        "order": 3
+    },
+    {
+        "id": "omkareshwar",
+        "name": "Omkareshwar",
+        "name_local": "ओंकारेश्वर",
+        "location": "Khandwa, MP",
+        "thumbnail": "data/temples/omkareshwar/images/hero.png",
+        "short_desc": "The sacred Om-shaped island with two Jyotirlingas.",
+        "category": "jyotirlinga",
+        "order": 4
+    },
+    {
+        "id": "kedarnath",
+        "name": "Kedarnath",
+        "name_local": "केदारनाथ",
+        "location": "Rudraprayag, UK",
+        "thumbnail": "data/temples/kedarnath/images/hero.png",
+        "short_desc": "The highest of the 12 Jyotirlingas, amidst the mighty Himalayas.",
+        "category": "jyotirlinga",
+        "order": 5
+    },
+    {
+        "id": "bhimashankar",
+        "name": "Bhimashankar",
+        "name_local": "भीमाशंकर",
+        "location": "Pune, Maharashtra",
+        "thumbnail": "data/temples/bhimashankar/images/hero.png",
+        "short_desc": "The fierce protector in the lush Sahyadri wildlife sanctuary.",
+        "category": "jyotirlinga",
+        "order": 6
+    },
+    {
+        "id": "kashi-vishwanath",
+        "name": "Kashi Vishwanath",
+        "name_local": "काशी विश्वनाथ",
+        "location": "Varanasi, UP",
+        "thumbnail": "data/temples/kashi-vishwanath/images/hero.png",
+        "short_desc": "The City of Light where Shiva himself whispers the Taraka Mantra.",
+        "category": "jyotirlinga",
+        "order": 7
+    },
+    {
+        "id": "trimbakeshwar",
+        "name": "Trimbakeshwar",
+        "name_local": "त्र्यंबकेश्वर",
+        "location": "Nashik, Maharashtra",
+        "thumbnail": "data/temples/trimbakeshwar/images/hero.png",
+        "short_desc": "Source of the Godavari, with the unique three-faced Trimurti Linga.",
+        "category": "jyotirlinga",
+        "order": 8
+    },
+    {
+        "id": "vaidyanath",
+        "name": "Vaidyanath",
+        "name_local": "वैद्यनाथ",
+        "location": "Deoghar, Jharkhand",
+        "thumbnail": "data/temples/vaidyanath/images/hero.png",
+        "short_desc": "The Divine Healer, famous for the Kanwar Yatra pilgrimage.",
+        "category": "jyotirlinga",
+        "order": 9
+    },
+    {
+        "id": "nageshwar",
+        "name": "Nageshwar",
+        "name_local": "नागेश्वर",
+        "location": "Dwarka, Gujarat",
+        "thumbnail": "data/temples/nageshwar/images/hero.png",
+        "short_desc": "The Lord of Serpents near Krishna's sacred city.",
+        "category": "jyotirlinga",
+        "order": 10
+    },
+    {
+        "id": "rameshwaram",
+        "name": "Rameshwaram",
+        "name_local": "रामेश्वरम्",
+        "location": "Rameshwaram, TN",
+        "thumbnail": "data/temples/rameshwaram/images/hero.png",
+        "short_desc": "Where Rama worshipped Shiva, with 22 sacred wells.",
+        "category": "jyotirlinga",
+        "order": 11
+    },
+    {
+        "id": "grishneshwar",
+        "name": "Grishneshwar",
+        "name_local": "घृष्णेश्वर",
+        "location": "Ellora, Maharashtra",
+        "thumbnail": "data/temples/grishneshwar/images/hero.png",
+        "short_desc": "The Lord of Compassion, the 12th and final Jyotirlinga.",
+        "category": "jyotirlinga",
+        "order": 12
+    },
+    {
+        "id": "tirupati",
+        "name": "Tirupati Balaji",
+        "name_local": "तिरुमला तिरुपति",
+        "location": "Tirumala, AP",
+        "thumbnail": "data/temples/tirupati/images/hero.png",
+        "short_desc": "The richest temple in the world, abode of Lord Venkateswara.",
+        "category": "other",
+        "order": 100
+    }
+]

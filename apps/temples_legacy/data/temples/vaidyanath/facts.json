@@ -1,0 +1,62 @@
+[
+    {
+        "id": "ravana",
+        "category": "Legend",
+        "title": "Ravana's Ultimate Devotion",
+        "hook": "The demon king offered his ten heads one by one to please Shiva here",
+        "full_story": "According to the Shiva Purana, Ravana performed intense penance at Kailash, but Shiva was unmoved. In desperation, Ravana began cutting off his heads as offerings. Moved by this extreme devotion (though Ravana was a demon), Shiva appeared and healed all ten heads, becoming known as Vaidyanath—the Divine Physician. He granted Ravana the boon he sought and agreed to come to Lanka. However, the lingam was tricked into being placed here on the journey, where it remains.",
+        "source": "Shiva Purana, Koti Rudra Samhita",
+        "image": "data/temples/vaidyanath/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "kamalnath",
+        "category": "Significance",
+        "title": "The 22-Temple Complex",
+        "hook": "Vaidyanath temple stands at the center of 21 other sacred shrines",
+        "full_story": "The Vaidyanath temple complex uniquely houses 22 temples. The main Jyotirlinga is surrounded by 21 other temples dedicated to various deities, including Parvati, Ganesha, Hanuman, and the Nava Grahas (nine planets). Completing a parikrama (circumambulation) of all 22 temples is considered a complete pilgrimage, addressing all spiritual needs in one sacred complex.",
+        "source": "Temple Trust records",
+        "image": "data/temples/vaidyanath/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "healing",
+        "category": "Mystery",
+        "title": "The Divine Physician's Miracles",
+        "hook": "Countless devotees report miraculous healings after prayers and water offerings",
+        "full_story": "Vaidyanath literally means 'Lord of Physicians.' Shiva became known by this name after healing Ravana's heads. Devotees suffering from chronic illnesses, particularly those deemed incurable, come here seeking divine intervention. The practice of offering water to the Jyotirlinga while praying for healing is central to the pilgrimage. Temple records and devotee testimonies speak of remarkable recoveries attributed to Vaidyanath's grace.",
+        "source": "Temple traditions, devotee accounts",
+        "image": "data/temples/vaidyanath/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "kanwar",
+        "category": "Experience",
+        "title": "The Great Kanwar Yatra",
+        "hook": "Millions walk barefoot carrying Ganga water to offer at Vaidyanath each Shravan",
+        "full_story": "During Shravan (July-August), over 8 million Kanwariyas undertake the Kanwar Yatra—walking barefoot from Sultanganj on the Ganga to Deoghar (100+ km), carrying holy Ganga water in decorated pots balanced on their shoulders. They do not rest the pot on the ground for the entire journey. This is one of the world's largest annual pilgrimages. The sight of orange-clad devotees covering the roads is awe-inspiring.",
+        "source": "Shravani Mela records",
+        "image": "data/temples/vaidyanath/images/thumbnail.png",
+        "verified": true
+    },
+    {
+        "id": "architecture",
+        "category": "Architecture",
+        "title": "Nagara Style Masterpiece",
+        "hook": "The distinctive shikhara rises 72 feet, visible for miles across the plains",
+        "full_story": "The Vaidyanath temple exemplifies Nagara-style architecture with its 72-foot high shikhara (spire). The temple was significantly rebuilt and expanded by successive Hindu and Muslim rulers who respected its sanctity. The main lingam is adorned with gold and precious jewels. The Natya Mandapa (dance hall) features elegant pillars with mythological carvings depicting Shiva's legends.",
+        "source": "Archaeological Survey of India",
+        "image": "data/temples/vaidyanath/images/hero.png",
+        "verified": true
+    },
+    {
+        "id": "moksha",
+        "category": "Tradition",
+        "title": "Liberation from Karmic Bonds",
+        "hook": "Pilgrimage here is said to break even the strongest karmic chains",
+        "full_story": "The Shiva Purana declares that sincere worship at Vaidyanath grants liberation from the cycle of birth and death. This applies even to those carrying heavy karma—as it did for Ravana himself. The combination of Ganga water offering and heartfelt prayer is said to wash away even the deepest accumulated sins, freeing the soul for spiritual advancement or final liberation.",
+        "source": "Shiva Purana, Koti Rudra Samhita",
+        "image": "data/temples/vaidyanath/images/thumbnail.png",
+        "verified": true
+    }
+]
