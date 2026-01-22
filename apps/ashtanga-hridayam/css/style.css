@@ -58,6 +58,47 @@
     --radius-full: 9999px;
 }
 
+/* Dark Theme */
+[data-theme="dark"] {
+    --md-primary: #81C784;
+    --md-on-primary: #003909;
+    --md-primary-container: #1B5E20;
+    --md-on-primary-container: #A5D6A7;
+
+    --md-secondary: #B5CABA;
+    --md-on-secondary: #213527;
+    --md-secondary-container: #374B3C;
+    --md-on-secondary-container: #D1E8D6;
+
+    --md-tertiary: #A4D0E2;
+    --md-tertiary-container: #1F4D5C;
+
+    --md-surface: #111411;
+    --md-surface-dim: #111411;
+    --md-surface-bright: #363A36;
+    --md-surface-container-lowest: #0C0F0C;
+    --md-surface-container-low: #191C19;
+    --md-surface-container: #1D201D;
+    --md-surface-container-high: #272B27;
+    --md-surface-container-highest: #323632;
+
+    --md-on-surface: #E1E3DE;
+    --md-on-surface-variant: #C2C9BE;
+    --md-outline: #8C9388;
+    --md-outline-variant: #424940;
+
+    --md-error: #FFB4AB;
+    --md-error-container: #93000A;
+
+    --color-vata: #9FA8DA;
+    --color-pitta: #EF9A9A;
+    --color-kapha: #80CBC4;
+
+    --elevation-1: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+    --elevation-2: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+    --elevation-3: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -978,4 +1019,231 @@ body {
 
 .favorites-container .remedies-grid {
     padding: 0;
+}
+
+/* ===== Bottom Navigation ===== */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--md-surface-container-lowest);
+    border-top: 1px solid var(--md-outline-variant);
+    display: flex;
+    justify-content: center;
+    padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+    z-index: 200;
+}
+
+.bottom-nav-inner {
+    display: flex;
+    gap: 8px;
+    max-width: 400px;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: var(--md-on-surface-variant);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: var(--radius-lg);
+    transition: all 0.2s;
+    min-width: 64px;
+}
+
+.nav-item:hover {
+    background: var(--md-surface-container);
+}
+
+.nav-item.active {
+    color: var(--md-on-primary-container);
+}
+
+.nav-item.active .nav-icon {
+    background: var(--md-primary-container);
+}
+
+.nav-icon {
+    width: 56px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+/* ===== Theme Toggle ===== */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--md-on-surface);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.theme-toggle:hover {
+    background: var(--md-surface-container-high);
+}
+
+.theme-toggle .sun {
+    display: none;
+}
+
+.theme-toggle .moon {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .sun {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .moon {
+    display: none;
+}
+
+/* ===== Onboarding Modal ===== */
+.onboarding-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+}
+
+.onboarding-content {
+    background: var(--md-surface-container-lowest);
+    border-radius: var(--radius-xl);
+    max-width: 400px;
+    width: 100%;
+    overflow: hidden;
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.onboarding-slides {
+    position: relative;
+}
+
+.onboarding-slide {
+    padding: 48px 32px 32px;
+    text-align: center;
+    display: none;
+}
+
+.onboarding-slide.active {
+    display: block;
+}
+
+.onboarding-slide .icon {
+    font-size: 64px;
+    margin-bottom: 24px;
+}
+
+.onboarding-slide h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: var(--md-on-surface);
+}
+
+.onboarding-slide p {
+    color: var(--md-on-surface-variant);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.onboarding-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--md-outline-variant);
+    transition: all 0.3s;
+}
+
+.dot.active {
+    width: 24px;
+    background: var(--md-primary);
+}
+
+.onboarding-actions {
+    display: flex;
+    gap: 12px;
+    padding: 0 32px 32px;
+}
+
+.onboarding-actions button {
+    flex: 1;
+}
+
+.btn-skip {
+    padding: 12px 20px;
+    background: transparent;
+    color: var(--md-on-surface-variant);
+    border: none;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: var(--radius-full);
+}
+
+.btn-skip:hover {
+    background: var(--md-surface-container);
+}
+
+/* Hide tab nav when using bottom nav */
+@media (max-width: 599px) {
+    .tab-nav {
+        display: none;
+    }
+
+    .app-container {
+        padding-bottom: 80px;
+    }
+}
+
+@media (min-width: 600px) {
+    .bottom-nav {
+        display: none;
+    }
 }

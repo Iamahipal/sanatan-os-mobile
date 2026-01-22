@@ -10,20 +10,78 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalBody = document.getElementById('modal-body');
 
     // Initialize
+    initTheme();
+    checkOnboarding();
     renderPopularRemedies();
     renderHerbs();
     updateFavoriteBadge();
 
+    // ===== THEME TOGGLE =====
+    function initTheme() {
+        const saved = localStorage.getItem('ayurveda_theme');
+        if (saved) {
+            document.documentElement.setAttribute('data-theme', saved);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    }
+
+    window.toggleTheme = function () {
+        const current = document.documentElement.getAttribute('data-theme');
+        const newTheme = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('ayurveda_theme', newTheme);
+    };
+
+    // ===== ONBOARDING =====
+    function checkOnboarding() {
+        const seen = localStorage.getItem('ayurveda_onboarding_done');
+        if (!seen) {
+            document.getElementById('onboarding-modal').classList.remove('hidden');
+        }
+    }
+
+    let currentSlide = 0;
+    window.nextSlide = function () {
+        const slides = document.querySelectorAll('.onboarding-slide');
+        const dots = document.querySelectorAll('.dot');
+
+        if (currentSlide < slides.length - 1) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            currentSlide++;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+
+            if (currentSlide === slides.length - 1) {
+                document.querySelector('.onboarding-actions .btn-primary').textContent = 'Get Started';
+            }
+        } else {
+            skipOnboarding();
+        }
+    };
+
+    window.skipOnboarding = function () {
+        localStorage.setItem('ayurveda_onboarding_done', 'true');
+        document.getElementById('onboarding-modal').classList.add('hidden');
+    };
+
     // ===== TAB NAVIGATION =====
     window.switchTab = function (tabId) {
-        // Update buttons
-        document.querySSelector('.tab-btn').forEach(btn => {
+        // Update tab buttons (desktop)
+        document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.tab === tabId);
+        });
+        // Update bottom nav items (mobile)
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.toggle('active', item.dataset.tab === tabId);
         });
         // Update content
         document.querySelectorAll('.tab-content').forEach(content => {
             content.classList.toggle('active', content.id === `tab-${tabId}`);
         });
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     // ===== SEARCH =====
@@ -243,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.closeModal = function () {
         modal.classList.add('hidden');
         document.body.style.overflow = '';
-        renderPopularRemedies(); // Refresh to update fav states
+        renderPopularRemedies();
     };
 
     modal.addEventListener('click', (e) => {
@@ -354,7 +412,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('quiz-container').classList.add('hidden');
         document.getElementById('quiz-result').classList.remove('hidden');
 
-        // Find dominant dosha
         const dominant = Object.entries(quizScores).sort((a, b) => b[1] - a[1])[0][0];
         const result = DOSHA_RESULTS[dominant];
 
