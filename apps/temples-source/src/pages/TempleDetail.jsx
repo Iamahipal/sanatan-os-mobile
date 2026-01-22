@@ -29,18 +29,19 @@ export default function TempleDetail() {
                 setTemple(found);
 
                 const fetchData = async () => {
+                    const baseUrl = import.meta.env.BASE_URL;
                     try {
-                        // Fetch core data files
+                        // Fetch core data files with correct BASE_URL
                         const [deityRes, manifestRes, factsRes] = await Promise.all([
-                            fetch(`/data/temples/${id}/deity.json`).then(r => r.ok ? r.json() : null),
-                            fetch(`/data/temples/${id}/manifest.json`).then(r => r.ok ? r.json() : null),
-                            fetch(`/data/temples/${id}/facts.json`).then(r => r.ok ? r.json() : [])
+                            fetch(`${baseUrl}data/temples/${id}/deity.json`).then(r => r.ok ? r.json() : null),
+                            fetch(`${baseUrl}data/temples/${id}/manifest.json`).then(r => r.ok ? r.json() : null),
+                            fetch(`${baseUrl}data/temples/${id}/facts.json`).then(r => r.ok ? r.json() : [])
                         ]);
 
                         // Try to fetch rituals if exists
                         let ritualsRes = null;
                         try {
-                            const r = await fetch(`/data/temples/${id}/rituals.json`);
+                            const r = await fetch(`${baseUrl}data/temples/${id}/rituals.json`);
                             if (r.ok) ritualsRes = await r.json();
                         } catch (e) { }
 
