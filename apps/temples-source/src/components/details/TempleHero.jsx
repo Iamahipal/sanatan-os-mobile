@@ -13,12 +13,20 @@ export default function TempleHero({ temple }) {
     // For now, hardcode a placeholder since we don't have temple.mantra_url yet.
     // In a real app, this comes from the JSON.
     const mantraTrack = {
-        url: temple.mantra_url || '/audio/om_namah_shivaya.mp3', // Future proofing
+        url: temple.mantra_url || `${import.meta.env.BASE_URL}audio/om_namah_shivaya.mp3`, // Fixed for sub-folder
         title: `${temple.name} Chant`,
         subtitle: 'Om Namah Shivaya',
     };
 
     const isCurrentTrackPlaying = isPlaying && currentTrack?.url === mantraTrack.url;
+
+    // Build hero image path with BASE_URL for sub-folder deployment
+    const getHeroImagePath = () => {
+        if (!temple.hero_image) return '';
+        if (temple.hero_image.startsWith('http')) return temple.hero_image;
+        const cleanPath = temple.hero_image.startsWith('/') ? temple.hero_image.slice(1) : temple.hero_image;
+        return `${import.meta.env.BASE_URL}${cleanPath}`;
+    };
 
     return (
         <div className="relative h-[80vh] w-full overflow-hidden">
@@ -28,9 +36,7 @@ export default function TempleHero({ temple }) {
                 className="absolute inset-0 z-0 h-[120%]"
             >
                 <img
-                    src={temple.hero_image?.startsWith('http') || temple.hero_image?.startsWith('/')
-                        ? temple.hero_image
-                        : `/${temple.hero_image}`}
+                    src={getHeroImagePath()}
                     alt={temple.name}
                     className="w-full h-full object-cover"
                 />

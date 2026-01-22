@@ -21,7 +21,7 @@ export default function HeroSection() {
                 className="absolute inset-0 z-0 will-change-transform"
             >
                 <img
-                    src="/data/temples/somnath/images/hero.png"
+                    src={`${import.meta.env.BASE_URL}data/temples/somnath/images/hero.png`}
                     alt="Divine Journey"
                     className="w-full h-full object-cover scale-110" // Initial scale to avoid gaps
                 />
