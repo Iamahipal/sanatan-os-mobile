@@ -5,66 +5,96 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsSection = document.getElementById('results-section');
     const resultsContainer = document.getElementById('results-container');
     const popularContainer = document.getElementById('popular-container');
+    const herbsContainer = document.getElementById('herbs-container');
     const modal = document.getElementById('remedy-modal');
     const modalBody = document.getElementById('modal-body');
 
-    // Initialize - Show popular remedies
+    // Initialize
     renderPopularRemedies();
+    renderHerbs();
+    updateFavoriteBadge();
 
-    // Search functionality
+    // ===== TAB NAVIGATION =====
+    window.switchTab = function (tabId) {
+        // Update buttons
+        document.querySSelector('.tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tab === tabId);
+        });
+        // Update content
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.toggle('active', content.id === `tab-${tabId}`);
+        });
+    };
+
+    // ===== SEARCH =====
     let debounceTimer;
     searchInput.addEventListener('input', (e) => {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
             const query = e.target.value.toLowerCase().trim();
             if (query.length >= 2) {
-                searchRemedies(query);
+                searchAll(query);
             } else {
                 resultsSection.classList.add('hidden');
             }
         }, 300);
     });
 
-    // Search remedies by symptom
-    function searchRemedies(query) {
-        const results = REMEDIES.filter(remedy => {
-            const matchesName = remedy.name.toLowerCase().includes(query);
-            const matchesSymptom = remedy.symptoms.some(s => s.includes(query));
-            const matchesSanskrit = remedy.name_sanskrit.includes(query);
-            return matchesName || matchesSymptom || matchesSanskrit;
-        });
+    function searchAll(query) {
+        const remedyResults = REMEDIES.filter(r =>
+            r.name.toLowerCase().includes(query) ||
+            r.symptoms.some(s => s.includes(query)) ||
+            r.name_sanskrit.includes(query)
+        );
 
-        if (results.length > 0) {
-            renderResults(results);
+        const herbResults = HERBS.filter(h =>
+            h.name.toLowerCase().includes(query) ||
+            h.uses.toLowerCase().includes(query) ||
+            h.name_sanskrit.includes(query)
+        );
+
+        if (remedyResults.length > 0 || herbResults.length > 0) {
+            let html = '';
+            if (remedyResults.length > 0) {
+                html += '<div class="remedies-grid">' + remedyResults.map(r => createRemedyCard(r)).join('') + '</div>';
+            }
+            if (herbResults.length > 0) {
+                html += '<h3 style="margin: 20px 0 12px; font-size: 13px; color: var(--md-on-surface-variant);">HERBS</h3>';
+                html += '<div class="herbs-grid">' + herbResults.map(h => createHerbCard(h)).join('') + '</div>';
+            }
+            resultsContainer.innerHTML = html;
             resultsSection.classList.remove('hidden');
+            attachCardListeners(resultsContainer);
+            attachHerbListeners(resultsContainer);
         } else {
             resultsContainer.innerHTML = `
-                <div class="no-results" style="text-align: center; padding: 40px; color: var(--color-text-secondary);">
-                    <p>No remedies found for "${query}"</p>
-                    <p style="font-size: 13px; margin-top: 8px;">Try searching for symptoms like "headache", "digestion", or "stress"</p>
+                <div class="no-results">
+                    <p>No results found for "${query}"</p>
+                    <p style="font-size: 13px; margin-top: 8px;">Try: headache, digestion, stress, tulsi, ashwagandha</p>
                 </div>
             `;
             resultsSection.classList.remove('hidden');
         }
     }
 
-    // Render search results
-    function renderResults(remedies) {
-        resultsContainer.innerHTML = remedies.map(remedy => createRemedyCard(remedy)).join('');
-        attachCardListeners(resultsContainer);
-    }
-
-    // Render popular remedies
+    // ===== REMEDIES =====
     function renderPopularRemedies() {
-        const popular = REMEDIES.slice(0, 6); // Show first 6
-        popularContainer.innerHTML = popular.map(remedy => createRemedyCard(remedy)).join('');
+        const popular = REMEDIES.slice(0, 6);
+        popularContainer.innerHTML = popular.map(r => createRemedyCard(r)).join('');
         attachCardListeners(popularContainer);
     }
 
-    // Create remedy card HTML
     function createRemedyCard(remedy) {
+        const isFav = isFavorite(remedy.id);
         return `
             <div class="remedy-card" data-id="${remedy.id}">
+                <div class="card-actions">
+                    <button class="fav-btn ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite('${remedy.id}')" title="Add to favorites">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                        </svg>
+                    </button>
+                </div>
                 <div class="emoji">${remedy.emoji}</div>
                 <div class="name">${remedy.name}</div>
                 <div class="sanskrit">${remedy.name_sanskrit}</div>
@@ -73,10 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Attach click listeners to cards
     function attachCardListeners(container) {
         container.querySelectorAll('.remedy-card').forEach(card => {
-            card.addEventListener('click', () => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.fav-btn')) return;
                 const id = card.dataset.id;
                 const remedy = REMEDIES.find(r => r.id === id);
                 if (remedy) openModal(remedy);
@@ -84,14 +114,98 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Open remedy detail modal
+    // ===== HERBS =====
+    function renderHerbs() {
+        if (!herbsContainer) return;
+        herbsContainer.innerHTML = HERBS.map(h => createHerbCard(h)).join('');
+        attachHerbListeners(herbsContainer);
+    }
+
+    function createHerbCard(herb) {
+        return `
+            <div class="herb-card" data-id="${herb.id}">
+                <div class="herb-icon">${herb.image}</div>
+                <div class="herb-info">
+                    <div class="herb-name">${herb.name}</div>
+                    <div class="herb-sanskrit">${herb.name_sanskrit}</div>
+                    <div class="herb-botanical">${herb.botanical}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    function attachHerbListeners(container) {
+        container.querySelectorAll('.herb-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.dataset.id;
+                const herb = HERBS.find(h => h.id === id);
+                if (herb) openHerbModal(herb);
+            });
+        });
+    }
+
+    function openHerbModal(herb) {
+        modalBody.innerHTML = `
+            <div class="modal-header">
+                <div class="emoji">${herb.image}</div>
+                <h2>${herb.name}</h2>
+                <div class="sanskrit">${herb.name_sanskrit}</div>
+                <div style="font-size: 12px; color: var(--md-on-surface-variant); margin-top: 4px;">${herb.botanical}</div>
+            </div>
+
+            <div class="modal-section">
+                <h3>⚗️ Properties (Guna)</h3>
+                <div class="property-grid">
+                    <div class="property"><strong>Rasa:</strong> ${herb.rasa}</div>
+                    <div class="property"><strong>Virya:</strong> ${herb.virya}</div>
+                    <div class="property"><strong>Vipaka:</strong> ${herb.vipaka}</div>
+                </div>
+            </div>
+
+            <div class="modal-section">
+                <h3>☯️ Dosha Effect</h3>
+                <p>${herb.dosha}</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>🌿 Parts Used</h3>
+                <p>${herb.parts_used}</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>✨ Key Properties</h3>
+                <ul>
+                    ${herb.properties.map(p => `<li>${p}</li>`).join('')}
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>💊 Uses</h3>
+                <p>${herb.uses}</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>⚠️ Contraindications</h3>
+                <p style="color: var(--md-error);">${herb.contraindications}</p>
+            </div>
+        `;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // ===== REMEDY MODAL =====
     window.openModal = function (remedy) {
+        const isFav = isFavorite(remedy.id);
         modalBody.innerHTML = `
             <div class="modal-header">
                 <div class="emoji">${remedy.emoji}</div>
                 <h2>${remedy.name}</h2>
                 <div class="sanskrit">${remedy.name_sanskrit}</div>
             </div>
+
+            <button class="modal-fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${remedy.id}'); this.classList.toggle('active');">
+                ${isFav ? '❤️ Saved' : '🤍 Save to Favorites'}
+            </button>
 
             <div class="modal-section">
                 <h3>🎯 Helps With</h3>
@@ -126,38 +240,144 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'hidden';
     };
 
-    // Close modal
     window.closeModal = function () {
         modal.classList.add('hidden');
         document.body.style.overflow = '';
+        renderPopularRemedies(); // Refresh to update fav states
     };
 
-    // Close modal on backdrop click
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
 
-    // Filter by dosha
+    // ===== DOSHA FILTER =====
     window.filterByDosha = function (dosha) {
         const results = REMEDIES.filter(r => r.dosha.includes(dosha));
-        const doshaNames = {
-            vata: 'Vata',
-            pitta: 'Pitta',
-            kapha: 'Kapha'
-        };
-
+        const doshaNames = { vata: 'Vata', pitta: 'Pitta', kapha: 'Kapha' };
         searchInput.value = `${doshaNames[dosha]} remedies`;
-        renderResults(results);
+        resultsContainer.innerHTML = '<div class="remedies-grid">' + results.map(r => createRemedyCard(r)).join('') + '</div>';
         resultsSection.classList.remove('hidden');
-
-        // Scroll to results
+        attachCardListeners(resultsContainer);
         resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
-    // Escape key closes modal
+    // ===== FAVORITES =====
+    function getFavorites() {
+        return JSON.parse(localStorage.getItem('ayurveda_favorites') || '[]');
+    }
+
+    function saveFavorites(favs) {
+        localStorage.setItem('ayurveda_favorites', JSON.stringify(favs));
+        updateFavoriteBadge();
+    }
+
+    function isFavorite(id) {
+        return getFavorites().includes(id);
+    }
+
+    window.toggleFavorite = function (id) {
+        let favs = getFavorites();
+        if (favs.includes(id)) {
+            favs = favs.filter(f => f !== id);
+        } else {
+            favs.push(id);
+        }
+        saveFavorites(favs);
+        renderPopularRemedies();
+    };
+
+    function updateFavoriteBadge() {
+        const count = getFavorites().length;
+        const badge = document.getElementById('fav-count');
+        if (badge) {
+            badge.textContent = count;
+            badge.classList.toggle('hidden', count === 0);
+        }
+    }
+
+    window.showFavorites = function () {
+        const favIds = getFavorites();
+        const favRemedies = REMEDIES.filter(r => favIds.includes(r.id));
+        const container = document.getElementById('favorites-container');
+
+        if (favRemedies.length === 0) {
+            container.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--md-on-surface-variant);">No favorites yet. Tap the heart icon on any remedy to save it!</p>';
+        } else {
+            container.innerHTML = '<div class="remedies-grid">' + favRemedies.map(r => createRemedyCard(r)).join('') + '</div>';
+            attachCardListeners(container);
+        }
+
+        document.getElementById('favorites-modal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeFavorites = function () {
+        document.getElementById('favorites-modal').classList.add('hidden');
+        document.body.style.overflow = '';
+    };
+
+    // ===== PRAKRITI QUIZ =====
+    let quizIndex = 0;
+    let quizScores = { vata: 0, pitta: 0, kapha: 0 };
+
+    window.startQuiz = function () {
+        quizIndex = 0;
+        quizScores = { vata: 0, pitta: 0, kapha: 0 };
+        document.getElementById('quiz-intro').classList.add('hidden');
+        document.getElementById('quiz-container').classList.remove('hidden');
+        document.getElementById('quiz-result').classList.add('hidden');
+        showQuestion();
+    };
+
+    function showQuestion() {
+        const q = QUIZ_QUESTIONS[quizIndex];
+        document.getElementById('quiz-counter').textContent = `Question ${quizIndex + 1} of ${QUIZ_QUESTIONS.length}`;
+        document.getElementById('progress-fill').style.width = `${((quizIndex + 1) / QUIZ_QUESTIONS.length) * 100}%`;
+        document.getElementById('quiz-question').innerHTML = `<h3>${q.question}</h3>`;
+        document.getElementById('quiz-options').innerHTML = q.options.map((opt, i) => `
+            <button class="quiz-option" onclick="selectAnswer('${opt.dosha}')">${opt.text}</button>
+        `).join('');
+    }
+
+    window.selectAnswer = function (dosha) {
+        quizScores[dosha]++;
+        quizIndex++;
+
+        if (quizIndex < QUIZ_QUESTIONS.length) {
+            showQuestion();
+        } else {
+            showResult();
+        }
+    };
+
+    function showResult() {
+        document.getElementById('quiz-container').classList.add('hidden');
+        document.getElementById('quiz-result').classList.remove('hidden');
+
+        // Find dominant dosha
+        const dominant = Object.entries(quizScores).sort((a, b) => b[1] - a[1])[0][0];
+        const result = DOSHA_RESULTS[dominant];
+
+        document.getElementById('result-dosha').innerHTML = `<span style="font-size: 64px;">${result.emoji}</span>`;
+        document.getElementById('result-title').textContent = result.title;
+        document.getElementById('result-title').style.color = result.color;
+        document.getElementById('result-description').textContent = result.description;
+        document.getElementById('result-tips').innerHTML = `
+            <h4>Tips for Balancing ${result.title.split(' ')[0]}:</h4>
+            <ul>${result.tips.map(t => `<li>${t}</li>`).join('')}</ul>
+        `;
+    }
+
+    window.resetQuiz = function () {
+        document.getElementById('quiz-result').classList.add('hidden');
+        document.getElementById('quiz-intro').classList.remove('hidden');
+    };
+
+    // ===== KEYBOARD =====
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        if (e.key === 'Escape') {
             closeModal();
+            closeFavorites();
         }
     });
 });

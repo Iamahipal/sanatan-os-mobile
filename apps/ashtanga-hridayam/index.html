@@ -1,82 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashtanga Hridayam - Ayurvedic Remedies</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Outfit:wght@300;400;500;600&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div class="app-container">
         <!-- Header -->
         <header class="header">
             <a href="../../index.html" class="back-btn" aria-label="Back to SanatanOS">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m12 19-7-7 7-7" />
+                    <path d="M19 12H5" />
                 </svg>
             </a>
             <div class="header-title">
                 <span class="sanskrit-title">अष्टाङ्ग हृदयम्</span>
                 <span class="english-title">Ashtanga Hridayam</span>
             </div>
+            <button id="favorites-btn" class="header-action" onclick="showFavorites()" title="My Favorites">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                </svg>
+                <span id="fav-count" class="fav-badge hidden">0</span>
+            </button>
         </header>
 
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">Ancient Wisdom for<br><span class="highlight">Modern Healing</span></h1>
-                <p class="hero-subtitle">Discover Ayurvedic remedies from the sacred text of Vagbhata</p>
-            </div>
-        </section>
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="home" onclick="switchTab('home')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                </svg>
+                Home
+            </button>
+            <button class="tab-btn" data-tab="herbs" onclick="switchTab('herbs')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4" />
+                    <path d="M12 2v20" />
+                </svg>
+                Herbs
+            </button>
+            <button class="tab-btn" data-tab="quiz" onclick="switchTab('quiz')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <path d="M12 17h.01" />
+                </svg>
+                Prakriti
+            </button>
+        </nav>
 
-        <!-- Search Section -->
-        <section class="search-section">
-            <div class="search-container">
-                <div class="search-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-                    </svg>
+        <!-- HOME TAB -->
+        <div id="tab-home" class="tab-content active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">Ancient Wisdom for<br><span class="highlight">Modern Healing</span></h1>
+                    <p class="hero-subtitle">Discover Ayurvedic remedies from the sacred text of Vagbhata</p>
                 </div>
-                <input type="text" id="symptom-search" class="search-input" placeholder="Describe your ailment (e.g., headache, digestion)...">
+            </section>
+
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                    </div>
+                    <input type="text" id="symptom-search" class="search-input"
+                        placeholder="Search symptoms, herbs, remedies...">
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="results-section hidden">
+                <h2 class="section-title">Recommended Remedies</h2>
+                <div id="results-container" class="results-container"></div>
+            </section>
+
+            <!-- Dosha Categories -->
+            <section class="categories-section">
+                <h2 class="section-title">Browse by Dosha</h2>
+                <div class="dosha-grid">
+                    <button class="dosha-card" data-dosha="vata" onclick="filterByDosha('vata')">
+                        <div class="dosha-icon">💨</div>
+                        <span class="dosha-name">Vata</span>
+                        <span class="dosha-desc">Air & Space</span>
+                    </button>
+                    <button class="dosha-card" data-dosha="pitta" onclick="filterByDosha('pitta')">
+                        <div class="dosha-icon">🔥</div>
+                        <span class="dosha-name">Pitta</span>
+                        <span class="dosha-desc">Fire & Water</span>
+                    </button>
+                    <button class="dosha-card" data-dosha="kapha" onclick="filterByDosha('kapha')">
+                        <div class="dosha-icon">🌊</div>
+                        <span class="dosha-name">Kapha</span>
+                        <span class="dosha-desc">Water & Earth</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Popular Remedies -->
+            <section class="popular-section">
+                <h2 class="section-title">Common Remedies</h2>
+                <div id="popular-container" class="remedies-grid"></div>
+            </section>
+        </div>
+
+        <!-- HERBS TAB -->
+        <div id="tab-herbs" class="tab-content">
+            <section class="herbs-section">
+                <h2 class="section-title" style="padding-top: 24px;">Herb Encyclopedia</h2>
+                <p class="section-subtitle">Essential Ayurvedic herbs and their healing properties</p>
+                <div id="herbs-container" class="herbs-grid"></div>
+            </section>
+        </div>
+
+        <!-- PRAKRITI QUIZ TAB -->
+        <div id="tab-quiz" class="tab-content">
+            <section class="quiz-section">
+                <div class="quiz-intro" id="quiz-intro">
+                    <div class="quiz-icon">🧘</div>
+                    <h2>Discover Your Prakriti</h2>
+                    <p>Answer 10 questions to find your unique Ayurvedic constitution (Vata, Pitta, or Kapha)</p>
+                    <button class="btn-primary" onclick="startQuiz()">Start Quiz</button>
+                </div>
+
+                <div id="quiz-container" class="quiz-container hidden">
+                    <div class="quiz-progress">
+                        <div class="progress-bar">
+                            <div id="progress-fill" class="progress-fill"></div>
+                        </div>
+                        <span id="quiz-counter">Question 1 of 10</span>
+                    </div>
+                    <div id="quiz-question" class="quiz-question"></div>
+                    <div id="quiz-options" class="quiz-options"></div>
+                </div>
+
+                <div id="quiz-result" class="quiz-result hidden">
+                    <div id="result-dosha" class="result-dosha"></div>
+                    <h2 id="result-title">Your Prakriti</h2>
+                    <p id="result-description"></p>
+                    <div id="result-tips" class="result-tips"></div>
+                    <button class="btn-secondary" onclick="resetQuiz()">Retake Quiz</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- FAVORITES MODAL -->
+        <div id="favorites-modal" class="modal hidden">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeFavorites()">&times;</button>
+                <div class="modal-header" style="text-align: center; padding-top: 16px;">
+                    <h2>❤️ My Favorites</h2>
+                </div>
+                <div id="favorites-container" class="favorites-container"></div>
             </div>
-        </section>
-
-        <!-- Results Section -->
-        <section id="results-section" class="results-section hidden">
-            <h2 class="section-title">Recommended Remedies</h2>
-            <div id="results-container" class="results-container"></div>
-        </section>
-
-        <!-- Categories Section -->
-        <section class="categories-section">
-            <h2 class="section-title">Browse by Dosha</h2>
-            <div class="dosha-grid">
-                <button class="dosha-card" data-dosha="vata" onclick="filterByDosha('vata')">
-                    <div class="dosha-icon">💨</div>
-                    <span class="dosha-name">Vata</span>
-                    <span class="dosha-desc">Air & Space</span>
-                </button>
-                <button class="dosha-card" data-dosha="pitta" onclick="filterByDosha('pitta')">
-                    <div class="dosha-icon">🔥</div>
-                    <span class="dosha-name">Pitta</span>
-                    <span class="dosha-desc">Fire & Water</span>
-                </button>
-                <button class="dosha-card" data-dosha="kapha" onclick="filterByDosha('kapha')">
-                    <div class="dosha-icon">🌊</div>
-                    <span class="dosha-name">Kapha</span>
-                    <span class="dosha-desc">Water & Earth</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- Popular Remedies Section -->
-        <section class="popular-section">
-            <h2 class="section-title">Common Remedies</h2>
-            <div id="popular-container" class="remedies-grid"></div>
-        </section>
+        </div>
 
         <!-- Remedy Detail Modal -->
         <div id="remedy-modal" class="modal hidden">
@@ -88,11 +187,15 @@
 
         <!-- Disclaimer -->
         <footer class="disclaimer">
-            <p>⚠️ <strong>Disclaimer:</strong> This information is for educational purposes only and is not intended to replace professional medical advice. Consult a qualified Ayurvedic practitioner or physician before starting any treatment.</p>
+            <p>⚠️ <strong>Disclaimer:</strong> This information is for educational purposes only. Consult a qualified
+                Ayurvedic practitioner before starting any treatment.</p>
         </footer>
     </div>
 
     <script src="data/remedies.js"></script>
+    <script src="data/herbs.js"></script>
+    <script src="data/quiz.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
