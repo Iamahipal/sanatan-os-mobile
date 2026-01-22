@@ -437,4 +437,74 @@ document.addEventListener('DOMContentLoaded', () => {
             closeFavorites();
         }
     });
+
+    // ===== TOAST NOTIFICATIONS =====
+    window.showToast = function (message, type = 'default') {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = message;
+        container.appendChild(toast);
+
+        // Remove after animation
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    };
+
+    // ===== SHARE REMEDY =====
+    window.shareRemedy = async function (remedyId) {
+        const remedy = REMEDIES.find(r => r.id === remedyId);
+        if (!remedy) return;
+
+        const shareData = {
+            title: `${remedy.name} - Ayurvedic Remedy`,
+            text: `${remedy.name} (${remedy.name_sanskrit})\n\nHelps with: ${remedy.symptoms.join(', ')}\n\nIngredients: ${remedy.ingredients.join(', ')}\n\nFrom: Ashtanga Hridayam`,
+            url: window.location.href
+        };
+
+        try {
+            if (navigator.share) {
+                await navigator.share(shareData);
+                showToast('✓ Shared successfully', 'success');
+            } else {
+                // Fallback: copy to clipboard
+                await navigator.clipboard.writeText(shareData.text);
+                showToast('📋 Copied to clipboard', 'success');
+            }
+        } catch (err) {
+            if (err.name !== 'AbortError') {
+                showToast('Could not share', 'error');
+            }
+        }
+    };
+
+    // ===== CONFETTI CELEBRATION =====
+    window.showConfetti = function () {
+        const container = document.createElement('div');
+        container.className = 'confetti-container';
+        document.body.appendChild(container);
+
+        const colors = ['#81C784', '#4CAF50', '#FFD700', '#FF6B6B', '#64B5F6'];
+
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+            container.appendChild(confetti);
+        }
+
+        setTimeout(() => container.remove(), 5000);
+    };
+
+    // Show confetti when quiz is completed
+    const originalShowResult = showResult;
+    showResult = function () {
+        originalShowResult();
+        showConfetti();
+    };
 });
+
