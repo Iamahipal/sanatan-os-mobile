@@ -86,9 +86,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== SEARCH =====
     let debounceTimer;
+    const searchContainer = searchInput.closest('.search-container');
+
     searchInput.addEventListener('input', (e) => {
+        // Add typing animation
+        searchContainer.classList.add('typing');
+
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
+            searchContainer.classList.remove('typing');
             const query = e.target.value.toLowerCase().trim();
             if (query.length >= 2) {
                 searchAll(query);
@@ -96,6 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 resultsSection.classList.add('hidden');
             }
         }, 300);
+    });
+
+    searchInput.addEventListener('blur', () => {
+        searchContainer.classList.remove('typing');
     });
 
     function searchAll(query) {

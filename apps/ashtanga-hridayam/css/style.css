@@ -1491,3 +1491,157 @@ input:focus-visible {
         transform: rotate(360deg);
     }
 }
+
+/* ===== PHASE 2: Physics & Life ===== */
+
+/* Dosha image hover - gentle float */
+.dosha-card:hover .dosha-icon-img {
+    transform: scale(1.08) translateY(-4px);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dosha-icon-img {
+    transition: transform 0.3s ease;
+}
+
+/* Search icon anticipation - pulse while typing */
+@keyframes searchPulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.search-container.typing .search-icon {
+    animation: searchPulse 0.6s ease-in-out infinite;
+    color: var(--md-primary);
+}
+
+/* Remedy card subtle lift on hover */
+.remedy-card {
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.25s ease,
+        border-color 0.2s ease;
+}
+
+.remedy-card:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+
+/* Tab indicator slide animation */
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--md-primary);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translateX(-50%);
+}
+
+.tab-btn.active::after {
+    width: 60%;
+}
+
+.tab-btn {
+    position: relative;
+}
+
+/* ===== PHASE 3: Unified Button System ===== */
+
+/* Base button class */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-decoration: none;
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+/* Primary button */
+.btn-primary {
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+}
+
+.btn-primary:hover {
+    background: var(--md-primary-dark, #2d7a4e);
+    box-shadow: var(--elevation-2);
+}
+
+/* Secondary/outline button */
+.btn-secondary {
+    background: transparent;
+    color: var(--md-primary);
+    border: 1px solid var(--md-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--md-primary-container);
+}
+
+/* Ghost/skip button */
+.btn-ghost {
+    background: transparent;
+    color: var(--md-on-surface-variant);
+    padding: 8px 16px;
+}
+
+.btn-ghost:hover {
+    background: var(--md-surface-container);
+}
+
+/* ===== PHASE 4: Modal Improvements ===== */
+
+/* Modal slide-down close animation */
+.modal.closing .modal-content {
+    animation: slideDown 0.25s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+/* ===== PHASE 5: Subtle Disclaimer ===== */
+
+.app-footer {
+    padding: 24px 20px;
+    margin-top: auto;
+    text-align: center;
+}
+
+.footer-disclaimer {
+    font-size: 11px;
+    color: var(--md-outline);
+    max-width: 320px;
+    margin: 0 auto;
+    line-height: 1.5;
+    opacity: 0.7;
+}
