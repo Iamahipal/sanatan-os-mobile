@@ -343,55 +343,64 @@ button {
     min-height: 500px;
 }
 
-/* Info Grid */
+/* Cleaner Info Grid */
 .info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: #FFF;
+    border-radius: 16px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    overflow: hidden;
     margin-bottom: 24px;
 }
 
 .info-item {
-    background: #FFF;
-    border: 1px solid var(--md-sys-color-surface-variant);
-    padding: 12px;
-    border-radius: var(--shape-m);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
+    padding: 16px;
+    border-bottom: 1px solid var(--md-sys-color-surface-variant);
+    background: transparent;
+    border-radius: 0;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+}
+
+.info-item:last-child {
+    border-bottom: none;
 }
 
 .info-item.full-width {
-    grid-column: span 2;
+    grid-column: auto;
 }
 
-.info-icon {
-    width: 36px;
-    height: 36px;
-    background: var(--md-sys-color-secondary-container);
-    color: var(--md-sys-color-on-secondary-container);
-    border-radius: 10px;
+/* Icon column */
+.info-item i {
+    width: 24px;
+    height: 24px;
+    color: var(--md-sys-color-primary);
+    flex-shrink: 0;
+}
+
+.info-item div {
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.info-icon i {
-    width: 18px;
-    height: 18px;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .info-item label {
-    display: block;
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
-    color: var(--md-sys-color-outline);
+    color: var(--md-sys-color-secondary);
     font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .info-item p {
     margin: 0;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
     color: var(--md-sys-color-on-surface);
 }
@@ -986,5 +995,148 @@ button {
 .modal-content.full-height {
     height: 100%;
     border-radius: 0;
-}/* Social Verification & Hero Update */ .social-verification-card { background: #F8F9FA; border: 1px solid #E1E3E6; border-radius: 12px; margin: 16px; overflow: hidden; } .svc-header { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #FFF; border-bottom: 1px solid #E1E3E6; font-weight: 500; font-size: 14px; } .svc-preview { padding: 16px; color: var(--md-sys-color-on-surface-variant); font-size: 13px; } .hero-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; } .hero-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 64px; background: var(--md-sys-color-surface-variant); } .vachak-image-lg { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #FFF; box-shadow: var(--shadow-1); }
-/* Vachak Profile Tabs */ .profile-tabs { display: flex; border-bottom: 1px solid var(--md-sys-color-surface-variant); background: #FFF; position: sticky; top: 60px; z-index: 10; } .tab-btn { flex: 1; padding: 16px; background: none; border: none; font-weight: 500; color: var(--md-sys-color-on-surface-variant); cursor: pointer; border-bottom: 2px solid transparent; } .tab-btn.active { color: var(--md-sys-color-primary); border-bottom-color: var(--md-sys-color-primary); } .about-section { padding: 20px; } .info-card { background: var(--md-sys-color-surface-variant); padding: 12px 16px; border-radius: 12px; margin-bottom: 16px; } .info-card label { display: block; font-size: 11px; color: var(--md-sys-color-outline); font-weight: 600; text-transform: uppercase; margin-bottom: 4px; } .info-card p { margin: 0; font-size: 14px; font-weight: 500; color: var(--md-sys-color-on-surface); } .bio-text { font-size: 15px; line-height: 1.6; color: var(--md-sys-color-on-surface); margin-bottom: 24px; } .social-links-grid { display: flex; gap: 12px; flex-wrap: wrap; } .social-pill { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 50px; text-decoration: none; font-size: 14px; font-weight: 500; transition: transform 0.2s; } .social-pill:active { transform: scale(0.95); } .social-pill.insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; } .social-pill.web { background: var(--md-sys-color-primary); color: white; }
+}
+
+/* Social Verification & Hero Update */
+.social-verification-card {
+    background: #F8F9FA;
+    border: 1px solid #E1E3E6;
+    border-radius: 12px;
+    margin: 16px;
+    overflow: hidden;
+}
+
+.svc-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #FFF;
+    border-bottom: 1px solid #E1E3E6;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.svc-preview {
+    padding: 16px;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 13px;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+}
+
+.hero-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    background: var(--md-sys-color-surface-variant);
+}
+
+.vachak-image-lg {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #FFF;
+    box-shadow: var(--shadow-1);
+}
+
+/* Vachak Profile Tabs */
+.profile-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--md-sys-color-surface-variant);
+    background: #FFF;
+    position: sticky;
+    top: 60px;
+    z-index: 10;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 16px;
+    background: none;
+    border: none;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+    color: var(--md-sys-color-primary);
+    border-bottom-color: var(--md-sys-color-primary);
+}
+
+.about-section {
+    padding: 20px;
+}
+
+.info-card {
+    background: var(--md-sys-color-surface-variant);
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.info-card label {
+    display: block;
+    font-size: 11px;
+    color: var(--md-sys-color-outline);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.info-card p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+}
+
+.bio-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 24px;
+}
+
+.social-links-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.social-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.2s;
+}
+
+.social-pill:active {
+    transform: scale(0.95);
+}
+
+.social-pill.insta {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+}
+
+.social-pill.web {
+    background: var(--md-sys-color-primary);
+    color: white;
+}.social-verification-card { border: none; background: #f0fdf4; border: 1px solid #bbf7d0; } .svc-header { background: transparent; border: none; color: #15803d; } .hero-subtitle { font-size: 14px; opacity: 0.9; margin-top: 4px; } 

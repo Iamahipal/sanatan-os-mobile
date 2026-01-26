@@ -43,6 +43,7 @@ export function EventDetail(event) {
         </div>
 
         <div class="event-body">
+            <!-- Key Info Card -->
             <div class="info-grid">
                 <div class="info-item">
                     <i data-lucide="calendar"></i>
@@ -58,12 +59,11 @@ export function EventDetail(event) {
                         <p>${event.dates.timing}</p>
                     </div>
                 </div>
-                <div class="info-item full-width">
+                <div class="info-item">
                      <i data-lucide="map-pin"></i>
                     <div>
                         <label>Venue</label>
-                        <p style="font-weight: 500;">${event.location.venue}</p>
-                        <p class="sub-text">${event.location.cityName}</p>
+                        <p>${event.location.venue}, ${event.location.cityName}</p>
                     </div>
                 </div>
             </div>
