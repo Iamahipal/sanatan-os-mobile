@@ -14,7 +14,16 @@ export const vachaks = [
         specialty: 'श्रीमद्भागवत कथा & भक्तमाल',
         followers: 1200000,
         eventsCount: 850,
-        bio: 'Anant Shri Vibhushit Shrimad Jagadguru Dwaracharya, Malook Peethadhishwar. Renowned for his deep, scholarly, and devotional exposition of Bhaktimal and Shrimad Bhagwat.',
+        bio: 'Anant Shri Vibhushit Shrimad Jagadguru Dwaracharya, Malook Peethadhishwar.',
+        fullBio: `Swami Shri Rajendradas Ji Maharaj is the current Peethadhishwar of the ancient **Malook Peeth** in Vrindavan, one of the most prestigious spiritual seats in the Nimbark Sampradaya.
+        
+Known for his unparalleled command over **shastras** and his melodious singing of "Padavalis", his recitations of *Shrimad Bhaktimal* (stories of devotees) are considered legendary. He advocates for *Gau Seva* (Cow protection) and leads massive humanitarian efforts through the Jadkhor Gaudham.`,
+        lineage: 'Malook Peeth, Nimbark Sampradaya',
+        socials: {
+            youtube: 'https://youtube.com/@RajendraDasJiMaharaj',
+            instagram: 'https://instagram.com/rajendradasjimaharaj',
+            website: 'https://jadkhor.org'
+        },
         verified: true
     },
     {
@@ -26,7 +35,15 @@ export const vachaks = [
         specialty: 'श्रीमद्भागवत कथा',
         followers: 400000,
         eventsCount: 200,
-        bio: 'Continuing the glorious lineage of Shri Radharaman Temple, Vrindavan. His discourses blend tradition with modern relevance.',
+        bio: 'Continuing the glorious lineage of Shri Radharaman Temple, Vrindavan.',
+        fullBio: `Pundrik Goswami Ji belongs to the lineage of **Shri Gopal Bhatt Goswami**, one of the Six Goswamis of Vrindavan. He is a sevait of the famous **Shri Radharaman Temple**.
+        
+His discourses are a unique blend of traditional *Rasik* philosophy and modern scientific understanding, making the wisdom of Vrindavan accessible to the youth.`,
+        lineage: 'Shri Radharaman Peeth, Gaudiya Sampradaya',
+        socials: {
+            instagram: 'https://instagram.com/sripundrik',
+            youtube: 'https://youtube.com/@PundrikGoswami'
+        },
         verified: true
     },
     {
@@ -38,7 +55,15 @@ export const vachaks = [
         specialty: 'राम कथा',
         followers: 5000000,
         eventsCount: 900,
-        bio: 'Internationally renowned exponent of Ram Charit Manas. He has been reciting Ram Katha for over 60 years across the globe.',
+        bio: 'Internationally renowned exponent of Ram Charit Manas.',
+        fullBio: `Morari Bapu is a renowned exponent of the **Ram Charit Manas** and has been reciting Ram Kathas for over sixty years throughout the world. 
+        
+His ethos is "Satya, Prem, Karuna" (Truth, Love, Compassion). He does not belong to any specific sect or sampradaya but spreads the universal message of humanity through the Ramayana.`,
+        lineage: 'Nimbarka lineage (Early influence), Independent',
+        socials: {
+            youtube: 'https://youtube.com/@MorariBapu',
+            website: 'https://chitrakutdhamtalgajarda.org'
+        },
         verified: true
     },
     {
@@ -50,7 +75,15 @@ export const vachaks = [
         specialty: 'Satsang & Motivational',
         followers: 10000000,
         eventsCount: 700,
-        bio: 'Renowned spiritual orator and motivational speaker, inspiring youth through "Divine Concerts" and Katha.',
+        bio: 'Renowned spiritual orator and motivational speaker.',
+        fullBio: `Jaya Kishori Ji is a spiritual orator and motivational speaker who began her spiritual journey at the tender age of 7. 
+        
+She is famously known for her **Nani Bai Ro Mayro** and *Shrimad Bhagwat Katha*. Her content focuses on family values, relationships, and applying spiritual principles to modern life.`,
+        lineage: 'Independent',
+        socials: {
+            instagram: 'https://instagram.com/iamjayakishori',
+            youtube: 'https://youtube.com/@iamjayakishori'
+        },
         verified: true
     },
     {
@@ -62,7 +95,15 @@ export const vachaks = [
         specialty: 'एकांतिक वार्ता',
         followers: 15000000,
         eventsCount: 9999,
-        bio: 'Revered saint of Vrindavan emphasizing absolute surrender to Priya-Priyatam. (Note: He does not travel; Darshan only in Vrindavan).',
+        bio: 'Revered saint of Vrindavan emphasizing absolute surrender to Priya-Priyatam.',
+        fullBio: `Pujya Premanand Ji Maharaj is an exalted saint of the **Radha Vallabh Sampradaya**. He lives a life of extreme renunciation in Vrindavan.
+        
+Known for his "Ekantik Varta" (Private Conversations), he answers the questions of desperate seekers with piercing truth. He advocates for "Nama Jap" (Chanting) and avoiding "Vaishnav Apradh" (Offending others).`,
+        lineage: 'Radha Vallabh Sampradaya',
+        socials: {
+            youtube: 'https://youtube.com/@BhajanMarg',
+            website: 'https://vrindavanrasmahima.com'
+        },
         verified: true
     },
     {
