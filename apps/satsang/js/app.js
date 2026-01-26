@@ -15,7 +15,10 @@ import { Calendar } from './components/Calendar.js';
 import { Profile } from './components/Profile.js';
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize
+const initApp = () => {
+    console.log('Satsang App Initializing...');
+
     // 1. Hydrate Store
     // Associate vachak objects to events for easier rendering
     const enrichedEvents = events.map(e => ({
@@ -39,7 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
     setupGlobalListeners();
 
     // Initial Render handled by Router
-});
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
 
 
 // ===== RENDERERS =====
