@@ -32,9 +32,16 @@ export function EventCard(event) {
     `;
 
     // Bind events
-    card.addEventListener('click', () => {
+    // Bind events
+    card.style.cursor = 'pointer'; // Ensure visual feedback
+
+    card.onclick = (e) => {
+        // Prevent if clicking on save button (handled separately, but good safety)
+        if (e.target.closest('.save-btn')) return;
+
+        console.log('Event Card Clicked:', event.id);
         window.location.hash = `event/${event.id}`;
-    });
+    };
 
     const saveBtn = card.querySelector('.save-btn');
     saveBtn.addEventListener('click', (e) => {
