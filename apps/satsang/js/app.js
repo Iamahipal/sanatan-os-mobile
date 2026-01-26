@@ -68,13 +68,24 @@ function renderHome() {
 }
 
 function renderEventDetail(id) {
+    console.log('[App] renderEventDetail called with:', id); // DEBUG
     if (!id) return;
     const event = EventService.getEventById(id);
-    if (!event) return;
+    console.log('[App] Event found:', event); // DEBUG
+    if (!event) {
+        console.error('[App] Event ID not found in store:', id);
+        return;
+    }
 
     const container = document.getElementById('eventMain');
     container.innerHTML = '';
-    container.appendChild(EventDetail(event));
+
+    try {
+        container.appendChild(EventDetail(event));
+    } catch (e) {
+        console.error('[App] Error rendering EventDetail component:', e);
+        return;
+    }
 
     showScreen('eventScreen');
     lucide.createIcons();

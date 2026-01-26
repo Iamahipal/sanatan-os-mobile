@@ -17,9 +17,11 @@ export class Router {
 
     _handleRoute() {
         const hash = window.location.hash.slice(1) || 'home';
+        console.log('[Router] Hash change:', hash); // DEBUG
         const [path, param] = hash.split('/');
 
         if (this.routes[path]) {
+            console.log('[Router] Route found:', path, 'Param:', param); // DEBUG
             // Close any open modals
             document.querySelectorAll('.modal-backdrop').forEach(m => m.remove());
 
