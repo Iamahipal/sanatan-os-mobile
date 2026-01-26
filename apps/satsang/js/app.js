@@ -1,1148 +1,187 @@
 /**
- * Satsang - Spiritual Events App
- * Main Application Logic
+ * Satsang App - Main Entry
  */
+
+import { store } from './store.js';
+import { Router } from './router.js';
+import { events, vachaks, cities } from './data/mock_data.js';
+import { EventService } from './services/events.js';
+import { EventCard } from './components/EventCard.js';
+import { EventDetail } from './components/EventDetail.js';
+import { EventDetail } from './components/EventDetail.js';
+import { VachakProfile } from './components/VachakProfile.js';
+import { SearchModal } from './components/SearchModal.js';
+import { Calendar } from './components/Calendar.js';
+import { Profile } from './components/Profile.js';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    lucide.createIcons();
-    initApp();
+    // 1. Hydrate Store
+    // Associate vachak objects to events for easier rendering
+    const enrichedEvents = events.map(e => ({
+        ...e,
+        vachak: vachaks.find(v => v.id === e.vachakId)
+    }));
+
+    store.init(enrichedEvents, vachaks, cities);
+
+    // 2. Setup Router
+    const router = new Router({
+        'home': renderHome,
+        'calendar': renderCalendar,
+        'saved': renderSaved,
+        'profile': renderProfile,
+        'event': renderEventDetail,
+        'vachak': renderVachakProfile
+    });
+
+    // 3. Global Listeners
+    setupGlobalListeners();
+
+    // Initial Render handled by Router
 });
 
-// State
-const state = {
-    currentCity: 'all',
-    savedEvents: [],
-    followedVachaks: [],
-    currentEventId: null,
-    currentVachakId: null,
-    selectedDate: null,
-    currentMonth: new Date().getMonth(),
-    currentYear: new Date().getFullYear()
-};
 
-// ===== INITIALIZATION =====
-function initApp() {
-    loadState();
-    loadVachaks();
-    loadEvents();
-    initSearch();
-    initLocation();
-    initFilter();
-    initBottomNav();
-    initCalendar();
-    initDonation();
-}
+// ===== RENDERERS =====
 
-// ===== SCREEN MANAGEMENT =====
-function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(screenId).classList.add('active');
-    lucide.createIcons();
-}
+function renderHome() {
+    showScreen('homeScreen');
 
-// ===== LOAD VACHAKS =====
-function loadVachaks() {
-    const container = document.getElementById('vachaksList');
-    container.innerHTML = '';
-
-    window.vachaks.forEach(v => {
-        const card = document.createElement('div');
-        card.className = 'vachak-card';
-        card.innerHTML = `
-            <div class="vachak-avatar">
-                <div class="vachak-avatar-placeholder">${v.emoji}</div>
-            </div>
-            <h4>${v.shortName}</h4>
-            <p>${v.specialty}</p>
-        `;
-        card.addEventListener('click', () => openVachak(v.id));
-        container.appendChild(card);
-    });
-}
-
-// ===== LOAD EVENTS =====
-function loadEvents() {
     const container = document.getElementById('eventsList');
-    const nearbyContainer = document.getElementById('nearbyList');
     container.innerHTML = '';
-    nearbyContainer.innerHTML = '';
 
-    // Filter by city
-    let filtered = window.events;
-    if (state.currentCity !== 'all') {
-        filtered = filtered.filter(e => e.city === state.currentCity);
-    }
-
-    // Sort by date
-    filtered.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-
-    // Upcoming events (first 4)
-    filtered.slice(0, 4).forEach(event => {
-        container.appendChild(createEventCard(event));
+    const upcoming = EventService.getUpcomingEvents();
+    upcoming.forEach(event => {
+        container.appendChild(EventCard(event));
     });
 
-    // Nearby (random 2)
-    filtered.slice(0, 2).forEach(event => {
-        nearbyContainer.appendChild(createEventCard(event));
-    });
-
+    // Update Lucide icons
     lucide.createIcons();
 }
 
-function createEventCard(event) {
-    const date = new Date(event.startDate);
-    const isSaved = state.savedEvents.includes(event.id);
-
-    const card = document.createElement('div');
-    card.className = 'event-card';
-    card.innerHTML = `
-        <div class="event-date-box">
-            <span class="day">${date.getDate()}</span>
-            <span class="month">${date.toLocaleString('en', { month: 'short' })}</span>
-        </div>
-        <div class="event-info">
-            <span class="event-type">${event.typeName}</span>
-            <h4>${event.title}</h4>
-            <p class="vachak-name">${event.vachakName}</p>
-            <div class="event-location">
-                <i data-lucide="map-pin"></i>
-                ${event.location}
-            </div>
-        </div>
-        <button class="save-btn ${isSaved ? 'saved' : ''}" data-event="${event.id}">
-            <i data-lucide="${isSaved ? 'heart' : 'heart'}"></i>
-        </button>
-    `;
-
-    // Click on card opens detail
-    card.querySelector('.event-info').addEventListener('click', () => openEvent(event.id));
-    card.querySelector('.event-date-box').addEventListener('click', () => openEvent(event.id));
-
-    // Save button
-    card.querySelector('.save-btn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleSaveEvent(event.id);
-    });
-
-    return card;
-}
-
-// ===== EVENT DETAIL =====
-function openEvent(eventId) {
-    const event = window.events.find(e => e.id === eventId);
+function renderEventDetail(id) {
+    if (!id) return;
+    const event = EventService.getEventById(id);
     if (!event) return;
 
-    state.currentEventId = eventId;
-
     const container = document.getElementById('eventMain');
-    const isSaved = state.savedEvents.includes(eventId);
-
-    container.innerHTML = `
-        <div class="event-hero">
-            <div class="event-hero-gradient"></div>
-            <div class="event-hero-content">
-                <span class="event-hero-type">${event.typeName}</span>
-                <h1>${event.title}</h1>
-                <p>${event.vachakName}</p>
-            </div>
-        </div>
-        <div class="event-details">
-            <div class="detail-row">
-                <div class="detail-icon"><i data-lucide="calendar"></i></div>
-                <div class="detail-content">
-                    <h4>${formatDateRange(event.startDate, event.endDate)}</h4>
-                    <p>${event.duration} Day${event.duration > 1 ? 's' : ''} • ${event.timing}</p>
-                </div>
-            </div>
-            <div class="detail-row">
-                <div class="detail-icon"><i data-lucide="map-pin"></i></div>
-                <div class="detail-content">
-                    <h4>${event.venue}</h4>
-                    <p>${event.location}</p>
-                    <a href="#" class="link">Open in Maps →</a>
-                </div>
-            </div>
-            <div class="detail-row">
-                <div class="detail-icon"><i data-lucide="user"></i></div>
-                <div class="detail-content">
-                    <h4>${event.organizer}</h4>
-                    <p>${event.contact}</p>
-                </div>
-            </div>
-            ${event.bhandara ? `
-            <div class="detail-row">
-                <div class="detail-icon"><i data-lucide="utensils"></i></div>
-                <div class="detail-content">
-                    <h4>Bhandara (Free Prasad)</h4>
-                    <p>Daily prasad distribution for all attendees</p>
-                </div>
-            </div>` : ''}
-            ${event.hasLiveStream ? `
-            <div class="detail-row">
-                <div class="detail-icon"><i data-lucide="video"></i></div>
-                <div class="detail-content">
-                    <h4>Live Streaming Available</h4>
-                    <p>Watch online if you can't attend</p>
-                </div>
-            </div>` : ''}
-            ${event.schedule.length > 0 ? `
-            <div class="detail-row">
-                <div class="detail-icon"><i data-lucide="list"></i></div>
-                <div class="detail-content">
-                    <h4>Daily Schedule</h4>
-                    <div class="schedule-list">
-                        ${event.schedule.map(s => `
-                            <div class="schedule-item">
-                                <span class="schedule-day">${s.day}</span>
-                                <div class="schedule-info">
-                                    <h5>${s.title}</h5>
-                                    <p>${s.time}</p>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            </div>` : ''}
-            <div class="detail-row">
-                <div class="detail-icon"><i data-lucide="info"></i></div>
-                <div class="detail-content">
-                    <h4>About This Event</h4>
-                    <p>${event.description}</p>
-                </div>
-            </div>
-        </div>
-    `;
-
-    // Update save button
-    document.getElementById('saveEvent').innerHTML = `<i data-lucide="${isSaved ? 'heart' : 'heart'}"></i>`;
-    document.getElementById('saveEvent').classList.toggle('saved', isSaved);
-
-    // Add event listeners
-    document.getElementById('backFromEvent').addEventListener('click', () => showScreen('homeScreen'));
-    document.getElementById('saveEvent').addEventListener('click', () => toggleSaveEvent(eventId));
-    document.getElementById('shareEvent').addEventListener('click', () => shareEvent(event));
-    document.getElementById('donateBtn').addEventListener('click', () => showDonationModal());
-    document.getElementById('registerBtn').addEventListener('click', () => registerForEvent(event));
+    container.innerHTML = '';
+    container.appendChild(EventDetail(event));
 
     showScreen('eventScreen');
     lucide.createIcons();
 }
 
-// ===== VACHAK PROFILE =====
-function openVachak(vachakId) {
-    const vachak = window.vachaks.find(v => v.id === vachakId);
-    if (!vachak) return;
+function renderSaved() {
+    showScreen('savedScreen');
+    const container = document.getElementById('savedList');
+    container.innerHTML = '';
 
-    state.currentVachakId = vachakId;
-    const isFollowing = state.followedVachaks.includes(vachakId);
+    const savedIds = store.getState().savedEvents;
+    if (savedIds.length === 0) {
+        document.getElementById('noSavedEvents').style.display = 'block';
+    } else {
+        document.getElementById('noSavedEvents').style.display = 'none';
+        savedIds.forEach(id => {
+            const event = EventService.getEventById(id);
+            if (event) container.appendChild(EventCard(event));
+        });
+    }
+    lucide.createIcons();
+}
 
-    document.getElementById('vachakName').textContent = vachak.name;
+function renderCalendar() {
+    showScreen('calendarScreen');
+    const container = document.querySelector('#calendarScreen .main-content') || document.getElementById('calendarScreen');
 
-    const container = document.getElementById('vachakMain');
-    container.innerHTML = `
-        <div class="vachak-profile">
-            <div class="vachak-large-avatar">
-                <div>${vachak.emoji}</div>
-            </div>
-            <h2>${vachak.name}</h2>
-            <p class="specialty">${vachak.specialty}</p>
-            <div class="vachak-stats">
-                <div class="stat">
-                    <span class="stat-value">${formatNumber(vachak.followers)}</span>
-                    <span class="stat-label">Followers</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">${vachak.events}+</span>
-                    <span class="stat-label">Events</span>
-                </div>
-            </div>
-            <button class="follow-btn" id="followVachakBtn">
-                <i data-lucide="${isFollowing ? 'check' : 'plus'}"></i>
-                ${isFollowing ? 'Following' : 'Follow'}
-            </button>
-        </div>
-        <section class="events-section">
-            <div class="section-header">
-                <h3 class="section-title">
-                    <i data-lucide="calendar-days"></i>
-                    Upcoming Events
-                </h3>
-            </div>
-            <div class="events-list" id="vachakEvents"></div>
-        </section>
-    `;
+    // Clear previous or reuse if we want to keep state (here we rebuild for simplicity)
+    const existing = container.querySelector('.calendar-container');
+    if (existing) existing.remove(); // Force refresh to update dates
 
-    // Load vachak's events
-    const vachakEvents = window.events.filter(e => e.vachakId === vachakId);
-    const eventsContainer = document.getElementById('vachakEvents');
-    vachakEvents.forEach(event => {
-        eventsContainer.appendChild(createEventCard(event));
+    // Find a proper place to inject. 
+    // Ideally we should have a <main> in the HTML structure for calendar too.
+    // Let's assume we append to the screen directly for now or clear it.
+
+    // Cleanup simple placeholder approach:
+    // We need to preserve the header.
+    const header = container.querySelector('header');
+
+    // Clear everything EXCEPT header
+    Array.from(container.children).forEach(child => {
+        if (child !== header) child.remove();
     });
 
-    // Follow button
-    document.getElementById('followVachakBtn').addEventListener('click', () => toggleFollow(vachakId));
+    container.appendChild(Calendar());
+    lucide.createIcons();
+}
 
-    // Back button
-    document.getElementById('backFromVachak').addEventListener('click', () => showScreen('homeScreen'));
+function renderProfile() {
+    showScreen('profileScreen');
+    const container = document.querySelector('#profileScreen') || document.getElementById('profileScreen');
+
+    // Clear content (keep header if separate, but likely full re-render is safer here)
+    const header = container.querySelector('header');
+    Array.from(container.children).forEach(child => {
+        if (child !== header) child.remove();
+    });
+
+    container.appendChild(Profile());
+    lucide.createIcons();
+}
+
+function renderVachakProfile(id) {
+    if (!id) return;
+    const vachak = vachaks.find(v => v.id === id);
+    if (!vachak) return;
+
+    const container = document.getElementById('vachakMain');
+    container.innerHTML = '';
+    container.appendChild(VachakProfile(vachak));
 
     showScreen('vachakScreen');
     lucide.createIcons();
 }
 
-// ===== CALENDAR =====
-function initCalendar() {
-    document.getElementById('seeAllEvents')?.addEventListener('click', () => {
-        showScreen('calendarScreen');
-        renderCalendar();
-    });
-
-    document.getElementById('backFromCalendar')?.addEventListener('click', () => showScreen('homeScreen'));
-    document.getElementById('prevMonth')?.addEventListener('click', () => changeMonth(-1));
-    document.getElementById('nextMonth')?.addEventListener('click', () => changeMonth(1));
-}
-
-function renderCalendar() {
-    const grid = document.getElementById('calendarGrid');
-    grid.innerHTML = '';
-
-    // Day headers
-    ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(day => {
-        const header = document.createElement('div');
-        header.className = 'calendar-day-header';
-        header.textContent = day;
-        grid.appendChild(header);
-    });
-
-    const firstDay = new Date(state.currentYear, state.currentMonth, 1);
-    const lastDay = new Date(state.currentYear, state.currentMonth + 1, 0);
-    const today = new Date();
-
-    // Update title
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'];
-    document.getElementById('calendarTitle').textContent =
-        `${monthNames[state.currentMonth]} ${state.currentYear}`;
-
-    // Empty cells before first day
-    for (let i = 0; i < firstDay.getDay(); i++) {
-        const cell = document.createElement('div');
-        cell.className = 'calendar-day other-month';
-        grid.appendChild(cell);
-    }
-
-    // Days
-    for (let day = 1; day <= lastDay.getDate(); day++) {
-        const cell = document.createElement('div');
-        cell.className = 'calendar-day';
-        cell.textContent = day;
-
-        const cellDate = new Date(state.currentYear, state.currentMonth, day);
-
-        // Check if today
-        if (cellDate.toDateString() === today.toDateString()) {
-            cell.classList.add('today');
-        }
-
-        // Check if has events
-        const dateStr = cellDate.toISOString().split('T')[0];
-        const hasEvent = window.events.some(e => {
-            const start = new Date(e.startDate);
-            const end = new Date(e.endDate);
-            return cellDate >= start && cellDate <= end;
-        });
-
-        if (hasEvent) {
-            cell.classList.add('has-event');
-        }
-
-        cell.addEventListener('click', () => selectDate(cellDate));
-        grid.appendChild(cell);
-    }
-
-    lucide.createIcons();
-}
-
-function changeMonth(delta) {
-    state.currentMonth += delta;
-    if (state.currentMonth > 11) {
-        state.currentMonth = 0;
-        state.currentYear++;
-    } else if (state.currentMonth < 0) {
-        state.currentMonth = 11;
-        state.currentYear--;
-    }
-    renderCalendar();
-}
-
-function selectDate(date) {
-    state.selectedDate = date;
-
-    // Update UI
-    document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
-    event.target.classList.add('selected');
-
-    // Find events on this date
-    const dateStr = date.toISOString().split('T')[0];
-    const dayEvents = window.events.filter(e => {
-        const start = new Date(e.startDate);
-        const end = new Date(e.endDate);
-        return date >= start && date <= end;
-    });
-
-    const eventsContainer = document.getElementById('calendarEvents');
-    if (dayEvents.length === 0) {
-        eventsContainer.innerHTML = `
-            <h3>Events on ${date.toLocaleDateString()}</h3>
-            <p class="no-events">No events on this day</p>
-        `;
-    } else {
-        eventsContainer.innerHTML = `<h3>Events on ${date.toLocaleDateString()}</h3>`;
-        dayEvents.forEach(event => {
-            eventsContainer.appendChild(createEventCard(event));
-        });
-    }
-
-    lucide.createIcons();
-}
-
-// ===== SEARCH =====
-function initSearch() {
-    const modal = document.getElementById('searchModal');
-    const input = document.getElementById('searchInput');
-
-    document.getElementById('searchBtn')?.addEventListener('click', () => {
-        modal.classList.add('active');
-        input.focus();
-    });
-
-    document.getElementById('closeSearch')?.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    document.querySelector('.search-modal .modal-backdrop')?.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    // Suggestion chips
-    document.querySelectorAll('.suggestion-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-            input.value = chip.textContent;
-            performSearch(chip.textContent);
-        });
-    });
-
-    input?.addEventListener('input', (e) => performSearch(e.target.value));
-}
-
-function performSearch(query) {
-    const results = document.getElementById('searchResults');
-    if (query.length < 2) {
-        results.innerHTML = '';
-        return;
-    }
-
-    const q = query.toLowerCase();
-    const matches = [];
-
-    // Search events
-    window.events.forEach(e => {
-        if (e.title.toLowerCase().includes(q) ||
-            e.englishTitle.toLowerCase().includes(q) ||
-            e.vachakName.toLowerCase().includes(q) ||
-            e.location.toLowerCase().includes(q)) {
-            matches.push({ type: 'event', data: e });
-        }
-    });
-
-    // Search vachaks
-    window.vachaks.forEach(v => {
-        if (v.name.toLowerCase().includes(q) ||
-            v.shortName.toLowerCase().includes(q)) {
-            matches.push({ type: 'vachak', data: v });
-        }
-    });
-
-    if (matches.length === 0) {
-        results.innerHTML = '<p class="search-hint">No results found</p>';
-    } else {
-        results.innerHTML = matches.slice(0, 8).map(m => {
-            if (m.type === 'event') {
-                return `
-                    <div class="search-result-item" onclick="openEvent('${m.data.id}'); document.getElementById('searchModal').classList.remove('active');">
-                        <h4>${m.data.title}</h4>
-                        <p>${m.data.vachakName} • ${m.data.location}</p>
-                    </div>
-                `;
-            } else {
-                return `
-                    <div class="search-result-item" onclick="openVachak('${m.data.id}'); document.getElementById('searchModal').classList.remove('active');">
-                        <h4>${m.data.emoji} ${m.data.name}</h4>
-                        <p>${m.data.specialty}</p>
-                    </div>
-                `;
-            }
-        }).join('');
-    }
-}
-
-// ===== LOCATION =====
-function initLocation() {
-    const modal = document.getElementById('locationModal');
-
-    document.getElementById('locationBtn')?.addEventListener('click', () => {
-        modal.classList.add('active');
-    });
-
-    document.getElementById('closeLocation')?.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    document.querySelector('.location-modal .modal-backdrop')?.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    // City buttons
-    document.querySelectorAll('.city-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const city = btn.dataset.city;
-            selectCity(city);
-            modal.classList.remove('active');
-        });
-    });
-
-    // Current location
-    document.getElementById('useCurrentLocation')?.addEventListener('click', () => {
-        showToast('Location detection coming soon!');
-        modal.classList.remove('active');
-    });
-}
-
-function selectCity(city) {
-    state.currentCity = city;
-    const cityData = window.cities[city];
-    document.getElementById('currentLocation').textContent = cityData.name;
-    loadEvents();
-    saveState();
-}
-
-// ===== FILTER =====
-function initFilter() {
-    const modal = document.getElementById('filterModal');
-
-    document.getElementById('filterBtn')?.addEventListener('click', () => {
-        modal.classList.add('active');
-    });
-
-    document.getElementById('closeFilter')?.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    document.querySelector('.filter-modal .modal-backdrop')?.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    document.getElementById('applyFilters')?.addEventListener('click', () => {
-        showToast('Filters applied!');
-        modal.classList.remove('active');
-    });
-
-    // Quick filter chips
-    document.querySelectorAll('.filter-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-        });
-    });
-}
-
-// ===== DONATION =====
-function initDonation() {
-    const modal = document.getElementById('donationModal');
-
-    document.getElementById('closeDonation')?.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    document.querySelector('.donation-modal .modal-backdrop')?.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    // Amount buttons
-    document.querySelectorAll('.amount-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            document.getElementById('customAmount').value = '';
-        });
-    });
-
-    document.getElementById('proceedDonation')?.addEventListener('click', () => {
-        showToast('Payment integration coming soon!');
-        modal.classList.remove('active');
-    });
-}
-
-function showDonationModal() {
-    document.getElementById('donationModal').classList.add('active');
-}
-
-// ===== BOTTOM NAV =====
-function initBottomNav() {
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', () => {
-            const tab = item.dataset.tab;
-
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-
-            switch (tab) {
-                case 'home':
-                    showScreen('homeScreen');
-                    break;
-                case 'calendar':
-                    showScreen('calendarScreen');
-                    renderCalendar();
-                    break;
-                case 'saved':
-                    showSavedEvents();
-                    break;
-                case 'profile':
-                    showProfile();
-                    break;
-            }
-        });
-    });
-}
-
-function showSavedEvents() {
-    const container = document.getElementById('savedList');
-    const emptyState = document.getElementById('noSavedEvents');
-    container.innerHTML = '';
-
-    if (state.savedEvents.length === 0) {
-        emptyState.style.display = 'block';
-    } else {
-        emptyState.style.display = 'none';
-        state.savedEvents.forEach(eventId => {
-            const event = window.events.find(e => e.id === eventId);
-            if (event) {
-                container.appendChild(createEventCard(event));
-            }
-        });
-    }
-
-    // Back button
-    document.getElementById('backFromSaved').onclick = () => showScreen('homeScreen');
-
-    showScreen('savedScreen');
-    lucide.createIcons();
-}
-
-function showProfile() {
-    // Update stats
-    document.getElementById('statSaved').textContent = state.savedEvents.length;
-    document.getElementById('statFollowing').textContent = state.followedVachaks.length;
-
-    // Get registrations count
-    const registrations = JSON.parse(localStorage.getItem('satsangRegistrations') || '[]');
-    document.getElementById('statRegistered').textContent = registrations.length;
-
-    // Check if user has registered before and use their name
-    if (registrations.length > 0) {
-        document.getElementById('profileName').textContent = registrations[0].name || 'Devotee';
-        document.getElementById('profileEmail').textContent = registrations[0].email || 'Registered devotee';
-    }
-
-    // Init buttons
-    document.getElementById('backFromProfile').onclick = () => showScreen('homeScreen');
-    document.getElementById('volunteerBtn').onclick = showVolunteerModal;
-    document.getElementById('myRegistrations').onclick = showMyRegistrations;
-    document.getElementById('myDonations').onclick = () => showToast('Donation history coming soon!');
-    document.getElementById('notifications').onclick = () => showToast('Notification settings coming soon!');
-    document.getElementById('language').onclick = () => showToast('Language options coming soon!');
-
-    showScreen('profileScreen');
-    lucide.createIcons();
-}
-
-// ===== VOLUNTEER REGISTRATION =====
-function showVolunteerModal() {
-    document.getElementById('volunteerModal').classList.add('active');
-    lucide.createIcons();
-
-    // Reset form
-    document.getElementById('volName').value = '';
-    document.getElementById('volPhone').value = '';
-    document.getElementById('volAge').value = '';
-    document.getElementById('volCity').value = '';
-    document.getElementById('volExperience').value = '';
-    document.querySelectorAll('#skillChips input').forEach(i => i.checked = false);
-
-    // Close handler
-    document.getElementById('closeVolunteer').onclick = () => {
-        document.getElementById('volunteerModal').classList.remove('active');
-    };
-    document.querySelector('.volunteer-modal .modal-backdrop').onclick = () => {
-        document.getElementById('volunteerModal').classList.remove('active');
-    };
-
-    // Submit handler
-    document.getElementById('submitVolunteer').onclick = submitVolunteerForm;
-}
-
-function submitVolunteerForm() {
-    const name = document.getElementById('volName').value.trim();
-    const phone = document.getElementById('volPhone').value.trim();
-    const age = document.getElementById('volAge').value;
-    const city = document.getElementById('volCity').value;
-
-    if (!name) {
-        showToast('Please enter your name');
-        return;
-    }
-    if (!phone) {
-        showToast('Please enter your phone number');
-        return;
-    }
-    if (!age) {
-        showToast('Please enter your age');
-        return;
-    }
-    if (!city) {
-        showToast('Please select your city');
-        return;
-    }
-
-    // Collect skills
-    const skills = [];
-    document.querySelectorAll('#skillChips input:checked').forEach(i => {
-        skills.push(i.value);
-    });
-
-    if (skills.length === 0) {
-        showToast('Please select at least one skill');
-        return;
-    }
-
-    // Collect availability
-    const availability = document.querySelector('input[name="availability"]:checked').value;
-
-    // Save volunteer data
-    const volunteerData = {
-        name,
-        phone,
-        age: parseInt(age),
-        city,
-        skills,
-        availability,
-        experience: document.getElementById('volExperience').value.trim(),
-        registeredAt: new Date().toISOString(),
-        volunteerId: 'VOL-' + Date.now().toString(36).toUpperCase()
-    };
-
-    const volunteers = JSON.parse(localStorage.getItem('satsangVolunteers') || '[]');
-    volunteers.push(volunteerData);
-    localStorage.setItem('satsangVolunteers', JSON.stringify(volunteers));
-
-    // Close modal and show success
-    document.getElementById('volunteerModal').classList.remove('active');
-    showToast('Volunteer registration successful! 🙏');
-}
-
-// ===== MY REGISTRATIONS =====
-function showMyRegistrations() {
-    const registrations = JSON.parse(localStorage.getItem('satsangRegistrations') || '[]');
-    const container = document.getElementById('registrationsList');
-
-    if (registrations.length === 0) {
-        container.innerHTML = `
-            <div class="empty-state">
-                <p>No registrations yet</p>
-            </div>
-        `;
-    } else {
-        container.innerHTML = registrations.map(reg => {
-            const event = window.events.find(e => e.id === reg.eventId);
-            const eventTitle = event ? event.title : 'Event';
-            return `
-                <div class="registration-item">
-                    <h4>${eventTitle}</h4>
-                    <p>${reg.name} • ${tierLabels[reg.tier] || reg.tier}</p>
-                    <p>ID: ${reg.registrationId}</p>
-                    <span class="reg-badge">${reg.tier === 'attendee' ? 'FREE' : '₹' + tierAmounts[reg.tier]}</span>
-                </div>
-            `;
-        }).join('');
-    }
-
-    document.getElementById('registrationsModal').classList.add('active');
-
-    document.getElementById('closeRegistrations').onclick = () => {
-        document.getElementById('registrationsModal').classList.remove('active');
-    };
-    document.querySelector('.registrations-modal .modal-backdrop').onclick = () => {
-        document.getElementById('registrationsModal').classList.remove('active');
-    };
-}
 
 // ===== HELPERS =====
-function toggleSaveEvent(eventId) {
-    const idx = state.savedEvents.indexOf(eventId);
-    if (idx === -1) {
-        state.savedEvents.push(eventId);
-        showToast('Event saved!');
-    } else {
-        state.savedEvents.splice(idx, 1);
-        showToast('Event removed');
-    }
-    saveState();
-    loadEvents();
+
+function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id)?.classList.add('active');
 }
 
-function toggleFollow(vachakId) {
-    const idx = state.followedVachaks.indexOf(vachakId);
-    if (idx === -1) {
-        state.followedVachaks.push(vachakId);
-        showToast('Following!');
-    } else {
-        state.followedVachaks.splice(idx, 1);
-        showToast('Unfollowed');
-    }
-    saveState();
-    openVachak(vachakId);
-}
-
-function shareEvent(event) {
-    if (navigator.share) {
-        navigator.share({
-            title: event.title,
-            text: `${event.title} by ${event.vachakName} in ${event.location}`,
-            url: window.location.href
+function setupGlobalListeners() {
+    // Bottom Nav
+    document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tab = btn.dataset.tab;
+            window.location.hash = tab;
         });
-    } else {
-        showToast('Link copied!');
-    }
-}
-
-function registerForEvent(event) {
-    showRegistrationModal(event);
-}
-
-// ===== YAJMAN REGISTRATION =====
-let registrationData = {
-    tier: 'attendee',
-    name: '',
-    fatherName: '',
-    gotra: '',
-    rashi: '',
-    nakshatra: '',
-    phone: '',
-    email: '',
-    pan: '',
-    eventId: null
-};
-
-let currentRegStep = 1;
-
-function showRegistrationModal(event) {
-    registrationData.eventId = event?.id || state.currentEventId;
-    currentRegStep = 1;
-    resetRegistrationForm();
-    updateRegStep(1);
-    document.getElementById('registrationModal').classList.add('active');
-    lucide.createIcons();
-
-    // Init tier change handler
-    document.querySelectorAll('input[name="tier"]').forEach(r => {
-        r.addEventListener('change', handleTierChange);
     });
 
-    // Init navigation
-    document.getElementById('regNextBtn').onclick = handleRegNext;
-    document.getElementById('regPrevBtn').onclick = handleRegPrev;
-    document.getElementById('closeRegistration').onclick = () => {
-        document.getElementById('registrationModal').classList.remove('active');
-    };
-    document.querySelector('.registration-modal .modal-backdrop').onclick = () => {
-        document.getElementById('registrationModal').classList.remove('active');
-    };
-}
+    // Subscribe to store changes to re-render parts of UI if needed
+    store.subscribe((state) => {
+        // Update "Saved" buttons across the app
+        document.querySelectorAll('.save-btn').forEach(btn => {
+            const id = btn.dataset.id;
+            if (state.savedEvents.includes(id)) {
+                btn.classList.add('saved');
+                btn.innerHTML = '<i data-lucide="heart"></i>'; // Solid heart logic handled by CSS usually, but here we ensure
+            } else {
+                btn.classList.remove('saved');
+                btn.innerHTML = '<i data-lucide="heart"></i>';
+            }
+        });
 
-function resetRegistrationForm() {
-    document.getElementById('yajmanName').value = '';
-    document.getElementById('fatherName').value = '';
-    document.getElementById('gotra').value = '';
-    document.getElementById('rashi').value = '';
-    document.getElementById('nakshatra').value = '';
-    document.getElementById('yajmanPhone').value = '';
-    document.getElementById('yajmanEmail').value = '';
-    document.getElementById('yajmanPan').value = '';
-    document.querySelector('input[name="tier"][value="attendee"]').checked = true;
-    document.getElementById('termsAgree').checked = false;
-}
-
-function handleTierChange(e) {
-    registrationData.tier = e.target.value;
-    const panGroup = document.getElementById('panGroup');
-    if (registrationData.tier !== 'attendee') {
-        panGroup.style.display = 'block';
-    } else {
-        panGroup.style.display = 'none';
-    }
-}
-
-function updateRegStep(step) {
-    currentRegStep = step;
-
-    // Update step indicators
-    document.querySelectorAll('.reg-steps .step').forEach(s => {
-        const num = parseInt(s.dataset.step);
-        s.classList.remove('active', 'done');
-        if (num === step) s.classList.add('active');
-        if (num < step) s.classList.add('done');
+        lucide.createIcons();
     });
 
-    // Show/hide content
-    document.getElementById('regStep1').classList.toggle('hidden', step !== 1);
-    document.getElementById('regStep2').classList.toggle('hidden', step !== 2);
-    document.getElementById('regStep3').classList.toggle('hidden', step !== 3);
-
-    // Update buttons
-    document.getElementById('regPrevBtn').style.display = step === 1 ? 'none' : 'flex';
-
-    const nextBtn = document.getElementById('regNextBtn');
-    if (step === 3) {
-        nextBtn.innerHTML = `<i data-lucide="check"></i> Confirm & ${registrationData.tier === 'attendee' ? 'Register' : 'Pay'}`;
-    } else {
-        nextBtn.innerHTML = `Next Step <i data-lucide="chevron-right"></i>`;
-    }
-
-    lucide.createIcons();
-}
-
-function handleRegNext() {
-    if (currentRegStep === 1) {
-        // Capture tier selection
-        const selected = document.querySelector('input[name="tier"]:checked');
-        registrationData.tier = selected.value;
-        updateRegStep(2);
-    } else if (currentRegStep === 2) {
-        // Validate personal details
-        const name = document.getElementById('yajmanName').value.trim();
-        const gotra = document.getElementById('gotra').value;
-        const rashi = document.getElementById('rashi').value;
-        const phone = document.getElementById('yajmanPhone').value.trim();
-
-        if (!name) {
-            showToast('Please enter your name');
-            return;
-        }
-        if (!gotra) {
-            showToast('Please select your Gotra');
-            return;
-        }
-        if (!rashi) {
-            showToast('Please select your Rashi');
-            return;
-        }
-        if (!phone) {
-            showToast('Please enter your phone number');
-            return;
-        }
-
-        // Save data
-        registrationData.name = name;
-        registrationData.fatherName = document.getElementById('fatherName').value.trim();
-        registrationData.gotra = gotra;
-        registrationData.rashi = rashi;
-        registrationData.nakshatra = document.getElementById('nakshatra').value;
-        registrationData.phone = phone;
-        registrationData.email = document.getElementById('yajmanEmail').value.trim();
-        registrationData.pan = document.getElementById('yajmanPan').value.trim();
-
-        // Populate confirmation
-        populateSankalpCard();
-        updateRegStep(3);
-    } else if (currentRegStep === 3) {
-        // Final confirmation
-        if (!document.getElementById('termsAgree').checked) {
-            showToast('Please accept the terms');
-            return;
-        }
-
-        completeRegistration();
+    // Wire Search Button Global
+    const searchBtn = document.querySelector('#homeScreen .header-btn:last-child');
+    if (searchBtn) {
+        searchBtn.addEventListener('click', () => {
+            document.body.appendChild(SearchModal());
+            lucide.createIcons();
+        });
     }
 }
-
-function handleRegPrev() {
-    if (currentRegStep > 1) {
-        updateRegStep(currentRegStep - 1);
-    }
-}
-
-const gotraNames = {
-    bharadwaj: 'भारद्वाज',
-    kashyap: 'कश्यप',
-    vashistha: 'वशिष्ठ',
-    gautam: 'गौतम',
-    jamadagni: 'जमदग्नि',
-    vishwamitra: 'विश्वामित्र',
-    atri: 'अत्रि',
-    agastya: 'अगस्त्य',
-    shandilya: 'शाण्डिल्य',
-    kaushik: 'कौशिक',
-    other: 'अन्य'
-};
-
-const rashiNames = {
-    mesh: 'मेष',
-    vrishabh: 'वृषभ',
-    mithun: 'मिथुन',
-    kark: 'कर्क',
-    simha: 'सिंह',
-    kanya: 'कन्या',
-    tula: 'तुला',
-    vrishchik: 'वृश्चिक',
-    dhanu: 'धनु',
-    makar: 'मकर',
-    kumbh: 'कुम्भ',
-    meen: 'मीन'
-};
-
-const tierLabels = {
-    attendee: 'उपस्थित',
-    dainik: 'दैनिक यजमान',
-    mukhya: 'मुख्य यजमान'
-};
-
-const tierAmounts = {
-    attendee: 0,
-    dainik: 5100,
-    mukhya: 21000
-};
-
-function populateSankalpCard() {
-    document.getElementById('confirmName').textContent = registrationData.name;
-    document.getElementById('confirmGotra').textContent = gotraNames[registrationData.gotra] || registrationData.gotra;
-    document.getElementById('confirmRashi').textContent = rashiNames[registrationData.rashi] || registrationData.rashi;
-    document.getElementById('confirmTier').textContent = tierLabels[registrationData.tier];
-
-    const event = window.events.find(e => e.id === registrationData.eventId);
-    if (event) {
-        document.getElementById('confirmEvent').textContent = event.title;
-        document.getElementById('confirmDate').textContent = formatDateRange(event.startDate, event.endDate) + ' • ' + event.location;
-    }
-
-    // Payment summary
-    const amount = tierAmounts[registrationData.tier];
-    if (amount > 0) {
-        document.getElementById('paymentSummary').style.display = 'block';
-        document.getElementById('sevaAmount').textContent = '₹' + amount.toLocaleString();
-        document.getElementById('totalAmount').textContent = '₹' + amount.toLocaleString();
-    } else {
-        document.getElementById('paymentSummary').style.display = 'none';
-    }
-}
-
-function completeRegistration() {
-    // Generate registration ID
-    const regId = 'SAT-' + new Date().getFullYear() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
-
-    // Save registration
-    const registrations = JSON.parse(localStorage.getItem('satsangRegistrations') || '[]');
-    registrations.push({
-        ...registrationData,
-        registrationId: regId,
-        timestamp: new Date().toISOString()
-    });
-    localStorage.setItem('satsangRegistrations', JSON.stringify(registrations));
-
-    // Close registration modal
-    document.getElementById('registrationModal').classList.remove('active');
-
-    // Show success modal
-    document.getElementById('registrationId').textContent = regId;
-    document.getElementById('successModal').classList.add('active');
-    lucide.createIcons();
-
-    // Success modal close
-    document.getElementById('closeSuccess').onclick = () => {
-        document.getElementById('successModal').classList.remove('active');
-        showScreen('homeScreen');
-    };
-    document.querySelector('.success-modal .modal-backdrop').onclick = () => {
-        document.getElementById('successModal').classList.remove('active');
-    };
-}
-
-function formatDateRange(start, end) {
-    const s = new Date(start);
-    const e = new Date(end);
-    const options = { day: 'numeric', month: 'short' };
-    if (s.toDateString() === e.toDateString()) {
-        return s.toLocaleDateString('en-IN', { ...options, year: 'numeric' });
-    }
-    return `${s.toLocaleDateString('en-IN', options)} - ${e.toLocaleDateString('en-IN', { ...options, year: 'numeric' })}`;
-}
-
-function formatNumber(n) {
-    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
-    if (n >= 1000) return (n / 1000).toFixed(0) + 'K';
-    return n.toString();
-}
-
-// ===== PERSISTENCE =====
-function saveState() {
-    localStorage.setItem('satsangState', JSON.stringify(state));
-}
-
-function loadState() {
-    const saved = localStorage.getItem('satsangState');
-    if (saved) {
-        Object.assign(state, JSON.parse(saved));
-        if (state.currentCity !== 'all') {
-            const cityData = window.cities[state.currentCity];
-            if (cityData) document.getElementById('currentLocation').textContent = cityData.name;
-        }
-    }
-}
-
-// ===== TOAST =====
-function showToast(message) {
-    const existing = document.querySelector('.toast');
-    if (existing) existing.remove();
-
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    toast.style.cssText = `
-        position: fixed;
-        bottom: 100px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 12px 24px;
-        background: #6B46C1;
-        color: white;
-        border-radius: 12px;
-        font-size: 0.85rem;
-        z-index: 9999;
-        animation: slideUp 0.3s ease;
-    `;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 2000);
-}
-
-// Animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideUp {
-        from { transform: translateX(-50%) translateY(20px); opacity: 0; }
-        to { transform: translateX(-50%) translateY(0); opacity: 1; }
-    }
-`;
-document.head.appendChild(style);
-
-// Make functions global for inline onclick
-window.openEvent = openEvent;
-window.openVachak = openVachak;
