@@ -9,7 +9,10 @@ export class Router {
         this.currentRoute = null;
 
         window.addEventListener('hashchange', () => this._handleRoute());
-        window.addEventListener('load', () => this._handleRoute());
+        window.addEventListener('hashchange', () => this._handleRoute());
+
+        // Trigger immediately as the app is already initialized
+        this._handleRoute();
     }
 
     _handleRoute() {
