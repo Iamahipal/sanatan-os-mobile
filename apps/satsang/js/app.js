@@ -8,7 +8,6 @@ import { events, vachaks, cities } from './data/mock_data.js';
 import { EventService } from './services/events.js';
 import { EventCard } from './components/EventCard.js';
 import { EventDetail } from './components/EventDetail.js';
-import { EventDetail } from './components/EventDetail.js';
 import { VachakProfile } from './components/VachakProfile.js';
 import { SearchModal } from './components/SearchModal.js';
 import { Calendar } from './components/Calendar.js';
