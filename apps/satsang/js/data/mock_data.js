@@ -1,6 +1,7 @@
 /**
  * Satsang App - Real-World Data (Manual Entry Phase)
  * Updated: 26 Jan 2026
+ * Source: User Verified Schedule
  */
 
 export const vachaks = [
@@ -16,14 +17,47 @@ export const vachaks = [
         verified: true
     },
     {
+        id: 'pundrik',
+        name: 'Pujya Pundrik Goswami Ji',
+        shortName: 'Pundrik Goswami',
+        emoji: '🪷',
+        specialty: 'श्रीमद्भागवत कथा',
+        followers: 400000,
+        eventsCount: 200,
+        bio: 'Continuing the glorious lineage of Shri Radharaman Temple, Vrindavan. His discourses blend tradition with modern relevance.',
+        verified: true
+    },
+    {
+        id: 'morari',
+        name: 'Pujya Morari Bapu',
+        shortName: 'Morari Bapu',
+        emoji: '📿',
+        specialty: 'राम कथा',
+        followers: 5000000,
+        eventsCount: 900,
+        bio: 'Internationally renowned exponent of Ram Charit Manas. He has been reciting Ram Katha for over 60 years across the globe.',
+        verified: true
+    },
+    {
+        id: 'jayakishori',
+        name: 'Jaya Kishori',
+        shortName: 'Jaya Kishori',
+        emoji: '🎤',
+        specialty: 'Satsang & Motivational',
+        followers: 10000000,
+        eventsCount: 700,
+        bio: 'Renowned spiritual orator and motivational speaker, inspiring youth through "Divine Concerts" and Katha.',
+        verified: true
+    },
+    {
         id: 'premanand',
         name: 'Pujya Shri Premanand Govind Sharan Ji Maharaj',
         shortName: 'Premanand Ji',
         emoji: '🙇',
-        specialty: 'एकांतिक वार्ता & राधा नाम',
+        specialty: 'एकांतिक वार्ता',
         followers: 15000000,
-        eventsCount: 9999, // Daily
-        bio: 'Revered saint of Vrindavan emphasizing "Radha Nam Kirtan" and absolute surrender to Priya-Priyatam. His Ekantik Varta guides millions.',
+        eventsCount: 9999,
+        bio: 'Revered saint of Vrindavan emphasizing absolute surrender to Priya-Priyatam. (Note: He does not travel; Darshan only in Vrindavan).',
         verified: true
     },
     {
@@ -34,7 +68,7 @@ export const vachaks = [
         specialty: 'दिव्य दरबार',
         followers: 12000000,
         eventsCount: 450,
-        bio: 'Pt. Dhirendra Krishna Shastri of Bageshwar Dham, known for his miraculous Divya Darbar and Sanatan Dharm prachar.',
+        bio: 'Pt. Dhirendra Krishna Shastri of Bageshwar Dham.',
         verified: true
     },
     {
@@ -43,43 +77,53 @@ export const vachaks = [
         shortName: 'Pradeep Mishra',
         emoji: '🔱',
         specialty: 'शिव महापुराण',
-        followers: 10000000,
+        followers: 11000000,
         eventsCount: 600,
-        bio: 'Sehore Wale Baba. His simple remedies (Upay) via Shiv Mahapuran have created a massive spiritual revolution.',
+        bio: 'Sehore Wale Baba. Famous for Shiv Mahapuran and Rudraksh Mahotsav.',
         verified: true
     },
     {
-        id: 'jayakishori',
-        name: 'Jaya Kishori',
-        shortName: 'Jaya Kishori',
-        emoji: '🎤',
-        specialty: 'नानी बाई रो मायरा & कथा',
-        followers: 8000000,
-        eventsCount: 700,
-        bio: 'Motivational speaker and spiritual singer connecting modern youth with ancient wisdom.',
-        verified: true
-    },
-    {
-        id: 'indresh',
-        name: 'Pt. Indresh Upadhyay',
-        shortName: 'Indresh Ji',
-        emoji: '🪈',
-        specialty: 'श्रीमद्भागवत कथा',
-        followers: 500000,
-        eventsCount: 300,
-        bio: 'Blessed with a melodious voice, his Bhagwat Katha recitations are a treat for the soul.',
+        id: 'avdheshanand',
+        name: 'Swami Avdheshanand Giri Ji',
+        shortName: 'Avdheshanand Giri',
+        emoji: '🏔️',
+        specialty: 'Vedanta & Spirituality',
+        followers: 6000000,
+        eventsCount: 500,
+        bio: 'Acharya Mahamandaleshwar of the Juna Akhara. A scholar of Vedanta and ancient Indian wisdom.',
         verified: true
     }
 ];
 
 export const events = [
-    // RAJENDRADAS JI - NAGPUR (User Requested)
+    // --- RAJENDRADAS JI ---
+    {
+        id: 'evt-raj-mathura',
+        type: 'ramkatha',
+        typeName: 'श्री राम कथा',
+        title: 'Shree Ram Katha - Mathura',
+        vachakId: 'rajendradas',
+        location: {
+            city: 'mathura',
+            cityName: 'Mathura, UP',
+            venue: 'Thakur Shree Brij Bhushan Mandir, Village Kotvan'
+        },
+        dates: {
+            start: '2026-01-22',
+            end: '2026-01-28',
+            duration: 7,
+            timing: 'Current Event'
+        },
+        features: { isLive: true, isFree: true, hasLiveStream: true, hasPrasad: true, hasAccommodation: false },
+        organizer: { name: 'Brij Bhushan Mandir Samiti', contact: '' },
+        description: 'Ongoing Ram Katha in the holy land of Braj.',
+        schedule: []
+    },
     {
         id: 'evt-raj-nagpur-2026',
         type: 'bhagwat',
         typeName: 'श्रीमद्भागवत कथा',
         title: 'Shrimad Bhagwat Katha - Nagpur',
-        englishTitle: 'Shrimad Bhagwat Katha',
         vachakId: 'rajendradas',
         location: {
             city: 'nagpur',
@@ -92,162 +136,171 @@ export const events = [
             duration: 7,
             timing: '03:00 PM - 07:00 PM'
         },
-        features: {
-            isLive: false, // Future
-            isFree: true,
-            hasLiveStream: true,
-            hasPrasad: true,
-            hasAccommodation: false
-        },
-        organizer: {
-            name: 'Jadkhor Gaudham & Malook Peeth',
-            contact: 'donation@jadkhor.org'
-        },
-        description: 'Prepare for a divine 7-day journey with Malook Peethadhishwar Swami Shri Rajendradas Ji Maharaj in Nagpur. Also graced by Param Pujya Shri Prajanand Ji Maharaj.',
-        schedule: [
-            { day: 1, title: 'Mahatmya & Shobha Yatra', time: '3:00 PM' },
-            { day: 2, title: 'Kapil Devahuti Samvad', time: '3:00 PM' },
-            { day: 3, title: 'Dhruv Charitra', time: '3:00 PM' },
-            { day: 4, title: 'Shri Krishna Janmotsav', time: '3:00 PM' },
-            { day: 5, title: 'Govardhan Pooja', time: '3:00 PM' },
-            { day: 6, title: 'Rukmini Vivah', time: '3:00 PM' },
-            { day: 7, title: 'Sudama Charitra & Vyas Pooja', time: '3:00 PM' }
-        ]
-    },
-
-    // PREMANAND JI - VRINDAVAN (Recurring/Live pattern)
-    {
-        id: 'evt-prem-daily',
-        type: 'satsang',
-        typeName: 'एकांतिक वार्ता',
-        title: 'Vrindavan Ekantik Varta',
-        englishTitle: 'Daily Spiritual Discourse',
-        vachakId: 'premanand',
-        location: {
-            city: 'vrindavan',
-            cityName: 'Vrindavan, UP',
-            venue: 'Shri Hit Radha Keli Kunj, Parikrama Marg'
-        },
-        dates: {
-            start: '2026-01-26', // Today
-            end: '2026-01-26', // Today
-            duration: 1,
-            timing: '02:00 AM - 04:00 AM'
-        },
-        features: {
-            isLive: true,
-            isFree: true,
-            hasLiveStream: true,
-            hasPrasad: false,
-            hasAccommodation: false
-        },
-        organizer: {
-            name: 'Radha Keli Kunj Trust',
-            contact: 'YouTube: Bhajan Marg'
-        },
-        description: 'Amrit Varta by Pujya Maharaj Ji. Questions and answers clearing the path of devotion for seekers.',
+        features: { isLive: false, isFree: true, hasLiveStream: true, hasPrasad: true, hasAccommodation: false },
+        organizer: { name: 'Jadkhor Gaudham', contact: 'donation@jadkhor.org' },
+        description: 'A divine gathering in Nagpur with Malook Peethadhishwar.',
         schedule: []
     },
 
-    // BAGESHWAR DHAM - UPCOMING
+    // --- PUNDRIK GOSWAMI JI ---
     {
-        id: 'evt-bag-feb-2026',
-        type: 'darbar',
-        typeName: 'दिव्य दरबार',
-        title: 'Bageshwar Dham Divya Darbar',
-        englishTitle: 'Divya Darbar',
-        vachakId: 'bageshwar',
+        id: 'evt-pundrik-mumbai',
+        type: 'bhagwat',
+        typeName: 'ब्रज भागवत कथा',
+        title: 'Shri Braj Bhagwat - Mumbai',
+        vachakId: 'pundrik',
         location: {
-            city: 'chhatarpur',
-            cityName: 'Gada, MP',
-            venue: 'Bageshwar Dham Sarkar'
+            city: 'mumbai',
+            cityName: 'Mumbai, MH',
+            venue: 'Azad Maidan, Fort'
         },
         dates: {
-            start: '2026-02-10',
-            end: '2026-02-12',
-            duration: 3,
-            timing: '12:00 PM - 08:00 PM'
-        },
-        features: {
-            isLive: false,
-            isFree: true,
-            hasLiveStream: true,
-            hasPrasad: true,
-            hasAccommodation: true
-        },
-        organizer: {
-            name: 'Bageshwar Dham Sewa Samiti',
-            contact: ''
-        },
-        description: 'Grand Divya Darbar by Dhirendra Krishna Shastri Ji. Token distribution on 9th Feb.',
-        schedule: []
-    },
-
-    // PRADEEP MISHRA - KUBERESHWAR
-    {
-        id: 'evt-pradeep-shiv-2026',
-        type: 'shiv',
-        typeName: 'रुद्राक्ष महोत्सव',
-        title: 'Rudraksh Mahotsav & Shiv Puran',
-        englishTitle: 'Rudraksh Festival',
-        vachakId: 'pradeep',
-        location: {
-            city: 'sehore',
-            cityName: 'Kubereshwar Dham, MP',
-            venue: 'Chitawaliya Hema, Sehore'
-        },
-        dates: {
-            start: '2026-03-01',
-            end: '2026-03-07',
+            start: '2026-01-27',
+            end: '2026-02-02',
             duration: 7,
-            timing: '01:00 PM - 05:00 PM'
-        },
-        features: {
-            isLive: false,
-            isFree: true,
-            hasLiveStream: true,
-            hasPrasad: true,
-            hasAccommodation: true
-        },
-        organizer: {
-            name: 'Vitthlesh Seva Samiti',
-            contact: ''
-        },
-        description: 'The massive annual Rudraksh Mahotsav. Millions of devotees expected.',
-        schedule: []
-    },
-
-    // JAYA KISHORI - KOLKATA
-    {
-        id: 'evt-jaya-kolkata',
-        type: 'nani',
-        typeName: 'नानी बाई रो मायरा',
-        title: 'Nani Bai Ro Mayro',
-        englishTitle: 'Musical Saga of Narsi Mehta',
-        vachakId: 'jayakishori',
-        location: {
-            city: 'kolkata',
-            cityName: 'Kolkata, WB',
-            venue: 'Science City Auditorium'
-        },
-        dates: {
-            start: '2026-02-15',
-            end: '2026-02-17',
-            duration: 3,
             timing: '04:00 PM - 08:00 PM'
         },
-        features: {
-            isLive: false,
-            isFree: false, // Ticketed usually
-            hasLiveStream: false,
-            hasPrasad: false,
-            hasAccommodation: false
+        features: { isLive: false, isFree: true, hasLiveStream: true, hasPrasad: false, hasAccommodation: false },
+        organizer: { name: 'Braj Ras Rasik Mandal', contact: '' },
+        description: 'Experience the bliss of Braj in the heart of Mumbai with Pundrik Goswami Ji.',
+        schedule: []
+    },
+    {
+        id: 'evt-pundrik-jalandhar',
+        type: 'ramkatha',
+        typeName: 'श्री राम कथा',
+        title: 'Shri Ram Katha - Jalandhar',
+        vachakId: 'pundrik',
+        location: {
+            city: 'jalandhar',
+            cityName: 'Jalandhar, Punjab',
+            venue: 'Mall Road, Model Town'
         },
-        organizer: {
-            name: 'Kolkata Rajasthani Manch',
-            contact: 'BookMyShow'
+        dates: {
+            start: '2026-02-05',
+            end: '2026-02-12',
+            duration: 8,
+            timing: '03:00 PM - 07:00 PM'
         },
-        description: 'A soulful 3-day musical rendition of the legend of Narsi Mehta and Lord Krishna.',
+        features: { isLive: false, isFree: true, hasLiveStream: true, hasPrasad: true, hasAccommodation: false },
+        organizer: { name: 'Ram Rajya Samiti', contact: '' },
+        description: 'Divine Ram Katha in Punjab.',
+        schedule: []
+    },
+
+    // --- MORARI BAPU ---
+    {
+        id: 'evt-morari-dwarka',
+        type: 'ramkatha',
+        typeName: 'राम कथा',
+        title: 'Ram Katha - Dwarka',
+        vachakId: 'morari',
+        location: {
+            city: 'dwarka',
+            cityName: 'Dwarka, Gujarat',
+            venue: 'Dwarkadhish Dham'
+        },
+        dates: {
+            start: '2026-02-05',
+            end: '2026-02-13',
+            duration: 9,
+            timing: '09:30 AM - 01:30 PM'
+        },
+        features: { isLive: false, isFree: true, hasLiveStream: true, hasPrasad: true, hasAccommodation: true },
+        organizer: { name: 'Ram Katha Aayojan Samiti', contact: '' },
+        description: 'Manas Dwarka - A 9-day spiritual journey at the abode of Lord Krishna.',
+        schedule: []
+    },
+    {
+        id: 'evt-morari-bagasara',
+        type: 'ramkatha',
+        typeName: 'राम कथा',
+        title: 'Ram Katha - Bagasara',
+        vachakId: 'morari',
+        location: {
+            city: 'bagasara',
+            cityName: 'Bagasara, Gujarat',
+            venue: 'Bagasara Grounds'
+        },
+        dates: {
+            start: '2026-03-07',
+            end: '2026-03-15',
+            duration: 9,
+            timing: '04:00 PM - 08:00 PM'
+        },
+        features: { isLive: false, isFree: true, hasLiveStream: true, hasPrasad: true, hasAccommodation: false },
+        organizer: { name: 'Local Organizers', contact: '' },
+        description: 'Ram Katha in Bagasara.',
+        schedule: []
+    },
+
+    // --- JAYA KISHORI (CONCERT SERIES) ---
+    {
+        id: 'evt-jaya-indore',
+        type: 'concert',
+        typeName: 'Divine Concert',
+        title: 'Divine Concert - Indore',
+        vachakId: 'jayakishori',
+        location: {
+            city: 'indore',
+            cityName: 'Indore, MP',
+            venue: 'Phoenix Citadel Mall'
+        },
+        dates: {
+            start: '2026-02-21',
+            end: '2026-02-21',
+            duration: 1,
+            timing: '06:00 PM onwards'
+        },
+        features: { isLive: false, isFree: false, hasLiveStream: false, hasPrasad: false, hasAccommodation: false },
+        organizer: { name: 'Event Management', contact: 'BookMyShow' },
+        description: 'An evening of spirituality and motivation.',
+        schedule: []
+    },
+    {
+        id: 'evt-jaya-jaipur',
+        type: 'concert',
+        typeName: 'Divine Concert',
+        title: 'Divine Concert - Jaipur',
+        vachakId: 'jayakishori',
+        location: {
+            city: 'jaipur',
+            cityName: 'Jaipur, RJ',
+            venue: 'JECC'
+        },
+        dates: {
+            start: '2026-02-22',
+            end: '2026-02-22',
+            duration: 1,
+            timing: '06:00 PM onwards'
+        },
+        features: { isLive: false, isFree: false, hasLiveStream: false, hasPrasad: false, hasAccommodation: false },
+        organizer: { name: 'Event Management', contact: 'BookMyShow' },
+        description: 'Live in Jaipur.',
+        schedule: []
+    },
+
+    // --- BAGESHWAR DHAM ---
+    {
+        id: 'evt-bag-meerut',
+        type: 'darbar',
+        typeName: 'दिव्य दरबार',
+        title: 'Divya Darbar - Meerut',
+        vachakId: 'bageshwar',
+        location: {
+            city: 'meerut',
+            cityName: 'Meerut, UP',
+            venue: 'Venue TBD'
+        },
+        dates: {
+            start: '2026-03-25',
+            end: '2026-03-29',
+            duration: 5,
+            timing: 'TBD'
+        },
+        features: { isLive: false, isFree: true, hasLiveStream: true, hasPrasad: true, hasAccommodation: false },
+        organizer: { name: 'Bageshwar Dham Sewa Samiti', contact: '' },
+        description: 'Tentative Schedule: Grand Divya Darbar in Meerut. Please duplicate check official channel before travel.',
         schedule: []
     }
 ];
@@ -256,16 +309,14 @@ export const cities = {
     all: { name: 'All India', emoji: '🇮🇳' },
     nagpur: { name: 'Nagpur', emoji: '🍊', state: 'MH' },
     vrindavan: { name: 'Vrindavan', emoji: '🏛️', state: 'UP' },
-    sehore: { name: 'Sehore', emoji: '🔱', state: 'MP' },
-    chhatarpur: { name: 'Bageshwar', emoji: '🕉️', state: 'MP' },
-    kolkata: { name: 'Kolkata', emoji: '🌉', state: 'WB' },
     mumbai: { name: 'Mumbai', emoji: '🌆', state: 'MH' },
-    delhi: { name: 'Delhi', emoji: '🏙️', state: 'Delhi' }
+    dwarka: { name: 'Dwarka', emoji: '🐚', state: 'GJ' },
+    indore: { name: 'Indore', emoji: '🏙️', state: 'MP' },
+    delhi: { name: 'Delhi', emoji: '🏙️', state: 'DL' }
 };
 
 export const wisdomQuotes = [
     { text: 'सत्संग से ही मोक्ष की प्राप्ति होती है।', source: 'Sant Kabir' },
-    { text: 'राधा कृष्न ही जीवन का सार हैं।', source: 'Premanand Ji' },
-    { text: 'एक लोटा जल, सारी समस्या का हल।', source: 'Pradeep Mishra Ji' },
-    { text: 'पर्चे पे जो लिख गया, वो होकर रहेगा।', source: 'Bageshwar Sarkar' }
+    { text: 'सिया राम मय सब जग जानी।', source: 'Tulsidas' },
+    { text: 'कर्म ही पूजा है।', source: 'Gita' }
 ];
