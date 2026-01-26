@@ -12,36 +12,38 @@ export function VachakProfile(vachak) {
     container.className = 'vachak-profile-container';
 
     container.innerHTML = `
-        <header class="app-header" id="profileHeader">
+        <header class="app-header transparent">
             <button class="header-btn" onclick="window.history.back()">
                 <i data-lucide="chevron-left"></i>
             </button>
-            <div class="header-title-center">${vachak.shortName}</div>
-            <button class="header-btn">
-                <i data-lucide="more-vertical"></i>
-            </button>
+            <div class="header-actions">
+                <button class="header-btn"><i data-lucide="share-2"></i></button>
+            </div>
         </header>
 
-        <main class="profile-scroll">
-            <div class="profile-hero">
-                <div class="profile-avatar-lg">
-                    <span>${vachak.emoji}</span>
+        <div class="vachak-hero">
+            <div class="vachak-avatar-lg">
+                ${vachak.image
+            ? `<img src="${vachak.image}" class="vachak-image-lg" alt="${vachak.name}">`
+            : vachak.emoji
+        }
+            </div>
+            <h1>${vachak.name}</h1>
+            <p class="specialty">${vachak.specialty}</p>
+            <div class="vachak-stats">
+                <div class="stat">
+                    <span class="num">${vachak.followers > 1000 ? (vachak.followers / 1000) + 'k' : vachak.followers}</span>
+                    <span class="lbl">Followers</span>
                 </div>
-                <h1 class="profile-name">
-                    ${vachak.name}
-                    ${vachak.verified ? '<i data-lucide="badge-check" class="verified-badge"></i>' : ''}
-                </h1>
-                <p class="profile-specialty">${vachak.specialty}</p>
-                
-                <div class="profile-stats-row">
-                    <div class="stat-box">
-                        <span class="stat-num">${vachak.followers > 1000 ? (vachak.followers / 1000) + 'k' : vachak.followers}</span>
-                        <span class="stat-lbl">Followers</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-num">${vachak.eventsCount}</span>
-                        <span class="stat-lbl">Events</span>
-                    </div>
+                <div class="stat">
+                    <span class="num">${vachak.eventsCount}</span>
+                    <span class="lbl">Events</span>
+                </div>
+            </div>
+            <button class="btn-primary" id="followBtn">Follow</button>
+        </div>
+
+        <main class="profile-scroll">
                 </div>
 
                 <div class="profile-actions">

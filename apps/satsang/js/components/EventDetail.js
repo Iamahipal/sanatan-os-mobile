@@ -14,61 +14,78 @@ export function EventDetail(event) {
     // Container
     const container = document.createElement('div');
     container.className = 'event-detail-container';
+    // Vachak details for header
+    const vachak = event.vachak;
 
     container.innerHTML = `
-        <header class="app-header transparent" id="detailHeader">
+        <header class="app-header transparent">
             <button class="header-btn" onclick="window.history.back()">
                 <i data-lucide="chevron-left"></i>
             </button>
             <div class="header-actions">
-                <button class="header-btn">
-                    <i data-lucide="share-2"></i>
-                </button>
-                <button class="header-btn ${isSaved ? 'text-primary' : ''}" id="detailSaveBtn">
-                    <i data-lucide="${isSaved ? 'heart' : 'heart'}"></i>
-                </button>
+                <button class="header-btn"><i data-lucide="share-2"></i></button>
+                <button class="header-btn save-btn ${isSaved ? 'text-primary' : ''}" data-id="${event.id}"><i data-lucide="heart"></i></button>
             </div>
         </header>
 
         <div class="event-hero">
-            <div class="event-hero-gradient"></div>
-            <div class="event-hero-content">
-                <span class="event-hero-type">${event.typeName}</span>
-                <h1 class="event-hero-title">${event.title}</h1>
-                <div class="event-hero-vachak">
-                    <span class="vachak-name">${event.vachak ? event.vachak.name : ''}</span>
+            ${vachak && vachak.image
+            ? `<img src="${vachak.image}" class="hero-image" alt="${vachak.name}">`
+            : `<div class="hero-placeholder">${event.emoji || '🕉️'}</div>`
+        }
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <span class="chip ${event.type}">${event.typeName}</span>
+                    <h1>${event.title}</h1>
+                    <p class="hero-subtitle">by ${vachak ? vachak.name : 'Unknown'}</p>
                 </div>
             </div>
         </div>
 
-        <div class="event-content">
-            <!-- Key Info Grid -->
+        <div class="event-body">
             <div class="info-grid">
                 <div class="info-item">
-                    <div class="info-icon"><i data-lucide="calendar"></i></div>
+                    <i data-lucide="calendar"></i>
                     <div>
-                        <label>Date</label>
+                        <label>Dates</label>
                         <p>${formatDate(dateStart)} - ${formatDate(dateEnd)}</p>
                     </div>
                 </div>
                 <div class="info-item">
-                    <div class="info-icon"><i data-lucide="clock"></i></div>
+                     <i data-lucide="clock"></i>
                     <div>
                         <label>Time</label>
                         <p>${event.dates.timing}</p>
                     </div>
                 </div>
                 <div class="info-item full-width">
-                    <div class="info-icon"><i data-lucide="map-pin"></i></div>
+                     <i data-lucide="map-pin"></i>
                     <div>
-                        <label>Location</label>
-                        <p class="font-medium">${event.location.venue}</p>
-                        <p class="text-sm text-muted">${event.location.cityName}</p>
+                        <label>Venue</label>
+                        <p style="font-weight: 500;">${event.location.venue}</p>
+                        <p class="sub-text">${event.location.cityName}</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Features -->
+            <!-- Social Verification -->
+            ${event.sourceLink ? `
+            <div class="social-verification-card">
+                <div class="svc-header">
+                    <i data-lucide="instagram" style="color: #E1306C;"></i>
+                    <span>Verified via Instagram</span>
+                </div>
+                <div class="svc-preview">
+                    <p>Source: Official Channel Post</p>
+                    <a href="${event.sourceLink}" target="_blank" class="btn-text">View Original Post <i data-lucide="external-link" style="width:14px;"></i></a>
+                </div>
+            </div>
+            ` : ''}
+
+            <div class="section">
+                <h3>About Event</h3>
+                <p class="description">${event.description}</p>
+            </div>
             <div class="features-scroll">
                 ${event.features.isLive ? '<span class="chip red"><i data-lucide="radio"></i> Live Now</span>' : ''}
                 ${event.features.hasLiveStream ? '<span class="chip"><i data-lucide="video"></i> Live Stream</span>' : ''}
@@ -76,7 +93,6 @@ export function EventDetail(event) {
                 ${event.features.hasAccommodation ? '<span class="chip"><i data-lucide="home"></i> Stay</span>' : ''}
             </div>
 
-            <!-- Description -->
             <section class="detail-section">
                 <h3>About Event</h3>
                 <p class="text-body">${event.description}</p>

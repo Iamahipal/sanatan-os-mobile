@@ -986,4 +986,4 @@ button {
 .modal-content.full-height {
     height: 100%;
     border-radius: 0;
-}
+}/* Social Verification & Hero Update */ .social-verification-card { background: #F8F9FA; border: 1px solid #E1E3E6; border-radius: 12px; margin: 16px; overflow: hidden; } .svc-header { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #FFF; border-bottom: 1px solid #E1E3E6; font-weight: 500; font-size: 14px; } .svc-preview { padding: 16px; color: var(--md-sys-color-on-surface-variant); font-size: 13px; } .hero-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; } .hero-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 64px; background: var(--md-sys-color-surface-variant); } .vachak-image-lg { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #FFF; box-shadow: var(--shadow-1); }
