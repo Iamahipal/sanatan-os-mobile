@@ -35,9 +35,17 @@ export function EventDetail(event) {
         }
             <div class="hero-overlay">
                 <div class="hero-content">
-                    <span class="chip ${event.type}">${event.typeName}</span>
+                    <div class="chip-row">
+                        <span class="chip ${event.type}">${event.typeName}</span>
+                        ${event.features.isLive ? '<span class="chip red"><i data-lucide="radio"></i> Live</span>' : ''}
+                    </div>
                     <h1>${event.title}</h1>
                     <p class="hero-subtitle">by ${vachak ? vachak.name : 'Unknown'}</p>
+                    
+                    <div class="hero-chips">
+                        ${event.features.hasPrasad ? '<span class="chip-glass"><i data-lucide="utensils"></i> Prasad</span>' : ''}
+                        ${event.features.hasAccommodation ? '<span class="chip-glass"><i data-lucide="home"></i> Stay</span>' : ''}
+                    </div>
                 </div>
             </div>
         </div>
@@ -83,12 +91,7 @@ export function EventDetail(event) {
             ` : ''}
 
 
-            <div class="features-scroll">
-                ${event.features.isLive ? '<span class="chip red"><i data-lucide="radio"></i> Live Now</span>' : ''}
-                ${event.features.hasLiveStream ? '<span class="chip"><i data-lucide="video"></i> Live Stream</span>' : ''}
-                ${event.features.hasPrasad ? '<span class="chip"><i data-lucide="utensils"></i> Prasad</span>' : ''}
-                ${event.features.hasAccommodation ? '<span class="chip"><i data-lucide="home"></i> Stay</span>' : ''}
-            </div>
+
 
             <section class="detail-section">
                 <h3>About Event</h3>

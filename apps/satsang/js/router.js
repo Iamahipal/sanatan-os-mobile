@@ -41,6 +41,15 @@ export class Router {
     }
 
     _updateNav(path) {
+        const nav = document.querySelector('.bottom-nav');
+
+        // Hide nav on detail screens
+        if (['event', 'vachak'].includes(path)) {
+            nav.classList.add('hidden');
+        } else {
+            nav.classList.remove('hidden');
+        }
+
         document.querySelectorAll('.nav-item').forEach(btn => {
             const tab = btn.dataset.tab;
             if (tab === path) {
