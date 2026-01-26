@@ -82,10 +82,7 @@ export function EventDetail(event) {
             </div>
             ` : ''}
 
-            <div class="section">
-                <h3>About Event</h3>
-                <p class="description">${event.description}</p>
-            </div>
+
             <div class="features-scroll">
                 ${event.features.isLive ? '<span class="chip red"><i data-lucide="radio"></i> Live Now</span>' : ''}
                 ${event.features.hasLiveStream ? '<span class="chip"><i data-lucide="video"></i> Live Stream</span>' : ''}
@@ -124,14 +121,13 @@ export function EventDetail(event) {
                         <h4>${event.organizer.name}</h4>
                         <p>${event.organizer.contact}</p>
                     </div>
-                    <button class="btn-outline sm">Contact</button>
                 </div>
             </section>
         </div>
 
         <!-- Sticky Action Bar -->
         <div class="action-bar">
-            <button class="btn-secondary flex-1">
+            <button class="btn-secondary flex-1" id="shareBtnAction">
                 <i data-lucide="share"></i> Share
             </button>
             <button class="btn-primary flex-2">
@@ -141,28 +137,33 @@ export function EventDetail(event) {
     `;
 
     // Logic
-    const saveBtn = container.querySelector('#detailSaveBtn');
-    saveBtn.onclick = () => {
-        store.toggleSaveEvent(event.id);
-        // Optimistic UI update
-        const newState = !isSaved; // Current local scope var might be stale, but toggle works
-        // Better: check store again or wait for signal. 
-        // For simple vanilla:
-        const updatedState = store.getState().savedEvents.includes(event.id);
-        saveBtn.classList.toggle('text-primary', updatedState);
-        saveBtn.innerHTML = `<i data-lucide="${updatedState ? 'heart' : 'heart'}"></i>`;
-        lucide.createIcons();
-    };
+    const saveBtn = container.querySelector('.save-btn'); // Fixed selector
+    if (saveBtn) {
+        saveBtn.onclick = () => {
+            store.toggleSaveEvent(event.id);
+            const updatedState = store.getState().savedEvents.includes(event.id);
+            saveBtn.classList.toggle('text-primary', updatedState);
+            saveBtn.innerHTML = `<i data-lucide="${updatedState ? 'heart' : 'heart'}"></i>`; // Lucide fills filled heart via class usually
+            lucide.createIcons();
+        };
+    }
 
-    // Share button
-    const shareBtn = container.querySelector('.header-actions .header-btn:first-child');
-    shareBtn.onclick = () => {
-        Utils.share(
-            event.title,
-            `Join me at ${event.title} in ${event.location.cityName}`,
-            window.location.href
-        );
-    };
+    // Share button (Header)
+    const shareBtns = container.querySelectorAll('.header-actions .header-btn:first-child, #shareBtnAction');
+    shareBtns.forEach(btn => {
+        btn.onclick = () => {
+            if (navigator.share) {
+                navigator.share({
+                    title: event.title,
+                    text: `Join me at ${event.title}`,
+                    url: window.location.href
+                });
+            } else {
+                alert('Share URL copied to clipboard!');
+                navigator.clipboard.writeText(window.location.href);
+            }
+        };
+    });
 
     return container;
 }
