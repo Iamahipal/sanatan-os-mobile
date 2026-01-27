@@ -1181,5 +1181,180 @@ button {
     font-size: 14px;
     opacity: 0.9;
     margin-top: 4px;
-}.chip-row { display: flex; gap: 8px; margin-bottom: 8px; } .hero-chips { display: flex; gap: 8px; margin-top: 12px; } .chip-glass { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 6px 12px; border-radius: 20px; font-size: 12px; display: flex; align-items: center; gap: 6px; } .chip-glass i { width: 14px; height: 14px; }
-.organizer-card { background: #FFF; border: 1px solid var(--md-sys-color-outline-variant); padding: 16px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; } .organizer-info h4 { margin: 0; font-size: 16px; color: var(--md-sys-color-primary); } .organizer-info p { margin: 4px 0 0; font-size: 13px; color: var(--md-sys-color-secondary); }
+}
+
+/* Chips in Hero */
+.chip-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.chip-glass {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.chip-glass i {
+    width: 14px;
+    height: 14px;
+}
+
+/* Organizer Card */
+.organizer-card {
+    background: var(--md-sys-color-surface-container-lowest);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    padding: 16px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    box-shadow: var(--shadow-sm);
+}
+
+.organizer-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+}
+
+.organizer-info p {
+    margin: 4px 0 0;
+    font-size: 0.85rem;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Event Hero Section */
+.event-hero {
+    height: auto;
+    aspect-ratio: 16/9;
+    background: var(--md-sys-color-surface-variant);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.event-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event-hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.event-hero-content {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 2;
+}
+
+.event-hero-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    background: var(--md-sys-color-primary);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-primary);
+    margin-bottom: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.event-hero h1 {
+    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.event-hero p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Event Details Section */
+.event-details {
+    padding: 24px 16px;
+    background: var(--md-sys-color-surface);
+}
+
+.detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--md-sys-color-surface-container);
+    border-radius: 12px;
+    color: var(--md-sys-color-primary);
+    flex-shrink: 0;
+}
+
+.detail-icon i {
+    width: 20px;
+    height: 20px;
+}
+
+.detail-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 40px;
+}
+
+.detail-content h4 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--md-sys-color-outline);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.detail-content p {
+    font-size: 0.95rem;
+    color: var(--md-sys-color-on-surface);
+    line-height: 1.5;
+    font-weight: 500;
+}

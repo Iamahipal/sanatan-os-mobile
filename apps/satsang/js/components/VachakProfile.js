@@ -28,29 +28,29 @@ export function VachakProfile(vachak) {
                 </div>
             </header>
 
-            <div class="vachak-hero">
-                <div class="vachak-avatar-lg">
+            <div class="profile-hero">
+                <div class="profile-avatar-lg">
                     ${vachak.image
                 ? `<img src="${vachak.image}" class="vachak-image-lg" alt="${vachak.name}">`
                 : vachak.emoji
             }
                 </div>
                 <h1>${vachak.name}</h1>
-                <p class="specialty">${vachak.specialty}</p>
-                <div class="vachak-stats">
-                    <div class="stat">
-                        <span class="num">${Utils.formatNumber(vachak.followers)}</span>
-                        <span class="lbl">Followers</span>
+                <p class="profile-specialty">${vachak.specialty}</p>
+                <div class="profile-stats-row">
+                    <div class="stat-box">
+                        <span class="stat-num">${Utils.formatNumber(vachak.followers)}</span>
+                        <span class="stat-lbl">Followers</span>
                     </div>
-                    <div class="stat">
-                        <span class="num">${vachak.eventsCount}</span>
-                        <span class="lbl">Events</span>
+                    <div class="stat-box">
+                        <span class="stat-num">${vachak.eventsCount}</span>
+                        <span class="stat-lbl">Events</span>
                     </div>
                 </div>
-                <div class="hero-actions">
-                    <button class="btn-primary" id="followBtn">Follow</button>
+                <div class="profile-actions">
+                    <button class="btn-primary full" id="followBtn">Follow</button>
                     ${vachak.socials && vachak.socials.youtube ? `
-                        <a href="${vachak.socials.youtube}" target="_blank" class="btn-icon circle">
+                        <a href="${vachak.socials.youtube}" target="_blank" class="btn-secondary icon-only">
                             <i data-lucide="youtube" style="color: #ff0000;"></i>
                         </a>` : ''}
                 </div>

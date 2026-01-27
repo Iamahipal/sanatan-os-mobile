@@ -14,15 +14,15 @@ export function Profile() {
     container.className = 'profile-padding';
 
     container.innerHTML = `
-        <div class="info-grid">
-             <div class="info-item full-width" style="border: none; box-shadow: var(--shadow-1);">
-                <div class="profile-avatar-sm">👤</div>
+        <div class="organizer-card" style="margin-bottom: 24px; background: var(--md-sys-color-surface-container-low); border: none;">
+            <div class="organizer-info" style="display:flex; align-items:center; gap:16px;">
+                <div class="profile-avatar-sm" style="background:var(--md-sys-color-surface-variant); color:var(--md-sys-color-on-surface-variant);">👤</div>
                 <div>
-                     <h3>Guest Devotee</h3>
-                     <p>Sign in to sync your journey</p>
+                     <h3 style="margin:0; font-size:1.1rem; color:var(--md-sys-color-on-surface); font-weight:600;">Guest Devotee</h3>
+                     <p style="margin:4px 0 0; font-size:0.9rem; color:var(--md-sys-color-on-surface-variant);">Sign in to sync your journey</p>
                 </div>
-                <button class="btn-secondary sm" style="margin-left: auto;">Login</button>
-             </div>
+            </div>
+            <button class="btn-secondary sm" style="height:36px; padding:0 16px;">Login</button>
         </div>
 
         <div class="profile-stats-row" style="background: #FFF; padding: 16px; border-radius: 16px; margin-bottom: 24px; justify-content: space-around;">
