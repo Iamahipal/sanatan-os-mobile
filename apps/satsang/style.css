@@ -586,19 +586,48 @@ button {
 }
 
 /* Action Bar */
+/* Bottom Action Bar (Krishna Vaani Style) */
 .action-bar {
     position: fixed;
-    bottom: 0;
+    bottom: 24px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;
-    max-width: 480px;
-    padding: 16px;
+    width: calc(100% - 32px);
+    max-width: 448px;
+    padding: 8px;
     background: #FFF;
-    border-top: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: 100px;
     display: flex;
-    gap: 12px;
+    gap: 8px;
     z-index: 100;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.action-bar .btn-primary,
+.action-bar .btn-secondary {
+    border-radius: 100px;
+    height: 52px;
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: none;
+}
+
+.action-bar .btn-primary {
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    flex: 2;
+}
+
+.action-bar .btn-secondary {
+    background: var(--md-sys-color-surface-variant);
+    color: var(--md-sys-color-on-surface-variant);
+    flex: 1;
+    border: none;
 }
 
 .header-actions {
@@ -1244,28 +1273,34 @@ button {
 
 /* Organizer Card */
 .organizer-card {
-    background: var(--md-sys-color-surface-container-lowest);
-    border: 1px solid var(--md-sys-color-outline-variant);
-    padding: 16px;
-    border-radius: 16px;
+    background: #FFF;
+    border: 1px solid var(--md-sys-color-surface-container-high);
+    padding: 20px;
+    border-radius: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 24px;
-    box-shadow: var(--shadow-sm);
+    margin-top: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    gap: 16px;
+}
+
+.organizer-info {
+    flex: 1;
 }
 
 .organizer-info h4 {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--md-sys-color-on-surface);
 }
 
 .organizer-info p {
     margin: 4px 0 0;
-    font-size: 0.85rem;
-    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.9rem;
+    color: var(--md-sys-color-primary);
+    font-weight: 500;
 }
 
 /* Event Hero Section */

@@ -43,7 +43,6 @@ export function EventDetail(event) {
                 
                 <div class="hero-chips">
                     ${event.features.isLive ? '<span class="chip-glass"><i data-lucide="radio"></i> Live</span>' : ''}
-                    ${event.features.hasPrasad ? '<span class="chip-glass"><i data-lucide="utensils"></i> Prasad</span>' : ''}
                 </div>
             </div>
         </div>
@@ -125,7 +124,9 @@ export function EventDetail(event) {
                     <h4>${event.organizer.name}</h4>
                     <p>${event.organizer.contact}</p>
                 </div>
-                <button class="btn-icon" style="color:var(--md-sys-color-primary);"><i data-lucide="phone"></i></button>
+                <button class="btn-tonal sm" style="height: 40px; padding: 0 20px; border-radius: 20px;">
+                    <i data-lucide="phone" style="width: 18px; height: 18px; margin-right: 8px;"></i> Call
+                </button>
             </div>
         </div>
 
