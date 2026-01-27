@@ -44,7 +44,6 @@ export function EventDetail(event) {
                 <div class="hero-chips">
                     ${event.features.isLive ? '<span class="chip-glass"><i data-lucide="radio"></i> Live</span>' : ''}
                     ${event.features.hasPrasad ? '<span class="chip-glass"><i data-lucide="utensils"></i> Prasad</span>' : ''}
-                    ${event.features.hasAccommodation ? '<span class="chip-glass"><i data-lucide="home"></i> Stay</span>' : ''}
                 </div>
             </div>
         </div>
