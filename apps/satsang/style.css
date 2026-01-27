@@ -822,9 +822,27 @@ button {
 }
 
 .search-result-item {
-    padding: 12px;
+    padding: 12px 16px;
     border-bottom: 1px solid var(--md-sys-color-outline-variant);
     cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-result-item:hover {
+    background: var(--md-sys-color-surface-container);
+}
+
+.search-result-item h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+}
+
+.search-result-item p {
+    margin: 4px 0 0;
+    font-size: 0.85rem;
+    color: var(--md-sys-color-on-surface-variant);
 }
 
 .chip-row {
@@ -1365,4 +1383,104 @@ button {
     color: var(--md-sys-color-on-surface);
     line-height: 1.5;
     font-weight: 500;
+}
+
+/* Modal Lists (Location, Filter) */
+.location-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid var(--md-sys-color-surface-container);
+}
+
+.list-item:active {
+    background: var(--md-sys-color-surface-container);
+}
+
+.list-item.selected {
+    background: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+}
+
+.list-item i {
+    width: 20px;
+    height: 20px;
+    color: var(--md-sys-color-outline);
+}
+
+.list-item.selected i {
+    color: var(--md-sys-color-on-secondary-container);
+}
+
+.list-item-content {
+    flex: 1;
+}
+
+.list-item-content h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.list-item-content p {
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.list-item.selected .list-item-content p {
+    color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    width: 48px;
+    height: 28px;
+    background: var(--md-sys-color-surface-variant);
+    border-radius: 14px;
+    position: relative;
+    border: 2px solid var(--md-sys-color-outline);
+    transition: all 0.2s;
+}
+
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    background: var(--md-sys-color-outline);
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.toggle-switch.active {
+    background: var(--md-sys-color-primary);
+    border-color: var(--md-sys-color-primary);
+}
+
+.toggle-switch.active::after {
+    background: white;
+    transform: translateX(20px);
+}
+
+/* Amount Grid */
+.amount-grid .chip {
+    justify-content: center;
+    height: 40px;
+}
+
+.amount-grid .chip.active {
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border: none;
 }

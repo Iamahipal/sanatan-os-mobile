@@ -92,8 +92,8 @@ export function SearchModal(onClose) {
             const el = document.createElement('div');
             el.className = 'search-result-item';
             el.innerHTML = `
-                <div style="font-weight: 600;">${event.title}</div>
-                <div style="font-size: 12px; color: var(--md-sys-color-secondary);">${event.vachak ? event.vachak.name : ''} • ${event.location.cityName}</div>
+                <h4>${event.title}</h4>
+                <p>${event.vachak ? event.vachak.name : ''} • ${event.location.cityName}</p>
             `;
             el.addEventListener('click', () => {
                 window.location.hash = `event/${event.id}`;

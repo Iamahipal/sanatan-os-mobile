@@ -10,6 +10,8 @@ import { EventCard } from './components/EventCard.js';
 import { EventDetail } from './components/EventDetail.js';
 import { VachakProfile } from './components/VachakProfile.js';
 import { SearchModal } from './components/SearchModal.js';
+import { LocationModal } from './components/LocationModal.js';
+import { FilterModal } from './components/FilterModal.js';
 import { Calendar } from './components/Calendar.js';
 import { Profile } from './components/Profile.js';
 
@@ -196,10 +198,33 @@ function setupGlobalListeners() {
     });
 
     // Wire Search Button Global
-    const searchBtn = document.querySelector('#homeScreen .header-btn:last-child');
+    const searchBtn = document.querySelector('#homeScreen .header-btn:last-child') || document.getElementById('searchBtn');
     if (searchBtn) {
         searchBtn.addEventListener('click', () => {
             document.body.appendChild(SearchModal());
+            lucide.createIcons();
+        });
+    }
+
+    // Wire Location Button
+    const locationBtn = document.getElementById('locationBtn');
+    if (locationBtn) {
+        locationBtn.addEventListener('click', () => {
+            document.body.appendChild(LocationModal(() => {
+                // Update Location Text on Close if needed
+                const city = store.getState().filters.city || 'Mathura';
+                const locText = document.getElementById('currentLocationText');
+                if (locText) locText.textContent = city;
+            }));
+            lucide.createIcons();
+        });
+    }
+
+    // Wire Filter Button
+    const filterBtn = document.getElementById('filterBtn');
+    if (filterBtn) {
+        filterBtn.addEventListener('click', () => {
+            document.body.appendChild(FilterModal());
             lucide.createIcons();
         });
     }

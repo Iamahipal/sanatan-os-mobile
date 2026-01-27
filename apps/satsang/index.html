@@ -29,14 +29,14 @@
         <!-- HOME -->
         <div class="screen home-screen" id="homeScreen">
             <header class="app-header">
-                <button class="header-btn">
-                    <i data-lucide="menu"></i>
+                <button class="header-btn" id="locationBtn">
+                    <i data-lucide="map-pin"></i>
                 </button>
                 <div class="header-center">
                     <h1 class="header-title">Satsang</h1>
-                    <span class="header-subtitle">Spiritual Connection</span>
+                    <span class="header-subtitle" id="currentLocationText">Mathura</span>
                 </div>
-                <button class="header-btn">
+                <button class="header-btn" id="searchBtn">
                     <i data-lucide="search"></i>
                 </button>
             </header>
@@ -54,8 +54,11 @@
                     </div>
                 </div>
 
-                <div class="section-padding">
-                    <h3 class="section-heading">Upcoming Events</h3>
+                <div class="section-padding" style="display:flex; justify-content:space-between; align-items:center;">
+                    <h3 class="section-heading" style="margin-bottom:0;">Upcoming Events</h3>
+                    <button class="btn-icon-sm" id="filterBtn">
+                        <i data-lucide="sliders-horizontal"></i>
+                    </button>
                 </div>
 
                 <div id="eventsList">

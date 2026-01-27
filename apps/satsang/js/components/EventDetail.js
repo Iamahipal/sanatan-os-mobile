@@ -135,8 +135,8 @@ export function EventDetail(event) {
             <button class="btn-secondary flex-1" id="shareBtnAction">
                 <i data-lucide="share"></i> Share
             </button>
-            <button class="btn-primary flex-2">
-                <i data-lucide="calendar-plus"></i> Add to Calendar
+            <button class="btn-primary flex-2" id="registerBtn">
+                <i data-lucide="calendar-plus"></i> Register
             </button>
         </div>
     `;
@@ -151,6 +151,19 @@ export function EventDetail(event) {
             saveBtn.innerHTML = `<i data-lucide="${updatedState ? 'heart' : 'heart'}"></i>`; // Lucide fills filled heart via class usually
             lucide.createIcons();
         };
+    }
+
+    // Register Button
+    const registerBtn = container.querySelector('#registerBtn');
+    if (registerBtn) {
+        registerBtn.addEventListener('click', () => {
+            import('./RegistrationModal.js').then(module => {
+                document.body.appendChild(module.RegistrationModal(event.title, () => {
+                    // Optional: Reload or update UI
+                    lucide.createIcons();
+                }));
+            });
+        });
     }
 
     // Share button (Header)

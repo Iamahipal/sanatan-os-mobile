@@ -48,7 +48,8 @@ export function VachakProfile(vachak) {
                     </div>
                 </div>
                 <div class="profile-actions">
-                    <button class="btn-primary full" id="followBtn">Follow</button>
+                    <button class="btn-primary flex-1" id="followBtn">Follow</button>
+                    <button class="btn-secondary flex-1" id="donateBtn">Donate</button>
                     ${vachak.socials && vachak.socials.youtube ? `
                         <a href="${vachak.socials.youtube}" target="_blank" class="btn-secondary icon-only">
                             <i data-lucide="youtube" style="color: #ff0000;"></i>
@@ -74,6 +75,16 @@ export function VachakProfile(vachak) {
                 lucide.createIcons();
             };
         });
+
+        // Donate Button
+        const donateBtn = container.querySelector('#donateBtn');
+        if (donateBtn) {
+            donateBtn.addEventListener('click', () => {
+                import('./DonationModal.js').then(module => {
+                    document.body.appendChild(module.DonationModal(vachak.name));
+                });
+            });
+        }
 
         // Event Card clicks
         container.querySelectorAll('.event-card').forEach(card => {
