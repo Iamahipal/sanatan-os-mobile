@@ -4,7 +4,7 @@
 
 import { store } from './store.js';
 import { Router } from './router.js';
-import { events, vachaks, cities } from './data/mock_data.js';
+import { dbService } from './services/db.js';
 import { EventService } from './services/events.js';
 import { EventCard } from './components/EventCard.js';
 import { EventDetail } from './components/EventDetail.js';
@@ -16,20 +16,27 @@ import { Calendar } from './components/Calendar.js';
 import { Profile } from './components/Profile.js';
 
 // Initialize
-// Initialize
-const initApp = () => {
+const initApp = async () => {
     console.log('Satsang App Initializing...');
 
-    // 1. Hydrate Store
+    // 0. Init Database Service (Check for Live Data)
+    await dbService.init();
+
+    // 1. Fetch Data
+    const cities = dbService.getCities();
+    const vachaks = await dbService.getVachaks();
+    const headers = await dbService.getEvents();
+
+    // 2. Hydrate Store
     // Associate vachak objects to events for easier rendering
-    const enrichedEvents = events.map(e => ({
+    const enrichedEvents = headers.map(e => ({
         ...e,
         vachak: vachaks.find(v => v.id === e.vachakId)
     }));
 
     store.init(enrichedEvents, vachaks, cities);
 
-    // 2. Setup Router
+    // 3. Setup Router
     const router = new Router({
         'home': renderHome,
         'calendar': renderCalendar,
@@ -39,7 +46,7 @@ const initApp = () => {
         'vachak': renderVachakProfile
     });
 
-    // 3. Global Listeners
+    // 4. Global Listeners
     setupGlobalListeners();
 
     // Initial Render handled by Router
