@@ -207,16 +207,20 @@ button {
 
 /* ===== COMPONENTS: EVENT CARD ===== */
 .event-card {
-    background: #FFF;
-    border-radius: var(--shape-m);
-    padding: 16px;
-    margin: 12px 16px;
     display: flex;
+    /* Flex layout for side-by-side date/info */
     gap: 16px;
-    box-shadow: var(--shadow-1);
+    padding: 16px;
+    background: #FFF;
+    border-radius: 24px;
+    /* M3 Corner Radius */
     position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
     border: 1px solid var(--md-sys-color-surface-variant);
+    margin: 12px 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    align-items: flex-start;
+    /* Top align date and content */
+    box-shadow: var(--shadow-1);
 }
 
 .event-card:active {
@@ -228,17 +232,21 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 50px;
+    width: 60px;
+    /* Fixed width */
+    height: 60px;
+    /* Fixed height */
     background: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-primary-container);
-    border-radius: var(--shape-s);
-    height: 60px;
+    border-radius: 16px;
+    /* Squircle */
+    flex-shrink: 0;
+    line-height: 1;
 }
 
 .event-date-box .day {
     font-size: 20px;
     font-weight: 700;
-    line-height: 1;
 }
 
 .event-date-box .month {
@@ -250,6 +258,9 @@ button {
 
 .event-info {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .event-type {
@@ -261,19 +272,22 @@ button {
     border-radius: 4px;
     color: var(--md-sys-color-on-surface-variant);
     font-weight: 600;
+    align-self: flex-start;
 }
 
 .event-info h4 {
+    margin: 0;
     font-size: 16px;
-    margin: 4px 0 2px;
+    font-weight: 700;
     color: var(--md-sys-color-on-surface);
+    line-height: 1.3;
 }
 
 .event-info .vachak-name {
     font-size: 13px;
     color: var(--md-sys-color-secondary);
-    margin-bottom: 6px;
     font-weight: 500;
+    margin: 0;
 }
 
 .event-location {
@@ -282,6 +296,7 @@ button {
     gap: 4px;
     font-size: 12px;
     color: var(--md-sys-color-outline);
+    margin-top: 2px;
 }
 
 .event-location i {
@@ -290,18 +305,23 @@ button {
 }
 
 .save-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
     background: transparent;
+    border: none;
+    color: var(--md-sys-color-outline);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--md-sys-color-outline);
+    padding: 0;
 }
 
 .save-btn.saved {
     color: var(--md-sys-color-primary);
+    fill: currentColor;
 }
 
 /* ===== HERO & DETAIL ===== */
@@ -1474,9 +1494,81 @@ button {
     background: var(--md-sys-color-surface-container);
 }
 
-.list-item.selected {
-    background: var(--md-sys-color-secondary-container);
-    color: var(--md-sys-color-on-secondary-container);
+/* Section Layouts */
+.section-padding {
+    padding: 32px 16px 0 16px;
+    /* Increased top breathing room */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.section-heading {
+    font-size: 1.125rem;
+    /* 18px */
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.3;
+}
+
+/* Home Padding Specifics */
+.home-padding {
+    padding: 16px;
+    padding-bottom: 8px;
+}
+
+/* ... existing code ... */
+
+.header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+    /* Tighter lockup */
+}
+
+.header-title {
+    font-size: 22px;
+    color: var(--md-sys-color-primary);
+    margin-bottom: 2px;
+    /* Slight gap */
+}
+
+.header-subtitle {
+    font-size: 11px;
+    color: var(--md-sys-color-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    /* More tracking */
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+}
+
+/* ... existing code ... */
+
+.vachak-rail-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.25;
+    max-width: 80px;
+    min-height: 30px;
+    /* Force 2-line height for alignment */
+    display: flex;
+    /* Flex to center single lines vertically if needed, but webkit-box conflict. Use block with height */
+    display: block;
+    height: 30px;
+    /* Fixed height for 2 lines */
 }
 
 .list-item i {
