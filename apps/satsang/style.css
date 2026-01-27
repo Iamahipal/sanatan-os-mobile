@@ -139,7 +139,17 @@ button {
     border: none;
     pointer-events: none;
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 72px;
+    /* Fixed height for alignment math */
+    z-index: 20;
 }
 
 .app-header.transparent .header-btn {
@@ -640,18 +650,25 @@ button {
 .btn-secondary {
     height: 48px;
     border-radius: 24px;
-    font-weight: 600;
-    font-size: 14px;
-    display: flex;
+    font-weight: 500;
+    font-size: 1rem;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    transition: transform 0.1s;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+}
+
+.btn-secondary.sm {
+    height: 32px;
+    padding: 0 16px;
+    font-size: 0.85rem;
 }
 
 .btn-primary {
     background: var(--md-sys-color-primary);
-    color: white;
     box-shadow: var(--shadow-2);
 }
 
@@ -1275,7 +1292,7 @@ button {
 .organizer-card {
     background: #FFF;
     border: 1px solid var(--md-sys-color-surface-container-high);
-    padding: 20px;
+    padding: 16px 20px;
     border-radius: 24px;
     display: flex;
     justify-content: space-between;

@@ -124,7 +124,7 @@ export function EventDetail(event) {
                     <h4>${event.organizer.name}</h4>
                     <p>${event.organizer.contact}</p>
                 </div>
-                <button class="btn-tonal sm" style="height: 40px; padding: 0 20px; border-radius: 20px;">
+                <button class="btn-secondary sm" style="height: 40px; padding: 0 20px; border-radius: 100px;">
                     <i data-lucide="phone" style="width: 18px; height: 18px; margin-right: 8px;"></i> Call
                 </button>
             </div>
