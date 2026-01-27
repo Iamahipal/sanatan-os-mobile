@@ -587,14 +587,24 @@ button {
 
 /* Action Bar */
 .action-bar {
-    position: sticky;
+    position: fixed;
     bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
     padding: 16px;
     background: #FFF;
     border-top: 1px solid var(--md-sys-color-outline-variant);
     display: flex;
     gap: 12px;
-    z-index: 40;
+    z-index: 100;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .btn-primary,

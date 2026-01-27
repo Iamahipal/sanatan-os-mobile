@@ -131,7 +131,7 @@ export function EventDetail(event) {
         </div>
 
         <!-- Sticky Action Bar -->
-        <div class="action-bar" style="position:fixed; bottom:0; left:0; right:0; padding:16px; background:var(--md-sys-color-surface); border-top:1px solid var(--md-sys-color-outline-variant); display:flex; gap:12px; z-index:100;">
+        <div class="action-bar">
             <button class="btn-secondary flex-1" id="shareBtnAction">
                 <i data-lucide="share"></i> Share
             </button>
