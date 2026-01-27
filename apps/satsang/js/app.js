@@ -65,8 +65,67 @@ function renderHome() {
         container.appendChild(EventCard(event));
     });
 
+    // 4. Render Categories (Satsang Marg)
+    renderCategories();
+
+    // 5. Render Vachaks (Sant Samagam)
+    renderVachaks();
+
     // Update Lucide icons
     lucide.createIcons();
+}
+
+function renderCategories() {
+    const rail = document.getElementById('categoryRail');
+    if (!rail) return;
+
+    rail.innerHTML = '';
+    const categories = [
+        { id: 'all', label: 'All', icon: 'infinity' },
+        { id: 'bhagwat', label: 'Bhagwat', icon: 'book-open' },
+        { id: 'ramkatha', label: 'Ram Katha', icon: 'feather' },
+        { id: 'kirtan', label: 'Kirtan', icon: 'music' },
+        { id: 'darbar', label: 'Darbar', icon: 'crown' },
+        { id: 'varta', label: 'Varta', icon: 'message-circle' }
+    ];
+
+    const currentFilter = store.getState().filters.type || 'all';
+
+    categories.forEach(cat => {
+        const item = document.createElement('div');
+        item.className = `category-item ${currentFilter === cat.id ? 'active' : ''}`;
+        item.innerHTML = `
+            <div class="category-icon">
+                <i data-lucide="${cat.icon}"></i>
+            </div>
+            <span class="category-label">${cat.label}</span>
+        `;
+        item.onclick = () => {
+            store.setFilter({ type: cat.id === 'all' ? null : cat.id });
+            renderHome(); // Re-renders events AND categories (via renderHome)
+        };
+        rail.appendChild(item);
+    });
+}
+
+function renderVachaks() {
+    const rail = document.getElementById('vachakRail');
+    if (!rail) return;
+
+    rail.innerHTML = '';
+    // Use vachaks from data
+    vachaks.forEach(v => {
+        const item = document.createElement('div');
+        item.className = 'vachak-rail-item';
+        item.innerHTML = `
+            <img src="${v.image}" class="vachak-rail-avatar" alt="${v.name}" onerror="this.src='https://ui-avatars.com/api/?name=${v.name}&background=random'">
+            <span class="vachak-rail-name">${v.shortName}</span>
+        `;
+        item.onclick = () => {
+            window.location.hash = `vachak/${v.id}`;
+        };
+        rail.appendChild(item);
+    });
 }
 
 function renderEventDetail(id) {

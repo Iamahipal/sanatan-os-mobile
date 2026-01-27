@@ -1533,8 +1533,98 @@ button {
     height: 40px;
 }
 
-.amount-grid .chip.active {
+/* Horizontal Rails (Satsang Marg & Sant Samagam) */
+.horizontal-rail {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding-bottom: 8px;
+    /* Hide scrollbar visual */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE */
+    margin: 0 -16px;
+    /* Bleed to edge */
+    padding: 0 16px;
+    /* Reset padding */
+}
+
+.horizontal-rail::-webkit-scrollbar {
+    display: none;
+}
+
+/* Category Pill (Satsang Marg) */
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 64px;
+    cursor: pointer;
+}
+
+.category-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--md-sys-color-surface-container);
+    border-radius: 50%;
+    /* Circle like stories */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    border: 2px solid transparent;
+    /* default border */
+    transition: all 0.2s;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.category-item.active .category-icon {
+    border-color: var(--md-sys-color-primary);
     background: var(--md-sys-color-primary-container);
-    color: var(--md-sys-color-on-primary-container);
-    border: none;
+}
+
+.category-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Vachak Avatar (Sant Samagam) */
+.vachak-rail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 72px;
+    cursor: pointer;
+}
+
+.vachak-rail-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--md-sys-color-primary);
+    padding: 2px;
+    /* Gap for ring effect */
+    background: white;
+    /* fallback */
+}
+
+.vachak-rail-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.2;
+    max-width: 80px;
 }
