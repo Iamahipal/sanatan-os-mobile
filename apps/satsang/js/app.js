@@ -78,8 +78,13 @@ function renderHome() {
     // 5. Render Vachaks (Sant Samagam)
     renderVachaks();
 
-    // Update Lucide icons
-    lucide.createIcons();
+    // 5. Render Vachaks (Sant Samagam)
+    renderVachaks();
+
+    // Update Lucide icons (Use setTimeout to ensure DOM is ready)
+    if (window.lucide) {
+        setTimeout(() => window.lucide.createIcons(), 0);
+    }
 }
 
 function renderCategories() {
