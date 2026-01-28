@@ -1,0 +1,41 @@
+/* CSS Variables & Design Tokens */
+:root {
+    /* Divine Light Palette */
+    --color-surface: #FFFAF5;
+    /* Warm Cream Background */
+    --color-surface-container: #FFFFFF;
+    /* Pure White Cards */
+    --color-primary: #D9480F;
+    /* Deep Saffron */
+    --color-primary-container: #FFF4E6;
+    /* Light Saffron Bg */
+    --color-on-primary: #FFFFFF;
+
+    --color-text-primary: #1F1F1F;
+    /* Charcoal */
+    --color-text-secondary: #5F5F5F;
+    /* Grey */
+    --color-outline: #EFDECE;
+    /* Soft Border */
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+
+    /* Radius */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(217, 72, 15, 0.08);
+    /* Saffron-tinted shadow */
+
+    /* Typography */
+    --font-heading: 'Tiro Devanagari Sanskrit', serif;
+    --font-body: 'Outfit', sans-serif;
+}

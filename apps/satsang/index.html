@@ -5,159 +5,119 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#FFFFFF"> <!-- Matches --md-sys-color-surface -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="default"> <!-- Matches surface color -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Satsang - Spiritual Events</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Theme & SEO -->
+    <title>Satsang - Sanatan OS</title>
+    <meta name="theme-color" content="#FFFAF5"> <!-- Divine Light Surface -->
+    <meta name="description" content="Find spiritual events, kathas, and satsangs near you.">
+
+    <!-- Critical CSS (Render Blocking is OK here as it's small and local) -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Preload Assets (Synchronous) -->
+    <!-- Fonts would go here, but using System stack/Online for now until Font file is moved -->
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit&display=swap"
         rel="stylesheet">
 
-    <!-- Icons -->
-    <!-- Icons -->
-    <script src="js/lib/lucide.min.js"></script>
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Icons (Local & Sync) -->
+    <script src="assets/icons/lucide.min.js"></script>
 </head>
 
 <body>
-    <div class="app-container">
 
-        <!-- Screens controlled by Router -->
+    <!-- App Shell: Always Visible -->
+    <div class="app-shell">
 
-        <!-- HOME -->
-        <div class="screen home-screen" id="homeScreen">
-            <header class="app-header">
-                <button class="header-btn" id="locationBtn">
-                    <i data-lucide="map-pin"></i>
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="btn-icon" aria-label="Menu">
+                    <i data-lucide="menu"></i>
                 </button>
-                <div class="header-center">
-                    <h1 class="header-title">Satsang</h1>
-                    <span class="header-subtitle" id="currentLocationText">Mathura</span>
+            </div>
+
+            <div class="header-center">
+                <h1 class="logo-text">Satsang</h1>
+                <div class="location-chip">
+                    <span id="headerLocation">Mathura</span>
+                    <i data-lucide="chevron-down" style="width:12px"></i>
                 </div>
-                <button class="header-btn" id="searchBtn">
+            </div>
+
+            <div class="header-right">
+                <button class="btn-icon" aria-label="Search">
                     <i data-lucide="search"></i>
                 </button>
-            </header>
-
-            <div class="main-content" style="padding-bottom: 20px;">
-                <!-- Featured (Hardcoded for demo) -->
-                <div class="home-padding">
-                    <div class="event-hero home-hero">
-                        <div class="event-hero-gradient home-hero-gradient"></div>
-                        <div class="event-hero-content">
-                            <span class="event-hero-type">Live Now</span>
-                            <h2>Shrimad Bhagwat Katha</h2>
-                            <p>Vrindavan • Pt. Indresh Upadhyay</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Satsang Marg (Categories) -->
-                <div class="section-padding">
-                    <h3 class="section-heading">Satsang Marg</h3>
-                    <div id="categoryRail" class="horizontal-rail">
-                        <!-- Categories Injected Here -->
-                    </div>
-                </div>
-
-                <!-- Sant Samagam (Vachaks) -->
-                <div class="section-padding">
-                    <h3 class="section-heading">Sant Samagam</h3>
-                    <div id="vachakRail" class="horizontal-rail">
-                        <!-- Vachaks Injected Here -->
-                    </div>
-                </div>
-
-                <div class="section-padding" style="display:flex; justify-content:space-between; align-items:center;">
-                    <h3 class="section-heading" style="margin-bottom:0;">Upcoming Events</h3>
-                    <button class="btn-icon-sm" id="filterBtn">
-                        <i data-lucide="sliders-horizontal"></i>
-                    </button>
-                </div>
-
-                <div id="eventsList">
-                    <!-- Event Cards Injected Here -->
-                </div>
             </div>
-        </div>
+        </header>
 
-        <!-- EVENT DETAIL -->
-        <div class="screen event-screen" id="eventScreen">
-            <main id="eventMain"></main>
-        </div>
+        <!-- Main Content (Scrollable) -->
+        <main class="app-content" id="mainContainer">
 
-        <!-- VACHAK PROFILE -->
-        <div class="screen vachak-screen" id="vachakScreen">
-            <main id="vachakMain"></main>
-        </div>
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <!-- Static Placeholder until JS Hydrates -->
+                <div class="hero-card skeleton"></div>
+            </section>
 
-        <!-- SAVED -->
-        <div class="screen saved-screen" id="savedScreen">
-            <header class="app-header">
-                <div class="header-title">Saved Events</div>
-            </header>
-            <div id="savedList" style="padding-top: 16px;"></div>
-            <div id="noSavedEvents" style="text-align: center; padding: 40px; color: #999;">
-                <i data-lucide="heart" style="width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.3;"></i>
-                <p>No saved events yet</p>
-            </div>
-        </div>
-
-        <!-- CALENDAR -->
-        <div class="screen calendar-screen" id="calendarScreen">
-            <header class="app-header">
-                <div class="header-title">Calendar</div>
-            </header>
-            <div style="padding: 40px; text-align: center; color: #999;">
-                Calendar View Coming Soon
-            </div>
-        </div>
-
-        <!-- PROFILE -->
-        <div class="screen profile-screen" id="profileScreen">
-            <header class="app-header">
-                <div class="header-title">My Profile</div>
-            </header>
-            <div style="padding: 16px;">
-                <div class="info-item">
-                    <div class="info-icon">👤</div>
-                    <div>
-                        <label>Devotee</label>
-                        <p>Not Logged In</p>
-                    </div>
+            <!-- Horizontal Rail: Categories -->
+            <section class="rail-section">
+                <div class="section-header">
+                    <h3>Satsang Marg</h3>
                 </div>
-            </div>
-        </div>
+                <!-- Categories will be injected here -->
+                <div class="rail-scroll" id="categoryRail">
+                    <!-- Static Shell items for instant feedback -->
+                    <div class="rail-item skeleton-pill"></div>
+                    <div class="rail-item skeleton-pill"></div>
+                    <div class="rail-item skeleton-pill"></div>
+                    <div class="rail-item skeleton-pill"></div>
+                </div>
+            </section>
 
-        <!-- BOTTOM NAV -->
+            <!-- Event List -->
+            <section class="list-section">
+                <div class="section-header">
+                    <h3>Upcoming Events</h3>
+                    <button class="btn-text">Filter</button>
+                </div>
+                <div class="event-list" id="eventList">
+                    <!-- Loading State -->
+                    <div class="event-card-skeleton"></div>
+                    <div class="event-card-skeleton"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
         <nav class="bottom-nav">
-            <button class="nav-item active" data-tab="home">
+            <a href="#home" class="nav-item active">
                 <i data-lucide="home"></i>
                 <span>Home</span>
-            </button>
-            <button class="nav-item" data-tab="calendar">
+            </a>
+            <a href="#calendar" class="nav-item">
                 <i data-lucide="calendar"></i>
                 <span>Calendar</span>
-            </button>
-            <button class="nav-item" data-tab="saved">
+            </a>
+            <a href="#saved" class="nav-item">
                 <i data-lucide="heart"></i>
                 <span>Saved</span>
-            </button>
-            <button class="nav-item" data-tab="profile">
+            </a>
+            <a href="#profile" class="nav-item">
                 <i data-lucide="user"></i>
                 <span>Profile</span>
-            </button>
+            </a>
         </nav>
 
     </div>
 
-    <!-- Main Module -->
-    <script type="module" src="js/app.js"></script>
+    <!-- Application Engine -->
+    <script type="module" src="js/ui/app.js"></script>
+
 </body>
 
 </html>
