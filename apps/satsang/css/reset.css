@@ -1,44 +1,125 @@
-/* Modern CSS Reset */
+/**
+ * Satsang App v2 - CSS Reset
+ * Modern reset with app-specific defaults
+ */
+
+/* Box Sizing */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
 }
 
+/* Remove default margins */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Prevent font size inflation */
+html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+/* Core body defaults */
 html,
 body {
     height: 100%;
     width: 100%;
-    font-family: var(--font-body);
-    font-size: 16px;
-    background-color: var(--color-surface);
-    color: var(--color-text-primary);
-    overflow: hidden;
-    /* App Shell logic */
 }
 
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.5;
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    /* App shell handles scroll */
+}
+
+/* Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* Remove built-in form typography styles */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+/* Buttons reset */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Links reset */
 a {
     text-decoration: none;
     color: inherit;
 }
 
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
+/* Lists reset */
+ul,
+ol {
+    list-style: none;
 }
 
-img {
-    max-width: 100%;
-    display: block;
+/* Headings reset */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: inherit;
+    font-size: inherit;
 }
 
-/* Scrollbar Hide */
+/* Hide scrollbar but allow scroll */
 ::-webkit-scrollbar {
-    width: 0px;
+    width: 0;
+    height: 0;
     background: transparent;
+}
+
+/* Selection color */
+::selection {
+    background-color: var(--color-primary-container);
+    color: var(--color-on-primary-container);
+}
+
+/* Focus visible (accessibility) */
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
