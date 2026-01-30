@@ -141,13 +141,13 @@ export function renderEvent(eventId) {
             
             <!-- Action Bar -->
             <div class="action-bar">
-                <button class="btn btn--outline ${isSaved ? 'active' : ''}" data-save-event="${eventId}" style="${isSaved ? 'background: var(--color-primary-container);' : ''}">
+                <button class="btn btn--outline ${isSaved ? 'active' : ''}" data-save-event="${eventId}">
                     <i data-lucide="${isSaved ? 'heart' : 'heart'}"></i>
                     ${isSaved ? 'Saved' : 'Save'}
                 </button>
-                <button class="btn btn--primary">
-                    <i data-lucide="ticket"></i>
-                    Register
+                <button class="btn btn--primary ${isLive ? 'btn--live' : ''}">
+                    <i data-lucide="${isLive ? 'video' : 'ticket'}"></i>
+                    ${isLive ? 'Watch Live 🔴' : 'Register Now'}
                 </button>
             </div>
         </div>

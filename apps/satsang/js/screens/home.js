@@ -56,6 +56,9 @@ function renderHero() {
                     <i data-lucide="map-pin"></i>
                     <span>${event.location.cityName}</span>
                 </div>
+                <button class="hero-card__cta btn ${isLive ? 'btn--live-hero' : 'btn--hero'}">
+                    ${isLive ? '🔴 Watch Live' : 'View Event →'}
+                </button>
             </div>
         </div>
     `;
@@ -130,7 +133,7 @@ function renderEventCard(event) {
         : `<span style="font-size: 1.5rem;">${vachak?.emoji || '🙏'}</span>`;
 
     return `
-        <div class="card card--interactive event-card" data-event-id="${event.id}">
+        <div class="card card--interactive event-card" data-event-id="${event.id}" data-type="${event.type}">
             <div class="event-card__content">
                 <span class="chip ${isLive ? 'chip--live' : ''} event-card__status">
                     ${dateDisplay}

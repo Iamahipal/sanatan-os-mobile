@@ -69,16 +69,94 @@
     height: 16px;
 }
 
+/* Hero CTA Button */
+.hero-card__cta {
+    margin-top: var(--space-4);
+    height: 44px;
+    padding: 0 var(--space-5);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+}
+
+.btn--hero {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn--hero:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn--live-hero {
+    background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+    color: white;
+    animation: hero-pulse 2s ease-in-out infinite;
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.4);
+}
+
+@keyframes hero-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
 /* Event Cards */
 .event-card {
     display: flex;
     gap: var(--space-4);
     padding: var(--space-4);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Color-coded event type bar */
+.event-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--color-primary);
+    border-radius: 0 4px 4px 0;
+}
+
+/* Event type color variants */
+.event-card[data-type="ramkatha"]::before {
+    background: linear-gradient(to bottom, #FF6B35, #F7931A);
+}
+
+.event-card[data-type="bhagwat"]::before {
+    background: linear-gradient(to bottom, #4F46E5, #7C3AED);
+}
+
+.event-card[data-type="kirtan"]::before {
+    background: linear-gradient(to bottom, #EC4899, #F472B6);
+}
+
+.event-card[data-type="darbar"]::before {
+    background: linear-gradient(to bottom, #F59E0B, #FBBF24);
+}
+
+.event-card[data-type="concert"]::before {
+    background: linear-gradient(to bottom, #8B5CF6, #A78BFA);
 }
 
 .event-card__content {
     flex: 1;
     min-width: 0;
+    padding-left: var(--space-2);
 }
 
 .event-card__status {
@@ -103,11 +181,12 @@
 }
 
 .event-card__avatar img {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
     border-radius: var(--radius-full);
     object-fit: cover;
-    border: 2px solid var(--color-primary-container);
+    border: 3px solid var(--color-primary-container);
+    box-shadow: var(--shadow-sm);
 }
 
 /* ========================================
@@ -273,10 +352,53 @@
     background: var(--color-surface-container);
     border-top: 1px solid var(--color-outline-variant);
     z-index: var(--z-header);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .action-bar .btn {
     flex: 1;
+    font-weight: 600;
+}
+
+/* Primary CTA with gradient and animation */
+.action-bar .btn--primary {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #D84315 100%);
+    box-shadow: 0 4px 16px rgba(233, 92, 41, 0.35);
+    transition: all 0.2s ease;
+}
+
+.action-bar .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(233, 92, 41, 0.45);
+}
+
+.action-bar .btn--primary:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Live Event CTA - pulsing */
+.action-bar .btn--live {
+    background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+    animation: live-cta-pulse 2s ease-in-out infinite;
+}
+
+@keyframes live-cta-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 4px 16px rgba(220, 38, 38, 0.35);
+    }
+
+    50% {
+        box-shadow: 0 4px 24px rgba(220, 38, 38, 0.55);
+    }
+}
+
+/* Save button enhanced */
+.action-bar .btn--outline.active {
+    background: var(--color-primary-container);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
 }
 
 /* ========================================
