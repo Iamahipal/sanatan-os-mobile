@@ -3,7 +3,7 @@
  */
 
 import { store } from '../store.js';
-import { formatDateRange, isEventLive, getCategoryInfo } from '../utils.js';
+import { formatDateRange, isEventLive, getCountdownText, getCategoryInfo } from '../utils.js';
 
 /**
  * Render the Home Screen
@@ -108,7 +108,13 @@ function renderEvents(state) {
             <div class="empty-state">
                 <i data-lucide="search-x" class="empty-state__icon"></i>
                 <h3 class="empty-state__title">No Events Found</h3>
-                <p class="empty-state__message">Try changing your filters or location.</p>
+                <p class="empty-state__message">
+                    We couldn't find any events matching your filters. Try adjusting your location or category.
+                </p>
+                <button class="btn btn--outline empty-state__cta" data-category="all">
+                    <i data-lucide="refresh-cw"></i>
+                    Show All Events
+                </button>
             </div>
         `;
         return;
@@ -124,27 +130,38 @@ function renderEvents(state) {
  */
 function renderEventCard(event) {
     const vachak = store.getVachak(event.vachakId);
-    const isLive = isEventLive(event);
-    const dateDisplay = isLive ? 'Live Now' : formatDateRange(event.dates.start, event.dates.end);
+    const countdown = getCountdownText(event);
 
-    // Avatar: image or emoji fallback
-    const avatar = vachak?.image
-        ? `<img src="${vachak.image}" alt="${vachak.shortName}" loading="lazy">`
-        : `<span style="font-size: 1.5rem;">${vachak?.emoji || '🙏'}</span>`;
+    // Use event image if available, else vachak image
+    const imageUrl = event.image || vachak?.image;
+    const hasImage = !!imageUrl;
+
+    // Status chip class
+    const statusClass = countdown.isLive ? 'chip--live' : (countdown.isUrgent ? 'chip--urgent' : '');
 
     return `
-        <div class="card card--interactive event-card" data-event-id="${event.id}" data-type="${event.type}">
-            <div class="event-card__content">
-                <span class="chip ${isLive ? 'chip--live' : ''} event-card__status">
-                    ${dateDisplay}
-                </span>
+        <div class="card card--interactive event-card event-card--v2" data-event-id="${event.id}" data-type="${event.type}">
+            ${hasImage ? `
+                <div class="event-card__image">
+                    <img src="${imageUrl}" alt="${event.title}" loading="lazy">
+                    <div class="event-card__image-overlay"></div>
+                </div>
+            ` : ''}
+            <div class="event-card__body">
+                <div class="event-card__header">
+                    <span class="chip ${statusClass} event-card__status">
+                        ${countdown.text}
+                    </span>
+                    <span class="event-card__vachak">${vachak?.shortName || 'Unknown'}</span>
+                </div>
                 <h3 class="event-card__title">${event.title}</h3>
-                <p class="event-card__subtitle">
-                    ${vachak?.shortName || 'Unknown'} • ${event.location.cityName}
-                </p>
-            </div>
-            <div class="event-card__avatar avatar avatar--lg" data-vachak-id="${event.vachakId}">
-                ${avatar}
+                <div class="event-card__footer">
+                    <div class="event-card__location">
+                        <i data-lucide="map-pin"></i>
+                        <span>${event.location.cityName}</span>
+                    </div>
+                    ${event.features?.isFree ? '<span class="event-card__free">Free</span>' : ''}
+                </div>
             </div>
         </div>
     `;

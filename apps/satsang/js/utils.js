@@ -46,6 +46,42 @@ export function isEventLive(event) {
 }
 
 /**
+ * Get countdown text for event
+ * @param {Object} event - Event object
+ * @returns {Object} { text: string, isUrgent: boolean }
+ */
+export function getCountdownText(event) {
+    const now = new Date();
+    const start = new Date(event.dates.start);
+    const end = new Date(event.dates.end);
+
+    // Event is live
+    if (now >= start && now <= end) {
+        return { text: '🔴 Live Now', isLive: true, isUrgent: true };
+    }
+
+    // Event is in the past
+    if (now > end) {
+        return { text: 'Ended', isLive: false, isUrgent: false };
+    }
+
+    // Calculate days until start
+    const diffTime = start - now;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+
+    if (diffHours < 24) {
+        return { text: `Starts in ${diffHours}h`, isLive: false, isUrgent: true };
+    } else if (diffDays === 1) {
+        return { text: 'Tomorrow', isLive: false, isUrgent: true };
+    } else if (diffDays <= 7) {
+        return { text: `${diffDays} days left`, isLive: false, isUrgent: diffDays <= 3 };
+    } else {
+        return { text: formatDateRange(event.dates.start, event.dates.end), isLive: false, isUrgent: false };
+    }
+}
+
+/**
  * Format number for display (1200000 → 1.2M)
  * @param {number} num - Number to format
  * @returns {string}

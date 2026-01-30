@@ -39,10 +39,10 @@ export function renderEvent(eventId) {
 
     // Feature tags
     const features = [];
-    if (event.features?.isFree) features.push({ icon: 'badge-check', label: 'Free Entry' });
-    if (event.features?.hasLiveStream) features.push({ icon: 'video', label: 'Livestream' });
-    if (event.features?.hasPrasad) features.push({ icon: 'utensils', label: 'Prasad' });
-    if (event.features?.hasAccommodation) features.push({ icon: 'bed', label: 'Stay' });
+    if (event.features?.isFree) features.push({ key: 'free', icon: 'badge-check', label: 'Free Entry' });
+    if (event.features?.hasLiveStream) features.push({ key: 'live', icon: 'video', label: 'Livestream' });
+    if (event.features?.hasPrasad) features.push({ key: 'prasad', icon: 'utensils', label: 'Prasad' });
+    if (event.features?.hasAccommodation) features.push({ key: 'stay', icon: 'bed', label: 'Stay' });
 
     container.innerHTML = `
         <div class="event-detail">
@@ -104,8 +104,8 @@ export function renderEvent(eventId) {
                 ${features.length > 0 ? `
                     <div class="feature-tags">
                         ${features.map(f => `
-                            <span class="chip">
-                                <i data-lucide="${f.icon}" style="width:14px; height:14px;"></i>
+                            <span class="chip chip--feature chip--${f.key || 'default'}">
+                                <i data-lucide="${f.icon}"></i>
                                 ${f.label}
                             </span>
                         `).join('')}
