@@ -310,6 +310,83 @@
 }
 
 /* ========================================
+   EVENT CARD COMPACT - List view with dates
+   ======================================== */
+.event-card--compact {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    margin-bottom: var(--space-3);
+    border-radius: var(--radius-lg);
+}
+
+.event-card--compact::before {
+    display: none;
+}
+
+.event-card__date-block {
+    flex-shrink: 0;
+    min-width: 70px;
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-primary-container);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.event-card__date-range {
+    font-family: var(--font-english);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: 1.3;
+}
+
+.event-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.event-card--compact .event-card__title {
+    font-size: var(--text-base);
+    font-weight: 600;
+    margin-bottom: var(--space-1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.event-card__meta {
+    font-size: var(--text-sm);
+    color: var(--color-on-surface-variant);
+}
+
+.event-card__separator {
+    margin: 0 var(--space-1);
+    opacity: 0.5;
+}
+
+.event-card__badges {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-1);
+}
+
+.chip--sm {
+    padding: 2px 8px;
+    font-size: 10px;
+}
+
+/* Events list spacing */
+#eventsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+/* ========================================
    EVENT DETAIL SCREEN
    ======================================== */
 .event-detail {
@@ -850,4 +927,181 @@
     width: 48px;
     height: 48px;
     margin-bottom: var(--space-3);
+}
+
+/* ========================================
+   PROFILE SCREEN - REVAMPED
+   ======================================== */
+.profile-screen {
+    padding: var(--space-4);
+}
+
+/* Profile Card */
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--color-surface-container);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-4);
+}
+
+.profile-card__avatar {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary-container);
+    color: var(--color-primary);
+    border-radius: var(--radius-full);
+}
+
+.profile-card__avatar svg {
+    width: 28px;
+    height: 28px;
+}
+
+.profile-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-card__name {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.profile-card__subtitle {
+    font-size: var(--text-sm);
+    color: var(--color-on-surface-variant);
+}
+
+.profile-card__action {
+    flex-shrink: 0;
+}
+
+.btn--sm {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+}
+
+/* Quick Stats */
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: var(--space-4);
+    background: var(--color-surface-container);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-5);
+}
+
+.profile-stats__item {
+    text-align: center;
+}
+
+.profile-stats__value {
+    display: block;
+    font-family: var(--font-english);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.profile-stats__label {
+    font-size: var(--text-xs);
+    color: var(--color-on-surface-variant);
+}
+
+/* Settings Sections */
+.settings-section {
+    margin-bottom: var(--space-5);
+}
+
+.settings-section__title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-on-surface-variant);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-2);
+    padding-left: var(--space-2);
+}
+
+/* Menu List Rounded Variant */
+.menu-list--rounded {
+    background: var(--color-surface-container);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.menu-list--rounded .menu-item {
+    border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.menu-list--rounded .menu-item:last-child {
+    border-bottom: none;
+}
+
+/* Menu Item Content Layout */
+.menu-item__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.menu-item__value {
+    font-size: var(--text-sm);
+    color: var(--color-on-surface-variant);
+}
+
+/* Icon color variants */
+.menu-item__icon--primary {
+    background: var(--color-primary-container);
+    color: var(--color-primary);
+}
+
+.menu-item__icon--warning {
+    background: #FEF3C7;
+    color: #92400E;
+}
+
+.menu-item__icon--info {
+    background: #DBEAFE;
+    color: #1D4ED8;
+}
+
+/* Profile Footer */
+.profile-footer {
+    text-align: center;
+    padding: var(--space-6) 0;
+}
+
+.profile-footer__version {
+    font-size: var(--text-sm);
+    color: var(--color-on-surface-variant);
+    margin-bottom: var(--space-1);
+}
+
+.profile-footer__credit {
+    font-size: var(--text-xs);
+    color: var(--color-on-surface-variant);
+    opacity: 0.7;
+}
+
+/* YouTube Watch Live Button */
+.btn--youtube {
+    background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.btn--youtube:hover {
+    background: linear-gradient(135deg, #CC0000 0%, #990000 100%);
 }

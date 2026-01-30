@@ -145,10 +145,19 @@ export function renderEvent(eventId) {
                     <i data-lucide="${isSaved ? 'heart' : 'heart'}"></i>
                     ${isSaved ? 'Saved' : 'Save'}
                 </button>
-                <button class="btn btn--primary ${isLive ? 'btn--live' : ''}">
-                    <i data-lucide="${isLive ? 'video' : 'ticket'}"></i>
-                    ${isLive ? 'Watch Live 🔴' : 'Register Now'}
-                </button>
+                ${event.liveYoutubeUrl || (vachak?.socials?.youtube && event.features?.hasLiveStream) ? `
+                    <a href="${event.liveYoutubeUrl || vachak?.socials?.youtube + '/live'}" 
+                       target="_blank" 
+                       class="btn btn--youtube">
+                        <i data-lucide="youtube"></i>
+                        Watch on YouTube
+                    </a>
+                ` : `
+                    <button class="btn btn--primary ${isLive ? 'btn--live' : ''}">
+                        <i data-lucide="${isLive ? 'video' : 'ticket'}"></i>
+                        ${isLive ? 'Watch Live 🔴' : 'Register Now'}
+                    </button>
+                `}
             </div>
         </div>
     `;

@@ -164,6 +164,7 @@ export const events = [
             timing: 'Current Event'
         },
         features: { isLive: true, isFree: true, hasLiveStream: true, hasPrasad: true, hasAccommodation: false },
+        liveYoutubeUrl: 'https://youtube.com/@RajendraDasJiMaharaj/live',
         organizer: { name: 'Brij Bhushan Mandir Samiti', contact: '' },
         description: 'Ongoing Ram Katha in the holy land of Braj.',
         schedule: []

@@ -124,7 +124,7 @@ function renderEvents(state) {
 }
 
 /**
- * Render a single Event Card
+ * Render a single Event Card - Compact version with dates
  * @param {Object} event - Event object
  * @returns {string} HTML string
  */
@@ -132,36 +132,35 @@ function renderEventCard(event) {
     const vachak = store.getVachak(event.vachakId);
     const countdown = getCountdownText(event);
 
-    // Use event image if available, else vachak image
-    const imageUrl = event.image || vachak?.image;
-    const hasImage = !!imageUrl;
-
     // Status chip class
     const statusClass = countdown.isLive ? 'chip--live' : (countdown.isUrgent ? 'chip--urgent' : '');
 
+    // Format date for display
+    const startDate = new Date(event.dates.start);
+    const endDate = new Date(event.dates.end);
+    const dateOptions = { day: 'numeric', month: 'short' };
+    const startStr = startDate.toLocaleDateString('en-IN', dateOptions);
+    const endStr = endDate.toLocaleDateString('en-IN', dateOptions);
+    const dateRange = startDate.getTime() === endDate.getTime()
+        ? startStr
+        : `${startStr.split(' ')[0]} - ${endStr}`;
+
     return `
-        <div class="card card--interactive event-card event-card--v2" data-event-id="${event.id}" data-type="${event.type}">
-            ${hasImage ? `
-                <div class="event-card__image">
-                    <img src="${imageUrl}" alt="${event.title}" loading="lazy">
-                    <div class="event-card__image-overlay"></div>
-                </div>
-            ` : ''}
-            <div class="event-card__body">
-                <div class="event-card__header">
-                    <span class="chip ${statusClass} event-card__status">
-                        ${countdown.text}
-                    </span>
-                    <span class="event-card__vachak">${vachak?.shortName || 'Unknown'}</span>
-                </div>
+        <div class="card card--interactive event-card event-card--compact" data-event-id="${event.id}" data-type="${event.type}">
+            <div class="event-card__date-block">
+                <span class="event-card__date-range">${dateRange}</span>
+            </div>
+            <div class="event-card__info">
                 <h3 class="event-card__title">${event.title}</h3>
-                <div class="event-card__footer">
-                    <div class="event-card__location">
-                        <i data-lucide="map-pin"></i>
-                        <span>${event.location.cityName}</span>
-                    </div>
-                    ${event.features?.isFree ? '<span class="event-card__free">Free</span>' : ''}
-                </div>
+                <p class="event-card__meta">
+                    <span class="event-card__vachak-name">${vachak?.shortName || 'Unknown'}</span>
+                    <span class="event-card__separator">•</span>
+                    <span class="event-card__city">${event.location.cityName}</span>
+                </p>
+            </div>
+            <div class="event-card__badges">
+                <span class="chip chip--sm ${statusClass}">${countdown.text}</span>
+                ${event.features?.isFree ? '<span class="chip chip--sm chip--free">Free</span>' : ''}
             </div>
         </div>
     `;
