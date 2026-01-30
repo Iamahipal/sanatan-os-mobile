@@ -160,7 +160,6 @@ function renderEventCard(event) {
             </div>
             <div class="event-card__badges">
                 <span class="chip chip--sm ${statusClass}">${countdown.text}</span>
-                ${event.features?.isFree ? '<span class="chip chip--sm chip--free">Free</span>' : ''}
             </div>
         </div>
     `;

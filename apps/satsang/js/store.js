@@ -23,6 +23,7 @@ class Store {
 
             // User Data
             savedEvents: [],
+            eventReminders: {}, // { eventId: { enabled: true, type: '1day' } }
             userLocation: 'All India',
 
             // Loading States
@@ -158,6 +159,30 @@ class Store {
     }
 
     /**
+     * Toggle reminder for event
+     * @param {string} eventId - Event ID
+     * @param {string} type - Reminder type: '1day', '1hour', 'none'
+     */
+    toggleReminder(eventId, type = '1day') {
+        const reminders = { ...this.state.eventReminders };
+
+        if (reminders[eventId]?.enabled && type === 'none') {
+            delete reminders[eventId];
+        } else {
+            reminders[eventId] = { enabled: true, type };
+        }
+
+        this.setState({ eventReminders: reminders });
+    }
+
+    /**
+     * Check if reminder is set for event
+     */
+    hasReminder(eventId) {
+        return !!this.state.eventReminders[eventId]?.enabled;
+    }
+
+    /**
      * Get filtered events
      */
     getFilteredEvents() {
@@ -240,6 +265,7 @@ class Store {
         try {
             const persistedData = {
                 savedEvents: this.state.savedEvents,
+                eventReminders: this.state.eventReminders,
                 selectedCity: this.state.selectedCity,
                 userLocation: this.state.userLocation
             };

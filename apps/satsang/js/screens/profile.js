@@ -13,132 +13,144 @@ export function renderProfile(state) {
     if (!container) return;
 
     const savedCount = state.savedEvents.length;
+    const reminderCount = Object.keys(state.eventReminders || {}).length;
 
     container.innerHTML = `
         <div class="profile-screen">
             <!-- User Profile Card -->
-            <div class="profile-card">
-                <div class="profile-card__avatar">
+            <div class="profile-hero">
+                <div class="profile-hero__avatar">
                     <i data-lucide="user"></i>
                 </div>
-                <div class="profile-card__info">
-                    <h2 class="profile-card__name">Guest User</h2>
-                    <p class="profile-card__subtitle">Tap to sign in for a personalized experience</p>
-                </div>
-                <button class="btn btn--primary btn--sm profile-card__action">
+                <h2 class="profile-hero__name">Guest User</h2>
+                <p class="profile-hero__subtitle">Sign in for personalized experience</p>
+                <button class="btn btn--primary btn--sm">
+                    <i data-lucide="log-in"></i>
                     Sign In
                 </button>
             </div>
             
-            <!-- Quick Stats -->
-            <div class="profile-stats">
-                <div class="profile-stats__item">
-                    <span class="profile-stats__value">${savedCount}</span>
-                    <span class="profile-stats__label">Saved</span>
+            <!-- Quick Stats Grid -->
+            <div class="profile-stats-grid">
+                <div class="profile-stat-card" data-action="goto-saved">
+                    <div class="profile-stat-card__icon">
+                        <i data-lucide="heart"></i>
+                    </div>
+                    <div class="profile-stat-card__content">
+                        <span class="profile-stat-card__value">${savedCount}</span>
+                        <span class="profile-stat-card__label">Saved</span>
+                    </div>
                 </div>
-                <div class="profile-stats__item">
-                    <span class="profile-stats__value">0</span>
-                    <span class="profile-stats__label">Attended</span>
-                </div>
-                <div class="profile-stats__item">
-                    <span class="profile-stats__value">${state.userLocation}</span>
-                    <span class="profile-stats__label">Location</span>
-                </div>
-            </div>
-            
-            <!-- Settings Sections -->
-            <div class="settings-section">
-                <h3 class="settings-section__title">Preferences</h3>
-                <div class="menu-list menu-list--rounded">
-                    <button class="menu-item" id="locationSettingBtn">
-                        <div class="menu-item__icon menu-item__icon--primary">
-                            <i data-lucide="map-pin"></i>
-                        </div>
-                        <div class="menu-item__content">
-                            <span class="menu-item__label">Location</span>
-                            <span class="menu-item__value">${state.userLocation}</span>
-                        </div>
-                        <i data-lucide="chevron-right" class="menu-item__arrow"></i>
-                    </button>
-                    
-                    <button class="menu-item">
-                        <div class="menu-item__icon menu-item__icon--warning">
-                            <i data-lucide="bell"></i>
-                        </div>
-                        <div class="menu-item__content">
-                            <span class="menu-item__label">Notifications</span>
-                            <span class="menu-item__value">On</span>
-                        </div>
-                        <i data-lucide="chevron-right" class="menu-item__arrow"></i>
-                    </button>
-                    
-                    <button class="menu-item">
-                        <div class="menu-item__icon menu-item__icon--info">
-                            <i data-lucide="globe"></i>
-                        </div>
-                        <div class="menu-item__content">
-                            <span class="menu-item__label">Language</span>
-                            <span class="menu-item__value">हिंदी</span>
-                        </div>
-                        <i data-lucide="chevron-right" class="menu-item__arrow"></i>
-                    </button>
+                <div class="profile-stat-card">
+                    <div class="profile-stat-card__icon profile-stat-card__icon--bell">
+                        <i data-lucide="bell"></i>
+                    </div>
+                    <div class="profile-stat-card__content">
+                        <span class="profile-stat-card__value">${reminderCount}</span>
+                        <span class="profile-stat-card__label">Reminders</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="settings-section">
-                <h3 class="settings-section__title">Support</h3>
-                <div class="menu-list menu-list--rounded">
-                    <button class="menu-item">
-                        <div class="menu-item__icon">
-                            <i data-lucide="help-circle"></i>
-                        </div>
-                        <span class="menu-item__label">Help & FAQ</span>
-                        <i data-lucide="chevron-right" class="menu-item__arrow"></i>
-                    </button>
-                    
-                    <button class="menu-item">
-                        <div class="menu-item__icon">
-                            <i data-lucide="message-circle"></i>
-                        </div>
-                        <span class="menu-item__label">Contact Us</span>
-                        <i data-lucide="chevron-right" class="menu-item__arrow"></i>
-                    </button>
-                    
-                    <button class="menu-item">
-                        <div class="menu-item__icon">
-                            <i data-lucide="star"></i>
-                        </div>
-                        <span class="menu-item__label">Rate App</span>
-                        <i data-lucide="chevron-right" class="menu-item__arrow"></i>
-                    </button>
+            <!-- Settings Card -->
+            <div class="settings-card">
+                <h3 class="settings-card__title">Preferences</h3>
+                
+                <button class="settings-row" id="locationSettingBtn">
+                    <div class="settings-row__icon settings-row__icon--primary">
+                        <i data-lucide="map-pin"></i>
+                    </div>
+                    <div class="settings-row__content">
+                        <span class="settings-row__label">Location</span>
+                        <span class="settings-row__value">${state.userLocation}</span>
+                    </div>
+                    <i data-lucide="chevron-right" class="settings-row__arrow"></i>
+                </button>
+                
+                <button class="settings-row">
+                    <div class="settings-row__icon settings-row__icon--amber">
+                        <i data-lucide="bell"></i>
+                    </div>
+                    <div class="settings-row__content">
+                        <span class="settings-row__label">Notifications</span>
+                        <span class="settings-row__value">On</span>
+                    </div>
+                    <i data-lucide="chevron-right" class="settings-row__arrow"></i>
+                </button>
+                
+                <button class="settings-row">
+                    <div class="settings-row__icon settings-row__icon--blue">
+                        <i data-lucide="globe"></i>
+                    </div>
+                    <div class="settings-row__content">
+                        <span class="settings-row__label">Language</span>
+                        <span class="settings-row__value">हिंदी</span>
+                    </div>
+                    <i data-lucide="chevron-right" class="settings-row__arrow"></i>
+                </button>
+            </div>
+            
+            <!-- Support Card -->
+            <div class="settings-card">
+                <h3 class="settings-card__title">Support</h3>
+                
+                <button class="settings-row">
+                    <div class="settings-row__icon">
+                        <i data-lucide="help-circle"></i>
+                    </div>
+                    <span class="settings-row__label">Help & FAQ</span>
+                    <i data-lucide="chevron-right" class="settings-row__arrow"></i>
+                </button>
+                
+                <button class="settings-row">
+                    <div class="settings-row__icon">
+                        <i data-lucide="message-circle"></i>
+                    </div>
+                    <span class="settings-row__label">Contact Us</span>
+                    <i data-lucide="chevron-right" class="settings-row__arrow"></i>
+                </button>
+                
+                <button class="settings-row">
+                    <div class="settings-row__icon">
+                        <i data-lucide="star"></i>
+                    </div>
+                    <span class="settings-row__label">Rate App</span>
+                    <i data-lucide="external-link" class="settings-row__arrow"></i>
+                </button>
+            </div>
+            
+            <!-- About Card -->
+            <div class="settings-card">
+                <h3 class="settings-card__title">About</h3>
+                
+                <button class="settings-row">
+                    <div class="settings-row__icon">
+                        <i data-lucide="info"></i>
+                    </div>
+                    <span class="settings-row__label">About Satsang</span>
+                    <i data-lucide="chevron-right" class="settings-row__arrow"></i>
+                </button>
+                
+                <button class="settings-row">
+                    <div class="settings-row__icon">
+                        <i data-lucide="shield"></i>
+                    </div>
+                    <span class="settings-row__label">Privacy Policy</span>
+                    <i data-lucide="chevron-right" class="settings-row__arrow"></i>
+                </button>
+                
+                <div class="settings-row settings-row--static">
+                    <div class="settings-row__icon">
+                        <i data-lucide="package"></i>
+                    </div>
+                    <span class="settings-row__label">Version</span>
+                    <span class="settings-row__value">2.0.0</span>
                 </div>
             </div>
             
-            <div class="settings-section">
-                <h3 class="settings-section__title">About</h3>
-                <div class="menu-list menu-list--rounded">
-                    <button class="menu-item">
-                        <div class="menu-item__icon">
-                            <i data-lucide="info"></i>
-                        </div>
-                        <span class="menu-item__label">About Satsang</span>
-                        <i data-lucide="chevron-right" class="menu-item__arrow"></i>
-                    </button>
-                    
-                    <button class="menu-item">
-                        <div class="menu-item__icon">
-                            <i data-lucide="shield"></i>
-                        </div>
-                        <span class="menu-item__label">Privacy Policy</span>
-                        <i data-lucide="chevron-right" class="menu-item__arrow"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- App Info Footer -->
+            <!-- Footer -->
             <div class="profile-footer">
-                <p class="profile-footer__version">Satsang v2.0</p>
-                <p class="profile-footer__credit">Made with 🕉️ in Bharat</p>
+                <p>Made with 🙏 in Bharat</p>
             </div>
         </div>
     `;
