@@ -214,17 +214,16 @@ const App = {
         const container = document.getElementById('locationModalBody');
         if (!container) return;
 
-        // All cities option plus city list
-        const cityEntries = [
-            ['all', { name: 'All India', emoji: '🇮🇳' }],
-            ...Object.entries(state.cities)
-        ];
+        // Use cities directly (already includes 'all')
+        const cityEntries = Object.entries(state.cities);
 
         container.innerHTML = cityEntries.map(([id, city]) => `
-            <button class="menu-item ${state.selectedCity === id ? 'active' : ''}" data-city="${id}">
-                <span class="menu-item__icon">${city.emoji || '📍'}</span>
-                <span class="menu-item__label">${city.name}</span>
-                ${state.selectedCity === id ? '<i data-lucide="check" class="menu-item__arrow"></i>' : ''}
+            <button class="location-item ${state.selectedCity === id ? 'location-item--active' : ''}" data-city="${id}">
+                <div class="location-item__icon">
+                    <i data-lucide="${city.icon || 'map-pin'}"></i>
+                </div>
+                <span class="location-item__name">${city.name}</span>
+                ${state.selectedCity === id ? '<i data-lucide="check" class="location-item__check"></i>' : ''}
             </button>
         `).join('');
 

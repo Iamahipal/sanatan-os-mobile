@@ -356,13 +356,16 @@ export const events = [
 ];
 
 export const cities = {
-    all: { name: 'All India', emoji: '🇮🇳' },
-    nagpur: { name: 'Nagpur', emoji: '🍊', state: 'MH' },
-    vrindavan: { name: 'Vrindavan', emoji: '🏛️', state: 'UP' },
-    mumbai: { name: 'Mumbai', emoji: '🌆', state: 'MH' },
-    dwarka: { name: 'Dwarka', emoji: '🐚', state: 'GJ' },
-    indore: { name: 'Indore', emoji: '🏙️', state: 'MP' },
-    delhi: { name: 'Delhi', emoji: '🏙️', state: 'DL' }
+    all: { name: 'All India', icon: 'globe' },
+    nagpur: { name: 'Nagpur', icon: 'map-pin', state: 'MH' },
+    vrindavan: { name: 'Vrindavan', icon: 'landmark', state: 'UP' },
+    mumbai: { name: 'Mumbai', icon: 'building-2', state: 'MH' },
+    dwarka: { name: 'Dwarka', icon: 'waves', state: 'GJ' },
+    indore: { name: 'Indore', icon: 'map-pin', state: 'MP' },
+    delhi: { name: 'Delhi', icon: 'map-pin', state: 'DL' },
+    jaipur: { name: 'Jaipur', icon: 'map-pin', state: 'RJ' },
+    meerut: { name: 'Meerut', icon: 'map-pin', state: 'UP' },
+    bagasara: { name: 'Bagasara', icon: 'map-pin', state: 'GJ' }
 };
 
 export const wisdomQuotes = [
