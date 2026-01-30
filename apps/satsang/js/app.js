@@ -12,6 +12,7 @@ import { renderEvent } from './screens/event.js';
 import { renderVachak } from './screens/vachak.js';
 import { renderSaved } from './screens/saved.js';
 import { renderProfile } from './screens/profile.js';
+import { renderCalendar, prevMonth, nextMonth, selectDate } from './screens/calendar.js';
 
 /**
  * App Controller
@@ -77,7 +78,7 @@ const App = {
                 renderProfile(state);
                 break;
             case 'calendar':
-                // TODO: Implement calendar screen
+                renderCalendar(state);
                 break;
         }
 
@@ -184,7 +185,25 @@ const App = {
                 modal.close('locationModal');
                 return;
             }
+
+            // Calendar date selection
+            const dateBtn = e.target.closest('.calendar-grid__day[data-date]');
+            if (dateBtn) {
+                selectDate(dateBtn.dataset.date);
+                return;
+            }
+
+            // Nav to home from empty state
+            const navHomeBtn = e.target.closest('[data-nav="home"]');
+            if (navHomeBtn) {
+                router.push('home');
+                return;
+            }
         });
+
+        // Calendar month navigation
+        document.getElementById('prevMonthBtn')?.addEventListener('click', () => prevMonth());
+        document.getElementById('nextMonthBtn')?.addEventListener('click', () => nextMonth());
     },
 
     /**

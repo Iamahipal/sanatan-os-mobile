@@ -116,6 +116,39 @@
                 </div>
             </div>
 
+            <!-- CALENDAR SCREEN (Hidden by default) -->
+            <div class="screen" id="calendarScreen">
+                <section class="section">
+                    <div class="section__header">
+                        <h2 class="section__title">Event Calendar</h2>
+                    </div>
+
+                    <!-- Month Navigator -->
+                    <div class="calendar-nav" id="calendarNav">
+                        <button class="btn-icon" id="prevMonthBtn" aria-label="Previous month">
+                            <i data-lucide="chevron-left"></i>
+                        </button>
+                        <span class="calendar-nav__month" id="currentMonthLabel">January 2026</span>
+                        <button class="btn-icon" id="nextMonthBtn" aria-label="Next month">
+                            <i data-lucide="chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Calendar Grid -->
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Days will be populated by JS -->
+                    </div>
+
+                    <!-- Events for Selected Date -->
+                    <div class="calendar-events" id="calendarEvents">
+                        <h3 class="calendar-events__title" id="selectedDateLabel">Today's Events</h3>
+                        <div id="calendarEventsList">
+                            <!-- Events will be populated by JS -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+
             <!-- SAVED SCREEN (Hidden by default) -->
             <div class="screen saved-screen" id="savedScreen">
                 <section class="section">
