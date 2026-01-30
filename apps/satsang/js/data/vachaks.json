@@ -1,0 +1,122 @@
+[
+  {
+    "id": "rajendradas",
+    "name": "Swami Shri Rajendradas Ji Maharaj",
+    "shortName": "Rajendradas Ji",
+    "emoji": "🙏",
+    "image": null,
+    "specialty": "श्रीमद्भागवत कथा",
+    "bio": "Renowned spiritual leader specializing in श्रीमद्भागवत कथा.",
+    "followers": 0,
+    "eventsCount": 0,
+    "socials": {
+      "youtube": "https://www.youtube.com/channel/undefined"
+    },
+    "verified": true
+  },
+  {
+    "id": "pundrik",
+    "name": "Shri Pundrik Goswami Ji Maharaj",
+    "shortName": "Pundrik Goswami",
+    "emoji": "📿",
+    "image": null,
+    "specialty": "श्रीमद्भागवत कथा",
+    "bio": "Renowned spiritual leader specializing in श्रीमद्भागवत कथा.",
+    "followers": 0,
+    "eventsCount": 0,
+    "socials": {
+      "youtube": "https://www.youtube.com/channel/undefined"
+    },
+    "verified": true
+  },
+  {
+    "id": "morari",
+    "name": "Morari Bapu",
+    "shortName": "Morari Bapu",
+    "emoji": "🙏",
+    "image": null,
+    "specialty": "राम कथा",
+    "bio": "Renowned spiritual leader specializing in राम कथा.",
+    "followers": 0,
+    "eventsCount": 0,
+    "socials": {
+      "youtube": "https://www.youtube.com/channel/undefined"
+    },
+    "verified": true
+  },
+  {
+    "id": "jayakishori",
+    "name": "Jaya Kishori",
+    "shortName": "Jaya Kishori",
+    "emoji": "🎤",
+    "image": null,
+    "specialty": "भजन & कथा",
+    "bio": "Renowned spiritual leader specializing in भजन & कथा.",
+    "followers": 0,
+    "eventsCount": 0,
+    "socials": {
+      "youtube": "https://www.youtube.com/channel/undefined"
+    },
+    "verified": true
+  },
+  {
+    "id": "premanand",
+    "name": "Pujya Premanand Ji Maharaj",
+    "shortName": "Premanand Ji",
+    "emoji": "🙏",
+    "image": null,
+    "specialty": "श्रीमद्भागवत कथा",
+    "bio": "Renowned spiritual leader specializing in श्रीमद्भागवत कथा.",
+    "followers": 0,
+    "eventsCount": 0,
+    "socials": {
+      "youtube": "https://www.youtube.com/channel/undefined"
+    },
+    "verified": true
+  },
+  {
+    "id": "bageshwar",
+    "name": "Bageshwar Dham Sarkar",
+    "shortName": "Bageshwar Dham",
+    "emoji": "✨",
+    "image": null,
+    "specialty": "दरबार",
+    "bio": "Renowned spiritual leader specializing in दरबार.",
+    "followers": 0,
+    "eventsCount": 0,
+    "socials": {
+      "youtube": "https://www.youtube.com/channel/undefined"
+    },
+    "verified": true
+  },
+  {
+    "id": "pradeep",
+    "name": "Pandit Pradeep Mishra",
+    "shortName": "Pradeep Mishra Ji",
+    "emoji": "🙏",
+    "image": null,
+    "specialty": "शिव महापुराण",
+    "bio": "Renowned spiritual leader specializing in शिव महापुराण.",
+    "followers": 0,
+    "eventsCount": 0,
+    "socials": {
+      "youtube": "https://www.youtube.com/channel/undefined"
+    },
+    "verified": true
+  },
+  {
+    "id": "indresh",
+    "name": "Acharya Indresh Upadhyay",
+    "shortName": "Indresh Upadhyay",
+    "emoji": "📿",
+    "image": null,
+    "specialty": "श्रीमद्भागवत कथा",
+    "bio": "Renowned spiritual leader specializing in श्रीमद्भागवत कथा.",
+    "followers": 0,
+    "eventsCount": 0,
+    "socials": {
+      "youtube": "https://www.youtube.com/channel/undefined"
+    },
+    "verified": true
+  }
+]

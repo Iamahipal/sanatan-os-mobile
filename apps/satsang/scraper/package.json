@@ -1,0 +1,17 @@
+{
+  "name": "satsang-scraper",
+  "version": "1.0.0",
+  "description": "Event data scraper for Satsang App - Fetches from YouTube RSS and other sources",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "scrape": "node index.js",
+    "export": "node index.js --export"
+  },
+  "keywords": ["satsang", "scraper", "youtube", "events"],
+  "author": "SanatanOS",
+  "license": "MIT",
+  "dependencies": {
+    "rss-parser": "^3.13.0"
+  }
+}
