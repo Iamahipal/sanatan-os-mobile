@@ -98,3 +98,66 @@ export const CITY_KEYWORDS = {
 
 // Export path for generated events
 export const OUTPUT_PATH = '../js/data/scraped_events.json';
+
+// ============================================
+// OFFICIAL WEBSITE CONFIGURATIONS
+// ============================================
+
+import { parseJadkhor, parseMorariBapu, parseGenericSite } from './sources/websites.js';
+
+export const WEBSITE_CONFIGS = [
+    {
+        id: 'jadkhor',
+        name: 'Jadkhor Gaudham',
+        url: 'https://jadkhor.org',
+        vachakId: 'rajendradas',
+        parser: parseJadkhor
+    },
+    {
+        id: 'chitrakutdham',
+        name: 'Chitrakut Dham Talgajarda',
+        url: 'https://chitrakutdhamtalgajarda.org/schedule',
+        vachakId: 'morari',
+        parser: parseMorariBapu
+    },
+    {
+        id: 'bageshwardham',
+        name: 'Bageshwar Dham Official',
+        url: 'https://bageshwardham.in',
+        vachakId: 'bageshwar',
+        parser: parseGenericSite
+    }
+];
+
+// ============================================
+// INSTAGRAM HANDLE CONFIGURATIONS
+// ============================================
+
+export const INSTAGRAM_HANDLES = {
+    'iamjayakishori': {
+        vachakId: 'jayakishori',
+        specialty: 'भजन & कथा',
+        priority: 1
+    },
+    'bageshwardhamsarkar': {
+        vachakId: 'bageshwar',
+        specialty: 'दिव्य दरबार',
+        priority: 1
+    },
+    'sripundrik': {
+        vachakId: 'pundrik',
+        specialty: 'श्रीमद्भागवत कथा',
+        priority: 2
+    },
+    'panditpradeep.mishra': {
+        vachakId: 'pradeep',
+        specialty: 'शिव महापुराण',
+        priority: 2
+    },
+    'rajendradasjimaharaj': {
+        vachakId: 'rajendradas',
+        specialty: 'श्रीमद्भागवत कथा',
+        priority: 2
+    }
+};
+

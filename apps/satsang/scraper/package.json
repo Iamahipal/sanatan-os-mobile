@@ -1,17 +1,27 @@
 {
   "name": "satsang-scraper",
-  "version": "1.0.0",
-  "description": "Event data scraper for Satsang App - Fetches from YouTube RSS and other sources",
+  "version": "1.1.0",
+  "description": "Multi-platform event data scraper for Satsang App",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "scrape": "node index.js",
+    "scrape:youtube": "node index.js --source=youtube",
+    "scrape:websites": "node index.js --source=websites",
+    "scrape:instagram": "node index.js --source=instagram",
     "export": "node index.js --export"
   },
-  "keywords": ["satsang", "scraper", "youtube", "events"],
+  "keywords": [
+    "satsang",
+    "scraper",
+    "youtube",
+    "instagram",
+    "events"
+  ],
   "author": "SanatanOS",
   "license": "MIT",
   "dependencies": {
-    "rss-parser": "^3.13.0"
+    "rss-parser": "^3.13.0",
+    "cheerio": "^1.0.0-rc.12"
   }
 }
