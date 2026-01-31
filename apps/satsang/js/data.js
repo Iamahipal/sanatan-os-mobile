@@ -61,7 +61,7 @@ His discourses are a unique blend of traditional *Rasik* philosophy and modern s
 His ethos is "Satya, Prem, Karuna" (Truth, Love, Compassion). He does not belong to any specific sect or sampradaya but spreads the universal message of humanity through the Ramayana.`,
         lineage: 'Nimbarka lineage (Early influence), Independent',
         socials: {
-            youtube: 'https://youtube.com/@ChitrakutdhamTalgajarda',
+            youtube: 'https://youtube.com/channel/UCnePvOdQ-uBSWSIgRoG55gA',
             instagram: 'https://instagram.com/ChitrakutdhamTalgajarda',
             website: 'https://chitrakutdhamtalgajarda.org'
         },
