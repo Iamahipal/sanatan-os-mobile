@@ -205,3 +205,31 @@ export const modal = {
         document.body.style.overflow = '';
     }
 };
+
+/**
+ * Show toast notification
+ * @param {string} message - Message to display
+ * @param {string} type - Toast type: 'success', 'error', 'info'
+ */
+export function showToast(message, type = 'success') {
+    // Remove existing toast if any
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.className = `toast toast--${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+        toast.classList.add('toast--visible');
+    });
+
+    // Auto-hide after 2.5s
+    setTimeout(() => {
+        toast.classList.remove('toast--visible');
+        setTimeout(() => toast.remove(), 300);
+    }, 2500);
+}

@@ -21,7 +21,7 @@ export function renderSaved(state) {
                 <i data-lucide="heart" class="empty-state__icon"></i>
                 <h3 class="empty-state__title">No Saved Events</h3>
                 <p class="empty-state__message">
-                    Tap the heart icon on any event to save it here for quick access. Your saved events sync across devices.
+                    Tap the heart icon on any event to save it here for quick access.
                 </p>
                 <button class="btn btn--primary empty-state__cta" data-nav="home">
                     <i data-lucide="compass"></i>

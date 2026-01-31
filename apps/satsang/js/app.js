@@ -6,7 +6,7 @@
 import { store } from './store.js';
 import { router } from './router.js';
 import { vachaks, events, cities } from './data.js';
-import { refreshIcons, showScreen, modal } from './utils.js';
+import { refreshIcons, showScreen, modal, showToast, debounce } from './utils.js';
 import { renderHome } from './screens/home.js';
 import { renderEvent } from './screens/event.js';
 import { renderVachak } from './screens/vachak.js';
@@ -115,6 +115,20 @@ const App = {
             document.getElementById('searchInput')?.focus();
         });
 
+        // Search input with debounce
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        if (searchInput && searchResults) {
+            searchInput.addEventListener('input', debounce((e) => {
+                const query = e.target.value.trim().toLowerCase();
+                if (query.length < 2) {
+                    searchResults.innerHTML = '<p class="search-hint">Type at least 2 characters to search...</p>';
+                    return;
+                }
+                this.renderSearchResults(query, searchResults);
+            }, 300));
+        }
+
         // Modal backdrop click
         document.getElementById('modalBackdrop')?.addEventListener('click', () => {
             modal.closeAll();
@@ -173,6 +187,8 @@ const App = {
                 // Update button state
                 const isSaved = store.isEventSaved(eventId);
                 saveBtn.classList.toggle('active', isSaved);
+                // Show toast feedback
+                showToast(isSaved ? '❤️ Event saved!' : 'Event removed from saved');
                 return;
             }
 
@@ -245,6 +261,77 @@ const App = {
             `;
             refreshIcons();
         }
+    },
+
+    /**
+     * Render search results
+     */
+    renderSearchResults(query, container) {
+        const state = store.getState();
+
+        // Search events
+        const matchedEvents = state.events.filter(e =>
+            e.title.toLowerCase().includes(query) ||
+            e.location.cityName.toLowerCase().includes(query)
+        ).slice(0, 5);
+
+        // Search vachaks
+        const matchedVachaks = state.vachaks.filter(v =>
+            v.name.toLowerCase().includes(query) ||
+            v.shortName.toLowerCase().includes(query)
+        ).slice(0, 3);
+
+        if (matchedEvents.length === 0 && matchedVachaks.length === 0) {
+            container.innerHTML = `
+                <div class="search-empty">
+                    <i data-lucide="search-x"></i>
+                    <p>No results for "${query}"</p>
+                </div>
+            `;
+            refreshIcons(container);
+            return;
+        }
+
+        let html = '';
+
+        // Vachaks section
+        if (matchedVachaks.length > 0) {
+            html += `<div class="search-section">
+                <h4 class="search-section__title">Vachaks</h4>
+                ${matchedVachaks.map(v => `
+                    <div class="search-result" data-vachak-id="${v.id}">
+                        <div class="avatar avatar--sm">
+                            ${v.image ? `<img src="${v.image}" alt="${v.shortName}">` : `<span>${v.emoji || '🙏'}</span>`}
+                        </div>
+                        <div class="search-result__info">
+                            <span class="search-result__title">${v.shortName}</span>
+                            <span class="search-result__subtitle">${v.specialty}</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>`;
+        }
+
+        // Events section
+        if (matchedEvents.length > 0) {
+            html += `<div class="search-section">
+                <h4 class="search-section__title">Events</h4>
+                ${matchedEvents.map(e => `
+                    <div class="search-result" data-event-id="${e.id}">
+                        <div class="search-result__icon">
+                            <i data-lucide="calendar"></i>
+                        </div>
+                        <div class="search-result__info">
+                            <span class="search-result__title">${e.title}</span>
+                            <span class="search-result__subtitle">${e.location.cityName}</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>`;
+        }
+
+        container.innerHTML = html;
+        refreshIcons(container);
     }
 };
 
