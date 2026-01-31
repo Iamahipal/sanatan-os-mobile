@@ -11,6 +11,7 @@ import { formatDateRange, isEventLive, getCountdownText, getCategoryInfo } from 
  */
 export function renderHome(state) {
     renderHero();
+    renderVachakRail(state);
     renderCategories(state);
     renderEvents(state);
 }
@@ -92,6 +93,31 @@ function renderCategories(state) {
             <span class="category-pill__label">${cat.labelHi}</span>
         </button>
     `).join('');
+}
+
+/**
+ * Render Vachak Avatar Rail
+ */
+function renderVachakRail(state) {
+    const container = document.getElementById('vachakRail');
+    if (!container) return;
+
+    const vachaks = state.vachaks.slice(0, 12); // Show first 12 vachaks
+
+    container.innerHTML = vachaks.map(vachak => {
+        const avatarContent = vachak.image
+            ? `<img src="${vachak.image}" alt="${vachak.shortName}" loading="lazy">`
+            : `<span class="vachak-avatar__emoji">${vachak.emoji || '🙏'}</span>`;
+
+        return `
+            <div class="rail__item vachak-avatar-item" data-vachak-id="${vachak.id}">
+                <div class="vachak-avatar ${vachak.verified ? 'vachak-avatar--verified' : ''}">
+                    ${avatarContent}
+                </div>
+                <span class="vachak-avatar__name">${vachak.shortName.split(' ')[0]}</span>
+            </div>
+        `;
+    }).join('');
 }
 
 /**
