@@ -5,6 +5,8 @@
 import { store } from '../store.js';
 import { router } from '../router.js';
 import { formatDateRange, isEventLive, getCategoryInfo } from '../utils.js';
+import { showCalendarExportModal } from '../services/calendar-export.js';
+import { openYouTubePlayer, extractYouTubeId } from '../components/youtube-player.js';
 
 /**
  * Render Event Detail Screen
@@ -145,17 +147,19 @@ export function renderEvent(eventId) {
                     <i data-lucide="${isSaved ? 'heart' : 'heart'}"></i>
                     ${isSaved ? 'Saved' : 'Save'}
                 </button>
+                <button class="btn btn--outline" data-add-calendar="${eventId}">
+                    <i data-lucide="calendar-plus"></i>
+                    Add to Calendar
+                </button>
                 ${event.liveYoutubeUrl || (vachak?.socials?.youtube && event.features?.hasLiveStream) ? `
-                    <a href="${event.liveYoutubeUrl || vachak?.socials?.youtube + '/live'}" 
-                       target="_blank" 
-                       class="btn btn--youtube">
+                    <button class="btn btn--youtube" data-watch-youtube="${eventId}">
                         <i data-lucide="youtube"></i>
-                        Watch on YouTube
-                    </a>
+                        Watch
+                    </button>
                 ` : `
                     <button class="btn btn--primary ${isLive ? 'btn--live' : ''}" data-register="${eventId}">
                         <i data-lucide="${isLive ? 'video' : 'ticket'}"></i>
-                        ${isLive ? 'Watch Live 🔴' : 'Register Now'}
+                        ${isLive ? 'Watch Live 🔴' : 'Register'}
                     </button>
                 `}
             </div>

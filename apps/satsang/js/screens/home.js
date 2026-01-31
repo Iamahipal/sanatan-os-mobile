@@ -4,6 +4,7 @@
 
 import { store } from '../store.js';
 import { formatDateRange, isEventLive, getCountdownText, getCategoryInfo } from '../utils.js';
+import { openYouTubePlayer, extractYouTubeId } from '../components/youtube-player.js';
 
 /**
  * Render the Home Screen
@@ -11,6 +12,7 @@ import { formatDateRange, isEventLive, getCountdownText, getCategoryInfo } from 
  */
 export function renderHome(state) {
     renderHero();
+    renderLiveNow(state);
     renderVachakRail(state);
     renderCategories(state);
     renderEvents(state);
@@ -63,6 +65,77 @@ function renderHero() {
             </div>
         </div>
     `;
+}
+
+/**
+ * Render Live Now Section
+ * Shows live events with embedded player option
+ */
+function renderLiveNow(state) {
+    const container = document.getElementById('liveNowSection');
+    if (!container) return;
+
+    // Find live events
+    const liveEvents = state.events.filter(event => isEventLive(event));
+
+    if (liveEvents.length === 0) {
+        container.style.display = 'none';
+        return;
+    }
+
+    container.style.display = 'block';
+
+    container.innerHTML = `
+        <div class="live-now-section">
+            <div class="live-now-section__header">
+                <h2 class="live-now-section__title">
+                    <span class="live-now-section__dot"></span>
+                    Live Now
+                </h2>
+            </div>
+            ${liveEvents.map(event => {
+        const vachak = store.getVachak(event.vachakId);
+        const youtubeId = extractYouTubeId(event.liveYoutubeUrl);
+
+        return `
+                    <div class="live-now-card" data-event-id="${event.id}" ${youtubeId ? `data-youtube-id="${youtubeId}"` : ''}>
+                        <div class="live-now-card__thumb">
+                            ${vachak?.image
+                ? `<img src="${vachak.image}" alt="${vachak.shortName}">`
+                : `<img src="./assets/images/placeholder-vachak.png" alt="Live">`
+            }
+                            <span class="live-now-card__live-badge">LIVE</span>
+                        </div>
+                        <div class="live-now-card__content">
+                            <div class="live-now-card__title">${event.title}</div>
+                            <div class="live-now-card__vachak">${vachak?.shortName || 'Unknown'}</div>
+                            <div class="live-now-card__viewers">🔴 Streaming now</div>
+                        </div>
+                    </div>
+                `;
+    }).join('')}
+        </div>
+    `;
+
+    // Add click handlers for live cards
+    container.querySelectorAll('.live-now-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const youtubeId = card.dataset.youtubeId;
+            const eventId = card.dataset.eventId;
+            const event = state.events.find(e => e.id === eventId);
+
+            if (youtubeId) {
+                // Open in-app YouTube player
+                openYouTubePlayer(youtubeId, event?.title || 'Live Katha', true);
+            } else if (event?.liveYoutubeUrl) {
+                // Open in new tab
+                window.open(event.liveYoutubeUrl, '_blank');
+            } else {
+                // Navigate to event detail
+                window.location.hash = `#event/${eventId}`;
+            }
+        });
+    });
 }
 
 /**

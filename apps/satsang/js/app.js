@@ -13,6 +13,9 @@ import { renderVachak } from './screens/vachak.js';
 import { renderSaved } from './screens/saved.js';
 import { renderProfile } from './screens/profile.js';
 import { renderCalendar, prevMonth, nextMonth, selectDate } from './screens/calendar.js';
+import { showSearchModal } from './components/search.js';
+import { initYouTubeAPI, openYouTubePlayer, extractYouTubeId } from './components/youtube-player.js';
+import { showCalendarExportModal } from './services/calendar-export.js';
 
 /**
  * App Controller
@@ -109,25 +112,13 @@ const App = {
             modal.open('locationModal');
         });
 
-        // Search button
+        // Search button - opens full-screen search modal
         document.getElementById('searchBtn')?.addEventListener('click', () => {
-            modal.open('searchModal');
-            document.getElementById('searchInput')?.focus();
+            showSearchModal();
         });
 
-        // Search input with debounce
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
-        if (searchInput && searchResults) {
-            searchInput.addEventListener('input', debounce((e) => {
-                const query = e.target.value.trim().toLowerCase();
-                if (query.length < 2) {
-                    searchResults.innerHTML = '<p class="search-hint">Type at least 2 characters to search...</p>';
-                    return;
-                }
-                this.renderSearchResults(query, searchResults);
-            }, 300));
-        }
+        // Initialize YouTube API for live streams
+        initYouTubeAPI().catch(err => console.log('YouTube API will load on demand'));
 
         // Modal backdrop click
         document.getElementById('modalBackdrop')?.addEventListener('click', () => {
@@ -223,6 +214,36 @@ const App = {
                     window.open(`mailto:${event.organizer.contact}?subject=Registration for ${event.title}`, '_blank');
                 } else {
                     showToast('📋 Registration info coming soon!');
+                }
+                return;
+            }
+
+            // Add to Calendar button
+            const calendarBtn = e.target.closest('[data-add-calendar]');
+            if (calendarBtn) {
+                const eventId = calendarBtn.dataset.addCalendar;
+                const event = store.getEvent(eventId);
+                const vachak = store.getVachak(event?.vachakId);
+                if (event) {
+                    showCalendarExportModal(event, vachak);
+                }
+                return;
+            }
+
+            // Watch YouTube button (in-app player)
+            const youtubeBtn = e.target.closest('[data-watch-youtube]');
+            if (youtubeBtn) {
+                const eventId = youtubeBtn.dataset.watchYoutube;
+                const event = store.getEvent(eventId);
+                const vachak = store.getVachak(event?.vachakId);
+                const youtubeUrl = event?.liveYoutubeUrl || vachak?.socials?.youtube;
+                if (youtubeUrl) {
+                    const videoId = extractYouTubeId(youtubeUrl);
+                    if (videoId) {
+                        openYouTubePlayer(videoId, event?.title || 'Live Katha', true);
+                    } else {
+                        window.open(youtubeUrl, '_blank');
+                    }
                 }
                 return;
             }
