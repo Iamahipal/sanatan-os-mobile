@@ -53,7 +53,7 @@ export function renderEvent(eventId) {
                     <button class="btn-icon" data-back aria-label="Go back">
                         <i data-lucide="arrow-left"></i>
                     </button>
-                    <button class="btn-icon" aria-label="Share">
+                    <button class="btn-icon" data-share="${eventId}" aria-label="Share">
                         <i data-lucide="share-2"></i>
                     </button>
                 </div>
@@ -153,7 +153,7 @@ export function renderEvent(eventId) {
                         Watch on YouTube
                     </a>
                 ` : `
-                    <button class="btn btn--primary ${isLive ? 'btn--live' : ''}">
+                    <button class="btn btn--primary ${isLive ? 'btn--live' : ''}" data-register="${eventId}">
                         <i data-lucide="${isLive ? 'video' : 'ticket'}"></i>
                         ${isLive ? 'Watch Live 🔴' : 'Register Now'}
                     </button>

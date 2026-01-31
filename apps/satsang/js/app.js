@@ -192,6 +192,41 @@ const App = {
                 return;
             }
 
+            // Share button (Web Share API)
+            const shareBtn = e.target.closest('[data-share]');
+            if (shareBtn) {
+                const eventId = shareBtn.dataset.share;
+                const event = store.getEvent(eventId);
+                if (event) {
+                    const shareData = {
+                        title: event.title,
+                        text: `Check out ${event.title} at ${event.location.cityName}`,
+                        url: window.location.href
+                    };
+                    if (navigator.share) {
+                        navigator.share(shareData).catch(() => { });
+                    } else {
+                        // Fallback: copy URL
+                        navigator.clipboard.writeText(window.location.href);
+                        showToast('Link copied to clipboard!');
+                    }
+                }
+                return;
+            }
+
+            // Register button
+            const registerBtn = e.target.closest('[data-register]');
+            if (registerBtn) {
+                const eventId = registerBtn.dataset.register;
+                const event = store.getEvent(eventId);
+                if (event?.organizer?.contact) {
+                    window.open(`mailto:${event.organizer.contact}?subject=Registration for ${event.title}`, '_blank');
+                } else {
+                    showToast('📋 Registration info coming soon!');
+                }
+                return;
+            }
+
             // City selection
             const cityBtn = e.target.closest('[data-city]');
             if (cityBtn) {
