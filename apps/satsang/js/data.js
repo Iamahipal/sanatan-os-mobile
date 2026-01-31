@@ -41,8 +41,8 @@ Known for his unparalleled command over **shastras** and his melodious singing o
 His discourses are a unique blend of traditional *Rasik* philosophy and modern scientific understanding, making the wisdom of Vrindavan accessible to the youth.`,
         lineage: 'Shri Radharaman Peeth, Gaudiya Sampradaya',
         socials: {
-            instagram: 'https://instagram.com/sripundrik',
-            youtube: 'https://youtube.com/@PundrikGoswami'
+            youtube: 'https://youtube.com/@sripundrik',
+            instagram: 'https://instagram.com/sripundrik_updates'
         },
         verified: true
     },
@@ -61,7 +61,8 @@ His discourses are a unique blend of traditional *Rasik* philosophy and modern s
 His ethos is "Satya, Prem, Karuna" (Truth, Love, Compassion). He does not belong to any specific sect or sampradaya but spreads the universal message of humanity through the Ramayana.`,
         lineage: 'Nimbarka lineage (Early influence), Independent',
         socials: {
-            youtube: 'https://youtube.com/@MorariBapu',
+            youtube: 'https://youtube.com/@ChitrakutdhamTalgajarda',
+            instagram: 'https://instagram.com/ChitrakutdhamTalgajarda',
             website: 'https://chitrakutdhamtalgajarda.org'
         },
         verified: true
@@ -108,14 +109,23 @@ Known for his "Ekantik Varta" (Private Conversations), he answers the questions 
     },
     {
         id: 'bageshwar',
-        name: 'Bageshwar Dham Sarkar',
+        name: 'Pt. Dhirendra Krishna Shastri',
         shortName: 'Bageshwar Ji',
         emoji: '🕉️',
         image: './assets/images/bageshwar.png',
-        specialty: 'दिव्य दरबार',
+        specialty: 'दिव्य दरबार व हनुमंत कथा',
         followers: 12000000,
         eventsCount: 450,
-        bio: 'Pt. Dhirendra Krishna Shastri of Bageshwar Dham.',
+        bio: 'Acharya of Bageshwar Dham Sarkar, Chhatarpur. Known for Divya Darbar.',
+        fullBio: `Pt. Dhirendra Krishna Shastri is the peethadhishwar of **Bageshwar Dham Sarkar** in Chhatarpur, Madhya Pradesh. He is famous for his **Divya Darbar** where devotees seek divine intervention for their problems.
+
+He is also known for his powerful Hanumant Katha and his bold stance on Sanatan Dharma. His programs draw massive crowds from across India.`,
+        lineage: 'Bageshwar Dham, Chhatarpur',
+        socials: {
+            youtube: 'https://youtube.com/@BageshwarDhamSarkar',
+            instagram: 'https://instagram.com/iambageshwardhamsarkar',
+            website: 'https://bageshwardham.co.in'
+        },
         verified: true
     },
     {
@@ -128,6 +138,14 @@ Known for his "Ekantik Varta" (Private Conversations), he answers the questions 
         followers: 11000000,
         eventsCount: 600,
         bio: 'Sehore Wale Baba. Famous for Shiv Mahapuran and Rudraksh Mahotsav.',
+        fullBio: `Pt. Pradeep Mishra Ji, popularly known as "Sehore Wale Baba", is one of the most followed Shiv Mahapuran speakers in India.
+
+He is famous for his simple home remedies (upay), Rudraksh Mahotsav, and making complex Shaivite philosophy accessible to common people. His devotion to Mahadev is evident in every discourse.`,
+        lineage: 'Independent',
+        socials: {
+            youtube: 'https://youtube.com/@PanditPradeepJiMishraSehoreWale',
+            instagram: 'https://instagram.com/pradeep_mishra_ji_sehore_vale_'
+        },
         verified: true
     },
     {
@@ -143,7 +161,9 @@ Known for his "Ekantik Varta" (Private Conversations), he answers the questions 
         fullBio: `Pt. Indresh Upadhyay is a young kathavachak from Vrindavan known for his scholarly approach to Bhagwat Katha. His explanations are clear, logical, and appeal to the educated youth seeking authentic scriptural knowledge.`,
         lineage: 'Vrindavan Tradition',
         socials: {
-            youtube: 'https://youtube.com/@IndreshUpadhyay'
+            youtube: 'https://youtube.com/@BhaktiPath',
+            instagram: 'https://instagram.com/bhaktipath',
+            website: 'https://bhaktipaths.com'
         },
         verified: true
     },
@@ -163,7 +183,7 @@ Known for his "Ekantik Varta" (Private Conversations), he answers the questions 
         fullBio: `Swami Vijay Kaushal Ji Maharaj is renowned for his deeply emotional and scholarly exposition of the Ramayana. His kathas move audiences to tears with their vivid descriptions of Lord Ram's leelas.`,
         lineage: 'Ramanandi Sampradaya',
         socials: {
-            youtube: 'https://youtube.com/@VijayKaushalJi'
+            youtube: 'https://youtube.com/@VIJAYKAUSHALJIMAHARAJ'
         },
         verified: true
     },
@@ -180,7 +200,7 @@ Known for his "Ekantik Varta" (Private Conversations), he answers the questions 
         fullBio: `Shri Rajan Ji Maharaj is famous for his unique musical style of Ram Katha narration. His bhajans and singing during katha create an atmosphere of divine devotion. He is particularly known for his Awadhi style of Manas recitation.`,
         lineage: 'Ramanandi Sampradaya',
         socials: {
-            youtube: 'https://youtube.com/@RajanJiMaharaj'
+            youtube: 'https://youtube.com/@PujyaRajanJiOfficial'
         },
         verified: true
     },
@@ -235,7 +255,9 @@ Known for his "Ekantik Varta" (Private Conversations), he answers the questions 
         fullBio: `Bhaishree Ramesh Oza is a veteran Bhagwat speaker who has been conducting kathas for decades. He focuses on the practical application of scriptural wisdom in daily life, making ancient texts relevant to modern challenges.`,
         lineage: 'Vallabh Sampradaya Influence',
         socials: {
-            youtube: 'https://youtube.com/@RameshOza'
+            youtube: 'https://youtube.com/@PujyaBhaishriRameshbhaiOza',
+            instagram: 'https://instagram.com/pujyabhaishri',
+            website: 'https://sandipani.org'
         },
         verified: true
     },
@@ -252,8 +274,9 @@ Known for his "Ekantik Varta" (Private Conversations), he answers the questions 
         fullBio: `Aniruddhacharya Ji Maharaj is famous for his energetic and engaging style of Bhagwat Katha. His kathas are regularly broadcasted on television channels and he has a massive following on social media for his short spiritual clips.`,
         lineage: 'Independent',
         socials: {
-            youtube: 'https://youtube.com/@AniruddhacharyaJi',
-            instagram: 'https://instagram.com/aniruddhacharyaji'
+            youtube: 'https://youtube.com/@Aniruddhacharyaji',
+            instagram: 'https://instagram.com/Aniruddhacharyajimaharaj',
+            website: 'https://aniruddhacharya.com'
         },
         verified: true
     },
