@@ -139,7 +139,228 @@ Known for his "Ekantik Varta" (Private Conversations), he answers the questions 
         specialty: 'श्रीमद्भागवत कथा',
         followers: 500000,
         eventsCount: 300,
-        bio: 'Blessed with a melodious voice, his Bhagwat Katha recitations are a treat for the soul.',
+        bio: 'A young and scholarly voice from Vrindavan, known for his clear explanations of scripture.',
+        fullBio: `Pt. Indresh Upadhyay is a young kathavachak from Vrindavan known for his scholarly approach to Bhagwat Katha. His explanations are clear, logical, and appeal to the educated youth seeking authentic scriptural knowledge.`,
+        lineage: 'Vrindavan Tradition',
+        socials: {
+            youtube: 'https://youtube.com/@IndreshUpadhyay'
+        },
+        verified: true
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // RAM KATHA SPECIALISTS
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'vijaykaushal',
+        name: 'Swami Vijay Kaushal Ji Maharaj',
+        shortName: 'Vijay Kaushal Ji',
+        emoji: '📖',
+        image: './assets/images/vijaykaushal.png',
+        specialty: 'राम कथा',
+        followers: 2500000,
+        eventsCount: 500,
+        bio: 'Known for emotional and deep exposition of the Ramayana.',
+        fullBio: `Swami Vijay Kaushal Ji Maharaj is renowned for his deeply emotional and scholarly exposition of the Ramayana. His kathas move audiences to tears with their vivid descriptions of Lord Ram's leelas.`,
+        lineage: 'Ramanandi Sampradaya',
+        socials: {
+            youtube: 'https://youtube.com/@VijayKaushalJi'
+        },
+        verified: true
+    },
+    {
+        id: 'rajanji',
+        name: 'Pujya Shri Rajan Ji Maharaj',
+        shortName: 'Rajan Ji Maharaj',
+        emoji: '🎵',
+        image: './assets/images/rajanji.png',
+        specialty: 'राम कथा (Musical)',
+        followers: 3000000,
+        eventsCount: 400,
+        bio: 'Famous for his musical Ram Katha and melodious singing style.',
+        fullBio: `Shri Rajan Ji Maharaj is famous for his unique musical style of Ram Katha narration. His bhajans and singing during katha create an atmosphere of divine devotion. He is particularly known for his Awadhi style of Manas recitation.`,
+        lineage: 'Ramanandi Sampradaya',
+        socials: {
+            youtube: 'https://youtube.com/@RajanJiMaharaj'
+        },
+        verified: true
+    },
+    {
+        id: 'prembhushan',
+        name: 'Swami Prembhushan Ji Maharaj',
+        shortName: 'Prembhushan Ji',
+        emoji: '🎶',
+        image: './assets/images/prembhushan.png',
+        specialty: 'राम कथा',
+        followers: 1500000,
+        eventsCount: 350,
+        bio: 'Known for his melodious "Hum Katha Sunate" style.',
+        fullBio: `Swami Prembhushan Ji Maharaj is famous for his unique style of Ram Katha beginning with "Hum Katha Sunate...". His melodious voice and emotional delivery have earned him a devoted following.`,
+        lineage: 'Ramanandi Sampradaya',
+        socials: {
+            youtube: 'https://youtube.com/@PrembhushanJi'
+        },
+        verified: true
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // BHAGWAT KATHA SPECIALISTS
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'devkinandan',
+        name: 'Pujya Swami Devkinandan Thakur Ji',
+        shortName: 'Devkinandan Ji',
+        emoji: '🦚',
+        image: './assets/images/devkinandan.png',
+        specialty: 'श्रीमद्भागवत कथा',
+        followers: 8000000,
+        eventsCount: 600,
+        bio: 'Known for his aggressive stance on Sanatan Dharma and melodious Bhagwat Katha.',
+        fullBio: `Pujya Devkinandan Thakur Ji Maharaj is based in Vrindavan and is known for his bold and unapologetic stance on Sanatan Dharma. His Bhagwat Kathas are characterized by beautiful singing and strong messages of Hindu unity and pride.`,
+        lineage: 'Vrindavan Tradition',
+        socials: {
+            youtube: 'https://youtube.com/@DevkinandanThakurJi',
+            instagram: 'https://instagram.com/devkinandanthakurji'
+        },
+        verified: true
+    },
+    {
+        id: 'rameshoza',
+        name: 'Bhaishree Ramesh Oza',
+        shortName: 'Ramesh Oza Ji',
+        emoji: '📚',
+        image: './assets/images/rameshoza.png',
+        specialty: 'श्रीमद्भागवत कथा',
+        followers: 2000000,
+        eventsCount: 800,
+        bio: 'Veteran spiritual leader focusing on practical application of spiritual texts.',
+        fullBio: `Bhaishree Ramesh Oza is a veteran Bhagwat speaker who has been conducting kathas for decades. He focuses on the practical application of scriptural wisdom in daily life, making ancient texts relevant to modern challenges.`,
+        lineage: 'Vallabh Sampradaya Influence',
+        socials: {
+            youtube: 'https://youtube.com/@RameshOza'
+        },
+        verified: true
+    },
+    {
+        id: 'aniruddhacharya',
+        name: 'Acharya Aniruddhacharya Ji Maharaj',
+        shortName: 'Aniruddhacharya Ji',
+        emoji: '📺',
+        image: './assets/images/aniruddhacharya.png',
+        specialty: 'श्रीमद्भागवत कथा',
+        followers: 6000000,
+        eventsCount: 450,
+        bio: 'Famous for his engaging style and televised kathas.',
+        fullBio: `Aniruddhacharya Ji Maharaj is famous for his energetic and engaging style of Bhagwat Katha. His kathas are regularly broadcasted on television channels and he has a massive following on social media for his short spiritual clips.`,
+        lineage: 'Independent',
+        socials: {
+            youtube: 'https://youtube.com/@AniruddhacharyaJi',
+            instagram: 'https://instagram.com/aniruddhacharyaji'
+        },
+        verified: true
+    },
+    {
+        id: 'mridulkrishna',
+        name: 'Swami Mridul Krishna Shastri Ji',
+        shortName: 'Mridul Krishna Ji',
+        emoji: '🎹',
+        image: './assets/images/mridulkrishna.png',
+        specialty: 'श्रीमद्भागवत कथा',
+        followers: 3500000,
+        eventsCount: 500,
+        bio: 'Veteran Bhagwat speaker from Vrindavan known for melodious kathas.',
+        fullBio: `Swami Mridul Krishna Shastri Ji is a veteran Bhagwat speaker from Vrindavan. He is known for his melodious voice and deep devotion to Radha-Krishna. His kathas are a blend of philosophy, music, and emotion.`,
+        lineage: 'Vrindavan Tradition',
+        socials: {
+            youtube: 'https://youtube.com/@MridulKrishnaShastri'
+        },
+        verified: true
+    },
+    {
+        id: 'gauravkrishna',
+        name: 'Swami Gaurav Krishna Goswami Ji',
+        shortName: 'Gaurav Krishna Ji',
+        emoji: '🌸',
+        image: './assets/images/gauravkrishna.png',
+        specialty: 'श्रीमद्भागवत कथा',
+        followers: 4500000,
+        eventsCount: 400,
+        bio: 'Popular young Bhagwat speaker known for energetic kathas.',
+        fullBio: `Swami Gaurav Krishna Goswami Ji is a popular young kathavachak known for his energetic style and ability to connect with youth. His kathas blend traditional wisdom with contemporary relevance.`,
+        lineage: 'Vrindavan Tradition',
+        socials: {
+            youtube: 'https://youtube.com/@GauravKrishnaGoswami',
+            instagram: 'https://instagram.com/gauravkrishnagoswami'
+        },
+        verified: true
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // OTHER PROMINENT KATHAVACHAKS
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'kirtimaa',
+        name: 'Pujya Kirti Maa',
+        shortName: 'Kirti Maa',
+        emoji: '🙏',
+        image: './assets/images/kirtimaa.png',
+        specialty: 'श्रीमद्भागवत कथा',
+        followers: 1000000,
+        eventsCount: 200,
+        bio: 'Revered female saint known for devotional Bhagwat Katha.',
+        fullBio: `Pujya Kirti Maa is a revered female kathavachak who conducts deeply devotional Bhagwat Kathas. Her simple yet powerful style touches the hearts of devotees seeking divine wisdom.`,
+        lineage: 'Independent',
+        socials: {
+            youtube: 'https://youtube.com/@KirtiMaa'
+        },
+        verified: true
+    },
+    {
+        id: 'sharnarangkrishna',
+        name: 'Pujya Sharnarang Krishna Murari Ji',
+        shortName: 'Sharnarang Ji',
+        emoji: '🔔',
+        image: './assets/images/sharnarang.png',
+        specialty: 'श्रीमद्भागवत कथा',
+        followers: 800000,
+        eventsCount: 250,
+        bio: 'Renowned for his unique style of Bhagwat Katha.',
+        fullBio: `Pujya Sharnarang Krishna Murari Ji is known for his unique and engaging style of Bhagwat Katha. His discourses are marked by deep scriptural knowledge and devotional fervor.`,
+        lineage: 'Vrindavan Tradition',
+        socials: {
+            youtube: 'https://youtube.com/@SharnarangJi'
+        },
+        verified: true
+    },
+    {
+        id: 'sureshanand',
+        name: 'Swami Suresh Anand Saraswati Ji',
+        shortName: 'Suresh Anand Ji',
+        emoji: '☸️',
+        image: './assets/images/sureshanand.png',
+        specialty: 'विविध कथा',
+        followers: 600000,
+        eventsCount: 300,
+        bio: 'Versatile kathavachak known for various puran kathas.',
+        fullBio: `Swami Suresh Anand Saraswati Ji is a versatile kathavachak who conducts various puran kathas including Bhagwat, Shiv Puran, and Ramayan. His encyclopedic knowledge of scriptures is well-recognized.`,
+        lineage: 'Saraswati Order',
+        socials: {
+            youtube: 'https://youtube.com/@SureshAnandJi'
+        },
+        verified: true
+    },
+    {
+        id: 'prakashgopi',
+        name: 'Acharya Prakash Gopi Ji',
+        shortName: 'Prakash Gopi Ji',
+        emoji: '🌺',
+        image: './assets/images/prakashgopi.png',
+        specialty: 'ब्रज रास कथा',
+        followers: 400000,
+        eventsCount: 150,
+        bio: 'Specialist in Braj Ras and Radha-Krishna leela kathas.',
+        fullBio: `Acharya Prakash Gopi Ji is a specialist in Braj Ras and conducts beautiful kathas on Radha-Krishna leelas. His deep connection to Vrindavan and Braj bhakti tradition makes his kathas unique.`,
+        lineage: 'Gaudiya-Rasik Tradition',
+        socials: {
+            youtube: 'https://youtube.com/@PrakashGopiJi'
+        },
         verified: true
     }
 ];
