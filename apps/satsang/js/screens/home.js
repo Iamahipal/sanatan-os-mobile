@@ -102,11 +102,14 @@ function renderVachakRail(state) {
     const container = document.getElementById('vachakRail');
     if (!container) return;
 
-    const vachaks = state.vachaks.slice(0, 12); // Show first 12 vachaks
+    const allVachaks = state.vachaks;
+    const displayVachaks = allVachaks.slice(0, 10); // Show first 10 vachaks
+    const hasMore = allVachaks.length > 10;
 
-    container.innerHTML = vachaks.map(vachak => {
+    let html = displayVachaks.map(vachak => {
         const avatarContent = vachak.image
-            ? `<img src="${vachak.image}" alt="${vachak.shortName}" loading="lazy">`
+            ? `<img src="${vachak.image}" alt="${vachak.shortName}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+            + `<span class="vachak-avatar__emoji" style="display:none;">${vachak.emoji || '🙏'}</span>`
             : `<span class="vachak-avatar__emoji">${vachak.emoji || '🙏'}</span>`;
 
         return `
@@ -118,6 +121,20 @@ function renderVachakRail(state) {
             </div>
         `;
     }).join('');
+
+    // Add "See All" item if there are more vachaks
+    if (hasMore) {
+        html += `
+            <div class="rail__item vachak-avatar-item vachak-see-all" id="seeAllVachaksBtn">
+                <div class="vachak-avatar vachak-avatar--see-all">
+                    <span class="vachak-avatar__count">+${allVachaks.length - 10}</span>
+                </div>
+                <span class="vachak-avatar__name">See All</span>
+            </div>
+        `;
+    }
+
+    container.innerHTML = html;
 }
 
 /**

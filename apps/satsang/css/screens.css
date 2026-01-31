@@ -210,6 +210,35 @@
     white-space: nowrap;
 }
 
+/* See All Button */
+.vachak-avatar--see-all {
+    background: var(--color-surface-variant);
+    border: 2px dashed var(--color-outline);
+}
+
+.vachak-avatar__count {
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    border-radius: 50%;
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.vachak-see-all:hover .vachak-avatar--see-all {
+    background: var(--color-primary);
+    border-color: transparent;
+}
+
+.vachak-see-all:hover .vachak-avatar__count {
+    background: var(--color-on-primary);
+    color: var(--color-primary);
+}
+
 /* Skeleton for avatar */
 .skeleton--avatar {
     width: 64px;
