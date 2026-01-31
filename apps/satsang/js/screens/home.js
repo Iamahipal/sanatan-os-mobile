@@ -107,10 +107,8 @@ function renderVachakRail(state) {
     const hasMore = allVachaks.length > 10;
 
     let html = displayVachaks.map(vachak => {
-        const avatarContent = vachak.image
-            ? `<img src="${vachak.image}" alt="${vachak.shortName}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
-            + `<span class="vachak-avatar__emoji" style="display:none;">${vachak.emoji || '🙏'}</span>`
-            : `<span class="vachak-avatar__emoji">${vachak.emoji || '🙏'}</span>`;
+        const imageSrc = vachak.image || './assets/images/placeholder-vachak.png';
+        const avatarContent = `<img src="${imageSrc}" alt="${vachak.shortName}" loading="lazy" onerror="this.src='./assets/images/placeholder-vachak.png';">`;
 
         return `
             <div class="rail__item vachak-avatar-item" data-vachak-id="${vachak.id}">
