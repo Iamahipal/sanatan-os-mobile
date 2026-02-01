@@ -118,14 +118,21 @@ function renderVideoGrid(category) {
         <div class="video-grid">
             ${filteredRecordings.map(rec => {
         const vachak = store.getVachak(rec.vachakId);
+        const thumbnailUrl = rec.youtubeId
+            ? `https://img.youtube.com/vi/${rec.youtubeId}/hqdefault.jpg`
+            : null;
         return `
                     <div class="video-card" 
                          data-youtube-id="${rec.youtubeId}" 
                          data-title="${rec.title}">
                         <div class="video-card__thumb">
-                            <div class="video-card__thumb-placeholder">
-                                <i data-lucide="play-circle"></i>
-                            </div>
+                            ${thumbnailUrl ? `
+                                <img src="${thumbnailUrl}" alt="${rec.title}" class="video-card__thumb-img" loading="lazy">
+                            ` : `
+                                <div class="video-card__thumb-placeholder">
+                                    <i data-lucide="play-circle"></i>
+                                </div>
+                            `}
                             <span class="video-card__duration">${rec.duration}</span>
                         </div>
                         <div class="video-card__info">

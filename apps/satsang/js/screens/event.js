@@ -44,7 +44,7 @@ export function renderEvent(eventId) {
     const features = [];
     if (event.features?.isFree) features.push({ key: 'free', icon: 'badge-check', label: 'Free Entry' });
     if (event.features?.hasLiveStream) features.push({ key: 'live', icon: 'video', label: 'Livestream' });
-    if (event.features?.hasPrasad) features.push({ key: 'prasad', icon: 'utensils', label: 'Prasad' });
+    if (event.features?.hasPrasad) features.push({ key: 'prasad', icon: 'soup', label: 'Prasad' });
     if (event.features?.hasAccommodation) features.push({ key: 'stay', icon: 'bed', label: 'Stay' });
 
     container.innerHTML = `
