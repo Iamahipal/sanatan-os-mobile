@@ -4,6 +4,10 @@
 
 import { store } from '../store.js';
 import { getNotificationPermission, requestNotificationPermission } from '../services/notifications.js';
+import { getCurrentUser, showLoginModal, signOut, isLoggedIn, loadUserSession } from '../services/auth.js';
+
+// Load user session on module load
+loadUserSession();
 
 /**
  * Render User Profile Screen
@@ -19,19 +23,29 @@ export function renderProfile(state) {
     const notifStatus = notifPermission === 'granted' ? 'On' :
         notifPermission === 'denied' ? 'Blocked' : 'Off';
 
+    const user = getCurrentUser();
+    const loggedIn = isLoggedIn();
+
     container.innerHTML = `
         <div class="profile-screen">
             <!-- User Profile Card -->
             <div class="profile-hero">
                 <div class="profile-hero__avatar">
-                    <i data-lucide="user"></i>
+                    <i data-lucide="${loggedIn ? 'user-check' : 'user'}"></i>
                 </div>
-                <h2 class="profile-hero__name">Guest User</h2>
-                <p class="profile-hero__subtitle">Sign in for personalized experience</p>
-                <button class="btn btn--primary btn--sm">
-                    <i data-lucide="log-in"></i>
-                    Sign In
-                </button>
+                <h2 class="profile-hero__name">${loggedIn ? (user.name || user.phone) : 'Guest User'}</h2>
+                <p class="profile-hero__subtitle">${loggedIn ? 'Welcome back!' : 'Sign in for personalized experience'}</p>
+                ${loggedIn ? `
+                    <button class="btn btn--outline btn--sm" id="signOutBtn">
+                        <i data-lucide="log-out"></i>
+                        Sign Out
+                    </button>
+                ` : `
+                    <button class="btn btn--primary btn--sm" id="signInBtn">
+                        <i data-lucide="log-in"></i>
+                        Sign In
+                    </button>
+                `}
             </div>
             
             <!-- Quick Stats Grid -->

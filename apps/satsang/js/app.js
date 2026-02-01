@@ -18,6 +18,8 @@ import { showSearchModal } from './components/search.js';
 import { initYouTubeAPI, openYouTubePlayer, extractYouTubeId } from './components/youtube-player.js';
 import { showCalendarExportModal } from './services/calendar-export.js';
 import { startReminderService, requestNotificationPermission } from './services/notifications.js';
+import { showLoginModal, signOut } from './services/auth.js';
+import { showCheckInModal } from './services/checkin.js';
 
 /**
  * App Controller
@@ -304,6 +306,30 @@ const App = {
                         refreshIcons();
                     }
                 });
+            }
+            // Sign In button
+            if (e.target.closest('#signInBtn')) {
+                showLoginModal();
+            }
+            // Sign Out button
+            if (e.target.closest('#signOutBtn')) {
+                signOut();
+                showToast('👋 Signed out');
+                const state = store.getState();
+                if (state.currentScreen === 'profile') {
+                    renderProfile(state);
+                    refreshIcons();
+                }
+            }
+        });
+
+        // Listen for auth state changes
+        window.addEventListener('auth-changed', () => {
+            const state = store.getState();
+            if (state.currentScreen === 'profile') {
+                renderProfile(state);
+                refreshIcons();
+                showToast('✅ Signed in successfully!');
             }
         });
     },

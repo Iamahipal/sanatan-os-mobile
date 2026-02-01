@@ -1,0 +1,145 @@
+/**
+ * Satsang App - Auth & Check-In Styles
+ */
+
+/* ========================================
+   LOGIN MODAL
+   ======================================== */
+.login-modal {
+    max-width: 400px;
+}
+
+.login-description {
+    text-align: center;
+    color: var(--color-on-surface-variant);
+    margin-bottom: var(--space-4);
+}
+
+.login-step {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+/* Phone Input */
+.phone-input-wrap {
+    display: flex;
+    align-items: center;
+    background: var(--color-surface-variant);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.phone-prefix {
+    padding: var(--space-4);
+    font-weight: 600;
+    color: var(--color-on-surface);
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-outline-variant);
+}
+
+.phone-input {
+    flex: 1;
+    padding: var(--space-4);
+    border: none;
+    background: transparent;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--color-on-surface);
+    letter-spacing: 2px;
+}
+
+.phone-input::placeholder {
+    color: var(--color-on-surface-variant);
+    letter-spacing: 2px;
+}
+
+.phone-input:focus {
+    outline: none;
+}
+
+/* OTP Input */
+.otp-input {
+    width: 100%;
+    padding: var(--space-4);
+    text-align: center;
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    letter-spacing: 8px;
+    border: 2px solid var(--color-outline-variant);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    color: var(--color-on-surface);
+}
+
+.otp-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+/* ========================================
+   CHECK-IN MODAL
+   ======================================== */
+.modal--center .modal__content {
+    margin: auto;
+    border-radius: var(--radius-xl);
+}
+
+.checkin-modal {
+    max-width: 340px;
+    text-align: center;
+}
+
+.checkin-qr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    background: white;
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+}
+
+.checkin-qr svg {
+    width: 200px;
+    height: 200px;
+}
+
+.checkin-event {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-on-surface);
+    margin-bottom: var(--space-2);
+}
+
+.checkin-hint {
+    font-size: var(--text-sm);
+    color: var(--color-on-surface-variant);
+    margin-bottom: var(--space-4);
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.btn--full {
+    width: 100%;
+}
+
+.btn--ghost {
+    background: transparent;
+    border: none;
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.btn--ghost:hover {
+    background: var(--color-primary-container);
+}
+
+/* ========================================
+   SETTINGS ROW ICON COLORS
+   ======================================== */
+.settings-row__icon--green {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
