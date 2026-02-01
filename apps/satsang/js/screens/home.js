@@ -41,6 +41,9 @@ function renderHero() {
     const isLive = isEventLive(event);
     const dateDisplay = isLive ? 'Live Now' : formatDateRange(event.dates.start, event.dates.end);
 
+    // Get daily timing if available
+    const dailyTime = event.dates.dailyTiming || '6:00 AM - 10:00 AM';
+
     // Use vachak image or placeholder gradient
     const backgroundStyle = vachak?.image
         ? `background-image: url('${vachak.image}'); background-size: cover; background-position: center;`
@@ -62,6 +65,7 @@ function renderHero() {
                 <button class="hero-card__cta btn ${isLive ? 'btn--live-hero' : 'btn--hero'}">
                     ${isLive ? '🔴 Watch Live' : 'View Event →'}
                 </button>
+                ${isLive ? `<div class="hero-card__time">${dailyTime}</div>` : ''}
             </div>
         </div>
     `;

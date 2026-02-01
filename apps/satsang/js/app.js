@@ -129,6 +129,11 @@ const App = {
             showSearchModal();
         });
 
+        // View All Vachaks button (सत समागम See All)
+        document.getElementById('viewAllVachaks')?.addEventListener('click', () => {
+            showToast('🙏 All saints view coming soon!');
+        });
+
         // Initialize YouTube API for live streams
         initYouTubeAPI().catch(err => console.log('YouTube API will load on demand'));
 

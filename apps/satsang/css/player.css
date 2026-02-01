@@ -221,8 +221,13 @@
     background: var(--color-surface);
     border-radius: var(--radius-lg);
     padding: var(--space-3);
+    margin-bottom: var(--space-3);
     cursor: pointer;
     transition: all var(--transition-fast);
+}
+
+.live-now-card:last-child {
+    margin-bottom: 0;
 }
 
 .live-now-card:hover {
