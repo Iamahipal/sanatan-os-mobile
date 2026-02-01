@@ -7,6 +7,7 @@ import { router } from '../router.js';
 import { formatDateRange, isEventLive, getCategoryInfo } from '../utils.js';
 import { showCalendarExportModal } from '../services/calendar-export.js';
 import { openYouTubePlayer, extractYouTubeId } from '../components/youtube-player.js';
+import { renderCommentsSection } from '../services/community.js';
 
 /**
  * Render Event Detail Screen
@@ -139,6 +140,9 @@ export function renderEvent(eventId) {
                         ` : ''}
                     </div>
                 ` : ''}
+                
+                <!-- Comments Section -->
+                ${renderCommentsSection(eventId)}
             </div>
             
             <!-- Action Bar -->
@@ -149,7 +153,11 @@ export function renderEvent(eventId) {
                 </button>
                 <button class="btn btn--outline" data-add-calendar="${eventId}">
                     <i data-lucide="calendar-plus"></i>
-                    Add to Calendar
+                    Calendar
+                </button>
+                <button class="btn btn--outline" data-donate="${eventId}">
+                    <i data-lucide="hand-heart"></i>
+                    Donate
                 </button>
                 ${event.liveYoutubeUrl || (vachak?.socials?.youtube && event.features?.hasLiveStream) ? `
                     <button class="btn btn--youtube" data-watch-youtube="${eventId}">
@@ -157,9 +165,9 @@ export function renderEvent(eventId) {
                         Watch
                     </button>
                 ` : `
-                    <button class="btn btn--primary ${isLive ? 'btn--live' : ''}" data-register="${eventId}">
-                        <i data-lucide="${isLive ? 'video' : 'ticket'}"></i>
-                        ${isLive ? 'Watch Live 🔴' : 'Register'}
+                    <button class="btn btn--primary ${isLive ? 'btn--live' : ''}" data-checkin="${eventId}">
+                        <i data-lucide="${isLive ? 'video' : 'qr-code'}"></i>
+                        ${isLive ? 'Watch Live 🔴' : 'Check-In'}
                     </button>
                 `}
             </div>

@@ -1197,6 +1197,11 @@
     color: #92400E;
 }
 
+.profile-stat-card__icon--donate {
+    background: #FFE0B2;
+    color: #E65100;
+}
+
 .profile-stat-card__icon svg {
     width: 20px;
     height: 20px;

@@ -20,6 +20,8 @@ import { showCalendarExportModal } from './services/calendar-export.js';
 import { startReminderService, requestNotificationPermission } from './services/notifications.js';
 import { showLoginModal, signOut } from './services/auth.js';
 import { showCheckInModal } from './services/checkin.js';
+import { showDonationModal } from './services/donations.js';
+import { addComment, likeComment } from './services/community.js';
 
 /**
  * App Controller
@@ -258,6 +260,56 @@ const App = {
                 return;
             }
 
+            // Donate button
+            const donateBtn = e.target.closest('[data-donate]');
+            if (donateBtn) {
+                const eventId = donateBtn.dataset.donate;
+                const event = store.getEvent(eventId);
+                showDonationModal({ eventId, eventTitle: event?.title });
+                return;
+            }
+
+            // Check-In button
+            const checkInBtn = e.target.closest('[data-checkin]');
+            if (checkInBtn) {
+                const eventId = checkInBtn.dataset.checkin;
+                const event = store.getEvent(eventId);
+                if (event) {
+                    showCheckInModal(event, store.getState().userId);
+                } else {
+                    showToast('📋 Event not found');
+                }
+                return;
+            }
+
+            // Comment submit
+            const commentSubmitBtn = e.target.closest('.comment-submit');
+            if (commentSubmitBtn) {
+                const eventId = commentSubmitBtn.dataset.eventId;
+                const input = document.querySelector(`.comment-input[data-event-id="${eventId}"]`);
+                if (input && input.value.trim()) {
+                    const comment = addComment(eventId, input.value.trim());
+                    if (comment) {
+                        input.value = '';
+                        showToast('💬 Comment added!');
+                        // Re-render event to show new comment
+                        renderEvent(eventId);
+                        refreshIcons();
+                    }
+                }
+                return;
+            }
+
+            // Comment like
+            const commentLikeBtn = e.target.closest('.comment-like');
+            if (commentLikeBtn) {
+                const commentId = commentLikeBtn.dataset.commentId;
+                const likes = likeComment(commentId);
+                commentLikeBtn.innerHTML = `<i data-lucide="heart"></i> ${likes}`;
+                refreshIcons();
+                return;
+            }
+
             // City selection
             const cityBtn = e.target.closest('[data-city]');
             if (cityBtn) {
@@ -320,6 +372,10 @@ const App = {
                     renderProfile(state);
                     refreshIcons();
                 }
+            }
+            // Donate card in profile
+            if (e.target.closest('#donateCardBtn')) {
+                showDonationModal({});
             }
         });
 

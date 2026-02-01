@@ -68,6 +68,15 @@ export function renderProfile(state) {
                         <span class="profile-stat-card__label">Reminders</span>
                     </div>
                 </div>
+                <div class="profile-stat-card" id="donateCardBtn">
+                    <div class="profile-stat-card__icon profile-stat-card__icon--donate">
+                        <i data-lucide="hand-heart"></i>
+                    </div>
+                    <div class="profile-stat-card__content">
+                        <span class="profile-stat-card__value">🙏</span>
+                        <span class="profile-stat-card__label">Donate</span>
+                    </div>
+                </div>
             </div>
             
             <!-- App Settings Card -->
