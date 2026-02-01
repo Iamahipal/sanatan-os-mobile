@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="css/screens.css">
     <link rel="stylesheet" href="css/player.css">
     <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/library.css">
 
     <!-- Icons (Local) -->
     <script src="assets/icons/lucide.min.js"></script>
@@ -191,6 +192,13 @@
                 </section>
             </div>
 
+            <!-- LIBRARY SCREEN (Hidden by default) -->
+            <div class="screen" id="libraryScreen">
+                <div id="libraryContainer">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+
             <!-- PROFILE SCREEN (Hidden by default) -->
             <div class="screen" id="profileScreen">
                 <div class="user-profile" id="userProfileContainer">
@@ -205,6 +213,10 @@
             <a href="#home" class="nav__item active" data-screen="home">
                 <i data-lucide="home"></i>
                 <span>Home</span>
+            </a>
+            <a href="#library" class="nav__item" data-screen="library">
+                <i data-lucide="play-circle"></i>
+                <span>Library</span>
             </a>
             <a href="#calendar" class="nav__item" data-screen="calendar">
                 <i data-lucide="calendar"></i>

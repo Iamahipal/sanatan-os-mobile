@@ -13,6 +13,7 @@ import { renderVachak } from './screens/vachak.js';
 import { renderSaved } from './screens/saved.js';
 import { renderProfile } from './screens/profile.js';
 import { renderCalendar, prevMonth, nextMonth, selectDate } from './screens/calendar.js';
+import { renderLibrary } from './screens/library.js';
 import { showSearchModal } from './components/search.js';
 import { initYouTubeAPI, openYouTubePlayer, extractYouTubeId } from './components/youtube-player.js';
 import { showCalendarExportModal } from './services/calendar-export.js';
@@ -86,6 +87,9 @@ const App = {
                 break;
             case 'calendar':
                 renderCalendar(state);
+                break;
+            case 'library':
+                renderLibrary(state);
                 break;
         }
 

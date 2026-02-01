@@ -12,6 +12,7 @@ class Router {
             'calendar': () => store.navigate('calendar'),
             'saved': () => store.navigate('saved'),
             'profile': () => store.navigate('profile'),
+            'library': () => store.navigate('library'),
             'event': (id) => store.navigate('event', id),
             'vachak': (id) => store.navigate('vachak', id)
         };
@@ -76,6 +77,7 @@ class Router {
             'event': 'home',
             'vachak': 'home',
             'calendar': 'calendar',
+            'library': 'library',
             'saved': 'saved',
             'profile': 'profile'
         };
