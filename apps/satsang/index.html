@@ -10,7 +10,15 @@
     <title>Satsang - Find Spiritual Events Near You</title>
     <meta name="description"
         content="Discover kathas, satsangs, and spiritual events by renowned Vachaks across India.">
-    <meta name="theme-color" content="#FFFAF5">
+    <meta name="theme-color" content="#FF6B35">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Satsang">
+    <meta name="mobile-web-app-capable" content="yes">
 
     <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -246,6 +254,38 @@
 
     <!-- Application Scripts -->
     <script type="module" src="js/app.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        // Register Service Worker for offline support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((reg) => console.log('✅ Service Worker registered:', reg.scope))
+                    .catch((err) => console.log('❌ SW registration failed:', err));
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('📱 Install prompt ready');
+            // Show install button in profile settings
+            const installBtn = document.getElementById('installAppBtn');
+            if (installBtn) installBtn.style.display = 'flex';
+        });
+
+        // Handle install
+        window.installApp = async () => {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log('Install outcome:', outcome);
+            deferredPrompt = null;
+        };
+    </script>
 </body>
 
 </html>

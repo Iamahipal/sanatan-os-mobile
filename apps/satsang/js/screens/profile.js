@@ -1,8 +1,9 @@
 /**
- * Satsang App v2 - Profile Screen Renderer
+ * Satsang App v3 - Profile Screen Renderer
  */
 
 import { store } from '../store.js';
+import { getNotificationPermission, requestNotificationPermission } from '../services/notifications.js';
 
 /**
  * Render User Profile Screen
@@ -14,6 +15,9 @@ export function renderProfile(state) {
 
     const savedCount = state.savedEvents.length;
     const reminderCount = Object.keys(state.eventReminders || {}).length;
+    const notifPermission = getNotificationPermission();
+    const notifStatus = notifPermission === 'granted' ? 'On' :
+        notifPermission === 'denied' ? 'Blocked' : 'Off';
 
     container.innerHTML = `
         <div class="profile-screen">
@@ -52,6 +56,33 @@ export function renderProfile(state) {
                 </div>
             </div>
             
+            <!-- App Settings Card -->
+            <div class="settings-card">
+                <h3 class="settings-card__title">App</h3>
+                
+                <button class="settings-row" id="installAppBtn" style="display: none;">
+                    <div class="settings-row__icon settings-row__icon--green">
+                        <i data-lucide="download"></i>
+                    </div>
+                    <div class="settings-row__content">
+                        <span class="settings-row__label">Install App</span>
+                        <span class="settings-row__value">Add to Home Screen</span>
+                    </div>
+                    <i data-lucide="chevron-right" class="settings-row__arrow"></i>
+                </button>
+                
+                <button class="settings-row" id="enableNotificationsBtn">
+                    <div class="settings-row__icon settings-row__icon--amber">
+                        <i data-lucide="bell"></i>
+                    </div>
+                    <div class="settings-row__content">
+                        <span class="settings-row__label">Notifications</span>
+                        <span class="settings-row__value">${notifStatus}</span>
+                    </div>
+                    <i data-lucide="${notifPermission === 'granted' ? 'check-circle' : 'chevron-right'}" class="settings-row__arrow"></i>
+                </button>
+            </div>
+            
             <!-- Settings Card -->
             <div class="settings-card">
                 <h3 class="settings-card__title">Preferences</h3>
@@ -63,17 +94,6 @@ export function renderProfile(state) {
                     <div class="settings-row__content">
                         <span class="settings-row__label">Location</span>
                         <span class="settings-row__value">${state.userLocation}</span>
-                    </div>
-                    <i data-lucide="chevron-right" class="settings-row__arrow"></i>
-                </button>
-                
-                <button class="settings-row">
-                    <div class="settings-row__icon settings-row__icon--amber">
-                        <i data-lucide="bell"></i>
-                    </div>
-                    <div class="settings-row__content">
-                        <span class="settings-row__label">Notifications</span>
-                        <span class="settings-row__value">On</span>
                     </div>
                     <i data-lucide="chevron-right" class="settings-row__arrow"></i>
                 </button>

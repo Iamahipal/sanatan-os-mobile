@@ -16,6 +16,7 @@ import { renderCalendar, prevMonth, nextMonth, selectDate } from './screens/cale
 import { showSearchModal } from './components/search.js';
 import { initYouTubeAPI, openYouTubePlayer, extractYouTubeId } from './components/youtube-player.js';
 import { showCalendarExportModal } from './services/calendar-export.js';
+import { startReminderService, requestNotificationPermission } from './services/notifications.js';
 
 /**
  * App Controller
@@ -25,7 +26,7 @@ const App = {
      * Initialize the application
      */
     init() {
-        console.log('🕉️ Satsang App v2 Initializing...');
+        console.log('🕉️ Satsang App v3 Initializing...');
 
         try {
             // 1. Initialize store with data
@@ -46,6 +47,9 @@ const App = {
 
             // 5. Refresh icons
             refreshIcons();
+
+            // 6. Start reminder service for notifications
+            startReminderService();
 
             console.log('✅ App initialized successfully');
         } catch (error) {
@@ -276,6 +280,28 @@ const App = {
         // Calendar month navigation
         document.getElementById('prevMonthBtn')?.addEventListener('click', () => prevMonth());
         document.getElementById('nextMonthBtn')?.addEventListener('click', () => nextMonth());
+
+        // Install App button (from profile)
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('#installAppBtn')) {
+                if (window.installApp) window.installApp();
+            }
+            if (e.target.closest('#enableNotificationsBtn')) {
+                requestNotificationPermission().then((permission) => {
+                    if (permission === 'granted') {
+                        showToast('🔔 Notifications enabled!');
+                    } else if (permission === 'denied') {
+                        showToast('❌ Notifications blocked. Enable in browser settings.');
+                    }
+                    // Re-render profile to update status
+                    const state = store.getState();
+                    if (state.currentScreen === 'profile') {
+                        renderProfile(state);
+                        refreshIcons();
+                    }
+                });
+            }
+        });
     },
 
     /**
