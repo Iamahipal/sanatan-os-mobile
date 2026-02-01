@@ -1,105 +1,173 @@
 /**
  * Satsang App v2 - Design Tokens
- * Divine Light Theme
+ * Material Design 3 Compliant + Krishna Vaani Font System
  */
 
+/* ========================================
+   FONTS - Same as Krishna Vaani
+   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap');
+
 :root {
-   /* ========================================
-       COLOR PALETTE
+    /* ========================================
+       TYPOGRAPHY - Krishna Vaani Style
+       ======================================== */
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-sanskrit: 'Tiro Devanagari Sanskrit', serif;
+
+    /* Legacy aliases for compatibility */
+    --font-heading: var(--font-sanskrit);
+    --font-body: var(--font-main);
+    --font-english: var(--font-main);
+
+    /* Font Weights */
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+
+    /* Type Scale */
+    --text-xs: 0.6875rem;
+    /* 11px */
+    --text-sm: 0.8125rem;
+    /* 13px */
+    --text-base: 0.9375rem;
+    /* 15px */
+    --text-lg: 1.0625rem;
+    /* 17px */
+    --text-xl: 1.25rem;
+    /* 20px */
+    --text-2xl: 1.5rem;
+    /* 24px */
+    --text-3xl: 2rem;
+    /* 32px */
+
+    /* ========================================
+       COLOR PALETTE - M3 Extended
        ======================================== */
 
-   /* Primary - Saffron */
-   --color-primary: #D9480F;
-   --color-primary-light: #FF6B2C;
-   --color-primary-container: #FFF4E6;
-   --color-on-primary: #FFFFFF;
-   --color-on-primary-container: #5C2D0E;
+    /* Primary - Saffron */
+    --color-primary: #D9480F;
+    --color-primary-light: #FF6B2C;
+    --color-primary-dark: #B84D1A;
+    --color-primary-container: #FFF4E6;
+    --color-on-primary: #FFFFFF;
+    --color-on-primary-container: #5C2D0E;
 
-   /* Surface - Divine Light */
-   --color-surface: #FFFAF5;
-   --color-surface-container: #FFFFFF;
-   --color-surface-container-high: #F8F4EF;
-   --color-surface-variant: #F0EBE6;
+    /* Secondary - Gold */
+    --color-secondary: #B8860B;
+    --color-secondary-light: #DAA520;
+    --color-secondary-container: #FFF8E1;
+    --color-on-secondary: #FFFFFF;
+    --color-on-secondary-container: #4A3600;
 
-   /* Text */
-   --color-on-surface: #1A1A1A;
-   --color-on-surface-variant: #5F5F5F;
-   --color-outline: #E0D6CC;
-   --color-outline-variant: #EFDECE;
+    /* Tertiary - Forest Green */
+    --color-tertiary: #2E7D32;
+    --color-tertiary-light: #4CAF50;
+    --color-tertiary-container: #E8F5E9;
+    --color-on-tertiary: #FFFFFF;
+    --color-on-tertiary-container: #1B5E20;
 
-   /* Semantic */
-   --color-error: #BA1A1A;
-   --color-error-container: #FFDAD6;
-   --color-success: #1B6D1B;
-   --color-success-container: #B8F5B8;
-   --color-live: #E53935;
+    /* Surface - Divine Light */
+    --color-surface: #FAFAF9;
+    --color-surface-container: #FFFFFF;
+    --color-surface-container-high: #F5F4F2;
+    --color-surface-variant: #F0EBE6;
+    --color-surface-dim: #E8E7E5;
 
-   /* ========================================
-       TYPOGRAPHY - Premium Hindi/Sanskrit Fonts
+    /* Text */
+    --color-on-surface: #1A1A1A;
+    --color-on-surface-variant: #5C5C5A;
+    --color-outline: #E0D6CC;
+    --color-outline-variant: #EFDECE;
+
+    /* Semantic */
+    --color-error: #BA1A1A;
+    --color-error-container: #FFDAD6;
+    --color-success: #1B6D1B;
+    --color-success-container: #B8F5B8;
+    --color-live: #E53935;
+
+    /* ========================================
+       STATE LAYERS - M3 Spec
        ======================================== */
-   --font-heading: 'Noto Serif Devanagari', 'Noto Sans Devanagari', serif;
-   --font-body: 'Noto Sans Devanagari', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-   --font-english: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --state-hover-opacity: 0.08;
+    --state-pressed-opacity: 0.12;
+    --state-focus-opacity: 0.12;
+    --state-dragged-opacity: 0.16;
 
-   --text-xs: 0.75rem;
-   /* 12px */
-   --text-sm: 0.875rem;
-   /* 14px */
-   --text-base: 1rem;
-   /* 16px */
-   --text-lg: 1.125rem;
-   /* 18px */
-   --text-xl: 1.25rem;
-   /* 20px */
-   --text-2xl: 1.5rem;
-   /* 24px */
-   --text-3xl: 2rem;
-   /* 32px */
-
-   /* ========================================
+    /* ========================================
        SPACING
        ======================================== */
-   --space-1: 4px;
-   --space-2: 8px;
-   --space-3: 12px;
-   --space-4: 16px;
-   --space-5: 20px;
-   --space-6: 24px;
-   --space-8: 32px;
-   --space-10: 40px;
-   --space-12: 48px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
 
-   /* ========================================
+    /* ========================================
        BORDER RADIUS
        ======================================== */
-   --radius-sm: 8px;
-   --radius-md: 12px;
-   --radius-lg: 16px;
-   --radius-xl: 24px;
-   --radius-full: 9999px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
 
-   /* ========================================
-       SHADOWS
+    /* ========================================
+       SHADOWS - Soft Premium
        ======================================== */
-   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-   --shadow-glow: 0 4px 16px rgba(217, 72, 15, 0.15);
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.03);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+    --shadow-glow: 0 4px 16px rgba(217, 72, 15, 0.15);
 
-   /* ========================================
-       TRANSITIONS
+    /* ========================================
+       MOTION - M3 Easing Curves
        ======================================== */
-   --transition-fast: 150ms ease;
-   --transition-normal: 250ms ease;
-   --transition-slow: 400ms ease;
+    --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+    --ease-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+    --ease-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --ease-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+    --ease-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
 
-   /* ========================================
+    /* Duration tokens */
+    --duration-short1: 50ms;
+    --duration-short2: 100ms;
+    --duration-short3: 150ms;
+    --duration-short4: 200ms;
+    --duration-medium1: 250ms;
+    --duration-medium2: 300ms;
+    --duration-medium3: 350ms;
+    --duration-medium4: 400ms;
+    --duration-long1: 450ms;
+    --duration-long2: 500ms;
+
+    /* Legacy transition aliases */
+    --transition-fast: var(--duration-short3) var(--ease-standard);
+    --transition-normal: var(--duration-medium1) var(--ease-standard);
+    --transition-slow: var(--duration-medium4) var(--ease-emphasized);
+
+    /* ========================================
        Z-INDEX SCALE
        ======================================== */
-   --z-base: 1;
-   --z-header: 100;
-   --z-nav: 100;
-   --z-modal-backdrop: 200;
-   --z-modal: 300;
-   --z-toast: 400;
+    --z-base: 1;
+    --z-header: 100;
+    --z-nav: 100;
+    --z-modal-backdrop: 200;
+    --z-modal: 300;
+    --z-toast: 400;
+
+    /* ========================================
+       SAFE AREAS
+       ======================================== */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
