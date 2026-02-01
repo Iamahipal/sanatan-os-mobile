@@ -94,8 +94,8 @@
 }
 
 .category-chip svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
 }
 
 .category-chip.active {
@@ -167,10 +167,10 @@
 }
 
 .video-card__thumb-placeholder svg {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     color: var(--color-primary);
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 .video-card__duration {

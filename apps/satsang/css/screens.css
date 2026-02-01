@@ -473,23 +473,23 @@
 
 .event-card__date-block {
     flex-shrink: 0;
-    width: 60px;
-    height: 44px;
+    width: 72px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-2);
+    padding: var(--space-1) var(--space-2);
     background: var(--color-primary-container);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
     text-align: center;
 }
 
 .event-card__date-range {
     font-family: var(--font-main);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--color-primary);
-    line-height: 1.2;
+    line-height: 1.1;
     white-space: nowrap;
 }
 
@@ -1083,8 +1083,8 @@
 
 .calendar-event-card__date {
     flex-shrink: 0;
-    width: 48px;
-    font-size: var(--text-xs);
+    width: 72px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--color-primary);
     text-align: center;
