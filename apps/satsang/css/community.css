@@ -1,0 +1,280 @@
+/**
+ * Satsang App - Donation & Community Styles
+ */
+
+/* ========================================
+   DONATION MODAL
+   ======================================== */
+.donation-modal {
+    max-width: 420px;
+}
+
+.donation-description {
+    text-align: center;
+    color: var(--color-on-surface-variant);
+    margin-bottom: var(--space-4);
+    line-height: 1.5;
+}
+
+/* Preset Amounts Grid */
+.donation-presets {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.donation-preset {
+    padding: var(--space-3);
+    background: var(--color-surface);
+    border: 2px solid var(--color-outline-variant);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-on-surface);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.donation-preset:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-container);
+}
+
+.donation-preset.active {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+}
+
+/* Custom Amount */
+.donation-custom {
+    margin-bottom: var(--space-4);
+}
+
+.donation-custom label {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--color-on-surface-variant);
+    margin-bottom: var(--space-2);
+}
+
+.donation-custom-input {
+    display: flex;
+    align-items: center;
+    background: var(--color-surface-variant);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.donation-custom-input .currency {
+    padding: var(--space-4);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-on-surface);
+}
+
+.donation-custom-input input {
+    flex: 1;
+    padding: var(--space-4);
+    border: none;
+    background: transparent;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--color-on-surface);
+}
+
+.donation-custom-input input:focus {
+    outline: none;
+}
+
+/* Payment Methods */
+.donation-methods {
+    margin-bottom: var(--space-3);
+}
+
+.donation-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-on-surface-variant);
+}
+
+.donation-note svg {
+    width: 14px;
+    height: 14px;
+    color: var(--color-primary);
+}
+
+/* ========================================
+   COMMUNITY SECTION
+   ======================================== */
+.community-section {
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border-radius: var(--radius-xl);
+    margin-top: var(--space-4);
+}
+
+.community-section__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-on-surface);
+    margin-bottom: var(--space-4);
+}
+
+.community-section__title svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-primary);
+}
+
+/* Comment Form */
+.comment-form {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.comment-input {
+    flex: 1;
+    padding: var(--space-3);
+    background: var(--color-surface-variant);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
+    color: var(--color-on-surface);
+}
+
+.comment-input::placeholder {
+    color: var(--color-on-surface-variant);
+}
+
+.comment-input:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+}
+
+.comment-submit {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.comment-submit svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-on-primary);
+}
+
+.comment-submit:hover {
+    transform: scale(1.05);
+}
+
+/* Comments List */
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.comments-empty {
+    text-align: center;
+    color: var(--color-on-surface-variant);
+    font-size: var(--text-sm);
+    padding: var(--space-4);
+}
+
+/* Comment Card */
+.comment-card {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.comment-card__avatar {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface-variant);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.comment-card__avatar svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-on-surface-variant);
+}
+
+.comment-card__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.comment-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+}
+
+.comment-card__author {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-on-surface);
+}
+
+.comment-card__time {
+    font-size: var(--text-xs);
+    color: var(--color-on-surface-variant);
+}
+
+.comment-card__text {
+    font-size: var(--text-sm);
+    color: var(--color-on-surface);
+    line-height: 1.4;
+    margin-bottom: var(--space-2);
+}
+
+.comment-card__actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.comment-like {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    background: transparent;
+    border: none;
+    font-size: var(--text-xs);
+    color: var(--color-on-surface-variant);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.comment-like svg {
+    width: 14px;
+    height: 14px;
+}
+
+.comment-like:hover {
+    color: #E91E63;
+    background: #FCE4EC;
+}
