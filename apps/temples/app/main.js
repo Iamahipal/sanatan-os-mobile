@@ -6,8 +6,11 @@ import { navigateToHome, navigateToTemple, watchRouteChanges } from "./router.js
 import { renderHomeView, renderShell, renderTempleView } from "./ui.js";
 
 const root = document.getElementById("root");
+const UPDATE_REMIND_AFTER_MS = 6 * 60 * 60 * 1000;
+const INSTALL_REMIND_AFTER_MS = 72 * 60 * 60 * 1000;
 
 const userPreferences = loadPreferences();
+let deferredInstallPrompt = null;
 
 const state = {
   route: { name: "home" },
@@ -24,7 +27,10 @@ const state = {
   visitedTempleIds: new Set(userPreferences.visitedTempleIds),
   bundles: new Map(),
   prefetched: new Set(),
-  pwaUpdateReady: false
+  pwaUpdateReady: false,
+  updateReminderAfter: userPreferences.updateReminderAfter || 0,
+  installPromptAvailable: false,
+  installReminderAfter: userPreferences.installReminderAfter || 0
 };
 
 function persistPreferences() {
@@ -33,7 +39,9 @@ function persistPreferences() {
     savedTempleIds: [...state.savedTempleIds],
     visitedTempleIds: [...state.visitedTempleIds],
     textScale: state.textScale,
-    highContrast: state.highContrast
+    highContrast: state.highContrast,
+    updateReminderAfter: state.updateReminderAfter,
+    installReminderAfter: state.installReminderAfter
   });
 }
 
@@ -187,6 +195,75 @@ function toggleContrast() {
   persistPreferences();
 }
 
+function dismissUpdateBanner() {
+  state.pwaUpdateReady = false;
+  state.updateReminderAfter = Date.now() + UPDATE_REMIND_AFTER_MS;
+  persistPreferences();
+}
+
+function canShowUpdateBanner() {
+  return Date.now() >= state.updateReminderAfter;
+}
+
+function canShowInstallPrompt() {
+  return Date.now() >= state.installReminderAfter;
+}
+
+function trackUiEvent(name, detail = {}) {
+  const payload = { name, detail, at: Date.now() };
+  window.dispatchEvent(new CustomEvent("temples:ui-event", { detail: payload }));
+  console.info("[Temples UI Event]", payload);
+}
+
+function setupInstallPrompt() {
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    if (canShowInstallPrompt()) {
+      state.installPromptAvailable = true;
+      render();
+    }
+  });
+
+  window.addEventListener("appinstalled", () => {
+    deferredInstallPrompt = null;
+    state.installPromptAvailable = false;
+    state.installReminderAfter = 0;
+    persistPreferences();
+    trackUiEvent("app_installed");
+    render();
+  });
+}
+
+function dismissInstallPrompt() {
+  state.installPromptAvailable = false;
+  state.installReminderAfter = Date.now() + INSTALL_REMIND_AFTER_MS;
+  persistPreferences();
+}
+
+async function promptInstall() {
+  if (!deferredInstallPrompt) {
+    state.installPromptAvailable = false;
+    return;
+  }
+
+  state.installPromptAvailable = false;
+  render();
+  deferredInstallPrompt.prompt();
+  const choice = await deferredInstallPrompt.userChoice;
+
+  if (choice.outcome === "accepted") {
+    state.installReminderAfter = 0;
+    trackUiEvent("install_prompt_accepted");
+  } else {
+    state.installReminderAfter = Date.now() + INSTALL_REMIND_AFTER_MS;
+    trackUiEvent("install_prompt_dismissed");
+  }
+
+  persistPreferences();
+  deferredInstallPrompt = null;
+}
+
 function prefetchStartupContent() {
   const firstTemple = state.index[0];
   if (!firstTemple) return;
@@ -213,7 +290,8 @@ function render() {
     locale: state.locale,
     textScale: state.textScale,
     highContrast: state.highContrast,
-    pwaUpdateReady: state.pwaUpdateReady
+    pwaUpdateReady: state.pwaUpdateReady,
+    installPromptAvailable: state.installPromptAvailable
   });
 }
 
@@ -225,11 +303,13 @@ function setupEvents() {
     const action = element.dataset.action;
 
     if (action === "open-temple" && element.dataset.id) {
+      trackUiEvent("open_temple", { templeId: element.dataset.id });
       navigateToTemple(element.dataset.id);
       return;
     }
 
     if (action === "continue-yatra" && element.dataset.id) {
+      trackUiEvent("continue_yatra", { templeId: element.dataset.id });
       navigateToTemple(element.dataset.id);
       return;
     }
@@ -237,6 +317,7 @@ function setupEvents() {
     if (action === "toggle-save") {
       event.stopPropagation();
       toggleMembership(state.savedTempleIds, element.dataset.id);
+      trackUiEvent("toggle_save", { templeId: element.dataset.id });
       render();
       return;
     }
@@ -244,12 +325,14 @@ function setupEvents() {
     if (action === "toggle-visited") {
       event.stopPropagation();
       toggleMembership(state.visitedTempleIds, element.dataset.id);
+      trackUiEvent("toggle_visited", { templeId: element.dataset.id });
       render();
       return;
     }
 
     if (action === "filter") {
       state.category = element.dataset.value || "all";
+      trackUiEvent("filter_changed", { category: state.category });
       render();
       return;
     }
@@ -279,6 +362,7 @@ function setupEvents() {
     }
 
     if (action === "go-home") {
+      trackUiEvent("go_home");
       navigateToHome();
       return;
     }
@@ -289,13 +373,35 @@ function setupEvents() {
     }
 
     if (action === "dismiss-update") {
-      state.pwaUpdateReady = false;
+      dismissUpdateBanner();
+      trackUiEvent("update_banner_dismissed");
       render();
       return;
     }
 
     if (action === "apply-update") {
+      state.updateReminderAfter = 0;
+      persistPreferences();
+      trackUiEvent("update_apply_clicked");
       applyPwaUpdate();
+      return;
+    }
+
+    if (action === "dismiss-install") {
+      dismissInstallPrompt();
+      trackUiEvent("install_prompt_dismissed");
+      render();
+      return;
+    }
+
+    if (action === "prompt-install") {
+      trackUiEvent("install_prompt_clicked");
+      promptInstall().finally(() => render());
+      return;
+    }
+
+    if (action === "open-map") {
+      trackUiEvent("open_map");
     }
   });
 
@@ -310,7 +416,9 @@ function setupEvents() {
 
 async function bootstrap() {
   setupEvents();
+  setupInstallPrompt();
   registerPwa(() => {
+    if (!canShowUpdateBanner()) return;
     state.pwaUpdateReady = true;
     render();
   });

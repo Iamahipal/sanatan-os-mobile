@@ -6,7 +6,8 @@ export async function registerPwa(onUpdateReady) {
   }
 
   try {
-    const registration = await navigator.serviceWorker.register("./sw.js", { scope: "./" });
+    const registration = await navigator.serviceWorker.register("./sw.js?v=3", { scope: "./" });
+    registration.update().catch(() => null);
 
     registration.addEventListener("updatefound", () => {
       const worker = registration.installing;

@@ -21,6 +21,8 @@ const CORE_ASSETS = [
   "./app/preferences.js",
   "./app/pwa.js",
   "./app/styles.css",
+  "./app/icons/icon-192.svg",
+  "./app/icons/icon-512.svg",
   "./vite.svg"
 ];
 

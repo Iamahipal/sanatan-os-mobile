@@ -53,7 +53,11 @@
     deityFallback: "Lord Shiva",
     updateAvailable: "A new version is ready.",
     updateNow: "Update now",
-    updateLater: "Later"
+    updateLater: "Later",
+    installApp: "Install app",
+    installAppHint: "Get full-screen, faster launch, and offline access.",
+    installNow: "Install now",
+    installLater: "Maybe later"
   },
   hi: {
     appTitleHome: "सनातन मंदिर",
@@ -109,7 +113,11 @@
     deityFallback: "भगवान शिव",
     updateAvailable: "नया संस्करण तैयार है।",
     updateNow: "अभी अपडेट करें",
-    updateLater: "बाद में"
+    updateLater: "बाद में",
+    installApp: "ऐप इंस्टॉल करें",
+    installAppHint: "फुल स्क्रीन, तेज़ लॉन्च और ऑफलाइन एक्सेस पाएँ।",
+    installNow: "अभी इंस्टॉल करें",
+    installLater: "बाद में"
   }
 };
 

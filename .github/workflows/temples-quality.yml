@@ -28,3 +28,6 @@ jobs:
 
       - name: Check JavaScript Syntax
         run: node apps/temples/tests/check-js-syntax.mjs
+
+      - name: UI Smoke Checks
+        run: node apps/temples/tests/ui-smoke.mjs

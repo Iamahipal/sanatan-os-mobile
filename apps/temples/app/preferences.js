@@ -1,11 +1,13 @@
-﻿const STORAGE_KEY = "temples.preferences.v2";
+﻿const STORAGE_KEY = "temples.preferences.v3";
 
 const defaultPreferences = {
   language: "en",
   savedTempleIds: [],
   visitedTempleIds: [],
   textScale: "normal",
-  highContrast: false
+  highContrast: false,
+  updateReminderAfter: 0,
+  installReminderAfter: 0
 };
 
 function uniqueStringArray(value) {
@@ -24,7 +26,9 @@ export function loadPreferences() {
       savedTempleIds: uniqueStringArray(parsed.savedTempleIds),
       visitedTempleIds: uniqueStringArray(parsed.visitedTempleIds),
       textScale: parsed.textScale === "large" ? "large" : "normal",
-      highContrast: Boolean(parsed.highContrast)
+      highContrast: Boolean(parsed.highContrast),
+      updateReminderAfter: Number.isFinite(parsed.updateReminderAfter) ? parsed.updateReminderAfter : 0,
+      installReminderAfter: Number.isFinite(parsed.installReminderAfter) ? parsed.installReminderAfter : 0
     };
   } catch {
     return { ...defaultPreferences };
@@ -37,7 +41,9 @@ export function savePreferences(preferences) {
     savedTempleIds: uniqueStringArray(preferences.savedTempleIds),
     visitedTempleIds: uniqueStringArray(preferences.visitedTempleIds),
     textScale: preferences.textScale === "large" ? "large" : "normal",
-    highContrast: Boolean(preferences.highContrast)
+    highContrast: Boolean(preferences.highContrast),
+    updateReminderAfter: Number.isFinite(preferences.updateReminderAfter) ? preferences.updateReminderAfter : 0,
+    installReminderAfter: Number.isFinite(preferences.installReminderAfter) ? preferences.installReminderAfter : 0
   };
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
