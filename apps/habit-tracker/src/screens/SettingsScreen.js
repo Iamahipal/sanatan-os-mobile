@@ -12,7 +12,7 @@ import { EventBus, Events } from '../core/EventBus.js';
 
 export class SettingsScreen extends Component {
     template() {
-        const isDark = ThemeService.isDark();
+
         const user = Store.getProperty('user');
 
         return `
@@ -34,26 +34,7 @@ export class SettingsScreen extends Component {
                         </div>
                     </div>
                     
-                    <!-- Appearance -->
-                    <div class="form-section">
-                        <div class="form-section-title">Appearance</div>
-                        <div class="card">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-3">
-                                    <div class="settings-icon-modern">
-                                        <i data-lucide="${isDark ? 'moon' : 'sun'}"></i>
-                                    </div>
-                                    <span>Dark Mode</span>
-                                </div>
-                                <button id="theme-toggle" 
-                                        class="toggle ${isDark ? 'active' : ''}"
-                                        role="switch"
-                                        aria-checked="${isDark}"
-                                        aria-label="Toggle dark mode">
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+
                     
                     <!-- Data Management -->
                     <div class="form-section">
@@ -159,12 +140,7 @@ export class SettingsScreen extends Component {
         // Back button - always go to dashboard
         this.on('#back-btn', 'click', () => navigate('/'));
 
-        // Theme toggle
-        this.on('#theme-toggle', 'click', (e) => {
-            ThemeService.toggle();
-            e.target.classList.toggle('active', ThemeService.isDark());
-            e.target.setAttribute('aria-checked', ThemeService.isDark());
-        });
+
 
         // Export
         this.on('#export-btn', 'click', () => this.exportData());

@@ -1,107 +1,63 @@
 /**
  * ThemeService - Theme Management
- * Handles dark/light mode with system preference detection
+ * Light Mode Only (Mobile Optimized)
  */
 
 import { Store } from '../core/Store.js';
-import { EventBus, Events } from '../core/EventBus.js';
 import { StorageService } from './StorageService.js';
 
 export const ThemeService = {
     /**
-     * Initialize theme from stored preference or system
+     * Initialize theme - Enforce Light Mode
      */
     init() {
-        // Get stored theme - default to light if not set
-        const stored = Store.getProperty('theme');
-        const theme = stored || 'light';
-
-        this.apply(theme);
-
-        // Listen for system theme changes
-        if (window.matchMedia) {
-            window.matchMedia('(prefers-color-scheme: dark)')
-                .addEventListener('change', (e) => {
-                    // Only auto-switch if user hasn't set a preference
-                    if (!Store.getProperty('theme')) {
-                        this.apply(e.matches ? 'dark' : 'light');
-                    }
-                });
-        }
-    },
-
-    /**
-     * Get system theme preference
-     * @returns {string}
-     */
-    getSystemTheme() {
-        if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
-        }
-        return 'light';
+        // Enforce light mode regardless of previous settings
+        this.apply('light');
     },
 
     /**
      * Get current theme
-     * @returns {string}
+     * @returns {string} Always returns 'light'
      */
     getCurrent() {
-        return Store.getProperty('theme') || 'light';
+        return 'light';
     },
 
     /**
-     * Toggle between dark and light
-     */
-    toggle() {
-        const current = this.getCurrent();
-        const next = current === 'dark' ? 'light' : 'dark';
-        this.set(next);
-    },
-
-    /**
-     * Set theme
-     * @param {string} theme - 'dark' | 'light'
+     * Set theme (No-op as we enforce light mode)
      */
     set(theme) {
-        Store.set('theme', theme);
-        this.apply(theme);
-        StorageService.save(Store.getPersistedState());
-        EventBus.emit(Events.THEME_CHANGE, theme);
+        // Ignore changes, enforce light
+        this.apply('light');
     },
 
     /**
      * Apply theme to DOM
-     * @param {string} theme
+     * @param {string} theme - 'dark' | 'light'
      */
     apply(theme) {
+        // Force light mode
         const root = document.documentElement;
         const body = document.body;
 
-        // Remove existing theme classes
-        body.classList.remove('theme-dark', 'theme-light');
+        // Ensure only light theme classes exist
+        body.classList.remove('theme-dark');
+        body.classList.add('theme-light');
         root.removeAttribute('data-theme');
-
-        // Apply new theme
-        if (theme === 'light') {
-            body.classList.add('theme-light');
-            root.setAttribute('data-theme', 'light');
-        } else {
-            body.classList.add('theme-dark');
-            root.setAttribute('data-theme', 'dark');
-        }
+        root.setAttribute('data-theme', 'light');
 
         // Update meta theme-color for mobile browsers
         const meta = document.querySelector('meta[name="theme-color"]');
         if (meta) {
-            meta.setAttribute('content', theme === 'dark' ? '#000000' : '#FFFFFF');
+            meta.setAttribute('content', '#FFFFFF');
         }
     },
 
     /**
      * Check if dark mode is active
-     * @returns {boolean}
+     * @returns {boolean} Always false
      */
     isDark() {
-        return this.getCurrent() === 'dark';
+        return false;
     }
 };

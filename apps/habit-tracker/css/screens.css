@@ -39,35 +39,6 @@
     overflow: hidden;
 }
 
-/* Subtle gradient orbs - only in dark mode */
-.theme-dark .onboarding-screen::before,
-.theme-dark .onboarding-screen::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.5;
-    pointer-events: none;
-}
-
-.theme-dark .onboarding-screen::before {
-    width: 300px;
-    height: 300px;
-    background: var(--primary);
-    top: -100px;
-    right: -100px;
-    animation: float 8s ease-in-out infinite;
-}
-
-.theme-dark .onboarding-screen::after {
-    width: 250px;
-    height: 250px;
-    background: var(--habit-purple);
-    bottom: 20%;
-    left: -80px;
-    animation: float 10s ease-in-out infinite reverse;
-}
-
 @keyframes float {
 
     0%,
@@ -79,6 +50,7 @@
         transform: translate(20px, -20px) scale(1.1);
     }
 }
+
 
 .onboarding-slides {
     flex: 1;
@@ -713,16 +685,6 @@
     height: 24px;
 }
 
-/* Responsive - larger icon grid on desktop */
-@media (min-width: 768px) {
-    .icon-picker {
-        grid-template-columns: repeat(8, 1fr);
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
 
 /* ===== SETTINGS SCREEN ===== */
 

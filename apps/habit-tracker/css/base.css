@@ -288,34 +288,3 @@ input:focus:not(:focus-visible) {
         scroll-behavior: auto !important;
     }
 }
-
-/* ===== HIGH CONTRAST MODE ===== */
-@media (prefers-contrast: high) {
-    :root {
-        --border-default: rgba(0, 0, 0, 0.3);
-        --border-strong: rgba(0, 0, 0, 0.5);
-    }
-
-    .btn {
-        border: 2px solid currentColor;
-    }
-
-    .card {
-        border-width: 2px;
-    }
-}
-
-/* ===== FORCED COLORS (Windows High Contrast) ===== */
-@media (forced-colors: active) {
-    .btn-primary {
-        border: 2px solid ButtonText;
-    }
-
-    .habit-toggle {
-        border: 2px solid ButtonText;
-    }
-
-    :focus-visible {
-        outline: 3px solid Highlight;
-    }
-}

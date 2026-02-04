@@ -1,6 +1,6 @@
 /**
  * Niyam Design Tokens
- * Core design system variables
+ * Core design system variables - Light Mode Only
  */
 
 :root {
@@ -36,7 +36,7 @@
     --bg-level-2: #E5E5EA;
     --bg-level-3: #D1D1D6;
 
-    /* Text Colors (Light Theme) */
+    /* Text Colors */
     --text-primary: #1C1C1E;
     --text-secondary: #6C6C70;
     --text-tertiary: #AEAEB2;
@@ -45,19 +45,6 @@
     /* Borders */
     --border-default: rgba(0, 0, 0, 0.08);
     --border-strong: rgba(0, 0, 0, 0.15);
-
-    /* ===== DARK THEME ===== */
-    --dark-bg-level-0: #000000;
-    --dark-bg-level-1: #1C1C1E;
-    --dark-bg-level-2: #2C2C2E;
-    --dark-bg-level-3: #3A3A3C;
-
-    --dark-text-primary: #FFFFFF;
-    --dark-text-secondary: #EBEBF5;
-    --dark-text-tertiary: rgba(235, 235, 245, 0.6);
-
-    --dark-border-default: rgba(255, 255, 255, 0.08);
-    --dark-border-strong: rgba(255, 255, 255, 0.15);
 
     /* ===== TYPOGRAPHY ===== */
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -123,7 +110,7 @@
     --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
     --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
 
-    /* ===== MOTION (M3 Tokens) ===== */
+    /* ===== MOTION ===== */
     --duration-short: 150ms;
     --duration-medium: 300ms;
     --duration-long: 500ms;
@@ -136,26 +123,6 @@
     --bottom-nav-height: 80px;
     --fab-size: 56px;
     --safe-area-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-/* ===== DARK THEME OVERRIDE ===== */
-[data-theme="dark"],
-.theme-dark {
-    --bg-level-0: var(--dark-bg-level-0);
-    --bg-level-1: var(--dark-bg-level-1);
-    --bg-level-2: var(--dark-bg-level-2);
-    --bg-level-3: var(--dark-bg-level-3);
-
-    --text-primary: var(--dark-text-primary);
-    --text-secondary: var(--dark-text-secondary);
-    --text-tertiary: var(--dark-text-tertiary);
-
-    --border-default: var(--dark-border-default);
-    --border-strong: var(--dark-border-strong);
-
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* ===== REDUCED MOTION ===== */
