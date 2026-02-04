@@ -1,8 +1,8 @@
 {
     "id": "mahakaleshwar",
     "name": "Mahakaleshwar",
-    "name_local": "महाकालेश्वर",
-    "sanskrit_name": "श्री महाकालेश्वर",
+    "name_local": "à¤®à¤¹à¤¾à¤•à¤¾à¤²à¥‡à¤¶à¥à¤µà¤°",
+    "sanskrit_name": "à¤¶à¥à¤°à¥€ à¤®à¤¹à¤¾à¤•à¤¾à¤²à¥‡à¤¶à¥à¤µà¤°",
     "alternate_names": [
         "Mahakala",
         "Lord of Time",
@@ -47,13 +47,13 @@
         "philosophy": "Mahakala - The Absolute Time that devours relative time. He is the substratum upon which the drama of time plays out.",
         "unique_distinctions": [
             "ONLY South-facing (Dakshinamukhi) Jyotirlinga among all 12",
-            "ONLY temple with Bhasma Aarti (Cremation Ash ritual)",
+            "Most renowned for the pre-dawn Bhasma Aarti tradition",
             "Swayambhu AND Jaagrit (Self-manifested AND Awakened)",
             "Five-Level Cosmological Architecture"
         ]
     },
-    "description": "The Mahakaleshwar Jyotirlinga represents the absolute and terrifying aspect of the Divine as Mahakala—the Great Time, the Devourer of Time. Unlike other Jyotirlingas associated with healing or auspiciousness, Mahakaleshwar is the embodiment of entropy, the force that dissolves the universe at the end of an epoch. The underground sanctum houses the only South-facing Jyotirlinga, confronting Yama (Death) directly. The daily Bhasma Aarti, where the Linga is smeared with cremation ash at dawn, is a visceral reminder of mortality and liberation.",
-    "secret_hook": "Here, at the ancient Prime Meridian where astronomers measured cosmic time, the Lord who transcends all Time awaits. With ash of the cremation ground adorning him, Mahakala grants freedom from the ultimate fear—death itself.",
+    "description": "The Mahakaleshwar Jyotirlinga represents the absolute and terrifying aspect of the Divine as Mahakalaâ€”the Great Time, the Devourer of Time. Unlike other Jyotirlingas associated with healing or auspiciousness, Mahakaleshwar is the embodiment of entropy, the force that dissolves the universe at the end of an epoch. The underground sanctum houses the only South-facing Jyotirlinga, confronting Yama (Death) directly. The daily Bhasma Aarti, where the Linga is smeared with cremation ash at dawn, is a visceral reminder of mortality and liberation.",
+    "secret_hook": "Here, at the ancient Prime Meridian where astronomers measured cosmic time, the Lord who transcends all Time awaits. With ash of the cremation ground adorning him, Mahakala grants freedom from the ultimate fearâ€”death itself.",
     "stats": {
         "age_years": 2000,
         "daily_visitors": "15,000-30,000",
@@ -77,13 +77,13 @@
     "established": {
         "era": "Ancient (Puranic)",
         "original_temple": "Pre-Gupta Period",
-        "destruction": "1234 CE by Sultan Iltutmish",
+        "destruction": "1235 CE by Sultan Iltutmish",
         "reconstruction": "1734 CE by Ranoji Shinde (Maratha)",
         "modern_expansion": "2022 - Mahakal Lok by PM Modi"
     },
     "best_time": {
         "season": "October to March",
-        "avoid": "April-June (extreme heat up to 45°C)",
+        "avoid": "April-June (extreme heat up to 45Â°C)",
         "special_periods": [
             "Mahashivaratri",
             "Shravan Month Mondays",

@@ -1,45 +1,38 @@
 {
-    "id": "grishneshwar",
-    "name": "Grishneshwar",
-    "name_local": "घृष्णेश्वर",
-    "name_marathi": "घृष्णेश्वर",
-    "official_name": "Shri Grishneshwar Jyotirlinga Temple",
-    "deity": {
-        "primary": "Lord Shiva",
-        "form": "Grishneshwar / Ghushmeshwar (Lord of Compassion)",
-        "manifestation": "Jyotirlinga - Twelfth of the 12",
-        "consort": "Goddess Parvati",
-        "mythology_link": "Where Shiva manifested to honor the devotion of Kusuma and Ghushma"
-    },
-    "location": {
-        "city": "Verul (near Ellora)",
-        "state": "Maharashtra",
-        "coords": [
-            20.0239,
-            75.1789
-        ],
-        "sacred_geography": "Adjacent to the UNESCO World Heritage Ellora Caves. The temple sits amidst some of India's greatest ancient architecture—Buddhist, Hindu, and Jain caves carved over centuries.",
-        "access": "30 km from Aurangabad, 300 km from Mumbai, near Ellora Caves"
-    },
-    "significance": {
-        "type": [
-            "Jyotirlinga",
-            "Near UNESCO Site",
-            "Maharashtra Heritage"
-        ],
-        "jyotirlinga_number": 12,
-        "rank": "Twelfth and final Jyotirlinga; completes the sacred pilgrimage circuit",
-        "philosophy": "Grishneshwar represents the completion of the Jyotirlinga journey. As the twelfth light, it symbolizes fullness—the devotee who reaches here has traversed the complete map of Shiva's manifestations. The proximity to Ellora suggests a continuum of devotional art spanning Buddhist, Jain, and Hindu traditions.",
-        "scriptural_reference": "Shiva Purana, Grishneshwar Mahatmya"
-    },
-    "stats": {
-        "age_years": 700,
-        "style": "Hemadpanthi architecture (Maratha period)",
-        "daily_visitors": "5,000-15,000",
-        "annual_visitors": "25 lakh+",
-        "unique_feature": "Adjacent to Ellora Caves; smallest Jyotirlinga temple"
-    },
-    "hero_image": "data/temples/grishneshwar/images/hero.png",
-    "description": "The twelfth and final Jyotirlinga stands near one of humanity's greatest artistic achievements—the Ellora Caves. Grishneshwar (also called Ghushmeshwar) is the smallest of the twelve temples, but its spiritual significance equals any. The temple was built by Ahilyabai Holkar of Indore in the 18th century in the elegant Hemadpanthi style. The legend involves a devoted woman named Ghushma whose lingam was repeatedly thrown into a nearby tank by jealous rivals. Each time she recreated it; each time she continued her worship without anger. Moved by her pure devotion and forgiveness, Shiva manifested as the Jyotirlinga. For those completing the Dwadash Jyotirlinga pilgrimage, Grishneshwar marks the sacred fulfillment. Combined with the adjacent Ellora Caves, this is a pilgrimage to both spiritual and artistic peaks of Indian civilization.",
-    "secret_hook": "Why is the twelfth Jyotirlinga located next to the world's greatest cave temples? Some believe the Ellora sculptors chose this site precisely because the Jyotirlinga was already here—making their Buddhist and Jain caves part of an older sacred geography."
+  "id": "grishneshwar",
+  "name": "Grishneshwar",
+  "name_local": "Grishneshwar",
+  "name_marathi": "Grushneshwar",
+  "official_name": "Shri Grishneshwar Jyotirlinga Temple",
+  "deity": {
+    "primary": "Lord Shiva",
+    "form": "Grishneshwar / Ghushmeshwar",
+    "manifestation": "Jyotirlinga - Twelfth of the 12",
+    "consort": "Goddess Parvati",
+    "mythology_link": "Linked with the Ghushma devotion narrative"
+  },
+  "location": {
+    "city": "Verul (Ellora region)",
+    "state": "Maharashtra",
+    "coords": [20.0239, 75.1789],
+    "sacred_geography": "Near the Ellora cave complex in the Aurangabad region",
+    "access": "About 30 km from Chhatrapati Sambhajinagar (Aurangabad)"
+  },
+  "significance": {
+    "type": ["Jyotirlinga", "Maharashtra Heritage"],
+    "jyotirlinga_number": 12,
+    "rank": "Twelfth and final Jyotirlinga in the Dwadash Jyotirlinga sequence",
+    "philosophy": "Grishneshwar is revered as a completion point in the twelve-Jyotirlinga pilgrimage tradition.",
+    "scriptural_reference": "Shiva Purana and regional Grishneshwar traditions"
+  },
+  "stats": {
+    "age_years": 300,
+    "style": "Later-period reconstruction associated with Ahilyabai Holkar patronage",
+    "daily_visitors": "Varies by season and festival calendar",
+    "annual_visitors": "Large annual pilgrimage footfall",
+    "unique_feature": "Proximity to Ellora adds strong heritage and pilgrimage value"
+  },
+  "hero_image": "data/temples/grishneshwar/images/hero.png",
+  "description": "Grishneshwar, near Ellora, is revered as the twelfth Jyotirlinga. The present temple form is associated with 18th-century restoration patronage by Ahilyabai Holkar, and the shrine remains an important stop for pilgrims completing the Dwadash Jyotirlinga circuit.",
+  "secret_hook": "Its location near Ellora keeps Grishneshwar at the intersection of living devotion and India's monumental sacred-architecture landscape."
 }

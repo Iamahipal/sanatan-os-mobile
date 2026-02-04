@@ -1,8 +1,8 @@
 {
     "id": "bhimashankar",
     "name": "Bhimashankar",
-    "name_local": "भीमाशंकर",
-    "name_marathi": "भीमाशंकर",
+    "name_local": "à¤­à¥€à¤®à¤¾à¤¶à¤‚à¤•à¤°",
+    "name_marathi": "à¤­à¥€à¤®à¤¾à¤¶à¤‚à¤•à¤°",
     "official_name": "Shri Bhimashankar Jyotirlinga Temple",
     "deity": {
         "primary": "Lord Shiva",
@@ -29,7 +29,7 @@
         ],
         "jyotirlinga_number": 6,
         "rank": "Sixth Jyotirlinga, set amidst the most pristine natural environment",
-        "philosophy": "Bhimashankar embodies Shiva's fierce protective aspect. The temple's remote forest location teaches that the divine dwells in untamed nature—beyond human settlements, in the wild heart of creation. Here, Shiva the Destroyer becomes Shiva the Protector.",
+        "philosophy": "Bhimashankar embodies Shiva's fierce protective aspect. The temple's remote forest location teaches that the divine dwells in untamed natureâ€”beyond human settlements, in the wild heart of creation. Here, Shiva the Destroyer becomes Shiva the Protector.",
         "scriptural_reference": "Shiva Purana, Bhima Purana"
     },
     "stats": {
@@ -37,10 +37,10 @@
         "altitude_feet": 3250,
         "daily_visitors": "3,000-8,000",
         "annual_visitors": "20 lakh+",
-        "architecture": "Hemadpanthi style (13th century Yadava period)",
-        "unique_feature": "Only Jyotirlinga located inside a wildlife sanctuary"
+        "architecture": "Nagara-style elements with later-period renovations",
+        "unique_feature": "Located within the Bhimashankar Wildlife Sanctuary landscape"
     },
     "hero_image": "data/temples/bhimashankar/images/hero.png",
-    "description": "Hidden in the misty Sahyadri mountains, Bhimashankar is perhaps the most naturally beautiful of all Jyotirlingas. The sixth sacred light of Shiva manifested here after a cosmic battle with the demon Bhima—son of Kumbhakarna. When Bhima's tyranny threatened all three worlds, Shiva descended in his fierce Rudra form, destroyed the demon, and at the request of sages, agreed to remain forever as Bhimashankar. The sweat that poured from Shiva's body during battle became the Bhima River, which originates near the temple. Today, the 13th-century Hemadpanthi temple stands surrounded by dense forests, home to the famous Indian Giant Squirrel and countless species of flora and fauna. Pilgrims climb through morning mist and ancient trees to reach the sanctum—making this one of the most meditative journeys to any Jyotirlinga.",
+    "description": "Hidden in the misty Sahyadri mountains, Bhimashankar is perhaps the most naturally beautiful of all Jyotirlingas. The sixth sacred light of Shiva manifested here after a cosmic battle with the demon Bhimaâ€”son of Kumbhakarna. When Bhima's tyranny threatened all three worlds, Shiva descended in his fierce Rudra form, destroyed the demon, and at the request of sages, agreed to remain forever as Bhimashankar. The sweat that poured from Shiva's body during battle became the Bhima River, which originates near the temple. Today, the historic temple complex stands surrounded by dense forests, home to the famous Indian Giant Squirrel and countless species of flora and fauna. Pilgrims climb through morning mist and ancient trees to reach the sanctumâ€”making this one of the most meditative journeys to any Jyotirlinga.",
     "secret_hook": "The Bhimashankar forest is home to the rare Shekru (Indian Giant Squirrel), which locals believe are sacred messengers of Shiva. Why does this particular creature guard only this Jyotirlinga?"
 }

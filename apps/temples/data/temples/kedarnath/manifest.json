@@ -1,8 +1,8 @@
 {
     "id": "kedarnath",
     "name": "Kedarnath",
-    "name_local": "केदारनाथ",
-    "name_sanskrit": "केदारनाथः",
+    "name_local": "à¤•à¥‡à¤¦à¤¾à¤°à¤¨à¤¾à¤¥",
+    "name_sanskrit": "à¤•à¥‡à¤¦à¤¾à¤°à¤¨à¤¾à¤¥à¤ƒ",
     "deity": {
         "primary": "Lord Shiva",
         "form": "Kedareshwara (Lord of the Field)",
@@ -30,21 +30,21 @@
         "jyotirlinga_number": 11,
         "char_dham_position": "Northernmost of the four (Yamunotri, Gangotri, Kedarnath, Badrinath)",
         "panch_kedar_position": "First and foremost of the 5 Kedar temples",
-        "philosophy": "Kedarnath represents Shiva as the hermit-god of the mountains—accessible only to those who make the difficult journey. The pilgrimage itself is the purification.",
+        "philosophy": "Kedarnath represents Shiva as the hermit-god of the mountainsâ€”accessible only to those who make the difficult journey. The pilgrimage itself is the purification.",
         "scriptural_reference": "Skanda Purana, Kedar Khanda"
     },
     "stats": {
         "age_years": 1200,
-        "built_by": "Adi Shankaracharya (8th century CE)",
+        "built_by": "Traditionally associated with Adi Shankaracharya's reconstruction (8th century CE)",
         "altitude_feet": 11755,
         "opening_months": "May-November (closed due to snow)",
         "daily_visitors_peak": "10,000-15,000",
         "annual_visitors": "10 lakh+",
         "trek_distance_km": 16,
-        "helicopter_cost_inr": 7000,
+        "helicopter_cost_inr": "Varies by sector and season; book via heliyatra.irctc.co.in",
         "stone_construction": "Massive grey stone slabs, interlocking without mortar"
     },
     "hero_image": "data/temples/kedarnath/images/hero.png",
-    "description": "Kedarnath is not just a temple—it's a test. At 11,755 feet, reached only by a freezing 16 km trek through Himalayan wilderness, this Jyotirlinga demands something from every pilgrim. Built by Adi Shankaracharya in the 8th century using massive interlocking stone slabs without mortar, the temple has survived 1200 years of earthquakes, avalanches, and the devastating 2013 floods that killed 6000 people—while a massive boulder stopped just behind the temple, diverting the floodwaters around it. Shiva tests you on the path. Then he protects you at the destination.",
+    "description": "Kedarnath is not just a templeâ€”it's a test. At 11,755 feet, reached only by a freezing 16 km trek through Himalayan wilderness, this Jyotirlinga demands something from every pilgrim. Built by Adi Shankaracharya in the 8th century using massive interlocking stone slabs without mortar, the temple has survived 1200 years of earthquakes, avalanches, and the devastating 2013 floods that killed 6000 peopleâ€”while a massive boulder stopped just behind the temple, diverting the floodwaters around it. Shiva tests you on the path. Then he protects you at the destination.",
     "secret_hook": "In 2013, a 16,000-year-old boulder 'appeared' behind the temple just in time to split the raging floodwaters, saving the structure while everything around was destroyed. Scientists can't explain how it got there..."
 }

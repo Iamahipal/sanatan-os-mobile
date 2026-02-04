@@ -1,15 +1,15 @@
 {
     "id": "omkareshwar",
     "name": "Omkareshwar",
-    "name_local": "ओंकारेश्वर",
-    "name_hindi": "ॐकारेश्वर",
+    "name_local": "à¤“à¤‚à¤•à¤¾à¤°à¥‡à¤¶à¥à¤µà¤°",
+    "name_hindi": "à¥à¤•à¤¾à¤°à¥‡à¤¶à¥à¤µà¤°",
     "official_name": "Shri Omkareshwar Jyotirlinga Temple",
     "deity": {
         "primary": "Lord Shiva",
         "form": "Omkareshwar (The Lord of Om)",
         "manifestation": "Jyotirlinga - Fourth of the 12",
         "consort": "Goddess Parvati",
-        "mythology_link": "The island itself is shaped like the sacred symbol Om (ॐ)"
+        "mythology_link": "The island itself is shaped like the sacred symbol Om (à¥)"
     },
     "location": {
         "city": "Khandwa District",
@@ -18,7 +18,7 @@
             22.2453,
             76.1512
         ],
-        "sacred_geography": "Located on Mandhata Island (Shivpuri) in the Narmada River. The island is naturally shaped like the sacred Om (ॐ) symbol when viewed from above. Two Jyotirlingas exist here: Omkareshwar on the island and Mamleshwar on the southern bank.",
+        "sacred_geography": "Located on Mandhata Island (Shivpuri) in the Narmada River. The island is naturally shaped like the sacred Om (à¥) symbol when viewed from above. The paired shrines of Omkareshwar and Mamleshwar are revered together by pilgrims.",
         "access": "80 km from Indore, 270 km from Bhopal. Boats ferry pilgrims to the island."
     },
     "significance": {
@@ -29,7 +29,7 @@
         ],
         "jyotirlinga_number": 4,
         "rank": "Fourth Jyotirlinga, unique for its Om-shaped geography and twin shrines",
-        "philosophy": "Omkareshwar embodies the primordial sound Om (ॐ)—the cosmic vibration from which creation emerged. The island's natural Om shape suggests that the divine pattern is woven into the very geography. Here, geography becomes theology.",
+        "philosophy": "Omkareshwar embodies the primordial sound Om (à¥)â€”the cosmic vibration from which creation emerged. The island's natural Om shape suggests that the divine pattern is woven into the very geography. Here, geography becomes theology.",
         "scriptural_reference": "Shiva Purana, Skanda Purana, Narmada Purana"
     },
     "stats": {
@@ -38,9 +38,9 @@
         "temples_on_island": 68,
         "daily_visitors": "8,000-15,000",
         "annual_visitors": "35 lakh+",
-        "unique_feature": "Only place with two Jyotirlingas and Om-shaped island"
+        "unique_feature": "Mandhata island's Om-shaped geography and the paired Omkareshwar-Mamleshwar pilgrimage tradition"
     },
     "hero_image": "data/temples/omkareshwar/images/hero.png",
-    "description": "Rising from the sacred Narmada River, Mandhata Island is one of the most extraordinary sacred sites in India—naturally shaped like the cosmic symbol Om (ॐ). This miraculous geography hosts not one but two Jyotirlingas: Omkareshwar on the island itself and Mamleshwar (Amaleshwar) on the southern bank. Ancient texts describe how the devas and asuras both worshipped Shiva here, and the Lord, pleased by their devotion, split himself into two forms—Omkar (formless, represented by Om) and Mamleshwar (with form). The island holds 68 sacred sites, and the Narmada Parikrama (circumambulation of the entire Narmada River) traditionally passes through here. Boats ferry pilgrims across the sacred waters as they have for millennia.",
-    "secret_hook": "Why are there TWO Jyotirlingas here and nowhere else? Ancient texts hint at a cosmic negotiation between devas and asuras that required Shiva to manifest in dual form—one for each side of the river."
+    "description": "Rising from the sacred Narmada River, Mandhata Island is one of the most extraordinary sacred sites in Indiaâ€”naturally shaped like the cosmic symbol Om (à¥). This miraculous geography hosts not one but two Jyotirlingas: Omkareshwar on the island itself and Mamleshwar (Amaleshwar) on the southern bank. Ancient texts describe how the devas and asuras both worshipped Shiva here, and the Lord, pleased by their devotion, split himself into two formsâ€”Omkar (formless, represented by Om) and Mamleshwar (with form). The island holds 68 sacred sites, and the Narmada Parikrama (circumambulation of the entire Narmada River) traditionally passes through here. Boats ferry pilgrims across the sacred waters as they have for millennia.",
+    "secret_hook": "Why are there TWO Jyotirlingas here and nowhere else? Ancient texts hint at a cosmic negotiation between devas and asuras that required Shiva to manifest in dual formâ€”one for each side of the river."
 }

@@ -1,46 +1,39 @@
 {
-    "id": "rameshwaram",
-    "name": "Rameshwaram",
-    "name_local": "रामेश्वरम्",
-    "name_tamil": "இராமேசுவரம்",
-    "official_name": "Shri Ramanathaswamy Temple",
-    "deity": {
-        "primary": "Lord Shiva",
-        "form": "Ramanathaswamy (Lord of Rama)",
-        "manifestation": "Jyotirlinga - Eleventh of the 12",
-        "consort": "Goddess Parvati (as Parvatavarthini)",
-        "mythology_link": "Where Lord Rama worshipped Shiva before the Lanka war"
-    },
-    "location": {
-        "city": "Rameshwaram Island",
-        "state": "Tamil Nadu",
-        "coords": [
-            9.2881,
-            79.3174
-        ],
-        "sacred_geography": "Located on Pamban Island, the closest point in India to Sri Lanka. The temple sits where Rama created the legendary bridge (Ram Setu) to Lanka. Connected by the iconic Pamban Bridge.",
-        "access": "570 km from Chennai, 170 km from Madurai, connected by Pamban Railway Bridge"
-    },
-    "significance": {
-        "type": [
-            "Jyotirlinga",
-            "Char Dham",
-            "Ram Setu Site"
-        ],
-        "jyotirlinga_number": 11,
-        "rank": "Eleventh Jyotirlinga; one of the four Char Dhams; where Rama worshipped Shiva",
-        "philosophy": "Rameshwaram unites the worship of Rama and Shiva in profound symbolism. Rama, avatar of Vishnu, worshipped Shiva before his battle—teaching that even divine incarnations honor Mahadeva. The 22 sacred wells represent complete purification through water.",
-        "scriptural_reference": "Ramayana, Shiva Purana, Skanda Purana"
-    },
-    "stats": {
-        "age_years": 1000,
-        "corridor_length_feet": 4000,
-        "sacred_wells": 22,
-        "daily_visitors": "15,000-30,000",
-        "annual_visitors": "50 lakh+",
-        "unique_feature": "World's longest temple corridor; 22 sacred wells within temple"
-    },
-    "hero_image": "data/temples/rameshwaram/images/hero.png",
-    "description": "On a sacred island where the Indian subcontinent nearly touches Sri Lanka, Lord Rama himself established this Jyotirlinga before his epic battle with Ravana. The Ramanathaswamy Temple today is an architectural wonder—its corridors stretch over 4,000 feet, making them the longest of any temple in India. Within the complex are 22 sacred wells (theerthams), each with unique healing properties. Pilgrims bathe in each well in sequence, a practice said to wash away all sins and cure diseases. This is one of the four Char Dhams—the four corners of Hindu pilgrimage in India. The nearby Ram Setu (Adam's Bridge)—the legendary causeway Rama built to Lanka—can still be seen stretching into the ocean. To visit Rameshwaram is to walk where Rama walked, to worship where Rama worshipped.",
-    "secret_hook": "NASA satellite images clearly show the underwater Ram Setu stretching toward Sri Lanka. Carbon dating suggests it was man-made, created roughly when the Ramayana describes. Did Rama's vanara army really build it?"
+  "id": "rameshwaram",
+  "name": "Rameshwaram",
+  "name_local": "Rameshwaram",
+  "name_tamil": "Ramanathaswamy",
+  "official_name": "Shri Ramanathaswamy Temple",
+  "deity": {
+    "primary": "Lord Shiva",
+    "form": "Ramanathaswamy",
+    "manifestation": "Jyotirlinga - Eleventh of the 12",
+    "consort": "Goddess Parvatavardhini",
+    "mythology_link": "Linked with Rama worshipping Shiva in the Ramayana tradition"
+  },
+  "location": {
+    "city": "Rameswaram Island",
+    "state": "Tamil Nadu",
+    "coords": [9.2881, 79.3174],
+    "sacred_geography": "On Pamban island in the Gulf of Mannar region, associated with Ramayana pilgrimage routes",
+    "access": "Connected by road and rail via Pamban bridge links"
+  },
+  "significance": {
+    "type": ["Jyotirlinga", "Char Dham", "Ramayana Pilgrimage"],
+    "jyotirlinga_number": 11,
+    "rank": "Eleventh Jyotirlinga and one of the four Char Dham destinations",
+    "philosophy": "Rameshwaram symbolizes the devotional unity of Rama and Shiva traditions.",
+    "scriptural_reference": "Ramayana, Shiva Purana, regional Sthala Purana traditions"
+  },
+  "stats": {
+    "age_years": 1000,
+    "corridor_length_feet": 4000,
+    "sacred_wells": 22,
+    "daily_visitors": "Varies by season and festival calendar",
+    "annual_visitors": "Very high annual footfall as a national pilgrimage center",
+    "unique_feature": "Known for one of the world's longest temple corridor systems and 22 theerthams"
+  },
+  "hero_image": "data/temples/rameshwaram/images/hero.png",
+  "description": "Ramanathaswamy Temple at Rameshwaram is among India's most important Shiva shrines, revered both as a Jyotirlinga site and as part of the Char Dham circuit. The temple is especially known for its long corridor architecture and ritual bathing traditions at the 22 theerthams within the complex.",
+  "secret_hook": "Rameshwaram's sea-facing geography, corridor architecture, and Ramayana-linked worship make it a uniquely layered pilgrimage destination."
 }
