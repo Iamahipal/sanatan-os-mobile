@@ -1,0 +1,147 @@
+﻿const STRINGS = {
+  en: {
+    appTitleHome: "Sanatan Temples",
+    appTitleDetail: "Temple Detail",
+    searchLabel: "Search",
+    searchPlaceholder: "Search by temple, location, or deity",
+    filterAll: "All",
+    filterJyotirlinga: "Jyotirlinga",
+    filterOther: "Other",
+    filterSaved: "Saved",
+    loadingCatalog: "Loading temple catalog...",
+    loadingTemple: "Loading temple details...",
+    noResults: "No temples match your current search.",
+    noFacts: "No facts available for this temple yet.",
+    noMedia: "No gallery media available.",
+    pageNotFound: "Page not found.",
+    goHome: "Go Home",
+    backToTemples: "Back to temples",
+    overview: "Overview",
+    deityMeaning: "Deity and Meaning",
+    whyVisit: "Why Visit",
+    keyFacts: "Key Facts",
+    gallery: "Gallery",
+    approxAge: "Approx. Age",
+    currentTemple: "Current Temple",
+    dailyVisitors: "Daily Visitors",
+    rebuildCycles: "Rebuild Cycles",
+    years: "years",
+    spiritualBenefit: "Spiritual Benefit",
+    insight: "Insight",
+    templeImage: "Temple image",
+    templeView: "Temple view",
+    bookmarked: "Saved",
+    save: "Save",
+    visited: "Visited",
+    markVisited: "Mark Visited",
+    plannerTitle: "Pilgrim Planner",
+    progress: "Progress",
+    nextTemple: "Next Temple",
+    continueYatra: "Continue Yatra",
+    resetProgress: "Reset",
+    mapDirections: "Open Map",
+    qualityNotice: "Some temple content is incomplete. Showing verified available details.",
+    language: "Language",
+    textSize: "Text",
+    contrast: "Contrast",
+    textNormal: "A",
+    textLarge: "A+",
+    contrastNormal: "Standard",
+    contrastHigh: "High",
+    emptySaved: "No saved temples yet. Tap Save on any temple.",
+    notFoundTemple: "Temple not found.",
+    deityFallback: "Lord Shiva",
+    updateAvailable: "A new version is ready.",
+    updateNow: "Update now",
+    updateLater: "Later"
+  },
+  hi: {
+    appTitleHome: "सनातन मंदिर",
+    appTitleDetail: "मंदिर विवरण",
+    searchLabel: "खोज",
+    searchPlaceholder: "मंदिर, स्थान या देवता से खोजें",
+    filterAll: "सभी",
+    filterJyotirlinga: "ज्योतिर्लिंग",
+    filterOther: "अन्य",
+    filterSaved: "सहेजे गए",
+    loadingCatalog: "मंदिर सूची लोड हो रही है...",
+    loadingTemple: "मंदिर विवरण लोड हो रहा है...",
+    noResults: "आपकी खोज से कोई मंदिर नहीं मिला।",
+    noFacts: "इस मंदिर के तथ्य अभी उपलब्ध नहीं हैं।",
+    noMedia: "गैलरी सामग्री उपलब्ध नहीं है।",
+    pageNotFound: "पेज नहीं मिला।",
+    goHome: "होम जाएं",
+    backToTemples: "मंदिर सूची पर वापस",
+    overview: "परिचय",
+    deityMeaning: "देवता और अर्थ",
+    whyVisit: "क्यों जाएं",
+    keyFacts: "मुख्य तथ्य",
+    gallery: "गैलरी",
+    approxAge: "अनुमानित आयु",
+    currentTemple: "वर्तमान मंदिर",
+    dailyVisitors: "दैनिक श्रद्धालु",
+    rebuildCycles: "पुनर्निर्माण",
+    years: "वर्ष",
+    spiritualBenefit: "आध्यात्मिक लाभ",
+    insight: "विशेष जानकारी",
+    templeImage: "मंदिर चित्र",
+    templeView: "मंदिर दृश्य",
+    bookmarked: "सहेजा गया",
+    save: "सहेजें",
+    visited: "दर्शन हुआ",
+    markVisited: "दर्शन चिह्नित करें",
+    plannerTitle: "तीर्थ यात्रा योजनाकार",
+    progress: "प्रगति",
+    nextTemple: "अगला मंदिर",
+    continueYatra: "यात्रा जारी रखें",
+    resetProgress: "रीसेट",
+    mapDirections: "मैप खोलें",
+    qualityNotice: "कुछ सामग्री अधूरी है। उपलब्ध सत्यापित जानकारी दिखाई जा रही है।",
+    language: "भाषा",
+    textSize: "टेक्स्ट",
+    contrast: "कॉन्ट्रास्ट",
+    textNormal: "A",
+    textLarge: "A+",
+    contrastNormal: "सामान्य",
+    contrastHigh: "उच्च",
+    emptySaved: "अभी कोई मंदिर सहेजा नहीं गया है।",
+    notFoundTemple: "मंदिर नहीं मिला।",
+    deityFallback: "भगवान शिव",
+    updateAvailable: "नया संस्करण तैयार है।",
+    updateNow: "अभी अपडेट करें",
+    updateLater: "बाद में"
+  }
+};
+
+const TEMPLE_NAMES_HI = {
+  somnath: "सोमनाथ",
+  mallikarjuna: "मल्लिकार्जुन",
+  mahakaleshwar: "महाकालेश्वर",
+  omkareshwar: "ओंकारेश्वर",
+  kedarnath: "केदारनाथ",
+  bhimashankar: "भीमाशंकर",
+  "kashi-vishwanath": "काशी विश्वनाथ",
+  trimbakeshwar: "त्र्यंबकेश्वर",
+  vaidyanath: "वैद्यनाथ",
+  nageshwar: "नागेश्वर",
+  rameshwaram: "रामेश्वरम",
+  grishneshwar: "घृष्णेश्वर",
+  tirupati: "तिरुपति बालाजी"
+};
+
+export function t(locale, key) {
+  const lang = locale === "hi" ? "hi" : "en";
+  return STRINGS[lang][key] || STRINGS.en[key] || key;
+}
+
+export function nextLanguage(locale) {
+  return locale === "hi" ? "en" : "hi";
+}
+
+export function templeDisplayName(temple, locale) {
+  if (!temple) return "";
+  if (locale === "hi") {
+    return TEMPLE_NAMES_HI[temple.id] || temple.name_local || temple.name;
+  }
+  return temple.name;
+}

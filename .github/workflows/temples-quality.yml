@@ -1,0 +1,30 @@
+﻿name: Temples Quality Checks
+
+on:
+  push:
+    paths:
+      - "apps/temples/**"
+      - ".github/workflows/temples-quality.yml"
+  pull_request:
+    paths:
+      - "apps/temples/**"
+      - ".github/workflows/temples-quality.yml"
+
+jobs:
+  validate-temples:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate Temple JSON Data
+        run: node apps/temples/tests/validate-data.mjs
+
+      - name: Check JavaScript Syntax
+        run: node apps/temples/tests/check-js-syntax.mjs

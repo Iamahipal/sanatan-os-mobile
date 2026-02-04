@@ -1,4 +1,6 @@
-﻿export async function registerPwa() {
+﻿let waitingWorker = null;
+
+export async function registerPwa(onUpdateReady) {
   if (!("serviceWorker" in navigator)) {
     return;
   }
@@ -12,11 +14,29 @@
 
       worker.addEventListener("statechange", () => {
         if (worker.state === "installed" && navigator.serviceWorker.controller) {
-          console.info("A new offline version is available. Reload to update.");
+          waitingWorker = worker;
+          if (typeof onUpdateReady === "function") {
+            onUpdateReady();
+          } else {
+            console.info("A new offline version is available. Reload to update.");
+          }
         }
       });
     });
   } catch (error) {
     console.warn("PWA registration failed:", error);
   }
+}
+
+export function applyPwaUpdate() {
+  if (!waitingWorker) return;
+
+  waitingWorker.postMessage({ type: "SKIP_WAITING" });
+
+  let refreshed = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (refreshed) return;
+    refreshed = true;
+    window.location.reload();
+  });
 }

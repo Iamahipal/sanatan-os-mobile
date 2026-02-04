@@ -1,7 +1,13 @@
-﻿const CACHE_VERSION = "temples-v1";
+﻿const CACHE_VERSION = "temples-v2";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const DATA_CACHE = `${CACHE_VERSION}-data`;
 const MEDIA_CACHE = `${CACHE_VERSION}-media`;
+
+const MAX_CACHE_ENTRIES = {
+  [APP_SHELL_CACHE]: 30,
+  [DATA_CACHE]: 80,
+  [MEDIA_CACHE]: 120
+};
 
 const CORE_ASSETS = [
   "./",
@@ -11,6 +17,8 @@ const CORE_ASSETS = [
   "./app/ui.js",
   "./app/router.js",
   "./app/data-service.js",
+  "./app/i18n.js",
+  "./app/preferences.js",
   "./app/pwa.js",
   "./app/styles.css",
   "./vite.svg"
@@ -36,6 +44,12 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
+self.addEventListener("message", (event) => {
+  if (event?.data?.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
 function isDataRequest(url) {
   return url.pathname.includes("/data/") || url.pathname.endsWith(".json");
 }
@@ -44,11 +58,30 @@ function isMediaRequest(url) {
   return /\.(png|jpg|jpeg|gif|webp|svg|mp3|ogg|wav)$/i.test(url.pathname);
 }
 
+async function trimCache(cacheName) {
+  const maxEntries = MAX_CACHE_ENTRIES[cacheName];
+  if (!maxEntries) return;
+
+  const cache = await caches.open(cacheName);
+  const keys = await cache.keys();
+
+  if (keys.length <= maxEntries) return;
+
+  const overflow = keys.length - maxEntries;
+  await Promise.all(keys.slice(0, overflow).map((request) => cache.delete(request)));
+}
+
+async function storeAndTrim(cacheName, request, response) {
+  const cache = await caches.open(cacheName);
+  await cache.put(request, response.clone());
+  await trimCache(cacheName);
+}
+
 async function networkFirst(request, cacheName, fallbackUrl) {
   const cache = await caches.open(cacheName);
   try {
     const response = await fetch(request);
-    cache.put(request, response.clone());
+    await storeAndTrim(cacheName, request, response);
     return response;
   } catch {
     const cached = await cache.match(request);
@@ -64,14 +97,15 @@ async function networkFirst(request, cacheName, fallbackUrl) {
 async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName);
   const cached = await cache.match(request);
-  const network = fetch(request)
-    .then((response) => {
-      cache.put(request, response.clone());
+
+  const networkPromise = fetch(request)
+    .then(async (response) => {
+      await storeAndTrim(cacheName, request, response);
       return response;
     })
     .catch(() => null);
 
-  return cached || network;
+  return cached || networkPromise;
 }
 
 self.addEventListener("fetch", (event) => {
