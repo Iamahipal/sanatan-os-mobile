@@ -12,7 +12,6 @@ const APP_SHELL = [
   "./js/data/scraped_events.json",
   "./js/data/vachaks.json",
   "./manifest.json",
-  "./assets/icons/lucide.min.js",
   "./assets/images/placeholder-vachak.png"
 ];
 

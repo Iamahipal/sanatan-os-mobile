@@ -5,7 +5,7 @@ export function renderApp(state, refs) {
   renderControls(state, refs);
   renderTabs(state, refs.tabs);
   renderView(state, refs.root);
-  refreshIcons();
+
 }
 
 export function renderDialog(event, dialog, isSaved) {
@@ -14,7 +14,7 @@ export function renderDialog(event, dialog, isSaved) {
       <div class="modal-top">
         <h2>${escapeHtml(event.title)}</h2>
         <button class="modal-close" data-action="close-dialog" aria-label="Close">
-          <i data-lucide="x"></i>
+          <span class="material-symbols-rounded" aria-hidden="true">close</span>
         </button>
       </div>
       <p>${escapeHtml(event.cityName)} · ${escapeHtml(event.venue)}</p>
@@ -35,7 +35,7 @@ export function renderDialog(event, dialog, isSaved) {
       ${event.speakerBio ? `<p style="margin-top:12px; color:#6e5a49;">${escapeHtml(event.speakerBio)}</p>` : ""}
     </article>
   `;
-  refreshIcons();
+
 }
 
 function renderHero(state, hero) {
@@ -220,11 +220,10 @@ function groupByMonth(list) {
   }, {});
 }
 
-function refreshIcons() {
-  if (window.lucide?.createIcons) window.lucide.createIcons();
-}
-
 function humanize(value) {
   return String(value).split('-').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
 }
+
+
+
 

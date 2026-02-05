@@ -10,9 +10,9 @@
   <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Roboto+Flex:opsz,wght@8..144,400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
   <link rel="stylesheet" href="css/app.css">
-  <script defer src="assets/icons/lucide.min.js"></script>
 </head>
 <body>
   <div class="texture" aria-hidden="true"></div>
@@ -23,7 +23,7 @@
         <h1>Find Events That Matter</h1>
       </div>
       <button id="installBtn" class="icon-btn" aria-label="Install app">
-        <i data-lucide="download"></i>
+        <span class="material-symbols-rounded" aria-hidden="true">download</span>
       </button>
     </header>
 
@@ -31,7 +31,7 @@
 
     <section class="filters" id="filters">
       <label class="search">
-        <i data-lucide="search"></i>
+        <span class="material-symbols-rounded" aria-hidden="true">search</span>
         <input id="searchInput" type="search" placeholder="Search by event, city, speaker">
       </label>
       <select id="cityFilter" aria-label="Filter by city"></select>
@@ -46,10 +46,10 @@
     <main id="viewRoot" class="view-root"></main>
 
     <nav class="tabs" id="tabs" aria-label="Primary navigation">
-      <button data-view="discover" class="active"><i data-lucide="compass"></i><span>Discover</span></button>
-      <button data-view="calendar"><i data-lucide="calendar-days"></i><span>Calendar</span></button>
-      <button data-view="saved"><i data-lucide="heart"></i><span>Saved</span></button>
-      <button data-view="profile"><i data-lucide="user-round"></i><span>Profile</span></button>
+      <button data-view="discover" class="active"><span class="material-symbols-rounded" aria-hidden="true">explore</span><span>Discover</span></button>
+      <button data-view="calendar"><span class="material-symbols-rounded" aria-hidden="true">calendar_month</span><span>Calendar</span></button>
+      <button data-view="saved"><span class="material-symbols-rounded" aria-hidden="true">favorite</span><span>Saved</span></button>
+      <button data-view="profile"><span class="material-symbols-rounded" aria-hidden="true">person</span><span>Profile</span></button>
     </nav>
   </div>
 
