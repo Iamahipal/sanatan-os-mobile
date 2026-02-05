@@ -10,7 +10,7 @@ export const VACHAKS = [
         id: 'rajendradas',
         name: 'Swami Shri Rajendradas Ji Maharaj',
         shortName: 'Rajendradas Ji',
-        handle: 'RajendraDasJiMaharaj',
+        handle: 'rajendradasjimaharaj',
         specialty: 'श्रीमद्भागवत कथा',
         emoji: '🙏'
     },
@@ -18,7 +18,7 @@ export const VACHAKS = [
         id: 'pundrik',
         name: 'Shri Pundrik Goswami Ji Maharaj',
         shortName: 'Pundrik Goswami',
-        handle: 'PundrikGoswami',
+        handle: 'sripundrik',
         specialty: 'श्रीमद्भागवत कथा',
         emoji: '📿'
     },
@@ -26,7 +26,7 @@ export const VACHAKS = [
         id: 'morari',
         name: 'Morari Bapu',
         shortName: 'Morari Bapu',
-        handle: 'moraboripuramakatha',
+        handle: 'moraribapu',
         specialty: 'राम कथा',
         emoji: '🙏'
     },
@@ -42,7 +42,7 @@ export const VACHAKS = [
         id: 'premanand',
         name: 'Pujya Premanand Ji Maharaj',
         shortName: 'Premanand Ji',
-        handle: 'PremanandJiMaharaj',
+        handle: 'BhajanMarg',
         specialty: 'श्रीमद्भागवत कथा',
         emoji: '🙏'
     },
@@ -58,7 +58,7 @@ export const VACHAKS = [
         id: 'pradeep',
         name: 'Pandit Pradeep Mishra',
         shortName: 'Pradeep Mishra Ji',
-        handle: 'PanditPradeepMishra',
+        handle: 'PradeepMishra',
         specialty: 'शिव महापुराण',
         emoji: '🙏'
     },
@@ -66,7 +66,7 @@ export const VACHAKS = [
         id: 'indresh',
         name: 'Acharya Indresh Upadhyay',
         shortName: 'Indresh Upadhyay',
-        handle: 'IndreshUpadhyay',
+        handle: 'BhaktiPath',
         specialty: 'श्रीमद्भागवत कथा',
         emoji: '📿'
     }
@@ -116,14 +116,14 @@ export const WEBSITE_CONFIGS = [
     {
         id: 'chitrakutdham',
         name: 'Chitrakut Dham Talgajarda',
-        url: 'https://chitrakutdhamtalgajarda.org/schedule',
+        url: 'https://chitrakutdhamtalgajarda.org',
         vachakId: 'morari',
         parser: parseMorariBapu
     },
     {
         id: 'bageshwardham',
         name: 'Bageshwar Dham Official',
-        url: 'https://bageshwardham.in',
+        url: 'https://bageshwardham.co.in/en',
         vachakId: 'bageshwar',
         parser: parseGenericSite
     }
@@ -160,4 +160,5 @@ export const INSTAGRAM_HANDLES = {
         priority: 2
     }
 };
+
 

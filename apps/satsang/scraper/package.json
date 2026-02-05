@@ -1,27 +1,29 @@
 {
-  "name": "satsang-scraper",
-  "version": "1.1.0",
-  "description": "Multi-platform event data scraper for Satsang App",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "scrape": "node index.js",
-    "scrape:youtube": "node index.js --source=youtube",
-    "scrape:websites": "node index.js --source=websites",
-    "scrape:instagram": "node index.js --source=instagram",
-    "export": "node index.js --export"
-  },
-  "keywords": [
-    "satsang",
-    "scraper",
-    "youtube",
-    "instagram",
-    "events"
-  ],
-  "author": "SanatanOS",
-  "license": "MIT",
-  "dependencies": {
-    "rss-parser": "^3.13.0",
-    "cheerio": "^1.0.0-rc.12"
-  }
+    "name":  "satsang-scraper",
+    "version":  "1.1.0",
+    "description":  "Multi-platform event data scraper for Satsang App",
+    "main":  "index.js",
+    "type":  "module",
+    "scripts":  {
+                    "scrape":  "node index.js --source=all",
+                    "scrape:youtube":  "node index.js --source=youtube",
+                    "scrape:websites":  "node index.js --source=websites",
+                    "scrape:instagram":  "node index.js --source=instagram",
+                    "export":  "node index.js --export",
+                    "scrape:dry":  "node index.js --source=all --dry-run",
+                    "scrape:strict":  "node index.js --source=all --min-confidence=75"
+                },
+    "keywords":  [
+                     "satsang",
+                     "scraper",
+                     "youtube",
+                     "instagram",
+                     "events"
+                 ],
+    "author":  "SanatanOS",
+    "license":  "MIT",
+    "dependencies":  {
+                         "rss-parser":  "^3.13.0",
+                         "cheerio":  "^1.0.0-rc.12"
+                     }
 }

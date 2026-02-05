@@ -1,0 +1,90 @@
+[
+  {
+    "id": "rajendradas",
+    "name": "Swami Shri Rajendradas Ji Maharaj",
+    "shortName": "Rajendradas Ji",
+    "specialty": "श्रीमद्भागवत कथा",
+    "emoji": "🙏",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@rajendradasjimaharaj"
+    }
+  },
+  {
+    "id": "pundrik",
+    "name": "Shri Pundrik Goswami Ji Maharaj",
+    "shortName": "Pundrik Goswami",
+    "specialty": "श्रीमद्भागवत कथा",
+    "emoji": "📿",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@sripundrik"
+    }
+  },
+  {
+    "id": "morari",
+    "name": "Morari Bapu",
+    "shortName": "Morari Bapu",
+    "specialty": "राम कथा",
+    "emoji": "🙏",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@moraribapu"
+    }
+  },
+  {
+    "id": "jayakishori",
+    "name": "Jaya Kishori",
+    "shortName": "Jaya Kishori",
+    "specialty": "भजन & कथा",
+    "emoji": "🎤",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@iamjayakishori"
+    }
+  },
+  {
+    "id": "premanand",
+    "name": "Pujya Premanand Ji Maharaj",
+    "shortName": "Premanand Ji",
+    "specialty": "श्रीमद्भागवत कथा",
+    "emoji": "🙏",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@BhajanMarg"
+    }
+  },
+  {
+    "id": "bageshwar",
+    "name": "Bageshwar Dham Sarkar",
+    "shortName": "Bageshwar Dham",
+    "specialty": "दरबार",
+    "emoji": "✨",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@BageshwarDhamSarkar"
+    }
+  },
+  {
+    "id": "pradeep",
+    "name": "Pandit Pradeep Mishra",
+    "shortName": "Pradeep Mishra Ji",
+    "specialty": "शिव महापुराण",
+    "emoji": "🙏",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@PradeepMishra"
+    }
+  },
+  {
+    "id": "indresh",
+    "name": "Acharya Indresh Upadhyay",
+    "shortName": "Indresh Upadhyay",
+    "specialty": "श्रीमद्भागवत कथा",
+    "emoji": "📿",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@BhaktiPath"
+    }
+  }
+]
