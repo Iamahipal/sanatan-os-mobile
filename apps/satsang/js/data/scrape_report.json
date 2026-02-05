@@ -1,28 +1,26 @@
 {
-  "generatedAt": "2026-02-05T07:26:33.255Z",
+  "generatedAt": "2026-02-05T08:01:40.430Z",
   "input": {
     "source": "all",
     "minConfidence": 75,
     "dryRun": false,
-    "rawEvents": 44,
-    "afterDedupe": 44
+    "rawEvents": 27,
+    "afterDedupe": 27
   },
   "output": {
-    "approved": 44,
+    "approved": 27,
     "review": 0
   },
   "stats": {
     "bySource": {
-      "youtube": 44
+      "youtube": 27
     },
     "byVachak": {
       "rajendradas": 1,
-      "pundrik": 1,
-      "morari": 13,
-      "premanand": 12,
-      "pradeep": 2,
+      "morari": 10,
+      "premanand": 1,
       "indresh": 15
     }
   },
-  "durationMs": 26226
+  "durationMs": 24062
 }

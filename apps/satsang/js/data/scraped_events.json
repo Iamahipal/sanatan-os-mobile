@@ -1,137 +1,5 @@
 [
   {
-    "id": "yt-pU7JL1L9tFk",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "Tata steel 3rd march celebration since 2020",
-    "vachakId": "pradeep",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2020-03-08",
-      "end": "2020-03-08",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=pU7JL1L9tFk",
-    "thumbnail": "https://i1.ytimg.com/vi/pU7JL1L9tFk/hqdefault.jpg",
-    "publishedAt": "2020-03-08T06:12:08.000Z",
-    "rawSignals": {
-      "usedPublishedDate": true,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": [
-        "event_too_far_future"
-      ]
-    },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
-  },
-  {
-    "id": "yt-KJw5UemO4gs",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "#Corona Virus, 5th April 9 PM for 9 min. Light off",
-    "vachakId": "pradeep",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2020-04-05",
-      "end": "2020-04-05",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=KJw5UemO4gs",
-    "thumbnail": "https://i4.ytimg.com/vi/KJw5UemO4gs/hqdefault.jpg",
-    "publishedAt": "2020-04-05T15:39:43.000Z",
-    "rawSignals": {
-      "usedPublishedDate": true,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": [
-        "event_too_far_future"
-      ]
-    },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
-  },
-  {
-    "id": "yt-sBj-pvV83iM",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "इस से आपका बहुत नुकसान हो जाएगा / इन 10 बातों से जानिए, आपके भाव अच्छे हैं या बुरे // 03/02/25",
-    "vachakId": "premanand",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2025-02-02",
-      "end": "2025-02-02",
-      "duration": 1,
-      "timing": "Live / Scheduled Live"
-    },
-    "features": {
-      "isLive": true,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=sBj-pvV83iM",
-    "thumbnail": "https://i4.ytimg.com/vi/sBj-pvV83iM/hqdefault.jpg",
-    "publishedAt": "2026-02-03T07:30:00.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": true
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": [
-        "event_too_far_future"
-      ]
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
-  },
-  {
     "id": "yt-P-DqZsnvL8Y",
     "type": "ramkatha",
     "typeName": "Ram Katha",
@@ -171,49 +39,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
-  },
-  {
-    "id": "yt-Xobzx_oHJmA",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "Chitrakut Award | Talgajarda | 14/01/2026",
-    "vachakId": "morari",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-13",
-      "end": "2026-01-13",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=Xobzx_oHJmA",
-    "thumbnail": "https://i1.ytimg.com/vi/Xobzx_oHJmA/hqdefault.jpg",
-    "publishedAt": "2026-01-16T04:52:27.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-UiCobMmgH7I",
@@ -255,7 +81,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-_Nk96XBnO_k",
@@ -297,7 +123,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-ETMkaPw-d2U",
@@ -339,7 +165,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-XMczPW9b3xQ",
@@ -381,7 +207,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-VRZB2_3BZxA",
@@ -423,7 +249,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-uugyYK2SAFY",
@@ -465,49 +291,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
-  },
-  {
-    "id": "yt-zEcWZzqnKl4",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "पाप नाश का रहस्य / क्रोध व हिंसा से कैसे बचें ? // 21/01/2026",
-    "vachakId": "premanand",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-20",
-      "end": "2026-01-20",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=zEcWZzqnKl4",
-    "thumbnail": "https://i3.ytimg.com/vi/zEcWZzqnKl4/hqdefault.jpg",
-    "publishedAt": "2026-01-21T07:30:00.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-fQjPSKG6N6g",
@@ -549,7 +333,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-24rIiVdEmKU",
@@ -591,49 +375,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
-  },
-  {
-    "id": "yt-nkdrqWTWGQE",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "परमार्थ पथ पर चल रहे साधकों के लिए जीवन अमृत समान वचन // 22/01/2026",
-    "vachakId": "premanand",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-21",
-      "end": "2026-01-21",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=nkdrqWTWGQE",
-    "thumbnail": "https://i3.ytimg.com/vi/nkdrqWTWGQE/hqdefault.jpg",
-    "publishedAt": "2026-01-22T07:30:00.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-DjSDH7qFCBk",
@@ -675,7 +417,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-BoluSjM172g",
@@ -717,49 +459,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
-  },
-  {
-    "id": "yt-2Yu84mJmGL4",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "बसंत पंचमी महोत्सव पर दिव्य सत्संग ! // 23/01/2026",
-    "vachakId": "premanand",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-22",
-      "end": "2026-01-22",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=2Yu84mJmGL4",
-    "thumbnail": "https://i3.ytimg.com/vi/2Yu84mJmGL4/hqdefault.jpg",
-    "publishedAt": "2026-01-23T07:30:00.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-yNshYFWcE7I",
@@ -801,49 +501,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
-  },
-  {
-    "id": "yt-h6F4zMcoLa8",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "Aahuti - A Kathak Recital | Delhi | 24/01/2026",
-    "vachakId": "morari",
-    "location": {
-      "city": "delhi",
-      "cityName": "New Delhi",
-      "venue": "See official details"
-    },
-    "dates": {
-      "start": "2026-01-23",
-      "end": "2026-01-23",
-      "duration": 1,
-      "timing": "Live / Scheduled Live"
-    },
-    "features": {
-      "isLive": true,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=h6F4zMcoLa8",
-    "thumbnail": "https://i1.ytimg.com/vi/h6F4zMcoLa8/hqdefault.jpg",
-    "publishedAt": "2026-02-04T10:01:09.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "delhi",
-      "typeDetected": "other",
-      "liveSignal": true
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-czXkjTf1sS0",
@@ -885,49 +543,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
-  },
-  {
-    "id": "yt-mVCAUtdH_KM",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "कहीं तुम स्वयं को ही धोखा तो नहीं दे रहे ?/ दुसंग कैसे जीवन को भीतर से नष्ट करता है // 24/01/2026",
-    "vachakId": "premanand",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-23",
-      "end": "2026-01-23",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=mVCAUtdH_KM",
-    "thumbnail": "https://i2.ytimg.com/vi/mVCAUtdH_KM/hqdefault.jpg",
-    "publishedAt": "2026-01-24T07:30:00.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-t7yitSbRd80",
@@ -969,7 +585,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-91zHTOw9MGs",
@@ -1011,49 +627,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
-  },
-  {
-    "id": "yt-tTKArxW6nxE",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "प्रेम का प्रभाव और साधना की विशेष सावधानियाँ ! // 25/01/2026",
-    "vachakId": "premanand",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-24",
-      "end": "2026-01-24",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=tTKArxW6nxE",
-    "thumbnail": "https://i1.ytimg.com/vi/tTKArxW6nxE/hqdefault.jpg",
-    "publishedAt": "2026-01-25T07:30:00.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-hUR4aM6yoOE",
@@ -1095,7 +669,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-_tEsbcm9EvA",
@@ -1137,133 +711,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
-  },
-  {
-    "id": "yt-aXgIiFCIOk0",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "गणतंत्र दिवस Special / जो चिंता और दुःख मिटाना चाहता है, वह ये 8 बातें धारण करे ! // 26/01/2026",
-    "vachakId": "premanand",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-25",
-      "end": "2026-01-25",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=aXgIiFCIOk0",
-    "thumbnail": "https://i2.ytimg.com/vi/aXgIiFCIOk0/hqdefault.jpg",
-    "publishedAt": "2026-01-26T07:30:00.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
-  },
-  {
-    "id": "yt-Ast9Gmu20Dk",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "साधना के अत्यंत महत्त्वपूर्ण सूत्र / हर साधक को अवश्य जानना चाहिए ! // 27/01/2026",
-    "vachakId": "premanand",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-26",
-      "end": "2026-01-26",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=Ast9Gmu20Dk",
-    "thumbnail": "https://i2.ytimg.com/vi/Ast9Gmu20Dk/hqdefault.jpg",
-    "publishedAt": "2026-01-27T07:30:00.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
-  },
-  {
-    "id": "yt-GuJzKMHytMA",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "जानिए आपके दुःख और पतन का वास्तविक कारण क्या है ?// 28/01/2026",
-    "vachakId": "premanand",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-27",
-      "end": "2026-01-27",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=GuJzKMHytMA",
-    "thumbnail": "https://i4.ytimg.com/vi/GuJzKMHytMA/hqdefault.jpg",
-    "publishedAt": "2026-01-28T07:30:00.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-eDU6slHj2o4",
@@ -1305,49 +753,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
-  },
-  {
-    "id": "yt-Y6OvlJobPrM",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "मनुष्य बंधन में क्यों है ? मूल कारण जानिए ! // 29/01/2026",
-    "vachakId": "premanand",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-28",
-      "end": "2026-01-28",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=Y6OvlJobPrM",
-    "thumbnail": "https://i2.ytimg.com/vi/Y6OvlJobPrM/hqdefault.jpg",
-    "publishedAt": "2026-01-29T07:30:00.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-9eYxaeYdeYM",
@@ -1389,7 +795,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-uNq1_NbGvcY",
@@ -1431,7 +837,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-3V6q-ZOQ29s",
@@ -1473,49 +879,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
-  },
-  {
-    "id": "yt-3m53KDXK3X8",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "Samuh Lagna - Patotsav | Senjal Dham | 01/02/2026",
-    "vachakId": "morari",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-31",
-      "end": "2026-01-31",
-      "duration": 1,
-      "timing": "Live / Scheduled Live"
-    },
-    "features": {
-      "isLive": true,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=3m53KDXK3X8",
-    "thumbnail": "https://i4.ytimg.com/vi/3m53KDXK3X8/hqdefault.jpg",
-    "publishedAt": "2026-02-03T08:52:35.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": true
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-QDLXDQohK64",
@@ -1557,7 +921,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-WjMBxmSbCVg",
@@ -1599,7 +963,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-dRbV7YJ6XVk",
@@ -1641,7 +1005,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-QNtAjClruiM",
@@ -1683,49 +1047,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
-  },
-  {
-    "id": "yt-0yKcUe-r3Ac",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "सावधान !! यह कुसंग ही आपके पतन का कारण बनता है // 04/02/2026",
-    "vachakId": "premanand",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-02-03",
-      "end": "2026-02-03",
-      "duration": 1,
-      "timing": "Live / Scheduled Live"
-    },
-    "features": {
-      "isLive": true,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=0yKcUe-r3Ac",
-    "thumbnail": "https://i1.ytimg.com/vi/0yKcUe-r3Ac/hqdefault.jpg",
-    "publishedAt": "2026-02-04T07:30:00.000Z",
-    "rawSignals": {
-      "usedPublishedDate": false,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": true
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-AAm3bNLN2vI",
@@ -1767,49 +1089,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
-  },
-  {
-    "id": "yt-RMqPxBlOvaE",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "for service not for success!",
-    "vachakId": "pundrik",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-02-04",
-      "end": "2026-02-04",
-      "duration": 1,
-      "timing": "Live / Scheduled Live"
-    },
-    "features": {
-      "isLive": true,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=RMqPxBlOvaE",
-    "thumbnail": "https://i3.ytimg.com/vi/RMqPxBlOvaE/hqdefault.jpg",
-    "publishedAt": "2026-02-04T07:50:01.000Z",
-    "rawSignals": {
-      "usedPublishedDate": true,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": true
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-05T07:26:33.254Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   },
   {
     "id": "yt-HyYuUPWcosM",
@@ -1851,6 +1131,6 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T07:26:33.255Z"
+    "updatedAt": "2026-02-05T08:01:40.429Z"
   }
 ]

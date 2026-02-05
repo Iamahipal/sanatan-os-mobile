@@ -36,14 +36,13 @@ function normalizeItem(item) {
     const description = String(item.contentSnippet || item.content || '').trim();
     const text = `${title} ${description}`;
 
-    if (!looksLikeEvent(text)) {
-      return null;
-    }
-
     const publishedDate = item.isoDate ? new Date(item.isoDate) : new Date();
     const eventDate = extractEventDate(text) || publishedDate;
 
     const eventType = detectEventType(text);
+    if (!isReligiousProgram(text, eventType.type)) {
+      return null;
+    }
     const city = detectCity(text);
     const liveSignal = detectLiveSignal(title, description, item);
 
@@ -103,16 +102,39 @@ function extractVideoId(item) {
   return 'unknown';
 }
 
-function looksLikeEvent(text) {
+function isReligiousProgram(text, detectedType) {
   const lower = text.toLowerCase();
-  const keywordHit = Object.values(EVENT_TYPE_KEYWORDS).some((list) =>
-    list.some((keyword) => lower.includes(keyword.toLowerCase()))
-  );
-  const hasDatePattern = /\b\d{1,2}[\/-]\d{1,2}(?:[\/-]\d{2,4})?\b/.test(lower) ||
-    /\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|january|february|march|april|june|july|august|september|october|november|december)\b/i.test(lower);
-  const liveWord = /\b(live|stream|premiere|upcoming)\b/i.test(lower);
 
-  return keywordHit || hasDatePattern || liveWord;
+  // Strong positive signals (word-boundary oriented).
+  const positivePatterns = [
+    /\bram\s*katha\b/,
+    /\bbhagwat\b/,
+    /\bbhagavat\b/,
+    /\bshrimad\b/,
+    /\bsatsang\b/,
+    /\bpravachan\b/,
+    /\bbhajan\b/,
+    /\bkirtan\b/,
+    /\bdarbar\b/,
+    /\bmahapuran\b/,
+    /\bshivpuran\b/,
+    /\bhanuman\s*katha\b/,
+    /\bhanumat\s*katha\b/,
+    /\bkatha\b/,
+  ];
+  const hasPrimary = positivePatterns.some((rx) => rx.test(lower));
+
+  // Exclude generic uploads that are usually not event listings.
+  const negativeKeywords = [
+    'shorts', '#shorts', 'reaction', 'trailer', 'teaser', 'vlog',
+    'podcast', 'interview', 'news', 'breaking', 'debate', 'comedy',
+    'gaming', 'movie', 'song promo', 'kathak'
+  ];
+  const hasNegative = negativeKeywords.some((kw) => lower.includes(kw));
+
+  if (hasNegative) return false;
+  if (detectedType !== 'other') return true;
+  return hasPrimary;
 }
 
 function detectEventType(text) {

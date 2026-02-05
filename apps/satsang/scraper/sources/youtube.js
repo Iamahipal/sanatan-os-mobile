@@ -18,14 +18,14 @@ const parser = new Parser({
 });
 
 const VERIFIED_CHANNEL_IDS = {
-  jayakishori: 'UCWX7Y1JXgz8VGlyFQnlHqpA',
-  bageshwar: 'UCp2Zqr_mGWq_WTZ2BKE9k_g',
+  rajendradas: 'UCXly_daYmaRFjYFIb_lfsiA',
+  pundrik: 'UCB5X11vjfDvgvEcgm26y1Vg',
   morari: 'UCnePvOdQ-uBSWSIgRoG55gA',
+  jayakishori: 'UCCR5eciEJIMvX2o1tiYOUKQ',
+  premanand: 'UC_fmMgNql89jbFI8TNcq9Vg',
+  bageshwar: 'UC6WcxjGtzDxtdWvWWj3aM5w',
   pradeep: 'UCiWB2Ucdmkj4GqmWMrka1RA',
-  rajendradas: 'UCJIVfJlBmvvGR-HMJBHx5Tw',
-  pundrik: 'UCM2iwBjYlzFQ34wT0CqMCGg',
-  premanand: 'UC5B9f9aZvpQV8MaKF6DWGRA',
-  indresh: 'UCFmJwGt-o16mS5EWgMmZ3rA',
+  indresh: 'UC03aV1e7XdXm2Za_K856duQ',
 };
 
 const resolvedCache = new Map();
