@@ -27,20 +27,24 @@
       </button>
     </header>
 
-    <section id="hero" class="hero"></section>
-
     <section class="filters" id="filters">
       <label class="search">
         <span class="material-symbols-rounded" aria-hidden="true">search</span>
         <input id="searchInput" type="search" placeholder="Search by event, city, speaker">
       </label>
-      <select id="cityFilter" aria-label="Filter by city"></select>
-      <select id="typeFilter" aria-label="Filter by type"></select>
-      <select id="sortSelect" aria-label="Sort events">
-        <option value="soonest">Soonest</option>
-        <option value="live">Live first</option>
-        <option value="city">City A-Z</option>
-      </select>
+      <button id="filterToggleBtn" class="filter-toggle" type="button" aria-expanded="false">
+        <span class="material-symbols-rounded" aria-hidden="true">tune</span>
+        <span>Filters</span>
+      </button>
+      <div id="filterPanel" class="filter-panel" hidden>
+        <select id="cityFilter" aria-label="Filter by city"></select>
+        <select id="typeFilter" aria-label="Filter by type"></select>
+        <select id="sortSelect" aria-label="Sort events">
+          <option value="soonest">Soonest</option>
+          <option value="live">Live first</option>
+          <option value="city">City A-Z</option>
+        </select>
+      </div>
     </section>
 
     <main id="viewRoot" class="view-root"></main>

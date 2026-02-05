@@ -51,7 +51,7 @@ export async function loadAppData() {
       cityName,
       venue: event?.location?.venue || "Venue TBD",
       timing: event?.dates?.timing || "Time TBD",
-      isLive: Boolean(event?.features?.isLive) || isDateLive(start, end),
+      isLive: isLiveToday(start, end, Boolean(event?.features?.isLive), Boolean(event?.features?.hasLiveStream)),
       isFree: Boolean(event?.features?.isFree),
       hasLiveStream: Boolean(event?.features?.hasLiveStream),
       thumbnail: event.thumbnail || "",
@@ -71,4 +71,9 @@ function isDateLive(start, end) {
   const s = new Date(start).setHours(0, 0, 0, 0);
   const e = new Date(end).setHours(23, 59, 59, 999);
   return now >= s && now <= e;
+}
+
+function isLiveToday(start, end, liveSignal, streamSignal) {
+  if (!isDateLive(start, end)) return false;
+  return liveSignal || streamSignal;
 }

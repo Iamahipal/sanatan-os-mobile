@@ -6,8 +6,10 @@ import { renderApp, renderDialog } from "./ui/renderers.js";
 const STORAGE_KEY = "satsang_state_v3";
 
 const refs = {
-  hero: document.getElementById("hero"),
   root: document.getElementById("viewRoot"),
+  filters: document.getElementById("filters"),
+  filterPanel: document.getElementById("filterPanel"),
+  filterToggleBtn: document.getElementById("filterToggleBtn"),
   tabs: document.getElementById("tabs"),
   search: document.getElementById("searchInput"),
   city: document.getElementById("cityFilter"),
@@ -25,6 +27,7 @@ const store = createStore({
   city: "all",
   type: "all",
   sort: "soonest",
+  filtersOpen: false,
   saved: [],
   reminders: [],
   savedSet: new Set(),
@@ -84,6 +87,21 @@ function bindDomEvents() {
   refs.search.addEventListener("input", (e) => {
     store.setState({ query: e.target.value.trim().toLowerCase() });
     recompute();
+  });
+
+  refs.search.addEventListener("focus", () => {
+    if (!store.getState().filtersOpen) {
+      store.setState({ filtersOpen: true });
+      persist();
+      syncFilterPanelUi();
+    }
+  });
+
+  refs.filterToggleBtn.addEventListener("click", () => {
+    const next = !store.getState().filtersOpen;
+    store.setState({ filtersOpen: next });
+    persist();
+    syncFilterPanelUi();
   });
 
   refs.city.addEventListener("change", (e) => {
@@ -229,6 +247,7 @@ function persist() {
   const state = store.getState();
   persistWith({
     view: state.view,
+    filtersOpen: state.filtersOpen,
     city: state.city,
     type: state.type,
     sort: state.sort,
@@ -249,6 +268,7 @@ function hydrateFromStorage() {
 
   store.setState({
     view: data.view || "discover",
+    filtersOpen: Boolean(data.filtersOpen),
     city: data.city || "all",
     type: data.type || "all",
     sort: data.sort || "soonest",
@@ -257,6 +277,8 @@ function hydrateFromStorage() {
     savedSet: new Set(saved),
     remindersSet: new Set(reminders),
   });
+
+  syncFilterPanelUi();
 }
 
 function readStorage() {
@@ -292,6 +314,15 @@ function setupPwa() {
     store.setState({ deferredInstall: null });
     refs.installBtn.style.display = "none";
   });
+}
+
+function syncFilterPanelUi() {
+  const { filtersOpen } = store.getState();
+  if (!refs.filterPanel || !refs.filterToggleBtn || !refs.filters) return;
+
+  refs.filterPanel.hidden = !filtersOpen;
+  refs.filterToggleBtn.setAttribute("aria-expanded", String(filtersOpen));
+  refs.filters.classList.toggle("filters-open", filtersOpen);
 }
 
 function downloadReminderIcs(event) {

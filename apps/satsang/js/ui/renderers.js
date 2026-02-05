@@ -1,7 +1,6 @@
 import { escapeHtml, formatDate, formatDateRange } from "../core/utils.js";
 
 export function renderApp(state, refs) {
-  renderHero(state, refs.hero);
   renderControls(state, refs);
   renderTabs(state, refs.tabs);
   renderView(state, refs.root);
@@ -36,27 +35,6 @@ export function renderDialog(event, dialog, isSaved, isReminderSet) {
       </div>
       ${event.speakerBio ? `<p style="margin-top:12px; color:#6e5a49;">${escapeHtml(event.speakerBio)}</p>` : ""}
     </article>
-  `;
-}
-
-function renderHero(state, hero) {
-  const featured = state.sortedEvents.find((event) => event.isLive) || state.sortedEvents[0];
-  if (!featured) {
-    hero.innerHTML = "<h2>No events available</h2><p>Add or sync event data to get started.</p>";
-    return;
-  }
-
-  const badge = featured.isLive ? "Live Now" : "Top Katha Vachak Event";
-
-  hero.innerHTML = `
-    <p class="hero-kicker">${badge}</p>
-    <h2>${escapeHtml(featured.title)}</h2>
-    <p>${escapeHtml(featured.speakerName)} | ${escapeHtml(featured.cityName)}</p>
-    <div class="hero-tags">
-      <span>${formatDateRange(featured.start, featured.end)}</span>
-      <span>${escapeHtml(featured.timing)}</span>
-      <span>${featured.isLive ? "Live now" : featured.typeLabel}</span>
-    </div>
   `;
 }
 
@@ -109,16 +87,15 @@ function renderDiscover(state, root) {
     return;
   }
 
-  const liveNow = list.filter((event) => event.isLive);
-  const upcoming = getUpcomingEvents(list);
+  const { liveToday, upcoming, past } = splitEventBuckets(list);
 
   root.innerHTML = `
     <section class="live-section">
-      <h2 class="section-title">Live Feed</h2>
+      <h2 class="section-title">Live Today</h2>
       ${
-        liveNow.length
+        liveToday.length
           ? `<section class="live-rail">
-              ${liveNow
+              ${liveToday
                 .map(
                   (event) => `
                     <article class="live-rail-card" data-action="open-event" data-id="${event.id}">
@@ -136,13 +113,21 @@ function renderDiscover(state, root) {
                 )
                 .join("")}
             </section>`
-          : '<div class="empty">No live satsang at the moment. Upcoming events are listed below.</div>'
+          : '<div class="empty">No live satsang right now.</div>'
       }
     </section>
     <section>
       <h2 class="section-title">Upcoming Events</h2>
       <section class="grid">${upcoming.map((event) => eventCard(event, state.savedSet.has(event.id), state.remindersSet.has(event.id))).join("")}</section>
     </section>
+    ${
+      past.length
+        ? `<section>
+            <h2 class="section-title">Past Events</h2>
+            <section class="grid">${past.map((event) => eventCard(event, state.savedSet.has(event.id), state.remindersSet.has(event.id))).join("")}</section>
+          </section>`
+        : ""
+    }
   `;
 }
 
@@ -282,17 +267,6 @@ function humanize(value) {
     .join(" ");
 }
 
-function getUpcomingEvents(list) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const threshold = today.getTime();
-
-  const future = list.filter((event) => !event.isLive && event.dateNum >= threshold);
-  if (future.length) return future;
-
-  return list.filter((event) => !event.isLive);
-}
-
 function getThreeMonthCalendar(list) {
   const now = new Date();
   const start = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -320,4 +294,21 @@ function isStartingSoon(event) {
   const start = new Date(event.start).setHours(0, 0, 0, 0);
   const diff = start - now;
   return diff >= 0 && diff <= 48 * 60 * 60 * 1000;
+}
+
+function splitEventBuckets(list) {
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  const todayStartNum = todayStart.getTime();
+
+  const liveToday = list.filter((event) => event.isLive && event.dateNum >= todayStartNum);
+  const nonLive = list.filter((event) => !event.isLive);
+  const upcoming = nonLive.filter((event) => event.dateNum >= todayStartNum);
+  const past = nonLive.filter((event) => event.dateNum < todayStartNum).sort((a, b) => b.dateNum - a.dateNum);
+
+  return {
+    liveToday,
+    upcoming,
+    past,
+  };
 }
