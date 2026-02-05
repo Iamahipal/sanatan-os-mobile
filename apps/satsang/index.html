@@ -1,305 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-
-    <!-- SEO & Theme -->
-    <title>Satsang - Find Spiritual Events Near You</title>
-    <meta name="description"
-        content="Discover kathas, satsangs, and spiritual events by renowned Vachaks across India.">
-    <meta name="theme-color" content="#FF6B35">
-
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Satsang">
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <!-- Preconnect to Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- Fonts - Best Hindi/Sanskrit from Google -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- CSS Design System -->
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/screens.css">
-    <link rel="stylesheet" href="css/player.css">
-    <link rel="stylesheet" href="css/search.css">
-    <link rel="stylesheet" href="css/library.css">
-    <link rel="stylesheet" href="css/auth.css">
-    <link rel="stylesheet" href="css/community.css">
-
-    <!-- Icons (Local) -->
-    <script src="assets/icons/lucide.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <title>Satsang - Modern Events</title>
+  <meta name="description" content="Discover spiritual events, satsangs, and live kathas in a modern experience.">
+  <meta name="theme-color" content="#9d3f11">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+  <script defer src="assets/icons/lucide.min.js"></script>
 </head>
-
 <body>
-    <!-- App Shell -->
-    <div class="app" id="app">
+  <div class="texture" aria-hidden="true"></div>
+  <div class="app" id="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Satsang Platform</p>
+        <h1>Find Events That Matter</h1>
+      </div>
+      <button id="installBtn" class="icon-btn" aria-label="Install app">
+        <i data-lucide="download"></i>
+      </button>
+    </header>
 
-        <!-- Header -->
-        <header class="header">
-            <div class="header__left">
-                <button class="btn-icon" aria-label="Menu" id="menuBtn">
-                    <i data-lucide="menu"></i>
-                </button>
-            </div>
+    <section id="hero" class="hero"></section>
 
-            <div class="header__center">
-                <span class="header__logo">सत्संग</span>
-                <button class="header__location" id="locationBtn" aria-label="Change location">
-                    <span id="currentLocation">All India</span>
-                    <i data-lucide="chevron-down"></i>
-                </button>
-            </div>
+    <section class="filters" id="filters">
+      <label class="search">
+        <i data-lucide="search"></i>
+        <input id="searchInput" type="search" placeholder="Search by event, city, speaker">
+      </label>
+      <select id="cityFilter" aria-label="Filter by city"></select>
+      <select id="typeFilter" aria-label="Filter by type"></select>
+      <select id="sortSelect" aria-label="Sort events">
+        <option value="soonest">Soonest</option>
+        <option value="live">Live first</option>
+        <option value="city">City A-Z</option>
+      </select>
+    </section>
 
-            <div class="header__right">
-                <button class="btn-icon" aria-label="Search" id="searchBtn">
-                    <i data-lucide="search"></i>
-                </button>
-            </div>
-        </header>
+    <main id="viewRoot" class="view-root"></main>
 
-        <!-- Main Content Area -->
-        <main class="main" id="mainContent">
+    <nav class="tabs" id="tabs" aria-label="Primary navigation">
+      <button data-view="discover" class="active"><i data-lucide="compass"></i><span>Discover</span></button>
+      <button data-view="calendar"><i data-lucide="calendar-days"></i><span>Calendar</span></button>
+      <button data-view="saved"><i data-lucide="heart"></i><span>Saved</span></button>
+      <button data-view="profile"><i data-lucide="user-round"></i><span>Profile</span></button>
+    </nav>
+  </div>
 
-            <!-- HOME SCREEN -->
-            <div class="screen active" id="homeScreen">
-                <!-- Hero Section (Featured Event) -->
-                <section class="section section--flush">
-                    <div id="heroContainer">
-                        <!-- Skeleton while loading -->
-                        <div class="hero-card skeleton" style="margin: var(--space-4); aspect-ratio: 1/1;"></div>
-                    </div>
-                </section>
-
-                <!-- Live Now Section (Dynamic) -->
-                <section class="section section--flush" id="liveNowSection" style="display: none;">
-                    <!-- Rendered by home.js when there are live streams -->
-                </section>
-
-                <!-- Vachak Avatar Rail (Sant Samagam) -->
-                <section class="section section--flush">
-                    <div class="section__header">
-                        <h2 class="section__title">संत समागम</h2>
-                        <button class="section__action" id="viewAllVachaks">
-                            <span>See All</span>
-                        </button>
-                    </div>
-                    <div class="rail vachak-rail" id="vachakRail">
-                        <!-- Skeletons -->
-                        <div class="rail__item skeleton--avatar skeleton"></div>
-                        <div class="rail__item skeleton--avatar skeleton"></div>
-                        <div class="rail__item skeleton--avatar skeleton"></div>
-                        <div class="rail__item skeleton--avatar skeleton"></div>
-                        <div class="rail__item skeleton--avatar skeleton"></div>
-                    </div>
-                </section>
-
-                <!-- Categories Rail -->
-                <section class="section section--flush">
-                    <div class="section__header">
-                        <h2 class="section__title">सत्संग मार्ग</h2>
-                    </div>
-                    <div class="rail" id="categoryRail">
-                        <!-- Skeletons -->
-                        <div class="rail__item skeleton--pill skeleton"></div>
-                        <div class="rail__item skeleton--pill skeleton"></div>
-                        <div class="rail__item skeleton--pill skeleton"></div>
-                        <div class="rail__item skeleton--pill skeleton"></div>
-                    </div>
-                </section>
-
-                <!-- Events List -->
-                <section class="section">
-                    <div class="section__header">
-                        <h2 class="section__title">आगामी कार्यक्रम</h2>
-                    </div>
-                    <div id="eventsList">
-                        <!-- Skeletons -->
-                        <div class="skeleton--card skeleton"></div>
-                        <div class="skeleton--card skeleton"></div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- EVENT DETAIL SCREEN (Hidden by default) -->
-            <div class="screen" id="eventScreen">
-                <div id="eventDetailContainer">
-                    <!-- Will be populated by JS -->
-                </div>
-            </div>
-
-            <!-- VACHAK PROFILE SCREEN (Hidden by default) -->
-            <div class="screen" id="vachakScreen">
-                <div id="vachakProfileContainer">
-                    <!-- Will be populated by JS -->
-                </div>
-            </div>
-
-            <!-- CALENDAR SCREEN (Hidden by default) -->
-            <div class="screen" id="calendarScreen">
-                <section class="section">
-                    <div class="section__header">
-                        <h2 class="section__title">Event Calendar</h2>
-                    </div>
-
-                    <!-- Month Navigator -->
-                    <div class="calendar-nav" id="calendarNav">
-                        <button class="btn-icon" id="prevMonthBtn" aria-label="Previous month">
-                            <i data-lucide="chevron-left"></i>
-                        </button>
-                        <span class="calendar-nav__month" id="currentMonthLabel">January 2026</span>
-                        <button class="btn-icon" id="nextMonthBtn" aria-label="Next month">
-                            <i data-lucide="chevron-right"></i>
-                        </button>
-                    </div>
-
-                    <!-- Calendar Grid -->
-                    <div class="calendar-grid" id="calendarGrid">
-                        <!-- Days will be populated by JS -->
-                    </div>
-
-                    <!-- Events for Selected Date -->
-                    <div class="calendar-events" id="calendarEvents">
-                        <h3 class="calendar-events__title" id="selectedDateLabel">Today's Events</h3>
-                        <div id="calendarEventsList">
-                            <!-- Events will be populated by JS -->
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- SAVED SCREEN (Hidden by default) -->
-            <div class="screen saved-screen" id="savedScreen">
-                <section class="section">
-                    <div class="section__header">
-                        <h2 class="section__title">Saved Events</h2>
-                    </div>
-                    <div id="savedEventsList">
-                        <!-- Will be populated by JS -->
-                    </div>
-                </section>
-            </div>
-
-            <!-- LIBRARY SCREEN (Hidden by default) -->
-            <div class="screen" id="libraryScreen">
-                <div id="libraryContainer">
-                    <!-- Will be populated by JS -->
-                </div>
-            </div>
-
-            <!-- PROFILE SCREEN (Hidden by default) -->
-            <div class="screen" id="profileScreen">
-                <div class="user-profile" id="userProfileContainer">
-                    <!-- Will be populated by JS -->
-                </div>
-            </div>
-
-        </main>
-
-        <!-- Bottom Navigation -->
-        <nav class="nav" id="bottomNav">
-            <a href="#home" class="nav__item active" data-screen="home">
-                <i data-lucide="home"></i>
-                <span>Home</span>
-            </a>
-            <a href="#library" class="nav__item" data-screen="library">
-                <i data-lucide="play-circle"></i>
-                <span>Library</span>
-            </a>
-            <a href="#calendar" class="nav__item" data-screen="calendar">
-                <i data-lucide="calendar"></i>
-                <span>Calendar</span>
-            </a>
-            <a href="#saved" class="nav__item" data-screen="saved">
-                <i data-lucide="heart"></i>
-                <span>Saved</span>
-            </a>
-            <a href="#profile" class="nav__item" data-screen="profile">
-                <i data-lucide="user"></i>
-                <span>Profile</span>
-            </a>
-        </nav>
-
-    </div>
-
-    <!-- Modal Backdrop -->
-    <div class="modal-backdrop" id="modalBackdrop"></div>
-
-    <!-- Location Modal -->
-    <div class="modal" id="locationModal">
-        <div class="modal__header">
-            <h3 class="modal__title">Select Location</h3>
-            <button class="btn-icon" aria-label="Close" data-close-modal>
-                <i data-lucide="x"></i>
-            </button>
-        </div>
-        <div class="modal__body" id="locationModalBody">
-            <!-- Cities will be populated by JS -->
-        </div>
-    </div>
-
-    <!-- Search Modal -->
-    <div class="modal" id="searchModal">
-        <div class="modal__header">
-            <h3 class="modal__title">Search</h3>
-            <button class="btn-icon" aria-label="Close" data-close-modal>
-                <i data-lucide="x"></i>
-            </button>
-        </div>
-        <div class="modal__body">
-            <input type="search" class="search-input" placeholder="Search events, vachaks..." id="searchInput">
-            <div id="searchResults"></div>
-        </div>
-    </div>
-
-    <!-- Application Scripts -->
-    <script type="module" src="js/app.js"></script>
-
-    <!-- Service Worker Registration -->
-    <script>
-        // Register Service Worker for offline support
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then((reg) => console.log('✅ Service Worker registered:', reg.scope))
-                    .catch((err) => console.log('❌ SW registration failed:', err));
-            });
-        }
-
-        // PWA Install Prompt
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            console.log('📱 Install prompt ready');
-            // Show install button in profile settings
-            const installBtn = document.getElementById('installAppBtn');
-            if (installBtn) installBtn.style.display = 'flex';
-        });
-
-        // Handle install
-        window.installApp = async () => {
-            if (!deferredPrompt) return;
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            console.log('Install outcome:', outcome);
-            deferredPrompt = null;
-        };
-    </script>
+  <dialog id="eventDialog"></dialog>
+  <script type="module" src="js/main.js"></script>
 </body>
-
 </html>

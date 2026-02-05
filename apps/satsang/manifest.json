@@ -1,105 +1,26 @@
 {
-    "name": "Satsang - कथा & सत्संग",
-    "short_name": "Satsang",
-    "description": "Discover kathas, satsangs, and spiritual events by renowned Vachaks across India",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#FFFAF5",
-    "theme_color": "#FF6B35",
-    "orientation": "portrait-primary",
-    "scope": "/",
-    "lang": "hi",
-    "dir": "ltr",
-    "categories": [
-        "lifestyle",
-        "entertainment",
-        "education"
-    ],
-    "icons": [
-        {
-            "src": "assets/icons/icon-72x72.png",
-            "sizes": "72x72",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "assets/icons/icon-96x96.png",
-            "sizes": "96x96",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "assets/icons/icon-128x128.png",
-            "sizes": "128x128",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "assets/icons/icon-144x144.png",
-            "sizes": "144x144",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "assets/icons/icon-152x152.png",
-            "sizes": "152x152",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "assets/icons/icon-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "assets/icons/icon-384x384.png",
-            "sizes": "384x384",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "assets/icons/icon-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any maskable"
-        }
-    ],
-    "shortcuts": [
-        {
-            "name": "Calendar",
-            "short_name": "Calendar",
-            "description": "View upcoming events",
-            "url": "/#calendar",
-            "icons": [
-                {
-                    "src": "assets/icons/icon-calendar.png",
-                    "sizes": "96x96"
-                }
-            ]
-        },
-        {
-            "name": "Saved Events",
-            "short_name": "Saved",
-            "description": "View your saved events",
-            "url": "/#saved",
-            "icons": [
-                {
-                    "src": "assets/icons/icon-saved.png",
-                    "sizes": "96x96"
-                }
-            ]
-        }
-    ],
-    "screenshots": [
-        {
-            "src": "assets/screenshots/home.png",
-            "sizes": "1080x1920",
-            "type": "image/png",
-            "form_factor": "narrow",
-            "label": "Home screen with live events"
-        }
-    ],
-    "related_applications": [],
-    "prefer_related_applications": false
+  "name": "Satsang - Spiritual Events",
+  "short_name": "Satsang",
+  "description": "Discover upcoming spiritual events, kathas and live programs.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3ede3",
+  "theme_color": "#aa4b12",
+  "orientation": "portrait-primary",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
