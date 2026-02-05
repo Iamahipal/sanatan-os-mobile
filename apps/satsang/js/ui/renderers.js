@@ -7,6 +7,9 @@ export function renderApp(state, refs) {
 }
 
 export function renderDialog(event, dialog, isSaved, isReminderSet) {
+  const mapsQuery = encodeURIComponent(`${event.venue}, ${event.cityName}`);
+  const mapsLink = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+
   dialog.innerHTML = `
     <article class="modal">
       <div class="modal-top">
@@ -31,6 +34,7 @@ export function renderDialog(event, dialog, isSaved, isReminderSet) {
         <button class="action-btn ${isReminderSet ? "active" : ""}" data-action="set-reminder" data-id="${event.id}">
           ${isReminderSet ? "Reminder Set" : "Set Reminder"}
         </button>
+        <a class="action-btn" style="text-decoration:none;" href="${mapsLink}" target="_blank" rel="noopener">Open in Maps</a>
         ${event.link ? `<a class="action-btn" style="text-decoration:none;" href="${event.link}" target="_blank" rel="noopener">Open Source</a>` : ""}
       </div>
       ${event.speakerBio ? `<p style="margin-top:12px; color:#6e5a49;">${escapeHtml(event.speakerBio)}</p>` : ""}
@@ -132,46 +136,21 @@ function renderDiscover(state, root) {
 }
 
 function renderCalendar(state, root) {
-  const { months, grouped } = getThreeMonthCalendar(state.sortedEvents);
+  const months = getThreeMonthCalendar(state.sortedEvents);
 
   root.innerHTML = `
     <h2 class="section-title">3-Month Calendar</h2>
-    <section class="timeline">
+    <p class="calendar-subtitle">This month + next 2 months, always rolling.</p>
+    <div class="calendar-jump">
       ${months
         .map(
-          (month) => `
-            <article class="month">
-              <h3>${escapeHtml(month)}</h3>
-              ${
-                grouped[month]?.length
-                  ? grouped[month]
-                      .map(
-                        (event) => `
-                          <div class="row" data-action="open-event" data-id="${event.id}">
-                            <div class="date">${formatDate(event.start)}</div>
-                            <div>
-                              <strong>${escapeHtml(event.title)}</strong><br>
-                              <span>${escapeHtml(event.cityName)} | ${escapeHtml(event.venue)}</span><br>
-                              <span>${escapeHtml(event.speakerName)}</span>
-                            </div>
-                            <div class="row-actions">
-                              <button class="action-btn ${state.savedSet.has(event.id) ? "active" : ""}" data-action="toggle-save" data-id="${event.id}">
-                                ${state.savedSet.has(event.id) ? "Saved" : "Save"}
-                              </button>
-                              <button class="action-btn ${state.remindersSet.has(event.id) ? "active" : ""}" data-action="set-reminder" data-id="${event.id}">
-                                ${state.remindersSet.has(event.id) ? "Reminder Set" : "Reminder"}
-                              </button>
-                            </div>
-                          </div>
-                        `
-                      )
-                      .join("")
-                  : '<p class="month-empty">No events scheduled.</p>'
-              }
-            </article>
-          `
+          (month, index) =>
+            `<button class="calendar-jump-btn ${index === 0 ? "active" : ""}" data-action="calendar-jump" data-month-index="${index}">${escapeHtml(month.shortLabel)}</button>`
         )
         .join("")}
+    </div>
+    <section class="calendar-stack">
+      ${months.map((month, index) => monthCard(month, index, state.savedSet, state.remindersSet)).join("")}
     </section>
   `;
 }
@@ -269,23 +248,7 @@ function humanize(value) {
 
 function getThreeMonthCalendar(list) {
   const now = new Date();
-  const start = new Date(now.getFullYear(), now.getMonth(), 1);
-  const end = new Date(now.getFullYear(), now.getMonth() + 3, 0, 23, 59, 59, 999);
-
-  const months = [0, 1, 2].map((offset) =>
-    new Date(now.getFullYear(), now.getMonth() + offset, 1).toLocaleDateString("en-US", {
-      month: "long",
-      year: "numeric",
-    })
-  );
-
-  const inWindow = list.filter((event) => {
-    const date = new Date(event.start).getTime();
-    return Number.isFinite(date) && date >= start.getTime() && date <= end.getTime();
-  });
-
-  const grouped = groupByMonth(inWindow);
-  return { months, grouped };
+  return [0, 1, 2].map((offset) => buildMonthView(now, offset, list));
 }
 
 function isStartingSoon(event) {
@@ -301,7 +264,7 @@ function splitEventBuckets(list) {
   todayStart.setHours(0, 0, 0, 0);
   const todayStartNum = todayStart.getTime();
 
-  const liveToday = list.filter((event) => event.isLive && event.dateNum >= todayStartNum);
+  const liveToday = list.filter((event) => event.isLive);
   const nonLive = list.filter((event) => !event.isLive);
   const upcoming = nonLive.filter((event) => event.dateNum >= todayStartNum);
   const past = nonLive.filter((event) => event.dateNum < todayStartNum).sort((a, b) => b.dateNum - a.dateNum);
@@ -310,5 +273,114 @@ function splitEventBuckets(list) {
     liveToday,
     upcoming,
     past,
+  };
+}
+
+function monthCard(month, monthIndex, savedSet, remindersSet) {
+  return `
+    <article class="month-card" data-calendar-month="${monthIndex}">
+      <div class="month-card-head">
+        <h3>${escapeHtml(month.label)}</h3>
+        <span class="month-count">${month.events.length} events</span>
+      </div>
+      <div class="weekday-row">${["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => `<span>${d}</span>`).join("")}</div>
+      <div class="month-grid">
+        ${month.days.map((day) => dayCell(day)).join("")}
+      </div>
+      <div class="month-agenda">
+        ${
+          month.events.length
+            ? month.events
+                .map((event) => {
+                  const day = new Date(event.start).getDate();
+                  return `
+                    <div class="agenda-row" data-action="open-event" data-id="${event.id}">
+                      <div class="agenda-day">${day}</div>
+                      <div class="agenda-main">
+                        <strong>${escapeHtml(event.title)}</strong>
+                        <span>${escapeHtml(event.cityName)} | ${escapeHtml(event.venue)}</span>
+                      </div>
+                      <div class="agenda-actions">
+                        <button class="action-btn ${savedSet.has(event.id) ? "active" : ""}" data-action="toggle-save" data-id="${event.id}">
+                          ${savedSet.has(event.id) ? "Saved" : "Save"}
+                        </button>
+                        <button class="action-btn ${remindersSet.has(event.id) ? "active" : ""}" data-action="set-reminder" data-id="${event.id}">
+                          ${remindersSet.has(event.id) ? "Reminder Set" : "Reminder"}
+                        </button>
+                      </div>
+                    </div>
+                  `;
+                })
+                .join("")
+            : '<p class="month-empty">No events scheduled.</p>'
+        }
+      </div>
+    </article>
+  `;
+}
+
+function dayCell(day) {
+  if (!day.inMonth) return '<div class="day-cell day-out"></div>';
+  const classes = ["day-cell"];
+  if (day.hasEvents) classes.push("day-has-events");
+  if (day.isToday) classes.push("day-today");
+  return `
+    <div class="${classes.join(" ")}" ${day.isToday ? 'data-calendar-today="true"' : ""}>
+      <span class="day-num">${day.date.getDate()}</span>
+      ${day.eventCount > 0 ? `<span class="day-dot">${day.eventCount}</span>` : ""}
+    </div>
+  `;
+}
+
+function buildMonthView(now, offset, events) {
+  const first = new Date(now.getFullYear(), now.getMonth() + offset, 1);
+  const monthStart = new Date(first.getFullYear(), first.getMonth(), 1);
+  const monthEnd = new Date(first.getFullYear(), first.getMonth() + 1, 0, 23, 59, 59, 999);
+  const label = first.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+
+  const monthEvents = events
+    .filter((event) => event.dateNum >= monthStart.getTime() && event.dateNum <= monthEnd.getTime())
+    .sort((a, b) => a.dateNum - b.dateNum);
+
+  const eventCountByDay = new Map();
+  monthEvents.forEach((event) => {
+    const key = new Date(event.start).getDate();
+    eventCountByDay.set(key, (eventCountByDay.get(key) || 0) + 1);
+  });
+
+  const today = new Date();
+  const daysInMonth = monthEnd.getDate();
+  const leading = monthStart.getDay();
+  const days = [];
+
+  for (let i = 0; i < leading; i += 1) {
+    days.push({ inMonth: false });
+  }
+
+  for (let d = 1; d <= daysInMonth; d += 1) {
+    const date = new Date(first.getFullYear(), first.getMonth(), d);
+    const isToday =
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate();
+    const eventCount = eventCountByDay.get(d) || 0;
+    days.push({
+      inMonth: true,
+      date,
+      hasEvents: eventCount > 0,
+      eventCount,
+      isToday,
+    });
+  }
+
+  while (days.length % 7 !== 0) {
+    days.push({ inMonth: false });
+  }
+
+  return {
+    label,
+    shortLabel: first.toLocaleDateString("en-US", { month: "short" }),
+    events: monthEvents,
+    days,
   };
 }

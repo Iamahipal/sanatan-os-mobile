@@ -44,7 +44,7 @@ function normalizeItem(item) {
       return null;
     }
     const city = detectCity(text);
-    const liveSignal = detectLiveSignal(title, description, item);
+    const liveSignal = detectLiveSignal(title, description, item, eventDate);
 
     return {
       id: `yt-${videoId}`,
@@ -202,11 +202,18 @@ function cleanTitle(title) {
     .trim();
 }
 
-function detectLiveSignal(title, description, item) {
+function detectLiveSignal(title, description, item, eventDate) {
   const text = `${title} ${description}`.toLowerCase();
-  const byKeyword = /\b(live|streaming|premiere|watch now|upcoming)\b/.test(text);
-  const byDate = item.isoDate ? isWithinDays(new Date(item.isoDate), 2) : false;
-  return byKeyword || byDate;
+  const hasLiveKeyword = /\b(live|livestream|streaming|going live|watch live)\b/.test(text);
+  const hasUpcomingKeyword = /\b(upcoming|premiere|scheduled)\b/.test(text);
+  const publishRecent = item.isoDate ? isWithinDays(new Date(item.isoDate), 1) : false;
+  const eventSoon = eventDate ? isWithinDays(eventDate, 1) : false;
+  const eventNotOld = eventDate ? !isOlderThanDays(eventDate, 1) : false;
+
+  if (!eventNotOld) return false;
+  if (hasLiveKeyword && (publishRecent || eventSoon)) return true;
+  if (hasUpcomingKeyword && eventSoon) return true;
+  return false;
 }
 
 function extractEventDate(text) {
@@ -241,6 +248,11 @@ function extractEventDate(text) {
 function isWithinDays(date, days) {
   const now = new Date();
   return Math.abs(now.getTime() - date.getTime()) <= days * 86400000;
+}
+
+function isOlderThanDays(date, days) {
+  const now = new Date();
+  return now.getTime() - date.getTime() > days * 86400000;
 }
 
 function formatDate(date) {

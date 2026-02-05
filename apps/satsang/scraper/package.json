@@ -9,6 +9,8 @@
                     "scrape:youtube":  "node index.js --source=youtube",
                     "scrape:websites":  "node index.js --source=websites",
                     "scrape:instagram":  "node index.js --source=instagram",
+                    "scrape:twitter":  "node index.js --source=twitter",
+                    "scrape:facebook":  "node index.js --source=facebook",
                     "export":  "node index.js --export",
                     "scrape:dry":  "node index.js --source=all --dry-run",
                     "scrape:strict":  "node index.js --source=all --min-confidence=75"

@@ -1,321 +1,899 @@
 [
-  {
-    "order": 1,
-    "id": "rajendradas",
-    "name": "Swami Shri Rajendra Das Ji Maharaj",
-    "shortName": "Rajendradas Ji",
-    "title": "Jagadguru Dwaracharya, Malook Peeth",
-    "tradition": "Ramanandi / Vaishnava",
-    "specialty": "Ram Katha, Bhagwat, Bhaktamal",
-    "primaryCity": "Vrindavan",
-    "statesCovered": ["Uttar Pradesh", "Rajasthan", "Maharashtra"],
-    "languages": ["Hindi"],
-    "bio": "Senior kathavachak associated with Malook Peeth and known for Ram Katha, Bhagwat, and bhakti-oriented pravachans.",
-    "image": "assets/images/rajendradas.png",
-    "socials": {
-      "youtube": "https://www.youtube.com/@rajendradasjimaharaj",
-      "instagram": "https://www.instagram.com/rajendradasjimaharaj",
-      "website": "https://jadkhor.org"
+    {
+        "order":  1,
+        "id":  "rajendradas",
+        "name":  "Swami Shri Rajendra Das Ji Maharaj",
+        "shortName":  "Rajendradas Ji",
+        "title":  "Jagadguru Dwaracharya, Malook Peeth",
+        "tradition":  "Ramanandi / Vaishnava",
+        "specialty":  "Ram Katha, Bhagwat, Bhaktamal",
+        "primaryCity":  "Vrindavan",
+        "statesCovered":  [
+                              "Uttar Pradesh",
+                              "Rajasthan",
+                              "Maharashtra"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Senior kathavachak associated with Malook Peeth and known for Ram Katha, Bhagwat, and bhakti-oriented pravachans.",
+        "image":  "assets/images/rajendradas.png",
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@rajendradasjimaharaj",
+                        "instagram":  "https://www.instagram.com/rajendradasjimaharaj",
+                        "website":  "https://jadkhor.org"
+                    },
+        "contact":  "https://jadkhor.org",
+        "verified":  true
     },
-    "contact": "https://jadkhor.org",
-    "verified": true
-  },
-  {
-    "order": 2,
-    "id": "pundrik",
-    "name": "Shri Pundrik Goswami Ji",
-    "shortName": "Pundrik Goswami",
-    "title": "Acharya, Radharaman Tradition",
-    "tradition": "Gaudiya Vaishnava",
-    "specialty": "Bhagwat Katha, Youth Spiritual Talks",
-    "primaryCity": "Vrindavan",
-    "statesCovered": ["Uttar Pradesh", "Delhi", "Maharashtra", "Gujarat"],
-    "languages": ["Hindi", "English", "Sanskrit"],
-    "bio": "Gaudiya acharya from the Radharaman lineage, known for combining scriptural exposition with modern contextual explanations.",
-    "image": "assets/images/pundrik.png",
-    "socials": {
-      "youtube": "https://www.youtube.com/@sripundrik",
-      "instagram": "https://www.instagram.com/sripundrik_updates",
-      "website": "https://sripundrik.com"
+    {
+        "order":  2,
+        "id":  "pundrik",
+        "name":  "Shri Pundrik Goswami Ji",
+        "shortName":  "Pundrik Goswami",
+        "title":  "Acharya, Radharaman Tradition",
+        "tradition":  "Gaudiya Vaishnava",
+        "specialty":  "Bhagwat Katha, Youth Spiritual Talks",
+        "primaryCity":  "Vrindavan",
+        "statesCovered":  [
+                              "Uttar Pradesh",
+                              "Delhi",
+                              "Maharashtra",
+                              "Gujarat"
+                          ],
+        "languages":  [
+                          "Hindi",
+                          "English",
+                          "Sanskrit"
+                      ],
+        "bio":  "Gaudiya acharya from the Radharaman lineage, known for combining scriptural exposition with modern contextual explanations.",
+        "image":  "assets/images/pundrik.png",
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@sripundrik",
+                        "instagram":  "https://www.instagram.com/sripundrik_updates",
+                        "website":  "https://sripundrik.com"
+                    },
+        "contact":  "https://sripundrik.com",
+        "verified":  true
     },
-    "contact": "https://sripundrik.com",
-    "verified": true
-  },
-  {
-    "order": 3,
-    "id": "morari",
-    "name": "Morari Bapu",
-    "shortName": "Morari Bapu",
-    "title": "Ram Katha Vyas",
-    "tradition": "Vaishnava / Ramcharitmanas Parampara",
-    "specialty": "Ram Katha",
-    "primaryCity": "Talgajarda",
-    "statesCovered": ["Gujarat", "Rajasthan", "Maharashtra", "All India"],
-    "languages": ["Gujarati", "Hindi"],
-    "bio": "Internationally known Ramcharitmanas exponent with decades of Ram Katha discourse centered on Satya, Prem and Karuna.",
-    "image": "assets/images/morari.png",
-    "socials": {
-      "youtube": "https://www.youtube.com/@ChitrakutdhamTalgajarda",
-      "instagram": "https://www.instagram.com/chitrakutdhamtalgajarda",
-      "website": "https://chitrakutdhamtalgajarda.org"
+    {
+        "order":  3,
+        "id":  "morari",
+        "name":  "Morari Bapu",
+        "shortName":  "Morari Bapu",
+        "title":  "Ram Katha Vyas",
+        "tradition":  "Vaishnava / Ramcharitmanas Parampara",
+        "specialty":  "Ram Katha",
+        "primaryCity":  "Talgajarda",
+        "statesCovered":  [
+                              "Gujarat",
+                              "Rajasthan",
+                              "Maharashtra",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Gujarati",
+                          "Hindi"
+                      ],
+        "bio":  "Internationally known Ramcharitmanas exponent with decades of Ram Katha discourse centered on Satya, Prem and Karuna.",
+        "image":  "assets/images/morari.png",
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@ChitrakutdhamTalgajarda",
+                        "instagram":  "https://www.instagram.com/chitrakutdhamtalgajarda",
+                        "website":  "https://chitrakutdhamtalgajarda.org"
+                    },
+        "contact":  "https://chitrakutdhamtalgajarda.org",
+        "verified":  true
     },
-    "contact": "https://chitrakutdhamtalgajarda.org",
-    "verified": true
-  },
-  {
-    "order": 4,
-    "id": "jayakishori",
-    "name": "Jaya Kishori",
-    "shortName": "Jaya Kishori",
-    "title": "Spiritual Orator",
-    "tradition": "Bhakti / Sanatan Public Discourse",
-    "specialty": "Bhajan, Motivational Spiritual Talks",
-    "primaryCity": "Kolkata / Mumbai",
-    "statesCovered": ["All India"],
-    "languages": ["Hindi", "English"],
-    "bio": "Popular spiritual speaker and bhajan artist known for satsang talks, youth-oriented value discourse, and devotional performances.",
-    "image": "assets/images/jayakishori.png",
-    "socials": {
-      "youtube": "https://www.youtube.com/@iamjayakishori",
-      "instagram": "https://www.instagram.com/iamjayakishori",
-      "website": "https://www.iamjayakishori.com"
+    {
+        "order":  4,
+        "id":  "jayakishori",
+        "name":  "Jaya Kishori",
+        "shortName":  "Jaya Kishori",
+        "title":  "Spiritual Orator",
+        "tradition":  "Bhakti / Sanatan Public Discourse",
+        "specialty":  "Bhajan, Motivational Spiritual Talks",
+        "primaryCity":  "Kolkata / Mumbai",
+        "statesCovered":  [
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi",
+                          "English"
+                      ],
+        "bio":  "Popular spiritual speaker and bhajan artist known for satsang talks, youth-oriented value discourse, and devotional performances.",
+        "image":  "assets/images/jayakishori.png",
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@iamjayakishori",
+                        "instagram":  "https://www.instagram.com/iamjayakishori",
+                        "website":  "https://www.iamjayakishori.com"
+                    },
+        "contact":  "contact@iamjayakishori.com",
+        "verified":  true
     },
-    "contact": "contact@iamjayakishori.com",
-    "verified": true
-  },
-  {
-    "order": 5,
-    "id": "premanand",
-    "name": "Pujya Shri Hit Premanand Govind Sharan Ji Maharaj",
-    "shortName": "Premanand Ji",
-    "title": "Vrindavan Rasik Sant",
-    "tradition": "Radha Vallabh",
-    "specialty": "Naam Bhakti, Satsang, Ekantik Vartalap",
-    "primaryCity": "Vrindavan",
-    "statesCovered": ["Uttar Pradesh", "All India (Online)"],
-    "languages": ["Hindi"],
-    "bio": "Renowned Vrindavan saint associated with Bhajan Marg satsang and devotional teachings focused on Radha-Krishna bhakti.",
-    "image": "assets/images/premanand.png",
-    "socials": {
-      "youtube": "https://www.youtube.com/@BhajanMarg",
-      "instagram": "https://www.instagram.com/bhajanmarg_official",
-      "website": "https://vrindavanrasmahima.com"
+    {
+        "order":  5,
+        "id":  "premanand",
+        "name":  "Pujya Shri Hit Premanand Govind Sharan Ji Maharaj",
+        "shortName":  "Premanand Ji",
+        "title":  "Vrindavan Rasik Sant",
+        "tradition":  "Radha Vallabh",
+        "specialty":  "Naam Bhakti, Satsang, Ekantik Vartalap",
+        "primaryCity":  "Vrindavan",
+        "statesCovered":  [
+                              "Uttar Pradesh",
+                              "All India (Online)"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Renowned Vrindavan saint associated with Bhajan Marg satsang and devotional teachings focused on Radha-Krishna bhakti.",
+        "image":  "assets/images/premanand.png",
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@BhajanMarg",
+                        "instagram":  "https://www.instagram.com/bhajanmarg_official",
+                        "website":  "https://vrindavanrasmahima.com"
+                    },
+        "contact":  "https://vrindavanrasmahima.com",
+        "verified":  true
     },
-    "contact": "https://vrindavanrasmahima.com",
-    "verified": true
-  },
-  {
-    "order": 6,
-    "id": "bageshwar",
-    "name": "Pt. Dhirendra Krishna Shastri",
-    "shortName": "Bageshwar Ji",
-    "title": "Peethadhishwar, Bageshwar Dham",
-    "tradition": "Hanuman Bhakti / Sanatan Pravachan",
-    "specialty": "Hanumant Katha, Divya Darbar",
-    "primaryCity": "Chhatarpur",
-    "statesCovered": ["Madhya Pradesh", "All India"],
-    "languages": ["Hindi"],
-    "bio": "Head of Bageshwar Dham, known for Hanumant Katha and large-format religious gatherings and darbar programs.",
-    "image": "assets/images/bageshwar.png",
-    "socials": {
-      "youtube": "https://www.youtube.com/@BageshwarDhamSarkar",
-      "instagram": "https://www.instagram.com/iambageshwardhamsarkar",
-      "website": "https://bageshwardham.co.in/en"
+    {
+        "order":  6,
+        "id":  "bageshwar",
+        "name":  "Pt. Dhirendra Krishna Shastri",
+        "shortName":  "Bageshwar Ji",
+        "title":  "Peethadhishwar, Bageshwar Dham",
+        "tradition":  "Hanuman Bhakti / Sanatan Pravachan",
+        "specialty":  "Hanumant Katha, Divya Darbar",
+        "primaryCity":  "Chhatarpur",
+        "statesCovered":  [
+                              "Madhya Pradesh",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Head of Bageshwar Dham, known for Hanumant Katha and large-format religious gatherings and darbar programs.",
+        "image":  "assets/images/bageshwar.png",
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@BageshwarDhamSarkar",
+                        "instagram":  "https://www.instagram.com/iambageshwardhamsarkar",
+                        "website":  "https://bageshwardham.co.in/en"
+                    },
+        "contact":  "https://bageshwardham.co.in/en/contact/",
+        "verified":  true
     },
-    "contact": "https://bageshwardham.co.in/en/contact/",
-    "verified": true
-  },
-  {
-    "order": 7,
-    "id": "indresh",
-    "name": "Pt. Indresh Upadhyay",
-    "shortName": "Indresh Ji",
-    "title": "Bhagwat Kathavachak",
-    "tradition": "Vaishnava",
-    "specialty": "Shrimad Bhagwat Katha, Bhajan",
-    "primaryCity": "Vrindavan",
-    "statesCovered": ["Uttar Pradesh", "Delhi", "Maharashtra", "All India"],
-    "languages": ["Hindi"],
-    "bio": "Young and widely followed kathavachak associated with BhaktiPath and devotional Bhagwat-centered pravachans.",
-    "image": "assets/images/indresh.png",
-    "socials": {
-      "youtube": "https://www.youtube.com/@BhaktiPath",
-      "instagram": "https://www.instagram.com/bhaktipath",
-      "website": "https://bhaktipaths.com"
+    {
+        "order":  7,
+        "id":  "indresh",
+        "name":  "Pt. Indresh Upadhyay",
+        "shortName":  "Indresh Ji",
+        "title":  "Bhagwat Kathavachak",
+        "tradition":  "Vaishnava",
+        "specialty":  "Shrimad Bhagwat Katha, Bhajan",
+        "primaryCity":  "Vrindavan",
+        "statesCovered":  [
+                              "Uttar Pradesh",
+                              "Delhi",
+                              "Maharashtra",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Young and widely followed kathavachak associated with BhaktiPath and devotional Bhagwat-centered pravachans.",
+        "image":  "assets/images/indresh.png",
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@BhaktiPath",
+                        "instagram":  "https://www.instagram.com/bhaktipath",
+                        "website":  "https://bhaktipaths.com"
+                    },
+        "contact":  "https://bhaktipaths.com",
+        "verified":  true
     },
-    "contact": "https://bhaktipaths.com",
-    "verified": true
-  },
-  {
-    "order": 9,
-    "id": "devkinandan",
-    "name": "Pujya Devkinandan Thakur Ji Maharaj",
-    "shortName": "Devkinandan Ji",
-    "title": "Bhagwat Kathavachak",
-    "tradition": "Vrindavan Vaishnava",
-    "specialty": "Shrimad Bhagwat Katha",
-    "primaryCity": "Vrindavan",
-    "statesCovered": ["Uttar Pradesh", "Rajasthan", "Delhi", "All India"],
-    "languages": ["Hindi"],
-    "bio": "Popular Bhagwat speaker from Vrindavan known for large public kathas and dharmic awareness discourse.",
-    "image": null,
-    "socials": {
-      "youtube": "https://www.youtube.com/@DevkinandanThakurJi",
-      "instagram": "https://www.instagram.com/devkinandanthakurji",
-      "website": "https://www.devkinandan.in"
+    {
+        "order":  9,
+        "id":  "devkinandan",
+        "name":  "Pujya Devkinandan Thakur Ji Maharaj",
+        "shortName":  "Devkinandan Ji",
+        "title":  "Bhagwat Kathavachak",
+        "tradition":  "Vrindavan Vaishnava",
+        "specialty":  "Shrimad Bhagwat Katha",
+        "primaryCity":  "Vrindavan",
+        "statesCovered":  [
+                              "Uttar Pradesh",
+                              "Rajasthan",
+                              "Delhi",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Popular Bhagwat speaker from Vrindavan known for large public kathas and dharmic awareness discourse.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@DevkinandanThakurJi",
+                        "instagram":  "https://www.instagram.com/devkinandanthakurji",
+                        "website":  "https://www.devkinandan.in"
+                    },
+        "contact":  "https://www.devkinandan.in",
+        "verified":  true
     },
-    "contact": "https://www.devkinandan.in",
-    "verified": true
-  },
-  {
-    "order": 11,
-    "id": "aniruddhacharya",
-    "name": "Pujya Shri Aniruddhacharya Ji Maharaj",
-    "shortName": "Aniruddhacharya Ji",
-    "title": "Spiritual Orator",
-    "tradition": "Sanatan Katha Parampara",
-    "specialty": "Bhagwat Katha, Dharma Pravachan",
-    "primaryCity": "Vrindavan",
-    "statesCovered": ["All India"],
-    "languages": ["Hindi"],
-    "bio": "Well-known spiritual speaker and social service promoter, with frequent large-scale katha events and digital outreach.",
-    "image": null,
-    "socials": {
-      "youtube": "https://www.youtube.com/@Aniruddhacharyaji",
-      "instagram": "https://www.instagram.com/aniruddhacharyajimaharaj",
-      "website": "https://aniruddhacharya.com"
+    {
+        "order":  11,
+        "id":  "aniruddhacharya",
+        "name":  "Pujya Shri Aniruddhacharya Ji Maharaj",
+        "shortName":  "Aniruddhacharya Ji",
+        "title":  "Spiritual Orator",
+        "tradition":  "Sanatan Katha Parampara",
+        "specialty":  "Bhagwat Katha, Dharma Pravachan",
+        "primaryCity":  "Vrindavan",
+        "statesCovered":  [
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Well-known spiritual speaker and social service promoter, with frequent large-scale katha events and digital outreach.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@Aniruddhacharyaji",
+                        "instagram":  "https://www.instagram.com/aniruddhacharyajimaharaj",
+                        "website":  "https://aniruddhacharya.com"
+                    },
+        "contact":  "https://aniruddhacharya.com",
+        "verified":  true
     },
-    "contact": "https://aniruddhacharya.com",
-    "verified": true
-  },
-  {
-    "order": 13,
-    "id": "rajanji",
-    "name": "Pujya Rajan Ji Maharaj",
-    "shortName": "Rajan Ji Maharaj",
-    "title": "Ram Katha Vyas",
-    "tradition": "Ram Bhakti Parampara",
-    "specialty": "Musical Ram Katha, Bhajan",
-    "primaryCity": "Varanasi",
-    "statesCovered": ["Uttar Pradesh", "Madhya Pradesh", "Delhi", "All India"],
-    "languages": ["Hindi"],
-    "bio": "Ram Katha speaker known for musical delivery style and high-volume devotional program circuits across India.",
-    "image": null,
-    "socials": {
-      "youtube": "https://www.youtube.com/@pujyarajanjee",
-      "instagram": "https://www.instagram.com/pujyarajanjee",
-      "website": "https://pujyarajanjee.com"
+    {
+        "order":  13,
+        "id":  "rajanji",
+        "name":  "Pujya Rajan Ji Maharaj",
+        "shortName":  "Rajan Ji Maharaj",
+        "title":  "Ram Katha Vyas",
+        "tradition":  "Ram Bhakti Parampara",
+        "specialty":  "Musical Ram Katha, Bhajan",
+        "primaryCity":  "Varanasi",
+        "statesCovered":  [
+                              "Uttar Pradesh",
+                              "Madhya Pradesh",
+                              "Delhi",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Ram Katha speaker known for musical delivery style and high-volume devotional program circuits across India.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@pujyarajanjee",
+                        "instagram":  "https://www.instagram.com/pujyarajanjee",
+                        "website":  "https://pujyarajanjee.com"
+                    },
+        "contact":  "https://pujyarajanjee.com",
+        "verified":  true
     },
-    "contact": "https://pujyarajanjee.com",
-    "verified": true
-  },
-  {
-    "order": 17,
-    "id": "chinmayanand_bapu",
-    "name": "Sant Chinmayanand Bapu Ji",
-    "shortName": "Chinmayanand Bapu",
-    "title": "Kathavachak",
-    "tradition": "Sanatan Katha Parampara",
-    "specialty": "Hanumant Katha, Ram Katha, Bhagwat",
-    "primaryCity": "Haridwar",
-    "statesCovered": ["Uttarakhand", "Uttar Pradesh", "Delhi", "International (UK programs)"],
-    "languages": ["Hindi"],
-    "bio": "Kathavachak associated with Vishva Kalyan Mission Trust, conducting Hanumant and Ram Katha events in India and abroad.",
-    "image": null,
-    "socials": {
-      "youtube": "https://www.youtube.com/results?search_query=Chinmayanand+Bapu+live",
-      "instagram": null,
-      "website": "https://vishvakalyanmission.com"
+    {
+        "order":  17,
+        "id":  "chinmayanand_bapu",
+        "name":  "Sant Chinmayanand Bapu Ji",
+        "shortName":  "Chinmayanand Bapu",
+        "title":  "Kathavachak",
+        "tradition":  "Sanatan Katha Parampara",
+        "specialty":  "Hanumant Katha, Ram Katha, Bhagwat",
+        "primaryCity":  "Haridwar",
+        "statesCovered":  [
+                              "Uttarakhand",
+                              "Uttar Pradesh",
+                              "Delhi",
+                              "International (UK programs)"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Kathavachak associated with Vishva Kalyan Mission Trust, conducting Hanumant and Ram Katha events in India and abroad.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Chinmayanand+Bapu+live",
+                        "instagram":  null,
+                        "website":  "https://vishvakalyanmission.com"
+                    },
+        "contact":  "https://vishvakalyanmission.com",
+        "verified":  true
     },
-    "contact": "https://vishvakalyanmission.com",
-    "verified": true
-  },
-  {
-    "order": 101,
-    "id": "shankaracharya_srngeri",
-    "name": "Jagadguru Shankaracharya Sri Sri Vidhushekhara Bharati Sannidhanam",
-    "shortName": "Sringeri Shankaracharya",
-    "title": "Dakshinamnaya Sri Sharada Peetham, Sringeri",
-    "tradition": "Advaita Vedanta",
-    "specialty": "Vedanta, Dharma Upadesha",
-    "primaryCity": "Sringeri",
-    "statesCovered": ["Karnataka", "All India"],
-    "languages": ["Sanskrit", "Kannada", "Hindi"],
-    "bio": "Current pontiff at Sringeri Sharada Peetham (with blessings of Jagadguru Bharati Tirtha Mahasannidhanam); events are regularly live-streamed.",
-    "image": null,
-    "socials": {
-      "youtube": "https://www.youtube.com/@SharadaPeetham",
-      "instagram": "https://www.instagram.com/sharadapeetham",
-      "website": "https://www.sringeri.net"
+    {
+        "order":  18,
+        "id":  "pradeepmishra",
+        "name":  "Pt. Pradeep Mishra (Sehore Wale)",
+        "shortName":  "Pradeep Mishra",
+        "title":  "Shiv Mahapuran Kathavachak",
+        "tradition":  "Shaiva / Sanatan Katha",
+        "specialty":  "Shiv Mahapuran Katha",
+        "primaryCity":  "Sehore",
+        "statesCovered":  [
+                              "Madhya Pradesh",
+                              "Rajasthan",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Widely followed kathavachak known for Shiva-centered kathas and large devotional gatherings.",
+        "image":  "assets/images/pradeep.png",
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@PradeepMishra",
+                        "instagram":  "https://www.instagram.com/pradeepmishrasehorewale",
+                        "website":  null
+                    },
+        "contact":  "",
+        "verified":  true
     },
-    "contact": "https://www.sringeri.net",
-    "verified": true,
-    "youtubeLive": true
-  },
-  {
-    "order": 102,
-    "id": "shankaracharya_puri",
-    "name": "Jagadguru Shankaracharya Swami Nischalananda Saraswati",
-    "shortName": "Puri Shankaracharya",
-    "title": "Purvamnaya Govardhan Math, Puri",
-    "tradition": "Advaita Vedanta",
-    "specialty": "Vedanta, Sanatan Dharma Discourse",
-    "primaryCity": "Puri",
-    "statesCovered": ["Odisha", "All India"],
-    "languages": ["Sanskrit", "Hindi", "Odia"],
-    "bio": "Pontiff of Govardhan Math, Puri; teachings and programs are distributed through official digital media including YouTube.",
-    "image": null,
-    "socials": {
-      "youtube": "https://www.youtube.com/@GovardhanMath",
-      "instagram": "https://www.instagram.com/govardhanmath",
-      "website": "https://govardhanpeeth.org/en/"
+    {
+        "order":  19,
+        "id":  "vijaykaushal",
+        "name":  "Swami Vijay Kaushal Ji Maharaj",
+        "shortName":  "Vijay Kaushal Ji",
+        "title":  "Bhagwat Kathavachak",
+        "tradition":  "Vaishnava",
+        "specialty":  "Shrimad Bhagwat Katha",
+        "primaryCity":  "Vrindavan",
+        "statesCovered":  [
+                              "Uttar Pradesh",
+                              "Delhi",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Senior Bhagwat kathavachak known for traditional scriptural exposition and devotional pravachans.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@VIJAYKAUSHALJIMAHARAJ",
+                        "instagram":  null,
+                        "website":  null
+                    },
+        "contact":  "",
+        "verified":  true
     },
-    "contact": "https://govardhanpeeth.org/en/",
-    "verified": true,
-    "youtubeLive": true
-  },
-  {
-    "order": 103,
-    "id": "shankaracharya_dwarka",
-    "name": "Jagadguru Shankaracharya Swami Sadananda Saraswati",
-    "shortName": "Dwarka Shankaracharya",
-    "title": "Pashchimamnaya Shri Sharada Peeth, Dwarka",
-    "tradition": "Advaita Vedanta",
-    "specialty": "Vedanta, Dharma Pravachan",
-    "primaryCity": "Dwarka",
-    "statesCovered": ["Gujarat", "All India"],
-    "languages": ["Sanskrit", "Hindi", "Gujarati"],
-    "bio": "Associated with Sharada Peeth Dwarka lineage; discourse videos and live sessions are available on the math's public YouTube presence.",
-    "image": null,
-    "socials": {
-      "youtube": "https://www.youtube.com/@shrisharadapeethamdwarka4224",
-      "instagram": null,
-      "website": "https://dwarkashardapeeth.org"
+    {
+        "order":  20,
+        "id":  "prembhushan",
+        "name":  "Swami Prembhushan Ji Maharaj",
+        "shortName":  "Prembhushan Ji",
+        "title":  "Ram Katha Vyas",
+        "tradition":  "Ram Bhakti Parampara",
+        "specialty":  "Ram Katha, Bhajan",
+        "primaryCity":  "Kanpur",
+        "statesCovered":  [
+                              "Uttar Pradesh",
+                              "Madhya Pradesh",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Prominent Ram Katha speaker known for devotional narration and musical bhakti style.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/c/PujyaPrembhushanjiMaharaj",
+                        "instagram":  null,
+                        "website":  null
+                    },
+        "contact":  "",
+        "verified":  true
     },
-    "contact": "https://dwarkashardapeeth.org",
-    "verified": true,
-    "youtubeLive": true
-  },
-  {
-    "order": 104,
-    "id": "shankaracharya_jyotirmath",
-    "name": "Jagadguru Shankaracharya Swami Avimukteshwaranand Saraswati",
-    "shortName": "Jyotirmath Shankaracharya",
-    "title": "Uttaramnaya Jyotish Peeth, Joshimath",
-    "tradition": "Advaita Vedanta",
-    "specialty": "Vedanta, Dharma and Public Spiritual Discourse",
-    "primaryCity": "Jyotirmath (Joshimath)",
-    "statesCovered": ["Uttarakhand", "All India"],
-    "languages": ["Sanskrit", "Hindi"],
-    "bio": "Publicly known representative associated with Jyotish Peeth tradition; discourse and event clips are distributed on YouTube and media streams.",
-    "image": null,
-    "socials": {
-      "youtube": "https://www.youtube.com/results?search_query=Jyotish+Peeth+live",
-      "instagram": null,
-      "website": "https://jyotishpeeth.com"
+    {
+        "order":  21,
+        "id":  "rameshoza",
+        "name":  "Bhaishree Rameshbhai Oza",
+        "shortName":  "Ramesh Oza",
+        "title":  "Bhagwat Kathakar",
+        "tradition":  "Vaishnava",
+        "specialty":  "Shrimad Bhagwat, Gita, Bhakti Discourse",
+        "primaryCity":  "Porbandar",
+        "statesCovered":  [
+                              "Gujarat",
+                              "Maharashtra",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Gujarati",
+                          "Hindi"
+                      ],
+        "bio":  "Respected Bhagwat kathakar and spiritual guide with broad national and international discourse presence.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@PujyaBhaishriRameshbhaiOza",
+                        "instagram":  null,
+                        "website":  "https://www.sandipani.org"
+                    },
+        "contact":  "https://www.sandipani.org",
+        "verified":  true
     },
-    "contact": "https://jyotishpeeth.com",
-    "verified": true,
-    "youtubeLive": true
-  }
+    {
+        "order":  22,
+        "id":  "rambhadracharya",
+        "name":  "Jagadguru Rambhadracharya",
+        "shortName":  "Rambhadracharya",
+        "title":  "Jagadguru Ramanandacharya",
+        "tradition":  "Ramanandi / Vaishnava",
+        "specialty":  "Ramayana, Vedanta, Sanskrit Scholarship",
+        "primaryCity":  "Chitrakoot",
+        "statesCovered":  [
+                              "Uttar Pradesh",
+                              "Madhya Pradesh",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi",
+                          "Sanskrit"
+                      ],
+        "bio":  "Renowned Jagadguru, scholar, and spiritual leader with major dharmic discourse influence.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Jagadguru+Rambhadracharya+live",
+                        "instagram":  null,
+                        "website":  "https://jagadgururambhadracharya.org"
+                    },
+        "contact":  "https://jagadgururambhadracharya.org",
+        "verified":  true
+    },
+    {
+        "order":  23,
+        "id":  "srisri",
+        "name":  "Gurudev Sri Sri Ravi Shankar",
+        "shortName":  "Sri Sri",
+        "title":  "Spiritual Leader, Art of Living",
+        "tradition":  "Vedanta / Yoga",
+        "specialty":  "Meditation, Satsang, Dharma Outreach",
+        "primaryCity":  "Bengaluru",
+        "statesCovered":  [
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi",
+                          "English"
+                      ],
+        "bio":  "Global spiritual teacher with large satsang and meditation programs across India and abroad.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@SriSriRaviShankar",
+                        "instagram":  "https://www.instagram.com/gurudev",
+                        "website":  "https://www.artofliving.org"
+                    },
+        "contact":  "https://www.artofliving.org",
+        "verified":  true
+    },
+    {
+        "order":  24,
+        "id":  "sadhguru",
+        "name":  "Sadhguru Jaggi Vasudev",
+        "shortName":  "Sadhguru",
+        "title":  "Founder, Isha Foundation",
+        "tradition":  "Yoga / Shaiva",
+        "specialty":  "Spiritual Talks, Meditation, Inner Engineering",
+        "primaryCity":  "Coimbatore",
+        "statesCovered":  [
+                              "All India"
+                          ],
+        "languages":  [
+                          "English",
+                          "Hindi",
+                          "Tamil"
+                      ],
+        "bio":  "Spiritual teacher with large public discourse ecosystem and frequent satsang events.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@sadhguru",
+                        "instagram":  "https://www.instagram.com/sadhguru",
+                        "website":  "https://isha.sadhguru.org"
+                    },
+        "contact":  "https://isha.sadhguru.org",
+        "verified":  true
+    },
+    {
+        "order":  25,
+        "id":  "gaurangdas",
+        "name":  "Gauranga Das Prabhu",
+        "shortName":  "Gauranga Das",
+        "title":  "ISKCON Leader and Spiritual Mentor",
+        "tradition":  "Gaudiya Vaishnava",
+        "specialty":  "Bhagavad Gita Talks, Youth Spiritual Guidance",
+        "primaryCity":  "Mumbai",
+        "statesCovered":  [
+                              "Maharashtra",
+                              "All India"
+                          ],
+        "languages":  [
+                          "English",
+                          "Hindi"
+                      ],
+        "bio":  "Senior ISKCON preacher known for practical youth-focused spiritual guidance and dharmic talks.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Gauranga+Das+Prabhu+live",
+                        "instagram":  "https://www.instagram.com/gaurangadas",
+                        "website":  "https://www.iskcon.org"
+                    },
+        "contact":  "https://www.iskcon.org",
+        "verified":  true
+    },
+    {
+        "order":  26,
+        "id":  "radhanath_swami",
+        "name":  "Radhanath Swami",
+        "shortName":  "Radhanath Swami",
+        "title":  "ISKCON Sannyasi and Spiritual Teacher",
+        "tradition":  "Gaudiya Vaishnava (ISKCON)",
+        "specialty":  "Bhakti, Bhagavad Gita, Satsang",
+        "primaryCity":  "Mumbai",
+        "statesCovered":  [
+                              "Maharashtra",
+                              "All India"
+                          ],
+        "languages":  [
+                          "English",
+                          "Hindi"
+                      ],
+        "bio":  "Senior ISKCON spiritual teacher known for devotional talks, kirtan culture, and youth outreach.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Radhanath+Swami+live",
+                        "instagram":  "https://www.instagram.com/radhanathswami",
+                        "website":  "https://radhanathswami.com"
+                    },
+        "contact":  "https://radhanathswami.com",
+        "verified":  true
+    },
+    {
+        "order":  27,
+        "id":  "gaurgopaldas",
+        "name":  "Gaur Gopal Das",
+        "shortName":  "Gaur Gopal Das",
+        "title":  "ISKCON Monk and Speaker",
+        "tradition":  "Gaudiya Vaishnava (ISKCON)",
+        "specialty":  "Practical Spiritual Guidance, Gita Talks",
+        "primaryCity":  "Mumbai",
+        "statesCovered":  [
+                              "All India"
+                          ],
+        "languages":  [
+                          "English",
+                          "Hindi"
+                      ],
+        "bio":  "Popular spiritual speaker known for practical dharmic life guidance and motivational satsang sessions.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Gaur+Gopal+Das+live",
+                        "instagram":  "https://www.instagram.com/gaurgopaldas",
+                        "website":  "https://gaurgopaldas.com"
+                    },
+        "contact":  "https://gaurgopaldas.com",
+        "verified":  true
+    },
+    {
+        "order":  28,
+        "id":  "amogh_lila_das",
+        "name":  "Amogh Lila Das",
+        "shortName":  "Amogh Lila Das",
+        "title":  "ISKCON Monk and Youth Mentor",
+        "tradition":  "Gaudiya Vaishnava (ISKCON)",
+        "specialty":  "Bhagavad Gita, Youth Satsang",
+        "primaryCity":  "Delhi",
+        "statesCovered":  [
+                              "Delhi",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi",
+                          "English"
+                      ],
+        "bio":  "Widely followed monk known for youth-focused spiritual talks and scripture-based practical guidance.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Amogh+Lila+Das+live",
+                        "instagram":  "https://www.instagram.com/amoghliladas",
+                        "website":  "https://iskcondwarka.org"
+                    },
+        "contact":  "https://iskcondwarka.org",
+        "verified":  true
+    },
+    {
+        "order":  29,
+        "id":  "mukundananda",
+        "name":  "Swami Mukundananda",
+        "shortName":  "Mukundananda Ji",
+        "title":  "Bhakti Yoga Teacher",
+        "tradition":  "Vaishnava / Bhakti Yoga",
+        "specialty":  "Gita, Mind Management, Bhakti",
+        "primaryCity":  "Delhi",
+        "statesCovered":  [
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi",
+                          "English"
+                      ],
+        "bio":  "Teacher of bhakti and self-development with regular Gita and spiritual upliftment programs.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@SwamiMukundananda",
+                        "instagram":  "https://www.instagram.com/swamimukundananda",
+                        "website":  "https://www.jkyog.org"
+                    },
+        "contact":  "https://www.jkyog.org",
+        "verified":  true
+    },
+    {
+        "order":  30,
+        "id":  "baba_ramdev",
+        "name":  "Swami Ramdev",
+        "shortName":  "Baba Ramdev",
+        "title":  "Yoga Guru",
+        "tradition":  "Yoga / Sanatan",
+        "specialty":  "Yoga, Health, Spiritual Discipline",
+        "primaryCity":  "Haridwar",
+        "statesCovered":  [
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi"
+                      ],
+        "bio":  "Yoga teacher with large public sessions integrating yogic practice and dharmic lifestyle.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Swami+Ramdev+live",
+                        "instagram":  "https://www.instagram.com/swamiramdev",
+                        "website":  "https://www.patanjaliayurved.net"
+                    },
+        "contact":  "https://www.patanjaliayurved.net",
+        "verified":  true
+    },
+    {
+        "order":  31,
+        "id":  "avdheshanand_giri",
+        "name":  "Acharya Mahamandaleshwar Swami Avdheshanand Giri",
+        "shortName":  "Avdheshanand Giri",
+        "title":  "Juna Akhada Acharya Mahamandaleshwar",
+        "tradition":  "Dashanami Sannyasa",
+        "specialty":  "Vedanta, Dharma Pravachan",
+        "primaryCity":  "Haridwar",
+        "statesCovered":  [
+                              "Uttarakhand",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi",
+                          "Sanskrit"
+                      ],
+        "bio":  "Renowned sannyasi and spiritual preceptor with regular discourse and dharmic guidance programs.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Avdheshanand+Giri+live",
+                        "instagram":  "https://www.instagram.com/avdheshanandg",
+                        "website":  "https://avdheshanandgiri.com"
+                    },
+        "contact":  "https://avdheshanandgiri.com",
+        "verified":  true
+    },
+    {
+        "order":  32,
+        "id":  "chidanand_saraswati",
+        "name":  "Pujya Swami Chidanand Saraswati",
+        "shortName":  "Chidanand Saraswati",
+        "title":  "President, Parmarth Niketan",
+        "tradition":  "Vedanta / Yoga",
+        "specialty":  "Ganga, Seva, Spiritual Discourse",
+        "primaryCity":  "Rishikesh",
+        "statesCovered":  [
+                              "Uttarakhand",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Hindi",
+                          "English"
+                      ],
+        "bio":  "Spiritual leader known for Ganga aarti outreach, yoga discourse, and seva-driven dharmic initiatives.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Swami+Chidanand+Saraswati+live",
+                        "instagram":  "https://www.instagram.com/parmarthniketan",
+                        "website":  "https://parmarth.org"
+                    },
+        "contact":  "https://parmarth.org",
+        "verified":  true
+    },
+    {
+        "order":  33,
+        "id":  "mahant_swami",
+        "name":  "Mahant Swami Maharaj",
+        "shortName":  "Mahant Swami",
+        "title":  "Spiritual Guru, BAPS",
+        "tradition":  "Swaminarayan (BAPS)",
+        "specialty":  "Satsang, Seva, Character Building",
+        "primaryCity":  "Ahmedabad",
+        "statesCovered":  [
+                              "Gujarat",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Gujarati",
+                          "Hindi"
+                      ],
+        "bio":  "Current spiritual guru of BAPS with major satsang assemblies and global devotional outreach.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Mahant+Swami+Maharaj+live",
+                        "instagram":  "https://www.instagram.com/baps",
+                        "website":  "https://www.baps.org"
+                    },
+        "contact":  "https://www.baps.org",
+        "verified":  true
+    },
+    {
+        "order":  34,
+        "id":  "tejomayananda",
+        "name":  "Swami Tejomayananda",
+        "shortName":  "Tejomayananda",
+        "title":  "Former Global Head, Chinmaya Mission",
+        "tradition":  "Advaita Vedanta",
+        "specialty":  "Gita, Upanishads, Vedanta",
+        "primaryCity":  "Mumbai",
+        "statesCovered":  [
+                              "All India"
+                          ],
+        "languages":  [
+                          "English",
+                          "Hindi"
+                      ],
+        "bio":  "Senior Vedanta teacher of Chinmaya tradition known for scripture teaching and satsang camps.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Swami+Tejomayananda+live",
+                        "instagram":  null,
+                        "website":  "https://www.chinmayamission.com"
+                    },
+        "contact":  "https://www.chinmayamission.com",
+        "verified":  true
+    },
+    {
+        "order":  35,
+        "id":  "swaroopananda_chinmaya",
+        "name":  "Swami Swaroopananda Saraswati (Chinmaya Mission)",
+        "shortName":  "Swaroopananda Ji",
+        "title":  "Global Head, Chinmaya Mission",
+        "tradition":  "Advaita Vedanta",
+        "specialty":  "Vedanta, Gita, Upanishads",
+        "primaryCity":  "Mumbai",
+        "statesCovered":  [
+                              "All India"
+                          ],
+        "languages":  [
+                          "English",
+                          "Hindi"
+                      ],
+        "bio":  "Current leader of Chinmaya Mission guiding Vedanta discourse, yajnas, and global satsang programs.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Swami+Swaroopananda+Chinmaya+live",
+                        "instagram":  null,
+                        "website":  "https://www.chinmayamission.com"
+                    },
+        "contact":  "https://www.chinmayamission.com",
+        "verified":  true
+    },
+    {
+        "order":  101,
+        "id":  "shankaracharya_srngeri",
+        "name":  "Jagadguru Shankaracharya Sri Sri Vidhushekhara Bharati Sannidhanam",
+        "shortName":  "Sringeri Shankaracharya",
+        "title":  "Dakshinamnaya Sri Sharada Peetham, Sringeri",
+        "tradition":  "Advaita Vedanta",
+        "specialty":  "Vedanta, Dharma Upadesha",
+        "primaryCity":  "Sringeri",
+        "statesCovered":  [
+                              "Karnataka",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Sanskrit",
+                          "Kannada",
+                          "Hindi"
+                      ],
+        "bio":  "Current pontiff at Sringeri Sharada Peetham (with blessings of Jagadguru Bharati Tirtha Mahasannidhanam); events are regularly live-streamed.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@SharadaPeetham",
+                        "instagram":  "https://www.instagram.com/sharadapeetham",
+                        "website":  "https://www.sringeri.net"
+                    },
+        "contact":  "https://www.sringeri.net",
+        "verified":  true,
+        "youtubeLive":  true
+    },
+    {
+        "order":  102,
+        "id":  "shankaracharya_puri",
+        "name":  "Jagadguru Shankaracharya Swami Nischalananda Saraswati",
+        "shortName":  "Puri Shankaracharya",
+        "title":  "Purvamnaya Govardhan Math, Puri",
+        "tradition":  "Advaita Vedanta",
+        "specialty":  "Vedanta, Sanatan Dharma Discourse",
+        "primaryCity":  "Puri",
+        "statesCovered":  [
+                              "Odisha",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Sanskrit",
+                          "Hindi",
+                          "Odia"
+                      ],
+        "bio":  "Pontiff of Govardhan Math, Puri; teachings and programs are distributed through official digital media including YouTube.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@GovardhanMath",
+                        "instagram":  "https://www.instagram.com/govardhanmath",
+                        "website":  "https://govardhanpeeth.org/en/"
+                    },
+        "contact":  "https://govardhanpeeth.org/en/",
+        "verified":  true,
+        "youtubeLive":  true
+    },
+    {
+        "order":  103,
+        "id":  "shankaracharya_dwarka",
+        "name":  "Jagadguru Shankaracharya Swami Sadananda Saraswati",
+        "shortName":  "Dwarka Shankaracharya",
+        "title":  "Pashchimamnaya Shri Sharada Peeth, Dwarka",
+        "tradition":  "Advaita Vedanta",
+        "specialty":  "Vedanta, Dharma Pravachan",
+        "primaryCity":  "Dwarka",
+        "statesCovered":  [
+                              "Gujarat",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Sanskrit",
+                          "Hindi",
+                          "Gujarati"
+                      ],
+        "bio":  "Associated with Sharada Peeth Dwarka lineage; discourse videos and live sessions are available on the math\u0027s public YouTube presence.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/@shrisharadapeethamdwarka4224",
+                        "instagram":  null,
+                        "website":  "https://dwarkashardapeeth.org"
+                    },
+        "contact":  "https://dwarkashardapeeth.org",
+        "verified":  true,
+        "youtubeLive":  true
+    },
+    {
+        "order":  104,
+        "id":  "shankaracharya_jyotirmath",
+        "name":  "Jagadguru Shankaracharya Swami Avimukteshwaranand Saraswati",
+        "shortName":  "Jyotirmath Shankaracharya",
+        "title":  "Uttaramnaya Jyotish Peeth, Joshimath",
+        "tradition":  "Advaita Vedanta",
+        "specialty":  "Vedanta, Dharma and Public Spiritual Discourse",
+        "primaryCity":  "Jyotirmath (Joshimath)",
+        "statesCovered":  [
+                              "Uttarakhand",
+                              "All India"
+                          ],
+        "languages":  [
+                          "Sanskrit",
+                          "Hindi"
+                      ],
+        "bio":  "Publicly known representative associated with Jyotish Peeth tradition; discourse and event clips are distributed on YouTube and media streams.",
+        "image":  null,
+        "socials":  {
+                        "youtube":  "https://www.youtube.com/results?search_query=Jyotish+Peeth+live",
+                        "instagram":  null,
+                        "website":  "https://jyotishpeeth.com"
+                    },
+        "contact":  "https://jyotishpeeth.com",
+        "verified":  true,
+        "youtubeLive":  true
+    }
 ]

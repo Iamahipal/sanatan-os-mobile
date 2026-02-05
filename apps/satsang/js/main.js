@@ -16,7 +16,6 @@ const refs = {
   type: document.getElementById("typeFilter"),
   sort: document.getElementById("sortSelect"),
   dialog: document.getElementById("eventDialog"),
-  installBtn: document.getElementById("installBtn"),
 };
 
 const store = createStore({
@@ -38,10 +37,10 @@ const store = createStore({
   cityOptions: [],
   typeOptions: [],
   selectedEventId: "",
-  deferredInstall: null,
 });
 
 const router = createRouter("discover");
+let previousView = "discover";
 
 init();
 
@@ -80,6 +79,10 @@ async function init() {
 function bindStateRendering() {
   store.subscribe((state) => {
     renderApp(state, refs);
+    if (state.view === "calendar" && previousView !== "calendar") {
+      queueMicrotask(() => focusCalendarToday());
+    }
+    previousView = state.view;
   });
 }
 
@@ -159,6 +162,14 @@ function handleActionClick(e) {
 
   if (action === "open-event" && id) {
     openDialogById(id);
+    return;
+  }
+
+  if (action === "calendar-jump") {
+    const monthIndex = Number(target.dataset.monthIndex);
+    if (Number.isFinite(monthIndex)) {
+      jumpToCalendarMonth(monthIndex);
+    }
     return;
   }
 
@@ -299,21 +310,6 @@ function setupPwa() {
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
   }
-
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    store.setState({ deferredInstall: e });
-    refs.installBtn.style.display = "grid";
-  });
-
-  refs.installBtn.addEventListener("click", async () => {
-    const prompt = store.getState().deferredInstall;
-    if (!prompt) return;
-    prompt.prompt();
-    await prompt.userChoice;
-    store.setState({ deferredInstall: null });
-    refs.installBtn.style.display = "none";
-  });
 }
 
 function syncFilterPanelUi() {
@@ -323,6 +319,25 @@ function syncFilterPanelUi() {
   refs.filterPanel.hidden = !filtersOpen;
   refs.filterToggleBtn.setAttribute("aria-expanded", String(filtersOpen));
   refs.filters.classList.toggle("filters-open", filtersOpen);
+}
+
+function focusCalendarToday() {
+  const todayCell = refs.root.querySelector('[data-calendar-today="true"]');
+  if (todayCell) {
+    todayCell.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+
+  const firstMonth = refs.root.querySelector('[data-calendar-month="0"]');
+  if (firstMonth) {
+    firstMonth.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function jumpToCalendarMonth(monthIndex) {
+  const month = refs.root.querySelector(`[data-calendar-month="${monthIndex}"]`);
+  if (!month) return;
+  month.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function downloadReminderIcs(event) {

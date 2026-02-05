@@ -39,6 +39,7 @@ export function processEvents(events, options = {}) {
 
 function enrichEvent(event, cfg) {
   const cloned = structuredClone(event);
+  sanitizeTemporalFlags(cloned);
 
   const validation = validateEvent(cloned, cfg);
   const confidence = scoreEvent(cloned, validation);
@@ -79,6 +80,8 @@ function validateEvent(event, cfg) {
 
   if (!event.link) warnings.push("missing_link");
   if (event.source === "instagram") warnings.push("instagram_unstable_source");
+  if (event.source === "twitter") warnings.push("twitter_signal_requires_verification");
+  if (event.source === "facebook") warnings.push("facebook_signal_requires_verification");
 
   return { errors, warnings };
 }
@@ -92,6 +95,8 @@ function scoreEvent(event, validation) {
   if (event.source === "youtube") score += 6;
   if (event.source === "website") score += 4;
   if (event.source === "instagram") score -= 8;
+  if (event.source === "twitter") score -= 5;
+  if (event.source === "facebook") score -= 4;
 
   if (event.features?.isLive) score += 4;
   if (event.features?.hasLiveStream) score += 3;
@@ -120,13 +125,18 @@ function dedupeKey(event) {
   const vachak = event.vachakId || "";
   const link = event.link || "";
 
-  if (link.includes("youtube.com/watch?v=")) return `yt:${extractVideoId(link)}`;
+  if (link.includes("youtube.com/watch?v=") || link.includes("youtu.be/")) {
+    return `yt:${extractVideoId(link)}`;
+  }
   return `${vachak}|${title}|${date}`;
 }
 
 function extractVideoId(link) {
-  const match = link.match(/[?&]v=([a-zA-Z0-9_-]{8,})/);
-  return match ? match[1] : link;
+  const watchMatch = link.match(/[?&]v=([a-zA-Z0-9_-]{8,})/);
+  if (watchMatch) return watchMatch[1];
+  const shortMatch = link.match(/youtu\.be\/([a-zA-Z0-9_-]{8,})/);
+  if (shortMatch) return shortMatch[1];
+  return link;
 }
 
 function summarize(events) {
@@ -149,4 +159,25 @@ function safeDate(value) {
 
 function dayDiff(a, b) {
   return Math.floor((a.getTime() - b.getTime()) / (1000 * 60 * 60 * 24));
+}
+
+function sanitizeTemporalFlags(event) {
+  const start = safeDate(event?.dates?.start);
+  const end = safeDate(event?.dates?.end || event?.dates?.start);
+  if (!start || !end) return;
+
+  const now = Date.now();
+  const eventEnd = new Date(end).setHours(23, 59, 59, 999);
+  const eventStart = new Date(start).setHours(0, 0, 0, 0);
+
+  // Hard safety: never allow stale live flags for completed events.
+  if (event.features?.isLive && eventEnd < now) {
+    event.features.isLive = false;
+  }
+
+  // Prevent false positives where events far in future are marked live.
+  const twoDays = 2 * 24 * 60 * 60 * 1000;
+  if (event.features?.isLive && eventStart - now > twoDays) {
+    event.features.isLive = false;
+  }
 }

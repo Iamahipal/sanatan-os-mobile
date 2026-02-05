@@ -1,16 +1,20 @@
-/**
+﻿/**
  * Satsang Scraper CLI v2
  * Usage:
  *   npm run scrape
  *   npm run scrape:youtube
  *   npm run scrape:websites
  *   npm run scrape:instagram
+ *   npm run scrape:twitter
+ *   npm run scrape:facebook
  *   node index.js --source=all --min-confidence=70
  */
 
 import { fetchAllChannels } from './sources/youtube.js';
 import { fetchAllWebsites } from './sources/websites.js';
 import { fetchAllInstagram } from './sources/instagram.js';
+import { fetchAllTwitter } from './sources/twitter.js';
+import { fetchAllFacebook } from './sources/facebook.js';
 import { normalizeEvents } from './normalizer.js';
 import { processEvents } from './quality.js';
 import {
@@ -53,6 +57,18 @@ async function main() {
       const events = await fetchAllInstagram();
       rawEvents.push(...events);
       console.log(`Instagram raw: ${events.length}`);
+    }
+
+    if (source === 'all' || source === 'twitter') {
+      const events = await fetchAllTwitter();
+      rawEvents.push(...events);
+      console.log(`Twitter raw: ${events.length}`);
+    }
+
+    if (source === 'all' || source === 'facebook') {
+      const events = await fetchAllFacebook();
+      rawEvents.push(...events);
+      console.log(`Facebook raw: ${events.length}`);
     }
 
     const processed = processEvents(rawEvents, { minConfidence });

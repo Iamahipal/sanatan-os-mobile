@@ -16,6 +16,8 @@ const parser = new Parser({
     ],
   },
 });
+const FEED_TIMEOUT_MS = 25000;
+const HANDLE_TIMEOUT_MS = 8000;
 
 const VERIFIED_CHANNEL_IDS = {
   rajendradas: 'UCXly_daYmaRFjYFIb_lfsiA',
@@ -24,7 +26,7 @@ const VERIFIED_CHANNEL_IDS = {
   jayakishori: 'UCCR5eciEJIMvX2o1tiYOUKQ',
   premanand: 'UC_fmMgNql89jbFI8TNcq9Vg',
   bageshwar: 'UC6WcxjGtzDxtdWvWWj3aM5w',
-  pradeep: 'UCiWB2Ucdmkj4GqmWMrka1RA',
+  pradeepmishra: 'UCiWB2Ucdmkj4GqmWMrka1RA',
   indresh: 'UC03aV1e7XdXm2Za_K856duQ',
 };
 
@@ -32,10 +34,16 @@ const resolvedCache = new Map();
 
 export async function fetchAllChannels() {
   const allItems = [];
+  const maxConcurrent = 3;
+  const activeVachaks = VACHAKS.filter((v) => !v.disabled);
+  const skipped = VACHAKS.filter((v) => v.disabled);
 
   console.log('Fetching YouTube RSS feeds...');
+  if (skipped.length) {
+    console.log(`Skipping ${skipped.length} disabled channels: ${skipped.map((v) => v.shortName).join(', ')}`);
+  }
 
-  for (const vachak of VACHAKS) {
+  await runWithConcurrency(activeVachaks, maxConcurrent, async (vachak) => {
     try {
       const items = await fetchChannel(vachak);
       allItems.push(...items);
@@ -43,7 +51,7 @@ export async function fetchAllChannels() {
     } catch (error) {
       console.error(`FAIL ${vachak.shortName}: ${error.message}`);
     }
-  }
+  });
 
   console.log(`YouTube total items: ${allItems.length}`);
   return allItems;
@@ -51,15 +59,18 @@ export async function fetchAllChannels() {
 
 export async function fetchChannel(vachak) {
   const candidates = await resolveChannelCandidates(vachak);
-  if (candidates.length === 0) {
-    throw new Error(`No channelId candidates for ${vachak.id}`);
-  }
+  const fallbackFeedUrls = vachak.handle
+    ? [
+        `https://www.youtube.com/feeds/videos.xml?user=${encodeURIComponent(vachak.handle)}`,
+        `https://www.youtube.com/feeds/videos.xml?user=${encodeURIComponent(vachak.handle.toLowerCase())}`,
+      ]
+    : [];
 
   let lastError = null;
   for (const channelId of candidates) {
     try {
       const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-      const feed = await parser.parseURL(feedUrl);
+      const feed = await parseFeedWithTimeout(feedUrl);
 
       resolvedCache.set(vachak.id, channelId);
       return (feed.items || []).map((item) => ({
@@ -77,6 +88,27 @@ export async function fetchChannel(vachak) {
     }
   }
 
+  for (const feedUrl of fallbackFeedUrls) {
+    try {
+      const feed = await parseFeedWithTimeout(feedUrl);
+      return (feed.items || []).map((item) => ({
+        ...item,
+        vachak: {
+          id: vachak.id,
+          name: vachak.name,
+          shortName: vachak.shortName,
+          specialty: vachak.specialty,
+          emoji: vachak.emoji,
+        },
+      }));
+    } catch (err) {
+      lastError = err;
+    }
+  }
+
+  if (candidates.length === 0 && fallbackFeedUrls.length === 0) {
+    throw new Error(`No channel candidates for ${vachak.id}`);
+  }
   throw new Error(lastError?.message || `All channel candidates failed for ${vachak.id}`);
 }
 
@@ -116,6 +148,7 @@ async function resolveFromHandle(handle) {
       'User-Agent': 'Mozilla/5.0',
       Accept: 'text/html',
     },
+    signal: AbortSignal.timeout(HANDLE_TIMEOUT_MS),
   });
 
   if (!response.ok) return null;
@@ -132,6 +165,27 @@ async function resolveFromHandle(handle) {
   }
 
   return null;
+}
+
+async function runWithConcurrency(items, limit, worker) {
+  const queue = [...items];
+  const runners = Array.from({ length: Math.min(limit, queue.length) }, async () => {
+    while (queue.length) {
+      const item = queue.shift();
+      // Queue is local and single-threaded in JS event loop, safe to shift here.
+      await worker(item);
+    }
+  });
+  await Promise.all(runners);
+}
+
+async function parseFeedWithTimeout(feedUrl) {
+  return Promise.race([
+    parser.parseURL(feedUrl),
+    new Promise((_, reject) => {
+      setTimeout(() => reject(new Error(`Feed timeout: ${feedUrl}`)), FEED_TIMEOUT_MS);
+    }),
+  ]);
 }
 
 

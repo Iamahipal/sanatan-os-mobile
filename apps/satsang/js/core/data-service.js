@@ -9,6 +9,7 @@ const speakerImageMap = {
   bageshwar: "assets/images/bageshwar.png",
   indresh: "assets/images/indresh.png",
   pradeep: "assets/images/pradeep.png",
+  pradeepmishra: "assets/images/pradeep.png",
 };
 
 const typeLabelMap = {
@@ -51,7 +52,7 @@ export async function loadAppData() {
       cityName,
       venue: event?.location?.venue || "Venue TBD",
       timing: event?.dates?.timing || "Time TBD",
-      isLive: isLiveToday(start, end, Boolean(event?.features?.isLive), Boolean(event?.features?.hasLiveStream)),
+      isLive: isLiveToday(start, end, Boolean(event?.features?.isLive)),
       isFree: Boolean(event?.features?.isFree),
       hasLiveStream: Boolean(event?.features?.hasLiveStream),
       thumbnail: event.thumbnail || "",
@@ -73,7 +74,7 @@ function isDateLive(start, end) {
   return now >= s && now <= e;
 }
 
-function isLiveToday(start, end, liveSignal, streamSignal) {
+function isLiveToday(start, end, liveSignal) {
   if (!isDateLive(start, end)) return false;
-  return liveSignal || streamSignal;
+  return liveSignal;
 }
