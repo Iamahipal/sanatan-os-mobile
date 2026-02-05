@@ -54,6 +54,7 @@ export async function loadAppData() {
       isLive: Boolean(event?.features?.isLive) || isDateLive(start, end),
       isFree: Boolean(event?.features?.isFree),
       hasLiveStream: Boolean(event?.features?.hasLiveStream),
+      thumbnail: event.thumbnail || "",
       link: event.link || "",
       speakerId: event?.vachakId || "",
       speakerName: speaker?.shortName || "Unknown Speaker",

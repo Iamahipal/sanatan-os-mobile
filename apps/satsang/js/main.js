@@ -3,7 +3,7 @@ import { createRouter } from "./core/router.js";
 import { loadAppData } from "./core/data-service.js";
 import { renderApp, renderDialog } from "./ui/renderers.js";
 
-const STORAGE_KEY = "satsang_state_v2";
+const STORAGE_KEY = "satsang_state_v3";
 
 const refs = {
   hero: document.getElementById("hero"),
@@ -26,7 +26,9 @@ const store = createStore({
   type: "all",
   sort: "soonest",
   saved: [],
+  reminders: [],
   savedSet: new Set(),
+  remindersSet: new Set(),
   events: [],
   filteredEvents: [],
   sortedEvents: [],
@@ -130,6 +132,13 @@ function handleActionClick(e) {
     return;
   }
 
+  if (action === "set-reminder" && id) {
+    toggleReminder(id);
+    recompute();
+    if (refs.dialog.open) openDialogById(id);
+    return;
+  }
+
   if (action === "open-event" && id) {
     openDialogById(id);
     return;
@@ -165,6 +174,7 @@ function recompute() {
       filteredEvents: filtered,
       sortedEvents: sorted,
       savedSet: new Set(state.saved),
+      remindersSet: new Set(state.reminders),
     };
   });
 }
@@ -185,12 +195,33 @@ function toggleSave(id) {
   });
 }
 
+function toggleReminder(id) {
+  store.update((state) => {
+    const reminders = state.reminders.includes(id)
+      ? state.reminders.filter((item) => item !== id)
+      : [...state.reminders, id];
+
+    const event = state.events.find((item) => item.id === id);
+    if (event && !state.reminders.includes(id)) {
+      downloadReminderIcs(event);
+    }
+
+    persistWith({ reminders });
+
+    return {
+      ...state,
+      reminders,
+      remindersSet: new Set(reminders),
+    };
+  });
+}
+
 function openDialogById(id) {
   const state = store.getState();
   const event = state.events.find((item) => item.id === id);
   if (!event) return;
 
-  renderDialog(event, refs.dialog, state.savedSet.has(id));
+  renderDialog(event, refs.dialog, state.savedSet.has(id), state.remindersSet.has(id));
   if (!refs.dialog.open) refs.dialog.showModal();
 }
 
@@ -202,6 +233,7 @@ function persist() {
     type: state.type,
     sort: state.sort,
     saved: state.saved,
+    reminders: state.reminders,
   });
 }
 
@@ -212,13 +244,18 @@ function persistWith(partial) {
 
 function hydrateFromStorage() {
   const data = readStorage();
+  const saved = Array.isArray(data.saved) ? data.saved : [];
+  const reminders = Array.isArray(data.reminders) ? data.reminders : [];
+
   store.setState({
     view: data.view || "discover",
     city: data.city || "all",
     type: data.type || "all",
     sort: data.sort || "soonest",
-    saved: Array.isArray(data.saved) ? data.saved : [],
-    savedSet: new Set(Array.isArray(data.saved) ? data.saved : []),
+    saved,
+    reminders,
+    savedSet: new Set(saved),
+    remindersSet: new Set(reminders),
   });
 }
 
@@ -233,8 +270,7 @@ function readStorage() {
 function uniqueValues(values) {
   return [...new Set(values)]
     .filter(Boolean)
-    .sort((a, b) => a.localeCompare(b))
-;
+    .sort((a, b) => a.localeCompare(b));
 }
 
 function setupPwa() {
@@ -258,3 +294,61 @@ function setupPwa() {
   });
 }
 
+function downloadReminderIcs(event) {
+  const start = new Date(event.start);
+  start.setHours(9, 0, 0, 0);
+  const end = new Date(event.end || event.start);
+  end.setHours(21, 0, 0, 0);
+
+  const dtStamp = formatIcsDate(new Date());
+  const dtStart = formatIcsDate(start);
+  const dtEnd = formatIcsDate(end);
+  const uid = `${event.id}@satsang.app`;
+
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//SanatanOS//Satsang//EN",
+    "BEGIN:VEVENT",
+    `UID:${uid}`,
+    `DTSTAMP:${dtStamp}`,
+    `DTSTART:${dtStart}`,
+    `DTEND:${dtEnd}`,
+    `SUMMARY:${escapeIcs(event.title)}`,
+    `LOCATION:${escapeIcs(`${event.venue}, ${event.cityName}`)}`,
+    `DESCRIPTION:${escapeIcs(`${event.speakerName} | ${event.typeLabel} | ${event.timing}`)}`,
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ];
+
+  const blob = new Blob([lines.join("\r\n")], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${sanitizeFileName(event.title)}.ics`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function formatIcsDate(date) {
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}T${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}Z`;
+}
+
+function escapeIcs(value) {
+  return String(value || "")
+    .replaceAll("\\", "\\\\")
+    .replaceAll(";", "\\;")
+    .replaceAll(",", "\\,")
+    .replaceAll("\n", "\\n");
+}
+
+function sanitizeFileName(value) {
+  return String(value || "satsang-reminder")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 64) || "satsang-reminder";
+}

@@ -5,10 +5,9 @@ export function renderApp(state, refs) {
   renderControls(state, refs);
   renderTabs(state, refs.tabs);
   renderView(state, refs.root);
-
 }
 
-export function renderDialog(event, dialog, isSaved) {
+export function renderDialog(event, dialog, isSaved, isReminderSet) {
   dialog.innerHTML = `
     <article class="modal">
       <div class="modal-top">
@@ -17,7 +16,7 @@ export function renderDialog(event, dialog, isSaved) {
           <span class="material-symbols-rounded" aria-hidden="true">close</span>
         </button>
       </div>
-      <p>${escapeHtml(event.cityName)} � ${escapeHtml(event.venue)}</p>
+      <p>${escapeHtml(event.cityName)} | ${escapeHtml(event.venue)}</p>
       <p><strong>Date:</strong> ${formatDateRange(event.start, event.end)}</p>
       <p><strong>Time:</strong> ${escapeHtml(event.timing)}</p>
       <p><strong>Speaker:</strong> ${escapeHtml(event.speakerName)}</p>
@@ -30,24 +29,29 @@ export function renderDialog(event, dialog, isSaved) {
         <button class="action-btn ${isSaved ? "active" : ""}" data-action="toggle-save" data-id="${event.id}">
           ${isSaved ? "Saved" : "Save"}
         </button>
+        <button class="action-btn ${isReminderSet ? "active" : ""}" data-action="set-reminder" data-id="${event.id}">
+          ${isReminderSet ? "Reminder Set" : "Set Reminder"}
+        </button>
         ${event.link ? `<a class="action-btn" style="text-decoration:none;" href="${event.link}" target="_blank" rel="noopener">Open Source</a>` : ""}
       </div>
       ${event.speakerBio ? `<p style="margin-top:12px; color:#6e5a49;">${escapeHtml(event.speakerBio)}</p>` : ""}
     </article>
   `;
-
 }
 
 function renderHero(state, hero) {
-  const featured = state.sortedEvents[0];
+  const featured = state.sortedEvents.find((event) => event.isLive) || state.sortedEvents[0];
   if (!featured) {
     hero.innerHTML = "<h2>No events available</h2><p>Add or sync event data to get started.</p>";
     return;
   }
 
+  const badge = featured.isLive ? "Live Now" : "Top Katha Vachak Event";
+
   hero.innerHTML = `
+    <p class="hero-kicker">${badge}</p>
     <h2>${escapeHtml(featured.title)}</h2>
-    <p>${escapeHtml(featured.speakerName)} � ${escapeHtml(featured.cityName)}</p>
+    <p>${escapeHtml(featured.speakerName)} | ${escapeHtml(featured.cityName)}</p>
     <div class="hero-tags">
       <span>${formatDateRange(featured.start, featured.end)}</span>
       <span>${escapeHtml(featured.timing)}</span>
@@ -105,45 +109,80 @@ function renderDiscover(state, root) {
     return;
   }
 
+  const liveNow = list.filter((event) => event.isLive);
+  const upcoming = getUpcomingEvents(list);
+
   root.innerHTML = `
-    <h2 class="section-title">Upcoming and Live</h2>
-    <section class="grid">${list.map((event) => eventCard(event, state.savedSet.has(event.id))).join("")}</section>
+    <section class="live-section">
+      <h2 class="section-title">Live Feed</h2>
+      ${
+        liveNow.length
+          ? `<section class="live-rail">
+              ${liveNow
+                .map(
+                  (event) => `
+                    <article class="live-rail-card" data-action="open-event" data-id="${event.id}">
+                      ${event.thumbnail ? `<img class="live-thumb" src="${escapeHtml(event.thumbnail)}" alt="${escapeHtml(event.title)}">` : ""}
+                      <p class="live-label">Live Right Now</p>
+                      <h3>${escapeHtml(event.title)}</h3>
+                      <p>${escapeHtml(event.speakerName)} | ${escapeHtml(event.cityName)}</p>
+                      <div class="chips">
+                        <span class="chip live">Live</span>
+                        ${isStartingSoon(event) ? '<span class="chip chip-soon">Starting Soon</span>' : ""}
+                        <span class="chip">${formatDateRange(event.start, event.end)}</span>
+                      </div>
+                    </article>
+                  `
+                )
+                .join("")}
+            </section>`
+          : '<div class="empty">No live satsang at the moment. Upcoming events are listed below.</div>'
+      }
+    </section>
+    <section>
+      <h2 class="section-title">Upcoming Events</h2>
+      <section class="grid">${upcoming.map((event) => eventCard(event, state.savedSet.has(event.id), state.remindersSet.has(event.id))).join("")}</section>
+    </section>
   `;
 }
 
 function renderCalendar(state, root) {
-  const list = state.sortedEvents;
-  if (!list.length) {
-    root.innerHTML = '<div class="empty">No events to show in timeline.</div>';
-    return;
-  }
-
-  const grouped = groupByMonth(list);
+  const { months, grouped } = getThreeMonthCalendar(state.sortedEvents);
 
   root.innerHTML = `
-    <h2 class="section-title">Timeline</h2>
+    <h2 class="section-title">3-Month Calendar</h2>
     <section class="timeline">
-      ${Object.entries(grouped)
+      ${months
         .map(
-          ([month, events]) => `
+          (month) => `
             <article class="month">
               <h3>${escapeHtml(month)}</h3>
-              ${events
-                .map(
-                  (event) => `
-                    <div class="row" data-action="open-event" data-id="${event.id}">
-                      <div class="date">${formatDate(event.start)}</div>
-                      <div>
-                        <strong>${escapeHtml(event.title)}</strong><br>
-                        <span>${escapeHtml(event.cityName)} � ${escapeHtml(event.speakerName)}</span>
-                      </div>
-                      <button class="action-btn ${state.savedSet.has(event.id) ? "active" : ""}" data-action="toggle-save" data-id="${event.id}">
-                        ${state.savedSet.has(event.id) ? "Saved" : "Save"}
-                      </button>
-                    </div>
-                  `
-                )
-                .join("")}
+              ${
+                grouped[month]?.length
+                  ? grouped[month]
+                      .map(
+                        (event) => `
+                          <div class="row" data-action="open-event" data-id="${event.id}">
+                            <div class="date">${formatDate(event.start)}</div>
+                            <div>
+                              <strong>${escapeHtml(event.title)}</strong><br>
+                              <span>${escapeHtml(event.cityName)} | ${escapeHtml(event.venue)}</span><br>
+                              <span>${escapeHtml(event.speakerName)}</span>
+                            </div>
+                            <div class="row-actions">
+                              <button class="action-btn ${state.savedSet.has(event.id) ? "active" : ""}" data-action="toggle-save" data-id="${event.id}">
+                                ${state.savedSet.has(event.id) ? "Saved" : "Save"}
+                              </button>
+                              <button class="action-btn ${state.remindersSet.has(event.id) ? "active" : ""}" data-action="set-reminder" data-id="${event.id}">
+                                ${state.remindersSet.has(event.id) ? "Reminder Set" : "Reminder"}
+                              </button>
+                            </div>
+                          </div>
+                        `
+                      )
+                      .join("")
+                  : '<p class="month-empty">No events scheduled.</p>'
+              }
             </article>
           `
         )
@@ -162,7 +201,7 @@ function renderSaved(state, root) {
 
   root.innerHTML = `
     <h2 class="section-title">Saved Events</h2>
-    <section class="grid">${list.map((event) => eventCard(event, true)).join("")}</section>
+    <section class="grid">${list.map((event) => eventCard(event, true, state.remindersSet.has(event.id))).join("")}</section>
   `;
 }
 
@@ -181,22 +220,38 @@ function renderProfile(state, root) {
   `;
 }
 
-function eventCard(event, saved) {
+function eventCard(event, saved, reminderSet) {
+  const soon = isStartingSoon(event);
+
   return `
-    <article class="card" data-action="open-event" data-id="${event.id}">
-      <h3>${escapeHtml(event.title)}</h3>
+    <article class="card card-tight" data-action="open-event" data-id="${event.id}">
+      ${
+        event.thumbnail
+          ? `<img class="event-thumb" src="${escapeHtml(event.thumbnail)}" alt="${escapeHtml(event.title)}">`
+          : '<div class="event-thumb event-thumb-fallback" aria-hidden="true"></div>'
+      }
+      <div class="card-topline">
+        <span class="card-speaker">${escapeHtml(event.speakerName)}</span>
+        <span class="card-date">${formatDate(event.start)}</span>
+      </div>
+      <h3 class="card-title">${escapeHtml(event.title)}</h3>
       <div class="meta">
-        <span>${escapeHtml(event.speakerName)}</span>
-        <span>${formatDateRange(event.start, event.end)} � ${escapeHtml(event.cityName)}</span>
-        <span>${escapeHtml(event.timing)}</span>
+        <span>${escapeHtml(event.cityName)} | ${escapeHtml(event.venue)}</span>
+        <span>${escapeHtml(event.timing)} | ${formatDateRange(event.start, event.end)}</span>
       </div>
       <div class="chips">
         <span class="chip ${event.isLive ? "live" : ""}">${event.isLive ? "Live" : event.typeLabel}</span>
+        ${soon ? '<span class="chip chip-soon">Starting Soon</span>' : ""}
         ${event.isFree ? '<span class="chip free">Free</span>' : ""}
       </div>
-      <button class="action-btn ${saved ? "active" : ""}" data-action="toggle-save" data-id="${event.id}">
-        ${saved ? "Saved" : "Save"}
-      </button>
+      <div class="card-actions">
+        <button class="action-btn ${saved ? "active" : ""}" data-action="toggle-save" data-id="${event.id}">
+          ${saved ? "Saved" : "Save"}
+        </button>
+        <button class="action-btn ${reminderSet ? "active" : ""}" data-action="set-reminder" data-id="${event.id}">
+          ${reminderSet ? "Reminder Set" : "Set Reminder"}
+        </button>
+      </div>
     </article>
   `;
 }
@@ -221,9 +276,48 @@ function groupByMonth(list) {
 }
 
 function humanize(value) {
-  return String(value).split('-').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
+  return String(value)
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
 }
 
+function getUpcomingEvents(list) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const threshold = today.getTime();
 
+  const future = list.filter((event) => !event.isLive && event.dateNum >= threshold);
+  if (future.length) return future;
 
+  return list.filter((event) => !event.isLive);
+}
 
+function getThreeMonthCalendar(list) {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth(), 1);
+  const end = new Date(now.getFullYear(), now.getMonth() + 3, 0, 23, 59, 59, 999);
+
+  const months = [0, 1, 2].map((offset) =>
+    new Date(now.getFullYear(), now.getMonth() + offset, 1).toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric",
+    })
+  );
+
+  const inWindow = list.filter((event) => {
+    const date = new Date(event.start).getTime();
+    return Number.isFinite(date) && date >= start.getTime() && date <= end.getTime();
+  });
+
+  const grouped = groupByMonth(inWindow);
+  return { months, grouped };
+}
+
+function isStartingSoon(event) {
+  if (!event?.start || event.isLive) return false;
+  const now = Date.now();
+  const start = new Date(event.start).setHours(0, 0, 0, 0);
+  const diff = start - now;
+  return diff >= 0 && diff <= 48 * 60 * 60 * 1000;
+}
