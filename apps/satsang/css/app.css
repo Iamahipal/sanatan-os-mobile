@@ -367,9 +367,8 @@ h1 {
 
 .live-thumb {
   width: 100%;
-  aspect-ratio: 21 / 9;
-  height: auto;
-  object-fit: contain;
+  height: 142px;
+  object-fit: cover;
   border-radius: 12px;
   border: 1px solid #deb696;
   margin-bottom: 10px;
@@ -431,9 +430,8 @@ h1 {
 
 .event-thumb {
   width: 100%;
-  aspect-ratio: 21 / 9;
-  height: auto;
-  object-fit: contain;
+  height: 148px;
+  object-fit: cover;
   border-radius: 12px;
   border: 1px solid #e2c5a9;
   margin-bottom: 10px;
