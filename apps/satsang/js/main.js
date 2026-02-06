@@ -27,6 +27,7 @@ const store = createStore({
   type: "all",
   sort: "soonest",
   filtersOpen: false,
+  calendarSavedOnly: false,
   saved: [],
   reminders: [],
   savedSet: new Set(),
@@ -173,6 +174,19 @@ function handleActionClick(e) {
     return;
   }
 
+  if (action === "calendar-today") {
+    focusCalendarToday();
+    return;
+  }
+
+  if (action === "calendar-saved") {
+    const next = !store.getState().calendarSavedOnly;
+    store.setState({ calendarSavedOnly: next });
+    persist();
+    recompute();
+    return;
+  }
+
   if (action === "close-dialog") {
     refs.dialog.close();
   }
@@ -259,6 +273,7 @@ function persist() {
   persistWith({
     view: state.view,
     filtersOpen: state.filtersOpen,
+    calendarSavedOnly: state.calendarSavedOnly,
     city: state.city,
     type: state.type,
     sort: state.sort,
@@ -280,6 +295,7 @@ function hydrateFromStorage() {
   store.setState({
     view: data.view || "discover",
     filtersOpen: Boolean(data.filtersOpen),
+    calendarSavedOnly: Boolean(data.calendarSavedOnly),
     city: data.city || "all",
     type: data.type || "all",
     sort: data.sort || "soonest",

@@ -3,7 +3,7 @@ import { escapeHtml, formatDate, formatDateRange } from "../core/utils.js";
 export function renderApp(state, refs) {
   renderControls(state, refs);
   if (refs.filters) {
-    refs.filters.hidden = state.view === "calendar";
+    refs.filters.hidden = state.view !== "discover";
   }
   renderTabs(state, refs.tabs);
   renderView(state, refs.root);
@@ -90,7 +90,7 @@ function renderView(state, root) {
 function renderDiscover(state, root) {
   const list = state.sortedEvents;
   if (!list.length) {
-    root.innerHTML = '<div class="empty">No results for the current filters.</div>';
+    root.innerHTML = '<div class="empty">No matches. Try clearing filters or search.</div>';
     return;
   }
 
@@ -98,7 +98,7 @@ function renderDiscover(state, root) {
 
   root.innerHTML = `
     <section class="live-section">
-      <h2 class="section-title">Live Today</h2>
+      <h2 class="section-title">Live Now</h2>
       ${
         liveToday.length
           ? `<section class="live-rail">
@@ -124,13 +124,13 @@ function renderDiscover(state, root) {
       }
     </section>
     <section>
-      <h2 class="section-title">Upcoming Events</h2>
+      <h2 class="section-title">Upcoming</h2>
       <section class="grid">${upcoming.map((event) => eventCard(event, state.savedSet.has(event.id), state.remindersSet.has(event.id))).join("")}</section>
     </section>
     ${
       past.length
         ? `<section>
-            <h2 class="section-title">Past Events</h2>
+            <h2 class="section-title">Past</h2>
             <section class="grid">${past.map((event) => eventCard(event, state.savedSet.has(event.id), state.remindersSet.has(event.id))).join("")}</section>
           </section>`
         : ""
@@ -139,11 +139,21 @@ function renderDiscover(state, root) {
 }
 
 function renderCalendar(state, root) {
-  const months = getThreeMonthCalendar(state.sortedEvents);
+  const list = state.calendarSavedOnly
+    ? state.sortedEvents.filter((event) => state.savedSet.has(event.id))
+    : state.sortedEvents;
+  const months = getThreeMonthCalendar(list);
 
   root.innerHTML = `
-    <h2 class="section-title">3-Month Calendar</h2>
-    <p class="calendar-subtitle">This month + next 2 months, always rolling.</p>
+    <h2 class="section-title">Calendar</h2>
+    <p class="calendar-subtitle">Rolling 3‑month view: this month and the next two.</p>
+    <div class="calendar-toolbar">
+      <button class="calendar-tool" data-action="calendar-today" type="button">Today</button>
+      <button class="calendar-tool ${state.calendarSavedOnly ? "active" : ""}" data-action="calendar-saved" type="button">
+        ${state.calendarSavedOnly ? "Saved Only" : "All Events"}
+      </button>
+    </div>
+    <p class="calendar-help">Tip: tap an event for details. Use Saved Only to focus.</p>
     <div class="calendar-jump">
       ${months
         .map(
@@ -162,12 +172,12 @@ function renderSaved(state, root) {
   const list = state.sortedEvents.filter((event) => state.savedSet.has(event.id));
 
   if (!list.length) {
-    root.innerHTML = '<div class="empty">No saved events yet.</div>';
+    root.innerHTML = '<div class="empty">No saved events yet. Save from Discover.</div>';
     return;
   }
 
   root.innerHTML = `
-    <h2 class="section-title">Saved Events</h2>
+    <h2 class="section-title">Saved</h2>
     <section class="grid">${list.map((event) => eventCard(event, true, state.remindersSet.has(event.id))).join("")}</section>
   `;
 }
@@ -178,6 +188,7 @@ function renderProfile(state, root) {
 
   root.innerHTML = `
     <h2 class="section-title">Profile</h2>
+    <p class="calendar-subtitle">Your activity snapshot.</p>
     <section class="stats">
       <article class="stat"><div class="label">Saved</div><div class="value">${state.saved.length}</div></article>
       <article class="stat"><div class="label">Total Events</div><div class="value">${state.events.length}</div></article>
@@ -284,7 +295,7 @@ function monthCard(month, monthIndex, savedSet, remindersSet) {
     <article class="month-card" data-calendar-month="${monthIndex}">
       <div class="month-card-head">
         <h3>${escapeHtml(month.label)}</h3>
-        <span class="month-count">${month.events.length} events</span>
+        <span class="month-count">${month.events.length ? `${month.events.length} events` : "No events"}</span>
       </div>
       <div class="weekday-row">${["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => `<span>${d}</span>`).join("")}</div>
       <div class="month-grid">
@@ -308,7 +319,7 @@ function monthCard(month, monthIndex, savedSet, remindersSet) {
                           ${savedSet.has(event.id) ? "Saved" : "Save"}
                         </button>
                         <button class="action-btn ${remindersSet.has(event.id) ? "active" : ""}" data-action="set-reminder" data-id="${event.id}">
-                          ${remindersSet.has(event.id) ? "Reminder Set" : "Reminder"}
+                          ${remindersSet.has(event.id) ? "Reminder Set" : "Set Reminder"}
                         </button>
                       </div>
                     </div>
