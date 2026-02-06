@@ -414,9 +414,6 @@ function eventsForDate(list, dateKey) {
 
 function resolveThumb(event) {
   if (!event) return "";
-  if (event.source === "youtube" && event.verifiedSource && event.speakerImage) {
-    return event.speakerImage;
-  }
   return event.thumbnail || event.speakerImage || "";
 }
 
