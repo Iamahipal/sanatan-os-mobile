@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0d1117">
+    <meta name="theme-color" content="#FCFDF7">
     <title>Gau Seva - Admin Dashboard</title>
 
     <!-- Fonts -->
@@ -21,18 +21,32 @@
 
     <style>
         :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-card: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-muted: rgba(255, 255, 255, 0.5);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --primary: #2E7D32;
-            --primary-light: #4CAF50;
-            --emergency: #D32F2F;
-            --warning: #FFA000;
-            --success: #388E3C;
+            /* M3 Light Theme Tokens */
+            --md-sys-color-surface: #FCFDF7;
+            --md-sys-color-surface-container-lowest: #FFFFFF;
+            --md-sys-color-surface-container-low: #F6F8F2;
+            --md-sys-color-surface-container: #F0F3EC;
+            --md-sys-color-surface-container-high: #EAEDE5;
+            --md-sys-color-on-surface: #1A1C19;
+            --md-sys-color-on-surface-variant: #424940;
+            --md-sys-color-outline: rgba(0, 0, 0, 0.12);
+            --md-sys-color-outline-variant: rgba(0, 0, 0, 0.06);
+            --md-sys-color-primary: #2E7D32;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #B8F5B8;
+            --md-sys-color-error: #BA1A1A;
+            --md-sys-color-warning: #FFA000;
+            --md-sys-color-success: #388E3C;
+
+            /* Shape tokens */
+            --md-sys-shape-corner-small: 8px;
+            --md-sys-shape-corner-medium: 12px;
+            --md-sys-shape-corner-large: 16px;
+            --md-sys-shape-corner-extra-large: 20px;
+
+            /* Shadow tokens */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
 
         * {
@@ -43,8 +57,8 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            background: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
             min-height: 100vh;
         }
 
@@ -59,7 +73,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
             margin-bottom: 24px;
         }
 
@@ -71,19 +85,20 @@
         }
 
         .header h1 span {
-            color: var(--primary-light);
+            color: var(--md-sys-color-primary);
         }
 
         .back-link {
-            color: var(--text-secondary);
+            color: var(--md-sys-color-on-surface-variant);
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 6px;
+            transition: color 0.2s;
         }
 
         .back-link:hover {
-            color: var(--primary-light);
+            color: var(--md-sys-color-primary);
         }
 
         .stats-grid {
@@ -94,30 +109,31 @@
         }
 
         .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
+            background: var(--md-sys-color-surface-container-lowest);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-corner-large);
             padding: 20px;
             text-align: center;
+            box-shadow: var(--shadow-sm);
         }
 
         .stat-value {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--primary-light);
+            color: var(--md-sys-color-primary);
         }
 
         .stat-value.pending {
-            color: var(--warning);
+            color: var(--md-sys-color-warning);
         }
 
         .stat-value.resolved {
-            color: var(--success);
+            color: var(--md-sys-color-success);
         }
 
         .stat-label {
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: var(--md-sys-color-on-surface-variant);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -131,7 +147,7 @@
         }
 
         .section-title i {
-            color: var(--primary-light);
+            color: var(--md-sys-color-primary);
         }
 
         .reports-list {
@@ -141,15 +157,17 @@
         }
 
         .report-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
+            background: var(--md-sys-color-surface-container-lowest);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-corner-large);
             padding: 16px;
             transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
         }
 
         .report-card:hover {
-            border-color: var(--primary-light);
+            border-color: var(--md-sys-color-primary);
+            box-shadow: var(--shadow-md);
         }
 
         .report-header {
@@ -162,36 +180,36 @@
         .case-id {
             font-family: monospace;
             font-size: 0.9rem;
-            color: var(--primary-light);
+            color: var(--md-sys-color-primary);
             font-weight: 600;
         }
 
         .status-badge {
             padding: 4px 10px;
-            border-radius: 8px;
+            border-radius: var(--md-sys-shape-corner-small);
             font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
         }
 
         .status-badge.pending {
-            background: rgba(255, 160, 0, 0.2);
-            color: var(--warning);
+            background: rgba(255, 160, 0, 0.15);
+            color: var(--md-sys-color-warning);
         }
 
         .status-badge.assigned {
-            background: rgba(33, 150, 243, 0.2);
-            color: #2196F3;
+            background: rgba(33, 150, 243, 0.15);
+            color: #1565C0;
         }
 
         .status-badge.resolved {
-            background: rgba(76, 175, 80, 0.2);
-            color: var(--success);
+            background: rgba(76, 175, 80, 0.15);
+            color: var(--md-sys-color-success);
         }
 
         .report-location {
             font-size: 0.9rem;
-            color: var(--text-secondary);
+            color: var(--md-sys-color-on-surface-variant);
             margin-bottom: 8px;
             display: flex;
             align-items: flex-start;
@@ -209,7 +227,7 @@
             gap: 12px;
             margin-bottom: 12px;
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: var(--md-sys-color-on-surface-variant);
         }
 
         .report-meta span {
@@ -227,10 +245,10 @@
 
         .condition-tag {
             padding: 4px 10px;
-            background: rgba(211, 47, 47, 0.2);
-            border-radius: 8px;
+            background: rgba(186, 26, 26, 0.12);
+            border-radius: var(--md-sys-shape-corner-small);
             font-size: 0.75rem;
-            color: var(--emergency);
+            color: var(--md-sys-color-error);
         }
 
         .report-actions {
@@ -245,7 +263,7 @@
             gap: 6px;
             padding: 8px 14px;
             border: none;
-            border-radius: 8px;
+            border-radius: var(--md-sys-shape-corner-small);
             font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.2s;
@@ -253,8 +271,8 @@
         }
 
         .action-btn.call {
-            background: var(--primary);
-            color: white;
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
         }
 
         .action-btn.whatsapp {
@@ -263,31 +281,31 @@
         }
 
         .action-btn.map {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
+            background: var(--md-sys-color-surface-container);
+            border: 1px solid var(--md-sys-color-outline);
+            color: var(--md-sys-color-on-surface-variant);
         }
 
         .action-btn.resolve {
-            background: var(--success);
+            background: var(--md-sys-color-success);
             color: white;
         }
 
         .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
         .loading {
             text-align: center;
             padding: 40px;
-            color: var(--text-muted);
+            color: var(--md-sys-color-on-surface-variant);
         }
 
         .empty-state {
             text-align: center;
             padding: 60px 20px;
-            color: var(--text-muted);
+            color: var(--md-sys-color-on-surface-variant);
         }
 
         .empty-state i {
@@ -303,18 +321,19 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: var(--primary);
-            color: white;
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 20px rgba(46, 125, 50, 0.4);
+            box-shadow: var(--shadow-md);
         }
 
         .refresh-btn:hover {
             transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
         }
 
         @media (max-width: 600px) {
@@ -331,14 +350,14 @@
             }
         }
 
-        /* LOGIN OVERLAY */
+        /* LOGIN OVERLAY - M3 Light Theme */
         .login-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0d1117;
+            background: var(--md-sys-color-surface);
             z-index: 10000;
             display: flex;
             align-items: center;
@@ -347,23 +366,23 @@
         }
 
         .login-card {
-            background: #161b22;
+            background: var(--md-sys-color-surface-container-lowest);
             padding: 40px;
-            border-radius: 20px;
+            border-radius: var(--md-sys-shape-corner-extra-large);
             text-align: center;
             width: 100%;
             max-width: 400px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--md-sys-color-outline-variant);
         }
 
         .login-input {
             width: 100%;
             padding: 16px;
-            background: #21262d;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 12px;
+            background: var(--md-sys-color-surface-container-low);
+            border: 1px solid var(--md-sys-color-outline);
+            color: var(--md-sys-color-on-surface);
+            border-radius: var(--md-sys-shape-corner-medium);
             font-size: 1.2rem;
             text-align: center;
             margin: 20px 0;
@@ -372,17 +391,17 @@
         }
 
         .login-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.3);
+            border-color: var(--md-sys-color-primary);
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
         }
 
         .login-btn {
-            background: var(--primary);
-            color: white;
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
             border: none;
             padding: 16px;
             width: 100%;
-            border-radius: 12px;
+            border-radius: var(--md-sys-shape-corner-medium);
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -390,22 +409,27 @@
         }
 
         .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.4);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
         .logout-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: none;
+            background: var(--md-sys-color-surface-container);
+            color: var(--md-sys-color-on-surface);
+            border: 1px solid var(--md-sys-color-outline);
             padding: 8px 16px;
-            border-radius: 8px;
+            border-radius: var(--md-sys-shape-corner-small);
             cursor: pointer;
             font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 8px;
             margin-left: auto;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: var(--md-sys-color-surface-container-high);
         }
 
         .hidden {
@@ -439,14 +463,14 @@
     <!-- AUTH OVERLAY -->
     <div id="loginOverlay" class="login-overlay">
         <div class="login-card">
-            <i data-lucide="shield-check" style="width: 48px; height: 48px; color: #4CAF50; margin-bottom: 20px;"></i>
-            <h2 style="margin-bottom: 10px;">Admin Access</h2>
-            <p style="color: rgba(255,255,255,0.5); margin-bottom: 20px;">Enter security PIN to continue</p>
+            <i data-lucide="shield-check" style="width: 48px; height: 48px; color: #2E7D32; margin-bottom: 20px;"></i>
+            <h2 style="margin-bottom: 10px; color: #1A1C19;">Admin Access</h2>
+            <p style="color: #424940; margin-bottom: 20px;">Enter security PIN to continue</p>
 
             <input type="password" id="adminPin" class="login-input" placeholder="••••" maxlength="4" pattern="[0-9]*"
                 inputmode="numeric">
             <button id="loginBtn" class="login-btn">Unlock Dashboard</button>
-            <p id="loginError" style="color: #ef5350; margin-top: 15px; display: none; font-size: 0.9rem;">Incorrect PIN
+            <p id="loginError" style="color: #BA1A1A; margin-top: 15px; display: none; font-size: 0.9rem;">Incorrect PIN
             </p>
         </div>
     </div>
