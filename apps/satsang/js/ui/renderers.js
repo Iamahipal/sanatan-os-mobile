@@ -180,7 +180,7 @@ function renderDiscover(state, root) {
             .map(
               (event) => `
                 <article class="live-rail-card" data-action="open-event" data-id="${event.id}">
-                  ${event.thumbnail ? `<img class="live-thumb" loading="lazy" src="${escapeHtml(event.thumbnail)}" alt="${escapeHtml(event.title)}">` : ""}
+                  ${resolveThumb(event) ? `<img class="live-thumb" loading="lazy" src="${escapeHtml(resolveThumb(event))}" alt="${escapeHtml(event.title)}">` : ""}
                   <p class="live-label">Live Right Now</p>
                   <h3>${escapeHtml(event.title)}</h3>
                   <p>${escapeHtml(event.speakerName)} | ${escapeHtml(event.cityName)}</p>
@@ -319,8 +319,8 @@ function eventCard(event, saved, reminderSet) {
   return `
     <article class="card card-tight" data-action="open-event" data-id="${event.id}">
       ${
-        event.thumbnail
-          ? `<img class="event-thumb" loading="lazy" src="${escapeHtml(event.thumbnail)}" alt="${escapeHtml(event.title)}">`
+        resolveThumb(event)
+          ? `<img class="event-thumb" loading="lazy" src="${escapeHtml(resolveThumb(event))}" alt="${escapeHtml(event.title)}">`
           : '<div class="event-thumb event-thumb-fallback" aria-hidden="true"></div>'
       }
       <div class="card-topline">
@@ -410,6 +410,14 @@ function isStale(event) {
 
 function eventsForDate(list, dateKey) {
   return list.filter((event) => String(event.start).slice(0, 10) === dateKey);
+}
+
+function resolveThumb(event) {
+  if (!event) return "";
+  if (event.source === "youtube" && event.verifiedSource && event.speakerImage) {
+    return event.speakerImage;
+  }
+  return event.thumbnail || event.speakerImage || "";
 }
 
 function getSixMonthCalendar(list) {
