@@ -367,7 +367,7 @@ h1 {
 
 .live-thumb {
   width: 100%;
-  height: 130px;
+  height: 142px;
   object-fit: cover;
   border-radius: 12px;
   border: 1px solid #deb696;
@@ -1026,10 +1026,30 @@ dialog::backdrop {
 }
 
 .modal-close {
-  border: 0;
-  background: transparent;
-  color: #8a623f;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid #e2c5a9;
+  background: #fffaf3;
+  color: #7a4a2b;
+  display: grid;
+  place-items: center;
   cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.modal-close .material-symbols-rounded {
+  font-size: 20px;
+}
+
+.modal-close:hover {
+  box-shadow: 0 6px 14px rgba(122, 72, 40, 0.12);
+  transform: translateY(-1px);
+}
+
+.modal-close:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(122, 72, 40, 0.16);
 }
 
 @media (max-width: 430px) {
