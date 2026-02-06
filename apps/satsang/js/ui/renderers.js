@@ -2,6 +2,9 @@ import { escapeHtml, formatDate, formatDateRange } from "../core/utils.js";
 
 export function renderApp(state, refs) {
   renderControls(state, refs);
+  if (refs.filters) {
+    refs.filters.hidden = state.view === "calendar";
+  }
   renderTabs(state, refs.tabs);
   renderView(state, refs.root);
 }

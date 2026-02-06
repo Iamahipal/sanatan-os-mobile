@@ -414,6 +414,7 @@ h1 {
   margin: 2px 0 4px;
   overflow-x: auto;
   padding-bottom: 2px;
+  scrollbar-width: none;
 }
 
 .calendar-jump::-webkit-scrollbar {
@@ -431,12 +432,19 @@ h1 {
   padding: 6px 12px;
   cursor: pointer;
   white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.calendar-jump-btn:focus-visible {
+  outline: 2px solid rgba(157, 63, 17, 0.35);
+  outline-offset: 2px;
 }
 
 .calendar-jump-btn.active {
   background: #8c3b12;
   color: #fff;
   border-color: #8c3b12;
+  box-shadow: 0 6px 14px rgba(122, 49, 19, 0.18);
 }
 
 .calendar-stack {
@@ -501,6 +509,7 @@ h1 {
   display: grid;
   place-items: center;
   position: relative;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease, background 0.12s ease;
 }
 
 .day-out {
@@ -517,6 +526,17 @@ h1 {
 .day-has-events {
   border-color: #d9b18f;
   background: #fff4e8;
+}
+
+.day-cell:not(.day-out):hover {
+  border-color: #cfa985;
+  box-shadow: 0 6px 14px rgba(122, 72, 40, 0.12);
+  transform: translateY(-1px);
+}
+
+.day-cell:not(.day-out):active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(122, 72, 40, 0.16);
 }
 
 .day-today {
@@ -547,12 +567,14 @@ h1 {
 
 .agenda-row {
   display: grid;
-  grid-template-columns: 32px minmax(0, 1fr);
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center;
   gap: 8px;
   padding: 8px;
   border: 1px solid #ebd4be;
   border-radius: 12px;
   background: #fff;
+  cursor: pointer;
 }
 
 .agenda-day {
@@ -587,7 +609,12 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 5px;
+  justify-self: end;
+}
+
+.agenda-actions .action-btn {
+  font-size: 0.76rem;
+  padding: 6px 10px;
 }
 
 .month-empty {
@@ -702,6 +729,17 @@ dialog::backdrop {
 
   .filter-panel {
     grid-template-columns: 1fr;
+  }
+
+  .agenda-row {
+    grid-template-columns: 32px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .agenda-actions {
+    grid-column: 2 / -1;
+    justify-self: start;
+    margin-top: 4px;
   }
 }
 

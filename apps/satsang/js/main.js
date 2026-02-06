@@ -337,7 +337,14 @@ function focusCalendarToday() {
 function jumpToCalendarMonth(monthIndex) {
   const month = refs.root.querySelector(`[data-calendar-month="${monthIndex}"]`);
   if (!month) return;
+  setActiveCalendarJump(monthIndex);
   month.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function setActiveCalendarJump(monthIndex) {
+  refs.root.querySelectorAll(".calendar-jump-btn").forEach((btn) => {
+    btn.classList.toggle("active", Number(btn.dataset.monthIndex) === monthIndex);
+  });
 }
 
 function downloadReminderIcs(event) {
