@@ -318,11 +318,7 @@ function eventCard(event, saved, reminderSet) {
 
   return `
     <article class="card card-tight" data-action="open-event" data-id="${event.id}">
-      ${
-        resolveThumb(event)
-          ? `<img class="event-thumb" loading="lazy" src="${escapeHtml(resolveThumb(event))}" alt="${escapeHtml(event.title)}">`
-          : '<div class="event-thumb event-thumb-fallback" aria-hidden="true"></div>'
-      }
+      ${resolveThumb(event) ? `<img class="event-thumb" loading="lazy" src="${escapeHtml(resolveThumb(event))}" alt="${escapeHtml(event.title)}">` : ""}
       <div class="card-topline">
         <span class="card-speaker">${escapeHtml(event.speakerName)}</span>
         <span class="card-date">${formatDate(event.start)}</span>
@@ -414,7 +410,7 @@ function eventsForDate(list, dateKey) {
 
 function resolveThumb(event) {
   if (!event) return "";
-  return event.thumbnail || event.speakerImage || "";
+  return event.thumbnail || "";
 }
 
 function getSixMonthCalendar(list) {
@@ -430,12 +426,25 @@ function isStartingSoon(event) {
   return diff >= 0 && diff <= 48 * 60 * 60 * 1000;
 }
 
+function isLiveNow(event) {
+  if (!event?.isLive || !event?.start) return false;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const start = new Date(event.start).setHours(0, 0, 0, 0);
+  if (start !== today.getTime()) return false;
+
+  const published = event.publishedAt ? new Date(event.publishedAt).getTime() : 0;
+  if (!published) return false;
+  const sixHours = 6 * 60 * 60 * 1000;
+  return Date.now() - published <= sixHours;
+}
+
 function splitEventBuckets(list) {
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
   const todayStartNum = todayStart.getTime();
 
-  const liveToday = list.filter((event) => event.isLive);
+  const liveToday = list.filter((event) => isLiveNow(event));
   const nonLive = list.filter((event) => !event.isLive);
   const upcoming = nonLive.filter((event) => event.dateNum >= todayStartNum);
   const past = nonLive.filter((event) => event.dateNum < todayStartNum).sort((a, b) => b.dateNum - a.dateNum);

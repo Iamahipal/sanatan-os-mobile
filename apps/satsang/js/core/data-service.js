@@ -61,6 +61,7 @@ export async function loadAppData() {
       source: event.source || "unknown",
       updatedAt: event.updatedAt || "",
       verifiedSource: Boolean(event.verifiedSource),
+      publishedAt: event.publishedAt || "",
       speakerId: event?.vachakId || "",
       speakerName: speaker?.shortName || "Unknown Speaker",
       speakerBio: speaker?.bio || "",
