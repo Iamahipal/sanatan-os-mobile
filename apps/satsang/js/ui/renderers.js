@@ -3,7 +3,13 @@ import { escapeHtml, formatDate, formatDateRange } from "../core/utils.js";
 export function renderApp(state, refs) {
   renderControls(state, refs);
   if (refs.filters) {
-    refs.filters.hidden = state.view !== "discover";
+    const showFilters = state.view === "discover";
+    refs.filters.hidden = !showFilters;
+    if (!showFilters) {
+      refs.filterPanel?.setAttribute("hidden", "true");
+      refs.filterToggleBtn?.setAttribute("aria-expanded", "false");
+      refs.filters.classList.remove("filters-open");
+    }
   }
   renderTabs(state, refs.tabs);
   renderView(state, refs.root);

@@ -80,9 +80,6 @@ async function init() {
 function bindStateRendering() {
   store.subscribe((state) => {
     renderApp(state, refs);
-    if (state.view === "calendar" && previousView !== "calendar") {
-      queueMicrotask(() => focusCalendarToday());
-    }
     previousView = state.view;
   });
 }
