@@ -1,48 +1,5 @@
 [
   {
-    "id": "yt-s56_hrN_Kdg",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "Shakthi",
-    "verifiedSource": true,
-    "vachakId": "amma",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2025-11-23",
-      "end": "2025-11-23",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=s56_hrN_Kdg",
-    "thumbnail": "https://i4.ytimg.com/vi/s56_hrN_Kdg/hqdefault.jpg",
-    "publishedAt": "2025-11-23T05:00:06.000Z",
-    "rawSignals": {
-      "usedPublishedDate": true,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
-  },
-  {
     "id": "yt-CTV1aJhKEAk",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
@@ -83,50 +40,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
-  },
-  {
-    "id": "yt-4ZKgnlltTjM",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "Amma alone can teach us total surrender",
-    "verifiedSource": true,
-    "vachakId": "amma",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2025-12-14",
-      "end": "2025-12-14",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=4ZKgnlltTjM",
-    "thumbnail": "https://i1.ytimg.com/vi/4ZKgnlltTjM/hqdefault.jpg",
-    "publishedAt": "2025-12-14T05:00:06.000Z",
-    "rawSignals": {
-      "usedPublishedDate": true,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.294Z"
   },
   {
     "id": "yt-UiCobMmgH7I",
@@ -169,7 +83,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-_Nk96XBnO_k",
@@ -212,7 +126,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-ETMkaPw-d2U",
@@ -255,50 +169,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
-  },
-  {
-    "id": "yt-8mJo9VZZiWQ",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "Swami Vivekananda",
-    "verifiedSource": true,
-    "vachakId": "amma",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-18",
-      "end": "2026-01-18",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=8mJo9VZZiWQ",
-    "thumbnail": "https://i1.ytimg.com/vi/8mJo9VZZiWQ/hqdefault.jpg",
-    "publishedAt": "2026-01-18T05:00:06.000Z",
-    "rawSignals": {
-      "usedPublishedDate": true,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-XMczPW9b3xQ",
@@ -341,7 +212,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.538Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-VRZB2_3BZxA",
@@ -384,7 +255,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-uugyYK2SAFY",
@@ -427,7 +298,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.538Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-fQjPSKG6N6g",
@@ -470,7 +341,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-24rIiVdEmKU",
@@ -513,7 +384,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.538Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-DjSDH7qFCBk",
@@ -556,7 +427,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-BoluSjM172g",
@@ -599,7 +470,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.538Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-yNshYFWcE7I",
@@ -642,7 +513,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-czXkjTf1sS0",
@@ -685,7 +556,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.538Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-t7yitSbRd80",
@@ -728,7 +599,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-91zHTOw9MGs",
@@ -771,7 +642,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.538Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-hUR4aM6yoOE",
@@ -814,7 +685,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-_tEsbcm9EvA",
@@ -857,7 +728,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "evt-jk-vrindavan-jan26",
@@ -892,7 +763,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.294Z"
   },
   {
     "id": "yt-eDU6slHj2o4",
@@ -935,7 +806,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-fwpPnFAtEq4",
@@ -978,7 +849,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.294Z"
   },
   {
     "id": "yt-9eYxaeYdeYM",
@@ -1021,7 +892,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-uNq1_NbGvcY",
@@ -1064,50 +935,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
-  },
-  {
-    "id": "yt-nNgr7dYlmgQ",
-    "type": "other",
-    "typeName": "Satsang",
-    "title": "Satsang Karo Satsang",
-    "verifiedSource": false,
-    "vachakId": "prembhushan",
-    "location": {
-      "city": "online",
-      "cityName": "Online Streaming",
-      "venue": "YouTube Live"
-    },
-    "dates": {
-      "start": "2026-01-30",
-      "end": "2026-01-30",
-      "duration": 1,
-      "timing": "See YouTube details"
-    },
-    "features": {
-      "isLive": false,
-      "isFree": true,
-      "hasLiveStream": true,
-      "hasPrasad": false,
-      "hasAccommodation": false
-    },
-    "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=nNgr7dYlmgQ",
-    "thumbnail": "https://i3.ytimg.com/vi/nNgr7dYlmgQ/hqdefault.jpg",
-    "publishedAt": "2026-01-30T10:01:51.000Z",
-    "rawSignals": {
-      "usedPublishedDate": true,
-      "cityDetected": "online",
-      "typeDetected": "other",
-      "liveSignal": false
-    },
-    "quality": {
-      "isValid": true,
-      "confidence": 100,
-      "errors": [],
-      "warnings": []
-    },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-3V6q-ZOQ29s",
@@ -1150,7 +978,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-QDLXDQohK64",
@@ -1193,7 +1021,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-WjMBxmSbCVg",
@@ -1236,7 +1064,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "evt-bd-chhatarpur-feb26",
@@ -1271,7 +1099,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.294Z"
   },
   {
     "id": "yt-dRbV7YJ6XVk",
@@ -1314,7 +1142,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-QNtAjClruiM",
@@ -1357,7 +1185,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-yu0WxGh71P4",
@@ -1400,7 +1228,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.294Z"
   },
   {
     "id": "yt-AAm3bNLN2vI",
@@ -1443,7 +1271,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-JGnurfwsHCU",
@@ -1486,7 +1314,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.294Z"
   },
   {
     "id": "yt-D0m2Qt81XDo",
@@ -1529,7 +1357,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.538Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-HyYuUPWcosM",
@@ -1572,7 +1400,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-BPvCcZPEmms",
@@ -1615,7 +1443,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.538Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-8eYJQpoHSVo",
@@ -1658,7 +1486,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-VEQbJU9_qRw",
@@ -1701,7 +1529,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.294Z"
   },
   {
     "id": "evt-mb-chitrakoot-feb26",
@@ -1736,7 +1564,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.294Z"
   },
   {
     "id": "yt-bDRUnoRo8K4",
@@ -1779,7 +1607,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-xEBHSGGlOf4",
@@ -1822,7 +1650,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-bLHcnwcJlL8",
@@ -1865,7 +1693,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "yt-aesA6pgJkMQ",
@@ -1908,7 +1736,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.293Z"
   },
   {
     "id": "evt-pm-ujjain-feb26",
@@ -1943,7 +1771,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.294Z"
   },
   {
     "id": "evt-pg-vrindavan-feb26",
@@ -1978,7 +1806,7 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.294Z"
   },
   {
     "id": "evt-rd-mathura-feb26",
@@ -2013,6 +1841,6 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-06T20:18:04.539Z"
+    "updatedAt": "2026-02-06T20:27:10.294Z"
   }
 ]

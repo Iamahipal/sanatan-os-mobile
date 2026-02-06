@@ -40,6 +40,9 @@ function normalizeItem(item) {
     const eventDate = extractEventDate(text) || publishedDate;
 
     const eventType = detectEventType(text);
+    if (eventType.type === 'other') {
+      return null;
+    }
     if (!isReligiousProgram(text, eventType.type)) {
       return null;
     }

@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-02-06T20:18:04.540Z",
+  "generatedAt": "2026-02-06T20:27:10.294Z",
   "input": {
     "source": "free",
     "minConfidence": 65,
     "dryRun": false,
-    "rawEvents": 49,
-    "afterDedupe": 48
+    "rawEvents": 45,
+    "afterDedupe": 44
   },
   "output": {
-    "approved": 48,
+    "approved": 44,
     "review": 0
   },
   "stats": {
     "bySource": {
-      "youtube": 42,
+      "youtube": 38,
       "manual": 6
     },
     "byVachak": {
@@ -23,13 +23,12 @@
       "bageshwar": 4,
       "indresh": 15,
       "aniruddhacharya": 3,
-      "prembhushan": 1,
       "sadhguru": 2,
-      "amma": 5,
+      "amma": 2,
       "jayakishori": 1,
       "pradeep": 1,
       "pundrik": 1
     }
   },
-  "durationMs": 61310
+  "durationMs": 61337
 }
