@@ -5,16 +5,14 @@
  *   npm run scrape:youtube
  *   npm run scrape:websites
  *   npm run scrape:instagram
- *   npm run scrape:twitter
- *   npm run scrape:facebook
+ *   npm run scrape:manual
  *   node index.js --source=all --min-confidence=70
  */
 
+import { readFile } from 'node:fs/promises';
 import { fetchAllChannels } from './sources/youtube.js';
 import { fetchAllWebsites } from './sources/websites.js';
 import { fetchAllInstagram } from './sources/instagram.js';
-import { fetchAllTwitter } from './sources/twitter.js';
-import { fetchAllFacebook } from './sources/facebook.js';
 import { normalizeEvents } from './normalizer.js';
 import { processEvents } from './quality.js';
 import {
@@ -40,35 +38,29 @@ async function main() {
   console.log('='.repeat(72));
 
   try {
-    if (source === 'all' || source === 'youtube') {
+    if (source === 'all' || source === 'free' || source === 'youtube') {
       const items = await fetchAllChannels();
       const events = normalizeEvents(items);
       rawEvents.push(...events);
       console.log(`YouTube normalized: ${events.length}`);
     }
 
-    if (source === 'all' || source === 'websites') {
+    if (source === 'all' || source === 'free' || source === 'websites') {
       const events = await fetchAllWebsites();
       rawEvents.push(...events);
       console.log(`Websites raw: ${events.length}`);
     }
 
-    if (source === 'all' || source === 'instagram') {
+    if (source === 'all' || source === 'free' || source === 'instagram') {
       const events = await fetchAllInstagram();
       rawEvents.push(...events);
       console.log(`Instagram raw: ${events.length}`);
     }
 
-    if (source === 'all' || source === 'twitter') {
-      const events = await fetchAllTwitter();
+    if (source === 'all' || source === 'free' || source === 'manual') {
+      const events = await loadManualEvents();
       rawEvents.push(...events);
-      console.log(`Twitter raw: ${events.length}`);
-    }
-
-    if (source === 'all' || source === 'facebook') {
-      const events = await fetchAllFacebook();
-      rawEvents.push(...events);
-      console.log(`Facebook raw: ${events.length}`);
+      console.log(`Manual raw: ${events.length}`);
     }
 
     const processed = processEvents(rawEvents, { minConfidence });
@@ -102,6 +94,21 @@ async function main() {
     console.error('Scraper failed:', error.message);
     console.error(error.stack);
     process.exit(1);
+  }
+}
+
+async function loadManualEvents() {
+  try {
+    const manualUrl = new URL('./data/manual.json', import.meta.url);
+    const raw = JSON.parse(await readFile(manualUrl, 'utf-8'));
+    const events = Array.isArray(raw?.events) ? raw.events : [];
+    return events.map((event) => ({
+      ...event,
+      source: event.source || 'manual',
+      verifiedSource: true,
+    }));
+  } catch {
+    return [];
   }
 }
 

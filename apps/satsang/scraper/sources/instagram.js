@@ -94,30 +94,30 @@ function parseInstagramPage(html, handle, config) {
         }
     }
 
-    // Try to find shared data (Instagram's internal state)
-    const sharedDataMatch = html.match(/window\._sharedData\s*=\s*({.+?});/);
-    if (sharedDataMatch) {
-        try {
-            const sharedData = JSON.parse(sharedDataMatch[1]);
-            const user = sharedData?.entry_data?.ProfilePage?.[0]?.graphql?.user;
+    const sharedData = extractInstagramData(html);
+    const user = pickInstagramUser(sharedData);
 
-            if (user?.biography) {
-                const bioEvent = extractEventFromText(user.biography, handle, config);
-                if (bioEvent) events.push(bioEvent);
-            }
+    if (user?.biography) {
+        const bioEvent = extractEventFromText(user.biography, handle, config);
+        if (bioEvent) events.push(bioEvent);
+    }
 
-            // Check recent posts
-            const edges = user?.edge_owner_to_timeline_media?.edges || [];
-            for (const edge of edges.slice(0, 3)) {
-                const caption = edge.node?.edge_media_to_caption?.edges?.[0]?.node?.text;
-                if (caption) {
-                    const postEvent = extractEventFromText(caption, handle, config);
-                    if (postEvent) events.push(postEvent);
-                }
-            }
-        } catch (e) {
-            // Parse failed
-        }
+    const edges = [
+        ...(user?.edge_owner_to_timeline_media?.edges || []),
+        ...(user?.edge_felix_video_timeline?.edges || [])
+    ];
+
+    const seenCaptions = new Set();
+    for (const edge of edges.slice(0, 6)) {
+        const caption =
+            edge.node?.edge_media_to_caption?.edges?.[0]?.node?.text ||
+            edge.node?.accessibility_caption ||
+            "";
+        const trimmed = String(caption || "").trim();
+        if (!trimmed || seenCaptions.has(trimmed)) continue;
+        seenCaptions.add(trimmed);
+        const postEvent = extractEventFromText(trimmed, handle, config);
+        if (postEvent) events.push(postEvent);
     }
 
     // Fallback: look for meta description
@@ -130,6 +130,41 @@ function parseInstagramPage(html, handle, config) {
     }
 
     return events;
+}
+
+function extractInstagramData(html) {
+    const sources = [
+        /window\._sharedData\s*=\s*({.+?});/s,
+        /window\.__initialData\s*=\s*({.+?});/s,
+        /window\.__additionalDataLoaded\([^,]+,\s*({.+?})\);/s
+    ];
+
+    for (const pattern of sources) {
+        const match = html.match(pattern);
+        if (!match) continue;
+        const parsed = safeJsonParse(match[1]);
+        if (parsed) return parsed;
+    }
+
+    return null;
+}
+
+function pickInstagramUser(data) {
+    return (
+        data?.entry_data?.ProfilePage?.[0]?.graphql?.user ||
+        data?.graphql?.user ||
+        data?.data?.user ||
+        data?.props?.pageProps?.user ||
+        null
+    );
+}
+
+function safeJsonParse(value) {
+    try {
+        return JSON.parse(value);
+    } catch {
+        return null;
+    }
 }
 
 /**

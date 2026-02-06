@@ -10,6 +10,8 @@ const refs = {
   filters: document.getElementById("filters"),
   filterPanel: document.getElementById("filterPanel"),
   filterToggleBtn: document.getElementById("filterToggleBtn"),
+  filterCount: document.getElementById("filterCount"),
+  quickFilters: document.querySelectorAll('[data-action="quick-filter"]'),
   tabs: document.getElementById("tabs"),
   search: document.getElementById("searchInput"),
   city: document.getElementById("cityFilter"),
@@ -22,12 +24,17 @@ const store = createStore({
   view: "discover",
   loading: true,
   error: "",
+  lastUpdated: "",
   query: "",
   city: "all",
   type: "all",
   sort: "soonest",
   filtersOpen: false,
-  calendarSavedOnly: false,
+  quickLive: false,
+  quickWeek: false,
+  quickFree: false,
+  quickOnline: false,
+  calendarSelectedDate: "",
   saved: [],
   reminders: [],
   savedSet: new Set(),
@@ -42,6 +49,7 @@ const store = createStore({
 
 const router = createRouter("discover");
 let previousView = "discover";
+let calendarObserver = null;
 
 init();
 
@@ -60,9 +68,10 @@ async function init() {
   router.init();
 
   try {
-    const { events } = await loadAppData();
+    const { events, lastUpdated } = await loadAppData();
     store.setState({
       events,
+      lastUpdated,
       loading: false,
       error: "",
       cityOptions: uniqueValues(events.map((event) => event.city)),
@@ -80,6 +89,8 @@ async function init() {
 function bindStateRendering() {
   store.subscribe((state) => {
     renderApp(state, refs);
+    syncQuickFiltersUi();
+    setupCalendarObserver(state);
     previousView = state.view;
   });
 }
@@ -103,6 +114,17 @@ function bindDomEvents() {
     store.setState({ filtersOpen: next });
     persist();
     syncFilterPanelUi();
+  });
+
+  refs.filters.addEventListener("click", (e) => {
+    const btn = e.target.closest('[data-action="quick-filter"]');
+    if (btn) {
+      const key = String(btn.dataset.filter || "").toLowerCase();
+      toggleQuickFilter(key);
+      return;
+    }
+    const reset = e.target.closest('[data-action="clear-filters"]');
+    if (reset) clearFilters();
   });
 
   refs.city.addEventListener("change", (e) => {
@@ -158,6 +180,18 @@ function handleActionClick(e) {
     return;
   }
 
+  if (action === "add-calendar" && id) {
+    const event = store.getState().events.find((item) => item.id === id);
+    if (event) downloadReminderIcs(event);
+    return;
+  }
+
+  if (action === "share-event") {
+    const link = target.dataset.link || window.location.href;
+    shareLink(link);
+    return;
+  }
+
   if (action === "open-event" && id) {
     openDialogById(id);
     return;
@@ -176,16 +210,24 @@ function handleActionClick(e) {
     return;
   }
 
-  if (action === "calendar-saved") {
-    const next = !store.getState().calendarSavedOnly;
-    store.setState({ calendarSavedOnly: next });
-    persist();
-    recompute();
+  if (action === "calendar-day") {
+    const date = target.dataset.date;
+    if (date) {
+      store.setState({ calendarSelectedDate: date });
+    }
     return;
   }
 
   if (action === "close-dialog") {
     refs.dialog.close();
+  }
+
+  if (action === "clear-filters") {
+    clearFilters();
+  }
+
+  if (action === "go-discover") {
+    router.push("discover");
   }
 }
 
@@ -200,7 +242,12 @@ function recompute() {
         event.title.toLowerCase().includes(q) ||
         event.cityName.toLowerCase().includes(q) ||
         event.speakerName.toLowerCase().includes(q);
-      return cityOk && typeOk && searchOk;
+      const quickActive = state.view === "discover";
+      const liveOk = !quickActive || !state.quickLive || event.isLive;
+      const freeOk = !quickActive || !state.quickFree || event.isFree;
+      const onlineOk = !quickActive || !state.quickOnline || event.city === "online";
+      const weekOk = !quickActive || !state.quickWeek || isWithinWeek(event.dateNum);
+      return cityOk && typeOk && searchOk && liveOk && freeOk && onlineOk && weekOk;
     });
 
     const sorted = [...filtered].sort((a, b) => {
@@ -270,10 +317,13 @@ function persist() {
   persistWith({
     view: state.view,
     filtersOpen: state.filtersOpen,
-    calendarSavedOnly: state.calendarSavedOnly,
     city: state.city,
     type: state.type,
     sort: state.sort,
+    quickLive: state.quickLive,
+    quickWeek: state.quickWeek,
+    quickFree: state.quickFree,
+    quickOnline: state.quickOnline,
     saved: state.saved,
     reminders: state.reminders,
   });
@@ -292,10 +342,13 @@ function hydrateFromStorage() {
   store.setState({
     view: data.view || "discover",
     filtersOpen: Boolean(data.filtersOpen),
-    calendarSavedOnly: Boolean(data.calendarSavedOnly),
     city: data.city || "all",
     type: data.type || "all",
     sort: data.sort || "soonest",
+    quickLive: Boolean(data.quickLive),
+    quickWeek: Boolean(data.quickWeek),
+    quickFree: Boolean(data.quickFree),
+    quickOnline: Boolean(data.quickOnline),
     saved,
     reminders,
     savedSet: new Set(saved),
@@ -303,6 +356,7 @@ function hydrateFromStorage() {
   });
 
   syncFilterPanelUi();
+  syncQuickFiltersUi();
 }
 
 function readStorage() {
@@ -334,6 +388,67 @@ function syncFilterPanelUi() {
   refs.filters.classList.toggle("filters-open", filtersOpen);
 }
 
+function syncQuickFiltersUi() {
+  const state = store.getState();
+  if (!refs.quickFilters?.length) return;
+  refs.quickFilters.forEach((btn) => {
+    const key = String(btn.dataset.filter || "").toLowerCase();
+    const active =
+      (key === "live" && state.quickLive) ||
+      (key === "week" && state.quickWeek) ||
+      (key === "free" && state.quickFree) ||
+      (key === "online" && state.quickOnline);
+    btn.classList.toggle("active", active);
+    btn.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function toggleQuickFilter(key) {
+  if (!key) return;
+  store.update((state) => {
+    const next = {
+      quickLive: state.quickLive,
+      quickWeek: state.quickWeek,
+      quickFree: state.quickFree,
+      quickOnline: state.quickOnline,
+    };
+    if (key === "live") next.quickLive = !state.quickLive;
+    if (key === "week") next.quickWeek = !state.quickWeek;
+    if (key === "free") next.quickFree = !state.quickFree;
+    if (key === "online") next.quickOnline = !state.quickOnline;
+    return { ...state, ...next };
+  });
+  persist();
+  recompute();
+  syncQuickFiltersUi();
+}
+
+function clearFilters() {
+  store.setState({
+    query: "",
+    city: "all",
+    type: "all",
+    sort: "soonest",
+    quickLive: false,
+    quickWeek: false,
+    quickFree: false,
+    quickOnline: false,
+    filtersOpen: false,
+  });
+  persist();
+  recompute();
+  syncQuickFiltersUi();
+  syncFilterPanelUi();
+}
+
+function isWithinWeek(dateNum) {
+  if (!Number.isFinite(dateNum)) return false;
+  const start = new Date();
+  start.setHours(0, 0, 0, 0);
+  const end = start.getTime() + 7 * 24 * 60 * 60 * 1000;
+  return dateNum >= start.getTime() && dateNum <= end;
+}
+
 function focusCalendarToday() {
   const todayCell = refs.root.querySelector('[data-calendar-today="true"]');
   if (todayCell) {
@@ -345,6 +460,34 @@ function focusCalendarToday() {
   if (firstMonth) {
     firstMonth.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+}
+
+function setupCalendarObserver(state) {
+  if (calendarObserver) {
+    calendarObserver.disconnect();
+    calendarObserver = null;
+  }
+
+  if (state.view !== "calendar") return;
+
+  queueMicrotask(() => {
+    const months = refs.root.querySelectorAll("[data-calendar-month]");
+    if (!months.length) return;
+
+    calendarObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        const idx = Number(visible.target.dataset.calendarMonth);
+        if (Number.isFinite(idx)) setActiveCalendarJump(idx);
+      },
+      { root: null, threshold: [0.4, 0.6, 0.75] }
+    );
+
+    months.forEach((month) => calendarObserver.observe(month));
+  });
 }
 
 function jumpToCalendarMonth(monthIndex) {
@@ -396,6 +539,28 @@ function downloadReminderIcs(event) {
   a.click();
   a.remove();
   URL.revokeObjectURL(url);
+}
+
+async function shareLink(link) {
+  try {
+    if (navigator.share) {
+      await navigator.share({ url: link });
+      return;
+    }
+  } catch {
+    // fall back to clipboard
+  }
+
+  try {
+    await navigator.clipboard.writeText(link);
+  } catch {
+    const input = document.createElement("input");
+    input.value = link;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    input.remove();
+  }
 }
 
 function formatIcsDate(date) {

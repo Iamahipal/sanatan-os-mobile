@@ -32,8 +32,13 @@
       <button id="filterToggleBtn" class="filter-toggle" type="button" aria-expanded="false">
         <span class="material-symbols-rounded" aria-hidden="true">tune</span>
         <span>Filters</span>
+        <span id="filterCount" class="filter-count" hidden>0</span>
       </button>
       <div id="filterPanel" class="filter-panel" hidden>
+        <div class="filter-panel-head">
+          <span>Filters</span>
+          <button class="filter-reset" type="button" data-action="clear-filters">Reset all</button>
+        </div>
         <select id="cityFilter" aria-label="Filter by city"></select>
         <select id="typeFilter" aria-label="Filter by type"></select>
         <select id="sortSelect" aria-label="Sort events">
@@ -41,6 +46,13 @@
           <option value="live">Live first</option>
           <option value="city">City A-Z</option>
         </select>
+      </div>
+      <div class="quick-filters" role="group" aria-label="Quick filters">
+        <button class="quick-filter" type="button" data-action="quick-filter" data-filter="live" aria-pressed="false">Live</button>
+        <button class="quick-filter" type="button" data-action="quick-filter" data-filter="week" aria-pressed="false">This Week</button>
+        <button class="quick-filter" type="button" data-action="quick-filter" data-filter="free" aria-pressed="false">Free</button>
+        <button class="quick-filter" type="button" data-action="quick-filter" data-filter="online" aria-pressed="false">Online</button>
+        <button class="quick-filter clear-link" type="button" data-action="clear-filters">Clear</button>
       </div>
     </section>
 

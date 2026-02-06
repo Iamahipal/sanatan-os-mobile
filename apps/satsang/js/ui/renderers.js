@@ -4,6 +4,7 @@ export function renderApp(state, refs) {
   const appRoot = document.getElementById("app");
   if (appRoot) appRoot.setAttribute("data-view", state.view);
   renderControls(state, refs);
+  renderFilterCount(state, refs);
   if (refs.filters) {
     const showFilters = state.view === "discover";
     refs.filters.hidden = !showFilters;
@@ -20,6 +21,7 @@ export function renderApp(state, refs) {
 export function renderDialog(event, dialog, isSaved, isReminderSet) {
   const mapsQuery = encodeURIComponent(`${event.venue}, ${event.cityName}`);
   const mapsLink = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+  const shareLink = event.link || window.location.href;
 
   dialog.innerHTML = `
     <article class="modal">
@@ -29,14 +31,23 @@ export function renderDialog(event, dialog, isSaved, isReminderSet) {
           <span class="material-symbols-rounded" aria-hidden="true">close</span>
         </button>
       </div>
-      <p>${escapeHtml(event.cityName)} | ${escapeHtml(event.venue)}</p>
+      <div class="speaker-row">
+        <img class="speaker-avatar" src="${escapeHtml(event.speakerImage)}" alt="${escapeHtml(event.speakerName)}">
+        <div>
+          <p class="speaker-name">${escapeHtml(event.speakerName)}</p>
+          <p class="speaker-meta">${escapeHtml(event.cityName)} | ${escapeHtml(event.venue)}</p>
+        </div>
+      </div>
       <p><strong>Date:</strong> ${formatDateRange(event.start, event.end)}</p>
       <p><strong>Time:</strong> ${escapeHtml(event.timing)}</p>
-      <p><strong>Speaker:</strong> ${escapeHtml(event.speakerName)}</p>
       <div class="chips">
         <span class="chip ${event.isLive ? "live" : ""}">${event.isLive ? "Live" : event.typeLabel}</span>
         ${event.isFree ? '<span class="chip free">Free</span>' : ""}
         ${event.hasLiveStream ? '<span class="chip">Livestream</span>' : ""}
+        ${event.city === "online" ? '<span class="chip chip-online">Online</span>' : ""}
+        ${isStale(event) ? '<span class="chip chip-stale">Stale</span>' : ""}
+        ${event.verifiedSource ? '<span class="chip chip-verified">Verified</span>' : ""}
+        <span class="chip chip-source">${sourceLabel(event.source)}</span>
       </div>
       <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;">
         <button class="action-btn ${isSaved ? "active" : ""}" data-action="toggle-save" data-id="${event.id}">
@@ -44,6 +55,12 @@ export function renderDialog(event, dialog, isSaved, isReminderSet) {
         </button>
         <button class="action-btn ${isReminderSet ? "active" : ""}" data-action="set-reminder" data-id="${event.id}">
           ${isReminderSet ? "Reminder Set" : "Set Reminder"}
+        </button>
+        <button class="action-btn" data-action="add-calendar" data-id="${event.id}">
+          Add to Calendar
+        </button>
+        <button class="action-btn" data-action="share-event" data-link="${escapeHtml(shareLink)}">
+          Share
         </button>
         <a class="action-btn" style="text-decoration:none;" href="${mapsLink}" target="_blank" rel="noopener">Open in Maps</a>
         ${event.link ? `<a class="action-btn" style="text-decoration:none;" href="${event.link}" target="_blank" rel="noopener">Open Source</a>` : ""}
@@ -60,6 +77,31 @@ function renderControls(state, refs) {
   refs.type.innerHTML = optionsHtml(state.typeOptions, state.type, "All types");
 }
 
+function renderFilterCount(state, refs) {
+  if (!refs.filterCount) return;
+  const count = countActiveFilters(state);
+  if (count <= 0) {
+    refs.filterCount.hidden = true;
+    refs.filterCount.textContent = "0";
+    return;
+  }
+  refs.filterCount.hidden = false;
+  refs.filterCount.textContent = String(count);
+}
+
+function countActiveFilters(state) {
+  let count = 0;
+  if (state.query) count += 1;
+  if (state.city && state.city !== "all") count += 1;
+  if (state.type && state.type !== "all") count += 1;
+  if (state.sort && state.sort !== "soonest") count += 1;
+  if (state.quickLive) count += 1;
+  if (state.quickWeek) count += 1;
+  if (state.quickFree) count += 1;
+  if (state.quickOnline) count += 1;
+  return count;
+}
+
 function renderTabs(state, tabs) {
   tabs.querySelectorAll("button[data-view]").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.view === state.view);
@@ -68,7 +110,25 @@ function renderTabs(state, tabs) {
 
 function renderView(state, root) {
   if (state.loading) {
-    root.innerHTML = '<div class="empty">Loading events...</div>';
+    root.innerHTML = `
+      <section class="skeleton-block">
+        <div class="skeleton-line skeleton-title"></div>
+        <div class="skeleton-line"></div>
+      </section>
+      <section class="grid skeleton-grid">
+        ${Array.from({ length: 6 })
+          .map(
+            () => `
+              <article class="card skeleton-card">
+                <div class="skeleton-thumb"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line short"></div>
+              </article>
+            `
+          )
+          .join("")}
+      </section>
+    `;
     return;
   }
 
@@ -98,39 +158,53 @@ function renderView(state, root) {
 function renderDiscover(state, root) {
   const list = state.sortedEvents;
   if (!list.length) {
-    root.innerHTML = '<div class="empty">No matches. Try clearing filters or search.</div>';
+    root.innerHTML = `
+      <div class="empty">
+        <div>No matches. Try clearing filters or search.</div>
+        <div class="empty-actions">
+          <button class="action-btn" data-action="clear-filters">Clear filters</button>
+        </div>
+      </div>
+    `;
     return;
   }
 
   const { liveToday, upcoming, past } = splitEventBuckets(list);
+  const updatedAt = state.lastUpdated ? `<p class="updated-at">Updated ${formatUpdatedAt(state.lastUpdated)}</p>` : "";
+  const liveSection = liveToday.length
+    ? `
+      <section class="live-section">
+        <h2 class="section-title">Live Now</h2>
+        <section class="live-rail">
+          ${liveToday
+            .map(
+              (event) => `
+                <article class="live-rail-card" data-action="open-event" data-id="${event.id}">
+                  ${event.thumbnail ? `<img class="live-thumb" loading="lazy" src="${escapeHtml(event.thumbnail)}" alt="${escapeHtml(event.title)}">` : ""}
+                  <p class="live-label">Live Right Now</p>
+                  <h3>${escapeHtml(event.title)}</h3>
+                  <p>${escapeHtml(event.speakerName)} | ${escapeHtml(event.cityName)}</p>
+                  <div class="chips">
+                    <span class="chip live">Live</span>
+                    ${event.city === "online" ? '<span class="chip chip-online">Online</span>' : ""}
+                    ${isStartingSoon(event) ? '<span class="chip chip-soon">Starting Soon</span>' : ""}
+                    <span class="chip chip-source">${sourceLabel(event.source)}</span>
+                  </div>
+                </article>
+              `
+            )
+            .join("")}
+        </section>
+      </section>
+    `
+    : "";
 
   root.innerHTML = `
-    <section class="live-section">
-      <h2 class="section-title">Live Now</h2>
-      ${
-        liveToday.length
-          ? `<section class="live-rail">
-              ${liveToday
-                .map(
-                  (event) => `
-                    <article class="live-rail-card" data-action="open-event" data-id="${event.id}">
-                      ${event.thumbnail ? `<img class="live-thumb" src="${escapeHtml(event.thumbnail)}" alt="${escapeHtml(event.title)}">` : ""}
-                      <p class="live-label">Live Right Now</p>
-                      <h3>${escapeHtml(event.title)}</h3>
-                      <p>${escapeHtml(event.speakerName)} | ${escapeHtml(event.cityName)}</p>
-                      <div class="chips">
-                        <span class="chip live">Live</span>
-                        ${isStartingSoon(event) ? '<span class="chip chip-soon">Starting Soon</span>' : ""}
-                        <span class="chip">${formatDateRange(event.start, event.end)}</span>
-                      </div>
-                    </article>
-                  `
-                )
-                .join("")}
-            </section>`
-          : '<div class="empty">No live satsang right now.</div>'
-      }
+    <section class="discover-head">
+      <h2 class="section-title">Discover</h2>
+      ${updatedAt}
     </section>
+    ${liveSection}
     <section>
       <h2 class="section-title">Upcoming</h2>
       <section class="grid">${upcoming.map((event) => eventCard(event, state.savedSet.has(event.id), state.remindersSet.has(event.id))).join("")}</section>
@@ -147,21 +221,45 @@ function renderDiscover(state, root) {
 }
 
 function renderCalendar(state, root) {
-  const list = state.calendarSavedOnly
-    ? state.sortedEvents.filter((event) => state.savedSet.has(event.id))
-    : state.sortedEvents;
-  const months = getThreeMonthCalendar(list);
+  const list = state.sortedEvents;
+  const months = getSixMonthCalendar(list);
+  const selectedDate = state.calendarSelectedDate;
+  const selectedEvents = selectedDate ? eventsForDate(list, selectedDate) : [];
+  const selectedLabel = selectedDate
+    ? new Date(selectedDate).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
+    : "";
 
   root.innerHTML = `
     <h2 class="section-title">Calendar</h2>
-    <p class="calendar-subtitle">Rolling 3‑month view: this month and the next two.</p>
+    <p class="calendar-subtitle">Rolling 6‑month view: previous, current, and next four.</p>
     <div class="calendar-toolbar">
       <button class="calendar-tool" data-action="calendar-today" type="button">Today</button>
-      <button class="calendar-tool ${state.calendarSavedOnly ? "active" : ""}" data-action="calendar-saved" type="button">
-        ${state.calendarSavedOnly ? "Saved Only" : "All Events"}
-      </button>
     </div>
-    <p class="calendar-help">Tip: tap an event for details. Use Saved Only to focus.</p>
+    <p class="calendar-help">Tip: tap an event for details. Use Today to jump.</p>
+    <section class="day-events">
+      <div class="day-events-head">
+        <h3>${selectedLabel || "Select a day"}</h3>
+        ${selectedLabel ? `<span>${selectedEvents.length} events</span>` : ""}
+      </div>
+      ${
+        selectedLabel
+          ? selectedEvents.length
+            ? `<div class="day-events-list">
+                ${selectedEvents
+                  .map(
+                    (event) => `
+                      <button class="day-event" data-action="open-event" data-id="${event.id}">
+                        <span>${escapeHtml(event.title)}</span>
+                        <span>${escapeHtml(event.cityName)}</span>
+                      </button>
+                    `
+                  )
+                  .join("")}
+              </div>`
+            : `<p class="month-empty">No events on this day.</p>`
+          : `<p class="month-empty">Tap any day with events to see the list.</p>`
+      }
+    </section>
     <div class="calendar-jump">
       ${months
         .map(
@@ -180,7 +278,14 @@ function renderSaved(state, root) {
   const list = state.sortedEvents.filter((event) => state.savedSet.has(event.id));
 
   if (!list.length) {
-    root.innerHTML = '<div class="empty">No saved events yet. Save from Discover.</div>';
+    root.innerHTML = `
+      <div class="empty">
+        <div>No saved events yet. Save from Discover.</div>
+        <div class="empty-actions">
+          <button class="action-btn" data-action="go-discover">Browse Discover</button>
+        </div>
+      </div>
+    `;
     return;
   }
 
@@ -199,6 +304,7 @@ function renderProfile(state, root) {
     <p class="calendar-subtitle">Your activity snapshot.</p>
     <section class="stats">
       <article class="stat"><div class="label">Saved</div><div class="value">${state.saved.length}</div></article>
+      <article class="stat"><div class="label">Reminders</div><div class="value">${state.reminders.length}</div></article>
       <article class="stat"><div class="label">Total Events</div><div class="value">${state.events.length}</div></article>
       <article class="stat"><div class="label">Live Now</div><div class="value">${live}</div></article>
       <article class="stat"><div class="label">Cities</div><div class="value">${cities}</div></article>
@@ -208,12 +314,13 @@ function renderProfile(state, root) {
 
 function eventCard(event, saved, reminderSet) {
   const soon = isStartingSoon(event);
+  const stale = isStale(event);
 
   return `
     <article class="card card-tight" data-action="open-event" data-id="${event.id}">
       ${
         event.thumbnail
-          ? `<img class="event-thumb" src="${escapeHtml(event.thumbnail)}" alt="${escapeHtml(event.title)}">`
+          ? `<img class="event-thumb" loading="lazy" src="${escapeHtml(event.thumbnail)}" alt="${escapeHtml(event.title)}">`
           : '<div class="event-thumb event-thumb-fallback" aria-hidden="true"></div>'
       }
       <div class="card-topline">
@@ -223,12 +330,16 @@ function eventCard(event, saved, reminderSet) {
       <h3 class="card-title">${escapeHtml(event.title)}</h3>
       <div class="meta">
         <span>${escapeHtml(event.cityName)} | ${escapeHtml(event.venue)}</span>
-        <span>${escapeHtml(event.timing)} | ${formatDateRange(event.start, event.end)}</span>
+        <span>${escapeHtml(event.timing)}</span>
       </div>
       <div class="chips">
         <span class="chip ${event.isLive ? "live" : ""}">${event.isLive ? "Live" : event.typeLabel}</span>
         ${soon ? '<span class="chip chip-soon">Starting Soon</span>' : ""}
         ${event.isFree ? '<span class="chip free">Free</span>' : ""}
+        ${event.city === "online" ? '<span class="chip chip-online">Online</span>' : ""}
+        ${stale ? '<span class="chip chip-stale">Stale</span>' : ""}
+        ${event.verifiedSource ? '<span class="chip chip-verified">Verified</span>' : ""}
+        <span class="chip chip-source">${sourceLabel(event.source)}</span>
       </div>
       <div class="card-actions">
         <button class="action-btn ${saved ? "active" : ""}" data-action="toggle-save" data-id="${event.id}">
@@ -268,9 +379,42 @@ function humanize(value) {
     .join(" ");
 }
 
-function getThreeMonthCalendar(list) {
+function formatUpdatedAt(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
+function sourceLabel(source) {
+  const map = {
+    youtube: "YouTube",
+    website: "Website",
+    instagram: "Instagram",
+    manual: "Manual",
+  };
+  return map[source] || "Source";
+}
+
+function isStale(event) {
+  if (!event?.dateNum) return false;
   const now = new Date();
-  return [0, 1, 2].map((offset) => buildMonthView(now, offset, list));
+  now.setHours(0, 0, 0, 0);
+  const staleDays = 14;
+  const threshold = now.getTime() - staleDays * 24 * 60 * 60 * 1000;
+  return event.dateNum < threshold && !event.isLive;
+}
+
+function eventsForDate(list, dateKey) {
+  return list.filter((event) => String(event.start).slice(0, 10) === dateKey);
+}
+
+function getSixMonthCalendar(list) {
+  const now = new Date();
+  return [-1, 0, 1, 2, 3, 4].map((offset) => buildMonthView(now, offset, list));
 }
 
 function isStartingSoon(event) {
@@ -346,8 +490,9 @@ function dayCell(day) {
   const classes = ["day-cell"];
   if (day.hasEvents) classes.push("day-has-events");
   if (day.isToday) classes.push("day-today");
+  const actionAttr = day.hasEvents ? `data-action="calendar-day" data-date="${day.dateKey}"` : "";
   return `
-    <div class="${classes.join(" ")}" ${day.isToday ? 'data-calendar-today="true"' : ""}>
+    <div class="${classes.join(" ")}" ${day.isToday ? 'data-calendar-today="true"' : ""} ${actionAttr}>
       <span class="day-num">${day.date.getDate()}</span>
       ${day.eventCount > 0 ? `<span class="day-dot">${day.eventCount}</span>` : ""}
     </div>
@@ -389,6 +534,7 @@ function buildMonthView(now, offset, events) {
     days.push({
       inMonth: true,
       date,
+      dateKey: date.toISOString().slice(0, 10),
       hasEvents: eventCount > 0,
       eventCount,
       isToday,

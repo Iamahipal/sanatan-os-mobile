@@ -11,6 +11,7 @@ export const VACHAKS = [
         name: 'Swami Shri Rajendradas Ji Maharaj',
         shortName: 'Rajendradas Ji',
         handle: 'rajendradasjimaharaj',
+        officialSite: 'https://jadkhor.org',
         specialty: 'Bhagwat Katha',
         emoji: '🙏'
     },
@@ -27,6 +28,7 @@ export const VACHAKS = [
         name: 'Morari Bapu',
         shortName: 'Morari Bapu',
         handle: 'moraribapu',
+        officialSite: 'https://chitrakutdhamtalgajarda.org',
         specialty: 'Ram Katha',
         emoji: '🙏'
     },
@@ -51,6 +53,7 @@ export const VACHAKS = [
         name: 'Bageshwar Dham Sarkar',
         shortName: 'Bageshwar Dham',
         handle: 'BageshwarDhamSarkar',
+        officialSite: 'https://bageshwardham.co.in',
         specialty: 'Darbar',
         emoji: '✨'
     },
@@ -67,6 +70,7 @@ export const VACHAKS = [
         name: 'Acharya Indresh Upadhyay',
         shortName: 'Indresh Upadhyay',
         handle: 'BhaktiPath',
+        officialSite: 'https://bhaktipaths.com',
         specialty: 'Bhagwat Katha',
         emoji: '📿'
     },
@@ -83,6 +87,7 @@ export const VACHAKS = [
         name: 'Pujya Shri Aniruddhacharya Ji Maharaj',
         shortName: 'Aniruddhacharya Ji',
         handle: 'Aniruddhacharyaji',
+        officialSite: 'https://en.aniruddhacharya.com',
         specialty: 'Bhagwat Katha',
         emoji: '🎤'
     },
@@ -133,6 +138,7 @@ export const VACHAKS = [
         name: 'Sadhguru Jaggi Vasudev',
         shortName: 'Sadhguru',
         handle: 'sadhguru',
+        officialSite: 'https://isha.sadhguru.org',
         specialty: 'Spiritual Talks',
         emoji: '🧘'
     },
@@ -141,6 +147,7 @@ export const VACHAKS = [
         name: 'Swami Mukundananda',
         shortName: 'Mukundananda Ji',
         handle: 'SwamiMukundananda',
+        officialSite: 'https://www.swamimukundananda.org',
         specialty: 'Gita and Bhakti',
         emoji: '🙏'
     },
@@ -157,6 +164,7 @@ export const VACHAKS = [
         name: 'Gaur Gopal Das',
         shortName: 'Gaur Gopal Das',
         handle: 'gaurgopaldas',
+        officialSite: 'https://gaurgopaldas.in',
         specialty: 'Practical Spiritual Guidance',
         emoji: '🎤'
     },
@@ -167,6 +175,41 @@ export const VACHAKS = [
         handle: 'gaurangadas',
         specialty: 'Bhagavad Gita Talks',
         emoji: '📿'
+    },
+    {
+        id: 'chinmaya',
+        name: 'Chinmaya Mission',
+        shortName: 'Chinmaya Mission',
+        handle: 'ChinmayaChannel',
+        officialSite: 'https://www.chinmayamission.com',
+        specialty: 'Vedanta Talks',
+        emoji: '📿'
+    },
+    {
+        id: 'amma',
+        name: 'Mata Amritanandamayi (Amma)',
+        shortName: 'Amma',
+        handle: 'amma',
+        officialSite: 'https://amma.org',
+        specialty: 'Satsang and Spiritual Teachings',
+        emoji: '🙏'
+    },
+    {
+        id: 'baps_betterliving',
+        name: 'BAPS Better Living',
+        shortName: 'BAPS Better Living',
+        handle: 'BAPSBetterLiving',
+        specialty: 'Spiritual Discourses',
+        emoji: '🕉️'
+    },
+    {
+        id: 'artofliving',
+        name: 'The Art of Living',
+        shortName: 'Art of Living',
+        handle: 'artofliving-official',
+        officialSite: 'https://www.artofliving.org',
+        specialty: 'Meditation and Spiritual Guidance',
+        emoji: '🕊️'
     }
 ];
 
@@ -222,6 +265,7 @@ export const WEBSITE_CONFIGS = [
         id: 'bageshwardham',
         name: 'Bageshwar Dham Official',
         url: 'https://bageshwardham.co.in/en',
+        fallbackUrls: ['https://bageshwardham.co.in'],
         vachakId: 'bageshwar',
         parser: parseGenericSite
     }
@@ -291,29 +335,20 @@ export const INSTAGRAM_HANDLES = {
         vachakId: 'sadhguru',
         specialty: 'Spiritual Talks',
         priority: 2
+    },
+    'mataamritanandamayi': {
+        vachakId: 'amma',
+        specialty: 'Satsang and Spiritual Teachings',
+        priority: 2
+    },
+    'baps_betterliving': {
+        vachakId: 'baps_betterliving',
+        specialty: 'Spiritual Discourses',
+        priority: 3
+    },
+    'artofliving': {
+        vachakId: 'artofliving',
+        specialty: 'Meditation and Spiritual Guidance',
+        priority: 2
     }
 };
-
-// ============================================
-// OFFICIAL X (TWITTER) ACCOUNTS
-// Only trusted handles are scanned.
-// ============================================
-export const OFFICIAL_X_HANDLES = [
-    { vachakId: 'sadhguru', handle: 'SadhguruJV', expectedUserId: null },
-    { vachakId: 'srisri', handle: 'SriSri', expectedUserId: null },
-    { vachakId: 'gaurgopaldas', handle: 'gaurgopal_d', expectedUserId: null },
-    { vachakId: 'mukundananda', handle: 'Sw_Mukundananda', expectedUserId: null },
-    { vachakId: 'baba_ramdev', handle: 'yogrishiramdev', expectedUserId: null }
-];
-
-// ============================================
-// OFFICIAL FACEBOOK PAGES (username/page-id)
-// Only trusted pages are scanned.
-// ============================================
-export const OFFICIAL_FACEBOOK_PAGES = [
-    { vachakId: 'sadhguru', page: 'sadhguru', expectedPageId: null },
-    { vachakId: 'srisri', page: 'GurudevSriSriRaviShankar', expectedPageId: null },
-    { vachakId: 'jayakishori', page: 'IamJayaKishori', expectedPageId: null },
-    { vachakId: 'bageshwar', page: 'bageshwardham', expectedPageId: null },
-    { vachakId: 'mukundananda', page: 'swamimukundananda', expectedPageId: null }
-];

@@ -45,12 +45,18 @@ function normalizeItem(item) {
     }
     const city = detectCity(text);
     const liveSignal = detectLiveSignal(title, description, item, eventDate);
+    const cleanedTitle = cleanTitle(title);
+    const finalTitle =
+      cleanedTitle && cleanedTitle.length >= 5
+        ? cleanedTitle
+        : buildFallbackTitle(eventType.name, item.vachak?.shortName, eventDate, liveSignal);
 
     return {
       id: `yt-${videoId}`,
       type: eventType.type,
       typeName: eventType.name,
-      title: cleanTitle(title),
+      title: finalTitle,
+      verifiedSource: Boolean(item.vachak?.verified),
       vachakId: item.vachak?.id || 'unknown',
       location: {
         city: city.id,
@@ -200,6 +206,14 @@ function cleanTitle(title) {
     .replace(/\bLIVE\b\s*:?\s*/gi, '')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+function buildFallbackTitle(typeName, vachakShortName, eventDate, liveSignal) {
+  const label = typeName || 'Satsang';
+  const by = vachakShortName ? ` with ${vachakShortName}` : '';
+  const date = eventDate ? ` · ${eventDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}` : '';
+  const live = liveSignal ? 'Live ' : '';
+  return `${live}${label}${by}${date}`.trim();
 }
 
 function detectLiveSignal(title, description, item, eventDate) {

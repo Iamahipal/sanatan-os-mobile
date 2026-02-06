@@ -80,8 +80,6 @@ function validateEvent(event, cfg) {
 
   if (!event.link) warnings.push("missing_link");
   if (event.source === "instagram") warnings.push("instagram_unstable_source");
-  if (event.source === "twitter") warnings.push("twitter_signal_requires_verification");
-  if (event.source === "facebook") warnings.push("facebook_signal_requires_verification");
 
   return { errors, warnings };
 }
@@ -95,8 +93,6 @@ function scoreEvent(event, validation) {
   if (event.source === "youtube") score += 6;
   if (event.source === "website") score += 4;
   if (event.source === "instagram") score -= 8;
-  if (event.source === "twitter") score -= 5;
-  if (event.source === "facebook") score -= 4;
 
   if (event.features?.isLive) score += 4;
   if (event.features?.hasLiveStream) score += 3;
@@ -108,10 +104,23 @@ function scoreEvent(event, validation) {
 function dedupeEvents(events) {
   const seen = new Set();
   const out = [];
+  const secondaryIndex = new Map();
 
   for (const event of events) {
     const key = dedupeKey(event);
     if (seen.has(key)) continue;
+    const secondary = secondaryKey(event);
+    if (secondary) {
+      if (secondaryIndex.has(secondary)) {
+        const idx = secondaryIndex.get(secondary);
+        const existing = out[idx];
+        if (sourcePriority(event) > sourcePriority(existing)) {
+          out[idx] = event;
+        }
+        continue;
+      }
+      secondaryIndex.set(secondary, out.length);
+    }
     seen.add(key);
     out.push(event);
   }
@@ -129,6 +138,32 @@ function dedupeKey(event) {
     return `yt:${extractVideoId(link)}`;
   }
   return `${vachak}|${title}|${date}`;
+}
+
+function secondaryKey(event) {
+  const title = normalizeTitle(event.title);
+  const date = event.dates?.start || "";
+  const vachak = event.vachakId || "";
+  if (!title || !date || !vachak) return "";
+  return `${vachak}|${title}|${date}`;
+}
+
+function normalizeTitle(title) {
+  return String(title || "")
+    .toLowerCase()
+    .replace(/\blive\b/g, "")
+    .replace(/[^\w\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function sourcePriority(event) {
+  const source = event?.source || "";
+  if (source === "website") return 4;
+  if (source === "manual") return 3;
+  if (source === "youtube") return 2;
+  if (source === "instagram") return 1;
+  return 0;
 }
 
 function extractVideoId(link) {

@@ -6,6 +6,7 @@
  */
 
 import * as cheerio from 'cheerio';
+import { readFile } from 'node:fs/promises';
 import { VACHAKS, WEBSITE_CONFIGS } from '../config.js';
 
 /**
@@ -14,10 +15,12 @@ import { VACHAKS, WEBSITE_CONFIGS } from '../config.js';
  */
 export async function fetchAllWebsites() {
     const allEvents = [];
+    const extraConfigs = await loadExtraWebsiteConfigs();
+    const configs = [...WEBSITE_CONFIGS, ...extraConfigs];
 
     console.log('🌐 Fetching Official Websites...\n');
 
-    for (const config of WEBSITE_CONFIGS) {
+    for (const config of configs) {
         try {
             const events = await fetchWebsite(config);
             allEvents.push(...events);
@@ -36,18 +39,25 @@ export async function fetchAllWebsites() {
  * @param {Object} config - Website configuration
  */
 async function fetchWebsite(config) {
-    const response = await fetch(config.url, {
-        headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-        }
-    });
+    const urls = [config.url, ...(config.fallbackUrls || [])].filter(Boolean);
+    let lastError = null;
 
-    if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
+    for (const url of urls) {
+        try {
+            const response = await fetchWithRetry(url, {
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                }
+            });
+
+            const html = await response.text();
+            return config.parser(html, { ...config, url });
+        } catch (error) {
+            lastError = error;
+        }
     }
 
-    const html = await response.text();
-    return config.parser(html, config);
+    throw lastError || new Error('HTTP request failed');
 }
 
 // ============================================
@@ -75,6 +85,7 @@ export function parseJadkhor(html, config) {
                     type: detectEventType(title),
                     typeName: 'श्रीमद्भागवत कथा',
                     title: title,
+                    verifiedSource: true,
                     vachakId: 'rajendradas',
                     location: {
                         city: extractCity(location) || 'vrindavan',
@@ -123,6 +134,7 @@ export function parseMorariBapu(html, config) {
                     type: 'ramkatha',
                     typeName: 'राम कथा',
                     title: 'Ram Katha Manas',
+                    verifiedSource: true,
                     vachakId: 'morari',
                     location: {
                         city: 'talgajarda',
@@ -172,6 +184,7 @@ export function parseGenericSite(html, config) {
                 type: 'bhagwat',
                 typeName: 'सत्संग',
                 title: text.substring(0, 50).trim(),
+                verifiedSource: true,
                 vachakId: config.vachakId || 'unknown',
                 location: {
                     city: 'online',
@@ -248,4 +261,63 @@ function parseDateFromText(text) {
         duration: 1,
         timing: text || 'TBD'
     };
+}
+
+async function fetchWithRetry(url, options) {
+    const maxAttempts = 3;
+    const retryableStatuses = new Set([429, 500, 502, 503, 504]);
+    let lastError = null;
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+        try {
+            const response = await fetch(url, {
+                ...options,
+                signal: AbortSignal.timeout(15000)
+            });
+
+            if (response.ok) return response;
+
+            if (!retryableStatuses.has(response.status)) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            lastError = new Error(`HTTP ${response.status}`);
+        } catch (error) {
+            lastError = error;
+        }
+
+        if (attempt < maxAttempts) {
+            const delayMs = 500 * Math.pow(2, attempt - 1);
+            await sleep(delayMs);
+        }
+    }
+
+    throw lastError || new Error('HTTP request failed');
+}
+
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function loadExtraWebsiteConfigs() {
+    try {
+        const url = new URL('../data/websites.json', import.meta.url);
+        const raw = JSON.parse(await readFile(url, 'utf-8'));
+        const sites = Array.isArray(raw?.sites) ? raw.sites : Array.isArray(raw) ? raw : [];
+        return sites
+            .filter((site) => site && site.url)
+            .map((site, index) => {
+                const name = site.name || new URL(site.url).hostname;
+                return {
+                    id: site.id || `extra-${index + 1}`,
+                    name,
+                    url: site.url,
+                    fallbackUrls: Array.isArray(site.fallbackUrls) ? site.fallbackUrls : [],
+                    vachakId: site.vachakId || 'unknown',
+                    parser: parseGenericSite
+                };
+            });
+    } catch {
+        return [];
+    }
 }

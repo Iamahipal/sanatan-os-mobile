@@ -3,7 +3,7 @@
     "id": "rajendradas",
     "name": "Swami Shri Rajendradas Ji Maharaj",
     "shortName": "Rajendradas Ji",
-    "specialty": "श्रीमद्भागवत कथा",
+    "specialty": "Bhagwat Katha",
     "emoji": "🙏",
     "verified": true,
     "socials": {
@@ -14,7 +14,7 @@
     "id": "pundrik",
     "name": "Shri Pundrik Goswami Ji Maharaj",
     "shortName": "Pundrik Goswami",
-    "specialty": "श्रीमद्भागवत कथा",
+    "specialty": "Bhagwat Katha",
     "emoji": "📿",
     "verified": true,
     "socials": {
@@ -25,7 +25,7 @@
     "id": "morari",
     "name": "Morari Bapu",
     "shortName": "Morari Bapu",
-    "specialty": "राम कथा",
+    "specialty": "Ram Katha",
     "emoji": "🙏",
     "verified": true,
     "socials": {
@@ -36,7 +36,7 @@
     "id": "jayakishori",
     "name": "Jaya Kishori",
     "shortName": "Jaya Kishori",
-    "specialty": "भजन & कथा",
+    "specialty": "Bhajan and Katha",
     "emoji": "🎤",
     "verified": true,
     "socials": {
@@ -47,7 +47,7 @@
     "id": "premanand",
     "name": "Pujya Premanand Ji Maharaj",
     "shortName": "Premanand Ji",
-    "specialty": "श्रीमद्भागवत कथा",
+    "specialty": "Bhagwat Katha",
     "emoji": "🙏",
     "verified": true,
     "socials": {
@@ -58,7 +58,7 @@
     "id": "bageshwar",
     "name": "Bageshwar Dham Sarkar",
     "shortName": "Bageshwar Dham",
-    "specialty": "दरबार",
+    "specialty": "Darbar",
     "emoji": "✨",
     "verified": true,
     "socials": {
@@ -66,10 +66,10 @@
     }
   },
   {
-    "id": "pradeep",
+    "id": "pradeepmishra",
     "name": "Pandit Pradeep Mishra",
     "shortName": "Pradeep Mishra Ji",
-    "specialty": "शिव महापुराण",
+    "specialty": "Shiv Mahapuran",
     "emoji": "🙏",
     "verified": true,
     "socials": {
@@ -80,11 +80,187 @@
     "id": "indresh",
     "name": "Acharya Indresh Upadhyay",
     "shortName": "Indresh Upadhyay",
-    "specialty": "श्रीमद्भागवत कथा",
+    "specialty": "Bhagwat Katha",
     "emoji": "📿",
     "verified": true,
     "socials": {
       "youtube": "https://www.youtube.com/@BhaktiPath"
+    }
+  },
+  {
+    "id": "devkinandan",
+    "name": "Pujya Devkinandan Thakur Ji",
+    "shortName": "Devkinandan Ji",
+    "specialty": "Bhagwat Katha",
+    "emoji": "🙏",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@DevkinandanThakurJi"
+    }
+  },
+  {
+    "id": "aniruddhacharya",
+    "name": "Pujya Shri Aniruddhacharya Ji Maharaj",
+    "shortName": "Aniruddhacharya Ji",
+    "specialty": "Bhagwat Katha",
+    "emoji": "🎤",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@Aniruddhacharyaji"
+    }
+  },
+  {
+    "id": "rajanji",
+    "name": "Pujya Rajan Ji Maharaj",
+    "shortName": "Rajan Ji",
+    "specialty": "Ram Katha",
+    "emoji": "🎶",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@pujyarajanjee"
+    }
+  },
+  {
+    "id": "vijaykaushal",
+    "name": "Swami Vijay Kaushal Ji Maharaj",
+    "shortName": "Vijay Kaushal Ji",
+    "specialty": "Bhagwat Katha",
+    "emoji": "🙏",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@VIJAYKAUSHALJIMAHARAJ"
+    }
+  },
+  {
+    "id": "prembhushan",
+    "name": "Swami Prembhushan Ji Maharaj",
+    "shortName": "Prembhushan Ji",
+    "specialty": "Ram Katha",
+    "emoji": "🎤",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@PujyaPrembhushanjiMaharaj"
+    }
+  },
+  {
+    "id": "rameshoza",
+    "name": "Bhaishree Rameshbhai Oza",
+    "shortName": "Ramesh Oza",
+    "specialty": "Bhagwat Katha",
+    "emoji": "📿",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@PujyaBhaishriRameshbhaiOza"
+    }
+  },
+  {
+    "id": "srisri",
+    "name": "Gurudev Sri Sri Ravi Shankar",
+    "shortName": "Sri Sri",
+    "specialty": "Satsang and Spiritual Talks",
+    "emoji": "✨",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@SriSriRaviShankar"
+    }
+  },
+  {
+    "id": "sadhguru",
+    "name": "Sadhguru Jaggi Vasudev",
+    "shortName": "Sadhguru",
+    "specialty": "Spiritual Talks",
+    "emoji": "🧘",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@sadhguru"
+    }
+  },
+  {
+    "id": "mukundananda",
+    "name": "Swami Mukundananda",
+    "shortName": "Mukundananda Ji",
+    "specialty": "Gita and Bhakti",
+    "emoji": "🙏",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@SwamiMukundananda"
+    }
+  },
+  {
+    "id": "radhanath_swami",
+    "name": "Radhanath Swami",
+    "shortName": "Radhanath Swami",
+    "specialty": "Bhakti and Satsang",
+    "emoji": "🙏",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@radhanathswami"
+    }
+  },
+  {
+    "id": "gaurgopaldas",
+    "name": "Gaur Gopal Das",
+    "shortName": "Gaur Gopal Das",
+    "specialty": "Practical Spiritual Guidance",
+    "emoji": "🎤",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@gaurgopaldas"
+    }
+  },
+  {
+    "id": "gaurangdas",
+    "name": "Gauranga Das Prabhu",
+    "shortName": "Gauranga Das",
+    "specialty": "Bhagavad Gita Talks",
+    "emoji": "📿",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@gaurangadas"
+    }
+  },
+  {
+    "id": "chinmaya",
+    "name": "Chinmaya Mission",
+    "shortName": "Chinmaya Mission",
+    "specialty": "Vedanta Talks",
+    "emoji": "📿",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@ChinmayaChannel"
+    }
+  },
+  {
+    "id": "amma",
+    "name": "Mata Amritanandamayi (Amma)",
+    "shortName": "Amma",
+    "specialty": "Satsang and Spiritual Teachings",
+    "emoji": "🙏",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@amma"
+    }
+  },
+  {
+    "id": "baps_betterliving",
+    "name": "BAPS Better Living",
+    "shortName": "BAPS Better Living",
+    "specialty": "Spiritual Discourses",
+    "emoji": "🕉️",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@BAPSBetterLiving"
+    }
+  },
+  {
+    "id": "artofliving",
+    "name": "The Art of Living",
+    "shortName": "Art of Living",
+    "specialty": "Meditation and Spiritual Guidance",
+    "emoji": "🕊️",
+    "verified": true,
+    "socials": {
+      "youtube": "https://www.youtube.com/@artofliving-official"
     }
   }
 ]

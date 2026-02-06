@@ -1,0 +1,33 @@
+{
+    "meta": {
+        "lastUpdated": "2026-02-06",
+        "note": "Add official event pages here. These are parsed with a generic scraper."
+    },
+    "sites": [
+        {
+            "id": "mukundananda-events",
+            "name": "Swami Mukundananda Events",
+            "url": "https://www.swamimukundananda.org/events/"
+        },
+        {
+            "id": "jkyog-events",
+            "name": "JKYog Events",
+            "url": "https://jkyog.in/en/events/"
+        },
+        {
+            "id": "amma-india-tours",
+            "name": "Amma Indian Tours",
+            "url": "https://amma.org/about-amma/ammas-tours/ammas-indian-tours/"
+        },
+        {
+            "id": "aniruddhacharya",
+            "name": "Aniruddhacharya Official",
+            "url": "https://en.aniruddhacharya.com/"
+        },
+        {
+            "id": "chinmaya-events",
+            "name": "Chinmaya Mission Events",
+            "url": "https://cmw.chinmaya75.org/"
+        }
+    ]
+}

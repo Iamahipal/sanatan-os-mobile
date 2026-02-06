@@ -20,9 +20,10 @@ const typeLabelMap = {
 };
 
 export async function loadAppData() {
-  const [eventsRaw, speakersRaw] = await Promise.all([
+  const [eventsRaw, speakersRaw, reportRaw] = await Promise.all([
     fetch("./js/data/scraped_events.json").then((r) => r.json()).catch(() => []),
     fetch("./js/data/vachaks.json").then((r) => r.json()).catch(() => []),
+    fetch("./js/data/scrape_report.json").then((r) => r.json()).catch(() => ({})),
   ]);
 
   const speakers = speakersRaw.map((speaker) => ({
@@ -57,14 +58,31 @@ export async function loadAppData() {
       hasLiveStream: Boolean(event?.features?.hasLiveStream),
       thumbnail: event.thumbnail || "",
       link: event.link || "",
+      source: event.source || "unknown",
+      updatedAt: event.updatedAt || "",
+      verifiedSource: Boolean(event.verifiedSource),
       speakerId: event?.vachakId || "",
       speakerName: speaker?.shortName || "Unknown Speaker",
       speakerBio: speaker?.bio || "",
+      speakerImage: speaker?.image || "assets/images/placeholder-vachak.png",
       dateNum: safeDateNumber(start),
     };
   });
 
-  return { events, speakers };
+  const reportUpdatedAt = reportRaw?.generatedAt || "";
+  const lastUpdated = reportUpdatedAt || newestUpdatedAt(events);
+
+  return { events, speakers, lastUpdated };
+}
+
+function newestUpdatedAt(events) {
+  let max = 0;
+  for (const event of events) {
+    if (!event?.updatedAt) continue;
+    const ts = new Date(event.updatedAt).getTime();
+    if (Number.isFinite(ts) && ts > max) max = ts;
+  }
+  return max ? new Date(max).toISOString() : "";
 }
 
 function isDateLive(start, end) {

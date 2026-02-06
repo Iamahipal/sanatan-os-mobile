@@ -1,26 +1,35 @@
 {
-  "generatedAt": "2026-02-05T08:01:40.430Z",
+  "generatedAt": "2026-02-06T20:18:04.540Z",
   "input": {
-    "source": "all",
-    "minConfidence": 75,
+    "source": "free",
+    "minConfidence": 65,
     "dryRun": false,
-    "rawEvents": 27,
-    "afterDedupe": 27
+    "rawEvents": 49,
+    "afterDedupe": 48
   },
   "output": {
-    "approved": 27,
+    "approved": 48,
     "review": 0
   },
   "stats": {
     "bySource": {
-      "youtube": 27
+      "youtube": 42,
+      "manual": 6
     },
     "byVachak": {
-      "rajendradas": 1,
-      "morari": 10,
+      "morari": 12,
+      "rajendradas": 2,
       "premanand": 1,
-      "indresh": 15
+      "bageshwar": 4,
+      "indresh": 15,
+      "aniruddhacharya": 3,
+      "prembhushan": 1,
+      "sadhguru": 2,
+      "amma": 5,
+      "jayakishori": 1,
+      "pradeep": 1,
+      "pundrik": 1
     }
   },
-  "durationMs": 24062
+  "durationMs": 61310
 }

@@ -1,18 +1,19 @@
 [
   {
-    "id": "yt-P-DqZsnvL8Y",
-    "type": "ramkatha",
-    "typeName": "Ram Katha",
-    "title": "Day 9 - Manas Shringi Rishi | Ram Katha 970 - Lakhisarai | 11/01/2026",
-    "vachakId": "morari",
+    "id": "yt-s56_hrN_Kdg",
+    "type": "other",
+    "typeName": "Satsang",
+    "title": "Shakthi",
+    "verifiedSource": true,
+    "vachakId": "amma",
     "location": {
       "city": "online",
       "cityName": "Online Streaming",
       "venue": "YouTube Live"
     },
     "dates": {
-      "start": "2026-01-10",
-      "end": "2026-01-10",
+      "start": "2025-11-23",
+      "end": "2025-11-23",
       "duration": 1,
       "timing": "See YouTube details"
     },
@@ -24,13 +25,13 @@
       "hasAccommodation": false
     },
     "source": "youtube",
-    "link": "https://www.youtube.com/watch?v=P-DqZsnvL8Y",
-    "thumbnail": "https://i1.ytimg.com/vi/P-DqZsnvL8Y/hqdefault.jpg",
-    "publishedAt": "2026-01-11T03:58:17.000Z",
+    "link": "https://www.youtube.com/watch?v=s56_hrN_Kdg",
+    "thumbnail": "https://i4.ytimg.com/vi/s56_hrN_Kdg/hqdefault.jpg",
+    "publishedAt": "2025-11-23T05:00:06.000Z",
     "rawSignals": {
-      "usedPublishedDate": false,
+      "usedPublishedDate": true,
       "cityDetected": "online",
-      "typeDetected": "ramkatha",
+      "typeDetected": "other",
       "liveSignal": false
     },
     "quality": {
@@ -39,13 +40,100 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-CTV1aJhKEAk",
+    "type": "bhagwat",
+    "typeName": "Shrimad Bhagwat Katha",
+    "title": "Gita Arati: A Musical Offering to Srimad Bhagavad Gita",
+    "verifiedSource": true,
+    "vachakId": "amma",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2025-11-30",
+      "end": "2025-11-30",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=CTV1aJhKEAk",
+    "thumbnail": "https://i4.ytimg.com/vi/CTV1aJhKEAk/hqdefault.jpg",
+    "publishedAt": "2025-11-30T07:37:07.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "bhagwat",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-4ZKgnlltTjM",
+    "type": "other",
+    "typeName": "Satsang",
+    "title": "Amma alone can teach us total surrender",
+    "verifiedSource": true,
+    "vachakId": "amma",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2025-12-14",
+      "end": "2025-12-14",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=4ZKgnlltTjM",
+    "thumbnail": "https://i1.ytimg.com/vi/4ZKgnlltTjM/hqdefault.jpg",
+    "publishedAt": "2025-12-14T05:00:06.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "other",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-UiCobMmgH7I",
     "type": "ramkatha",
     "typeName": "Ram Katha",
     "title": "Day 1 - Manas Sanatan Dharma | Ram Katha 971 - New Delhi | 17/01/2026",
+    "verifiedSource": true,
     "vachakId": "morari",
     "location": {
       "city": "delhi",
@@ -81,13 +169,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-_Nk96XBnO_k",
     "type": "ramkatha",
     "typeName": "Ram Katha",
     "title": "Day 2 - Manas Sanatan Dharma | Ram Katha 971 - New Delhi | 18/01/2026",
+    "verifiedSource": true,
     "vachakId": "morari",
     "location": {
       "city": "delhi",
@@ -123,13 +212,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-ETMkaPw-d2U",
     "type": "ramkatha",
     "typeName": "Ram Katha",
     "title": "Day 3 - Manas Sanatan Dharma | Ram Katha 971 - New Delhi | 19/01/2026",
+    "verifiedSource": true,
     "vachakId": "morari",
     "location": {
       "city": "delhi",
@@ -165,13 +255,57 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-8mJo9VZZiWQ",
+    "type": "other",
+    "typeName": "Satsang",
+    "title": "Swami Vivekananda",
+    "verifiedSource": true,
+    "vachakId": "amma",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-01-18",
+      "end": "2026-01-18",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=8mJo9VZZiWQ",
+    "thumbnail": "https://i1.ytimg.com/vi/8mJo9VZZiWQ/hqdefault.jpg",
+    "publishedAt": "2026-01-18T05:00:06.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "other",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-XMczPW9b3xQ",
     "type": "ramkatha",
     "typeName": "Ram Katha",
     "title": "Day 4 - Manas Sanatan Dharma | Ram Katha 971 - New Delhi | 20/01/2026",
+    "verifiedSource": true,
     "vachakId": "morari",
     "location": {
       "city": "delhi",
@@ -207,13 +341,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.538Z"
   },
   {
     "id": "yt-VRZB2_3BZxA",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 1 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "delhi",
@@ -224,10 +359,10 @@
       "start": "2026-01-19",
       "end": "2026-01-19",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -241,7 +376,7 @@
       "usedPublishedDate": true,
       "cityDetected": "delhi",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -249,13 +384,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-uugyYK2SAFY",
     "type": "ramkatha",
     "typeName": "Ram Katha",
     "title": "Day 5 - Manas Sanatan Dharma | Ram Katha 971 - New Delhi | 21/01/2026",
+    "verifiedSource": true,
     "vachakId": "morari",
     "location": {
       "city": "delhi",
@@ -291,13 +427,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.538Z"
   },
   {
     "id": "yt-fQjPSKG6N6g",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 2 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "delhi",
@@ -308,10 +445,10 @@
       "start": "2026-01-20",
       "end": "2026-01-20",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -325,7 +462,7 @@
       "usedPublishedDate": true,
       "cityDetected": "delhi",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -333,13 +470,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-24rIiVdEmKU",
     "type": "ramkatha",
     "typeName": "Ram Katha",
     "title": "Day 6 - Manas Sanatan Dharma | Ram Katha 971 - New Delhi | 22/01/2026",
+    "verifiedSource": true,
     "vachakId": "morari",
     "location": {
       "city": "delhi",
@@ -375,13 +513,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.538Z"
   },
   {
     "id": "yt-DjSDH7qFCBk",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 3 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "delhi",
@@ -392,10 +531,10 @@
       "start": "2026-01-21",
       "end": "2026-01-21",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -409,7 +548,7 @@
       "usedPublishedDate": true,
       "cityDetected": "delhi",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -417,13 +556,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-BoluSjM172g",
     "type": "ramkatha",
     "typeName": "Ram Katha",
     "title": "Day 7 - Manas Sanatan Dharma | Ram Katha 971 - New Delhi | 23/01/2026",
+    "verifiedSource": true,
     "vachakId": "morari",
     "location": {
       "city": "delhi",
@@ -459,13 +599,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.538Z"
   },
   {
     "id": "yt-yNshYFWcE7I",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 4 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "delhi",
@@ -476,10 +617,10 @@
       "start": "2026-01-22",
       "end": "2026-01-22",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -493,7 +634,7 @@
       "usedPublishedDate": true,
       "cityDetected": "delhi",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -501,13 +642,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-czXkjTf1sS0",
     "type": "ramkatha",
     "typeName": "Ram Katha",
     "title": "Day 8 - Manas Sanatan Dharma | Ram Katha 971 - New Delhi | 24/01/2026",
+    "verifiedSource": true,
     "vachakId": "morari",
     "location": {
       "city": "delhi",
@@ -543,13 +685,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.538Z"
   },
   {
     "id": "yt-t7yitSbRd80",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 5 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "delhi",
@@ -560,10 +703,10 @@
       "start": "2026-01-23",
       "end": "2026-01-23",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -577,7 +720,7 @@
       "usedPublishedDate": true,
       "cityDetected": "delhi",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -585,13 +728,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-91zHTOw9MGs",
     "type": "ramkatha",
     "typeName": "Ram Katha",
     "title": "Day 9 - Manas Sanatan Dharma | Ram Katha 971 - New Delhi | 25/01/2026",
+    "verifiedSource": true,
     "vachakId": "morari",
     "location": {
       "city": "delhi",
@@ -627,13 +771,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.538Z"
   },
   {
     "id": "yt-hUR4aM6yoOE",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 6 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "delhi",
@@ -644,10 +789,10 @@
       "start": "2026-01-24",
       "end": "2026-01-24",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -661,7 +806,7 @@
       "usedPublishedDate": true,
       "cityDetected": "delhi",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -669,13 +814,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-_tEsbcm9EvA",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 5 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "delhi",
@@ -686,10 +832,10 @@
       "start": "2026-01-24",
       "end": "2026-01-24",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -703,7 +849,7 @@
       "usedPublishedDate": true,
       "cityDetected": "delhi",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -711,13 +857,49 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "evt-jk-vrindavan-jan26",
+    "type": "bhagwat",
+    "typeName": "श्रीमद्भागवत कथा",
+    "title": "Shrimad Bhagwat Katha",
+    "vachakId": "jayakishori",
+    "location": {
+      "city": "vrindavan",
+      "cityName": "Vrindavan, UP",
+      "venue": "ISKCON Temple"
+    },
+    "dates": {
+      "start": "2026-01-26",
+      "end": "2026-02-01",
+      "duration": 7,
+      "timing": "03:00 PM - 07:00 PM"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": true,
+      "hasAccommodation": false
+    },
+    "source": "manual",
+    "link": "https://www.youtube.com/@iamjayakishori",
+    "verifiedSource": true,
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-eDU6slHj2o4",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 8 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "delhi",
@@ -728,10 +910,10 @@
       "start": "2026-01-27",
       "end": "2026-01-27",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -745,7 +927,7 @@
       "usedPublishedDate": true,
       "cityDetected": "delhi",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -753,13 +935,57 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-fwpPnFAtEq4",
+    "type": "kirtan",
+    "typeName": "Kirtan",
+    "title": "Swami Amritaswarupanandapuri Ji's Bhajans |",
+    "verifiedSource": true,
+    "vachakId": "amma",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-01-28",
+      "end": "2026-01-28",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=fwpPnFAtEq4",
+    "thumbnail": "https://i3.ytimg.com/vi/fwpPnFAtEq4/hqdefault.jpg",
+    "publishedAt": "2026-01-28T14:01:37.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "kirtan",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-9eYxaeYdeYM",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 1 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "online",
@@ -770,10 +996,10 @@
       "start": "2026-01-29",
       "end": "2026-01-29",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -787,7 +1013,7 @@
       "usedPublishedDate": true,
       "cityDetected": "online",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -795,13 +1021,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-uNq1_NbGvcY",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 2 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "online",
@@ -812,10 +1039,10 @@
       "start": "2026-01-30",
       "end": "2026-01-30",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -829,7 +1056,7 @@
       "usedPublishedDate": true,
       "cityDetected": "online",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -837,13 +1064,57 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-nNgr7dYlmgQ",
+    "type": "other",
+    "typeName": "Satsang",
+    "title": "Satsang Karo Satsang",
+    "verifiedSource": false,
+    "vachakId": "prembhushan",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-01-30",
+      "end": "2026-01-30",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=nNgr7dYlmgQ",
+    "thumbnail": "https://i3.ytimg.com/vi/nNgr7dYlmgQ/hqdefault.jpg",
+    "publishedAt": "2026-01-30T10:01:51.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "other",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-3V6q-ZOQ29s",
     "type": "kirtan",
     "typeName": "Kirtan",
     "title": "सियपिय प्यारी अवध बिहारी जय जय श्री अग्रदास दुलारी | कीर्तन",
+    "verifiedSource": false,
     "vachakId": "rajendradas",
     "location": {
       "city": "online",
@@ -879,13 +1150,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-QDLXDQohK64",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 4 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "online",
@@ -896,10 +1168,10 @@
       "start": "2026-02-01",
       "end": "2026-02-01",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -913,7 +1185,7 @@
       "usedPublishedDate": true,
       "cityDetected": "online",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -921,13 +1193,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-WjMBxmSbCVg",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 3 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "online",
@@ -938,10 +1211,10 @@
       "start": "2026-02-01",
       "end": "2026-02-01",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -955,7 +1228,7 @@
       "usedPublishedDate": true,
       "cityDetected": "online",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -963,13 +1236,49 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "evt-bd-chhatarpur-feb26",
+    "type": "darbar",
+    "typeName": "दिव्य दरबार",
+    "title": "Divya Darbar - Bageshwar Dham",
+    "vachakId": "bageshwar",
+    "location": {
+      "city": "chhatarpur",
+      "cityName": "Chhatarpur, MP",
+      "venue": "Bageshwar Dham Sarkar"
+    },
+    "dates": {
+      "start": "2026-02-01",
+      "end": "2026-02-07",
+      "duration": 7,
+      "timing": "10:00 AM - 04:00 PM"
+    },
+    "features": {
+      "isLive": true,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": true,
+      "hasAccommodation": true
+    },
+    "source": "manual",
+    "link": "https://www.youtube.com/@BageshwarDhamSarkar",
+    "verifiedSource": true,
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-dRbV7YJ6XVk",
     "type": "kirtan",
     "typeName": "Kirtan",
     "title": "वृंदावन की प्रेममयी लीला",
+    "verifiedSource": false,
     "vachakId": "premanand",
     "location": {
       "city": "vrindavan",
@@ -1005,13 +1314,14 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-QNtAjClruiM",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 5 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "online",
@@ -1022,10 +1332,10 @@
       "start": "2026-02-02",
       "end": "2026-02-02",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -1039,7 +1349,7 @@
       "usedPublishedDate": true,
       "cityDetected": "online",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -1047,13 +1357,57 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-yu0WxGh71P4",
+    "type": "shivpuran",
+    "typeName": "Shiv Mahapuran",
+    "title": "Why Are Serpents Dear to Shiva?",
+    "verifiedSource": true,
+    "vachakId": "sadhguru",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-02-02",
+      "end": "2026-02-02",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=yu0WxGh71P4",
+    "thumbnail": "https://i2.ytimg.com/vi/yu0WxGh71P4/hqdefault.jpg",
+    "publishedAt": "2026-02-02T07:35:17.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "shivpuran",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   },
   {
     "id": "yt-AAm3bNLN2vI",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 6 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "online",
@@ -1064,10 +1418,10 @@
       "start": "2026-02-03",
       "end": "2026-02-03",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -1081,7 +1435,7 @@
       "usedPublishedDate": true,
       "cityDetected": "online",
       "typeDetected": "bhagwat",
-      "liveSignal": true
+      "liveSignal": false
     },
     "quality": {
       "isValid": true,
@@ -1089,13 +1443,100 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-JGnurfwsHCU",
+    "type": "shivpuran",
+    "typeName": "Shiv Mahapuran",
+    "title": "Why Shiva Wore the Moon",
+    "verifiedSource": true,
+    "vachakId": "sadhguru",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-02-03",
+      "end": "2026-02-03",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=JGnurfwsHCU",
+    "thumbnail": "https://i3.ytimg.com/vi/JGnurfwsHCU/hqdefault.jpg",
+    "publishedAt": "2026-02-03T11:38:54.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "shivpuran",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-D0m2Qt81XDo",
+    "type": "ramkatha",
+    "typeName": "Ram Katha",
+    "title": "Day 1 - Manas Krishna Avatar | Ram Katha 972 - Dwarka | 05/02/2026",
+    "verifiedSource": true,
+    "vachakId": "morari",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-02-04",
+      "end": "2026-02-04",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=D0m2Qt81XDo",
+    "thumbnail": "https://i1.ytimg.com/vi/D0m2Qt81XDo/hqdefault.jpg",
+    "publishedAt": "2026-02-05T14:26:17.000Z",
+    "rawSignals": {
+      "usedPublishedDate": false,
+      "cityDetected": "online",
+      "typeDetected": "ramkatha",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.538Z"
   },
   {
     "id": "yt-HyYuUPWcosM",
     "type": "bhagwat",
     "typeName": "Shrimad Bhagwat Katha",
     "title": "Day - 7 | Shrimad Bhagwat Katha | Pujya Shri Thakur Ji Maharaj",
+    "verifiedSource": false,
     "vachakId": "indresh",
     "location": {
       "city": "online",
@@ -1106,10 +1547,10 @@
       "start": "2026-02-04",
       "end": "2026-02-04",
       "duration": 1,
-      "timing": "Live / Scheduled Live"
+      "timing": "See YouTube details"
     },
     "features": {
-      "isLive": true,
+      "isLive": false,
       "isFree": true,
       "hasLiveStream": true,
       "hasPrasad": false,
@@ -1123,6 +1564,342 @@
       "usedPublishedDate": true,
       "cityDetected": "online",
       "typeDetected": "bhagwat",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-BPvCcZPEmms",
+    "type": "ramkatha",
+    "typeName": "Ram Katha",
+    "title": "Day 2 - Manas Krishna Avatar | Ram Katha 972 - Dwarka | 06/02/2026",
+    "verifiedSource": true,
+    "vachakId": "morari",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-02-05",
+      "end": "2026-02-05",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=BPvCcZPEmms",
+    "thumbnail": "https://i3.ytimg.com/vi/BPvCcZPEmms/hqdefault.jpg",
+    "publishedAt": "2026-02-06T08:47:55.000Z",
+    "rawSignals": {
+      "usedPublishedDate": false,
+      "cityDetected": "online",
+      "typeDetected": "ramkatha",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.538Z"
+  },
+  {
+    "id": "yt-8eYJQpoHSVo",
+    "type": "shivpuran",
+    "typeName": "Shiv Mahapuran",
+    "title": "सीताराम कहने का अद्भुत फल | गुरुदेव का ज्ञान",
+    "verifiedSource": true,
+    "vachakId": "bageshwar",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-02-05",
+      "end": "2026-02-05",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=8eYJQpoHSVo",
+    "thumbnail": "https://i1.ytimg.com/vi/8eYJQpoHSVo/hqdefault.jpg",
+    "publishedAt": "2026-02-05T16:18:06.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "shivpuran",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-VEQbJU9_qRw",
+    "type": "bhagwat",
+    "typeName": "Shrimad Bhagwat Katha",
+    "title": "Shrimad Bhagwat Katha with Aniruddhacharya Ji · Feb 5, 2026",
+    "verifiedSource": false,
+    "vachakId": "aniruddhacharya",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-02-05",
+      "end": "2026-02-05",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=VEQbJU9_qRw",
+    "thumbnail": "https://i3.ytimg.com/vi/VEQbJU9_qRw/hqdefault.jpg",
+    "publishedAt": "2026-02-05T13:06:36.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "bhagwat",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "evt-mb-chitrakoot-feb26",
+    "type": "ramkatha",
+    "typeName": "राम कथा",
+    "title": "Ram Katha Manas",
+    "vachakId": "morari",
+    "location": {
+      "city": "chitrakoot",
+      "cityName": "Chitrakoot, MP",
+      "venue": "Chitrakut Dham Talgajarda"
+    },
+    "dates": {
+      "start": "2026-02-05",
+      "end": "2026-02-13",
+      "duration": 9,
+      "timing": "09:30 AM - 12:30 PM"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": true,
+      "hasAccommodation": true
+    },
+    "source": "manual",
+    "link": "https://chitrakutdhamtalgajarda.org",
+    "verifiedSource": true,
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-bDRUnoRo8K4",
+    "type": "shivpuran",
+    "typeName": "Shiv Mahapuran",
+    "title": "गुरु के वचनों पर भरोसा है तो भगवान को आना पड़ेगा | Bageshwar Dham Sarkar",
+    "verifiedSource": true,
+    "vachakId": "bageshwar",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-02-06",
+      "end": "2026-02-06",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=bDRUnoRo8K4",
+    "thumbnail": "https://i3.ytimg.com/vi/bDRUnoRo8K4/hqdefault.jpg",
+    "publishedAt": "2026-02-06T13:28:57.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "shivpuran",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-xEBHSGGlOf4",
+    "type": "bhagwat",
+    "typeName": "Shrimad Bhagwat Katha",
+    "title": "आज से पूज्य सरकार सुनाएंगे श्रीमद्भागवत कथा, देशभर से आएंगे अतिथि",
+    "verifiedSource": true,
+    "vachakId": "bageshwar",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-02-06",
+      "end": "2026-02-06",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=xEBHSGGlOf4",
+    "thumbnail": "https://i1.ytimg.com/vi/xEBHSGGlOf4/hqdefault.jpg",
+    "publishedAt": "2026-02-06T09:44:57.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "bhagwat",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-bLHcnwcJlL8",
+    "type": "kirtan",
+    "typeName": "Kirtan",
+    "title": "महाराज जी के बिहार आगमन पर भोजपुरी में भजन 👏 #aniruddhacharyajimaharaj",
+    "verifiedSource": false,
+    "vachakId": "aniruddhacharya",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-02-06",
+      "end": "2026-02-06",
+      "duration": 1,
+      "timing": "See YouTube details"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=bLHcnwcJlL8",
+    "thumbnail": "https://i3.ytimg.com/vi/bLHcnwcJlL8/hqdefault.jpg",
+    "publishedAt": "2026-02-06T12:50:22.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "kirtan",
+      "liveSignal": false
+    },
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "yt-aesA6pgJkMQ",
+    "type": "bhagwat",
+    "typeName": "Shrimad Bhagwat Katha",
+    "title": "Live Shrimad Bhagwat Katha with Aniruddhacharya Ji · Feb 6, 2026",
+    "verifiedSource": false,
+    "vachakId": "aniruddhacharya",
+    "location": {
+      "city": "online",
+      "cityName": "Online Streaming",
+      "venue": "YouTube Live"
+    },
+    "dates": {
+      "start": "2026-02-06",
+      "end": "2026-02-06",
+      "duration": 1,
+      "timing": "Live / Scheduled Live"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "youtube",
+    "link": "https://www.youtube.com/watch?v=aesA6pgJkMQ",
+    "thumbnail": "https://i2.ytimg.com/vi/aesA6pgJkMQ/hqdefault.jpg",
+    "publishedAt": "2026-02-06T12:49:51.000Z",
+    "rawSignals": {
+      "usedPublishedDate": true,
+      "cityDetected": "online",
+      "typeDetected": "bhagwat",
       "liveSignal": true
     },
     "quality": {
@@ -1131,6 +1908,111 @@
       "errors": [],
       "warnings": []
     },
-    "updatedAt": "2026-02-05T08:01:40.429Z"
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "evt-pm-ujjain-feb26",
+    "type": "shivpuran",
+    "typeName": "शिव महापुराण",
+    "title": "Shiv Mahapuran Katha",
+    "vachakId": "pradeep",
+    "location": {
+      "city": "ujjain",
+      "cityName": "Ujjain, MP",
+      "venue": "Mahakaleshwar Temple Complex"
+    },
+    "dates": {
+      "start": "2026-02-10",
+      "end": "2026-02-17",
+      "duration": 7,
+      "timing": "04:00 PM - 08:00 PM"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": false,
+      "hasAccommodation": false
+    },
+    "source": "manual",
+    "link": "https://www.youtube.com/@PanditPradeepMishra",
+    "verifiedSource": true,
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "evt-pg-vrindavan-feb26",
+    "type": "bhagwat",
+    "typeName": "श्रीमद्भागवत कथा",
+    "title": "Shrimad Bhagwat Saptah",
+    "vachakId": "pundrik",
+    "location": {
+      "city": "vrindavan",
+      "cityName": "Vrindavan, UP",
+      "venue": "Shri Radha Ras Bihari Temple"
+    },
+    "dates": {
+      "start": "2026-02-15",
+      "end": "2026-02-21",
+      "duration": 7,
+      "timing": "02:00 PM - 06:00 PM"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": true,
+      "hasAccommodation": false
+    },
+    "source": "manual",
+    "link": "https://www.youtube.com/@PundrikGoswami",
+    "verifiedSource": true,
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
+  },
+  {
+    "id": "evt-rd-mathura-feb26",
+    "type": "bhagwat",
+    "typeName": "श्रीमद्भागवत कथा",
+    "title": "Bhaktimal Katha",
+    "vachakId": "rajendradas",
+    "location": {
+      "city": "mathura",
+      "cityName": "Mathura, UP",
+      "venue": "Jadkhor Gaudham"
+    },
+    "dates": {
+      "start": "2026-02-20",
+      "end": "2026-02-27",
+      "duration": 7,
+      "timing": "10:00 AM - 01:00 PM"
+    },
+    "features": {
+      "isLive": false,
+      "isFree": true,
+      "hasLiveStream": true,
+      "hasPrasad": true,
+      "hasAccommodation": true
+    },
+    "source": "manual",
+    "link": "https://jadkhor.org",
+    "verifiedSource": true,
+    "quality": {
+      "isValid": true,
+      "confidence": 100,
+      "errors": [],
+      "warnings": []
+    },
+    "updatedAt": "2026-02-06T20:18:04.539Z"
   }
 ]

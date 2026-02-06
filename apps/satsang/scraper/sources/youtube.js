@@ -18,6 +18,7 @@ const parser = new Parser({
 });
 const FEED_TIMEOUT_MS = 25000;
 const HANDLE_TIMEOUT_MS = 8000;
+const VERIFY_TIMEOUT_MS = 8000;
 
 const VERIFIED_CHANNEL_IDS = {
   rajendradas: 'UCXly_daYmaRFjYFIb_lfsiA',
@@ -31,6 +32,7 @@ const VERIFIED_CHANNEL_IDS = {
 };
 
 const resolvedCache = new Map();
+const verifiedCache = new Map();
 
 export async function fetchAllChannels() {
   const allItems = [];
@@ -59,6 +61,7 @@ export async function fetchAllChannels() {
 
 export async function fetchChannel(vachak) {
   const candidates = await resolveChannelCandidates(vachak);
+  const verified = await resolveVerification(vachak);
   const fallbackFeedUrls = vachak.handle
     ? [
         `https://www.youtube.com/feeds/videos.xml?user=${encodeURIComponent(vachak.handle)}`,
@@ -81,6 +84,7 @@ export async function fetchChannel(vachak) {
           shortName: vachak.shortName,
           specialty: vachak.specialty,
           emoji: vachak.emoji,
+          verified,
         },
       }));
     } catch (err) {
@@ -99,6 +103,7 @@ export async function fetchChannel(vachak) {
           shortName: vachak.shortName,
           specialty: vachak.specialty,
           emoji: vachak.emoji,
+          verified,
         },
       }));
     } catch (err) {
@@ -165,6 +170,55 @@ async function resolveFromHandle(handle) {
   }
 
   return null;
+}
+
+async function resolveVerification(vachak) {
+  if (verifiedCache.has(vachak.id)) {
+    return verifiedCache.get(vachak.id);
+  }
+
+  if (!vachak?.handle || !vachak?.officialSite) {
+    verifiedCache.set(vachak.id, false);
+    return false;
+  }
+
+  const host = safeHostname(vachak.officialSite);
+  if (!host) {
+    verifiedCache.set(vachak.id, false);
+    return false;
+  }
+
+  try {
+    const url = `https://www.youtube.com/@${vachak.handle}/about`;
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0',
+        Accept: 'text/html',
+      },
+      signal: AbortSignal.timeout(VERIFY_TIMEOUT_MS),
+    });
+
+    if (!response.ok) {
+      verifiedCache.set(vachak.id, false);
+      return false;
+    }
+
+    const html = (await response.text()).toLowerCase();
+    const ok = html.includes(host.toLowerCase());
+    verifiedCache.set(vachak.id, ok);
+    return ok;
+  } catch {
+    verifiedCache.set(vachak.id, false);
+    return false;
+  }
+}
+
+function safeHostname(value) {
+  try {
+    return new URL(value).hostname;
+  } catch {
+    return "";
+  }
 }
 
 async function runWithConcurrency(items, limit, worker) {
