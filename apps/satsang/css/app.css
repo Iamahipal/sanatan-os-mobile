@@ -112,6 +112,10 @@ h1 {
   gap: 8px;
 }
 
+#app:not([data-view="discover"]) .filters {
+  display: none;
+}
+
 .search {
   position: relative;
 }

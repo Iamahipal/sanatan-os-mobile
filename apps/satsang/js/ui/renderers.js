@@ -1,6 +1,8 @@
 import { escapeHtml, formatDate, formatDateRange } from "../core/utils.js";
 
 export function renderApp(state, refs) {
+  const appRoot = document.getElementById("app");
+  if (appRoot) appRoot.setAttribute("data-view", state.view);
   renderControls(state, refs);
   if (refs.filters) {
     const showFilters = state.view === "discover";
