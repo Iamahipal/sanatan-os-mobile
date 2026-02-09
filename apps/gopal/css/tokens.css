@@ -1,0 +1,25 @@
+﻿:root {
+  --bg1: #fff6e5;
+  --bg2: #e7f6ff;
+  --ink: #1b1b1f;
+  --muted: #5a5a66;
+  --card: rgba(255, 255, 255, 0.78);
+  --stroke: rgba(27, 27, 31, 0.12);
+  --brand: #1a4aa8;
+  --good: #1b7b3a;
+  --warn: #b15c00;
+  --shadow: 0 14px 34px rgba(0,0,0,0.12);
+
+  --r-xl: 22px;
+  --r-lg: 18px;
+  --r-md: 14px;
+
+  --pad: 16px;
+  --tap: 48px;
+
+  --font: ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
+}

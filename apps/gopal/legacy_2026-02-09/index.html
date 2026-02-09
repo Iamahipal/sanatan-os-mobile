@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bal Krishna | Daily Habits</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <h1>Bal Krishna</h1>
+        <div class="streak"><i class="fa-solid fa-fire"></i> <span id="streak">0</span></div>
+    </header>
+
+    <!-- Main Scene -->
+    <main class="scene">
+        <!-- Krishna Character (Direct IMG tag for reliability) -->
+        <img id="krishna" src="assets/krishna.png" alt="Bal Krishna" class="krishna-img">
+
+        <!-- Big "Start" Button -->
+        <button id="start-btn" class="start-btn">
+            <i class="fa-solid fa-sun"></i>
+            <span>Wake Up!</span>
+        </button>
+    </main>
+
+    <!-- Routine Tabs -->
+    <nav class="tabs">
+        <button class="tab active" data-routine="morning"><i class="fa-solid fa-sun"></i> Morning</button>
+        <button class="tab" data-routine="meal"><i class="fa-solid fa-bowl-food"></i> Meal</button>
+        <button class="tab" data-routine="night"><i class="fa-solid fa-moon"></i> Night</button>
+    </nav>
+
+    <!-- Timer Overlay -->
+    <div id="overlay" class="overlay hidden">
+        <div class="overlay-box">
+            <h2 id="action-title">Time to Brush!</h2>
+            <div class="timer-circle">
+                <span id="timer">00:10</span>
+            </div>
+            <p class="hint">Do it with Krishna!</p>
+            <button id="done-btn" class="done-btn">I Did It! ✓</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
