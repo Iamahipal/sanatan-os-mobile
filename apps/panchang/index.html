@@ -4,50 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>पञ्चाङ्ग - Vedic Calendar</title>
-    <meta name="description" content="Accurate Vedic Panchang with Drikpanchang-level precision for tithi, nakshatra, yoga, karana, and muhurat calculations.">
+    <title>पञ्चाङ्ग - Daily Guide</title>
+    <meta name="description" content="Your daily Hindu calendar guide. Know the right time for the right action.">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
     <div class="app-container">
-        <!-- Header -->
+        <!-- Minimal Header -->
         <header class="app-header">
-            <a href="../../index.html" class="header-btn back-btn" aria-label="Back">
+            <a href="../../index.html" class="back-btn" aria-label="Back">
                 <i data-lucide="chevron-left"></i>
             </a>
-            <div class="header-center">
-                <h1 class="header-title">पञ्चाङ्ग</h1>
-                <span class="header-subtitle">Vedic Calendar</span>
+            <div class="location-pill" id="location-pill">
+                <i data-lucide="map-pin"></i>
+                <span id="location-name">Delhi</span>
             </div>
-            <button id="settings-btn" class="header-btn" aria-label="Settings">
+            <button id="settings-btn" class="icon-btn" aria-label="Settings">
                 <i data-lucide="settings"></i>
             </button>
         </header>
 
-        <!-- Date Navigator -->
-        <div class="date-navigator">
-            <button id="prev-day" class="nav-btn"><i data-lucide="chevron-left"></i></button>
-            <div class="date-display" id="date-display">
-                <span id="gregorian-date" class="gregorian-date">9 February 2026</span>
+        <!-- Date Selector -->
+        <div class="date-bar">
+            <button id="prev-day" class="date-nav"><i data-lucide="chevron-left"></i></button>
+            <div class="date-center" id="date-center">
                 <span id="hindu-date" class="hindu-date">माघ कृष्ण द्वादशी</span>
+                <span id="gregorian-date" class="gregorian-date">9 Feb 2026</span>
             </div>
-            <button id="next-day" class="nav-btn"><i data-lucide="chevron-right"></i></button>
+            <button id="next-day" class="date-nav"><i data-lucide="chevron-right"></i></button>
         </div>
 
-        <!-- Location Bar -->
-        <div class="location-bar" id="location-bar">
-            <i data-lucide="map-pin"></i>
-            <span id="location-name">New Delhi</span>
-            <button id="location-btn" class="change-btn">Change</button>
-        </div>
-
-        <!-- Hero Section - Moon & Samvatsara -->
+        <!-- SECTION 1: Today at a Glance (The "What") -->
         <section class="hero-section">
-            <!-- Moon Card -->
-            <div class="celestial-card moon-card">
+            <div class="moon-hero">
                 <div class="moon-visual">
                     <div class="moon-3d" id="moon-visual">
                         <div class="moon-surface"></div>
@@ -55,305 +49,209 @@
                     </div>
                 </div>
                 <div class="moon-info">
-                    <span id="tithi-display" class="tithi-display">कृष्ण द्वादशी</span>
-                    <span id="moon-percent" class="moon-percent">25% Illuminated</span>
-                    <span id="tithi-end" class="element-end">Till 14:32</span>
+                    <div class="tithi-main">
+                        <span id="tithi-label" class="tithi-label">तिथि</span>
+                        <span id="tithi-name" class="tithi-name">कृष्ण द्वादशी</span>
+                    </div>
+                    <span id="tithi-end" class="tithi-end">Till 14:32</span>
                 </div>
             </div>
 
-            <!-- Samvatsara Card -->
-            <div class="celestial-card samvatsara-card">
-                <div class="samvatsara-info">
-                    <span class="label">संवत्सर</span>
-                    <span id="samvatsara-name" class="value">प्रभव</span>
-                </div>
-                <div class="samvat-row">
-                    <div class="samvat-item">
-                        <span class="label">विक्रम</span>
-                        <span id="vikram-samvat" class="value">2083</span>
-                    </div>
-                    <div class="samvat-item">
-                        <span class="label">शक</span>
-                        <span id="shaka-samvat" class="value">1948</span>
+            <div class="quick-facts">
+                <div class="fact">
+                    <i data-lucide="star"></i>
+                    <div>
+                        <span class="fact-label">Nakshatra</span>
+                        <span id="nakshatra-name" class="fact-value">स्वाति</span>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Panchang Elements -->
-        <section class="panchang-section">
-            <h2 class="section-title"><i data-lucide="sparkles" class="section-icon"></i> पञ्चाङ्ग तत्व</h2>
-            <div class="panchang-grid">
-                <div class="panchang-card tithi-card">
-                    <div class="card-icon-wrap"><i data-lucide="moon"></i></div>
-                    <div class="card-content">
-                        <div class="card-label">तिथि (Tithi)</div>
-                        <div id="tithi-value" class="card-value">कृष्ण द्वादशी</div>
-                        <div id="tithi-time" class="card-time">Till 14:32</div>
-                    </div>
-                </div>
-                
-                <div class="panchang-card nakshatra-card">
-                    <div class="card-icon-wrap"><i data-lucide="star"></i></div>
-                    <div class="card-content">
-                        <div class="card-label">नक्षत्र (Nakshatra)</div>
-                        <div id="nakshatra-value" class="card-value">स्वाति</div>
-                        <div id="nakshatra-pada" class="card-sub">Pada 3</div>
-                        <div id="nakshatra-time" class="card-time">Till 18:45</div>
-                    </div>
-                </div>
-                
-                <div class="panchang-card yoga-card">
-                    <div class="card-icon-wrap"><i data-lucide="orbit"></i></div>
-                    <div class="card-content">
-                        <div class="card-label">योग (Yoga)</div>
-                        <div id="yoga-value" class="card-value">शुभ</div>
-                        <div id="yoga-time" class="card-time">Till 22:10</div>
-                    </div>
-                </div>
-                
-                <div class="panchang-card karana-card">
-                    <div class="card-icon-wrap"><i data-lucide="circle-dot"></i></div>
-                    <div class="card-content">
-                        <div class="card-label">करण (Karana)</div>
-                        <div id="karana-value" class="card-value">वणिज</div>
-                        <div id="karana-time" class="card-time">Till 14:32</div>
-                    </div>
-                </div>
-                
-                <div class="panchang-card vara-card full-width">
-                    <div class="card-icon-wrap"><i data-lucide="calendar-days"></i></div>
-                    <div class="card-content">
-                        <div class="card-label">वार (Day)</div>
-                        <div id="vara-value" class="card-value">सोमवार</div>
-                        <div id="vara-deity" class="card-sub">Lord Chandra</div>
-                    </div>
-                    <div id="day-color" class="day-color" style="background: #E8E8E8;"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sun & Moon Timings -->
-        <section class="timings-section">
-            <h2 class="section-title">🌅 सूर्य-चन्द्र समय</h2>
-            <div class="timings-grid">
-                <div class="timing-card sun">
+                <div class="fact">
                     <i data-lucide="sunrise"></i>
-                    <span class="timing-label">Sunrise</span>
-                    <span id="sunrise" class="timing-value">06:45</span>
+                    <div>
+                        <span class="fact-label">Sunrise</span>
+                        <span id="sunrise" class="fact-value">06:52</span>
+                    </div>
                 </div>
-                <div class="timing-card sun">
+                <div class="fact">
                     <i data-lucide="sunset"></i>
-                    <span class="timing-label">Sunset</span>
-                    <span id="sunset" class="timing-value">18:05</span>
-                </div>
-                <div class="timing-card moon">
-                    <i data-lucide="moon"></i>
-                    <span class="timing-label">Moonrise</span>
-                    <span id="moonrise" class="timing-value">23:18</span>
-                </div>
-                <div class="timing-card moon">
-                    <i data-lucide="moon"></i>
-                    <span class="timing-label">Moonset</span>
-                    <span id="moonset" class="timing-value">10:45</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Muhurat Section -->
-        <section class="muhurat-section">
-            <h2 class="section-title">⏰ मुहूर्त</h2>
-            
-            <div class="muhurat-category shubh">
-                <h3 class="category-title"><span class="dot green"></span> शुभ मुहूर्त (Auspicious)</h3>
-                <div class="muhurat-list">
-                    <div class="muhurat-item">
-                        <span class="muhurat-name">ब्रह्म मुहूर्त</span>
-                        <span id="brahma-muhurat" class="muhurat-time">05:09 - 05:57</span>
-                    </div>
-                    <div class="muhurat-item">
-                        <span class="muhurat-name">अभिजित मुहूर्त</span>
-                        <span id="abhijit-muhurat" class="muhurat-time">12:01 - 12:49</span>
-                    </div>
-                    <div class="muhurat-item">
-                        <span class="muhurat-name">गोधूलि मुहूर्त</span>
-                        <span id="godhuli-muhurat" class="muhurat-time">17:41 - 18:05</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="muhurat-category ashubh">
-                <h3 class="category-title"><span class="dot red"></span> अशुभ काल (Inauspicious)</h3>
-                <div class="muhurat-list">
-                    <div class="muhurat-item">
-                        <span class="muhurat-name">राहु काल</span>
-                        <span id="rahu-kalam" class="muhurat-time">07:30 - 09:00</span>
-                    </div>
-                    <div class="muhurat-item">
-                        <span class="muhurat-name">यमगण्ड</span>
-                        <span id="yamagandam" class="muhurat-time">10:30 - 12:00</span>
-                    </div>
-                    <div class="muhurat-item">
-                        <span class="muhurat-name">गुलिक काल</span>
-                        <span id="gulika-kalam" class="muhurat-time">13:30 - 15:00</span>
+                    <div>
+                        <span class="fact-label">Sunset</span>
+                        <span id="sunset" class="fact-value">18:05</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Choghadiya Section -->
-        <section class="choghadiya-section">
-            <h2 class="section-title"><i data-lucide="clock" class="section-icon"></i> चौघड़िया</h2>
-            
-            <!-- Day/Night Toggle -->
-            <div class="choghadiya-tabs">
-                <button class="chog-tab active" data-period="day">दिन (Day)</button>
-                <button class="chog-tab" data-period="night">रात्रि (Night)</button>
+        <!-- SECTION 2: Right Now (The "When") -->
+        <section class="timing-section">
+            <h2 class="section-title">⏰ Right Now</h2>
+
+            <!-- Current Status Banner -->
+            <div id="current-status" class="status-banner good">
+                <span class="status-icon">✅</span>
+                <div class="status-text">
+                    <span id="status-title" class="status-title">Auspicious Time</span>
+                    <span id="status-desc" class="status-desc">लाभ Choghadiya until 10:30</span>
+                </div>
             </div>
-            
-            <!-- Choghadiya Grid -->
-            <div id="choghadiya-grid" class="choghadiya-grid">
+
+            <!-- Simple Time Blocks -->
+            <div class="time-blocks">
+                <div class="time-block good" id="good-times">
+                    <div class="block-header">
+                        <span class="block-icon">✅</span>
+                        <span class="block-title">Good Times Today</span>
+                    </div>
+                    <div id="good-times-list" class="block-list">
+                        <div class="time-row">
+                            <span class="time-name">Brahma Muhurta</span>
+                            <span class="time-range">05:09 - 05:57</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="time-block avoid" id="avoid-times">
+                    <div class="block-header">
+                        <span class="block-icon">⚠️</span>
+                        <span class="block-title">Avoid These Times</span>
+                    </div>
+                    <div id="avoid-times-list" class="block-list">
+                        <div class="time-row">
+                            <span class="time-name">Rahu Kalam</span>
+                            <span class="time-range">07:30 - 09:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Upcoming (The "Plan") -->
+        <section class="upcoming-section">
+            <h2 class="section-title">📅 Coming Up</h2>
+
+            <!-- Today's Events -->
+            <div id="today-events" class="events-today">
                 <!-- Populated by JS -->
             </div>
-            
-            <!-- Current Choghadiya Alert -->
-            <div id="current-chog-alert" class="current-chog-alert" style="display: none;">
-                <span id="current-chog-icon" class="chog-icon">✨</span>
-                <div class="chog-info">
-                    <span id="current-chog-name" class="chog-name">अमृत</span>
-                    <span id="current-chog-time" class="chog-time-left">42 min remaining</span>
-                </div>
-            </div>
-        </section>
 
-        <!-- Tara Bala Section -->
-        <section class="tara-section">
-            <h2 class="section-title"><i data-lucide="sparkles" class="section-icon"></i> तारा बल (Your Daily Luck)</h2>
-            <div class="tara-container">
-                <div id="tara-setup" class="tara-setup">
-                    <p class="tara-intro">Enter your birth nakshatra to see personalized daily luck</p>
-                    <select id="birth-nakshatra" class="nakshatra-select">
-                        <option value="">Select Your Birth Star...</option>
-                    </select>
-                    <button id="save-nakshatra" class="save-btn">Save My Star</button>
-                </div>
-                <div id="tara-result" class="tara-result" style="display: none;">
-                    <div class="tara-meter" id="tara-meter">
-                        <div id="tara-icon" class="tara-icon">✨</div>
-                        <div class="tara-info">
-                            <span id="tara-name" class="tara-name">सम्पत्</span>
-                            <span id="tara-english" class="tara-english">Wealth & Prosperity</span>
-                        </div>
-                        <div id="tara-badge" class="tara-badge good">Good</div>
-                    </div>
-                    <p id="tara-desc" class="tara-desc">Today favors financial growth and new opportunities.</p>
-                    <button id="change-nakshatra" class="change-btn">Change Birth Star</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Today's Festivals -->
-        <section class="events-section">
-            <h2 class="section-title"><i data-lucide="calendar-heart" class="section-icon"></i> आज के उत्सव</h2>
-            
-            <!-- Region Selector -->
-            <div class="region-tabs">
-                <button class="region-tab active" data-region="all">
-                    <span class="region-icon">🕉️</span>
-                    <span>All</span>
-                </button>
-                <button class="region-tab" data-region="maharashtra">
-                    <span class="region-icon">🥥</span>
-                    <span>Maharashtra</span>
-                </button>
-                <button class="region-tab" data-region="tamil">
-                    <span class="region-icon">🍚</span>
-                    <span>Tamil Nadu</span>
-                </button>
-                <button class="region-tab" data-region="bengal">
-                    <span class="region-icon">🌺</span>
-                    <span>Bengal</span>
-                </button>
-            </div>
-            
-            <div id="events-list" class="events-list">
+            <!-- Upcoming Festivals -->
+            <div id="upcoming-festivals" class="upcoming-list">
                 <!-- Populated by JS -->
             </div>
         </section>
 
-        <!-- Sankalpa Generator -->
-        <section class="sankalpa-section">
-            <h2 class="section-title"><i data-lucide="scroll-text" class="section-icon"></i> संकल्प Generator</h2>
-            <div class="sankalpa-container">
-                <div id="sankalpa-setup" class="sankalpa-setup">
-                    <p class="sankalpa-intro">Generate your personalized Sankalpa for today</p>
-                    <div class="input-group">
-                        <label>Your Name</label>
-                        <input type="text" id="user-name" placeholder="राम शर्मा" class="sankalpa-input">
-                    </div>
-                    <div class="input-group">
-                        <label>Gotra</label>
-                        <input type="text" id="user-gotra" placeholder="भारद्वाज" class="sankalpa-input">
-                    </div>
-                    <button id="generate-sankalpa" class="generate-btn">
-                        <i data-lucide="wand-2"></i> Generate Sankalpa
-                    </button>
-                </div>
-                
-                <div id="sankalpa-result" class="sankalpa-result" style="display: none;">
-                    <div class="sankalpa-header">
-                        <span class="sankalpa-label">Today's Sankalpa</span>
-                        <div class="sankalpa-actions">
-                            <button id="speak-sankalpa" class="action-btn" title="Listen">
-                                <i data-lucide="volume-2"></i>
-                            </button>
-                            <button id="copy-sankalpa" class="action-btn" title="Copy">
-                                <i data-lucide="copy"></i>
-                            </button>
+        <!-- SECTION 4: Learn More (Expandable) -->
+        <section class="details-section">
+            <button class="expand-btn" id="expand-details">
+                <span>More Details</span>
+                <i data-lucide="chevron-down"></i>
+            </button>
+
+            <div id="details-content" class="details-content" style="display: none;">
+                <!-- Panchang Elements -->
+                <div class="detail-group">
+                    <h3>पञ्चाङ्ग Elements</h3>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">तिथि</span>
+                            <span id="d-tithi" class="detail-value">कृष्ण द्वादशी</span>
+                            <span id="d-tithi-time" class="detail-time">Till 14:32</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">नक्षत्र</span>
+                            <span id="d-nakshatra" class="detail-value">स्वाति</span>
+                            <span id="d-nakshatra-time" class="detail-time">Till 18:45</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">योग</span>
+                            <span id="d-yoga" class="detail-value">शुभ</span>
+                            <span id="d-yoga-time" class="detail-time">Till 22:10</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">करण</span>
+                            <span id="d-karana" class="detail-value">वणिज</span>
+                            <span id="d-karana-time" class="detail-time">Till 14:32</span>
                         </div>
                     </div>
-                    <div id="sankalpa-text" class="sankalpa-text"></div>
-                    <button id="edit-sankalpa" class="edit-btn">Edit Details</button>
+                </div>
+
+                <!-- Choghadiya Table -->
+                <div class="detail-group">
+                    <h3>Choghadiya</h3>
+                    <div class="choghadiya-tabs">
+                        <button class="chog-tab active" data-period="day">Day</button>
+                        <button class="chog-tab" data-period="night">Night</button>
+                    </div>
+                    <div id="choghadiya-list" class="choghadiya-list"></div>
+                </div>
+
+                <!-- Calendar Info -->
+                <div class="detail-group">
+                    <h3>Calendar</h3>
+                    <div class="calendar-info">
+                        <div class="cal-item">
+                            <span>Samvatsara</span>
+                            <span id="d-samvatsara">प्रभव</span>
+                        </div>
+                        <div class="cal-item">
+                            <span>Vikram Samvat</span>
+                            <span id="d-vikram">2083</span>
+                        </div>
+                        <div class="cal-item">
+                            <span>Shaka Samvat</span>
+                            <span id="d-shaka">1948</span>
+                        </div>
+                        <div class="cal-item">
+                            <span>Month</span>
+                            <span id="d-month">माघ</span>
+                        </div>
+                        <div class="cal-item">
+                            <span>Ayana</span>
+                            <span id="d-ayana">उत्तरायण</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- Help Tooltip -->
+        <div id="help-tooltip" class="help-tooltip" style="display: none;">
+            <button class="tooltip-close" id="close-tooltip"><i data-lucide="x"></i></button>
+            <h4 id="tooltip-title"></h4>
+            <p id="tooltip-text"></p>
+        </div>
 
         <!-- Settings Modal -->
         <div id="settings-modal" class="modal-overlay">
-            <div class="modal-content settings-modal">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h3>⚙️ Settings</h3>
+                    <h3>Settings</h3>
                     <button id="close-settings" class="close-btn"><i data-lucide="x"></i></button>
                 </div>
                 <div class="modal-body">
-                    <div class="setting-group">
-                        <label>Ayanamsa System</label>
-                        <select id="ayanamsa-select" class="setting-select">
-                            <option value="lahiri">Lahiri (Chitrapaksha) - Recommended</option>
-                            <option value="krishnamurti">Krishnamurti (KP)</option>
-                            <option value="raman">B.V. Raman</option>
-                            <option value="yukteshwar">Sri Yukteshwar</option>
-                        </select>
-                        <p class="setting-desc">Lahiri is the official standard for Indian government calendar</p>
-                    </div>
-                    
-                    <div class="setting-group">
-                        <label>Calendar Tradition</label>
-                        <select id="tradition-select" class="setting-select">
-                            <option value="north">North Indian (Purnimant)</option>
-                            <option value="south">South Indian (Amant)</option>
+                    <div class="setting-item">
+                        <label>Location</label>
+                        <select id="city-select" class="setting-input">
+                            <option value="28.6139,77.2090">New Delhi</option>
+                            <option value="19.0760,72.8777">Mumbai</option>
+                            <option value="13.0827,80.2707">Chennai</option>
+                            <option value="22.5726,88.3639">Kolkata</option>
+                            <option value="12.9716,77.5946">Bengaluru</option>
+                            <option value="23.0225,72.5714">Ahmedabad</option>
+                            <option value="17.3850,78.4867">Hyderabad</option>
+                            <option value="18.5204,73.8567">Pune</option>
+                            <option value="26.9124,75.7873">Jaipur</option>
+                            <option value="25.3176,82.9739">Varanasi</option>
                         </select>
                     </div>
-                    
-                    <div class="setting-group">
-                        <label>Default Region</label>
-                        <select id="region-select" class="setting-select">
-                            <option value="all">All India</option>
-                            <option value="maharashtra">Maharashtra</option>
-                            <option value="tamil">Tamil Nadu</option>
-                            <option value="bengal">Bengal</option>
-                            <option value="gujarat">Gujarat</option>
+                    <div class="setting-item advanced">
+                        <label>Ayanamsa (Advanced)</label>
+                        <select id="ayanamsa-select" class="setting-input">
+                            <option value="lahiri">Lahiri (Recommended)</option>
+                            <option value="krishnamurti">Krishnamurti</option>
+                            <option value="raman">Raman</option>
                         </select>
+                        <p class="setting-hint">Only change if you know what this means</p>
                     </div>
                 </div>
             </div>
@@ -361,19 +259,18 @@
 
         <!-- Location Modal -->
         <div id="location-modal" class="modal-overlay">
-            <div class="modal-content location-modal">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h3>📍 Set Location</h3>
+                    <h3>📍 Select Location</h3>
                     <button id="close-location" class="close-btn"><i data-lucide="x"></i></button>
                 </div>
                 <div class="modal-body">
-                    <button id="auto-location" class="location-option">
+                    <button id="auto-location" class="location-auto-btn">
                         <i data-lucide="locate"></i>
-                        <span>Use Current Location</span>
+                        <span>Use My Location</span>
                     </button>
-                    <div class="location-divider">or select a city</div>
-                    <div class="city-list" id="city-list">
-                        <button class="city-btn" data-lat="28.6139" data-lon="77.2090">New Delhi</button>
+                    <div class="city-grid" id="city-grid">
+                        <button class="city-btn" data-lat="28.6139" data-lon="77.2090">Delhi</button>
                         <button class="city-btn" data-lat="19.0760" data-lon="72.8777">Mumbai</button>
                         <button class="city-btn" data-lat="13.0827" data-lon="80.2707">Chennai</button>
                         <button class="city-btn" data-lat="22.5726" data-lon="88.3639">Kolkata</button>
@@ -383,16 +280,8 @@
                         <button class="city-btn" data-lat="18.5204" data-lon="73.8567">Pune</button>
                         <button class="city-btn" data-lat="26.9124" data-lon="75.7873">Jaipur</button>
                         <button class="city-btn" data-lat="25.3176" data-lon="82.9739">Varanasi</button>
-                        <button class="city-btn" data-lat="27.1767" data-lon="78.0081">Agra</button>
-                        <button class="city-btn" data-lat="23.2599" data-lon="77.4126">Bhopal</button>
-                        <button class="city-btn" data-lat="21.1702" data-lon="72.8311">Surat</button>
-                        <button class="city-btn" data-lat="26.8467" data-lon="80.9462">Lucknow</button>
-                        <button class="city-btn" data-lat="21.1458" data-lon="79.0882">Nagpur</button>
                         <button class="city-btn" data-lat="30.7333" data-lon="76.7794">Chandigarh</button>
-                        <button class="city-btn" data-lat="15.2993" data-lon="74.1240">Goa</button>
-                        <button class="city-btn" data-lat="23.1815" data-lon="79.9864">Jabalpur</button>
-                        <button class="city-btn" data-lat="22.7196" data-lon="75.8577">Indore</button>
-                        <button class="city-btn" data-lat="19.8762" data-lon="75.3433">Aurangabad</button>
+                        <button class="city-btn" data-lat="26.8467" data-lon="80.9462">Lucknow</button>
                     </div>
                 </div>
             </div>
@@ -403,9 +292,7 @@
     <script src="lib/vedic-engine.js"></script>
     <script src="lib/festival-calculator.js"></script>
     <script src="script.js"></script>
-    <script>
-        lucide.createIcons();
-    </script>
+    <script>lucide.createIcons();</script>
 </body>
 
 </html>
