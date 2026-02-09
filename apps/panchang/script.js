@@ -1,5 +1,5 @@
 /**
- * Panchang App - Simplified Script
+ * Panchang App - Complete Script
  * First Principles: Answer user's core questions quickly
  * 
  * 1. WHAT - Today's tithi, nakshatra
@@ -12,11 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === STATE ===
     let currentDate = new Date();
-    let location = { lat: 28.6139, lon: 77.2090, city: 'Delhi' };
+    let location = { lat: 18.5204, lon: 73.8567, city: 'Pune' }; // Default to Pune
     let settings = { ayanamsa: 'lahiri' };
     let currentPanchang = null;
 
-    // === UPCOMING FESTIVALS (Static for performance, regenerate monthly) ===
+    // === CITY DATABASE ===
+    const CITIES = {
+        delhi: { lat: 28.6139, lon: 77.2090, name: 'Delhi' },
+        mumbai: { lat: 19.0760, lon: 72.8777, name: 'Mumbai' },
+        pune: { lat: 18.5204, lon: 73.8567, name: 'Pune' },
+        bangalore: { lat: 12.9716, lon: 77.5946, name: 'Bangalore' },
+        chennai: { lat: 13.0827, lon: 80.2707, name: 'Chennai' },
+        kolkata: { lat: 22.5726, lon: 88.3639, name: 'Kolkata' },
+        hyderabad: { lat: 17.3850, lon: 78.4867, name: 'Hyderabad' },
+        ahmedabad: { lat: 23.0225, lon: 72.5714, name: 'Ahmedabad' },
+        jaipur: { lat: 26.9124, lon: 75.7873, name: 'Jaipur' },
+        lucknow: { lat: 26.8467, lon: 80.9462, name: 'Lucknow' },
+        varanasi: { lat: 25.3176, lon: 82.9739, name: 'Varanasi' },
+        ujjain: { lat: 23.1765, lon: 75.7885, name: 'Ujjain' },
+        prayagraj: { lat: 25.4358, lon: 81.8463, name: 'Prayagraj' },
+        kanpur: { lat: 26.4499, lon: 80.3319, name: 'Kanpur' },
+        surat: { lat: 21.1702, lon: 72.8311, name: 'Surat' },
+        nagpur: { lat: 21.1458, lon: 79.0882, name: 'Nagpur' },
+        indore: { lat: 22.7196, lon: 75.8577, name: 'Indore' },
+        bhopal: { lat: 23.2599, lon: 77.4126, name: 'Bhopal' },
+        patna: { lat: 25.5941, lon: 85.1376, name: 'Patna' },
+        coimbatore: { lat: 11.0168, lon: 76.9558, name: 'Coimbatore' }
+    };
+
+    // === UPCOMING FESTIVALS ===
     const UPCOMING_FESTIVALS = [
         { date: new Date(2026, 1, 14), name: 'महाशिवरात्रि', nameEn: 'Maha Shivaratri', icon: '🔱' },
         { date: new Date(2026, 2, 13), name: 'होली', nameEn: 'Holi', icon: '🎨' },
@@ -32,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loadSettings();
         setupEventListeners();
         updateDisplay();
-        lucide.createIcons();
     }
 
     function loadSettings() {
@@ -48,9 +71,34 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('panchang_settings', JSON.stringify({ location, settings }));
     }
 
+    // === REVERSE GEOCODING ===
+    function findNearestCity(lat, lon) {
+        let nearestCity = 'Current Location';
+        let minDist = Infinity;
+
+        for (const [key, city] of Object.entries(CITIES)) {
+            const dist = Math.sqrt(
+                Math.pow(lat - city.lat, 2) +
+                Math.pow(lon - city.lon, 2)
+            );
+            if (dist < minDist) {
+                minDist = dist;
+                nearestCity = city.name;
+            }
+        }
+
+        // Only use city name if within ~50km (roughly 0.5 degrees)
+        return minDist < 0.5 ? nearestCity : 'Current Location';
+    }
+
     // === MAIN UPDATE ===
     function updateDisplay() {
         try {
+            if (typeof VedicEngine === 'undefined' || !VedicEngine) {
+                console.error('VedicEngine not loaded');
+                return;
+            }
+
             currentPanchang = VedicEngine.getPanchang(currentDate, location.lat, location.lon, {
                 ayanamsa: settings.ayanamsa
             });
@@ -65,15 +113,12 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTiming();
             updateUpcoming();
             updateDetails();
-
-            lucide.createIcons();
         } catch (error) {
             console.error('Error:', error);
         }
     }
 
     function updateHeader() {
-        // Date
         const hinduDate = document.getElementById('hindu-date');
         const gregorianDate = document.getElementById('gregorian-date');
         const locationName = document.getElementById('location-name');
@@ -144,120 +189,165 @@ document.addEventListener('DOMContentLoaded', () => {
         const statusBanner = document.getElementById('current-status');
         const statusTitle = document.getElementById('status-title');
         const statusDesc = document.getElementById('status-desc');
+        const statusIcon = statusBanner?.querySelector('.status-icon');
 
         if (isToday && currentChog) {
             statusBanner.className = `status-banner ${currentChog.good ? 'good' : 'avoid'}`;
-            statusBanner.querySelector('.status-icon').textContent = currentChog.good ? '✅' : '⚠️';
-            statusTitle.textContent = currentChog.good ? 'Auspicious Time' : 'Caution Period';
-            const minsLeft = Math.floor((currentChog.end - currentHour) * 60);
-            statusDesc.textContent = `${currentChog.name} (${currentChog.nameEn}) • ${minsLeft} min remaining`;
+            if (statusIcon) {
+                statusIcon.textContent = currentChog.good ? 'check_circle' : 'warning';
+            }
+            if (statusTitle) {
+                statusTitle.textContent = currentChog.good ? 'Auspicious Time' : 'Caution Period';
+            }
+            if (statusDesc) {
+                const mins = Math.floor((currentChog.end - currentHour) * 60);
+                statusDesc.textContent = `${currentChog.name} (${currentChog.nameEn}) • ${mins} min remaining`;
+            }
         } else {
-            statusBanner.style.display = 'none';
+            // Check Rahu Kalam
+            const inRahu = isToday && currentHour >= rahuKalam.start && currentHour < rahuKalam.end;
+            if (inRahu) {
+                statusBanner.className = 'status-banner avoid';
+                if (statusIcon) statusIcon.textContent = 'warning';
+                if (statusTitle) statusTitle.textContent = 'Rahu Kalam';
+                if (statusDesc) {
+                    const mins = Math.floor((rahuKalam.end - currentHour) * 60);
+                    statusDesc.textContent = `Avoid new ventures • ${mins} min remaining`;
+                }
+            }
         }
 
-        // Good times list
-        const goodList = document.getElementById('good-times-list');
-        if (goodList) {
-            let html = '';
-            html += timeRow('Brahma Muhurta', `${auspiciousMuhurats.brahmaMuhurta.startTime} - ${auspiciousMuhurats.brahmaMuhurta.endTime}`);
-            html += timeRow('Abhijit Muhurta', `${auspiciousMuhurats.abhijitMuhurta.startTime} - ${auspiciousMuhurats.abhijitMuhurta.endTime}`);
-
-            // Add good choghadiyas
-            slots.filter(s => s.good).slice(0, 2).forEach(s => {
-                html += timeRow(s.name, `${s.startTime} - ${s.endTime}`);
-            });
-
-            goodList.innerHTML = html;
-        }
-
-        // Avoid times list
-        const avoidList = document.getElementById('avoid-times-list');
-        if (avoidList) {
-            let html = '';
-            html += timeRow('Rahu Kalam', `${rahuKalam.startTime} - ${rahuKalam.endTime}`);
-            html += timeRow('Yamaganda', `${yamagandam.startTime} - ${yamagandam.endTime}`);
-            avoidList.innerHTML = html;
-        }
+        // Update good times list
+        updateGoodTimes(auspiciousMuhurats, choghadiya);
+        updateAvoidTimes(rahuKalam, yamagandam);
     }
 
-    function timeRow(name, range) {
-        return `<div class="time-row"><span class="time-name">${name}</span><span class="time-range">${range}</span></div>`;
+    function updateGoodTimes(muhurats, choghadiya) {
+        const list = document.getElementById('good-times-list');
+        if (!list) return;
+
+        const goodTimes = [
+            { name: 'Brahma Muhurta', range: `${muhurats.brahmaMuhurta.startTime} - ${muhurats.brahmaMuhurta.endTime}` },
+            { name: 'Abhijit Muhurta', range: `${muhurats.abhijitMuhurta.startTime} - ${muhurats.abhijitMuhurta.endTime}` }
+        ];
+
+        // Add good choghadiyas
+        const goodChogs = choghadiya.day.filter(c => c.good && ['अमृत', 'शुभ', 'लाभ'].includes(c.name));
+        goodChogs.forEach(c => {
+            goodTimes.push({ name: `${c.name}`, range: `${c.startTime} - ${c.endTime}` });
+        });
+
+        list.innerHTML = goodTimes.map(t => `
+            <div class="time-row">
+                <span class="time-name">${t.name}</span>
+                <span class="time-range">${t.range}</span>
+            </div>
+        `).join('');
+    }
+
+    function updateAvoidTimes(rahu, yama) {
+        const list = document.getElementById('avoid-times-list');
+        if (!list) return;
+
+        list.innerHTML = `
+            <div class="time-row">
+                <span class="time-name">Rahu Kalam</span>
+                <span class="time-range">${rahu.startTime} - ${rahu.endTime}</span>
+            </div>
+            <div class="time-row">
+                <span class="time-name">Yamagandam</span>
+                <span class="time-range">${yama.startTime} - ${yama.endTime}</span>
+            </div>
+        `;
     }
 
     function updateUpcoming() {
         const todayEvents = document.getElementById('today-events');
         const upcomingList = document.getElementById('upcoming-festivals');
 
-        // Today's festivals
-        try {
-            const festivals = FestivalCalculator.getFestivalsForDate(
-                currentDate, VedicEngine, location.lat, location.lon, 'all'
-            );
-
-            if (festivals && festivals.length > 0) {
-                todayEvents.innerHTML = festivals.map(f => `
-                    <div class="event-card">
-                        <span class="event-icon">${f.icon || '🙏'}</span>
-                        <div class="event-info">
-                            <span class="event-name">${f.name}</span>
-                            <span class="event-name-en">${f.nameEn || ''}</span>
-                            ${f.significance ? `<p class="event-desc">${f.significance}</p>` : ''}
-                        </div>
-                    </div>
-                `).join('');
-            } else {
-                todayEvents.innerHTML = '';
-            }
-        } catch (e) {
-            console.error(e);
-            todayEvents.innerHTML = '';
-        }
-
-        // Upcoming festivals (next 7 days)
-        const today = new Date();
+        const today = new Date(currentDate);
         today.setHours(0, 0, 0, 0);
-        const week = new Date(today);
-        week.setDate(week.getDate() + 60);
 
-        const upcoming = UPCOMING_FESTIVALS
-            .filter(f => f.date >= today && f.date <= week)
-            .slice(0, 4);
+        // Today's events
+        const eventsToday = UPCOMING_FESTIVALS.filter(f => {
+            const festDate = new Date(f.date);
+            festDate.setHours(0, 0, 0, 0);
+            return festDate.getTime() === today.getTime();
+        });
 
-        if (upcoming.length > 0) {
-            upcomingList.innerHTML = upcoming.map(f => `
-                <div class="upcoming-item">
-                    <div class="upcoming-date">
-                        <span class="upcoming-day">${f.date.getDate()}</span>
-                        <span class="upcoming-month">${f.date.toLocaleDateString('en', { month: 'short' })}</span>
+        if (todayEvents) {
+            todayEvents.innerHTML = eventsToday.map(e => `
+                <div class="event-card">
+                    <span class="event-icon">${e.icon}</span>
+                    <div class="event-info">
+                        <span class="event-name">${e.name}</span>
+                        <span class="event-name-en">${e.nameEn}</span>
                     </div>
-                    <span class="event-icon">${f.icon}</span>
-                    <span class="upcoming-name">${f.name}</span>
                 </div>
             `).join('');
-        } else {
-            upcomingList.innerHTML = '<div class="no-events">No major festivals in next 2 months</div>';
+        }
+
+        // Upcoming
+        const upcoming = UPCOMING_FESTIVALS
+            .filter(f => f.date > today)
+            .sort((a, b) => a.date - b.date)
+            .slice(0, 5);
+
+        if (upcomingList) {
+            if (upcoming.length === 0) {
+                upcomingList.innerHTML = '<div class="no-events">No upcoming festivals</div>';
+            } else {
+                upcomingList.innerHTML = upcoming.map(f => `
+                    <div class="upcoming-item">
+                        <div class="upcoming-date">
+                            <span class="upcoming-day">${f.date.getDate()}</span>
+                            <span class="upcoming-month">${f.date.toLocaleDateString('en', { month: 'short' })}</span>
+                        </div>
+                        <span class="upcoming-name">${f.icon} ${f.nameEn}</span>
+                    </div>
+                `).join('');
+            }
         }
     }
 
     function updateDetails() {
-        const { tithi, nakshatra, yoga, karana, samvatsara, hinduMonth, ayana, choghadiya, sunTimes } = currentPanchang;
+        const { tithi, nakshatra, yoga, karana, samvatsara, hinduMonth, ayana } = currentPanchang;
 
-        // Panchang elements
         setText('d-tithi', tithi.fullName);
         setText('d-tithi-time', `Till ${tithi.endTime}`);
-        setText('d-nakshatra', `${nakshatra.name} (Pada ${nakshatra.pada})`);
+        setText('d-nakshatra', nakshatra.name);
         setText('d-nakshatra-time', `Till ${nakshatra.endTime}`);
         setText('d-yoga', yoga.name);
         setText('d-yoga-time', `Till ${yoga.endTime}`);
         setText('d-karana', karana.name);
         setText('d-karana-time', `Till ${karana.endTime}`);
 
-        // Calendar
-        setText('d-samvatsara', samvatsara.name);
-        setText('d-vikram', samvatsara.vikramSamvat);
-        setText('d-shaka', samvatsara.shakaSamvat);
-        setText('d-month', hinduMonth.lunar.name);
-        setText('d-ayana', ayana.name);
+        // Calendar info
+        const calendarInfo = document.getElementById('calendar-info');
+        if (calendarInfo) {
+            calendarInfo.innerHTML = `
+                <div class="cal-item">
+                    <span>Samvatsara</span>
+                    <span>${samvatsara.name}</span>
+                </div>
+                <div class="cal-item">
+                    <span>Vikram Samvat</span>
+                    <span>${samvatsara.vikramSamvat}</span>
+                </div>
+                <div class="cal-item">
+                    <span>Shaka Samvat</span>
+                    <span>${samvatsara.shakaSamvat}</span>
+                </div>
+                <div class="cal-item">
+                    <span>Month</span>
+                    <span>${hinduMonth.lunar.name}</span>
+                </div>
+                <div class="cal-item">
+                    <span>Ayana</span>
+                    <span>${ayana.name}</span>
+                </div>
+            `;
+        }
     }
 
     function setText(id, text) {
@@ -349,49 +439,82 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // City selection
+        // City selection (works with data-lat/data-lon)
         document.querySelectorAll('.city-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                location.lat = parseFloat(btn.dataset.lat);
-                location.lon = parseFloat(btn.dataset.lon);
-                location.city = btn.textContent;
-                saveSettings();
-                document.getElementById('location-modal').classList.remove('active');
-                updateDisplay();
+                const lat = parseFloat(btn.dataset.lat);
+                const lon = parseFloat(btn.dataset.lon);
+
+                if (!isNaN(lat) && !isNaN(lon)) {
+                    location.lat = lat;
+                    location.lon = lon;
+                    location.city = btn.textContent.trim();
+                    saveSettings();
+                    closeAllModals();
+                    updateDisplay();
+                }
             });
         });
 
-        // Auto location
-        document.getElementById('auto-location')?.addEventListener('click', () => {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(pos => {
-                    location.lat = pos.coords.latitude;
-                    location.lon = pos.coords.longitude;
-                    location.city = 'Current Location';
-                    saveSettings();
-                    document.getElementById('location-modal').classList.remove('active');
-                    updateDisplay();
-                }, () => {
-                    alert('Could not get location');
-                });
-            }
+        // Auto location detection - for both buttons
+        const locationButtons = [
+            document.getElementById('detect-location'),
+            document.getElementById('detect-location-2')
+        ];
+
+        locationButtons.forEach(btn => {
+            btn?.addEventListener('click', detectLocation);
         });
 
-        // Settings changes
-        document.getElementById('city-select')?.addEventListener('change', (e) => {
-            const [lat, lon] = e.target.value.split(',').map(Number);
-            location.lat = lat;
-            location.lon = lon;
-            location.city = e.target.options[e.target.selectedIndex].text;
-            saveSettings();
-            updateDisplay();
-        });
-
+        // Ayanamsa change
         document.getElementById('ayanamsa-select')?.addEventListener('change', (e) => {
             settings.ayanamsa = e.target.value;
             saveSettings();
             updateDisplay();
         });
+    }
+
+    function detectLocation() {
+        if (!navigator.geolocation) {
+            alert('Geolocation not supported by your browser');
+            return;
+        }
+
+        // Show loading state
+        const btns = document.querySelectorAll('[id^="detect-location"]');
+        btns.forEach(btn => {
+            if (btn) btn.textContent = 'Detecting...';
+        });
+
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                location.lat = pos.coords.latitude;
+                location.lon = pos.coords.longitude;
+                location.city = findNearestCity(pos.coords.latitude, pos.coords.longitude);
+                saveSettings();
+                closeAllModals();
+                updateDisplay();
+
+                // Reset button text
+                btns.forEach(btn => {
+                    if (btn) btn.innerHTML = '<span class="material-symbols-rounded">my_location</span> Use My Location';
+                });
+            },
+            (error) => {
+                console.error('Location error:', error);
+                alert('Could not detect location. Please select a city manually.');
+
+                // Reset button text
+                btns.forEach(btn => {
+                    if (btn) btn.innerHTML = '<span class="material-symbols-rounded">my_location</span> Use My Location';
+                });
+            },
+            { enableHighAccuracy: true, timeout: 10000 }
+        );
+    }
+
+    function closeAllModals() {
+        document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
     }
 
     // === START ===
