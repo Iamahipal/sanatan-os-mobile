@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>पञ्चाङ्ग - Daily Guide</title>
     <meta name="description" content="Your daily Hindu calendar guide. Know the right time for the right action.">
+    <meta name="theme-color" content="#FF9933">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
 
     <!-- M3 Fonts: Inter, Noto Sans Devanagari, Material Symbols -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,6 +54,18 @@
             </button>
         </div>
 
+        <!-- TODAY'S INSIGHT - Actionable Guidance -->
+        <section class="insight-section" id="insight-section">
+            <div class="insight-card" id="insight-card">
+                <span class="insight-icon material-symbols-rounded filled">lightbulb</span>
+                <div class="insight-content">
+                    <span class="insight-title" id="insight-title">Good day for new beginnings</span>
+                    <span class="insight-desc" id="insight-desc">Start important tasks after Brahma Muhurta ends at
+                        06:17</span>
+                </div>
+            </div>
+        </section>
+
         <!-- SECTION 1: Today at a Glance (The "What") -->
         <section class="hero-section">
             <div class="moon-hero">
@@ -88,6 +104,13 @@
                     <div class="fact-content">
                         <span class="fact-label">Sunset</span>
                         <span id="sunset" class="fact-value">18:05</span>
+                    </div>
+                </div>
+                <div class="fact">
+                    <span class="material-symbols-rounded filled">dark_mode</span>
+                    <div class="fact-content">
+                        <span class="fact-label">Moonrise</span>
+                        <span id="moonrise" class="fact-value">--:--</span>
                     </div>
                 </div>
             </div>

@@ -53,9 +53,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === INIT ===
     function init() {
+        registerServiceWorker();
         loadSettings();
         setupEventListeners();
         updateDisplay();
+    }
+
+    function registerServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('SW registered'))
+                .catch(err => console.error('SW registration failed:', err));
+        }
     }
 
     function loadSettings() {
@@ -108,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            updateInsight();
             updateHeader();
             updateHero();
             updateTiming();
@@ -137,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateHero() {
-        const { tithi, nakshatra, sunTimes, moonIllumination } = currentPanchang;
+        const { tithi, nakshatra, sunTimes, moonTimes, moonIllumination } = currentPanchang;
 
         // Moon visual
         const moonShadow = document.getElementById('moon-shadow');
@@ -164,9 +174,107 @@ document.addEventListener('DOMContentLoaded', () => {
         const nakshatraName = document.getElementById('nakshatra-name');
         const sunrise = document.getElementById('sunrise');
         const sunset = document.getElementById('sunset');
+        const moonrise = document.getElementById('moonrise');
         if (nakshatraName) nakshatraName.textContent = nakshatra.name;
         if (sunrise) sunrise.textContent = sunTimes.sunriseTime;
         if (sunset) sunset.textContent = sunTimes.sunsetTime;
+        if (moonrise) moonrise.textContent = moonTimes?.moonriseTime || '--:--';
+    }
+
+    // === TODAY'S INSIGHT ===
+    function updateInsight() {
+        const { tithi, nakshatra, yoga, rahuKalam, auspiciousMuhurats, choghadiya } = currentPanchang;
+        const insightTitle = document.getElementById('insight-title');
+        const insightDesc = document.getElementById('insight-desc');
+        const insightIcon = document.querySelector('.insight-icon');
+
+        if (!insightTitle || !insightDesc) return;
+
+        let insight = generateDailyInsight();
+        insightTitle.textContent = insight.title;
+        insightDesc.textContent = insight.desc;
+        if (insightIcon) insightIcon.textContent = insight.icon;
+    }
+
+    function generateDailyInsight() {
+        const { tithi, nakshatra, yoga, rahuKalam, auspiciousMuhurats, choghadiya, vara } = currentPanchang;
+        const now = new Date();
+        const currentHour = now.getHours() + now.getMinutes() / 60;
+        const isToday = currentDate.toDateString() === now.toDateString();
+
+        // Priority 1: Check if in Rahu Kalam right now
+        if (isToday && currentHour >= rahuKalam.start && currentHour < rahuKalam.end) {
+            return {
+                icon: 'warning',
+                title: 'Avoid new ventures now',
+                desc: `Rahu Kalam ends at ${rahuKalam.endTime}. Wait before starting important tasks.`
+            };
+        }
+
+        // Priority 2: Special Tithis
+        const specialTithis = {
+            10: { title: 'Ekadashi - Day of fasting', desc: 'Considered auspicious for spiritual practices and fasting.' },
+            14: { title: 'Purnima - Full Moon', desc: 'Excellent for meditation, charity, and new beginnings.' },
+            29: { title: 'Amavasya - New Moon', desc: 'Good for introspection, ancestor worship (Pitru Tarpan).' },
+            3: { title: 'Chaturthi - Ganesh Worship', desc: 'Auspicious day for Lord Ganesha prayers.' },
+            8: { title: 'Ashtami - Day of Shakti', desc: 'Good for Durga/Shakti worship and spiritual practices.' }
+        };
+
+        if (specialTithis[tithi.index]) {
+            return {
+                icon: 'star',
+                ...specialTithis[tithi.index]
+            };
+        }
+
+        // Priority 3: Yoga-based guidance
+        if (!yoga.good) {
+            return {
+                icon: 'info',
+                title: `${yoga.nameEn} Yoga - Exercise caution`,
+                desc: 'Not ideal for major decisions. Good for routine work and planning.'
+            };
+        }
+
+        // Priority 4: Upcoming Rahu Kalam warning
+        if (isToday && currentHour < rahuKalam.start) {
+            const minsToRahu = Math.floor((rahuKalam.start - currentHour) * 60);
+            if (minsToRahu <= 60) {
+                return {
+                    icon: 'schedule',
+                    title: `Rahu Kalam starts in ${minsToRahu} min`,
+                    desc: `Complete important tasks before ${rahuKalam.startTime}.`
+                };
+            }
+        }
+
+        // Priority 5: Good yoga encouragement
+        if (yoga.good) {
+            const positiveYogas = ['Siddhi', 'Shubha', 'Amrita', 'Saubhagya'];
+            if (positiveYogas.includes(yoga.nameEn)) {
+                return {
+                    icon: 'lightbulb',
+                    title: 'Excellent day for new ventures',
+                    desc: `${yoga.nameEn} Yoga favors success. Start important projects today.`
+                };
+            }
+        }
+
+        // Priority 6: Brahma Muhurta recommendation
+        if (isToday && currentHour < 7) {
+            return {
+                icon: 'wb_twilight',
+                title: 'Brahma Muhurta is special',
+                desc: `Best time for meditation: ${auspiciousMuhurats.brahmaMuhurta.startTime} - ${auspiciousMuhurats.brahmaMuhurta.endTime}`
+            };
+        }
+
+        // Default: General positive message
+        return {
+            icon: 'lightbulb',
+            title: 'Good day for steady progress',
+            desc: 'Focus on routine tasks and planning. Check choghadiya for best times.'
+        };
     }
 
     function updateTiming() {
