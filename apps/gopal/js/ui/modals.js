@@ -14,7 +14,8 @@ export async function modal({ title, body, buttons, choices }) {
 
   const btnHtml = (buttons || []).map(b => {
     const cls = b.kind === "primary" ? "btn btnPrimary" : (b.kind === "good" ? "btn btnGood" : "btn");
-    return `<button class="${cls}" data-btn="${b.id}">${b.label}</button>`;
+    const hold = b.holdMs ? ` data-holdms="${b.holdMs}"` : "";
+    return `<button class="${cls}" data-btn="${b.id}"${hold}>${b.label}</button>`;
   }).join("");
 
   el.innerHTML = `
@@ -47,11 +48,39 @@ export async function modal({ title, body, buttons, choices }) {
     });
 
     el.querySelectorAll("[data-btn]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const id = btn.getAttribute("data-btn");
-        cleanup();
-        resolve({ id, choiceIdx: pickedChoice });
-      });
+      const holdMs = Number(btn.getAttribute("data-holdms") || "0");
+      if (holdMs > 0) {
+        let t = null;
+        let start = 0;
+
+        const cancel = () => {
+          if (t) clearTimeout(t);
+          t = null;
+          start = 0;
+          btn.textContent = originalLabel;
+        };
+
+        let originalLabel = btn.textContent;
+        btn.addEventListener("pointerdown", () => {
+          start = Date.now();
+          originalLabel = btn.textContent;
+          btn.textContent = `Hold: ${originalLabel}`;
+          t = setTimeout(() => {
+            const id = btn.getAttribute("data-btn");
+            cleanup();
+            resolve({ id, choiceIdx: pickedChoice });
+          }, holdMs);
+        });
+        btn.addEventListener("pointerup", cancel);
+        btn.addEventListener("pointercancel", cancel);
+        btn.addEventListener("pointerleave", cancel);
+      } else {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-btn");
+          cleanup();
+          resolve({ id, choiceIdx: pickedChoice });
+        });
+      }
     });
 
     backdrop.onclick = () => {
@@ -135,6 +164,10 @@ export async function settingsModal({ app, content, lang }) {
       <input class="input" id="setCap" inputmode="numeric" value="${app.settings.dailyCapMinutes || 0}" />
     </div>
     <div class="toggleRow">
+      <div><strong>Sound</strong><div class="small">Tap sounds</div></div>
+      <input type="checkbox" id="setSound" ${app.settings.soundOn ? "checked" : ""} />
+    </div>
+    <div class="toggleRow">
       <div><strong>${ui("naam", lang)}</strong><div class="small">Default naam-jap</div></div>
       <select class="input" id="setNaam" style="min-height:40px">${options}</select>
     </div>
@@ -169,6 +202,7 @@ export async function settingsModal({ app, content, lang }) {
       const language = el.querySelector("#setLang").value;
       const cap = Number(String(el.querySelector("#setCap").value || "0").trim());
       const naamPresetId = el.querySelector("#setNaam").value;
+      const soundOn = !!el.querySelector("#setSound").checked;
       const confirmPranam = !!el.querySelector("#setConfirmPranam").checked;
       const confirmSeva = !!el.querySelector("#setConfirmSeva").checked;
 
@@ -176,6 +210,7 @@ export async function settingsModal({ app, content, lang }) {
       next.language = language;
       next.dailyCapMinutes = Number.isFinite(cap) ? cap : 0;
       next.naamPresetId = naamPresetId;
+      next.soundOn = soundOn;
       next.parentConfirm = { ...(next.parentConfirm || {}) };
       next.parentConfirm.pranam = confirmPranam;
       next.parentConfirm.seva = confirmSeva;

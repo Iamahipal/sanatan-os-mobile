@@ -15,6 +15,21 @@ function pickRotation(items, idx, avoid) {
   return items[idx % items.length];
 }
 
+function themeForDay(dayIdx) {
+  // 0=Sun..6=Sat
+  // Themes are stable and values-oriented. They never change the 3-task minimum.
+  const themes = [
+    "gratitude", // Sun
+    "samay",     // Mon
+    "seva",      // Tue
+    "sports",    // Wed
+    "naam",      // Thu
+    "respect",   // Fri
+    "clean"      // Sat
+  ];
+  return themes[dayIdx] || "seva";
+}
+
 export function buildDailyPlan({ dateKey, tasks, settings, historyToday }) {
   // Stable minimum: 3 tasks always.
   // Slot mapping:
@@ -24,6 +39,7 @@ export function buildDailyPlan({ dateKey, tasks, settings, historyToday }) {
 
   const dayIdx = weekdayIndex(dateKey);
   const done = new Set(historyToday.doneTaskIds || []);
+  const theme = themeForDay(dayIdx);
 
   const bySlot = {
     morning: tasks.filter(t => (t.slots || []).includes("morning")),
@@ -72,5 +88,5 @@ export function buildDailyPlan({ dateKey, tasks, settings, historyToday }) {
     doneTaskIds: [...done]
   };
 
-  return { dateKey, minTasks, status };
+  return { dateKey, minTasks, status, theme };
 }

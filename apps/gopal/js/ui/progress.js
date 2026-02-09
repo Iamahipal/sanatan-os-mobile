@@ -28,16 +28,16 @@ export function renderProgress({ main, store, content, plan }) {
   pad.innerHTML = `
     <div class="bubble">
       <div class="bubbleTitle">${ui("progress", lang)}</div>
-      <div class="bubbleText">Consistency makes sanskar.</div>
+      <div class="bubbleText">${ui("progress_sub", lang)}</div>
     </div>
     <div class="sep"></div>
     <div class="progressRow">
       <div class="kv">
-        <div><strong>Today\'s garland</strong><div class="small">3 flowers = day complete</div></div>
+        <div><strong>${ui("garland_title", lang)}</strong><div class="small">${ui("garland_sub", lang)}</div></div>
         <div class="garland">${garland}</div>
       </div>
       <div class="kv">
-        <div><strong>Mala beads</strong><div class="small">27 beads = milestone</div></div>
+        <div><strong>${ui("mala_title", lang)}</strong><div class="small">${ui("mala_sub", lang)}</div></div>
         <div class="badge">${beadsOn}/27</div>
       </div>
       <div class="mala">${beads}</div>

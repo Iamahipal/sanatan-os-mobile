@@ -1,15 +1,16 @@
 ﻿import { loadState, saveState, ensureToday, getTodayKey } from "./services/storage.js";
 import { buildDailyPlan } from "./services/scheduler.js";
 import { t, ui } from "./services/i18n.js";
+import { createAudio } from "./services/audio.js";
 import { createStore } from "./state/store.js";
 import { renderToday } from "./ui/today.js";
 import { renderProgress } from "./ui/progress.js";
 import { modal, closeModal, parentGateModal, settingsModal, confirmModal } from "./ui/modals.js";
+import content from "./content/quests.js";
 
-async function loadContent() {
-  const res = await fetch("js/content/quests.json", { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to load quests.json");
-  return res.json();
+// Content is imported as a module so the app works from file:// without fetch/CORS issues.
+function loadContent() {
+  return content;
 }
 
 function setTab(active) {
@@ -188,6 +189,8 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
   // Play implementations are intentionally simple but deterministic.
   let playState = { ok: false, data: null };
 
+  const audio = createAudio(() => store.get().settings);
+
   function renderPlay() {
     if (playUI.kind === "tap_sequence") {
       const steps = playUI.steps;
@@ -195,8 +198,8 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
       playState.ok = false;
       playEl.innerHTML = `
         <div class="bubble">
-          <div class="bubbleTitle">Play</div>
-          <div class="bubbleText">Tap the steps in order.</div>
+          <div class="bubbleTitle">${ui("play_title", lang)}</div>
+          <div class="bubbleText">${ui("play_tap_sequence", lang)}</div>
         </div>
         <div style="height:10px"></div>
         <div class="taskList" id="seq"></div>
@@ -210,14 +213,17 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
         btn.className = "btn";
         btn.textContent = label;
         btn.addEventListener("click", () => {
+          audio.tap();
           if (i !== idx) {
             hint.textContent = "Try again: start from the first step.";
+            audio.warn();
             idx = 0;
             return;
           }
           idx++;
-          hint.textContent = (idx >= steps.length) ? "Good." : `Step ${idx + 1} of ${steps.length}`;
+          hint.textContent = (idx >= steps.length) ? ui("play_good", lang) : `Step ${idx + 1} of ${steps.length}`;
           if (idx >= steps.length) playState.ok = true;
+          if (playState.ok) audio.good();
         });
         seq.appendChild(btn);
       });
@@ -241,19 +247,22 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
       `;
       const tapBtn = playEl.querySelector("#tapBead");
       const hint = playEl.querySelector("#tapHint");
-      hint.textContent = "Tap slowly and steadily.";
+      hint.textContent = ui("play_rhythm_hint", lang);
       tapBtn.addEventListener("click", () => {
+        audio.tap();
         const now = Date.now();
         if (lastTap && (now - lastTap) < 180) {
-          hint.textContent = "Too fast. Slow down.";
+          hint.textContent = ui("play_too_fast", lang);
+          audio.warn();
           return;
         }
         lastTap = now;
         count++;
         tapBtn.textContent = `Tap bead (${count}/${beads})`;
         if (count >= beads) {
-          hint.textContent = "Good.";
+          hint.textContent = ui("play_good", lang);
           playState.ok = true;
+          audio.good();
         }
       });
       return;
@@ -278,8 +287,8 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
 
       playEl.innerHTML = `
         <div class="bubble">
-          <div class="bubbleTitle">Plan</div>
-          <div class="bubbleText">Choose an order for your day blocks.</div>
+          <div class="bubbleTitle">${ui("play_title", lang)}</div>
+          <div class="bubbleText">${ui("play_choose_order", lang)}</div>
         </div>
         <div style="height:10px"></div>
         <div class="grid2" id="blocks"></div>
@@ -295,14 +304,17 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
         btn.className = "btn";
         btn.textContent = `${b.label} (${b.mins}m)`;
         btn.addEventListener("click", () => {
+          audio.tap();
           if (chosen.find(x => x.id === b.id)) return;
           chosen.push(b);
           renderChosen();
           if (chosen.length >= blocks.length) playState.ok = true;
+          if (playState.ok) audio.good();
         });
         blocksEl.appendChild(btn);
       });
       playEl.querySelector("#btnClear").addEventListener("click", () => {
+        audio.tap();
         chosen.length = 0;
         playState.ok = false;
         renderChosen();
@@ -325,13 +337,15 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
       `;
       const btn = playEl.querySelector("#btnCount");
       const hint = playEl.querySelector("#moveHint");
-      hint.textContent = "Steady pace.";
+      hint.textContent = ui("play_move_hint", lang);
       btn.addEventListener("click", () => {
+        audio.tap();
         count++;
         btn.textContent = `${playUI.label}: ${count}/${playUI.target}`;
         if (count >= playUI.target) {
-          hint.textContent = "Good.";
+          hint.textContent = ui("play_good", lang);
           playState.ok = true;
+          audio.good();
         }
       });
       return;
@@ -341,8 +355,8 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
       playState.ok = false;
       playEl.innerHTML = `
         <div class="bubble">
-          <div class="bubbleTitle">Seva</div>
-          <div class="bubbleText">Pick one seva for today.</div>
+          <div class="bubbleTitle">${ui("play_title", lang)}</div>
+          <div class="bubbleText">${ui("play_pick_seva", lang)}</div>
         </div>
         <div style="height:10px"></div>
         <div class="taskList" id="cards"></div>
@@ -356,9 +370,11 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
         btn.className = "btn";
         btn.textContent = c.label;
         btn.addEventListener("click", () => {
-          hint.textContent = `Chosen: ${c.label}`;
+          audio.tap();
+          hint.textContent = `${ui("chosen_prefix", lang)}: ${c.label}`;
           playState.data = { cardId: c.id, label: c.label };
           playState.ok = true;
+          audio.good();
         });
         cards.appendChild(btn);
       });
@@ -386,9 +402,10 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
     if (!playState.ok) {
       await modal({
         title: "",
-        body: "Finish the play step first.",
+        body: ui("finish_play_first", lang),
         buttons: [{ id: "ok", label: ui("ok", lang), kind: "primary" }]
       });
+      audio.warn();
       return;
     }
 
@@ -398,10 +415,10 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
     const choices = getReflectionChoices(task, lang);
 
     const ans = await modal({
-      title: ui("real_world", lang),
+      title: ui("real_world_title", lang),
       body: `${real}\n\n${reflectPrompt}`,
       choices,
-      buttons: [{ id: "done", label: ui("done", lang), kind: "good" }]
+      buttons: [{ id: "done", label: ui("done", lang), kind: "good", holdMs: task.bonusOnly ? 600 : 900 }]
     });
 
     // Optional parent confirmation for specific habits (Pranam / Seva).
@@ -411,9 +428,10 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
       if (!ok) {
         await modal({
           title: ui("parent_mode", lang),
-          body: "Not confirmed. You can do it again later.",
+          body: ui("not_confirmed", lang),
           buttons: [{ id: "ok", label: ui("ok", lang), kind: "primary" }]
         });
+        audio.warn();
         return;
       }
     }
@@ -436,6 +454,7 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
       saveState(app2);
     }, "task_complete");
 
+    audio.good();
     onFinish(true);
   });
 }
@@ -525,7 +544,7 @@ function renderApp({ store, content, tab }) {
 }
 
 async function main() {
-  const content = await loadContent();
+  const content = loadContent();
   const app = loadState();
   const store = createStore(app);
 

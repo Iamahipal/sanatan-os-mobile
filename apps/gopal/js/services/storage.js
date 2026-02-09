@@ -7,6 +7,8 @@ const DEFAULTS = {
     minTasksPerDay: 3,
     bonusMax: 2,
     dailyCapMinutes: 15,
+    soundOn: true,
+    voiceOn: false,
     parentConfirm: {
       pranam: false,
       seva: false

@@ -1,7 +1,8 @@
 ﻿import { t, ui } from "../services/i18n.js";
 import { ensureToday, getTodayKey, saveState } from "../services/storage.js";
+import { modal } from "./modals.js";
 
-function taskRow({ task, lang, done, onOpen }) {
+function taskRow({ task, lang, done, onOpen, canOpen, onBlocked }) {
   const wrap = document.createElement("div");
   wrap.className = "taskItem";
 
@@ -20,6 +21,10 @@ function taskRow({ task, lang, done, onOpen }) {
 
   wrap.addEventListener("click", () => {
     if (done) return;
+    if (canOpen && !canOpen()) {
+      onBlocked && onBlocked();
+      return;
+    }
     onOpen(task.id);
   });
 
@@ -71,14 +76,17 @@ export function renderToday({ main, store, content, plan, onOpenTask }) {
   const flowers = Math.max(0, Math.min(3, hist.flowers || 0));
   const garland = Array.from({ length: 3 }).map((_, i) => `<div class="flower ${i < flowers ? "flowerOn" : ""}"></div>`).join("");
 
-	pad.innerHTML = `
-	    <div class="krishnaWrap">
-	      <img class="krishnaImg" src="assets/krishna.png" alt="Krishna" />
-	      <div class="bubble">
-	        <div class="bubbleTitle">${ui("pearls_today", lang)}</div>
-	        <div class="bubbleText">${ui("three_small_habits", lang)}</div>
-	      </div>
-	    </div>
+  const themeKey = plan.theme ? `theme_${plan.theme}` : "theme_seva";
+  const themeLine = `${ui("theme_today", lang)}: ${ui(themeKey, lang)}`;
+
+  pad.innerHTML = `
+    <div class="krishnaWrap">
+      <img class="krishnaImg" src="assets/krishna.png" alt="Krishna" />
+      <div class="bubble">
+        <div class="bubbleTitle">${ui("pearls_today", lang)}</div>
+        <div class="bubbleText" style="white-space:pre-line">${ui("three_small_habits", lang)}\n${themeLine}${(cap && cap > 0) ? `\n\n${played}/${cap} min` : ""}</div>
+      </div>
+    </div>
     <div class="sep"></div>
     <div class="kv">
       <div><strong>Garland</strong><div class="small">3 flowers completes the day</div></div>
@@ -97,6 +105,18 @@ export function renderToday({ main, store, content, plan, onOpenTask }) {
   const list = document.createElement("div");
   list.className = "taskList";
 
+  const cap = Number(app.settings.dailyCapMinutes || 0);
+  const played = Number(hist.minutesPlayed || 0);
+  const capReached = !!cap && played >= cap;
+
+  const blocked = async () => {
+    await modal({
+      title: ui("time_title", lang),
+      body: `${ui("cap_reached", lang)}\n${ui("cap_try_tomorrow", lang)}`,
+      buttons: [{ id: "ok", label: ui("ok", lang), kind: "primary" }]
+    });
+  };
+
   // Resolve minTasks into actual task list. Evening is a choice.
   let eveningPickedId = hist.eveningPickedId || null;
 
@@ -105,7 +125,14 @@ export function renderToday({ main, store, content, plan, onOpenTask }) {
     if (item.type === "task") {
       const task = item.task;
       const done = (hist.doneTaskIds || []).includes(task.id);
-      rows.push(taskRow({ task, lang, done, onOpen: onOpenTask }));
+      rows.push(taskRow({
+        task,
+        lang,
+        done,
+        onOpen: onOpenTask,
+        canOpen: () => !capReached,
+        onBlocked: blocked
+      }));
     } else {
       // choice
       const choice = item.choice;
@@ -113,7 +140,14 @@ export function renderToday({ main, store, content, plan, onOpenTask }) {
         const task = content.tasks.find(tk => tk.id === eveningPickedId);
         if (task) {
           const done = (hist.doneTaskIds || []).includes(task.id);
-          rows.push(taskRow({ task, lang, done, onOpen: onOpenTask }));
+          rows.push(taskRow({
+            task,
+            lang,
+            done,
+            onOpen: onOpenTask,
+            canOpen: () => !capReached,
+            onBlocked: blocked
+          }));
         }
       } else {
         rows.push(choiceCard({
@@ -136,7 +170,7 @@ export function renderToday({ main, store, content, plan, onOpenTask }) {
   if (hist.dayComplete) {
     const done = document.createElement("div");
     done.className = "bubble";
-    done.innerHTML = `<div class="bubbleTitle">${ui("day_complete", lang)}</div><div class="bubbleText">See Progress to view your mala beads.</div>`;
+    done.innerHTML = `<div class="bubbleTitle">${ui("day_complete", lang)}</div><div class="bubbleText">${ui("mala_sub", lang)}</div>`;
     list.appendChild(done);
 
     const bonusMax = Number(app.settings.bonusMax || 0);
@@ -149,7 +183,7 @@ export function renderToday({ main, store, content, plan, onOpenTask }) {
       const p = document.createElement("div");
       p.className = "cardPad";
 
-      const disabled = left <= 0;
+      const disabled = left <= 0 || capReached;
       p.innerHTML = `
         <div class="bubble">
           <div class="bubbleTitle">${ui("bonus_seva", lang)}</div>
@@ -170,6 +204,8 @@ export function renderToday({ main, store, content, plan, onOpenTask }) {
       const btn = p.querySelector("#btnBonus");
       if (!disabled) {
         btn.addEventListener("click", () => onOpenTask("bonus_seva"));
+      } else if (capReached) {
+        btn.addEventListener("click", blocked);
       }
     }
   }
