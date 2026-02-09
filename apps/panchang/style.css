@@ -1,98 +1,123 @@
-/* Panchang App Styles - Premium Vedic Calendar v2 */
+/**
+ * Panchang App - Premium Dark Theme CSS
+ * @author SanatanOS Team
+ * @version 2.0.0
+ */
+
+/* === BASE STYLES === */
+:root {
+    /* Primary Colors */
+    --primary: #FF9933;
+    --primary-glow: rgba(255, 153, 51, 0.4);
+    --primary-dark: #E8850D;
+    
+    /* Backgrounds */
+    --bg-primary: #0A0A0F;
+    --bg-secondary: #12121A;
+    --bg-card: rgba(20, 20, 30, 0.8);
+    --bg-card-hover: rgba(30, 30, 45, 0.9);
+    
+    /* Glass Effect */
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: blur(20px);
+    
+    /* Text Colors */
+    --text-primary: #FFFFFF;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+    
+    /* Status Colors */
+    --success: #4ADE80;
+    --success-bg: rgba(74, 222, 128, 0.1);
+    --danger: #F87171;
+    --danger-bg: rgba(248, 113, 113, 0.1);
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+    
+    /* Fonts */
+    --font-main: 'Outfit', -apple-system, sans-serif;
+    --font-hindi: 'Noto Sans Devanagari', sans-serif;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 20px var(--primary-glow);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
-:root {
-    --bg-deep: #0a0612;
-    --bg-card: rgba(255, 255, 255, 0.04);
-    --bg-card-hover: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-border-light: rgba(255, 255, 255, 0.15);
-    --text: #ffffff;
-    --text-muted: rgba(255, 255, 255, 0.5);
-    --text-dim: rgba(255, 255, 255, 0.35);
-    --accent-gold: #f0c14b;
-    --accent-orange: #ff7b3a;
-    --accent-purple: #a855f7;
-    --shubh-green: #22c55e;
-    --ashubh-red: #ef4444;
-    --sun-orange: #ff9500;
-    --moon-silver: #e8e8e8;
-}
-
-body {
-    font-family: 'Outfit', sans-serif;
-    background: var(--bg-deep);
-    background-image:
-        radial-gradient(ellipse at 50% 0%, rgba(88, 28, 135, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(120, 53, 15, 0.1) 0%, transparent 40%);
-    color: var(--text);
-    min-height: 100vh;
+html, body {
+    height: 100%;
+    font-family: var(--font-main);
+    background: var(--bg-primary);
+    color: var(--text-primary);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 .app-container {
     min-height: 100vh;
-    padding-bottom: 40px;
-    max-width: 480px;
-    margin: 0 auto;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #0D0D15 100%);
+    padding-bottom: 60px;
 }
 
-/* Desktop enhancement */
-@media (min-width: 481px) {
-    body {
-        background-color: #050308;
-    }
-
-    .app-container {
-        box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
-        border-left: 1px solid rgba(255, 255, 255, 0.05);
-        border-right: 1px solid rgba(255, 255, 255, 0.05);
-    }
-}
-
-/* Header */
+/* === HEADER === */
 .app-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 56px;
-    padding: 0 12px;
+    padding: var(--spacing-md);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(10, 6, 18, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
 }
 
 .header-btn {
     width: 40px;
     height: 40px;
+    border-radius: var(--radius-full);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-card);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    color: var(--text);
-    text-decoration: none;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
-.header-btn:active {
-    transform: scale(0.95);
-    background: var(--bg-card-hover);
+.header-btn:hover {
+    background: var(--primary);
+    color: var(--bg-primary);
+    border-color: var(--primary);
 }
 
-.header-btn i {
-    width: 18px;
-    height: 18px;
+.header-btn svg {
+    width: 20px;
+    height: 20px;
 }
 
 .header-center {
@@ -100,758 +125,691 @@ body {
 }
 
 .header-title {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-family: var(--font-hindi);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
 }
 
 .header-subtitle {
-    font-size: 0.6rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: var(--text-muted);
     letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
-/* Date Navigator */
+/* === DATE NAVIGATOR === */
 .date-navigator {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 16px;
-    margin: 0 16px 16px;
-    background: var(--bg-card);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--glass-bg);
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .nav-btn {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: none;
-    border-radius: 10px;
-    color: var(--text);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
 }
 
-.nav-btn:active {
-    transform: scale(0.9);
-    background: var(--accent-gold);
-    color: #000;
+.nav-btn:hover {
+    background: var(--primary);
+    color: var(--bg-primary);
+    border-color: var(--primary);
 }
 
-.nav-btn i {
-    width: 16px;
-    height: 16px;
+.nav-btn svg {
+    width: 18px;
+    height: 18px;
 }
 
 .date-display {
     text-align: center;
+    cursor: pointer;
 }
 
 .gregorian-date {
     display: block;
     font-size: 1.1rem;
     font-weight: 600;
-    letter-spacing: -0.02em;
+    color: var(--text-primary);
 }
 
 .hindu-date {
     display: block;
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 0.8rem;
-    color: var(--accent-gold);
+    font-family: var(--font-hindi);
+    font-size: 0.9rem;
+    color: var(--primary);
     margin-top: 2px;
 }
 
-/* Hero Section - Celestial Bodies */
+/* === LOCATION BAR === */
+.location-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-secondary);
+}
+
+.location-bar svg {
+    width: 14px;
+    height: 14px;
+    color: var(--primary);
+}
+
+.location-bar span {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.change-btn {
+    background: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+}
+
+.change-btn:hover {
+    background: var(--primary-glow);
+}
+
+/* === HERO SECTION === */
 .hero-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    padding: 0 16px 20px;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
 }
 
 .celestial-card {
     background: var(--bg-card);
+    border-radius: var(--radius-xl);
     border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+    padding: var(--spacing-lg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
 }
 
-.celestial-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+/* Moon Card */
+.moon-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.moon-visual {
+    position: relative;
+    width: 100px;
     height: 100px;
-    background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
-    pointer-events: none;
-}
-
-/* 3D Moon */
-.moon-container {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 12px;
-    perspective: 200px;
 }
 
 .moon-3d {
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     position: relative;
-    transform-style: preserve-3d;
-    animation: moonFloat 6s ease-in-out infinite;
-    box-shadow:
-        0 0 40px rgba(255, 253, 230, 0.2),
-        0 0 80px rgba(255, 253, 230, 0.1),
-        inset -25px -15px 40px rgba(0, 0, 0, 0.4),
-        inset 8px 8px 25px rgba(255, 255, 255, 0.25);
-    background: linear-gradient(135deg, #fefcd7 0%, #e8e4c9 30%, #c9c5a8 70%, #9a9680 100%);
+    overflow: hidden;
+    box-shadow: 
+        inset -10px -10px 30px rgba(0, 0, 0, 0.6),
+        inset 5px 5px 20px rgba(255, 255, 255, 0.1),
+        0 0 40px rgba(255, 255, 255, 0.1);
 }
 
-@keyframes moonFloat {
-
-    0%,
-    100% {
-        transform: translateY(0) rotateX(5deg);
-    }
-
-    50% {
-        transform: translateY(-5px) rotateX(-5deg);
-    }
-}
-
-.moon-crater {
-    position: absolute;
+.moon-surface {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #E8E8E8 0%, #C8C8C8 50%, #A8A8A8 100%);
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.1);
-    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.moon-crater:nth-child(1) {
-    width: 12px;
-    height: 12px;
-    top: 15px;
-    left: 20px;
-}
-
-.moon-crater:nth-child(2) {
-    width: 8px;
-    height: 8px;
-    top: 35px;
-    left: 45px;
-}
-
-.moon-crater:nth-child(3) {
-    width: 15px;
-    height: 15px;
-    top: 50px;
-    left: 25px;
-}
-
-.moon-crater:nth-child(4) {
-    width: 6px;
-    height: 6px;
-    top: 25px;
-    left: 55px;
 }
 
 .moon-shadow {
     position: absolute;
     top: 0;
     height: 100%;
-    background: linear-gradient(90deg, transparent 0%, var(--bg-deep) 60%);
-    border-radius: 0 50% 50% 0;
-    transition: width 0.5s ease;
+    background: linear-gradient(90deg, var(--bg-primary) 0%, rgba(10, 10, 15, 0.95) 100%);
+    transition: all 0.5s ease;
 }
 
-.moon-label {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
+.moon-info {
+    text-align: center;
+}
+
+.tithi-display {
+    display: block;
+    font-family: var(--font-hindi);
     font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 4px;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
 .moon-percent {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.element-end {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--primary);
+    margin-top: 4px;
+}
+
+/* Samvatsara Card */
+.samvatsara-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.samvatsara-info, .samvat-row {
+    text-align: center;
+}
+
+.samvatsara-info .value {
+    font-family: var(--font-hindi);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.samvat-row {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.samvat-item {
+    flex: 1;
+    padding: var(--spacing-sm);
+    background: var(--glass-bg);
+    border-radius: var(--radius-md);
+}
+
+.label {
+    display: block;
     font-size: 0.7rem;
     color: var(--text-muted);
-}
-
-/* 3D Sun/Color */
-.color-orb {
-    position: relative;
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 12px;
-    border-radius: 50%;
-    animation: sunPulse 3s ease-in-out infinite;
-}
-
-@keyframes sunPulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 30px var(--sun-orange), 0 0 60px rgba(255, 149, 0, 0.3);
-    }
-
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 0 40px var(--sun-orange), 0 0 80px rgba(255, 149, 0, 0.4);
-    }
-}
-
-.color-orb::before {
-    content: '';
-    position: absolute;
-    inset: -5px;
-    border-radius: 50%;
-    background: inherit;
-    opacity: 0.3;
-    filter: blur(10px);
-}
-
-.color-label {
-    font-size: 0.65rem;
-    color: var(--text-dim);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
+    letter-spacing: 1px;
 }
 
-.color-name {
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-/* Section Titles */
-.section-title {
-    font-size: 0.9rem;
+.value {
+    font-size: 1.1rem;
     font-weight: 600;
-    padding: 12px 16px 10px;
+    color: var(--text-primary);
+}
+
+/* === SECTION STYLES === */
+section {
+    padding: var(--spacing-lg);
+}
+
+.section-title {
     display: flex;
     align-items: center;
-    gap: 6px;
-    color: var(--text-muted);
+    gap: var(--spacing-sm);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
 }
 
-/* Panchang Grid - Bento Style */
-.panchang-section {
-    padding: 0 16px 16px;
+.section-title .section-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--primary);
 }
 
+/* === PANCHANG ELEMENTS === */
 .panchang-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, auto);
-    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
 }
 
 .panchang-card {
     background: var(--bg-card);
+    border-radius: var(--radius-lg);
     border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 16px;
-    text-align: center;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
+    padding: var(--spacing-md);
+    display: flex;
+    gap: var(--spacing-md);
+    transition: all 0.3s ease;
 }
 
-.panchang-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--glass-border-light), transparent);
-}
-
-.panchang-card.highlight {
-    background: linear-gradient(135deg, rgba(240, 193, 75, 0.08), rgba(255, 123, 58, 0.05));
-    border-color: rgba(240, 193, 75, 0.2);
+.panchang-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-glow);
 }
 
 .panchang-card.full-width {
-    grid-column: 1 / -1;
+    grid-column: span 2;
 }
 
-/* Icon Wrappers - Lucide Style */
 .card-icon-wrap {
     width: 40px;
     height: 40px;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
+    background: var(--primary-glow);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 10px;
+    flex-shrink: 0;
 }
 
-.card-icon-wrap i {
-    width: 22px;
-    height: 22px;
+.card-icon-wrap svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary);
 }
 
-.moon-icon {
-    background: rgba(240, 193, 75, 0.15);
-    color: var(--accent-gold);
-}
-
-.star-icon {
-    background: rgba(251, 191, 36, 0.15);
-    color: #fbbf24;
-}
-
-.yoga-icon {
-    background: rgba(168, 85, 247, 0.15);
-    color: var(--accent-purple);
-}
-
-.karana-icon {
-    background: rgba(236, 72, 153, 0.15);
-    color: #ec4899;
-}
-
-.day-icon {
-    background: rgba(59, 130, 246, 0.15);
-    color: #3b82f6;
-}
-
-.section-icon {
-    width: 16px;
-    height: 16px;
-    color: var(--accent-gold);
+.card-content {
+    flex: 1;
 }
 
 .card-label {
-    font-size: 0.65rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 6px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
 }
 
 .card-value {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-family: var(--font-hindi);
     font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--accent-gold);
-    line-height: 1.2;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.card-sub {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
 }
 
 .card-time {
-    font-size: 0.65rem;
-    color: var(--text-dim);
-    margin-top: 6px;
+    font-size: 0.75rem;
+    color: var(--primary);
+    margin-top: 4px;
 }
 
-/* Sun Moon Timings - Creative Grid */
-.timings-section {
-    padding: 0 16px 16px;
+.day-color {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+    border: 2px solid var(--glass-border);
 }
 
+/* === TIMINGS === */
 .timings-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: var(--spacing-md);
 }
 
 .timing-card {
-    background: var(--bg-card);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    position: relative;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
 }
 
-.timing-card.sun {
-    background: linear-gradient(135deg, rgba(255, 149, 0, 0.08), transparent);
+.timing-card svg {
+    width: 24px;
+    height: 24px;
 }
 
-.timing-card.moon {
-    background: linear-gradient(135deg, rgba(147, 197, 253, 0.08), transparent);
+.timing-card.sun svg {
+    color: #FFB347;
 }
 
-.timing-card i {
-    width: 28px;
-    height: 28px;
-    padding: 6px;
-    border-radius: 10px;
-}
-
-.timing-card.sun i {
-    color: var(--sun-orange);
-    background: rgba(255, 149, 0, 0.15);
-}
-
-.timing-card.moon i {
-    color: #93c5fd;
-    background: rgba(147, 197, 253, 0.15);
+.timing-card.moon svg {
+    color: #A7C7E7;
 }
 
 .timing-label {
-    font-size: 0.65rem;
-    color: var(--text-dim);
+    font-size: 0.75rem;
+    color: var(--text-muted);
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .timing-value {
-    font-size: 1.3rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
 }
 
-/* Muhurat Section */
-.muhurat-section {
-    padding: 0 16px 16px;
-}
-
+/* === MUHURAT === */
 .muhurat-category {
-    background: var(--bg-card);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 14px;
-    margin-bottom: 10px;
-    position: relative;
-    overflow: hidden;
-}
-
-.muhurat-category::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-}
-
-.muhurat-category.shubh::before {
-    background: linear-gradient(180deg, var(--shubh-green), transparent);
-}
-
-.muhurat-category.ashubh::before {
-    background: linear-gradient(180deg, var(--ashubh-red), transparent);
+    margin-bottom: var(--spacing-lg);
 }
 
 .category-title {
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding-left: 8px;
+    gap: var(--spacing-sm);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
 }
 
 .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
 }
 
 .dot.green {
-    background: var(--shubh-green);
-    box-shadow: 0 0 8px var(--shubh-green);
+    background: var(--success);
 }
 
 .dot.red {
-    background: var(--ashubh-red);
-    box-shadow: 0 0 8px var(--ashubh-red);
+    background: var(--danger);
 }
 
 .muhurat-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding-left: 8px;
+    gap: var(--spacing-sm);
 }
 
 .muhurat-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 12px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    padding: var(--spacing-md);
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
 }
 
 .muhurat-name {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 0.85rem;
+    font-family: var(--font-hindi);
+    font-size: 0.95rem;
+    color: var(--text-primary);
 }
 
 .muhurat-time {
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.muhurat-category.shubh .muhurat-time {
-    color: var(--shubh-green);
-}
-
-.muhurat-category.ashubh .muhurat-time {
-    color: var(--ashubh-red);
-}
-
-/* Choghadiya Section */
-.choghadiya-section {
-    padding: 0 16px 16px;
-}
-
-/* Time Wheel */
-.time-wheel-container {
-    margin-bottom: 16px;
-}
-
-.time-wheel {
-    position: relative;
-    width: 220px;
-    height: 220px;
-    margin: 0 auto 12px;
-}
-
-.wheel-svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-}
-
-.wheel-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 10;
-}
-
-.current-chog-name {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 1.4rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    color: var(--text);
-    margin-bottom: 4px;
+    color: var(--text-secondary);
 }
 
-.current-chog-countdown {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 8px;
+.shubh .muhurat-item {
+    border-left: 3px solid var(--success);
 }
 
-.current-chog-badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
+.ashubh .muhurat-item {
+    border-left: 3px solid var(--danger);
 }
 
-.current-chog-badge.good {
-    background: rgba(34, 197, 94, 0.2);
-    color: var(--shubh-green);
-}
-
-.current-chog-badge.bad {
-    background: rgba(239, 68, 68, 0.2);
-    color: var(--ashubh-red);
-}
-
-/* Segment colors */
-.segment-shubh {
-    fill: rgba(34, 197, 94, 0.5);
-}
-
-.segment-amrit {
-    fill: rgba(168, 85, 247, 0.5);
-}
-
-.segment-labh {
-    fill: rgba(59, 130, 246, 0.5);
-}
-
-.segment-chal {
-    fill: rgba(234, 179, 8, 0.4);
-}
-
-.segment-rog {
-    fill: rgba(239, 68, 68, 0.4);
-}
-
-.segment-kaal {
-    fill: rgba(100, 50, 50, 0.5);
-}
-
-.segment-udveg {
-    fill: rgba(251, 146, 60, 0.4);
-}
-
-.segment-active {
-    stroke: var(--accent-gold);
-    stroke-width: 2;
-    filter: brightness(1.3);
-}
-
-/* Time Alert */
-.time-alert {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
-    background: rgba(239, 68, 68, 0.15);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    border-radius: 12px;
-    margin-bottom: 12px;
-    animation: alertPulse 2s infinite;
-}
-
-.time-alert i {
-    width: 18px;
-    height: 18px;
-    color: var(--ashubh-red);
-}
-
-.time-alert span {
-    font-size: 0.8rem;
-    color: var(--ashubh-red);
-}
-
-@keyframes alertPulse {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.7;
-    }
-}
-
+/* === CHOGHADIYA === */
 .choghadiya-tabs {
     display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-    background: var(--bg-card);
-    padding: 4px;
-    border-radius: 12px;
-    border: 1px solid var(--glass-border);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
 }
 
 .chog-tab {
     flex: 1;
-    padding: 10px;
-    background: transparent;
-    border: none;
-    border-radius: 10px;
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    font-family: 'Outfit', sans-serif;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
 }
 
 .chog-tab.active {
-    background: var(--accent-gold);
-    color: #000;
-    font-weight: 600;
+    background: var(--primary);
+    color: var(--bg-primary);
+    border-color: var(--primary);
 }
 
 .choghadiya-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
 }
 
 .chog-card {
-    padding: 12px;
-    border-radius: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8rem;
+    text-align: center;
+    padding: var(--spacing-md) var(--spacing-sm);
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
 }
 
-.chog-card.shubh {
-    background: rgba(34, 197, 94, 0.12);
-    border: 1px solid rgba(34, 197, 94, 0.2);
+.chog-card.good {
+    border-color: rgba(74, 222, 128, 0.3);
+    background: var(--success-bg);
 }
 
-.chog-card.labh {
-    background: rgba(59, 130, 246, 0.12);
-    border: 1px solid rgba(59, 130, 246, 0.2);
+.chog-card.bad {
+    border-color: rgba(248, 113, 113, 0.2);
+    background: var(--danger-bg);
 }
 
-.chog-card.amrit {
-    background: rgba(234, 179, 8, 0.12);
-    border: 1px solid rgba(234, 179, 8, 0.2);
-}
-
-.chog-card.chal {
-    background: rgba(168, 85, 247, 0.12);
-    border: 1px solid rgba(168, 85, 247, 0.2);
-}
-
-.chog-card.rog {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.15);
-}
-
-.chog-card.kaal {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.15);
-}
-
-.chog-card.udveg {
-    background: rgba(251, 146, 60, 0.1);
-    border: 1px solid rgba(251, 146, 60, 0.15);
+.chog-card.current {
+    box-shadow: var(--shadow-glow);
+    border-color: var(--primary);
+    transform: scale(1.05);
 }
 
 .chog-name {
-    font-weight: 500;
+    display: block;
+    font-family: var(--font-hindi);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.chog-english {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 2px;
 }
 
 .chog-time {
-    color: var(--text-muted);
+    display: block;
     font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
 }
 
-/* Events Section */
-.events-section {
-    padding: 0 16px 16px;
+.current-chog-alert {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
 }
 
-/* Region Tabs */
+.current-chog-alert.good {
+    border-color: var(--success);
+    background: var(--success-bg);
+}
+
+.current-chog-alert.bad {
+    border-color: var(--danger);
+    background: var(--danger-bg);
+}
+
+.chog-icon {
+    font-size: 1.5rem;
+}
+
+.chog-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.chog-info .chog-name {
+    font-size: 1rem;
+}
+
+.chog-time-left {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* === TARA BALA === */
+.tara-container {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    padding: var(--spacing-lg);
+}
+
+.tara-intro {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.nakshatra-select, .setting-select {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    cursor: pointer;
+}
+
+.nakshatra-select option, .setting-select option {
+    background: var(--bg-secondary);
+}
+
+.save-btn, .generate-btn {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: var(--primary);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--bg-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.save-btn:hover, .generate-btn:hover {
+    background: var(--primary-dark);
+    box-shadow: var(--shadow-glow);
+}
+
+.tara-meter {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-md);
+}
+
+.tara-meter.good {
+    border: 1px solid var(--success);
+}
+
+.tara-meter.bad {
+    border: 1px solid var(--danger);
+}
+
+.tara-icon {
+    font-size: 2rem;
+}
+
+.tara-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tara-name {
+    font-family: var(--font-hindi);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.tara-english {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.tara-badge {
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.tara-badge.good {
+    background: var(--success-bg);
+    color: var(--success);
+}
+
+.tara-badge.bad {
+    background: var(--danger-bg);
+    color: var(--danger);
+}
+
+.tara-desc {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-md);
+}
+
+/* === EVENTS === */
 .region-tabs {
     display: flex;
-    gap: 8px;
+    gap: var(--spacing-xs);
     overflow-x: auto;
-    padding-bottom: 12px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    -webkit-overflow-scrolling: touch;
 }
 
 .region-tabs::-webkit-scrollbar {
@@ -861,48 +819,54 @@ body {
 .region-tab {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
     background: var(--bg-card);
     border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    font-family: 'Outfit', sans-serif;
-    cursor: pointer;
-    transition: all 0.2s;
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
     white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.region-tab .region-icon {
-    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .region-tab.active {
-    background: var(--accent-gold);
-    border-color: var(--accent-gold);
-    color: #000;
-    font-weight: 600;
+    background: var(--primary);
+    color: var(--bg-primary);
+    border-color: var(--primary);
+}
+
+.region-icon {
+    font-size: 1rem;
 }
 
 .events-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--spacing-md);
+}
+
+.no-events {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-muted);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--glass-border);
 }
 
 .event-card {
-    background: var(--bg-card);
-    border: 1px solid var(--glass-border);
-    border-radius: 14px;
-    padding: 14px;
     display: flex;
-    gap: 12px;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
 }
 
 .event-icon {
-    font-size: 1.8rem;
+    font-size: 2rem;
     flex-shrink: 0;
 }
 
@@ -914,574 +878,357 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 4px;
+    margin-bottom: var(--spacing-xs);
 }
 
 .event-name {
-    font-size: 0.95rem;
-    font-weight: 500;
-    font-family: 'Tiro Devanagari Sanskrit', serif;
+    display: block;
+    font-family: var(--font-hindi);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
 .event-name-en {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    font-family: 'Outfit', sans-serif;
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
 }
 
 .event-type {
-    font-size: 0.6rem;
-    color: #000;
-    background: var(--accent-gold);
+    font-size: 0.7rem;
     padding: 2px 8px;
-    border-radius: 10px;
-    font-weight: 600;
+    background: var(--primary-glow);
+    color: var(--primary);
+    border-radius: var(--radius-full);
     text-transform: uppercase;
 }
 
 .event-desc {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
-    margin-bottom: 6px;
-    line-height: 1.3;
+    margin-top: var(--spacing-xs);
 }
 
 .event-naivedya {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 10px;
-    background: rgba(34, 197, 94, 0.1);
-    border-radius: 8px;
-    font-size: 0.7rem;
-    color: var(--shubh-green);
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+    font-size: 0.8rem;
+    color: var(--success);
 }
 
-.event-naivedya i {
+.event-naivedya svg {
     width: 14px;
     height: 14px;
 }
 
-.event-ritual {
-    font-size: 0.7rem;
-    color: var(--accent-orange);
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    margin-top: 6px;
-    font-style: italic;
-}
-
-.no-events {
-    text-align: center;
-    padding: 24px;
-    color: var(--text-dim);
-    font-size: 0.8rem;
-    background: var(--bg-card);
-    border-radius: 14px;
-    border: 1px dashed var(--glass-border);
-}
-
-/* Modal */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 1000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    backdrop-filter: blur(10px);
-}
-
-.modal-overlay.active {
-    display: flex;
-}
-
-.modal-content {
-    background: linear-gradient(180deg, rgba(30, 20, 50, 0.98), rgba(10, 6, 18, 0.98));
-    border-radius: 20px;
-    width: 100%;
-    max-width: 340px;
-    border: 1px solid var(--glass-border);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    border-bottom: 1px solid var(--glass-border);
-}
-
-.modal-header h3 {
-    font-size: 1rem;
-}
-
-.close-btn {
-    width: 30px;
-    height: 30px;
-    background: var(--bg-card);
-    border: 1px solid var(--glass-border);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text);
-    cursor: pointer;
-}
-
-.close-btn i {
-    width: 14px;
-    height: 14px;
-}
-
-.modal-body {
-    padding: 16px;
-}
-
-.location-option {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px;
-    background: var(--bg-card);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    color: var(--text);
-    font-size: 0.9rem;
-    font-family: 'Outfit', sans-serif;
-    cursor: pointer;
-}
-
-.location-option i {
-    width: 20px;
-    height: 20px;
-    color: var(--accent-gold);
-}
-
-.location-divider {
-    text-align: center;
-    padding: 12px;
-    color: var(--text-dim);
-    font-size: 0.75rem;
-}
-
-.city-input {
-    width: 100%;
-    padding: 12px 14px;
-    background: var(--bg-card);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    color: var(--text);
-    font-size: 0.9rem;
-    font-family: 'Outfit', sans-serif;
-    outline: none;
-}
-
-.city-input::placeholder {
-    color: var(--text-dim);
-}
-
-.city-input:focus {
-    border-color: var(--accent-gold);
-}
-
-.city-suggestions {
-    margin-top: 8px;
-    max-height: 120px;
-    overflow-y: auto;
-}
-
-.city-item {
-    padding: 10px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.85rem;
-}
-
-.city-item:hover {
-    background: var(--bg-card);
-}
-
-/* Tara Bala Section */
-.tara-section {
-    padding: 0 16px 16px;
-}
-
-.tara-container {
-    background: var(--bg-card);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 16px;
-}
-
-.tara-setup {
-    text-align: center;
-}
-
-.tara-intro {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-}
-
-.nakshatra-select {
-    width: 100%;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    color: var(--text);
-    font-size: 0.9rem;
-    font-family: 'Outfit', sans-serif;
-    margin-bottom: 12px;
-    cursor: pointer;
-}
-
-.nakshatra-select option {
-    background: #1a1025;
-    color: var(--text);
-}
-
-.save-nakshatra-btn {
-    width: 100%;
-    padding: 12px;
-    background: var(--accent-gold);
-    border: none;
-    border-radius: 12px;
-    color: #000;
-    font-size: 0.9rem;
-    font-weight: 600;
-    font-family: 'Outfit', sans-serif;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.save-nakshatra-btn:active {
-    transform: scale(0.98);
-}
-
-.tara-result {
-    text-align: center;
-}
-
-.tara-meter {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px;
-    border-radius: 14px;
-    margin-bottom: 12px;
-}
-
-.tara-meter.good {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05));
-    border: 1px solid rgba(34, 197, 94, 0.3);
-}
-
-.tara-meter.bad {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
-    border: 1px solid rgba(239, 68, 68, 0.3);
-}
-
-.tara-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-}
-
-.tara-meter.good .tara-icon {
-    background: rgba(34, 197, 94, 0.2);
-}
-
-.tara-meter.bad .tara-icon {
-    background: rgba(239, 68, 68, 0.2);
-}
-
-.tara-info {
-    flex: 1;
-    text-align: left;
-}
-
-.tara-name {
-    display: block;
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-}
-
-.tara-english {
-    display: block;
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-top: 2px;
-}
-
-.tara-badge {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.tara-meter.good .tara-badge {
-    background: var(--shubh-green);
-    color: #fff;
-}
-
-.tara-meter.bad .tara-badge {
-    background: var(--ashubh-red);
-    color: #fff;
-}
-
-.tara-desc {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-    line-height: 1.4;
-}
-
-.change-star-btn {
-    background: transparent;
-    border: 1px solid var(--glass-border);
-    border-radius: 8px;
-    padding: 8px 16px;
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    font-family: 'Outfit', sans-serif;
-    cursor: pointer;
-}
-
-.change-star-btn:hover {
-    background: var(--bg-card);
-    color: var(--text);
-}
-
-/* Sankalpa Generator */
-.sankalpa-section {
-    padding: 0 16px 16px;
-}
-
+/* === SANKALPA === */
 .sankalpa-container {
     background: var(--bg-card);
+    border-radius: var(--radius-lg);
     border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 16px;
-}
-
-.sankalpa-setup {
-    text-align: center;
+    padding: var(--spacing-lg);
 }
 
 .sankalpa-intro {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-    line-height: 1.4;
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
 }
 
 .input-group {
-    margin-bottom: 12px;
-    text-align: left;
+    margin-bottom: var(--spacing-md);
 }
 
 .input-group label {
     display: block;
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
 }
 
 .sankalpa-input {
     width: 100%;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.3);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
     border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    color: var(--text);
-    font-size: 0.9rem;
-    font-family: 'Outfit', sans-serif;
-    outline: none;
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: var(--font-hindi);
 }
 
 .sankalpa-input:focus {
-    border-color: var(--accent-gold);
-}
-
-.tradition-toggle {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-}
-
-.tradition-toggle span {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-}
-
-.toggle-btns {
-    display: flex;
-    flex: 1;
-    gap: 6px;
-}
-
-.tradition-btn {
-    flex: 1;
-    padding: 8px 12px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--glass-border);
-    border-radius: 8px;
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    font-family: 'Outfit', sans-serif;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.tradition-btn.active {
-    background: var(--accent-gold);
-    border-color: var(--accent-gold);
-    color: #000;
-    font-weight: 600;
-}
-
-.generate-btn {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
-    border: none;
-    border-radius: 12px;
-    color: #000;
-    font-size: 0.9rem;
-    font-weight: 600;
-    font-family: 'Outfit', sans-serif;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.2s;
-}
-
-.generate-btn:active {
-    transform: scale(0.98);
-}
-
-.generate-btn i {
-    width: 18px;
-    height: 18px;
-}
-
-.sankalpa-result {
-    text-align: left;
+    outline: none;
+    border-color: var(--primary);
 }
 
 .sankalpa-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
 }
 
 .sankalpa-label {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
 }
 
 .sankalpa-actions {
     display: flex;
-    gap: 6px;
+    gap: var(--spacing-sm);
 }
 
 .action-btn {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: var(--bg-secondary);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--glass-border);
-    border-radius: 8px;
-    color: var(--text-muted);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
 }
 
 .action-btn:hover {
-    background: var(--accent-gold);
-    color: #000;
+    background: var(--primary);
+    color: var(--bg-primary);
+    border-color: var(--primary);
 }
 
-.action-btn i {
+.action-btn svg {
     width: 16px;
     height: 16px;
 }
 
 .sankalpa-text {
-    font-family: 'Tiro Devanagari Sanskrit', serif;
+    font-family: var(--font-hindi);
     font-size: 0.95rem;
     line-height: 1.8;
-    padding: 14px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    margin-bottom: 14px;
-    color: var(--accent-gold);
-}
-
-.sankalpa-breakdown {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 14px;
-}
-
-.breakdown-item {
-    background: rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.breakdown-label {
-    display: block;
-    font-size: 0.6rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-}
-
-.breakdown-value {
-    display: block;
-    font-family: 'Tiro Devanagari Sanskrit', serif;
-    font-size: 0.8rem;
-    color: var(--text);
+    color: var(--text-primary);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    white-space: pre-wrap;
+    margin-bottom: var(--spacing-md);
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .edit-btn {
-    width: 100%;
-    padding: 10px;
     background: transparent;
     border: 1px solid var(--glass-border);
-    border-radius: 10px;
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    font-family: 'Outfit', sans-serif;
+    color: var(--text-secondary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
 }
 
 .edit-btn:hover {
+    background: var(--glass-bg);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* === MODALS === */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: var(--spacing-lg);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 400px;
+    max-height: 80vh;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.modal-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+}
+
+.close-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.modal-body {
+    padding: var(--spacing-lg);
+    overflow-y: auto;
+    max-height: calc(80vh - 80px);
+}
+
+/* Settings Modal */
+.setting-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.setting-group:last-child {
+    margin-bottom: 0;
+}
+
+.setting-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.setting-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: var(--spacing-xs);
+}
+
+/* Location Modal */
+.location-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: var(--primary-glow);
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-lg);
+    color: var(--primary);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.location-option:hover {
+    background: var(--primary);
+    color: var(--bg-primary);
+}
+
+.location-option svg {
+    width: 24px;
+    height: 24px;
+}
+
+.location-divider {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    padding: var(--spacing-md) 0;
+}
+
+.city-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.city-btn {
+    padding: var(--spacing-md);
     background: var(--bg-card);
-    color: var(--text);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.city-btn:hover {
+    background: var(--primary-glow);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 480px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .choghadiya-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .panchang-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .panchang-card.full-width {
+        grid-column: span 1;
+    }
+    
+    .timings-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .city-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.panchang-card, .timing-card, .event-card {
+    animation: fadeIn 0.4s ease;
 }
