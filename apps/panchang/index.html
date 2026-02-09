@@ -6,37 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>पञ्चाङ्ग - Daily Guide</title>
     <meta name="description" content="Your daily Hindu calendar guide. Know the right time for the right action.">
-    <link rel="stylesheet" href="style.css">
+
+    <!-- M3 Fonts: Inter, Noto Sans Devanagari, Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="app-container">
-        <!-- Minimal Header -->
+        <!-- Header -->
         <header class="app-header">
-            <a href="../../index.html" class="back-btn" aria-label="Back">
-                <i data-lucide="chevron-left"></i>
+            <a href="../../index.html" class="icon-btn" aria-label="Back">
+                <span class="material-symbols-rounded">arrow_back</span>
             </a>
-            <div class="location-pill" id="location-pill">
-                <i data-lucide="map-pin"></i>
+            <div class="location-chip" id="location-pill">
+                <span class="material-symbols-rounded filled">location_on</span>
                 <span id="location-name">Delhi</span>
             </div>
             <button id="settings-btn" class="icon-btn" aria-label="Settings">
-                <i data-lucide="settings"></i>
+                <span class="material-symbols-rounded">settings</span>
             </button>
         </header>
 
         <!-- Date Selector -->
         <div class="date-bar">
-            <button id="prev-day" class="date-nav"><i data-lucide="chevron-left"></i></button>
+            <button id="prev-day" class="icon-btn">
+                <span class="material-symbols-rounded">chevron_left</span>
+            </button>
             <div class="date-center" id="date-center">
-                <span id="hindu-date" class="hindu-date">माघ कृष्ण द्वादशी</span>
+                <span id="hindu-date" class="hindu-date">मार्गशीर्ष कृष्ण नवमी</span>
                 <span id="gregorian-date" class="gregorian-date">9 Feb 2026</span>
             </div>
-            <button id="next-day" class="date-nav"><i data-lucide="chevron-right"></i></button>
+            <button id="next-day" class="icon-btn">
+                <span class="material-symbols-rounded">chevron_right</span>
+            </button>
         </div>
 
         <!-- SECTION 1: Today at a Glance (The "What") -->
@@ -51,30 +62,30 @@
                 <div class="moon-info">
                     <div class="tithi-main">
                         <span id="tithi-label" class="tithi-label">तिथि</span>
-                        <span id="tithi-name" class="tithi-name">कृष्ण द्वादशी</span>
+                        <span id="tithi-name" class="tithi-name">कृष्ण नवमी</span>
                     </div>
-                    <span id="tithi-end" class="tithi-end">Till 14:32</span>
+                    <span id="tithi-end" class="tithi-end">Till 20:44</span>
                 </div>
             </div>
 
             <div class="quick-facts">
                 <div class="fact">
-                    <i data-lucide="star"></i>
-                    <div>
+                    <span class="material-symbols-rounded filled">star</span>
+                    <div class="fact-content">
                         <span class="fact-label">Nakshatra</span>
-                        <span id="nakshatra-name" class="fact-value">स्वाति</span>
+                        <span id="nakshatra-name" class="fact-value">विशाखा</span>
                     </div>
                 </div>
                 <div class="fact">
-                    <i data-lucide="sunrise"></i>
-                    <div>
+                    <span class="material-symbols-rounded filled">wb_twilight</span>
+                    <div class="fact-content">
                         <span class="fact-label">Sunrise</span>
-                        <span id="sunrise" class="fact-value">06:52</span>
+                        <span id="sunrise" class="fact-value">07:05</span>
                     </div>
                 </div>
                 <div class="fact">
-                    <i data-lucide="sunset"></i>
-                    <div>
+                    <span class="material-symbols-rounded filled">nights_stay</span>
+                    <div class="fact-content">
                         <span class="fact-label">Sunset</span>
                         <span id="sunset" class="fact-value">18:05</span>
                     </div>
@@ -84,11 +95,14 @@
 
         <!-- SECTION 2: Right Now (The "When") -->
         <section class="timing-section">
-            <h2 class="section-title">⏰ Right Now</h2>
+            <h2 class="section-title">
+                <span class="material-symbols-rounded">schedule</span>
+                Right Now
+            </h2>
 
             <!-- Current Status Banner -->
             <div id="current-status" class="status-banner good">
-                <span class="status-icon">✅</span>
+                <span class="status-icon material-symbols-rounded filled">check_circle</span>
                 <div class="status-text">
                     <span id="status-title" class="status-title">Auspicious Time</span>
                     <span id="status-desc" class="status-desc">लाभ Choghadiya until 10:30</span>
@@ -99,20 +113,20 @@
             <div class="time-blocks">
                 <div class="time-block good" id="good-times">
                     <div class="block-header">
-                        <span class="block-icon">✅</span>
+                        <span class="material-symbols-rounded filled">verified</span>
                         <span class="block-title">Good Times Today</span>
                     </div>
                     <div id="good-times-list" class="block-list">
                         <div class="time-row">
                             <span class="time-name">Brahma Muhurta</span>
-                            <span class="time-range">05:09 - 05:57</span>
+                            <span class="time-range">05:29 - 06:17</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="time-block avoid" id="avoid-times">
                     <div class="block-header">
-                        <span class="block-icon">⚠️</span>
+                        <span class="material-symbols-rounded filled">warning</span>
                         <span class="block-title">Avoid These Times</span>
                     </div>
                     <div id="avoid-times-list" class="block-list">
@@ -127,7 +141,10 @@
 
         <!-- SECTION 3: Upcoming (The "Plan") -->
         <section class="upcoming-section">
-            <h2 class="section-title">📅 Coming Up</h2>
+            <h2 class="section-title">
+                <span class="material-symbols-rounded">event</span>
+                Coming Up
+            </h2>
 
             <!-- Today's Events -->
             <div id="today-events" class="events-today">
@@ -144,7 +161,7 @@
         <section class="details-section">
             <button class="expand-btn" id="expand-details">
                 <span>More Details</span>
-                <i data-lucide="chevron-down"></i>
+                <span class="material-symbols-rounded">expand_more</span>
             </button>
 
             <div id="details-content" class="details-content" style="display: none;">
@@ -154,12 +171,12 @@
                     <div class="detail-grid">
                         <div class="detail-item">
                             <span class="detail-label">तिथि</span>
-                            <span id="d-tithi" class="detail-value">कृष्ण द्वादशी</span>
-                            <span id="d-tithi-time" class="detail-time">Till 14:32</span>
+                            <span id="d-tithi" class="detail-value">कृष्ण नवमी</span>
+                            <span id="d-tithi-time" class="detail-time">Till 20:44</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">नक्षत्र</span>
-                            <span id="d-nakshatra" class="detail-value">स्वाति</span>
+                            <span id="d-nakshatra" class="detail-value">विशाखा</span>
                             <span id="d-nakshatra-time" class="detail-time">Till 18:45</span>
                         </div>
                         <div class="detail-item">
@@ -169,119 +186,105 @@
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">करण</span>
-                            <span id="d-karana" class="detail-value">वणिज</span>
-                            <span id="d-karana-time" class="detail-time">Till 14:32</span>
+                            <span id="d-karana" class="detail-value">विष्टि</span>
+                            <span id="d-karana-time" class="detail-time">Till 10:23</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Choghadiya Table -->
+                <!-- Choghadiya -->
                 <div class="detail-group">
-                    <h3>Choghadiya</h3>
+                    <h3>चौघड़िया</h3>
                     <div class="choghadiya-tabs">
                         <button class="chog-tab active" data-period="day">Day</button>
                         <button class="chog-tab" data-period="night">Night</button>
                     </div>
-                    <div id="choghadiya-list" class="choghadiya-list"></div>
+                    <div id="choghadiya-list" class="choghadiya-list">
+                        <!-- Populated by JS -->
+                    </div>
                 </div>
 
                 <!-- Calendar Info -->
                 <div class="detail-group">
-                    <h3>Calendar</h3>
-                    <div class="calendar-info">
-                        <div class="cal-item">
-                            <span>Samvatsara</span>
-                            <span id="d-samvatsara">प्रभव</span>
-                        </div>
-                        <div class="cal-item">
-                            <span>Vikram Samvat</span>
-                            <span id="d-vikram">2083</span>
-                        </div>
-                        <div class="cal-item">
-                            <span>Shaka Samvat</span>
-                            <span id="d-shaka">1948</span>
-                        </div>
-                        <div class="cal-item">
-                            <span>Month</span>
-                            <span id="d-month">माघ</span>
-                        </div>
-                        <div class="cal-item">
-                            <span>Ayana</span>
-                            <span id="d-ayana">उत्तरायण</span>
-                        </div>
+                    <h3>पञ्चाङ्ग Calendar</h3>
+                    <div id="calendar-info" class="calendar-info">
+                        <!-- Populated by JS -->
                     </div>
                 </div>
             </div>
         </section>
+    </div>
 
-        <!-- Help Tooltip -->
-        <div id="help-tooltip" class="help-tooltip" style="display: none;">
-            <button class="tooltip-close" id="close-tooltip"><i data-lucide="x"></i></button>
-            <h4 id="tooltip-title"></h4>
-            <p id="tooltip-text"></p>
-        </div>
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Settings</h3>
+                <button class="close-btn" id="close-settings">
+                    <span class="material-symbols-rounded">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button class="location-auto-btn" id="detect-location">
+                    <span class="material-symbols-rounded">my_location</span>
+                    Use My Location
+                </button>
 
-        <!-- Settings Modal -->
-        <div id="settings-modal" class="modal-overlay">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Settings</h3>
-                    <button id="close-settings" class="close-btn"><i data-lucide="x"></i></button>
+                <div class="setting-item">
+                    <label>Or select a city:</label>
+                    <div class="city-grid" id="city-grid">
+                        <button class="city-btn" data-city="delhi">Delhi</button>
+                        <button class="city-btn" data-city="mumbai">Mumbai</button>
+                        <button class="city-btn" data-city="bangalore">Bangalore</button>
+                        <button class="city-btn" data-city="chennai">Chennai</button>
+                        <button class="city-btn" data-city="kolkata">Kolkata</button>
+                        <button class="city-btn" data-city="hyderabad">Hyderabad</button>
+                        <button class="city-btn" data-city="pune">Pune</button>
+                        <button class="city-btn" data-city="ahmedabad">Ahmedabad</button>
+                        <button class="city-btn" data-city="jaipur">Jaipur</button>
+                        <button class="city-btn" data-city="lucknow">Lucknow</button>
+                        <button class="city-btn" data-city="varanasi">Varanasi</button>
+                        <button class="city-btn" data-city="ujjain">Ujjain</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div class="setting-item">
-                        <label>Location</label>
-                        <select id="city-select" class="setting-input">
-                            <option value="28.6139,77.2090">New Delhi</option>
-                            <option value="19.0760,72.8777">Mumbai</option>
-                            <option value="13.0827,80.2707">Chennai</option>
-                            <option value="22.5726,88.3639">Kolkata</option>
-                            <option value="12.9716,77.5946">Bengaluru</option>
-                            <option value="23.0225,72.5714">Ahmedabad</option>
-                            <option value="17.3850,78.4867">Hyderabad</option>
-                            <option value="18.5204,73.8567">Pune</option>
-                            <option value="26.9124,75.7873">Jaipur</option>
-                            <option value="25.3176,82.9739">Varanasi</option>
-                        </select>
-                    </div>
-                    <div class="setting-item advanced">
-                        <label>Ayanamsa (Advanced)</label>
-                        <select id="ayanamsa-select" class="setting-input">
-                            <option value="lahiri">Lahiri (Recommended)</option>
-                            <option value="krishnamurti">Krishnamurti</option>
-                            <option value="raman">Raman</option>
-                        </select>
-                        <p class="setting-hint">Only change if you know what this means</p>
-                    </div>
+
+                <div class="setting-item advanced">
+                    <label>Ayanamsa System</label>
+                    <select id="ayanamsa-select" class="setting-input">
+                        <option value="lahiri" selected>Lahiri (Chitrapaksha)</option>
+                        <option value="krishnamurti">Krishnamurti (KP)</option>
+                        <option value="raman">B.V. Raman</option>
+                        <option value="yukteshwar">Sri Yukteshwar</option>
+                    </select>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Location Modal -->
-        <div id="location-modal" class="modal-overlay">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>📍 Select Location</h3>
-                    <button id="close-location" class="close-btn"><i data-lucide="x"></i></button>
-                </div>
-                <div class="modal-body">
-                    <button id="auto-location" class="location-auto-btn">
-                        <i data-lucide="locate"></i>
-                        <span>Use My Location</span>
-                    </button>
-                    <div class="city-grid" id="city-grid">
-                        <button class="city-btn" data-lat="28.6139" data-lon="77.2090">Delhi</button>
-                        <button class="city-btn" data-lat="19.0760" data-lon="72.8777">Mumbai</button>
-                        <button class="city-btn" data-lat="13.0827" data-lon="80.2707">Chennai</button>
-                        <button class="city-btn" data-lat="22.5726" data-lon="88.3639">Kolkata</button>
-                        <button class="city-btn" data-lat="12.9716" data-lon="77.5946">Bengaluru</button>
-                        <button class="city-btn" data-lat="23.0225" data-lon="72.5714">Ahmedabad</button>
-                        <button class="city-btn" data-lat="17.3850" data-lon="78.4867">Hyderabad</button>
-                        <button class="city-btn" data-lat="18.5204" data-lon="73.8567">Pune</button>
-                        <button class="city-btn" data-lat="26.9124" data-lon="75.7873">Jaipur</button>
-                        <button class="city-btn" data-lat="25.3176" data-lon="82.9739">Varanasi</button>
-                        <button class="city-btn" data-lat="30.7333" data-lon="76.7794">Chandigarh</button>
-                        <button class="city-btn" data-lat="26.8467" data-lon="80.9462">Lucknow</button>
+    <!-- Location Modal -->
+    <div class="modal-overlay" id="location-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Set Location</h3>
+                <button class="close-btn" id="close-location">
+                    <span class="material-symbols-rounded">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button class="location-auto-btn" id="detect-location-2">
+                    <span class="material-symbols-rounded">my_location</span>
+                    Detect My Location
+                </button>
+
+                <div class="setting-item">
+                    <label>Popular Cities:</label>
+                    <div class="city-grid" id="city-grid-2">
+                        <button class="city-btn" data-city="delhi">Delhi</button>
+                        <button class="city-btn" data-city="mumbai">Mumbai</button>
+                        <button class="city-btn" data-city="bangalore">Bangalore</button>
+                        <button class="city-btn" data-city="chennai">Chennai</button>
+                        <button class="city-btn" data-city="kolkata">Kolkata</button>
+                        <button class="city-btn" data-city="hyderabad">Hyderabad</button>
                     </div>
                 </div>
             </div>
@@ -293,7 +296,6 @@
     <script src="lib/vedic-engine.js"></script>
     <script src="lib/festival-calculator.js"></script>
     <script src="script.js"></script>
-    <script>lucide.createIcons();</script>
 </body>
 
 </html>
