@@ -198,8 +198,24 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTiming();
             updateUpcoming();
             updateDetails();
+            updateTodayIndicator();
         } catch (error) {
             console.error('Error:', error);
+        }
+    }
+
+    // === TODAY INDICATOR ===
+    function updateTodayIndicator() {
+        const today = new Date();
+        const isToday = currentDate.toDateString() === today.toDateString();
+        const dateBar = document.querySelector('.date-bar');
+        const todayBadge = document.getElementById('today-badge');
+
+        if (dateBar) {
+            dateBar.classList.toggle('not-today', !isToday);
+        }
+        if (todayBadge) {
+            todayBadge.style.display = isToday ? 'none' : 'inline-block';
         }
     }
 
@@ -618,27 +634,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === EVENT LISTENERS ===
     function setupEventListeners() {
-        // Date navigation
+        // Date navigation (uses navigateDate for slide animation)
         const prevBtn = document.getElementById('prev-day');
         const nextBtn = document.getElementById('next-day');
         const dateCenter = document.getElementById('date-center');
 
         if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                const newDate = new Date(currentDate);
-                newDate.setDate(newDate.getDate() - 1);
-                currentDate = newDate;
-                updateDisplay();
-            });
+            prevBtn.addEventListener('click', () => navigateDate(-1, 'slide-right'));
         }
 
         if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                const newDate = new Date(currentDate);
-                newDate.setDate(newDate.getDate() + 1);
-                currentDate = newDate;
-                updateDisplay();
-            });
+            nextBtn.addEventListener('click', () => navigateDate(1, 'slide-left'));
         }
 
         if (dateCenter) {
@@ -647,6 +653,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateDisplay();
             });
         }
+
+        // Share button
+        document.getElementById('share-btn')?.addEventListener('click', sharePanchang);
 
         // Expand details
         document.getElementById('expand-details')?.addEventListener('click', () => {
@@ -785,7 +794,112 @@ document.addEventListener('DOMContentLoaded', () => {
         return data;
     }
 
+    // === SWIPE NAVIGATION ===
+    function setupSwipe() {
+        const container = document.querySelector('.app-container');
+        if (!container) return;
+
+        let startX = 0;
+        let startY = 0;
+        let swiping = false;
+
+        container.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            swiping = true;
+        }, { passive: true });
+
+        container.addEventListener('touchend', (e) => {
+            if (!swiping) return;
+            swiping = false;
+
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const diffX = endX - startX;
+            const diffY = endY - startY;
+
+            // Only trigger if horizontal swipe is dominant and > 60px
+            if (Math.abs(diffX) > 60 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
+                if (diffX < 0) {
+                    // Swipe left → next day
+                    navigateDate(1, 'slide-left');
+                } else {
+                    // Swipe right → previous day
+                    navigateDate(-1, 'slide-right');
+                }
+            }
+        }, { passive: true });
+    }
+
+    function navigateDate(delta, animClass) {
+        const container = document.querySelector('.app-container');
+        const newDate = new Date(currentDate);
+        newDate.setDate(newDate.getDate() + delta);
+        currentDate = newDate;
+
+        if (container && animClass) {
+            container.classList.remove('slide-left', 'slide-right');
+            void container.offsetWidth; // Force reflow
+            container.classList.add(animClass);
+            setTimeout(() => container.classList.remove(animClass), 300);
+        }
+
+        updateDisplay();
+    }
+
+    // === SHARE FEATURE ===
+    function sharePanchang() {
+        if (!currentPanchang || currentPanchang.error) return;
+
+        const dateStr = currentDate.toLocaleDateString('en-IN', {
+            weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+        });
+
+        const text = [
+            `🙏 पञ्चाङ्ग — ${dateStr}`,
+            `📍 ${userLocation.city}`,
+            '',
+            `🗓 ${currentPanchang.vara?.nameHi || ''} (${currentPanchang.vara?.name || ''})`,
+            `🌙 तिथि: ${currentPanchang.tithi?.fullName || ''}`,
+            `⭐ नक्षत्र: ${currentPanchang.nakshatra?.name || ''}`,
+            `🧘 योग: ${currentPanchang.yoga?.name || ''}`,
+            `📿 करण: ${currentPanchang.karana?.name || ''}`,
+            '',
+            `🌅 Sunrise: ${currentPanchang.sunTimes?.sunrise || ''}`,
+            `🌇 Sunset: ${currentPanchang.sunTimes?.sunset || ''}`,
+            '',
+            `— via पञ्चाङ्ग App`
+        ].join('\n');
+
+        if (navigator.share) {
+            navigator.share({
+                title: `पञ्चाङ्ग — ${dateStr}`,
+                text: text
+            }).catch(() => { });
+        } else {
+            // Fallback: copy to clipboard
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard! 📋');
+            }).catch(() => {
+                showToast('Could not share');
+            });
+        }
+    }
+
+    function showToast(message) {
+        let toast = document.querySelector('.share-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.className = 'share-toast';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
     // === START ===
     init();
+    setupSwipe();
 });
 
