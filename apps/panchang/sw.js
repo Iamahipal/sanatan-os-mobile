@@ -2,7 +2,7 @@
  * Panchang Service Worker - Offline Support
  */
 
-const CACHE_NAME = 'panchang-v1';
+const CACHE_NAME = 'panchang-v2-fix-font-nav';
 const ASSETS = [
     './',
     './index.html',
