@@ -250,6 +250,7 @@ body {
     text-decoration: none;
     transition: background var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
     position: relative;
+    overflow: hidden; /* Prevent text spill */
 }
 
 .icon-btn:hover {
@@ -747,6 +748,7 @@ body {
 
 .event-icon {
     font-size: 40px;
+    overflow: hidden;
 }
 
 .event-info {
