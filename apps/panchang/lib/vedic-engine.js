@@ -735,6 +735,35 @@ const VedicEngine = (function () {
 
     // === MAIN API ===
 
+    // === DISHA SHOOL (Travel Prohibition) ===
+    function getDishaShool(date) {
+        const day = date.getDay(); // 0 = Sunday
+        const rules = {
+            1: { direction: 'East', directionHi: 'पूर्व', remedy: 'Eat Mirror/Sugar' }, // Mon
+            6: { direction: 'East', directionHi: 'पूर्व', remedy: 'Eat Ginger/Urad' },  // Sat
+            4: { direction: 'South', directionHi: 'दक्षिण', remedy: 'Eat Curd/Cumin' }, // Thu
+            0: { direction: 'West', directionHi: 'पश्चिम', remedy: 'Eat Paan/Ghee' },   // Sun
+            5: { direction: 'West', directionHi: 'पश्चिम', remedy: 'Eat Barley/Rai' },  // Fri
+            2: { direction: 'North', directionHi: 'उत्तर', remedy: 'Eat Jaggery/Hari Dhaniya' }, // Tue
+            3: { direction: 'North', directionHi: 'उत्तर', remedy: 'Eat Dhaniya/Sesame' },     // Wed
+        };
+        return rules[day];
+    }
+
+    // === PANCHAK (Inauspicious Period) ===
+    function getPanchak(moonLong) {
+        // Moon in Aquarius (300°) to Pisces (360°)
+        // Specifically starts from Dhanishtha 3rd Pada (approx 293°20')?
+        // Simpler rule: Moon in Kumbha (Aquarius) or Meena (Pisces)
+        // Aquarius = 300-330, Pisces = 330-360
+        // Actually Panchak is approx last 5 nakshatras:
+        // Dhanishtha (1/2), Shatabhisha, P. Bhadrapada, U. Bhadrapada, Revati
+
+        // Dhanishtha starts at 293°20'
+
+        return moonLong >= 293.33 && moonLong < 360;
+    }
+
     function getPanchang(date, lat, lon, options = {}) {
         try {
             const dateObj = new Date(date);
@@ -773,6 +802,11 @@ const VedicEngine = (function () {
             const moonTimes = calculateMoonTimes(dateObj, lat, lon);
             const moonIllumination = getMoonIllumination(sunriseDate);
 
+            // Additional Calculations
+            const dishaShool = getDishaShool(sunriseDate);
+            const moonLong = getMoonLongitude(sunriseDate); // Needed for Panchak
+            const isPanchak = getPanchak(moonLong);
+
             // Weekday
             const vara = VARAS[dayOfWeek];
 
@@ -806,6 +840,10 @@ const VedicEngine = (function () {
                 gulikaKalam,
                 auspiciousMuhurats,
                 choghadiya,
+
+                // Guidance
+                dishaShool,
+                isPanchak,
 
                 // Ayanamsa used
                 ayanamsa: getAyanamsa(sunriseDate),

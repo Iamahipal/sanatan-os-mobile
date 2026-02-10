@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function updateGuidance() {
-        const { vara, nakshatra, yoga, tithi } = currentPanchang;
+        const { vara, nakshatra, yoga, tithi, dishaShool, isPanchak } = currentPanchang;
         const varaInfo = VARA_DATA[vara.index];
 
         // Update Vara display
@@ -186,8 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let avoidFor = varaInfo.avoid;
 
         // Modify based on yoga
-        if (!yoga.good) {
-            avoidFor = 'Major decisions, ' + avoidFor;
+        if (yoga.nameEn && (yoga.nameEn.includes('Vyatipata') || yoga.nameEn.includes('Vaidhriti'))) {
+            avoidFor = 'New ventures, ' + avoidFor;
         }
 
         // Modify based on nakshatra
@@ -199,6 +199,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Special tithi modifications
         if (tithi.index === 10 || tithi.index === 25) { // Ekadashi
             goodFor = 'Fasting, Spiritual practices, ' + goodFor;
+        }
+
+        // Disha Shool (Travel Prohibition)
+        if (dishaShool) {
+            avoidFor = `Travel to ${dishaShool.direction}, ` + avoidFor;
+        }
+
+        // Panchak Warning
+        if (isPanchak) {
+            avoidFor = '⚠️ Panchak (South travel, Roof construction), ' + avoidFor;
         }
 
         setText('good-for', goodFor);
