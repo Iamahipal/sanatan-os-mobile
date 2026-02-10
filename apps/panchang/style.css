@@ -266,11 +266,83 @@ body {
     margin-top: 2px;
 }
 
-/* === INSIGHT SECTION === */
-.insight-section {
-    padding: 16px 16px 0;
+/* === GUIDANCE SECTION === */
+.guidance-section {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
+/* Vara Card */
+.vara-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--md-sys-color-surface-container);
+    border-radius: var(--md-sys-shape-corner-medium);
+}
+
+.vara-icon {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.vara-info {
+    flex: 1;
+}
+
+.vara-name {
+    display: block;
+    font: var(--md-sys-typescale-title-medium);
+    font-family: var(--md-ref-typeface-brand);
+    color: var(--md-sys-color-on-surface);
+}
+
+.vara-deity {
+    display: block;
+    font: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-on-surface);
+    opacity: 0.7;
+}
+
+/* Day Quality - THE most important info */
+.day-quality {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    background: var(--md-sys-color-surface-container-high);
+    border-radius: var(--md-sys-shape-corner-large);
+}
+
+.quality-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.quality-row.good .quality-label {
+    color: var(--md-sys-color-primary);
+    min-width: 80px;
+    font: var(--md-sys-typescale-label-medium);
+    font-weight: 600;
+}
+
+.quality-row.avoid .quality-label {
+    color: var(--md-sys-color-error);
+    min-width: 80px;
+    font: var(--md-sys-typescale-label-medium);
+    font-weight: 600;
+}
+
+.quality-value {
+    font: var(--md-sys-typescale-body-medium);
+    color: var(--md-sys-color-on-surface);
+}
+
+/* Insight Card */
 .insight-card {
     display: flex;
     align-items: center;

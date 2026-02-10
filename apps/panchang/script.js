@@ -41,15 +41,47 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // === UPCOMING FESTIVALS ===
-    const UPCOMING_FESTIVALS = [
-        { date: new Date(2026, 1, 14), name: 'महाशिवरात्रि', nameEn: 'Maha Shivaratri', icon: '🔱' },
-        { date: new Date(2026, 2, 13), name: 'होली', nameEn: 'Holi', icon: '🎨' },
-        { date: new Date(2026, 3, 2), name: 'राम नवमी', nameEn: 'Ram Navami', icon: '🏹' },
-        { date: new Date(2026, 7, 14), name: 'जन्माष्टमी', nameEn: 'Janmashtami', icon: '🎂' },
-        { date: new Date(2026, 8, 26), name: 'गणेश चतुर्थी', nameEn: 'Ganesh Chaturthi', icon: '🐘' },
-        { date: new Date(2026, 9, 10), name: 'दशहरा', nameEn: 'Dussehra', icon: '🏹' },
-        { date: new Date(2026, 9, 29), name: 'दीपावली', nameEn: 'Diwali', icon: '🪔' }
-    ];
+    // Dynamically calculated using FestivalCalculator based on Tithi/Nakshatra
+    function getNextFestivals() {
+        if (typeof FestivalCalculator === 'undefined' || typeof VedicEngine === 'undefined') {
+            console.warn('FestivalCalculator or VedicEngine not loaded');
+            return [];
+        }
+
+        const festivals = [];
+        const start = new Date(currentDate);
+        let currentMonth = start.getMonth();
+        let currentYear = start.getFullYear();
+
+        // Scan next 6 months
+        for (let i = 0; i < 6; i++) {
+            const monthFestivals = FestivalCalculator.getFestivalsForMonth(
+                currentYear,
+                currentMonth,
+                VedicEngine,
+                location.lat,
+                location.lon
+            );
+
+            festivals.push(...monthFestivals);
+
+            // Next month
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+        }
+
+        // Filter: Only future festivals (including today)
+        const today = new Date(currentDate);
+        today.setHours(0, 0, 0, 0);
+
+        return festivals
+            .filter(f => f.gregorianDate >= today)
+            .sort((a, b) => a.gregorianDate - b.gregorianDate)
+            .slice(0, 7); // Show next 7 festivals
+    }
 
     // === INIT ===
     function init() {
@@ -117,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            updateGuidance();
             updateInsight();
             updateHeader();
             updateHero();
@@ -126,6 +159,50 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error:', error);
         }
+    }
+
+    // === VARA & DAY QUALITY (First Principles: What should I do today?) ===
+    const VARA_DATA = {
+        0: { icon: '☀️', deity: 'Lord Surya', deityHi: 'सूर्य देव', goodFor: 'Government work, Leadership, Health', avoid: 'Starting new ventures' },
+        1: { icon: '🌙', deity: 'Lord Shiva', deityHi: 'शिव', goodFor: 'Meditation, Fasting, Travel', avoid: 'Major purchases' },
+        2: { icon: '🔴', deity: 'Lord Hanuman', deityHi: 'हनुमान', goodFor: 'Property, Land deals, Sports', avoid: 'Starting journeys' },
+        3: { icon: '🟢', deity: 'Lord Vishnu', deityHi: 'विष्णु', goodFor: 'Education, Business, Communication', avoid: 'Nothing specific' },
+        4: { icon: '🟡', deity: 'Lord Brihaspati', deityHi: 'गुरु', goodFor: 'Weddings, Learning, Religious acts', avoid: 'Lending money' },
+        5: { icon: '⚪', deity: 'Goddess Lakshmi', deityHi: 'लक्ष्मी', goodFor: 'Shopping, Entertainment, Romance', avoid: 'Starting construction' },
+        6: { icon: '🔵', deity: 'Lord Shani', deityHi: 'शनि', goodFor: 'Oil massage, Iron work, Charity', avoid: 'New beginnings, Travel' }
+    };
+
+    function updateGuidance() {
+        const { vara, nakshatra, yoga, tithi } = currentPanchang;
+        const varaInfo = VARA_DATA[vara.index];
+
+        // Update Vara display
+        setText('vara-icon', varaInfo.icon);
+        setText('vara-name', vara.name);
+        setText('vara-deity', `${varaInfo.deity}'s Day`);
+
+        // Update Day Quality
+        let goodFor = varaInfo.goodFor;
+        let avoidFor = varaInfo.avoid;
+
+        // Modify based on yoga
+        if (!yoga.good) {
+            avoidFor = 'Major decisions, ' + avoidFor;
+        }
+
+        // Modify based on nakshatra
+        const travelNakshatras = ['Ashwini', 'Mrigashira', 'Pushya', 'Hasta', 'Anuradha', 'Revati'];
+        if (travelNakshatras.includes(nakshatra.nameEn)) {
+            goodFor = 'Travel, ' + goodFor;
+        }
+
+        // Special tithi modifications
+        if (tithi.index === 10 || tithi.index === 25) { // Ekadashi
+            goodFor = 'Fasting, Spiritual practices, ' + goodFor;
+        }
+
+        setText('good-for', goodFor);
+        setText('avoid-for', avoidFor);
     }
 
     function updateHeader() {
@@ -373,12 +450,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const todayEvents = document.getElementById('today-events');
         const upcomingList = document.getElementById('upcoming-festivals');
 
+        const upcoming = getNextFestivals();
+
+        // Today's events
         const today = new Date(currentDate);
         today.setHours(0, 0, 0, 0);
 
-        // Today's events
-        const eventsToday = UPCOMING_FESTIVALS.filter(f => {
-            const festDate = new Date(f.date);
+        const eventsToday = upcoming.filter(f => {
+            const festDate = new Date(f.gregorianDate);
             festDate.setHours(0, 0, 0, 0);
             return festDate.getTime() === today.getTime();
         });
@@ -386,32 +465,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (todayEvents) {
             todayEvents.innerHTML = eventsToday.map(e => `
                 <div class="event-card">
-                    <span class="event-icon">${e.icon}</span>
+                    <span class="event-icon">${e.icon || '🎉'}</span>
                     <div class="event-info">
                         <span class="event-name">${e.name}</span>
                         <span class="event-name-en">${e.nameEn}</span>
+                        ${e.significance ? `<p class="event-desc">${e.significance}</p>` : ''}
                     </div>
                 </div>
             `).join('');
         }
 
-        // Upcoming
-        const upcoming = UPCOMING_FESTIVALS
-            .filter(f => f.date > today)
-            .sort((a, b) => a.date - b.date)
-            .slice(0, 5);
+        // Upcoming (exclude today)
+        const futureEvents = upcoming.filter(f => {
+            const festDate = new Date(f.gregorianDate);
+            festDate.setHours(0, 0, 0, 0);
+            return festDate.getTime() > today.getTime();
+        }).slice(0, 5);
 
         if (upcomingList) {
-            if (upcoming.length === 0) {
-                upcomingList.innerHTML = '<div class="no-events">No upcoming festivals</div>';
+            if (futureEvents.length === 0) {
+                upcomingList.innerHTML = '<div class="no-events">No upcoming festivals in next 6 months</div>';
             } else {
-                upcomingList.innerHTML = upcoming.map(f => `
+                upcomingList.innerHTML = futureEvents.map(f => `
                     <div class="upcoming-item">
                         <div class="upcoming-date">
-                            <span class="upcoming-day">${f.date.getDate()}</span>
-                            <span class="upcoming-month">${f.date.toLocaleDateString('en', { month: 'short' })}</span>
+                            <span class="upcoming-day">${f.gregorianDate.getDate()}</span>
+                            <span class="upcoming-month">${f.gregorianDate.toLocaleDateString('en', { month: 'short' })}</span>
                         </div>
-                        <span class="upcoming-name">${f.icon} ${f.nameEn}</span>
+                        <span class="upcoming-name">${f.icon || '🎉'} ${f.nameEn}</span>
                     </div>
                 `).join('');
             }
