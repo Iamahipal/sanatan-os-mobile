@@ -85,10 +85,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === INIT ===
     function init() {
+        // Hide content initially to prevent "numbers" glitch
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.3s ease';
+
         registerServiceWorker();
         loadSettings();
+        setupTheme();
         setupEventListeners();
         updateDisplay();
+        updateDisplay();
+
+        // Reveal content
+        requestAnimationFrame(() => {
+            document.body.style.opacity = '1';
+        });
     }
 
     function registerServiceWorker() {
@@ -96,6 +107,38 @@ document.addEventListener('DOMContentLoaded', () => {
             navigator.serviceWorker.register('./sw.js')
                 .then(reg => console.log('SW registered'))
                 .catch(err => console.error('SW registration failed:', err));
+        }
+    }
+
+    // === THEME ===
+    function setupTheme() {
+        const toggleBtn = document.getElementById('theme-toggle');
+        const icon = toggleBtn?.querySelector('span');
+        
+        // 1. Get saved theme or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        let currentTheme = savedTheme || (systemDark ? 'dark' : 'light');
+
+        // 2. Apply theme
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+
+        // 3. Toggle listener
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', currentTheme);
+                localStorage.setItem('theme', currentTheme);
+                updateThemeIcon(currentTheme);
+            });
+        }
+
+        function updateThemeIcon(theme) {
+            if (icon) {
+                icon.textContent = theme === 'light' ? 'dark_mode' : 'light_mode';
+            }
         }
     }
 
@@ -577,20 +620,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // === EVENT LISTENERS ===
     function setupEventListeners() {
         // Date navigation
-        document.getElementById('prev-day')?.addEventListener('click', () => {
-            currentDate.setDate(currentDate.getDate() - 1);
-            updateDisplay();
-        });
+        const prevBtn = document.getElementById('prev-day');
+        const nextBtn = document.getElementById('next-day');
+        const dateCenter = document.getElementById('date-center');
 
-        document.getElementById('next-day')?.addEventListener('click', () => {
-            currentDate.setDate(currentDate.getDate() + 1);
-            updateDisplay();
-        });
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                const newDate = new Date(currentDate);
+                newDate.setDate(newDate.getDate() - 1);
+                currentDate = newDate;
+                console.log('Navigating to previous day:', currentDate);
+                updateDisplay();
+            });
+        } else {
+            console.error('Prev button not found');
+        }
 
-        document.getElementById('date-center')?.addEventListener('click', () => {
-            currentDate = new Date();
-            updateDisplay();
-        });
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                const newDate = new Date(currentDate);
+                newDate.setDate(newDate.getDate() + 1);
+                currentDate = newDate;
+                console.log('Navigating to next day:', currentDate);
+                updateDisplay();
+            });
+        } else {
+            console.error('Next button not found');
+        }
+
+        if (dateCenter) {
+            dateCenter.addEventListener('click', () => {
+                currentDate = new Date();
+                console.log('Resetting to today:', currentDate);
+                updateDisplay();
+            });
+        }
 
         // Expand details
         document.getElementById('expand-details')?.addEventListener('click', () => {

@@ -112,6 +112,64 @@
     --md-sys-motion-duration-long: 500ms;
 }
 
+/* === LIGHT THEME === */
+[data-theme="light"] {
+    /* Primary - Deep Orange/Saffron remains, but adjusted for light bg */
+    --md-sys-color-primary: #D86B00;
+    --md-sys-color-on-primary: #FFFFFF;
+    --md-sys-color-primary-container: #FFE0C2;
+    --md-sys-color-on-primary-container: #4D2600;
+
+    /* Secondary */
+    --md-sys-color-secondary: #7A5930;
+    --md-sys-color-on-secondary: #FFFFFF;
+    --md-sys-color-secondary-container: #FFDDB8;
+    --md-sys-color-on-secondary-container: #2A1F0D;
+
+    /* Tertiary */
+    --md-sys-color-tertiary: #4A6540;
+    --md-sys-color-on-tertiary: #FFFFFF;
+    --md-sys-color-tertiary-container: #CCEBC4;
+    --md-sys-color-on-tertiary-container: #082105;
+
+    /* Error */
+    --md-sys-color-error: #BA1A1A;
+    --md-sys-color-on-error: #FFFFFF;
+    --md-sys-color-error-container: #FFDAD6;
+    --md-sys-color-on-error-container: #410002;
+
+    /* Success */
+    --md-sys-color-success: #2E6C31;
+    --md-sys-color-on-success: #FFFFFF;
+    --md-sys-color-success-container: #CDF5D0;
+    --md-sys-color-on-success-container: #002105;
+
+    /* Surface - Light theme warm tint */
+    --md-sys-color-surface: #FFF8F6;
+    --md-sys-color-on-surface: #201A17;
+    --md-sys-color-surface-dim: #E3DCD9;
+    --md-sys-color-surface-bright: #FFF8F6;
+
+    /* Surface Containers */
+    --md-sys-color-surface-container-lowest: #FFFFFF;
+    --md-sys-color-surface-container-low: #FFF1EB;
+    --md-sys-color-surface-container: #FCEAE3;
+    --md-sys-color-surface-container-high: #F6E4DD;
+    --md-sys-color-surface-container-highest: #F0DED8;
+
+    /* Outline */
+    --md-sys-color-outline: #857366;
+    --md-sys-color-outline-variant: #D7C2B4;
+
+    /* Inverse */
+    --md-sys-color-inverse-surface: #362F2C;
+    --md-sys-color-inverse-on-surface: #FBEEE9;
+    --md-sys-color-inverse-primary: #FFB778;
+
+    /* Shadow */
+    --md-sys-color-shadow: rgba(0, 0, 0, 0.15);
+}
+
 /* === MATERIAL SYMBOLS SETUP === */
 .material-symbols-rounded {
     font-family: 'Material Symbols Rounded';
@@ -859,10 +917,14 @@ body {
 }
 
 .detail-time {
-    display: block;
+    display: inline-block;
     font: var(--md-sys-typescale-label-small);
-    color: var(--md-sys-color-primary);
-    margin-top: 4px;
+    color: var(--md-sys-color-on-primary-container);
+    background: var(--md-sys-color-primary-container);
+    padding: 4px 10px;
+    border-radius: var(--md-sys-shape-corner-small);
+    margin-top: 8px;
+    font-weight: 500;
 }
 
 /* Choghadiya */

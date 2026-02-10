@@ -28,16 +28,18 @@
     <div class="app-container">
         <!-- Header -->
         <header class="app-header">
-            <a href="../../index.html" class="icon-btn" aria-label="Back">
-                <span class="material-symbols-rounded">arrow_back</span>
-            </a>
-            <div class="location-chip" id="location-pill">
-                <span class="material-symbols-rounded filled">location_on</span>
-                <span id="location-name">Delhi</span>
-            </div>
-            <button id="settings-btn" class="icon-btn" aria-label="Settings">
-                <span class="material-symbols-rounded">settings</span>
+            <button id="detect-location" class="location-chip">
+                <span class="material-symbols-rounded">my_location</span>
+                <span id="current-city">Pune</span>
             </button>
+            <div style="display: flex; gap: 8px;">
+                <button id="theme-toggle" class="icon-btn">
+                    <span class="material-symbols-rounded">light_mode</span>
+                </button>
+                <button class="icon-btn" onclick="document.getElementById('location-modal').style.display='flex'">
+                    <span class="material-symbols-rounded">settings</span>
+                </button>
+            </div>
         </header>
 
         <!-- Date Selector -->
