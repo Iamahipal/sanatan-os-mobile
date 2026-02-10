@@ -9,6 +9,7 @@
     <meta name="theme-color" content="#FF9933">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="manifest.json">
 
     <!-- M3 Fonts: Inter, Noto Sans Devanagari, Material Symbols -->
@@ -28,15 +29,15 @@
     <div class="app-container">
         <!-- Header -->
         <header class="app-header">
-            <button id="detect-location" class="location-chip">
+            <button id="location-chip" class="location-chip" aria-label="Change location">
                 <span class="material-symbols-rounded">my_location</span>
                 <span id="current-city">Pune</span>
             </button>
             <div style="display: flex; gap: 8px;">
-                <button id="theme-toggle" class="icon-btn">
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
                     <span class="material-symbols-rounded">light_mode</span>
                 </button>
-                <button class="icon-btn" onclick="document.getElementById('location-modal').style.display='flex'">
+                <button id="settings-btn" class="icon-btn" aria-label="Settings">
                     <span class="material-symbols-rounded">settings</span>
                 </button>
             </div>
@@ -44,14 +45,14 @@
 
         <!-- Date Selector -->
         <div class="date-bar">
-            <button id="prev-day" class="icon-btn">
+            <button id="prev-day" class="icon-btn" aria-label="Previous day">
                 <span class="material-symbols-rounded">chevron_left</span>
             </button>
-            <div class="date-center" id="date-center">
+            <div class="date-center" id="date-center" role="button" aria-label="Reset to today">
                 <span id="hindu-date" class="hindu-date">मार्गशीर्ष कृष्ण नवमी</span>
                 <span id="gregorian-date" class="gregorian-date">9 Feb 2026</span>
             </div>
-            <button id="next-day" class="icon-btn">
+            <button id="next-day" class="icon-btn" aria-label="Next day">
                 <span class="material-symbols-rounded">chevron_right</span>
             </button>
         </div>
@@ -262,79 +263,36 @@
         </section>
     </div>
 
-    <!-- Settings Modal -->
-    <div class="modal-overlay" id="settings-modal">
+    <!-- Settings Modal (single consolidated modal) -->
+    <div class="modal-overlay" id="settings-modal" role="dialog" aria-label="Settings">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Settings</h3>
-                <button class="close-btn" id="close-settings">
+                <button class="close-btn" id="close-settings" aria-label="Close settings">
                     <span class="material-symbols-rounded">close</span>
                 </button>
             </div>
             <div class="modal-body">
-                <button class="location-auto-btn" id="detect-location">
-                    <span class="material-symbols-rounded">my_location</span>
-                    Use My Location
-                </button>
-
-                <div class="setting-item">
-                    <label>Or select a city:</label>
-                    <div class="city-grid" id="city-grid">
-                        <button class="city-btn" data-lat="28.6139" data-lon="77.2090">Delhi</button>
-                        <button class="city-btn" data-lat="19.0760" data-lon="72.8777">Mumbai</button>
-                        <button class="city-btn" data-lat="18.5204" data-lon="73.8567">Pune</button>
-                        <button class="city-btn" data-lat="12.9716" data-lon="77.5946">Bangalore</button>
-                        <button class="city-btn" data-lat="13.0827" data-lon="80.2707">Chennai</button>
-                        <button class="city-btn" data-lat="22.5726" data-lon="88.3639">Kolkata</button>
-                        <button class="city-btn" data-lat="17.3850" data-lon="78.4867">Hyderabad</button>
-                        <button class="city-btn" data-lat="23.0225" data-lon="72.5714">Ahmedabad</button>
-                        <button class="city-btn" data-lat="26.9124" data-lon="75.7873">Jaipur</button>
-                        <button class="city-btn" data-lat="26.8467" data-lon="80.9462">Lucknow</button>
-                        <button class="city-btn" data-lat="25.3176" data-lon="82.9739">Varanasi</button>
-                        <button class="city-btn" data-lat="23.1765" data-lon="75.7885">Ujjain</button>
-                    </div>
-                </div>
-
-                <div class="setting-item advanced">
-                    <label>Ayanamsa System</label>
-                    <select id="ayanamsa-select" class="setting-input">
-                        <option value="lahiri" selected>Lahiri (Chitrapaksha)</option>
-                        <option value="krishnamurti">Krishnamurti (KP)</option>
-                        <option value="raman">B.V. Raman</option>
-                        <option value="yukteshwar">Sri Yukteshwar</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Location Modal -->
-    <div class="modal-overlay" id="location-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Set Location</h3>
-                <button class="close-btn" id="close-location">
-                    <span class="material-symbols-rounded">close</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <button class="location-auto-btn" id="detect-location-2">
+                <button class="location-auto-btn" id="detect-location" aria-label="Detect my location">
                     <span class="material-symbols-rounded">my_location</span>
                     Detect My Location
                 </button>
 
                 <div class="setting-item">
-                    <label>Popular Cities:</label>
-                    <div class="city-grid" id="city-grid-2">
-                        <button class="city-btn" data-lat="28.6139" data-lon="77.2090">Delhi</button>
-                        <button class="city-btn" data-lat="19.0760" data-lon="72.8777">Mumbai</button>
-                        <button class="city-btn" data-lat="18.5204" data-lon="73.8567">Pune</button>
-                        <button class="city-btn" data-lat="12.9716" data-lon="77.5946">Bangalore</button>
-                        <button class="city-btn" data-lat="13.0827" data-lon="80.2707">Chennai</button>
-                        <button class="city-btn" data-lat="22.5726" data-lon="88.3639">Kolkata</button>
-                        <button class="city-btn" data-lat="17.3850" data-lon="78.4867">Hyderabad</button>
-                        <button class="city-btn" data-lat="25.3176" data-lon="82.9739">Varanasi</button>
+                    <label>Select a city:</label>
+                    <div class="city-grid" id="city-grid">
+                        <!-- Cities populated dynamically by JS -->
                     </div>
+                </div>
+
+                <div class="setting-item advanced">
+                    <label>Ayanamsa System</label>
+                    <select id="ayanamsa-select" class="setting-input" aria-label="Ayanamsa system">
+                        <option value="lahiri" selected>Lahiri (Chitrapaksha)</option>
+                        <option value="krishnamurti">Krishnamurti (KP)</option>
+                        <option value="raman">B.V. Raman</option>
+                        <option value="yukteshwar">Sri Yukteshwar</option>
+                    </select>
                 </div>
             </div>
         </div>

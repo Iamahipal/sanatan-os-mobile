@@ -4,8 +4,7 @@
  * @version 4.0.0
  */
 
-/* === GOOGLE FONTS === */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+/* Fonts loaded via <link> in index.html — no @import needed */
 
 /* === M3 DESIGN TOKENS === */
 :root {
@@ -250,12 +249,16 @@ body {
     text-decoration: none;
     transition: background var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
     position: relative;
-    overflow: hidden; /* Prevent text spill */
+    overflow: hidden;
+    /* Prevent text spill */
 }
 
 .icon-btn:hover {
-    background: var(--md-sys-color-on-surface);
-    opacity: 0.08;
+    background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .icon-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
 }
 
 .icon-btn:focus-visible {
@@ -265,6 +268,10 @@ body {
 
 .icon-btn:active {
     background: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="light"] .icon-btn:active {
+    background: rgba(0, 0, 0, 0.12);
 }
 
 .icon-btn .material-symbols-rounded {
@@ -289,6 +296,10 @@ body {
 
 .location-chip:hover {
     background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .location-chip:hover {
+    background: rgba(0, 0, 0, 0.06);
 }
 
 .location-chip .material-symbols-rounded {
@@ -494,7 +505,7 @@ body {
     height: calc(100% + 4px);
     background: linear-gradient(90deg,
             var(--md-sys-color-surface) 0%,
-            rgba(18, 18, 18, 0.95) 70%,
+            var(--md-sys-color-surface) 70%,
             transparent 100%);
     transition: all 600ms var(--md-sys-motion-easing-emphasized);
     border-radius: var(--md-sys-shape-corner-full);
@@ -1058,6 +1069,10 @@ body {
     background: rgba(255, 255, 255, 0.08);
 }
 
+[data-theme="light"] .close-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
 .modal-body {
     padding: 0 24px 24px;
 }
@@ -1190,23 +1205,7 @@ body {
     color: var(--md-sys-color-on-surface);
 }
 
-/* Date Nav Button */
-.date-nav {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--md-sys-shape-corner-full);
-    background: transparent;
-    border: none;
-    color: var(--md-sys-color-on-surface);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.date-nav:hover {
-    background: rgba(255, 255, 255, 0.08);
-}
+/* Dead .date-nav class removed — buttons use .icon-btn */
 
 /* === ANIMATIONS === */
 @keyframes fadeIn {

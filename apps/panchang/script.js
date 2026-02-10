@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === STATE ===
     let currentDate = new Date();
-    let location = { lat: 18.5204, lon: 73.8567, city: 'Pune' }; // Default to Pune
+    let userLocation = { lat: 18.5204, lon: 73.8567, city: 'Pune' }; // Default to Pune
     let settings = { ayanamsa: 'lahiri' };
     let currentPanchang = null;
 
@@ -59,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentYear,
                 currentMonth,
                 VedicEngine,
-                location.lat,
-                location.lon
+                userLocation.lat,
+                userLocation.lon
             );
 
             festivals.push(...monthFestivals);
@@ -94,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setupTheme();
         setupEventListeners();
         updateDisplay();
-        updateDisplay();
 
         // Reveal content
         requestAnimationFrame(() => {
@@ -105,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function registerServiceWorker() {
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('SW registered'))
+                .then(() => { })
                 .catch(err => console.error('SW registration failed:', err));
         }
     }
@@ -114,11 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupTheme() {
         const toggleBtn = document.getElementById('theme-toggle');
         const icon = toggleBtn?.querySelector('span');
-        
+
         // 1. Get saved theme or system preference
         const savedTheme = localStorage.getItem('theme');
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
+
         let currentTheme = savedTheme || (systemDark ? 'dark' : 'light');
 
         // 2. Apply theme
@@ -146,13 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const saved = localStorage.getItem('panchang_settings');
         if (saved) {
             const parsed = JSON.parse(saved);
-            location = parsed.location || location;
+            userLocation = parsed.location || userLocation;
             settings = parsed.settings || settings;
         }
     }
 
     function saveSettings() {
-        localStorage.setItem('panchang_settings', JSON.stringify({ location, settings }));
+        localStorage.setItem('panchang_settings', JSON.stringify({ location: userLocation, settings }));
     }
 
     // === REVERSE GEOCODING ===
@@ -183,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            currentPanchang = VedicEngine.getPanchang(currentDate, location.lat, location.lon, {
+            currentPanchang = VedicEngine.getPanchang(currentDate, userLocation.lat, userLocation.lon, {
                 ayanamsa: settings.ayanamsa
             });
 
@@ -261,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateHeader() {
         const hinduDate = document.getElementById('hindu-date');
         const gregorianDate = document.getElementById('gregorian-date');
-        const locationName = document.getElementById('location-name');
+        const currentCity = document.getElementById('current-city');
 
         if (hinduDate) {
             hinduDate.textContent = `${currentPanchang.hinduMonth.lunar.name} ${currentPanchang.tithi.fullName}`;
@@ -271,8 +270,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 day: 'numeric', month: 'short', year: 'numeric'
             });
         }
-        if (locationName) {
-            locationName.textContent = location.city;
+        if (currentCity) {
+            currentCity.textContent = userLocation.city;
         }
     }
 
@@ -503,7 +502,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const todayEvents = document.getElementById('today-events');
         const upcomingList = document.getElementById('upcoming-festivals');
 
-        const upcoming = getNextFestivals();
+        const upcoming = getCachedFestivals();
 
         // Today's events
         const today = new Date(currentDate);
@@ -629,11 +628,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const newDate = new Date(currentDate);
                 newDate.setDate(newDate.getDate() - 1);
                 currentDate = newDate;
-                console.log('Navigating to previous day:', currentDate);
                 updateDisplay();
             });
-        } else {
-            console.error('Prev button not found');
         }
 
         if (nextBtn) {
@@ -641,17 +637,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const newDate = new Date(currentDate);
                 newDate.setDate(newDate.getDate() + 1);
                 currentDate = newDate;
-                console.log('Navigating to next day:', currentDate);
                 updateDisplay();
             });
-        } else {
-            console.error('Next button not found');
         }
 
         if (dateCenter) {
             dateCenter.addEventListener('click', () => {
                 currentDate = new Date();
-                console.log('Resetting to today:', currentDate);
                 updateDisplay();
             });
         }
@@ -678,56 +670,34 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Location pill
-        document.getElementById('location-pill')?.addEventListener('click', () => {
-            document.getElementById('location-modal').classList.add('active');
-        });
+        // --- SINGLE SETTINGS MODAL ---
+        const settingsModal = document.getElementById('settings-modal');
 
-        // Settings
+        // Open modal: Settings button OR location chip
         document.getElementById('settings-btn')?.addEventListener('click', () => {
-            document.getElementById('settings-modal').classList.add('active');
+            settingsModal?.classList.add('active');
+        });
+        document.getElementById('location-chip')?.addEventListener('click', () => {
+            settingsModal?.classList.add('active');
         });
 
-        // Close modals
+        // Close modal
         document.getElementById('close-settings')?.addEventListener('click', () => {
-            document.getElementById('settings-modal').classList.remove('active');
-        });
-        document.getElementById('close-location')?.addEventListener('click', () => {
-            document.getElementById('location-modal').classList.remove('active');
+            settingsModal?.classList.remove('active');
         });
 
+        // Click outside to close
         document.querySelectorAll('.modal-overlay').forEach(modal => {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) modal.classList.remove('active');
             });
         });
 
-        // City selection (works with data-lat/data-lon)
-        document.querySelectorAll('.city-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const lat = parseFloat(btn.dataset.lat);
-                const lon = parseFloat(btn.dataset.lon);
+        // --- DYNAMIC CITY GRID ---
+        populateCityGrid();
 
-                if (!isNaN(lat) && !isNaN(lon)) {
-                    location.lat = lat;
-                    location.lon = lon;
-                    location.city = btn.textContent.trim();
-                    saveSettings();
-                    closeAllModals();
-                    updateDisplay();
-                }
-            });
-        });
-
-        // Auto location detection - for both buttons
-        const locationButtons = [
-            document.getElementById('detect-location'),
-            document.getElementById('detect-location-2')
-        ];
-
-        locationButtons.forEach(btn => {
-            btn?.addEventListener('click', detectLocation);
-        });
+        // Auto location detection
+        document.getElementById('detect-location')?.addEventListener('click', detectLocation);
 
         // Ayanamsa change
         document.getElementById('ayanamsa-select')?.addEventListener('change', (e) => {
@@ -737,40 +707,62 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // === DYNAMIC CITY BUTTONS ===
+    function populateCityGrid() {
+        const grid = document.getElementById('city-grid');
+        if (!grid) return;
+
+        grid.innerHTML = '';
+        for (const [key, city] of Object.entries(CITIES)) {
+            const btn = document.createElement('button');
+            btn.className = 'city-btn';
+            btn.textContent = city.name;
+            btn.dataset.lat = city.lat;
+            btn.dataset.lon = city.lon;
+            btn.addEventListener('click', () => {
+                userLocation.lat = city.lat;
+                userLocation.lon = city.lon;
+                userLocation.city = city.name;
+                saveSettings();
+                closeAllModals();
+                updateDisplay();
+                // Update city display
+                const cityEl = document.getElementById('current-city');
+                if (cityEl) cityEl.textContent = city.name;
+            });
+            grid.appendChild(btn);
+        }
+    }
+
     function detectLocation() {
         if (!navigator.geolocation) {
             alert('Geolocation not supported by your browser');
             return;
         }
 
-        // Show loading state
-        const btns = document.querySelectorAll('[id^="detect-location"]');
-        btns.forEach(btn => {
-            if (btn) btn.textContent = 'Detecting...';
-        });
+        const btn = document.getElementById('detect-location');
+        if (btn) btn.textContent = 'Detecting...';
 
         navigator.geolocation.getCurrentPosition(
             (pos) => {
-                location.lat = pos.coords.latitude;
-                location.lon = pos.coords.longitude;
-                location.city = findNearestCity(pos.coords.latitude, pos.coords.longitude);
+                userLocation.lat = pos.coords.latitude;
+                userLocation.lon = pos.coords.longitude;
+                userLocation.city = findNearestCity(pos.coords.latitude, pos.coords.longitude);
                 saveSettings();
                 closeAllModals();
                 updateDisplay();
 
-                // Reset button text
-                btns.forEach(btn => {
-                    if (btn) btn.innerHTML = '<span class="material-symbols-rounded">my_location</span> Use My Location';
-                });
+                // Update city display
+                const cityEl = document.getElementById('current-city');
+                if (cityEl) cityEl.textContent = userLocation.city;
+
+                // Reset button
+                if (btn) btn.innerHTML = '<span class="material-symbols-rounded">my_location</span> Detect My Location';
             },
             (error) => {
                 console.error('Location error:', error);
                 alert('Could not detect location. Please select a city manually.');
-
-                // Reset button text
-                btns.forEach(btn => {
-                    if (btn) btn.innerHTML = '<span class="material-symbols-rounded">my_location</span> Use My Location';
-                });
+                if (btn) btn.innerHTML = '<span class="material-symbols-rounded">my_location</span> Detect My Location';
             },
             { enableHighAccuracy: true, timeout: 10000 }
         );
@@ -780,6 +772,20 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
     }
 
+    // === FESTIVAL CACHE ===
+    let festivalCache = { key: null, data: null };
+
+    function getCachedFestivals() {
+        const cacheKey = `${currentDate.getMonth()}-${currentDate.getFullYear()}-${userLocation.lat}-${userLocation.lon}`;
+        if (festivalCache.key === cacheKey && festivalCache.data) {
+            return festivalCache.data;
+        }
+        const data = getNextFestivals();
+        festivalCache = { key: cacheKey, data: data };
+        return data;
+    }
+
     // === START ===
     init();
 });
+

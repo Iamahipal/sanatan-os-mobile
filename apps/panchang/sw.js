@@ -1,8 +1,9 @@
 /**
  * Panchang Service Worker - Offline Support
+ * Strategy: Stale-While-Revalidate (fresh content when online, cached when offline)
  */
 
-const CACHE_NAME = 'panchang-v2-fix-font-nav';
+const CACHE_NAME = 'panchang-v3-audit-cleanup';
 const ASSETS = [
     './',
     './index.html',
@@ -14,7 +15,7 @@ const ASSETS = [
     './lib/festival-calculator.js'
 ];
 
-// Install
+// Install - Pre-cache core assets
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -23,7 +24,7 @@ self.addEventListener('install', (event) => {
     );
 });
 
-// Activate
+// Activate - Clean old caches
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then(keys => {
@@ -35,7 +36,8 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Fetch - Cache first, network fallback
+// Fetch - Stale-While-Revalidate
+// Serve from cache immediately, but also fetch from network to update cache
 self.addEventListener('fetch', (event) => {
     // Skip non-GET requests
     if (event.request.method !== 'GET') return;
@@ -47,23 +49,23 @@ self.addEventListener('fetch', (event) => {
     }
 
     event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request).then(response => {
-                    // Don't cache non-successful responses
-                    if (!response || response.status !== 200) {
-                        return response;
+        caches.open(CACHE_NAME).then(cache => {
+            return cache.match(event.request).then(cachedResponse => {
+                // Fetch from network in the background
+                const networkFetch = fetch(event.request).then(networkResponse => {
+                    // Update the cache with fresh content
+                    if (networkResponse && networkResponse.status === 200) {
+                        cache.put(event.request, networkResponse.clone());
                     }
-                    // Cache successful responses
-                    const responseToCache = response.clone();
-                    caches.open(CACHE_NAME).then(cache => {
-                        cache.put(event.request, responseToCache);
-                    });
-                    return response;
+                    return networkResponse;
+                }).catch(() => {
+                    // Network failed, cachedResponse will be used
+                    return null;
                 });
-            })
+
+                // Return cached response immediately, or wait for network
+                return cachedResponse || networkFetch;
+            });
+        })
     );
 });
