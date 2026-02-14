@@ -668,6 +668,22 @@ body {
     margin-top: 2px;
 }
 
+.status-countdown {
+    display: block;
+    font: var(--md-sys-typescale-title-large);
+    font-weight: 600;
+    margin-top: 4px;
+    font-variant-numeric: tabular-nums;
+}
+
+.status-banner.good .status-countdown {
+    color: var(--md-sys-color-on-success-container);
+}
+
+.status-banner.avoid .status-countdown {
+    color: var(--md-sys-color-on-error-container);
+}
+
 /* === TIME BLOCKS === */
 .time-blocks {
     display: flex;
@@ -1341,4 +1357,299 @@ body {
 .share-toast.show {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
+}
+
+/* === PANCHAK/BHADRA WARNING BANNER === */
+.warning-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 16px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #D32F2F22, #FF980022);
+    border: 1px solid #D32F2F44;
+    border-radius: var(--md-sys-shape-corner-medium);
+    color: #D32F2F;
+    animation: fadeIn 0.4s ease;
+}
+
+[data-theme="dark"] .warning-banner {
+    background: linear-gradient(135deg, #FF535322, #FFB74D22);
+    border-color: #FF535344;
+    color: #FF8A80;
+}
+
+.warning-banner .material-symbols-rounded {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.warning-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.warning-title {
+    font: var(--md-sys-typescale-title-small);
+    font-weight: 600;
+}
+
+.warning-desc {
+    font: var(--md-sys-typescale-body-small);
+    opacity: 0.8;
+}
+
+/* === DAY TIMELINE === */
+.day-timeline {
+    position: relative;
+    margin: 16px 0 8px;
+    padding: 0 4px;
+}
+
+.timeline-bar {
+    display: flex;
+    height: 28px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--md-sys-color-surface-container);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-segment {
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+    cursor: default;
+}
+
+.timeline-segment.good {
+    background: #4CAF50;
+}
+
+.timeline-segment.neutral {
+    background: #9E9E9E88;
+}
+
+.timeline-segment.bad {
+    background: #F44336;
+}
+
+.timeline-segment.rahu {
+    background: #9C27B0;
+}
+
+.timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 2px 0;
+    font: var(--md-sys-typescale-label-small);
+    color: var(--md-sys-color-on-surface);
+    opacity: 0.6;
+}
+
+.timeline-now {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.now-marker {
+    width: 3px;
+    height: 28px;
+    background: var(--md-sys-color-on-surface);
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.now-label {
+    font: var(--md-sys-typescale-label-small);
+    font-weight: 700;
+    color: var(--md-sys-color-primary);
+    margin-top: 2px;
+}
+
+/* === HORA DISPLAY === */
+.hora-display {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hora-current {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--md-sys-color-primary-container);
+    border-radius: var(--md-sys-shape-corner-medium);
+}
+
+.hora-planet-icon {
+    font-size: 28px;
+}
+
+.hora-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.hora-planet-name {
+    font: var(--md-sys-typescale-title-small);
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.hora-time {
+    font: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-on-primary-container);
+    opacity: 0.8;
+}
+
+.hora-good-for {
+    font: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-on-surface);
+    opacity: 0.7;
+    padding: 4px 0;
+}
+
+.hora-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.hora-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 4px;
+    border-radius: var(--md-sys-shape-corner-small);
+    background: var(--md-sys-color-surface-container);
+    font: var(--md-sys-typescale-label-small);
+}
+
+.hora-item.active {
+    background: var(--md-sys-color-primary-container);
+    font-weight: 700;
+}
+
+.hora-item-icon {
+    font-size: 16px;
+}
+
+.hora-item-time {
+    font: var(--md-sys-typescale-label-small);
+    opacity: 0.7;
+    margin-top: 2px;
+}
+
+/* === GRAHA STHITI === */
+.graha-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.graha-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 6px;
+    border-radius: var(--md-sys-shape-corner-medium);
+    background: var(--md-sys-color-surface-container);
+    text-align: center;
+}
+
+.graha-icon {
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+.graha-name {
+    font: var(--md-sys-typescale-label-medium);
+    color: var(--md-sys-color-on-surface);
+    font-weight: 600;
+}
+
+.graha-rashi {
+    font: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-primary);
+    font-weight: 500;
+}
+
+.graha-degree {
+    font: var(--md-sys-typescale-label-small);
+    color: var(--md-sys-color-on-surface);
+    opacity: 0.6;
+}
+
+/* === DAILY MANTRA === */
+.mantra-card {
+    padding: 16px;
+    background: linear-gradient(135deg, var(--md-sys-color-primary-container), var(--md-sys-color-surface-container-high));
+    border-radius: var(--md-sys-shape-corner-medium);
+}
+
+.mantra-deity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.mantra-deity-icon {
+    font-size: 24px;
+}
+
+.mantra-deity-name {
+    font: var(--md-sys-typescale-title-small);
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.mantra-text {
+    font: var(--md-sys-typescale-body-medium);
+    font-family: var(--md-ref-typeface-brand);
+    color: var(--md-sys-color-on-primary-container);
+    line-height: 1.6;
+    margin: 8px 0;
+    font-style: italic;
+}
+
+.mantra-meaning {
+    font: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-on-surface);
+    opacity: 0.7;
+    margin-bottom: 8px;
+}
+
+.mantra-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: var(--md-sys-shape-corner-full);
+    background: transparent;
+    color: var(--md-sys-color-primary);
+    font: var(--md-sys-typescale-label-small);
+    cursor: pointer;
+}
+
+.mantra-copy-btn:active {
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
 }

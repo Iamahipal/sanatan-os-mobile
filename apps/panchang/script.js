@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // === STATE ===
     let currentDate = new Date();
     let userLocation = { lat: 18.5204, lon: 73.8567, city: 'Pune' }; // Default to Pune
-    let settings = { ayanamsa: 'lahiri' };
+    let settings = { ayanamsa: 'lahiri', language: 'en' };
     let currentPanchang = null;
 
     // === CITY DATABASE ===
@@ -38,6 +38,45 @@ document.addEventListener('DOMContentLoaded', () => {
         bhopal: { lat: 23.2599, lon: 77.4126, name: 'Bhopal' },
         patna: { lat: 25.5941, lon: 85.1376, name: 'Patna' },
         coimbatore: { lat: 11.0168, lon: 76.9558, name: 'Coimbatore' }
+    };
+
+    const TRANSLATIONS = {
+        en: {
+            "Auspicious Time": "Auspicious Time",
+            "Caution Period": "Caution Period",
+            "Rahu Kalam": "Rahu Kalam",
+            "Sunrise": "Sunrise",
+            "Sunset": "Sunset",
+            "Moonrise": "Moonrise",
+            "Good Times Today": "Good Times Today",
+            "Avoid These Times": "Avoid These Times",
+            "Right Now": "Right Now",
+            "Coming Up": "Coming Up",
+            "Panchang Elements": "Panchang Elements",
+            "More Details": "More Details",
+            "Day": "Day",
+            "Night": "Night",
+            "Good for": "✓ Good for",
+            "Avoid": "✗ Avoid"
+        },
+        hi: {
+            "Auspicious Time": "शुभ समय",
+            "Caution Period": "सतर्कता समय",
+            "Rahu Kalam": "राहु काल",
+            "Sunrise": "सूर्योदय",
+            "Sunset": "सूर्यास्त",
+            "Moonrise": "चंद्रोदय",
+            "Good Times Today": "आज का शुभ समय",
+            "Avoid These Times": "वर्जित समय",
+            "Right Now": "अभी",
+            "Coming Up": "आगामी",
+            "Panchang Elements": "पञ्चाङ्ग विवरण",
+            "More Details": "अधिक विवरण",
+            "Day": "दिन",
+            "Night": "रात",
+            "Good for": "✓ इसके लिए शुभ",
+            "Avoid": "✗ इससे बचें"
+        }
     };
 
     // === UPCOMING FESTIVALS ===
@@ -94,11 +133,117 @@ document.addEventListener('DOMContentLoaded', () => {
         setupTheme();
         setupEventListeners();
         updateDisplay();
+        startRealTimeUpdates(); // Start the heartbeat
 
         // Reveal content
         requestAnimationFrame(() => {
             document.body.style.opacity = '1';
         });
+    }
+
+    // === REAL-TIME UPDATES ===
+    let timeInterval;
+
+    function startRealTimeUpdates() {
+        if (timeInterval) clearInterval(timeInterval);
+
+        // Update every second for countdowns
+        timeInterval = setInterval(() => {
+            updateRealTimeStatus();
+            updateTimelineNow();
+        }, 1000);
+
+        // Initial call
+        updateRealTimeStatus();
+        updateTimelineNow();
+    }
+
+    function updateRealTimeStatus() {
+        if (!currentPanchang) return;
+
+        const now = new Date();
+        const currentHour = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
+        const isToday = currentDate.toDateString() === now.toDateString();
+
+        if (!isToday) {
+            document.getElementById('status-countdown').textContent = '';
+            return;
+        }
+
+        const { choghadiya, rahuKalam } = currentPanchang;
+
+        // Check Rahu Kalam first (high priority)
+        if (currentHour >= rahuKalam.start && currentHour < rahuKalam.end) {
+            updateCountdown(rahuKalam.end, 'Rahu Kalam ends in');
+            return;
+        }
+
+        // Check Choghadiya
+        const isDay = currentHour >= currentPanchang.sunTimes.sunrise && currentHour < currentPanchang.sunTimes.sunset;
+        const slots = choghadiya[isDay ? 'day' : 'night'];
+        const currentSlot = slots.find(s => currentHour >= s.start && currentHour < s.end);
+
+        if (currentSlot) {
+            updateCountdown(currentSlot.end, `${currentSlot.name} ends in`);
+        }
+    }
+
+    function updateCountdown(endTimeHours, label) {
+        const now = new Date();
+        const currentHour = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
+
+        let diffHours = endTimeHours - currentHour;
+        if (diffHours < 0) diffHours += 24; // Handle day rollover if needed
+
+        const diffSecs = Math.floor(diffHours * 3600);
+        const h = Math.floor(diffSecs / 3600);
+        const m = Math.floor((diffSecs % 3600) / 60);
+        const s = diffSecs % 60;
+
+        const timeStr = h > 0 ? `${h}h ${m}m ${s}s` : `${m}m ${s}s`;
+
+        const el = document.getElementById('status-countdown');
+        if (el) el.textContent = `${label} ${timeStr}`;
+    }
+
+    function updateTimelineNow() {
+        const bar = document.getElementById('timeline-bar');
+        const marker = document.getElementById('timeline-now');
+        if (!bar || !marker || !currentPanchang) return;
+
+        const now = new Date();
+        const isToday = currentDate.toDateString() === now.toDateString();
+
+        if (!isToday) {
+            marker.style.display = 'none';
+            return;
+        }
+
+        const { sunTimes } = currentPanchang;
+        const currentHour = now.getHours() + now.getMinutes() / 60;
+
+        // Timeline goes from Sunrise to Sunset (Day view)
+        // Or we could make it 24h? The existing design suggests "Day Timeline". 
+        // Let's stick to Sunrise-Sunset for the bar as per audit.
+
+        if (currentHour < sunTimes.sunrise || currentHour > sunTimes.sunset) {
+            marker.style.display = 'none';
+            return;
+        }
+
+        marker.style.display = 'flex';
+
+        const dayDuration = sunTimes.sunset - sunTimes.sunrise;
+        const progress = (currentHour - sunTimes.sunrise) / dayDuration;
+        const pct = Math.max(0, Math.min(100, progress * 100));
+
+        marker.style.left = `${pct}%`;
+
+        // Update label to show time
+        const label = document.getElementById('now-label');
+        if (label) {
+            label.textContent = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+        }
     }
 
     function registerServiceWorker() {
@@ -191,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            applyTranslations();
             updateGuidance();
             updateInsight();
             updateHeader();
@@ -199,8 +345,38 @@ document.addEventListener('DOMContentLoaded', () => {
             updateUpcoming();
             updateDetails();
             updateTodayIndicator();
+            checkWarnings();
         } catch (error) {
             console.error('Error:', error);
+        }
+    }
+
+    function checkWarnings() {
+        const { isPanchak, karana } = currentPanchang;
+        const banner = document.getElementById('warning-banner');
+        const title = document.getElementById('warning-title');
+        const desc = document.getElementById('warning-desc');
+
+        if (!banner) return;
+
+        let warning = null;
+
+        // Priority 1: Panchak
+        if (isPanchak) {
+            warning = { title: 'Panchak Active', desc: 'Avoid south travel and roof construction.' };
+        }
+
+        // Priority 2: Bhadra (Vishti Karana)
+        if (karana && karana.isBhadra) {
+            warning = { title: 'Bhadra Active', desc: 'Avoid auspicious ceremonies now.' };
+        }
+
+        if (warning) {
+            banner.style.display = 'flex';
+            if (title) title.textContent = warning.title;
+            if (desc) desc.textContent = warning.desc;
+        } else {
+            banner.style.display = 'none';
         }
     }
 
@@ -237,7 +413,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update Vara display
         setText('vara-icon', varaInfo.icon);
         setText('vara-name', vara.name);
-        setText('vara-deity', `${varaInfo.deity}'s Day`);
+
+        const lang = settings.language || 'en';
+        if (lang === 'hi') {
+            setText('vara-deity', `${varaInfo.deityHi} का दिन`);
+        } else {
+            setText('vara-deity', `${varaInfo.deity}'s Day`);
+        }
 
         // Update Day Quality
         let goodFor = varaInfo.goodFor;
@@ -428,6 +610,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentHour = now.getHours() + now.getMinutes() / 60;
         const isToday = currentDate.toDateString() === now.toDateString();
 
+        // Render Visual Timeline
+        renderTimeline(sunTimes, choghadiya.day, rahuKalam);
+
         // Determine if day or night
         const isDaytime = currentHour >= sunTimes.sunrise && currentHour < sunTimes.sunset;
         const slots = choghadiya[isDaytime ? 'day' : 'night'];
@@ -453,8 +638,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 statusTitle.textContent = currentChog.good ? 'Auspicious Time' : 'Caution Period';
             }
             if (statusDesc) {
-                const mins = Math.floor((currentChog.end - currentHour) * 60);
-                statusDesc.textContent = `${currentChog.name} (${currentChog.nameEn}) • ${mins} min remaining`;
+                statusDesc.textContent = `${currentChog.name} (${currentChog.nameEn})`;
+                // Countdown handled by real-time loop
             }
         } else {
             // Check Rahu Kalam
@@ -464,8 +649,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (statusIcon) statusIcon.textContent = 'warning';
                 if (statusTitle) statusTitle.textContent = 'Rahu Kalam';
                 if (statusDesc) {
-                    const mins = Math.floor((rahuKalam.end - currentHour) * 60);
-                    statusDesc.textContent = `Avoid new ventures • ${mins} min remaining`;
+                    statusDesc.textContent = 'Avoid new ventures';
                 }
             }
         }
@@ -473,6 +657,45 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update good times list
         updateGoodTimes(auspiciousMuhurats, choghadiya);
         updateAvoidTimes(rahuKalam, yamagandam);
+    }
+
+    function renderTimeline(sunTimes, dayChoghadiyas, rahuKalam) {
+        const bar = document.getElementById('timeline-bar');
+        const sunriseLabel = document.getElementById('timeline-sunrise');
+        const sunsetLabel = document.getElementById('timeline-sunset');
+
+        if (!bar) return;
+
+        if (sunriseLabel) sunriseLabel.textContent = sunTimes.sunriseTime;
+        if (sunsetLabel) sunsetLabel.textContent = sunTimes.sunsetTime;
+
+        const dayDuration = sunTimes.sunset - sunTimes.sunrise;
+
+        // Create segments
+        let html = '';
+
+        // 1. Choghadiya Segments (Background)
+        dayChoghadiyas.forEach(slot => {
+            const startPct = ((slot.start - sunTimes.sunrise) / dayDuration) * 100;
+            const widthPct = ((slot.end - slot.start) / dayDuration) * 100;
+            const type = slot.good ? 'good' : 'bad'; // can use specific good/bad or neutral
+
+            // Map specific names to colors if needed, or just good/bad
+            let className = 'neutral';
+            if (slot.good) className = 'good';
+            if (!slot.good) className = 'bad';
+
+            html += `<div class="timeline-segment ${className}" style="width: ${widthPct}%" title="${slot.name}">
+                ${slot.name}
+            </div>`;
+        });
+
+        bar.innerHTML = html;
+
+        // Overlay Rahu Kalam? 
+        // For V1, the Choghadiya segments are good enough as base. 
+        // Ideally we'd show Rahu Kalam as a marker or overlay, but CSS-wise simple segments are safer.
+        // Let's stick to Choghadiya segments for the bar background.
     }
 
     function updateGoodTimes(muhurats, choghadiya) {
@@ -568,7 +791,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateDetails() {
-        const { tithi, nakshatra, yoga, karana, samvatsara, hinduMonth, ayana } = currentPanchang;
+        const { tithi, nakshatra, yoga, karana, samvatsara, hinduMonth, ayana, sunTimes } = currentPanchang;
 
         setText('d-tithi', tithi.fullName);
         setText('d-tithi-time', `Till ${tithi.endTime}`);
@@ -605,6 +828,185 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
         }
+
+        // Update Hora
+        updateHora(sunTimes);
+
+        // Update Graha Sthiti
+        updateGrahaSthiti();
+
+        // Update Mantra
+        updateMantra(currentPanchang.vara.index);
+    }
+
+    function updateHora(sunTimes) {
+        const container = document.getElementById('hora-display');
+        if (!container) return;
+
+        // Order of lords starting from Sunday sunrises
+        // Sun, Venus, Mercury, Moon, Saturn, Jupiter, Mars
+        const lords = [
+            { name: 'Sun', icon: '☀️' },
+            { name: 'Venus', icon: '💎' },
+            { name: 'Mercury', icon: '☿️' },
+            { name: 'Moon', icon: '🌙' },
+            { name: 'Saturn', icon: '🪐' },
+            { name: 'Jupiter', icon: '📿' },
+            { name: 'Mars', icon: '⚔️' }
+        ];
+
+        // Calculate current hora
+        // 1 Hora approx 1 hour, but strictly dayDuration / 12
+        const dayDuration = sunTimes.sunset - sunTimes.sunrise;
+        const horaDuration = dayDuration / 12;
+
+        const now = new Date();
+        const currentHour = now.getHours() + now.getMinutes() / 60;
+
+        if (currentHour < sunTimes.sunrise || currentHour > sunTimes.sunset) {
+            container.innerHTML = '<div class="hora-current">Night time logic distinct...</div>';
+            return; // Simplified for day only for now
+        }
+
+        const horaIndex = Math.floor((currentHour - sunTimes.sunrise) / horaDuration);
+
+        // Day of week index (0=Sun)
+        const dayIndex = currentDate.getDay();
+        // First hora of day is ruled by day lord. Then cyclic order:
+        // Sun(0) -> Venus(1) -> Mercury(2) -> Moon(3) -> Saturn(4) -> Jupiter(5) -> Mars(6)
+        // This is weird. Standard order is cyclic speed? 
+        // Actually: Sun -> Venus -> Mercury -> Moon -> Saturn -> Jupiter -> Mars is decreasing speed order?
+        // Correct Sequence: 
+        // 1. Surya
+        // 2. Shukra
+        // 3. Budha
+        // 4. Chandra
+        // 5. Shani
+        // 6. Guru
+        // 7. Mangal
+        // repeat...
+
+        // The first hora is the day lord.
+        // Day Lords: Sun=Sun, Mon=Moon, Tue=Mars, Wed=Merc, Thu=Jup, Fri=Ven, Sat=Sat
+
+        const lordMap = { 0: 0, 1: 3, 2: 6, 3: 2, 4: 5, 5: 1, 6: 4 }; // Map DayIndex to LordIndex in the 'lords' array
+        const startLordIndex = lordMap[dayIndex];
+
+        const currentLordIndex = (startLordIndex + horaIndex) % 7;
+        const currentLord = lords[currentLordIndex];
+
+        container.innerHTML = `
+            <div class="hora-current">
+                <span class="hora-planet-icon">${currentLord.icon}</span>
+                <div class="hora-info">
+                    <span class="hora-planet-name">${currentLord.name} Hora</span>
+                    <span class="hora-time">Active now</span>
+                </div>
+            </div>
+        `;
+    }
+
+    function updateGrahaSthiti() {
+        const container = document.getElementById('graha-sthiti');
+        if (!container || !VedicEngine) return;
+
+        // Calculated real positions
+        const sunLong = VedicEngine.getSunLongitude(currentDate);
+        const moonLong = VedicEngine.getMoonLongitude(currentDate);
+
+        // Simple Rashi calculator (0-360)
+        const getRashi = (lon) => {
+            const index = Math.floor(lon / 30);
+            const rashis = ['Mesh', 'Vrishabh', 'Mithun', 'Karka', 'Simha', 'Kanya', 'Tula', 'Vrishchik', 'Dhanu', 'Makar', 'Kumbha', 'Meena'];
+            const deg = Math.floor(lon % 30);
+            return { name: rashis[index], deg };
+        };
+
+        const sun = getRashi(sunLong);
+        const moon = getRashi(moonLong);
+
+        container.innerHTML = `
+            <div class="graha-item">
+                <span class="graha-icon">☀️</span>
+                <span class="graha-name">Sun</span>
+                <span class="graha-rashi">${sun.name}</span>
+                <span class="graha-degree">${sun.deg}°</span>
+            </div>
+            <div class="graha-item">
+                <span class="graha-icon">🌙</span>
+                <span class="graha-name">Moon</span>
+                <span class="graha-rashi">${moon.name}</span>
+                <span class="graha-degree">${moon.deg}°</span>
+            </div>
+        `;
+    }
+
+    function updateMantra(dayIndex) {
+        const container = document.getElementById('daily-mantra');
+        if (!container) return;
+
+        const mantras = [
+            { deity: 'Surya', mantra: 'Om Suryaya Namah' },
+            { deity: 'Shiva', mantra: 'Om Namah Shivaya' },
+            { deity: 'Hanuman', mantra: 'Om Hanumate Namah' },
+            { deity: 'Mercury', mantra: 'Om Budhaya Namah' },
+            { deity: 'Vishnu', mantra: 'Om Namo Bhagavate Vasudevaya' },
+            { deity: 'Lakshmi', mantra: 'Om Mahalakshmyai Namah' },
+            { deity: 'Shani', mantra: 'Om Sham Shanicharaya Namah' }
+        ];
+
+        const m = mantras[dayIndex];
+
+        container.innerHTML = `
+            <div class="mantra-deity">
+                <span class="mantra-deity-icon">🕉️</span>
+                <b>${m.deity}</b>
+            </div>
+            <p>${m.mantra}</p>
+        `;
+    }
+
+    function applyTranslations() {
+        const lang = settings.language || 'en';
+        const dict = TRANSLATIONS[lang];
+        if (!dict) return;
+
+        // Helper to safely set text
+        const safeSet = (id, key) => {
+            const el = document.getElementById(id);
+            if (el && dict[key]) el.textContent = dict[key];
+        };
+
+        // Static labels
+        safeSet('label-sunrise', 'Sunrise');
+        safeSet('label-good-for', 'Good for');
+        safeSet('label-avoid', 'Avoid');
+        // Need to add IDs to HTML labels if not present
+        // Actually, many labels in HTML don't have IDs. 
+        // Strategy: dynamic content updates should handle translation, static content needs IDs.
+        // For V1, let's just translate the dynamic headers we control.
+
+        // Update Section Headers
+        // We can query selector by class and text, but that's brittle.
+        // Let's rely on specific IDs or just update the variable parts.
+
+        // Vara Name is handled in updateGuidance
+        // Tithi Name is handled in updateHero
+
+        // Update Choghadiya Tabs
+        document.querySelectorAll('.chog-tab').forEach(tab => {
+            if (tab.dataset.period === 'day') tab.textContent = dict['Day'];
+            if (tab.dataset.period === 'night') tab.textContent = dict['Night'];
+        });
+
+        // Update More Details Button
+        const expandBtn = document.querySelector('#expand-details span');
+        if (expandBtn) expandBtn.textContent = dict['More Details'];
+    }
+
+    function getText(key) {
+        const lang = settings.language || 'en';
+        return TRANSLATIONS[lang]?.[key] || key;
     }
 
     function setText(id, text) {
@@ -649,6 +1051,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (dateCenter) {
             dateCenter.addEventListener('click', () => {
+                if (navigator.vibrate) navigator.vibrate(10);
                 currentDate = new Date();
                 updateDisplay();
             });
@@ -684,10 +1087,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Open modal: Settings button OR location chip
         document.getElementById('settings-btn')?.addEventListener('click', () => {
+            // Populate settings
+            const langSelect = document.getElementById('language-select');
+            if (langSelect) langSelect.value = settings.language;
             settingsModal?.classList.add('active');
         });
         document.getElementById('location-chip')?.addEventListener('click', () => {
+            const langSelect = document.getElementById('language-select');
+            if (langSelect) langSelect.value = settings.language;
             settingsModal?.classList.add('active');
+        });
+
+        // --- CALENDAR MODAL ---
+        const calendarModal = document.getElementById('calendar-modal');
+        let calDate = new Date();
+
+        document.getElementById('calendar-btn')?.addEventListener('click', () => {
+            calDate = new Date(currentDate); // Start at current view date
+            renderCalendar(calDate);
+            calendarModal?.classList.add('active');
+        });
+
+        document.getElementById('close-calendar')?.addEventListener('click', () => {
+            calendarModal?.classList.remove('active');
+        });
+
+        document.getElementById('cal-prev')?.addEventListener('click', () => {
+            calDate.setMonth(calDate.getMonth() - 1);
+            renderCalendar(calDate);
+        });
+
+        document.getElementById('cal-next')?.addEventListener('click', () => {
+            calDate.setMonth(calDate.getMonth() + 1);
+            renderCalendar(calDate);
         });
 
         // Close modal
@@ -715,6 +1147,64 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDisplay();
         });
     }
+
+    // === CALENDAR LOGIC ===
+    function renderCalendar(date) {
+        const grid = document.getElementById('calendar-grid');
+        const header = document.getElementById('cal-month-year');
+        if (!grid || !header) return;
+
+        const year = date.getFullYear();
+        const month = date.getMonth();
+
+        header.textContent = date.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        const startDay = firstDay.getDay(); // 0 = Sun
+
+        let html = '';
+
+        // Empty slots
+        for (let i = 0; i < startDay; i++) {
+            html += '<div class="cal-day empty"></div>';
+        }
+
+        // Days
+        for (let d = 1; d <= daysInMonth; d++) {
+            const dayDate = new Date(year, month, d);
+            // Check if selected
+            const isSelected = dayDate.toDateString() === currentDate.toDateString();
+            const isToday = dayDate.toDateString() === new Date().toDateString();
+
+            // Simple data check (mock for now, ideally fetch panchang for each day)
+            // For V1, just show basic numbers. Can add dots for Ekadashi/Purnima if cache available.
+
+            const classes = ['cal-day'];
+            if (isSelected) classes.push('selected');
+            if (isToday) classes.push('today');
+
+            html += `<div class="${classes.join(' ')}" data-date="${dayDate.toISOString()}">
+                <span class="cal-day-num">${d}</span>
+                <!-- <div class="cal-day-dot"></div> -->
+            </div>`;
+        }
+
+        grid.innerHTML = html;
+
+        // Add click listeners
+        grid.querySelectorAll('.cal-day:not(.empty)').forEach(el => {
+            el.addEventListener('click', () => {
+                const newD = new Date(el.dataset.date);
+                currentDate = newD;
+                updateDisplay();
+                document.getElementById('calendar-modal').classList.remove('active');
+            });
+        });
+    }
+
+
 
     // === DYNAMIC CITY BUTTONS ===
     function populateCityGrid() {
@@ -831,7 +1321,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
+    // === NAVIGATION ===
+    let isNavigating = false;
+
     function navigateDate(delta, animClass) {
+        if (isNavigating) return;
+        isNavigating = true;
+
+        // Haptic feedback
+        if (navigator.vibrate) navigator.vibrate(10);
+
         const container = document.querySelector('.app-container');
         const newDate = new Date(currentDate);
         newDate.setDate(newDate.getDate() + delta);
@@ -841,7 +1340,12 @@ document.addEventListener('DOMContentLoaded', () => {
             container.classList.remove('slide-left', 'slide-right');
             void container.offsetWidth; // Force reflow
             container.classList.add(animClass);
-            setTimeout(() => container.classList.remove(animClass), 300);
+            setTimeout(() => {
+                container.classList.remove(animClass);
+                isNavigating = false;
+            }, 300); // Match animation duration
+        } else {
+            isNavigating = false;
         }
 
         updateDisplay();

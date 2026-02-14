@@ -694,7 +694,9 @@ const FestivalCalculator = (function () {
         getFestivalsForMonth,
         findTithiDate,
         findMakarSankranti,
-        checkEkadashiViddhi
+        checkEkadashiViddhi,
+        getSunLongitude,
+        getMoonLongitude
     };
 })();
 

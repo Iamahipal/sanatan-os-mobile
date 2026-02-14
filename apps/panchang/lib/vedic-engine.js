@@ -870,7 +870,9 @@ const VedicEngine = (function () {
         TITHIS,
         YOGAS,
         KARANAS,
-        VARAS
+        VARAS,
+        getSunLongitude,
+        getMoonLongitude
     };
 
 })();
