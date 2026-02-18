@@ -70,6 +70,46 @@ export const UI_STRINGS = {
     theme_respect: "Respect",
     theme_clean: "Cleanliness",
     theme_gratitude: "Gratitude"
+    ,
+    garland_label: "Garland",
+    garland_done_sub: "3 flowers completes the day",
+    used_suffix: "used",
+    play_not_impl: "(Not implemented)",
+    try_again_start: "Try again: start from the first step.",
+    step_of: "Step {n} of {total}"
+    ,
+    tap_bead: "Tap bead ({n}/{total})"
+    ,
+    theme_msg_samay: "Today we protect time. Start on time, finish calmly.",
+    theme_msg_seva: "Today we do seva. Help at home without being asked.",
+    theme_msg_sports: "Today we build strength. Move with a steady pace.",
+    theme_msg_naam: "Today we do naam-jap. Slow breath, steady mind.",
+    theme_msg_respect: "Today we practice respect. Speak sweetly, bow proudly.",
+    theme_msg_clean: "Today we practice cleanliness. A clean space makes a calm mind.",
+    theme_msg_gratitude: "Today we practice gratitude. Thank someone for one thing."
+    ,
+    settings_title: "Parent mode",
+    settings_sub: "Settings",
+    daily_min_tasks: "Daily minimum tasks",
+    daily_min_hint: "Keep it small for consistency",
+    bonus_max: "Bonus seva per day",
+    bonus_max_hint: "Optional after day complete",
+    sound_label: "Sound",
+    sound_hint: "Tap sounds",
+    voice_label: "Voice",
+    voice_hint: "Speak Krishna guidance",
+    categories_title: "Enable categories",
+    categories_hint: "Hide categories you don't want to practice right now",
+    cat_respect: "Respect",
+    cat_naam: "Naam",
+    cat_samay: "Samay",
+    cat_study: "Study",
+    cat_sports: "Sports",
+    cat_seva: "Seva",
+    parent_confirm_pranam: "Parent confirm: Pranam",
+    parent_confirm_seva: "Parent confirm: Seva",
+    require_gate: "Require gate to mark as done",
+    speak: "Speak"
   },
   hi: {
     today: "आज",
@@ -133,9 +173,57 @@ export const UI_STRINGS = {
     theme_respect: "सम्मान",
     theme_clean: "स्वच्छता",
     theme_gratitude: "कृतज्ञता"
+    ,
+    garland_label: "माला",
+    garland_done_sub: "3 फूल = दिन पूरा",
+    used_suffix: "उपयोग",
+    play_not_impl: "(अभी नहीं)",
+    try_again_start: "फिर कोशिश: पहले कदम से शुरू करो।",
+    step_of: "कदम {n} / {total}"
+    ,
+    tap_bead: "दाना टैप ({n}/{total})"
+    ,
+    theme_msg_samay: "आज समय की रक्षा। समय पर शुरू करो, शांति से पूरा करो।",
+    theme_msg_seva: "आज सेवा। बिना बोले घर में मदद करो।",
+    theme_msg_sports: "आज शक्ति। स्थिर गति से शरीर चलाओ।",
+    theme_msg_naam: "आज नाम-जप। धीमी श्वास, स्थिर मन।",
+    theme_msg_respect: "आज सम्मान। मधुर बोलो, गर्व से झुको।",
+    theme_msg_clean: "आज स्वच्छता। साफ़ जगह से मन शांत होता है।",
+    theme_msg_gratitude: "आज कृतज्ञता। किसी एक बात के लिए धन्यवाद कहो।"
+    ,
+    settings_title: "अभिभावक मोड",
+    settings_sub: "सेटिंग",
+    daily_min_tasks: "दैनिक न्यूनतम कार्य",
+    daily_min_hint: "निरंतरता के लिए छोटा रखें",
+    bonus_max: "दैनिक बोनस सेवा",
+    bonus_max_hint: "दिन पूरा होने के बाद वैकल्पिक",
+    sound_label: "ध्वनि",
+    sound_hint: "टैप ध्वनि",
+    voice_label: "आवाज़",
+    voice_hint: "कृष्ण मार्गदर्शन बोले",
+    categories_title: "श्रेणियाँ चालू करें",
+    categories_hint: "अभी जिन श्रेणियों की जरूरत नहीं, उन्हें बंद करें",
+    cat_respect: "सम्मान",
+    cat_naam: "नाम",
+    cat_samay: "समय",
+    cat_study: "पढ़ाई",
+    cat_sports: "खेल",
+    cat_seva: "सेवा",
+    parent_confirm_pranam: "अभिभावक पुष्टि: प्रणाम",
+    parent_confirm_seva: "अभिभावक पुष्टि: सेवा",
+    require_gate: "हो गया चिह्न के लिए गेट जरूरी",
+    speak: "बोलें"
   }
 };
 
 export function ui(key, lang) {
   return (UI_STRINGS[lang] && UI_STRINGS[lang][key]) || UI_STRINGS.en[key] || key;
+}
+
+export function fmt(s, vars) {
+  let out = String(s || "");
+  for (const [k, v] of Object.entries(vars || {})) {
+    out = out.replaceAll(`{${k}}`, String(v));
+  }
+  return out;
 }

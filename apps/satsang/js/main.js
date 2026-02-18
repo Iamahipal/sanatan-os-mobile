@@ -2,6 +2,7 @@ import { createStore } from "./core/store.js";
 import { createRouter } from "./core/router.js";
 import { loadAppData } from "./core/data-service.js";
 import { renderApp, renderDialog } from "./ui/renderers.js";
+import { getCityCoords, haversineKm } from "./core/geo.js";
 
 const STORAGE_KEY = "satsang_state_v3";
 
@@ -25,6 +26,8 @@ const store = createStore({
   loading: true,
   error: "",
   lastUpdated: "",
+  cachedAt: "",
+  report: null,
   query: "",
   city: "all",
   type: "all",
@@ -34,11 +37,21 @@ const store = createStore({
   quickWeek: false,
   quickFree: false,
   quickOnline: false,
+  quickNear: false,
   calendarSelectedDate: "",
+  calendarDayFilter: "all",
+  persona: "",
+  home: null, // { mode: 'geo'|'city', lat, lon, city, cityName, updatedAt }
+  nearRadiusKm: 50,
+  following: [],
+  followingSet: new Set(),
+  followingOnly: false,
   saved: [],
   reminders: [],
   savedSet: new Set(),
   remindersSet: new Set(),
+  distanceById: {},
+  speakers: [],
   events: [],
   filteredEvents: [],
   sortedEvents: [],
@@ -57,6 +70,7 @@ async function init() {
   hydrateFromStorage();
   bindDomEvents();
   bindStateRendering();
+  bindDeepLinks();
   router.subscribe((view) => {
     if (view !== store.getState().view) {
       store.setState({ view });
@@ -68,10 +82,12 @@ async function init() {
   router.init();
 
   try {
-    const { events, lastUpdated } = await loadAppData();
+    const { events, speakers, lastUpdated, report } = await loadAppData();
     store.setState({
       events,
+      speakers,
       lastUpdated,
+      report,
       loading: false,
       error: "",
       cityOptions: uniqueValues(events.map((event) => event.city)),
@@ -218,8 +234,15 @@ function handleActionClick(e) {
     return;
   }
 
+  if (action === "calendar-filter") {
+    const filter = target.dataset.filter || "all";
+    store.setState({ calendarDayFilter: filter });
+    return;
+  }
+
   if (action === "close-dialog") {
     refs.dialog.close();
+    clearEventLink();
   }
 
   if (action === "clear-filters") {
@@ -228,6 +251,56 @@ function handleActionClick(e) {
 
   if (action === "go-discover") {
     router.push("discover");
+  }
+
+  if (action === "refresh-data") {
+    refreshData();
+  }
+
+  if (action === "open-vachak") {
+    const speakerId = String(target.dataset.speakerId || "");
+    if (speakerId) router.push(`vachak/${speakerId}`);
+    return;
+  }
+
+  if (action === "set-persona") {
+    const persona = String(target.dataset.persona || "").toLowerCase();
+    if (persona) setPersona(persona);
+  }
+
+  if (action === "toggle-following-only") {
+    store.update((state) => {
+      const followingOnly = !state.followingOnly;
+      persistWith({ followingOnly });
+      return { ...state, followingOnly };
+    });
+    recompute();
+  }
+
+  if (action === "toggle-follow-speaker") {
+    const speakerId = String(target.dataset.speakerId || "");
+    if (speakerId) toggleFollowSpeaker(speakerId);
+  }
+
+  if (action === "set-home-city") {
+    const city = String(target.dataset.city || "");
+    if (city) setHomeCity(city);
+  }
+
+  if (action === "set-home-geo") {
+    requestHomeGeolocation();
+  }
+
+  if (action === "near-radius") {
+    const delta = Number(target.dataset.delta || 0);
+    if (!Number.isFinite(delta) || !delta) return;
+    store.update((state) => {
+      const current = Number(state.nearRadiusKm) || 50;
+      const next = clamp(Math.round(current + delta), 5, 500);
+      persistWith({ nearRadiusKm: next });
+      return { ...state, nearRadiusKm: next };
+    });
+    recompute();
   }
 }
 
@@ -247,9 +320,13 @@ function recompute() {
       const freeOk = !quickActive || !state.quickFree || event.isFree;
       const onlineOk = !quickActive || !state.quickOnline || event.city === "online";
       const weekOk = !quickActive || !state.quickWeek || isWithinWeek(event.dateNum);
-      return cityOk && typeOk && searchOk && liveOk && freeOk && onlineOk && weekOk;
+      const followingOk =
+        !quickActive || !state.followingOnly || state.followingSet.has(event.speakerId);
+      const nearOk = !quickActive || !state.quickNear || isNearHome(state, event);
+      return cityOk && typeOk && searchOk && liveOk && freeOk && onlineOk && weekOk && followingOk && nearOk;
     });
 
+    const distanceById = computeDistances(state, filtered);
     const sorted = [...filtered].sort((a, b) => {
       if (state.sort === "live") return Number(b.isLive) - Number(a.isLive) || a.dateNum - b.dateNum;
       if (state.sort === "city") return a.cityName.localeCompare(b.cityName);
@@ -262,6 +339,8 @@ function recompute() {
       sortedEvents: sorted,
       savedSet: new Set(state.saved),
       remindersSet: new Set(state.reminders),
+      followingSet: new Set(state.following),
+      distanceById,
     };
   });
 }
@@ -308,8 +387,11 @@ function openDialogById(id) {
   const event = state.events.find((item) => item.id === id);
   if (!event) return;
 
-  renderDialog(event, refs.dialog, state.savedSet.has(id), state.remindersSet.has(id));
+  renderDialog(event, refs.dialog, state.savedSet.has(id), state.remindersSet.has(id), {
+    distanceKm: state.distanceById[id],
+  });
   if (!refs.dialog.open) refs.dialog.showModal();
+  setEventLink(id);
 }
 
 function persist() {
@@ -324,14 +406,20 @@ function persist() {
     quickWeek: state.quickWeek,
     quickFree: state.quickFree,
     quickOnline: state.quickOnline,
+    quickNear: state.quickNear,
     saved: state.saved,
     reminders: state.reminders,
+    persona: state.persona,
+    home: state.home,
+    nearRadiusKm: state.nearRadiusKm,
+    following: state.following,
+    followingOnly: state.followingOnly,
   });
 }
 
 function persistWith(partial) {
   const current = readStorage();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...current, ...partial }));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...current, ...partial, cachedAt: new Date().toISOString() }));
 }
 
 function hydrateFromStorage() {
@@ -349,6 +437,13 @@ function hydrateFromStorage() {
     quickWeek: Boolean(data.quickWeek),
     quickFree: Boolean(data.quickFree),
     quickOnline: Boolean(data.quickOnline),
+    quickNear: Boolean(data.quickNear),
+    cachedAt: data.cachedAt || "",
+    persona: data.persona || "",
+    home: data.home || null,
+    nearRadiusKm: Number.isFinite(Number(data.nearRadiusKm)) ? Number(data.nearRadiusKm) : 50,
+    following: Array.isArray(data.following) ? data.following.filter(Boolean) : [],
+    followingOnly: Boolean(data.followingOnly),
     saved,
     reminders,
     savedSet: new Set(saved),
@@ -373,9 +468,34 @@ function uniqueValues(values) {
     .sort((a, b) => a.localeCompare(b));
 }
 
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
 function setupPwa() {
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+  }
+}
+
+async function refreshData() {
+  try {
+    store.setState({ loading: true, error: "" });
+    const { events, speakers, lastUpdated, report } = await loadAppData();
+    store.setState({
+      events,
+      speakers,
+      lastUpdated,
+      report,
+      loading: false,
+      error: "",
+      cityOptions: uniqueValues(events.map((event) => event.city)),
+      typeOptions: uniqueValues(events.map((event) => event.type)),
+      cachedAt: new Date().toISOString(),
+    });
+    recompute();
+  } catch {
+    store.setState({ loading: false, error: "Could not refresh events." });
   }
 }
 
@@ -397,7 +517,8 @@ function syncQuickFiltersUi() {
       (key === "live" && state.quickLive) ||
       (key === "week" && state.quickWeek) ||
       (key === "free" && state.quickFree) ||
-      (key === "online" && state.quickOnline);
+      (key === "online" && state.quickOnline) ||
+      (key === "near" && state.quickNear);
     btn.classList.toggle("active", active);
     btn.setAttribute("aria-pressed", String(active));
   });
@@ -411,11 +532,13 @@ function toggleQuickFilter(key) {
       quickWeek: state.quickWeek,
       quickFree: state.quickFree,
       quickOnline: state.quickOnline,
+      quickNear: state.quickNear,
     };
     if (key === "live") next.quickLive = !state.quickLive;
     if (key === "week") next.quickWeek = !state.quickWeek;
     if (key === "free") next.quickFree = !state.quickFree;
     if (key === "online") next.quickOnline = !state.quickOnline;
+    if (key === "near") next.quickNear = !state.quickNear;
     return { ...state, ...next };
   });
   persist();
@@ -433,12 +556,116 @@ function clearFilters() {
     quickWeek: false,
     quickFree: false,
     quickOnline: false,
+    quickNear: false,
+    followingOnly: false,
     filtersOpen: false,
   });
   persist();
   recompute();
   syncQuickFiltersUi();
   syncFilterPanelUi();
+}
+
+function setPersona(persona) {
+  store.update((state) => {
+    const patch = { persona };
+    // Nudge defaults for the selected primary job.
+    if (persona === "attend") {
+      patch.quickWeek = true;
+      if (state.home) patch.quickNear = true;
+    }
+    if (persona === "online") {
+      patch.quickOnline = true;
+      patch.quickNear = false;
+    }
+    if (persona === "follow") {
+      patch.followingOnly = state.following.length > 0;
+    }
+    persistWith(patch);
+    return { ...state, ...patch };
+  });
+  recompute();
+  syncQuickFiltersUi();
+}
+
+function toggleFollowSpeaker(speakerId) {
+  store.update((state) => {
+    const following = state.following.includes(speakerId)
+      ? state.following.filter((id) => id !== speakerId)
+      : [...state.following, speakerId];
+    const patch = { following };
+    persistWith(patch);
+    return { ...state, ...patch, followingSet: new Set(following) };
+  });
+  recompute();
+}
+
+function setHomeCity(city) {
+  const coords = getCityCoords(city, city);
+  const home = {
+    mode: "city",
+    city,
+    cityName: city,
+    lat: coords ? coords.lat : null,
+    lon: coords ? coords.lon : null,
+    updatedAt: new Date().toISOString(),
+  };
+  store.setState({ home });
+  persistWith({ home });
+  recompute();
+}
+
+function requestHomeGeolocation() {
+  if (!("geolocation" in navigator)) return;
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const home = {
+        mode: "geo",
+        lat: pos.coords.latitude,
+        lon: pos.coords.longitude,
+        city: "",
+        cityName: "Current location",
+        updatedAt: new Date().toISOString(),
+      };
+      store.setState({ home, quickNear: true });
+      persistWith({ home, quickNear: true });
+      recompute();
+      syncQuickFiltersUi();
+    },
+    () => {}
+  );
+}
+
+function isNearHome(state, event) {
+  // If user turned it on but hasn't set a location yet, don't hide everything.
+  if (!state.home) return true;
+  if (event.city === "online") return false;
+
+  const home = state.home;
+  const radiusKm = Number(state.nearRadiusKm) || 50;
+
+  // City fallback if we don't have coordinates.
+  if (!Number.isFinite(home.lat) || !Number.isFinite(home.lon)) {
+    return Boolean(home.city) && event.city === home.city;
+  }
+
+  if (!Number.isFinite(event.cityLat) || !Number.isFinite(event.cityLon)) return false;
+  const km = haversineKm({ lat: home.lat, lon: home.lon }, { lat: event.cityLat, lon: event.cityLon });
+  return Number.isFinite(km) && km <= radiusKm;
+}
+
+function computeDistances(state, list) {
+  const byId = {};
+  const home = state.home;
+  if (!home) return byId;
+  if (!Number.isFinite(home.lat) || !Number.isFinite(home.lon)) return byId;
+
+  for (const event of list) {
+    if (!Number.isFinite(event.cityLat) || !Number.isFinite(event.cityLon)) continue;
+    const km = haversineKm({ lat: home.lat, lon: home.lon }, { lat: event.cityLat, lon: event.cityLon });
+    if (Number.isFinite(km)) byId[event.id] = km;
+  }
+  return byId;
 }
 
 function isWithinWeek(dateNum) {
@@ -561,6 +788,38 @@ async function shareLink(link) {
     document.execCommand("copy");
     input.remove();
   }
+}
+
+function setEventLink(id) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("event", id);
+  window.history.replaceState(null, "", url.toString());
+}
+
+function clearEventLink() {
+  const url = new URL(window.location.href);
+  url.searchParams.delete("event");
+  window.history.replaceState(null, "", url.toString());
+}
+
+function bindDeepLinks() {
+  const openFromUrl = () => {
+    const url = new URL(window.location.href);
+    const id = url.searchParams.get("event");
+    if (!id) return;
+    const state = store.getState();
+    const event = state.events.find((item) => item.id === id);
+    if (event) {
+      openDialogById(id);
+    }
+  };
+
+  window.addEventListener("popstate", openFromUrl);
+  store.subscribe(() => {
+    if (!store.getState().loading) {
+      openFromUrl();
+    }
+  });
 }
 
 function formatIcsDate(date) {

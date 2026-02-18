@@ -1,4 +1,5 @@
 import { safeDateNumber } from "./utils.js";
+import { getCityCoords } from "./geo.js";
 
 const speakerImageMap = {
   rajendradas: "assets/images/rajendradas.png",
@@ -41,6 +42,8 @@ export async function loadAppData() {
     const type = String(event?.type || "other").toLowerCase();
     const speaker = speakerById.get(event.vachakId);
     const cityName = event?.location?.cityName || "Unknown City";
+    const citySlug = event?.location?.city || cityName.toLowerCase().replace(/\s+/g, "-");
+    const coords = getCityCoords(citySlug, cityName);
 
     return {
       id: event.id,
@@ -49,7 +52,7 @@ export async function loadAppData() {
       end,
       type,
       typeLabel: typeLabelMap[type] || "Spiritual Event",
-      city: event?.location?.city || cityName.toLowerCase().replace(/\s+/g, "-"),
+      city: citySlug,
       cityName,
       venue: event?.location?.venue || "Venue TBD",
       timing: event?.dates?.timing || "Time TBD",
@@ -67,13 +70,23 @@ export async function loadAppData() {
       speakerBio: speaker?.bio || "",
       speakerImage: speaker?.image || "assets/images/placeholder-vachak.png",
       dateNum: safeDateNumber(start),
+      cityLat: coords ? coords.lat : null,
+      cityLon: coords ? coords.lon : null,
     };
   });
 
   const reportUpdatedAt = reportRaw?.generatedAt || "";
   const lastUpdated = reportUpdatedAt || newestUpdatedAt(events);
 
-  return { events, speakers, lastUpdated };
+  const report = {
+    generatedAt: reportUpdatedAt,
+    bySource: reportRaw?.stats?.bySource || {},
+    byVachak: reportRaw?.stats?.byVachak || {},
+    input: reportRaw?.input || {},
+    output: reportRaw?.output || {},
+  };
+
+  return { events, speakers, lastUpdated, report };
 }
 
 function newestUpdatedAt(events) {

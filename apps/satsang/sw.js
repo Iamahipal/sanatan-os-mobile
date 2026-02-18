@@ -1,4 +1,4 @@
-const CACHE_NAME = "satsang-modern-v3";
+const CACHE_NAME = "satsang-modern-v4";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -8,9 +8,11 @@ const APP_SHELL = [
   "./js/core/router.js",
   "./js/core/utils.js",
   "./js/core/data-service.js",
+  "./js/core/geo.js",
   "./js/ui/renderers.js",
   "./js/data/scraped_events.json",
   "./js/data/vachaks.json",
+  "./js/data/scrape_report.json",
   "./manifest.json",
   "./assets/images/placeholder-vachak.png"
 ];

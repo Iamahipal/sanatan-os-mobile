@@ -1,0 +1,205 @@
+/* Bal Krishna App - Mobile First CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 60%, #81C784 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    padding-top: max(15px, env(safe-area-inset-top));
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.header h1 {
+    font-size: 1.4rem;
+    color: #1A237E;
+}
+
+.back-btn {
+    color: #1A237E;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.streak {
+    background: #FF9800;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Main Scene */
+.scene {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+/* Krishna Image - Direct IMG tag */
+.krishna-img {
+    max-width: 200px;
+    max-height: 280px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Start Button - BIG and OBVIOUS */
+.start-btn {
+    position: absolute;
+    bottom: 100px;
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.start-btn:active {
+    transform: scale(0.95);
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 8px 25px rgba(255, 152, 0, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 8px 40px rgba(255, 152, 0, 0.8);
+    }
+}
+
+/* Routine Tabs */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.tab {
+    background: #ECEFF1;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    color: #607D8B;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.tab.active {
+    background: #1A237E;
+    color: white;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.3s;
+}
+
+.overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.overlay-box {
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+.overlay-box h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.timer-circle {
+    width: 150px;
+    height: 150px;
+    border: 8px solid #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.timer-circle span {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.hint {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.done-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 50px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.done-btn:active {
+    transform: scale(0.95);
+}

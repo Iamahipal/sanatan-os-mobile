@@ -4,11 +4,19 @@ const DEFAULTS = {
   storageVersion: 1,
   settings: {
     language: "en",
-    minTasksPerDay: 3,
+    minTasksPerDay: 3, // 2 or 3 (default 3)
     bonusMax: 2,
     dailyCapMinutes: 15,
     soundOn: true,
     voiceOn: false,
+    enabledCategories: {
+      respect: true,
+      naam: true,
+      samay: true,
+      study: true,
+      sports: true,
+      seva: true
+    },
     parentConfirm: {
       pranam: false,
       seva: false
@@ -46,6 +54,10 @@ function migrate(data) {
   merged.settings.parentConfirm = {
     ...merged.settings.parentConfirm,
     ...((data.settings && data.settings.parentConfirm) || {})
+  };
+  merged.settings.enabledCategories = {
+    ...merged.settings.enabledCategories,
+    ...((data.settings && data.settings.enabledCategories) || {})
   };
   merged.progress = { ...merged.progress, ...(data.progress || {}) };
   merged.historyByDate = { ...(data.historyByDate || {}) };

@@ -6,6 +6,7 @@ export function renderProgress({ main, store, content, plan }) {
   const lang = app.settings.language;
   const dateKey = getTodayKey();
   const hist = ensureToday(app, dateKey);
+  const required = Math.max(1, Math.min(3, (plan && Array.isArray(plan.minTasks)) ? plan.minTasks.length : 3));
 
   main.innerHTML = "";
 
@@ -17,8 +18,8 @@ export function renderProgress({ main, store, content, plan }) {
   const beadsOn = Math.max(0, Math.min(27, app.progress.malaBeads || 0));
   const beads = Array.from({ length: 27 }).map((_, i) => `<div class="bead ${i < beadsOn ? "beadOn" : ""}"></div>`).join("");
 
-  const flowers = Math.max(0, Math.min(3, hist.flowers || 0));
-  const garland = Array.from({ length: 3 }).map((_, i) => `<div class="flower ${i < flowers ? "flowerOn" : ""}"></div>`).join("");
+  const flowers = Math.max(0, Math.min(required, hist.flowers || 0));
+  const garland = Array.from({ length: required }).map((_, i) => `<div class="flower ${i < flowers ? "flowerOn" : ""}"></div>`).join("");
   const bonus = Array.isArray(hist.bonusLog) ? hist.bonusLog : [];
   const bonusMax = Number(app.settings.bonusMax || 0);
   const bonusLines = bonus.length
@@ -33,7 +34,7 @@ export function renderProgress({ main, store, content, plan }) {
     <div class="sep"></div>
     <div class="progressRow">
       <div class="kv">
-        <div><strong>${ui("garland_title", lang)}</strong><div class="small">${ui("garland_sub", lang)}</div></div>
+        <div><strong>${ui("garland_title", lang)}</strong><div class="small">${flowers}/${required}</div></div>
         <div class="garland">${garland}</div>
       </div>
       <div class="kv">

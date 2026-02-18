@@ -27,42 +27,297 @@
 
 <body>
     <div class="app-container">
-        <!-- Header -->
-        <header class="app-header">
+        <!-- Top App Bar -->
+        <header class="app-header" role="banner">
             <button id="location-chip" class="location-chip" aria-label="Change location">
                 <span class="material-symbols-rounded">my_location</span>
                 <span id="current-city">Pune</span>
             </button>
-            <div style="display: flex; gap: 8px;">
-                <button id="calendar-btn" class="icon-btn" aria-label="Open Calendar">
+            <div class="header-actions">
+                <button id="calendar-btn" class="icon-btn m3-state" aria-label="Open Calendar">
                     <span class="material-symbols-rounded">calendar_month</span>
                 </button>
-                <button id="share-btn" class="icon-btn" aria-label="Share today's Panchang">
+                <button id="share-btn" class="icon-btn m3-state" aria-label="Share today's Panchang">
                     <span class="material-symbols-rounded">share</span>
                 </button>
-                <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+                <button id="theme-toggle" class="icon-btn m3-state" aria-label="Toggle theme">
                     <span class="material-symbols-rounded">light_mode</span>
                 </button>
-                <button id="settings-btn" class="icon-btn" aria-label="Settings">
+                <button id="settings-btn" class="icon-btn m3-state" aria-label="Settings">
                     <span class="material-symbols-rounded">settings</span>
                 </button>
             </div>
         </header>
 
-        <!-- ...existing code... -->
+        <!-- Warning Banner (hidden by default) -->
+        <div class="warning-banner" id="warning-banner" role="alert" style="display:none">
+            <span class="material-symbols-rounded warning-banner-icon">error</span>
+            <div class="warning-content">
+                <span class="warning-title" id="warning-title"></span>
+                <span class="warning-desc" id="warning-desc"></span>
+            </div>
+        </div>
+
+        <main id="app-main" role="main">
+            <!-- Date Navigation Bar -->
+            <section class="date-bar" id="date-bar" aria-label="Date navigation">
+                <button id="prev-day" class="icon-btn m3-state" aria-label="Previous day">
+                    <span class="material-symbols-rounded">chevron_left</span>
+                </button>
+                <div class="date-center" id="date-center" role="button" tabindex="0" aria-label="Go to today">
+                    <span class="hindu-date" id="hindu-date">Loading…</span>
+                    <span class="gregorian-date" id="gregorian-date"></span>
+                    <span class="today-badge" id="today-badge" style="display:none">Tap to go to today</span>
+                </div>
+                <button id="next-day" class="icon-btn m3-state" aria-label="Next day">
+                    <span class="material-symbols-rounded">chevron_right</span>
+                </button>
+            </section>
+
+            <!-- Daily Guidance -->
+            <section class="guidance-section" id="guidance" aria-label="Daily guidance">
+                <!-- Vara Card -->
+                <div class="vara-card">
+                    <span class="vara-icon" id="vara-icon">☀️</span>
+                    <div class="vara-info">
+                        <span class="vara-name" id="vara-name">Loading…</span>
+                        <span class="vara-deity" id="vara-deity"></span>
+                    </div>
+                </div>
+
+                <!-- Day Quality -->
+                <div class="day-quality">
+                    <div class="quality-row good">
+                        <span class="quality-icon material-symbols-rounded">check_circle</span>
+                        <span class="quality-label" id="label-good-for">Good for</span>
+                        <span class="quality-value" id="good-for">—</span>
+                    </div>
+                    <div class="quality-row avoid">
+                        <span class="quality-icon material-symbols-rounded">block</span>
+                        <span class="quality-label" id="label-avoid">Avoid</span>
+                        <span class="quality-value" id="avoid-for">—</span>
+                    </div>
+                </div>
+
+                <!-- Daily Insight -->
+                <div class="insight-card">
+                    <span class="material-symbols-rounded insight-icon">lightbulb</span>
+                    <div class="insight-content">
+                        <span class="insight-title" id="insight-title">Loading insight…</span>
+                        <span class="insight-desc" id="insight-desc"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hero: Moon + Tithi + Quick Facts -->
+            <section class="hero-section" id="hero" aria-label="Today at a glance">
+                <div class="moon-hero">
+                    <div class="moon-visual" aria-hidden="true">
+                        <div class="moon-3d">
+                            <div class="moon-surface"></div>
+                            <div class="moon-shadow" id="moon-shadow"></div>
+                        </div>
+                    </div>
+                    <div class="moon-info">
+                        <span class="tithi-label">Tithi</span>
+                        <span class="tithi-name" id="tithi-name">—</span>
+                        <span class="tithi-end" id="tithi-end">
+                            <span class="material-symbols-rounded" style="font-size:16px">schedule</span>
+                            Loading…
+                        </span>
+                    </div>
+                </div>
+
+                <div class="quick-facts">
+                    <div class="fact">
+                        <span class="material-symbols-rounded">star</span>
+                        <div class="fact-content">
+                            <span class="fact-label">Nakshatra</span>
+                            <span class="fact-value" id="nakshatra-name">—</span>
+                        </div>
+                    </div>
+                    <div class="fact">
+                        <span class="material-symbols-rounded">wb_sunny</span>
+                        <div class="fact-content">
+                            <span class="fact-label" id="label-sunrise">Sunrise</span>
+                            <span class="fact-value" id="sunrise">—</span>
+                        </div>
+                    </div>
+                    <div class="fact">
+                        <span class="material-symbols-rounded">wb_twilight</span>
+                        <div class="fact-content">
+                            <span class="fact-label">Sunset</span>
+                            <span class="fact-value" id="sunset">—</span>
+                        </div>
+                    </div>
+                    <div class="fact">
+                        <span class="material-symbols-rounded">brightness_3</span>
+                        <div class="fact-content">
+                            <span class="fact-label">Moonrise</span>
+                            <span class="fact-value" id="moonrise">—</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timings: Status + Timeline + Good/Avoid -->
+            <section class="timing-section" id="timings" aria-label="Auspicious and avoid timings">
+                <h2 class="section-title">
+                    <span class="material-symbols-rounded">schedule</span>
+                    <span id="label-right-now">Right Now</span>
+                </h2>
+
+                <!-- Status Banner -->
+                <div class="status-banner good" id="current-status" role="status" aria-live="polite">
+                    <span class="material-symbols-rounded status-icon">check_circle</span>
+                    <div class="status-info">
+                        <span class="status-title" id="status-title">Loading…</span>
+                        <span class="status-desc" id="status-desc"></span>
+                    </div>
+                </div>
+
+                <!-- Day Timeline -->
+                <div class="day-timeline" aria-label="Day timeline showing auspicious and inauspicious periods">
+                    <div class="timeline-bar" id="timeline-bar" role="img" aria-label="Choghadiya timeline"></div>
+                    <div class="timeline-labels">
+                        <span id="timeline-sunrise">--:--</span>
+                        <span id="timeline-sunset">--:--</span>
+                    </div>
+                    <div class="timeline-now" id="timeline-now" aria-hidden="true">
+                        <div class="now-marker"></div>
+                        <span class="now-label">Now</span>
+                    </div>
+                </div>
+
+                <!-- Time Blocks -->
+                <div class="time-blocks">
+                    <div class="time-block good">
+                        <div class="block-header">
+                            <span class="material-symbols-rounded">verified</span>
+                            <span class="block-title" id="label-good-times">Good Times Today</span>
+                        </div>
+                        <div class="block-list" id="good-times-list">
+                            <div class="time-row"><span class="time-name">Loading…</span></div>
+                        </div>
+                    </div>
+                    <div class="time-block avoid">
+                        <div class="block-header">
+                            <span class="material-symbols-rounded">dangerous</span>
+                            <span class="block-title" id="label-avoid-times">Avoid These Times</span>
+                        </div>
+                        <div class="block-list" id="avoid-times-list">
+                            <div class="time-row"><span class="time-name">Loading…</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upcoming Events & Festivals -->
+            <section class="upcoming-section" id="upcoming" aria-label="Upcoming festivals and events">
+                <h2 class="section-title">
+                    <span class="material-symbols-rounded">celebration</span>
+                    <span id="label-coming-up">Coming Up</span>
+                </h2>
+                <div id="today-events"></div>
+                <div class="upcoming-list" id="upcoming-festivals">
+                    <div class="no-events">Loading festivals…</div>
+                </div>
+            </section>
+
+            <!-- Panchang Details (Expandable) -->
+            <section class="details-section" id="details" aria-label="Panchang details">
+                <button class="expand-btn m3-state" id="expand-details"
+                        aria-expanded="false" aria-controls="details-content">
+                    <span id="label-more-details">More Details</span>
+                    <span class="material-symbols-rounded">expand_more</span>
+                </button>
+
+                <div class="details-content" id="details-content" style="display:none" role="region"
+                     aria-label="Expanded panchang details">
+                    <!-- Panchang Elements Grid -->
+                    <div class="detail-group">
+                        <h3>Panchang Elements</h3>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Tithi</span>
+                                <span class="detail-value" id="d-tithi">—</span>
+                                <span class="detail-time" id="d-tithi-time"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Nakshatra</span>
+                                <span class="detail-value" id="d-nakshatra">—</span>
+                                <span class="detail-time" id="d-nakshatra-time"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Yoga</span>
+                                <span class="detail-value" id="d-yoga">—</span>
+                                <span class="detail-time" id="d-yoga-time"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Karana</span>
+                                <span class="detail-value" id="d-karana">—</span>
+                                <span class="detail-time" id="d-karana-time"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calendar Info -->
+                    <div class="detail-group">
+                        <h3>Hindu Calendar</h3>
+                        <div class="calendar-info" id="calendar-info">
+                            <div class="cal-item"><span>Loading…</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Choghadiya -->
+                    <div class="detail-group">
+                        <h3>Choghadiya</h3>
+                        <div class="choghadiya-tabs" role="tablist" aria-label="Choghadiya period selector">
+                            <button class="chog-tab m3-state active" data-period="day" role="tab"
+                                    aria-selected="true" aria-controls="choghadiya-list">Day</button>
+                            <button class="chog-tab m3-state" data-period="night" role="tab"
+                                    aria-selected="false" aria-controls="choghadiya-list">Night</button>
+                        </div>
+                        <div class="choghadiya-list" id="choghadiya-list" role="tabpanel">
+                            <div class="chog-item"><span class="chog-name">Loading…</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Hora -->
+                    <div class="detail-group">
+                        <h3>Current Hora</h3>
+                        <div class="hora-display" id="hora-display"></div>
+                    </div>
+
+                    <!-- Graha Sthiti -->
+                    <div class="detail-group">
+                        <h3>Graha Sthiti</h3>
+                        <div class="graha-grid" id="graha-sthiti"></div>
+                    </div>
+
+                    <!-- Daily Mantra -->
+                    <div class="detail-group">
+                        <h3>Today's Mantra</h3>
+                        <div class="mantra-card" id="daily-mantra"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
 
         <!-- Calendar Modal -->
-        <div class="modal-overlay" id="calendar-modal" role="dialog" aria-label="Calendar">
+        <div class="modal-overlay" id="calendar-modal" role="dialog" aria-modal="true" aria-label="Calendar">
             <div class="modal-content calendar-modal-content">
                 <div class="modal-header">
                     <h3 id="cal-month-year">February 2026</h3>
                     <div class="cal-nav">
-                        <button id="cal-prev" class="icon-btn small"><span
-                                class="material-symbols-rounded">chevron_left</span></button>
-                        <button id="cal-next" class="icon-btn small"><span
-                                class="material-symbols-rounded">chevron_right</span></button>
+                        <button id="cal-prev" class="icon-btn m3-state" aria-label="Previous month">
+                            <span class="material-symbols-rounded">chevron_left</span>
+                        </button>
+                        <button id="cal-next" class="icon-btn m3-state" aria-label="Next month">
+                            <span class="material-symbols-rounded">chevron_right</span>
+                        </button>
                     </div>
-                    <button class="close-btn" id="close-calendar" aria-label="Close calendar">
+                    <button class="icon-btn m3-state" id="close-calendar" aria-label="Close calendar">
                         <span class="material-symbols-rounded">close</span>
                     </button>
                 </div>
@@ -70,24 +325,24 @@
                     <div class="calendar-grid-header">
                         <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
                     </div>
-                    <div id="calendar-grid" class="calendar-grid">
+                    <div id="calendar-grid" class="calendar-grid" role="grid" aria-label="Calendar days">
                         <!-- Populated by JS -->
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Settings Modal (single consolidated modal) -->
-        <div class="modal-overlay" id="settings-modal" role="dialog" aria-label="Settings">
+        <!-- Settings Modal -->
+        <div class="modal-overlay" id="settings-modal" role="dialog" aria-modal="true" aria-label="Settings">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3>Settings</h3>
-                    <button class="close-btn" id="close-settings" aria-label="Close settings">
+                    <button class="icon-btn m3-state" id="close-settings" aria-label="Close settings">
                         <span class="material-symbols-rounded">close</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <button class="location-auto-btn" id="detect-location" aria-label="Detect my location">
+                    <button class="location-auto-btn m3-state" id="detect-location" aria-label="Detect my location">
                         <span class="material-symbols-rounded">my_location</span>
                         Detect My Location
                     </button>
@@ -125,6 +380,7 @@
         <script src="lib/vedic-engine.js"></script>
         <script src="lib/festival-calculator.js"></script>
         <script src="script.js"></script>
+</div>
 </body>
 
 </html>

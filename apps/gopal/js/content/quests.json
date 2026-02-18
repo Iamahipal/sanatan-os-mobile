@@ -1,4 +1,4 @@
-﻿{
+{
   "app": {
     "id": "gopal",
     "storageVersion": 1
@@ -41,6 +41,174 @@
       "reward": {"flowers": 1}
     },
     {
+      "id": "guru_respect",
+      "category": "respect",
+      "slots": ["morning"],
+      "title": {"en":"Respect Teachers & Elders","hi":"गुरुजन का सम्मान"},
+      "teachLine": {"en":"A student is humble and brave.","hi":"शिष्य नम्र और साहसी होता है।"},
+      "play": {
+        "mode": "tap_sequence",
+        "config": {
+          "steps": [
+            {"en":"Greet politely","hi":"नम्र नमस्ते"},
+            {"en":"Listen fully","hi":"ध्यान से सुनो"},
+            {"en":"Speak softly","hi":"धीरे बोलो"},
+            {"en":"Say thank you","hi":"धन्यवाद बोलो"}
+          ]
+        }
+      },
+      "realWorld": {"en":"Greet a teacher/elder today and listen carefully.","hi":"आज किसी गुरु/बड़े को नमस्ते करो और ध्यान से सुनो।"},
+      "reflection": {
+        "prompt": {"en":"Today I was...","hi":"आज मैं था/थी..."},
+        "choices": [
+          {"en":"Respectful","hi":"सम्मान देने वाला"},
+          {"en":"Trying","hi":"कोशिश कर रहा/रही"},
+          {"en":"I will do better","hi":"और अच्छा करूंगा/करूंगी"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "madhur_vani",
+      "category": "respect",
+      "slots": ["morning"],
+      "title": {"en":"Madhur Vani","hi":"मधुर वाणी"},
+      "teachLine": {"en":"Sweet speech is seva.","hi":"मधुर वाणी भी सेवा है।"},
+      "play": {
+        "mode": "tap_sequence",
+        "config": {
+          "steps": [
+            {"en":"Pause","hi":"रुको"},
+            {"en":"Think kind words","hi":"अच्छे शब्द सोचो"},
+            {"en":"Speak softly","hi":"धीरे बोलो"},
+            {"en":"Smile","hi":"मुस्कुराओ"}
+          ]
+        }
+      },
+      "realWorld": {"en":"Say one kind sentence to your family today.","hi":"आज परिवार में एक मधुर वाक्य बोलो।"},
+      "reflection": {
+        "prompt": {"en":"My speech was...","hi":"मेरी वाणी थी..."},
+        "choices": [
+          {"en":"Sweet","hi":"मधुर"},
+          {"en":"Okay","hi":"ठीक"},
+          {"en":"I will improve","hi":"मैं सुधार करूंगा/करूंगी"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "gratitude_parents",
+      "category": "respect",
+      "slots": ["morning"],
+      "title": {"en":"Gratitude to Parents","hi":"माता-पिता के प्रति कृतज्ञता"},
+      "teachLine": {"en":"Gratitude makes the heart bright.","hi":"कृतज्ञता से मन उजला होता है।"},
+      "play": {
+        "mode": "tap_sequence",
+        "config": {
+          "steps": [
+            {"en":"Think 1 good thing","hi":"1 अच्छी बात सोचो"},
+            {"en":"Think 2 good things","hi":"2 अच्छी बातें सोचो"},
+            {"en":"Think 3 good things","hi":"3 अच्छी बातें सोचो"},
+            {"en":"Say thank you","hi":"धन्यवाद बोलो"}
+          ]
+        }
+      },
+      "realWorld": {"en":"Thank your parents for something specific.","hi":"माता-पिता को किसी एक बात के लिए धन्यवाद कहो।"},
+      "reflection": {
+        "prompt": {"en":"I said thank you...","hi":"मैंने धन्यवाद कहा..."},
+        "choices": [
+          {"en":"With a smile","hi":"मुस्कान के साथ"},
+          {"en":"Quietly","hi":"धीरे से"},
+          {"en":"Later today","hi":"आज बाद में"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "satya_vachan",
+      "category": "respect",
+      "slots": ["morning"],
+      "title": {"en":"Satya (Truthfulness)","hi":"सत्य (सच बोलना)"},
+      "teachLine": {"en":"Truth builds trust.","hi":"सत्य से विश्वास बनता है।"},
+      "play": {
+        "mode": "tap_sequence",
+        "config": {
+          "steps": [
+            {"en":"Pause","hi":"रुको"},
+            {"en":"Think what is true","hi":"सच सोचो"},
+            {"en":"Speak clearly","hi":"साफ बोलो"},
+            {"en":"Fix mistakes","hi":"गलती सुधारो"}
+          ]
+        }
+      },
+      "realWorld": {"en":"Say one true sentence today, even if it is small.","hi":"आज एक सच्चा वाक्य बोलो, चाहे छोटा ही हो।"},
+      "reflection": {
+        "prompt": {"en":"Telling truth felt...","hi":"सच बोलना लगा..."},
+        "choices": [
+          {"en":"Easy","hi":"आसान"},
+          {"en":"Hard","hi":"कठिन"},
+          {"en":"I will practice","hi":"अभ्यास करूंगा/करूंगी"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "sorry_and_fix",
+      "category": "respect",
+      "slots": ["morning"],
+      "title": {"en":"Say Sorry and Fix","hi":"माफ़ी और सुधार"},
+      "teachLine": {"en":"A brave child says sorry and fixes it.","hi":"बहादुर बच्चा माफ़ी भी मांगता है और सुधार भी।"},
+      "play": {
+        "mode": "tap_sequence",
+        "config": {
+          "steps": [
+            {"en":"Accept mistake","hi":"गलती मानो"},
+            {"en":"Say sorry","hi":"माफ़ी मांगो"},
+            {"en":"Fix it","hi":"सुधार करो"},
+            {"en":"Do better next time","hi":"अगली बार अच्छा"}
+          ]
+        }
+      },
+      "realWorld": {"en":"If you made a mistake today, say sorry and fix one thing.","hi":"आज अगर गलती हो, माफ़ी मांगो और एक चीज़ सुधारो।"},
+      "reflection": {
+        "prompt": {"en":"I was...","hi":"मैं था/थी..."},
+        "choices": [
+          {"en":"Brave","hi":"बहादुर"},
+          {"en":"Trying","hi":"कोशिश कर रहा/रही"},
+          {"en":"Later","hi":"बाद में"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "listen_first",
+      "category": "respect",
+      "slots": ["morning"],
+      "title": {"en":"Listen First","hi":"पहले सुनो"},
+      "teachLine": {"en":"Listening is learning.","hi":"सुनना ही सीखना है।"},
+      "play": {
+        "mode": "tap_sequence",
+        "config": {
+          "steps": [
+            {"en":"Look at the speaker","hi":"बोलने वाले को देखो"},
+            {"en":"Stay quiet","hi":"चुप रहो"},
+            {"en":"Understand","hi":"समझो"},
+            {"en":"Reply softly","hi":"धीरे उत्तर दो"}
+          ]
+        }
+      },
+      "realWorld": {"en":"Listen fully to one person today before replying.","hi":"आज किसी एक व्यक्ति की बात पूरी सुनकर ही उत्तर दो।"},
+      "reflection": {
+        "prompt": {"en":"Listening was...","hi":"सुनना था..."},
+        "choices": [
+          {"en":"Easy","hi":"आसान"},
+          {"en":"Okay","hi":"ठीक"},
+          {"en":"Hard","hi":"कठिन"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
       "id": "naam_mala",
       "category": "naam",
       "slots": ["morning"],
@@ -57,6 +225,34 @@
           {"en":"Calm","hi":"शांत"},
           {"en":"Restless","hi":"चंचल"},
           {"en":"Sleepy","hi":"नींद सा"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "naam_breath",
+      "category": "naam",
+      "slots": ["morning"],
+      "title": {"en":"Breath With Naam","hi":"नाम के साथ श्वास"},
+      "teachLine": {"en":"Breath slowly. Mind becomes steady.","hi":"धीरे श्वास लो। मन स्थिर होता है।"},
+      "play": {
+        "mode": "tap_sequence",
+        "config": {
+          "steps": [
+            {"en":"Sit calm","hi":"शांत बैठो"},
+            {"en":"Inhale (slow)","hi":"धीरे सांस लो"},
+            {"en":"Exhale (slow)","hi":"धीरे सांस छोड़ो"},
+            {"en":"Say the naam 3 times","hi":"नाम 3 बार बोलो"}
+          ]
+        }
+      },
+      "realWorld": {"en":"Do 3 slow breaths and say the naam softly.","hi":"3 धीमी सांसें लो और नाम धीरे बोलो।"},
+      "reflection": {
+        "prompt": {"en":"After breathing, I feel...","hi":"श्वास के बाद मैं..."},
+        "choices": [
+          {"en":"Calm","hi":"शांत"},
+          {"en":"Better","hi":"अच्छा"},
+          {"en":"Still restless","hi":"अभी भी चंचल"}
         ]
       },
       "reward": {"flowers": 1}
@@ -84,6 +280,62 @@
           {"en":"Easy","hi":"आसान"},
           {"en":"Okay","hi":"ठीक"},
           {"en":"Hard","hi":"कठिन"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "samay_pack_bag",
+      "category": "samay",
+      "slots": ["afternoon"],
+      "title": {"en":"Pack Bag On Time","hi":"समय पर बैग तैयार"},
+      "teachLine": {"en":"Preparedness saves time.","hi":"तैयारी से समय बचता है।"},
+      "play": {
+        "mode": "tap_sequence",
+        "config": {
+          "steps": [
+            {"en":"Check timetable","hi":"टाइमटेबल देखो"},
+            {"en":"Pack books","hi":"किताबें रखो"},
+            {"en":"Pack bottle","hi":"बोतल रखो"},
+            {"en":"Keep uniform ready","hi":"यूनिफॉर्म तैयार"}
+          ]
+        }
+      },
+      "realWorld": {"en":"Pack your school bag for tomorrow.","hi":"कल के लिए स्कूल बैग तैयार करो।"},
+      "reflection": {
+        "prompt": {"en":"Packing was...","hi":"बैग तैयार करना..."},
+        "choices": [
+          {"en":"Easy","hi":"आसान"},
+          {"en":"Okay","hi":"ठीक"},
+          {"en":"I need help","hi":"मदद चाहिए"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "samay_screen_limit",
+      "category": "samay",
+      "slots": ["afternoon"],
+      "title": {"en":"Screen Time Discipline","hi":"स्क्रीन समय अनुशासन"},
+      "teachLine": {"en":"Control the tool. Do not be controlled.","hi":"उपकरण को नियंत्रित करो। उपकरण से नहीं।"},
+      "play": {
+        "mode": "tap_sequence",
+        "config": {
+          "steps": [
+            {"en":"Ask permission","hi":"अनुमति लो"},
+            {"en":"Set a timer","hi":"टाइमर लगाओ"},
+            {"en":"Play gently","hi":"शांति से खेलो"},
+            {"en":"Stop on time","hi":"समय पर बंद करो"}
+          ]
+        }
+      },
+      "realWorld": {"en":"Follow a timer for screen time today.","hi":"आज स्क्रीन समय टाइमर के साथ करो।"},
+      "reflection": {
+        "prompt": {"en":"Stopping on time was...","hi":"समय पर बंद करना..."},
+        "choices": [
+          {"en":"Easy","hi":"आसान"},
+          {"en":"Hard","hi":"कठिन"},
+          {"en":"I will practice","hi":"अभ्यास करूंगा/करूंगी"}
         ]
       },
       "reward": {"flowers": 1}
@@ -117,6 +369,62 @@
       "reward": {"flowers": 1}
     },
     {
+      "id": "study_homework_focus",
+      "category": "study",
+      "slots": ["afternoon"],
+      "title": {"en":"Homework Focus","hi":"होमवर्क ध्यान"},
+      "teachLine": {"en":"One page with full focus.","hi":"एक पन्ना, पूरा ध्यान।"},
+      "play": {
+        "mode": "tap_sequence",
+        "config": {
+          "steps": [
+            {"en":"Phone away","hi":"फोन दूर"},
+            {"en":"Open notebook","hi":"कॉपी खोलो"},
+            {"en":"Do 1 page","hi":"1 पन्ना करो"},
+            {"en":"Mark done","hi":"हो गया चिन्ह"}
+          ]
+        }
+      },
+      "realWorld": {"en":"Do 10 minutes of homework now.","hi":"अब 10 मिनट होमवर्क करो।"},
+      "reflection": {
+        "prompt": {"en":"My focus was...","hi":"मेरा ध्यान था..."},
+        "choices": [
+          {"en":"Strong","hi":"मज़बूत"},
+          {"en":"Medium","hi":"ठीक"},
+          {"en":"Weak","hi":"कम"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "study_read_aloud",
+      "category": "study",
+      "slots": ["afternoon"],
+      "title": {"en":"Read Aloud","hi":"ऊँचा पढ़ो"},
+      "teachLine": {"en":"Clear reading builds clear thinking.","hi":"साफ पढ़ाई से साफ सोच बनती है।"},
+      "play": {
+        "mode": "tap_sequence",
+        "config": {
+          "steps": [
+            {"en":"Pick 5 lines","hi":"5 पंक्तियाँ चुनो"},
+            {"en":"Read slowly","hi":"धीरे पढ़ो"},
+            {"en":"Say meaning","hi":"अर्थ बताओ"},
+            {"en":"Smile","hi":"मुस्कुराओ"}
+          ]
+        }
+      },
+      "realWorld": {"en":"Read 5 lines aloud to a parent.","hi":"माता-पिता को 5 पंक्तियाँ ऊँचा पढ़कर सुनाओ।"},
+      "reflection": {
+        "prompt": {"en":"Reading felt...","hi":"पढ़ना लगा..."},
+        "choices": [
+          {"en":"Easy","hi":"आसान"},
+          {"en":"Okay","hi":"ठीक"},
+          {"en":"I need practice","hi":"अभ्यास चाहिए"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
       "id": "sports_activity",
       "category": "sports",
       "slots": ["evening"],
@@ -133,6 +441,106 @@
           {"en":"High","hi":"ज़्यादा"},
           {"en":"Medium","hi":"ठीक"},
           {"en":"Low","hi":"कम"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "sports_stretch",
+      "category": "sports",
+      "slots": ["evening"],
+      "title": {"en":"Stretch & Strength","hi":"स्ट्रेच और शक्ति"},
+      "teachLine": {"en":"Daily movement is daily strength.","hi":"रोज़ की गति, रोज़ की शक्ति।"},
+      "play": {
+        "mode": "sports_rhythm",
+        "config": { "target": 12, "label": {"en":"Stretches","hi":"स्ट्रेच"} }
+      },
+      "realWorld": {"en":"Do 2 minutes of stretching.","hi":"2 मिनट स्ट्रेचिंग करो।"},
+      "reflection": {
+        "prompt": {"en":"My body feels...","hi":"शरीर कैसा है?"},
+        "choices": [
+          {"en":"Loose","hi":"हल्का"},
+          {"en":"Okay","hi":"ठीक"},
+          {"en":"Tired","hi":"थका"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "sports_walk",
+      "category": "sports",
+      "slots": ["evening"],
+      "title": {"en":"Walk With Krishna","hi":"कृष्ण के साथ चलो"},
+      "teachLine": {"en":"Steady steps build steady mind.","hi":"स्थिर कदम, स्थिर मन।"},
+      "play": {
+        "mode": "sports_rhythm",
+        "config": { "target": 30, "label": {"en":"Steps","hi":"कदम"} }
+      },
+      "realWorld": {"en":"Walk for 3 minutes with a family member.","hi":"परिवार के साथ 3 मिनट चलो।"},
+      "reflection": {
+        "prompt": {"en":"Walking was...","hi":"चलना था..."},
+        "choices": [
+          {"en":"Fun","hi":"मज़ेदार"},
+          {"en":"Okay","hi":"ठीक"},
+          {"en":"Not today","hi":"आज नहीं"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "seva_clean_space",
+      "category": "seva",
+      "slots": ["evening"],
+      "confirmKey": "seva",
+      "title": {"en":"Clean Your Space","hi":"अपनी जगह साफ़"},
+      "teachLine": {"en":"Cleanliness is discipline.","hi":"स्वच्छता अनुशासन है।"},
+      "play": {
+        "mode": "seva_cards",
+        "config": {
+          "cards": [
+            {"id":"desk","label":{"en":"Tidy your desk","hi":"टेबल ठीक करो"}},
+            {"id":"toys","label":{"en":"Put toys away","hi":"खिलौने रखो"}},
+            {"id":"trash","label":{"en":"Throw trash properly","hi":"कूड़ा सही डालो"}},
+            {"id":"shoes","label":{"en":"Arrange shoes","hi":"जूते सजाओ"}}
+          ]
+        }
+      },
+      "realWorld": {"en":"Clean your space for 2 minutes.","hi":"2 मिनट अपनी जगह साफ़ करो।"},
+      "reflection": {
+        "prompt": {"en":"After cleaning I feel...","hi":"साफ़ करने के बाद..."},
+        "choices": [
+          {"en":"Fresh","hi":"ताज़ा"},
+          {"en":"Okay","hi":"ठीक"},
+          {"en":"Tired","hi":"थका"}
+        ]
+      },
+      "reward": {"flowers": 1}
+    },
+    {
+      "id": "seva_sharing",
+      "category": "seva",
+      "slots": ["evening"],
+      "confirmKey": "seva",
+      "title": {"en":"Sharing & Kindness","hi":"साझा और दया"},
+      "teachLine": {"en":"Kindness is real strength.","hi":"दया ही सच्ची शक्ति है।"},
+      "play": {
+        "mode": "seva_cards",
+        "config": {
+          "cards": [
+            {"id":"share","label":{"en":"Share a toy or book","hi":"खिलौना/किताब साझा"}},
+            {"id":"help_sibling","label":{"en":"Help sibling","hi":"भाई-बहन की मदद"}},
+            {"id":"water_someone","label":{"en":"Offer water","hi":"पानी देना"}},
+            {"id":"feed_bird","label":{"en":"Feed birds","hi":"पक्षियों को दाना"}}
+          ]
+        }
+      },
+      "realWorld": {"en":"Do one act of sharing/kindness now.","hi":"अब एक साझा/दया का काम करो।"},
+      "reflection": {
+        "prompt": {"en":"My heart feels...","hi":"मेरा मन..."},
+        "choices": [
+          {"en":"Happy","hi":"खुश"},
+          {"en":"Warm","hi":"अच्छा"},
+          {"en":"I will do more","hi":"और करूंगा/करूंगी"}
         ]
       },
       "reward": {"flowers": 1}
@@ -181,7 +589,10 @@
             {"id":"water","label":{"en":"Fill water bottle","hi":"पानी की बोतल भरो"}},
             {"id":"bed","label":{"en":"Make your bed","hi":"बिस्तर ठीक करो"}},
             {"id":"books","label":{"en":"Arrange books","hi":"किताबें सजाओ"}},
-            {"id":"plates","label":{"en":"Help set plates","hi":"प्लेट लगाओ"}}
+            {"id":"plates","label":{"en":"Help set plates","hi":"प्लेट लगाओ"}},
+            {"id":"desk","label":{"en":"Tidy your desk","hi":"टेबल ठीक करो"}},
+            {"id":"toys","label":{"en":"Put toys away","hi":"खिलौने रखो"}},
+            {"id":"trash","label":{"en":"Throw trash properly","hi":"कूड़ा सही डालो"}}
           ]
         }
       },

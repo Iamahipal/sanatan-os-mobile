@@ -73,26 +73,29 @@ export function renderToday({ main, store, content, plan, onOpenTask }) {
   const pad = document.createElement("div");
   pad.className = "cardPad";
 
-  const flowers = Math.max(0, Math.min(3, hist.flowers || 0));
-  const garland = Array.from({ length: 3 }).map((_, i) => `<div class="flower ${i < flowers ? "flowerOn" : ""}"></div>`).join("");
+  const required = Math.max(1, Math.min(3, (plan && Array.isArray(plan.minTasks)) ? plan.minTasks.length : 3));
+  const flowers = Math.max(0, Math.min(required, hist.flowers || 0));
+  const garland = Array.from({ length: required }).map((_, i) => `<div class="flower ${i < flowers ? "flowerOn" : ""}"></div>`).join("");
 
   const themeKey = plan.theme ? `theme_${plan.theme}` : "theme_seva";
   const themeLine = `${ui("theme_today", lang)}: ${ui(themeKey, lang)}`;
+  const themeMsgKey = plan.theme ? `theme_msg_${plan.theme}` : "theme_msg_seva";
+  const themeMsg = ui(themeMsgKey, lang);
 
   pad.innerHTML = `
     <div class="krishnaWrap">
       <img class="krishnaImg" src="assets/krishna.png" alt="Krishna" />
       <div class="bubble">
         <div class="bubbleTitle">${ui("pearls_today", lang)}</div>
-        <div class="bubbleText" style="white-space:pre-line">${ui("three_small_habits", lang)}\n${themeLine}${(cap && cap > 0) ? `\n\n${played}/${cap} min` : ""}</div>
+        <div class="bubbleText" style="white-space:pre-line">${ui("three_small_habits", lang)}\n${themeLine}\n${themeMsg}${(cap && cap > 0) ? `\n\n${played}/${cap} min` : ""}</div>
       </div>
     </div>
-    <div class="sep"></div>
-    <div class="kv">
-      <div><strong>Garland</strong><div class="small">3 flowers completes the day</div></div>
-      <div class="garland">${garland}</div>
-    </div>
-  `;
+	    <div class="sep"></div>
+	    <div class="kv">
+	      <div><strong>${ui("garland_label", lang)}</strong><div class="small">${flowers}/${required}</div></div>
+	      <div class="garland">${garland}</div>
+	    </div>
+	  `;
 
   header.appendChild(pad);
   main.appendChild(header);
@@ -191,7 +194,7 @@ export function renderToday({ main, store, content, plan, onOpenTask }) {
         </div>
         <div class="sep"></div>
         <div class="kv">
-          <div><strong>${ui("bonus_left", lang)}</strong><div class="small">${used}/${bonusMax} used</div></div>
+          <div><strong>${ui("bonus_left", lang)}</strong><div class="small">${used}/${bonusMax} ${ui("used_suffix", lang)}</div></div>
           <div class="badge">${left}</div>
         </div>
         <div style="height:12px"></div>

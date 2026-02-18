@@ -605,7 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateTiming() {
-        const { sunTimes, choghadiya, rahuKalam, yamagandam, auspiciousMuhurats } = currentPanchang;
+        const { sunTimes, choghadiya, rahuKalam, yamagandam, gulikaKalam, auspiciousMuhurats } = currentPanchang;
         const now = new Date();
         const currentHour = now.getHours() + now.getMinutes() / 60;
         const isToday = currentDate.toDateString() === now.toDateString();
@@ -656,7 +656,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update good times list
         updateGoodTimes(auspiciousMuhurats, choghadiya);
-        updateAvoidTimes(rahuKalam, yamagandam);
+        updateAvoidTimes(rahuKalam, yamagandam, gulikaKalam);
     }
 
     function renderTimeline(sunTimes, dayChoghadiyas, rahuKalam) {
@@ -685,7 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (slot.good) className = 'good';
             if (!slot.good) className = 'bad';
 
-            html += `<div class="timeline-segment ${className}" style="width: ${widthPct}%" title="${slot.name}">
+            html += `<div class="timeline-segment ${className}" style="width: ${widthPct}%" title="${slot.name} (${slot.startTime} - ${slot.endTime})" aria-label="${slot.nameEn || slot.name}: ${slot.startTime} to ${slot.endTime}, ${slot.good ? 'auspicious' : 'inauspicious'}">
                 ${slot.name}
             </div>`;
         });
@@ -721,7 +721,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    function updateAvoidTimes(rahu, yama) {
+    function updateAvoidTimes(rahu, yama, gulika) {
         const list = document.getElementById('avoid-times-list');
         if (!list) return;
 
@@ -733,6 +733,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="time-row">
                 <span class="time-name">Yamagandam</span>
                 <span class="time-range">${yama.startTime} - ${yama.endTime}</span>
+            </div>
+            <div class="time-row">
+                <span class="time-name">Gulika Kalam</span>
+                <span class="time-range">${gulika.startTime} - ${gulika.endTime}</span>
             </div>
         `;
     }
@@ -843,64 +847,65 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('hora-display');
         if (!container) return;
 
-        // Order of lords starting from Sunday sunrises
-        // Sun, Venus, Mercury, Moon, Saturn, Jupiter, Mars
+        // Chaldean order (correct planetary hora sequence)
+        // Saturn(0) → Jupiter(1) → Mars(2) → Sun(3) → Venus(4) → Mercury(5) → Moon(6)
         const lords = [
-            { name: 'Sun', icon: '☀️' },
-            { name: 'Venus', icon: '💎' },
-            { name: 'Mercury', icon: '☿️' },
-            { name: 'Moon', icon: '🌙' },
-            { name: 'Saturn', icon: '🪐' },
-            { name: 'Jupiter', icon: '📿' },
-            { name: 'Mars', icon: '⚔️' }
+            { name: 'Saturn', nameHi: 'शनि', icon: '🪐' },
+            { name: 'Jupiter', nameHi: 'गुरु', icon: '📿' },
+            { name: 'Mars', nameHi: 'मंगल', icon: '⚔️' },
+            { name: 'Sun', nameHi: 'सूर्य', icon: '☀️' },
+            { name: 'Venus', nameHi: 'शुक्र', icon: '💎' },
+            { name: 'Mercury', nameHi: 'बुध', icon: '☿️' },
+            { name: 'Moon', nameHi: 'चन्द्र', icon: '🌙' }
         ];
 
-        // Calculate current hora
-        // 1 Hora approx 1 hour, but strictly dayDuration / 12
-        const dayDuration = sunTimes.sunset - sunTimes.sunrise;
-        const horaDuration = dayDuration / 12;
+        // Day lords in Chaldean array index:
+        // Sun=3, Mon=6, Tue=2, Wed=5, Thu=1, Fri=4, Sat=0
+        const dayLordIndex = [3, 6, 2, 5, 1, 4, 0];
 
         const now = new Date();
         const currentHour = now.getHours() + now.getMinutes() / 60;
+        const dayIndex = currentDate.getDay();
 
-        if (currentHour < sunTimes.sunrise || currentHour > sunTimes.sunset) {
-            container.innerHTML = '<div class="hora-current">Night time logic distinct...</div>';
-            return; // Simplified for day only for now
+        const dayDuration = sunTimes.sunset - sunTimes.sunrise;
+        const nightDuration = 24 - dayDuration;
+        const dayHora = dayDuration / 12;
+        const nightHora = nightDuration / 12;
+
+        let horaIndex, isDay;
+        if (currentHour >= sunTimes.sunrise && currentHour < sunTimes.sunset) {
+            // Daytime hora
+            horaIndex = Math.min(Math.floor((currentHour - sunTimes.sunrise) / dayHora), 11);
+            isDay = true;
+        } else {
+            // Nighttime hora — starts after sunset, continues to next sunrise
+            let nightElapsed;
+            if (currentHour >= sunTimes.sunset) {
+                nightElapsed = currentHour - sunTimes.sunset;
+            } else {
+                // After midnight, before sunrise
+                nightElapsed = (24 - sunTimes.sunset) + currentHour;
+            }
+            horaIndex = Math.min(Math.floor(nightElapsed / nightHora), 11);
+            isDay = false;
         }
 
-        const horaIndex = Math.floor((currentHour - sunTimes.sunrise) / horaDuration);
-
-        // Day of week index (0=Sun)
-        const dayIndex = currentDate.getDay();
-        // First hora of day is ruled by day lord. Then cyclic order:
-        // Sun(0) -> Venus(1) -> Mercury(2) -> Moon(3) -> Saturn(4) -> Jupiter(5) -> Mars(6)
-        // This is weird. Standard order is cyclic speed? 
-        // Actually: Sun -> Venus -> Mercury -> Moon -> Saturn -> Jupiter -> Mars is decreasing speed order?
-        // Correct Sequence: 
-        // 1. Surya
-        // 2. Shukra
-        // 3. Budha
-        // 4. Chandra
-        // 5. Shani
-        // 6. Guru
-        // 7. Mangal
-        // repeat...
-
-        // The first hora is the day lord.
-        // Day Lords: Sun=Sun, Mon=Moon, Tue=Mars, Wed=Merc, Thu=Jup, Fri=Ven, Sat=Sat
-
-        const lordMap = { 0: 0, 1: 3, 2: 6, 3: 2, 4: 5, 5: 1, 6: 4 }; // Map DayIndex to LordIndex in the 'lords' array
-        const startLordIndex = lordMap[dayIndex];
-
-        const currentLordIndex = (startLordIndex + horaIndex) % 7;
+        // First day hora = day lord. Night starts at hora 12 (index 0 of night = dayLord + 12)
+        const startIndex = dayLordIndex[dayIndex];
+        const offset = isDay ? horaIndex : (12 + horaIndex);
+        const currentLordIndex = (startIndex + offset) % 7;
         const currentLord = lords[currentLordIndex];
+
+        const horaEnd = isDay
+            ? VedicEngine.hoursToTime(sunTimes.sunrise + (horaIndex + 1) * dayHora)
+            : VedicEngine.hoursToTime(sunTimes.sunset + (horaIndex + 1) * nightHora);
 
         container.innerHTML = `
             <div class="hora-current">
                 <span class="hora-planet-icon">${currentLord.icon}</span>
                 <div class="hora-info">
-                    <span class="hora-planet-name">${currentLord.name} Hora</span>
-                    <span class="hora-time">Active now</span>
+                    <span class="hora-planet-name">${currentLord.nameHi} (${currentLord.name}) Hora</span>
+                    <span class="hora-time">${isDay ? 'Day' : 'Night'} • till ${horaEnd}</span>
                 </div>
             </div>
         `;
@@ -910,15 +915,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('graha-sthiti');
         if (!container || !VedicEngine) return;
 
-        // Calculated real positions
-        const sunLong = VedicEngine.getSunLongitude(currentDate);
-        const moonLong = VedicEngine.getMoonLongitude(currentDate);
+        // Use SIDEREAL positions (subtract ayanamsa)
+        const sunLong = VedicEngine.getSiderealSun(currentDate);
+        const moonLong = VedicEngine.getSiderealMoon(currentDate);
 
-        // Simple Rashi calculator (0-360)
         const getRashi = (lon) => {
-            const index = Math.floor(lon / 30);
+            const normLon = ((lon % 360) + 360) % 360;
+            const index = Math.floor(normLon / 30);
             const rashis = ['Mesh', 'Vrishabh', 'Mithun', 'Karka', 'Simha', 'Kanya', 'Tula', 'Vrishchik', 'Dhanu', 'Makar', 'Kumbha', 'Meena'];
-            const deg = Math.floor(lon % 30);
+            const deg = Math.floor(normLon % 30);
             return { name: rashis[index], deg };
         };
 
@@ -1066,9 +1071,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const content = document.getElementById('details-content');
 
             btn.classList.toggle('active');
-            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+            const isExpanded = content.style.display !== 'none';
+            content.style.display = isExpanded ? 'none' : 'block';
+            btn.setAttribute('aria-expanded', !isExpanded);
 
-            if (content.style.display === 'block') {
+            if (!isExpanded) {
                 updateChoghadiya('day');
             }
         });
@@ -1076,8 +1083,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Choghadiya tabs
         document.querySelectorAll('.chog-tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                document.querySelectorAll('.chog-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.chog-tab').forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
                 tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
                 updateChoghadiya(tab.dataset.period);
             });
         });
@@ -1132,6 +1143,31 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) modal.classList.remove('active');
             });
+        });
+
+        // Escape key to close modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeAllModals();
+            }
+        });
+
+        // Focus trap for modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+            const activeModal = document.querySelector('.modal-overlay.active .modal-content');
+            if (!activeModal) return;
+            const focusable = activeModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (focusable.length === 0) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
         });
 
         // --- DYNAMIC CITY GRID ---
@@ -1193,15 +1229,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
         grid.innerHTML = html;
 
-        // Add click listeners
-        grid.querySelectorAll('.cal-day:not(.empty)').forEach(el => {
-            el.addEventListener('click', () => {
-                const newD = new Date(el.dataset.date);
-                currentDate = newD;
-                updateDisplay();
-                document.getElementById('calendar-modal').classList.remove('active');
-            });
+        // Add click listeners & tabindex for keyboard nav
+        const dayEls = grid.querySelectorAll('.cal-day:not(.empty)');
+        dayEls.forEach((el, idx) => {
+            el.setAttribute('tabindex', el.classList.contains('selected') ? '0' : '-1');
+            el.setAttribute('role', 'gridcell');
+            el.addEventListener('click', () => selectCalendarDay(el));
+            el.addEventListener('keydown', (e) => handleCalendarKeydown(e, dayEls, idx));
         });
+
+        // Focus the selected day (or first day)
+        const selectedDay = grid.querySelector('.cal-day.selected') || dayEls[0];
+        if (selectedDay) selectedDay.setAttribute('tabindex', '0');
+    }
+
+    function selectCalendarDay(el) {
+        const newD = new Date(el.dataset.date);
+        currentDate = newD;
+        updateDisplay();
+        document.getElementById('calendar-modal').classList.remove('active');
+    }
+
+    function handleCalendarKeydown(e, dayEls, currentIdx) {
+        let targetIdx = currentIdx;
+        switch (e.key) {
+            case 'ArrowRight': targetIdx = Math.min(dayEls.length - 1, currentIdx + 1); break;
+            case 'ArrowLeft': targetIdx = Math.max(0, currentIdx - 1); break;
+            case 'ArrowDown': targetIdx = Math.min(dayEls.length - 1, currentIdx + 7); break;
+            case 'ArrowUp': targetIdx = Math.max(0, currentIdx - 7); break;
+            case 'Enter':
+            case ' ': e.preventDefault(); selectCalendarDay(dayEls[currentIdx]); return;
+            case 'Escape': document.getElementById('calendar-modal').classList.remove('active'); return;
+            default: return;
+        }
+        e.preventDefault();
+        dayEls[currentIdx].setAttribute('tabindex', '-1');
+        dayEls[targetIdx].setAttribute('tabindex', '0');
+        dayEls[targetIdx].focus();
     }
 
 
@@ -1363,14 +1427,14 @@ document.addEventListener('DOMContentLoaded', () => {
             `🙏 पञ्चाङ्ग — ${dateStr}`,
             `📍 ${userLocation.city}`,
             '',
-            `🗓 ${currentPanchang.vara?.nameHi || ''} (${currentPanchang.vara?.name || ''})`,
+            `🗓 ${currentPanchang.vara?.name || ''} (${currentPanchang.vara?.nameEn || ''})`,
             `🌙 तिथि: ${currentPanchang.tithi?.fullName || ''}`,
             `⭐ नक्षत्र: ${currentPanchang.nakshatra?.name || ''}`,
             `🧘 योग: ${currentPanchang.yoga?.name || ''}`,
             `📿 करण: ${currentPanchang.karana?.name || ''}`,
             '',
-            `🌅 Sunrise: ${currentPanchang.sunTimes?.sunrise || ''}`,
-            `🌇 Sunset: ${currentPanchang.sunTimes?.sunset || ''}`,
+            `🌅 Sunrise: ${currentPanchang.sunTimes?.sunriseTime || ''}`,
+            `🌇 Sunset: ${currentPanchang.sunTimes?.sunsetTime || ''}`,
             '',
             `— via पञ्चाङ्ग App`
         ].join('\n');

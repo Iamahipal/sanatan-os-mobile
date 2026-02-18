@@ -148,8 +148,8 @@ export async function settingsModal({ app, content, lang }) {
 
   el.innerHTML = `
     <div class="bubble">
-      <div class="bubbleTitle">${ui("parent_mode", lang)}</div>
-      <div class="bubbleText">Settings</div>
+      <div class="bubbleTitle">${ui("settings_title", lang)}</div>
+      <div class="bubbleText">${ui("settings_sub", lang)}</div>
     </div>
     <div class="sep"></div>
     <div class="toggleRow">
@@ -160,24 +160,68 @@ export async function settingsModal({ app, content, lang }) {
       </select>
     </div>
     <div class="toggleRow">
+      <div><strong>${ui("daily_min_tasks", lang)}</strong><div class="small">${ui("daily_min_hint", lang)}</div></div>
+      <select class="input" id="setMinTasks" style="min-height:40px">
+        <option value="2" ${Number(app.settings.minTasksPerDay || 3) === 2 ? "selected" : ""}>2</option>
+        <option value="3" ${Number(app.settings.minTasksPerDay || 3) === 3 ? "selected" : ""}>3</option>
+      </select>
+    </div>
+    <div class="toggleRow">
       <div><strong>${ui("daily_cap", lang)}</strong><div class="small">0 = unlimited</div></div>
       <input class="input" id="setCap" inputmode="numeric" value="${app.settings.dailyCapMinutes || 0}" />
     </div>
     <div class="toggleRow">
-      <div><strong>Sound</strong><div class="small">Tap sounds</div></div>
+      <div><strong>${ui("bonus_max", lang)}</strong><div class="small">${ui("bonus_max_hint", lang)}</div></div>
+      <input class="input" id="setBonusMax" inputmode="numeric" value="${app.settings.bonusMax || 0}" />
+    </div>
+    <div class="toggleRow">
+      <div><strong>${ui("sound_label", lang)}</strong><div class="small">${ui("sound_hint", lang)}</div></div>
       <input type="checkbox" id="setSound" ${app.settings.soundOn ? "checked" : ""} />
+    </div>
+    <div class="toggleRow">
+      <div><strong>${ui("voice_label", lang)}</strong><div class="small">${ui("voice_hint", lang)}</div></div>
+      <input type="checkbox" id="setVoice" ${app.settings.voiceOn ? "checked" : ""} />
     </div>
     <div class="toggleRow">
       <div><strong>${ui("naam", lang)}</strong><div class="small">Default naam-jap</div></div>
       <select class="input" id="setNaam" style="min-height:40px">${options}</select>
     </div>
     <div class="sep"></div>
+    <div class="bubble">
+      <div class="bubbleTitle">${ui("categories_title", lang)}</div>
+      <div class="bubbleText">${ui("categories_hint", lang)}</div>
+    </div>
     <div class="toggleRow">
-      <div><strong>Parent confirm: Pranam</strong><div class="small">Require gate to mark as done</div></div>
+      <div><strong>${ui("cat_respect", lang)}</strong></div>
+      <input type="checkbox" id="catRespect" ${(app.settings.enabledCategories && app.settings.enabledCategories.respect) ? "checked" : ""} />
+    </div>
+    <div class="toggleRow">
+      <div><strong>${ui("cat_naam", lang)}</strong></div>
+      <input type="checkbox" id="catNaam" ${(app.settings.enabledCategories && app.settings.enabledCategories.naam) ? "checked" : ""} />
+    </div>
+    <div class="toggleRow">
+      <div><strong>${ui("cat_samay", lang)}</strong></div>
+      <input type="checkbox" id="catSamay" ${(app.settings.enabledCategories && app.settings.enabledCategories.samay) ? "checked" : ""} />
+    </div>
+    <div class="toggleRow">
+      <div><strong>${ui("cat_study", lang)}</strong></div>
+      <input type="checkbox" id="catStudy" ${(app.settings.enabledCategories && app.settings.enabledCategories.study) ? "checked" : ""} />
+    </div>
+    <div class="toggleRow">
+      <div><strong>${ui("cat_sports", lang)}</strong></div>
+      <input type="checkbox" id="catSports" ${(app.settings.enabledCategories && app.settings.enabledCategories.sports) ? "checked" : ""} />
+    </div>
+    <div class="toggleRow">
+      <div><strong>${ui("cat_seva", lang)}</strong></div>
+      <input type="checkbox" id="catSeva" ${(app.settings.enabledCategories && app.settings.enabledCategories.seva) ? "checked" : ""} />
+    </div>
+    <div class="sep"></div>
+    <div class="toggleRow">
+      <div><strong>${ui("parent_confirm_pranam", lang)}</strong><div class="small">${ui("require_gate", lang)}</div></div>
       <input type="checkbox" id="setConfirmPranam" ${app.settings.parentConfirm && app.settings.parentConfirm.pranam ? "checked" : ""} />
     </div>
     <div class="toggleRow">
-      <div><strong>Parent confirm: Seva</strong><div class="small">Require gate to mark as done</div></div>
+      <div><strong>${ui("parent_confirm_seva", lang)}</strong><div class="small">${ui("require_gate", lang)}</div></div>
       <input type="checkbox" id="setConfirmSeva" ${app.settings.parentConfirm && app.settings.parentConfirm.seva ? "checked" : ""} />
     </div>
     <div class="sep"></div>
@@ -200,17 +244,32 @@ export async function settingsModal({ app, content, lang }) {
     el.querySelector("#btnReset").onclick = () => { cleanup(); resolve({ action: "reset" }); };
     el.querySelector("#btnSave").onclick = () => {
       const language = el.querySelector("#setLang").value;
+      const minTasks = Number(String(el.querySelector("#setMinTasks").value || "3").trim());
       const cap = Number(String(el.querySelector("#setCap").value || "0").trim());
+      const bonusMax = Number(String(el.querySelector("#setBonusMax").value || "0").trim());
       const naamPresetId = el.querySelector("#setNaam").value;
       const soundOn = !!el.querySelector("#setSound").checked;
+      const voiceOn = !!el.querySelector("#setVoice").checked;
       const confirmPranam = !!el.querySelector("#setConfirmPranam").checked;
       const confirmSeva = !!el.querySelector("#setConfirmSeva").checked;
+      const enabledCategories = {
+        respect: !!el.querySelector("#catRespect").checked,
+        naam: !!el.querySelector("#catNaam").checked,
+        samay: !!el.querySelector("#catSamay").checked,
+        study: !!el.querySelector("#catStudy").checked,
+        sports: !!el.querySelector("#catSports").checked,
+        seva: !!el.querySelector("#catSeva").checked
+      };
 
       const next = structuredClone(app.settings);
       next.language = language;
+      next.minTasksPerDay = (minTasks === 2) ? 2 : 3;
       next.dailyCapMinutes = Number.isFinite(cap) ? cap : 0;
+      next.bonusMax = Number.isFinite(bonusMax) ? Math.max(0, Math.min(10, bonusMax)) : 0;
       next.naamPresetId = naamPresetId;
       next.soundOn = soundOn;
+      next.voiceOn = voiceOn;
+      next.enabledCategories = enabledCategories;
       next.parentConfirm = { ...(next.parentConfirm || {}) };
       next.parentConfirm.pranam = confirmPranam;
       next.parentConfirm.seva = confirmSeva;

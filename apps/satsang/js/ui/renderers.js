@@ -18,10 +18,14 @@ export function renderApp(state, refs) {
   renderView(state, refs.root);
 }
 
-export function renderDialog(event, dialog, isSaved, isReminderSet) {
+export function renderDialog(event, dialog, isSaved, isReminderSet, context = {}) {
   const mapsQuery = encodeURIComponent(`${event.venue}, ${event.cityName}`);
   const mapsLink = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
   const shareLink = event.link || window.location.href;
+  const distanceChip =
+    Number.isFinite(context.distanceKm) && event.city !== "online"
+      ? `<span class="chip chip-distance">${formatKm(context.distanceKm)}</span>`
+      : "";
 
   dialog.innerHTML = `
     <article class="modal">
@@ -39,17 +43,21 @@ export function renderDialog(event, dialog, isSaved, isReminderSet) {
         </div>
       </div>
       <p><strong>Date:</strong> ${formatDateRange(event.start, event.end)}</p>
-      <p><strong>Time:</strong> ${escapeHtml(event.timing)}</p>
+      <p><strong>Time:</strong> ${escapeHtml(event.timing)} <span class="time-note">(as listed at source)</span></p>
       <div class="chips">
         <span class="chip ${event.isLive ? "live" : ""}">${event.isLive ? "Live" : event.typeLabel}</span>
         ${event.isFree ? '<span class="chip free">Free</span>' : ""}
         ${event.hasLiveStream ? '<span class="chip">Livestream</span>' : ""}
         ${event.city === "online" ? '<span class="chip chip-online">Online</span>' : ""}
+        ${distanceChip}
         ${isStale(event) ? '<span class="chip chip-stale">Stale</span>' : ""}
         ${event.verifiedSource ? '<span class="chip chip-verified">Verified</span>' : ""}
         <span class="chip chip-source">${sourceLabel(event.source)}</span>
       </div>
       <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;">
+        <button class="action-btn" data-action="open-vachak" data-speaker-id="${escapeHtml(event.speakerId)}">
+          Speaker Profile
+        </button>
         <button class="action-btn ${isSaved ? "active" : ""}" data-action="toggle-save" data-id="${event.id}">
           ${isSaved ? "Saved" : "Save"}
         </button>
@@ -66,6 +74,10 @@ export function renderDialog(event, dialog, isSaved, isReminderSet) {
         ${event.link ? `<a class="action-btn" style="text-decoration:none;" href="${event.link}" target="_blank" rel="noopener">Open Source</a>` : ""}
       </div>
       ${event.speakerBio ? `<p style="margin-top:12px; color:#6e5a49;">${escapeHtml(event.speakerBio)}</p>` : ""}
+      <div class="trust-note">
+        <div><strong>Trust:</strong> ${trustLabel(event)}. ${trustExplainer(event)}</div>
+        <div><strong>Provenance:</strong> ${event.updatedAt ? `Updated ${formatUpdatedAt(event.updatedAt)}` : "Update time unknown"}${event.publishedAt ? ` · Published ${formatUpdatedAt(event.publishedAt)}` : ""}</div>
+      </div>
     </article>
   `;
 }
@@ -99,12 +111,16 @@ function countActiveFilters(state) {
   if (state.quickWeek) count += 1;
   if (state.quickFree) count += 1;
   if (state.quickOnline) count += 1;
+  if (state.quickNear) count += 1;
+  if (state.followingOnly) count += 1;
   return count;
 }
 
 function renderTabs(state, tabs) {
+  const raw = String(state.view || "");
+  const base = raw.startsWith("vachak/") ? "discover" : raw;
   tabs.querySelectorAll("button[data-view]").forEach((btn) => {
-    btn.classList.toggle("active", btn.dataset.view === state.view);
+    btn.classList.toggle("active", btn.dataset.view === base);
   });
 }
 
@@ -137,6 +153,12 @@ function renderView(state, root) {
     return;
   }
 
+  if (String(state.view || "").startsWith("vachak/")) {
+    const id = String(state.view || "").split("/")[1] || "";
+    renderVachakProfile(state, root, id);
+    return;
+  }
+
   if (state.view === "discover") {
     renderDiscover(state, root);
     return;
@@ -157,7 +179,7 @@ function renderView(state, root) {
 
 function renderDiscover(state, root) {
   const list = state.sortedEvents;
-  if (!list.length) {
+	  if (!list.length) {
     root.innerHTML = `
       <div class="empty">
         <div>No matches. Try clearing filters or search.</div>
@@ -166,11 +188,47 @@ function renderDiscover(state, root) {
         </div>
       </div>
     `;
-    return;
-  }
+	    return;
+	  }
 
-  const { liveToday, upcoming, past } = splitEventBuckets(list);
+	  const onboarding = !state.persona
+	    ? `
+	      <section class="card onboarding">
+	        <h3 class="onboarding-title">Who is this for?</h3>
+	        <p class="onboarding-sub">Pick your primary goal so we can optimize filters and promises.</p>
+	        <div class="onboarding-actions">
+	          <button class="action-btn" data-action="set-persona" data-persona="attend">Attend nearby events</button>
+	          <button class="action-btn" data-action="set-persona" data-persona="follow">Follow a speaker</button>
+	          <button class="action-btn" data-action="set-persona" data-persona="online">Watch online lives</button>
+	        </div>
+	      </section>
+	    `
+	    : "";
+
+	  const followingToggle =
+	    state.following?.length > 0
+	      ? `
+	        <div class="inline-toggle">
+	          <button class="action-btn ${state.followingOnly ? "active" : ""}" data-action="toggle-following-only" type="button">
+	            ${state.followingOnly ? "Showing: Following" : "Showing: All"}
+	          </button>
+	        </div>
+	      `
+	      : "";
+
+	  const nearMissing =
+	    state.quickNear && !state.home
+	      ? `<p class="near-note">Near me is on, but no location is set. Go to Profile to set a home city or use geolocation.</p>`
+	      : "";
+
+	  const { liveToday, upcoming, past } = splitEventBuckets(list);
   const updatedAt = state.lastUpdated ? `<p class="updated-at">Updated ${formatUpdatedAt(state.lastUpdated)}</p>` : "";
+  const cacheNote = state.cachedAt
+    ? `<p class="cache-note ${isCacheStale(state.cachedAt) ? "stale" : ""}">
+        Cached ${formatUpdatedAt(state.cachedAt)}${isCacheStale(state.cachedAt) ? " · Data may be stale" : ""}
+        <button class="cache-refresh" data-action="refresh-data" type="button">Refresh</button>
+      </p>`
+    : "";
   const liveSection = liveToday.length
     ? `
       <section class="live-section">
@@ -199,25 +257,49 @@ function renderDiscover(state, root) {
     `
     : "";
 
-  root.innerHTML = `
-    <section class="discover-head">
-      <h2 class="section-title">Discover</h2>
-      ${updatedAt}
-    </section>
-    ${liveSection}
-    <section>
-      <h2 class="section-title">Upcoming</h2>
-      <section class="grid">${upcoming.map((event) => eventCard(event, state.savedSet.has(event.id), state.remindersSet.has(event.id))).join("")}</section>
-    </section>
-    ${
-      past.length
-        ? `<section>
-            <h2 class="section-title">Past</h2>
-            <section class="grid">${past.map((event) => eventCard(event, state.savedSet.has(event.id), state.remindersSet.has(event.id))).join("")}</section>
-          </section>`
-        : ""
-    }
-  `;
+	  root.innerHTML = `
+	    <section class="discover-head">
+	      <h2 class="section-title">Discover</h2>
+	      <div class="discover-meta">
+	        ${updatedAt}
+	        ${cacheNote}
+	      </div>
+	    </section>
+	    ${onboarding}
+	    ${followingToggle}
+	    ${nearMissing}
+	    ${liveSection}
+	    <section>
+	      <h2 class="section-title">Upcoming</h2>
+	      <section class="grid">${upcoming
+	        .map((event) =>
+	          eventCard(
+	            event,
+	            state.savedSet.has(event.id),
+	            state.remindersSet.has(event.id),
+	            state.distanceById?.[event.id]
+	          )
+	        )
+	        .join("")}</section>
+	    </section>
+	    ${
+	      past.length
+	        ? `<section>
+	            <h2 class="section-title">Past</h2>
+	            <section class="grid">${past
+	              .map((event) =>
+	                eventCard(
+	                  event,
+	                  state.savedSet.has(event.id),
+	                  state.remindersSet.has(event.id),
+	                  state.distanceById?.[event.id]
+	                )
+	              )
+	              .join("")}</section>
+	          </section>`
+	        : ""
+	    }
+	  `;
 }
 
 function renderCalendar(state, root) {
@@ -225,6 +307,7 @@ function renderCalendar(state, root) {
   const months = getSixMonthCalendar(list);
   const selectedDate = state.calendarSelectedDate;
   const selectedEvents = selectedDate ? eventsForDate(list, selectedDate) : [];
+  const filteredSelected = applyDayFilter(selectedEvents, state.calendarDayFilter);
   const selectedLabel = selectedDate
     ? new Date(selectedDate).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
     : "";
@@ -239,13 +322,24 @@ function renderCalendar(state, root) {
     <section class="day-events">
       <div class="day-events-head">
         <h3>${selectedLabel || "Select a day"}</h3>
-        ${selectedLabel ? `<span>${selectedEvents.length} events</span>` : ""}
+        ${selectedLabel ? `<span>${filteredSelected.length} events</span>` : ""}
+      </div>
+      <div class="day-events-filters">
+        ${["all", "today", "week"]
+          .map(
+            (key) => `
+              <button class="day-filter ${state.calendarDayFilter === key ? "active" : ""}" data-action="calendar-filter" data-filter="${key}">
+                ${key === "all" ? "All" : key === "today" ? "Today" : "This Week"}
+              </button>
+            `
+          )
+          .join("")}
       </div>
       ${
         selectedLabel
-          ? selectedEvents.length
+          ? filteredSelected.length
             ? `<div class="day-events-list">
-                ${selectedEvents
+                ${filteredSelected
                   .map(
                     (event) => `
                       <button class="day-event" data-action="open-event" data-id="${event.id}">
@@ -289,15 +383,33 @@ function renderSaved(state, root) {
     return;
   }
 
-  root.innerHTML = `
-    <h2 class="section-title">Saved</h2>
-    <section class="grid">${list.map((event) => eventCard(event, true, state.remindersSet.has(event.id))).join("")}</section>
-  `;
-}
+	  root.innerHTML = `
+	    <h2 class="section-title">Saved</h2>
+	    <section class="grid">${list
+	      .map((event) => eventCard(event, true, state.remindersSet.has(event.id), state.distanceById?.[event.id]))
+	      .join("")}</section>
+	  `;
+	}
 
 function renderProfile(state, root) {
   const live = state.events.filter((event) => event.isLive).length;
   const cities = new Set(state.events.map((event) => event.city)).size;
+  const homeLabel =
+    state.home?.mode === "geo"
+      ? "Current location"
+      : state.home?.city
+        ? humanize(state.home.city)
+        : "Not set";
+  const sources = state.report?.bySource || {};
+  const sourcesList = Object.keys(sources).length
+    ? `<ul class="source-list">${Object.entries(sources)
+        .sort((a, b) => Number(b[1] || 0) - Number(a[1] || 0))
+        .map(([key, count]) => `<li><strong>${escapeHtml(sourceLabel(key))}:</strong> ${Number(count) || 0}</li>`)
+        .join("")}</ul>`
+    : `<p class="muted">No coverage report found.</p>`;
+  const speakers = Array.isArray(state.speakers) ? state.speakers : [];
+  const following = Array.isArray(state.following) ? state.following : [];
+  const topSpeakers = speakers.slice(0, 12);
 
   root.innerHTML = `
     <h2 class="section-title">Profile</h2>
@@ -309,12 +421,178 @@ function renderProfile(state, root) {
       <article class="stat"><div class="label">Live Now</div><div class="value">${live}</div></article>
       <article class="stat"><div class="label">Cities</div><div class="value">${cities}</div></article>
     </section>
+    <section class="profile-cards">
+      <article class="card">
+        <h3 class="profile-title">Primary user + job</h3>
+        <p class="muted">Current primary goal: <strong>${escapeHtml(state.persona || "not set")}</strong></p>
+        <div class="onboarding-actions">
+          <button class="action-btn ${state.persona === "attend" ? "active" : ""}" data-action="set-persona" data-persona="attend">Attend nearby</button>
+          <button class="action-btn ${state.persona === "follow" ? "active" : ""}" data-action="set-persona" data-persona="follow">Follow speakers</button>
+          <button class="action-btn ${state.persona === "online" ? "active" : ""}" data-action="set-persona" data-persona="online">Online lives</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3 class="profile-title">Location relevance</h3>
+        <p class="muted">Home: <strong>${escapeHtml(homeLabel)}</strong> · Near radius: <strong>${escapeHtml(String(state.nearRadiusKm || 50))} km</strong></p>
+        <div class="onboarding-actions">
+          <button class="action-btn" data-action="set-home-geo" type="button">Use my location</button>
+          <button class="action-btn" data-action="near-radius" data-delta="-10" type="button">-10 km</button>
+          <button class="action-btn" data-action="near-radius" data-delta="10" type="button">+10 km</button>
+        </div>
+        <div class="city-pills">
+          ${(state.cityOptions || [])
+            .filter((c) => c && c !== "online")
+            .slice(0, 18)
+            .map(
+              (c) =>
+                `<button class="pill ${state.home?.city === c ? "active" : ""}" data-action="set-home-city" data-city="${escapeHtml(c)}" type="button">${escapeHtml(humanize(c))}</button>`
+            )
+            .join("")}
+        </div>
+        <p class="muted">Near me is approximate (city-level). Online events are excluded when Near me is on.</p>
+      </article>
+
+      <article class="card">
+        <h3 class="profile-title">Personalization</h3>
+        <p class="muted">Following: <strong>${following.length}</strong></p>
+        <div class="follow-list">
+          ${topSpeakers
+            .map((s) => {
+              const active = following.includes(s.id);
+              return `<button class="pill ${active ? "active" : ""}" data-action="toggle-follow-speaker" data-speaker-id="${escapeHtml(s.id)}" type="button">${escapeHtml(s.shortName || s.name || s.id)}</button>`;
+            })
+            .join("")}
+        </div>
+        <p class="muted">Enable "Showing: Following" in Discover to see only followed speakers.</p>
+      </article>
+
+      <article class="card">
+        <h3 class="profile-title">Trust, verification, freshness</h3>
+        <p class="muted">
+          Last scrape: <strong>${escapeHtml(state.lastUpdated ? formatUpdatedAt(state.lastUpdated) : "unknown")}</strong>.
+          Verified means the listing came from an official/curated source configured in the scraper.
+          Stale means the event date is older than 14 days.
+        </p>
+        <p class="muted">Coverage in this dataset:</p>
+        ${sourcesList}
+        <p class="muted">Always cross-check by opening the event source link. No fixed freshness SLA is promised yet.</p>
+      </article>
+
+      <article class="card">
+        <h3 class="profile-title">For organizers</h3>
+        <p class="muted">
+          There is no in-app submission flow yet. Today, accuracy stays high only when sources are official and when the scraper/manual dataset is updated.
+        </p>
+        <p class="muted">If you manage an event, publish an official listing (website/YouTube) and ensure details are updated there first.</p>
+      </article>
+    </section>
   `;
 }
 
-function eventCard(event, saved, reminderSet) {
+function renderVachakProfile(state, root, vachakId) {
+  const speaker = (state.speakers || []).find((s) => s.id === vachakId);
+  if (!speaker) {
+    root.innerHTML = `
+      <div class="empty">
+        <div>Speaker not found.</div>
+        <div class="empty-actions">
+          <button class="action-btn" data-action="go-discover">Back to Discover</button>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const isFollowing = state.followingSet?.has(speaker.id);
+  const socials = speaker.socials || {};
+  const links = [
+    socials.website ? { label: "Website", href: socials.website } : null,
+    socials.youtube ? { label: "YouTube", href: socials.youtube } : null,
+    socials.instagram ? { label: "Instagram", href: socials.instagram } : null,
+    socials.facebook ? { label: "Facebook", href: socials.facebook } : null,
+    socials.x ? { label: "X", href: socials.x } : null,
+    ...(Array.isArray(speaker.links) ? speaker.links : []),
+  ]
+    .filter(Boolean)
+    .filter((l) => l && l.href);
+
+  const ashram = speaker.ashram || null;
+  const ashramMapLink = ashram?.mapsQuery
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ashram.mapsQuery)}`
+    : ashram?.address
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ashram.address)}`
+      : "";
+
+  const upcoming = (state.sortedEvents || [])
+    .filter((e) => e.speakerId === speaker.id)
+    .slice(0, 12);
+
+  root.innerHTML = `
+    <section class="vachak-head">
+      <button class="action-btn" data-action="go-discover" type="button">Back</button>
+      <h2 class="section-title">Speaker</h2>
+    </section>
+
+    <article class="card vachak-card">
+      <div class="vachak-hero">
+        <img class="vachak-avatar" src="${escapeHtml(speaker.image || "assets/images/placeholder-vachak.png")}" alt="${escapeHtml(speaker.shortName || speaker.name || "Speaker")}">
+        <div>
+          <h3 class="vachak-name">${escapeHtml(speaker.shortName || speaker.name || "Speaker")}</h3>
+          <p class="muted" style="margin-top:4px;">${escapeHtml(speaker.title || "")}</p>
+        </div>
+      </div>
+      <p class="muted">${escapeHtml(speaker.bio || "")}</p>
+      ${speaker.visitorNote ? `<p class="muted"><strong>Visitor note:</strong> ${escapeHtml(speaker.visitorNote)}</p>` : ""}
+
+      <div class="card-actions">
+        <button class="action-btn ${isFollowing ? "active" : ""}" data-action="toggle-follow-speaker" data-speaker-id="${escapeHtml(speaker.id)}" type="button">
+          ${isFollowing ? "Following" : "Follow"}
+        </button>
+        ${links
+          .map(
+            (l) =>
+              `<a class="action-btn" style="text-decoration:none;" href="${escapeHtml(l.href)}" target="_blank" rel="noopener">${escapeHtml(l.label)}</a>`
+          )
+          .join("")}
+      </div>
+
+      ${
+        ashram
+          ? `
+            <div class="vachak-section">
+              <h4 class="vachak-subtitle">Ashram</h4>
+              <p class="muted"><strong>${escapeHtml(ashram.name || "Ashram")}</strong></p>
+              ${ashram.address ? `<p class="muted">${escapeHtml(ashram.address)}</p>` : ""}
+              ${ashramMapLink ? `<a class="action-btn" style="text-decoration:none;" href="${ashramMapLink}" target="_blank" rel="noopener">Open in Maps</a>` : ""}
+            </div>
+          `
+          : ""
+      }
+    </article>
+
+    <section>
+      <h2 class="section-title">Upcoming</h2>
+      ${
+        upcoming.length
+          ? `<section class="grid">${upcoming
+              .map((event) =>
+                eventCard(event, state.savedSet.has(event.id), state.remindersSet.has(event.id), state.distanceById?.[event.id])
+              )
+              .join("")}</section>`
+          : `<div class="empty">No events for this speaker in the current dataset.</div>`
+      }
+    </section>
+  `;
+}
+
+function eventCard(event, saved, reminderSet, distanceKm) {
   const soon = isStartingSoon(event);
   const stale = isStale(event);
+  const distanceChip =
+    Number.isFinite(distanceKm) && event.city !== "online"
+      ? `<span class="chip chip-distance">${formatKm(distanceKm)}</span>`
+      : "";
 
   return `
     <article class="card card-tight" data-action="open-event" data-id="${event.id}">
@@ -333,6 +611,7 @@ function eventCard(event, saved, reminderSet) {
         ${soon ? '<span class="chip chip-soon">Starting Soon</span>' : ""}
         ${event.isFree ? '<span class="chip free">Free</span>' : ""}
         ${event.city === "online" ? '<span class="chip chip-online">Online</span>' : ""}
+        ${distanceChip}
         ${stale ? '<span class="chip chip-stale">Stale</span>' : ""}
         ${event.verifiedSource ? '<span class="chip chip-verified">Verified</span>' : ""}
         <span class="chip chip-source">${sourceLabel(event.source)}</span>
@@ -385,6 +664,21 @@ function formatUpdatedAt(value) {
   });
 }
 
+function formatKm(value) {
+  const km = Number(value);
+  if (!Number.isFinite(km)) return "";
+  if (km < 10) return `${km.toFixed(1)} km`;
+  return `${Math.round(km)} km`;
+}
+
+function isCacheStale(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return false;
+  const now = Date.now();
+  const twoDays = 2 * 24 * 60 * 60 * 1000;
+  return now - date.getTime() > twoDays;
+}
+
 function sourceLabel(source) {
   const map = {
     youtube: "YouTube",
@@ -393,6 +687,19 @@ function sourceLabel(source) {
     manual: "Manual",
   };
   return map[source] || "Source";
+}
+
+function trustLabel(event) {
+  if (event.verifiedSource && (event.source === "website" || event.source === "manual")) return "High";
+  if (event.verifiedSource) return "Medium";
+  return "Low";
+}
+
+function trustExplainer(event) {
+  if (event.verifiedSource) {
+    return "Verified indicates the source is official/curated in our scraper config.";
+  }
+  return "Unverified indicates we could not confirm an official listing.";
 }
 
 function isStale(event) {
@@ -411,6 +718,23 @@ function eventsForDate(list, dateKey) {
 function resolveThumb(event) {
   if (!event) return "";
   return event.thumbnail || "";
+}
+
+function applyDayFilter(list, filter) {
+  if (!Array.isArray(list)) return [];
+  if (filter === "today") {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const key = today.toISOString().slice(0, 10);
+    return list.filter((event) => String(event.start).slice(0, 10) === key);
+  }
+  if (filter === "week") {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const end = today.getTime() + 7 * 24 * 60 * 60 * 1000;
+    return list.filter((event) => event.dateNum >= today.getTime() && event.dateNum <= end);
+  }
+  return list;
 }
 
 function getSixMonthCalendar(list) {

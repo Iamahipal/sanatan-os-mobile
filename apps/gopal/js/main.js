@@ -1,7 +1,8 @@
 ﻿import { loadState, saveState, ensureToday, getTodayKey } from "./services/storage.js";
 import { buildDailyPlan } from "./services/scheduler.js";
-import { t, ui } from "./services/i18n.js";
+import { t, ui, fmt } from "./services/i18n.js";
 import { createAudio } from "./services/audio.js";
+import { createVoice } from "./services/voice.js";
 import { createStore } from "./state/store.js";
 import { renderToday } from "./ui/today.js";
 import { renderProgress } from "./ui/progress.js";
@@ -34,15 +35,25 @@ function flowersFromToday(historyToday) {
   return Math.max(0, Math.min(3, f));
 }
 
-function addFlowerAndMaybeBead(app, dateKey) {
+function addFlowerAndMaybeBead(app, dateKey, requiredFlowers) {
   const hist = ensureToday(app, dateKey);
-  if (hist.flowers < 3) {
+  const req = Math.max(1, Math.min(3, Number(requiredFlowers || 3)));
+  if (hist.flowers < req) {
     hist.flowers++;
   }
-  if (hist.flowers >= 3 && !hist.dayComplete) {
+  if (hist.flowers >= req && !hist.dayComplete) {
     hist.dayComplete = true;
     app.progress.malaBeads = Math.min(27, (app.progress.malaBeads || 0) + 1);
   }
+}
+
+function requiredFlowersForDate(contentObj, app, dateKey) {
+  const hist = ensureToday(app, dateKey);
+  const plan = buildDailyPlan({ dateKey, tasks: contentObj.tasks, settings: app.settings, historyToday: hist });
+  // Required flowers equals number of minimum slots shown today.
+  // This gracefully adapts if parent disables categories or sets minTasksPerDay=2.
+  const n = Array.isArray(plan.minTasks) ? plan.minTasks.length : 3;
+  return Math.max(1, Math.min(3, n));
 }
 
 function minutesPlayedToday(historyToday) {
@@ -157,6 +168,9 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
 
   main.innerHTML = "";
 
+  const voice = createVoice(() => store.get().settings);
+  const audio = createAudio(() => store.get().settings);
+
   const card = document.createElement("div");
   card.className = "card";
 
@@ -167,8 +181,15 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
     <div class="krishnaWrap">
       <img class="krishnaImg" src="assets/krishna.png" alt="Krishna" />
       <div class="bubble">
-        <div class="bubbleTitle">${getTaskTitle(task, lang)}</div>
-        <div class="bubbleText">${getTeachLine(task, lang)}</div>
+        <div class="row" style="justify-content:space-between; align-items:flex-start">
+          <div style="min-width:0">
+            <div class="bubbleTitle">${getTaskTitle(task, lang)}</div>
+            <div class="bubbleText">${getTeachLine(task, lang)}</div>
+          </div>
+          <button class="iconBtn" id="btnSpeak" aria-label="${ui("speak", lang)}" title="${ui("speak", lang)}" style="width:44px;height:44px;flex:0 0 auto">
+            <span class="icon">🔊</span>
+          </button>
+        </div>
       </div>
     </div>
     <div class="sep"></div>
@@ -186,10 +207,18 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
 
   const playEl = pad.querySelector("#play");
 
+  // Speak teach line on open if enabled.
+  setTimeout(() => {
+    voice.speak(`${getTaskTitle(task, lang)}. ${getTeachLine(task, lang)}`, lang);
+  }, 120);
+
+  pad.querySelector("#btnSpeak").addEventListener("click", () => {
+    audio.tap();
+    voice.speak(`${getTaskTitle(task, lang)}. ${getTeachLine(task, lang)}. ${getRealWorld(task, lang)}`, lang);
+  });
+
   // Play implementations are intentionally simple but deterministic.
   let playState = { ok: false, data: null };
-
-  const audio = createAudio(() => store.get().settings);
 
   function renderPlay() {
     if (playUI.kind === "tap_sequence") {
@@ -207,7 +236,7 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
       `;
       const seq = playEl.querySelector("#seq");
       const hint = playEl.querySelector("#seqHint");
-      hint.textContent = `Step ${idx + 1} of ${steps.length}`;
+      hint.textContent = fmt(ui("step_of", lang), { n: idx + 1, total: steps.length });
       steps.forEach((label, i) => {
         const btn = document.createElement("button");
         btn.className = "btn";
@@ -215,13 +244,15 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
         btn.addEventListener("click", () => {
           audio.tap();
           if (i !== idx) {
-            hint.textContent = "Try again: start from the first step.";
+            hint.textContent = ui("try_again_start", lang);
             audio.warn();
             idx = 0;
             return;
           }
           idx++;
-          hint.textContent = (idx >= steps.length) ? ui("play_good", lang) : `Step ${idx + 1} of ${steps.length}`;
+          hint.textContent = (idx >= steps.length)
+            ? ui("play_good", lang)
+            : fmt(ui("step_of", lang), { n: idx + 1, total: steps.length });
           if (idx >= steps.length) playState.ok = true;
           if (playState.ok) audio.good();
         });
@@ -242,7 +273,7 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
           <div class="bubbleText">${naamText}</div>
         </div>
         <div style="height:10px"></div>
-        <button class="btn btnGood" id="tapBead">Tap bead (${count}/${beads})</button>
+        <button class="btn btnGood" id="tapBead">${fmt(ui("tap_bead", lang), { n: count, total: beads })}</button>
         <div class="small" id="tapHint" style="margin-top:10px"></div>
       `;
       const tapBtn = playEl.querySelector("#tapBead");
@@ -258,7 +289,7 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
         }
         lastTap = now;
         count++;
-        tapBtn.textContent = `Tap bead (${count}/${beads})`;
+        tapBtn.textContent = fmt(ui("tap_bead", lang), { n: count, total: beads });
         if (count >= beads) {
           hint.textContent = ui("play_good", lang);
           playState.ok = true;
@@ -381,7 +412,7 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
       return;
     }
 
-    playEl.innerHTML = `<div class="bubble"><div class="bubbleTitle">Play</div><div class="bubbleText">(Not implemented)</div></div>`;
+    playEl.innerHTML = `<div class="bubble"><div class="bubbleTitle">${ui("play_title", lang)}</div><div class="bubbleText">${ui("play_not_impl", lang)}</div></div>`;
     playState.ok = true;
   }
 
@@ -389,7 +420,7 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
 
   pad.querySelector("#btnBack").addEventListener("click", () => onFinish(false));
 
-  pad.querySelector("#btnNext").addEventListener("click", async () => {
+    pad.querySelector("#btnNext").addEventListener("click", async () => {
     if (!withinDailyCap(store.get(), dateKey)) {
       await modal({
         title: "Time",
@@ -438,6 +469,7 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
 
     store.update(app2 => {
       const hist = ensureToday(app2, dateKey);
+      const required = requiredFlowersForDate(content, app2, dateKey);
       addMinutes(app2, dateKey, playMinutesEstimate);
       if (task.bonusOnly) {
         hist.bonusLog.push({
@@ -449,7 +481,7 @@ function renderTaskFlow({ content, store, dateKey, taskId, onFinish }) {
       } else {
         markTaskDone(app2, dateKey, taskId);
         if (typeof ans.choiceIdx === "number") setReflection(app2, dateKey, taskId, ans.choiceIdx);
-        addFlowerAndMaybeBead(app2, dateKey);
+        addFlowerAndMaybeBead(app2, dateKey, required);
       }
       saveState(app2);
     }, "task_complete");

@@ -2,11 +2,11 @@
     {
         "order":  1,
         "id":  "rajendradas",
-        "name":  "Swami Shri Rajendra Das Ji Maharaj",
+        "name":  "Jagadguru Ramanandacharya Swami Rajendra Das Ji Maharaj",
         "shortName":  "Rajendradas Ji",
-        "title":  "Jagadguru Dwaracharya, Malook Peeth",
-        "tradition":  "Ramanandi / Vaishnava",
-        "specialty":  "Ram Katha, Bhagwat, Bhaktamal",
+        "title":  "Peethadhishwar, Malook Peeth (Vrindavan)",
+        "tradition":  "Ramanandi Sampradaya",
+        "specialty":  "Bhaktamal (Saint Biographies), Ram Katha",
         "primaryCity":  "Vrindavan",
         "statesCovered":  [
                               "Uttar Pradesh",
@@ -16,14 +16,39 @@
         "languages":  [
                           "Hindi"
                       ],
-        "bio":  "Senior kathavachak associated with Malook Peeth and known for Ram Katha, Bhagwat, and bhakti-oriented pravachans.",
+        "bio":  "Revered Mahant of Malook Peeth, known for scholarly and emotional kathas with special focus on Bhaktamal (lives of saints) and perpetual seva via Malook Peeth's Sada Vrat.",
         "image":  "assets/images/rajendradas.png",
         "socials":  {
-                        "youtube":  "https://www.youtube.com/@rajendradasjimaharaj",
+                        "youtube":  "https://www.youtube.com/c/RajendraDasjiMaharaj",
                         "instagram":  "https://www.instagram.com/rajendradasjimaharaj",
-                        "website":  "https://jadkhor.org"
+                        "facebook":  "https://www.facebook.com/rajendradasjiMaharaj",
+                        "website":  "https://malookpeeth.com/"
                     },
-        "contact":  "https://jadkhor.org",
+        "ashram":  {
+                      "name":  "Shri Malook Peeth (Prachin)",
+                      "address":  "Shri Malook Peeth, Bansivat, Parikrama Marg, Vrindavan, Mathura, Uttar Pradesh - 281121, India.",
+                      "mapsQuery":  "Malook Peeth Vrindavan"
+                  },
+        "links":  [
+                      {
+                          "label":  "YouTube: Malook Peeth",
+                          "href":  "https://www.youtube.com/c/MalookPeeth"
+                      },
+                      {
+                          "label":  "YouTube (Channel ID)",
+                          "href":  "https://www.youtube.com/channel/UCXly_daYmaRFjYFIb_lfsiA"
+                      },
+                      {
+                          "label":  "Instagram: Malook Peeth",
+                          "href":  "https://www.instagram.com/malookpeeth"
+                      },
+                      {
+                          "label":  "Telegram",
+                          "href":  "https://t.me/rajendradasjimaharaj"
+                      }
+                  ],
+        "visitorNote":  "If visiting Malook Peeth, try to attend during panghat/community feast time; the Sada Vrat food distribution is a special part of the ashram's seva.",
+        "contact":  "https://malookpeeth.com/",
         "verified":  true
     },
     {
@@ -46,25 +71,32 @@
                           "English",
                           "Sanskrit"
                       ],
-        "bio":  "Gaudiya acharya from the Radharaman lineage, known for combining scriptural exposition with modern contextual explanations.",
-        "image":  "assets/images/pundrik.png",
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/@sripundrik",
-                        "instagram":  "https://www.instagram.com/sripundrik_updates",
-                        "website":  "https://sripundrik.com"
-                    },
-        "contact":  "https://sripundrik.com",
-        "verified":  true
-    },
-    {
-        "order":  3,
-        "id":  "morari",
-        "name":  "Morari Bapu",
-        "shortName":  "Morari Bapu",
-        "title":  "Ram Katha Vyas",
-        "tradition":  "Vaishnava / Ramcharitmanas Parampara",
-        "specialty":  "Ram Katha",
-        "primaryCity":  "Talgajarda",
+	        "bio":  "38th Acharya in the Gaudiya Vaishnava parampara. Known for Bhagwat Katha and youth-focused spiritual talks with clear, modern reasoning.",
+	        "image":  "assets/images/pundrik.png",
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/c/SriPundrik",
+	                        "instagram":  "https://www.instagram.com/sripundrik",
+	                        "facebook":  "https://www.facebook.com/sripundrik",
+	                        "x":  "https://twitter.com/sripundrik",
+	                        "website":  "https://sripundrik.com"
+	                    },
+	        "ashram":  {
+	                      "name":  "Vaijayanti Ashram (Vaijayanti Sewa Sansthan Trust)",
+	                      "address":  "Vaijayanti Ashram, Gyan Gudri, Vrindavan, Mathura, Uttar Pradesh - 281121, India.",
+	                      "mapsQuery":  "Vaijayanti Ashram Sri Pundrik Goswami Ji"
+	                  },
+	        "contact":  "https://sripundrik.com",
+	        "verified":  true
+	    },
+	    {
+	        "order":  3,
+	        "id":  "morari",
+	        "name":  "Morari Bapu",
+	        "shortName":  "Morari Bapu",
+	        "title":  "Ram Katha Vyas",
+	        "tradition":  "Vaishnava / Ramcharitmanas Parampara",
+	        "specialty":  "Ram Katha",
+	        "primaryCity":  "Talgajarda",
         "statesCovered":  [
                               "Gujarat",
                               "Rajasthan",
@@ -75,25 +107,31 @@
                           "Gujarati",
                           "Hindi"
                       ],
-        "bio":  "Internationally known Ramcharitmanas exponent with decades of Ram Katha discourse centered on Satya, Prem and Karuna.",
-        "image":  "assets/images/morari.png",
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/@ChitrakutdhamTalgajarda",
-                        "instagram":  "https://www.instagram.com/chitrakutdhamtalgajarda",
-                        "website":  "https://chitrakutdhamtalgajarda.org"
-                    },
-        "contact":  "https://chitrakutdhamtalgajarda.org",
-        "verified":  true
-    },
-    {
-        "order":  4,
-        "id":  "jayakishori",
-        "name":  "Jaya Kishori",
-        "shortName":  "Jaya Kishori",
-        "title":  "Spiritual Orator",
-        "tradition":  "Bhakti / Sanatan Public Discourse",
-        "specialty":  "Bhajan, Motivational Spiritual Talks",
-        "primaryCity":  "Kolkata / Mumbai",
+	        "bio":  "Globally renowned Ramcharitmanas exponent. Core message: Satya (Truth), Prem (Love), Karuna (Compassion).",
+	        "image":  "assets/images/morari.png",
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/channel/UCnePvOdQ-uBSWSIgRoG55gA",
+	                        "instagram":  "https://www.instagram.com/chitrakutdhamtalgajarda/",
+	                        "x":  "https://x.com/MorariBapu_",
+	                        "website":  "https://chitrakutdhamtalgajarda.org/"
+	                    },
+	        "ashram":  {
+	                      "name":  "Shree Chitrakutdham Trust",
+	                      "address":  "Talgajarda, Mahuva, District Bhavnagar, Gujarat - 364290, India.",
+	                      "mapsQuery":  "Chitrakutdham Talgajarda"
+	                  },
+	        "contact":  "https://chitrakutdhamtalgajarda.org",
+	        "verified":  true
+	    },
+	    {
+	        "order":  4,
+	        "id":  "jayakishori",
+	        "name":  "Jaya Kishori",
+	        "shortName":  "Jaya Kishori",
+	        "title":  "Spiritual Orator",
+	        "tradition":  "Bhakti / Sanatan Public Discourse",
+	        "specialty":  "Bhajan, Motivational Spiritual Talks",
+	        "primaryCity":  "Kolkata / Mumbai",
         "statesCovered":  [
                               "All India"
                           ],
@@ -101,16 +139,22 @@
                           "Hindi",
                           "English"
                       ],
-        "bio":  "Popular spiritual speaker and bhajan artist known for satsang talks, youth-oriented value discourse, and devotional performances.",
-        "image":  "assets/images/jayakishori.png",
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/@iamjayakishori",
-                        "instagram":  "https://www.instagram.com/iamjayakishori",
-                        "website":  "https://www.iamjayakishori.com"
-                    },
-        "contact":  "contact@iamjayakishori.com",
-        "verified":  true
-    },
+	        "bio":  "Spiritual orator and singer, known for Shrimad Bhagwat Katha and Nani Bai Ro Mayra. Focuses on family values and practical spirituality for youth.",
+	        "image":  "assets/images/jayakishori.png",
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/channel/UCfwa_zKl8-zC9rQDWIEixgg",
+	                        "instagram":  "https://www.instagram.com/iamjayakishori/",
+	                        "facebook":  "https://www.facebook.com/iamjayakishori",
+	                        "x":  "https://x.com/iamjayakishori",
+	                        "website":  "https://www.iamjayakishori.com/"
+	                    },
+	        "office":  {
+	                      "city":  "Kolkata",
+	                      "note":  "No public ashram address; events are announced on official channels. Bookings via website."
+	                  },
+	        "contact":  "contact@iamjayakishori.com",
+	        "verified":  true
+	    },
     {
         "order":  5,
         "id":  "premanand",
@@ -118,8 +162,8 @@
         "shortName":  "Premanand Ji",
         "title":  "Vrindavan Rasik Sant",
         "tradition":  "Radha Vallabh",
-        "specialty":  "Naam Bhakti, Satsang, Ekantik Vartalap",
-        "primaryCity":  "Vrindavan",
+	        "specialty":  "Naam Bhakti, Satsang, Ekantik Vartalap",
+	        "primaryCity":  "Vrindavan",
         "statesCovered":  [
                               "Uttar Pradesh",
                               "All India (Online)"
@@ -127,16 +171,70 @@
         "languages":  [
                           "Hindi"
                       ],
-        "bio":  "Renowned Vrindavan saint associated with Bhajan Marg satsang and devotional teachings focused on Radha-Krishna bhakti.",
-        "image":  "assets/images/premanand.png",
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/@BhajanMarg",
-                        "instagram":  "https://www.instagram.com/bhajanmarg_official",
-                        "website":  "https://vrindavanrasmahima.com"
-                    },
-        "contact":  "https://vrindavanrasmahima.com",
-        "verified":  true
-    },
+	        "bio":  "Revered saint of the Radhavallabh sampradaya in Vrindavan. Known for Bhajan Marg satsang, Naam Jap, and practical guidance rooted in Shri Radha-Rani bhakti.",
+	        "image":  "assets/images/premanand.png",
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/@BhajanMarg",
+	                        "instagram":  "https://www.instagram.com/bhajanmarg_official",
+	                        "facebook":  "https://www.facebook.com/bhajanmargofficial11",
+	                        "x":  "https://x.com/RadhaKeliKunj",
+	                        "website":  "https://bhajanmarg.com/"
+	                    },
+	        "ashram":  {
+	                      "name":  "Shri Hit Radha Kripa Punj",
+	                      "address":  "Shri Hit Radha Kripa Punj, Varaha Ghat, Parikrama Marg, Vrindavan, Mathura, Uttar Pradesh - 281121, India.",
+	                      "mapsQuery":  "Shri Hit Radha Kripa Punj"
+	                  },
+	        "links":  [
+	                      {
+	                          "label":  "Vrindavan Ras Mahima",
+	                          "href":  "https://vrindavanrasmahima.com"
+	                      },
+	                      {
+	                          "label":  "Radha Keli Kunj",
+	                          "href":  "https://radhakelikunj.com/"
+	                      },
+	                      {
+	                          "label":  "YouTube (Channel ID)",
+	                          "href":  "https://www.youtube.com/channel/UC_fmMgNql89jbFI8TNcq9Vg"
+	                      },
+	                      {
+	                          "label":  "YouTube: Sadhan Path",
+	                          "href":  "https://www.youtube.com/c/SadhanPath"
+	                      },
+	                      {
+	                          "label":  "YouTube: Sadhan Path (Channel ID)",
+	                          "href":  "https://www.youtube.com/channel/UCD2j_fwM7NO4a1KFk5k_TUQ"
+	                      },
+	                      {
+	                          "label":  "YouTube: Gurukripa Kevalam",
+	                          "href":  "https://www.youtube.com/@Gurukripakevalam"
+	                      },
+	                      {
+	                          "label":  "Instagram: Vrindavan Ras Mahima",
+	                          "href":  "https://www.instagram.com/vrindavanrasmahima"
+	                      },
+	                      {
+	                          "label":  "Facebook: Vrindavan Ras Mahima",
+	                          "href":  "https://www.facebook.com/VrindavanRasMahima"
+	                      },
+	                      {
+	                          "label":  "Android App",
+	                          "href":  "https://play.google.com/store/apps/details?id=com.vrindavan_ras_mahima"
+	                      },
+	                      {
+	                          "label":  "WhatsApp Channel",
+	                          "href":  "https://www.whatsapp.com/channel/0029Va52nGR7Noa22uMbEM3q"
+	                      },
+	                      {
+	                          "label":  "Flickr",
+	                          "href":  "https://www.flickr.com/photos/premanandjimaharaj/albums/"
+	                      }
+	                  ],
+	        "visitorNote":  "Due to health considerations, close contact may be regulated. Many devotees take darshan during early morning parikrama.",
+	        "contact":  "https://bhajanmarg.com/",
+	        "verified":  true
+	    },
     {
         "order":  6,
         "id":  "bageshwar",
@@ -153,22 +251,30 @@
         "languages":  [
                           "Hindi"
                       ],
-        "bio":  "Head of Bageshwar Dham, known for Hanumant Katha and large-format religious gatherings and darbar programs.",
-        "image":  "assets/images/bageshwar.png",
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/@BageshwarDhamSarkar",
-                        "instagram":  "https://www.instagram.com/iambageshwardhamsarkar",
-                        "website":  "https://bageshwardham.co.in/en"
-                    },
-        "contact":  "https://bageshwardham.co.in/en/contact/",
-        "verified":  true
-    },
+	        "bio":  "Peethadhishwar of Bageshwar Dham Sarkar (Hanuman). Known for Divya Darbar and Hanumant Katha; announcements and token schedules are posted on official channels.",
+	        "image":  "assets/images/bageshwar.png",
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/c/BageshwarDhamSarkar",
+	                        "instagram":  "https://www.instagram.com/iambageshwardhamsarkar",
+	                        "facebook":  "https://www.facebook.com/bageshwardhamsarkarofficial/",
+	                        "x":  "https://x.com/bageshwardham",
+	                        "website":  "https://bageshwardham.co.in/"
+	                    },
+	        "ashram":  {
+	                      "name":  "Bageshwar Dham Swayambhu Hanuman Temple",
+	                      "address":  "Village Garha (Ganjan), Tehsil Rajnagar, District Chhatarpur, Madhya Pradesh - 471105, India.",
+	                      "mapsQuery":  "Bageshwar Dham Sarkar Garha Chhatarpur"
+	                  },
+	        "visitorNote":  "Divya Darbar is usually held on Tuesdays and Saturdays; expect large crowds. Check official channels for token distribution and schedules.",
+	        "contact":  "https://bageshwardham.co.in/",
+	        "verified":  true
+	    },
     {
         "order":  7,
         "id":  "indresh",
         "name":  "Pt. Indresh Upadhyay",
         "shortName":  "Indresh Ji",
-        "title":  "Bhagwat Kathavachak",
+        "title":  "Bhagwat Katha Vyas, Sankirtan Vocalist",
         "tradition":  "Vaishnava",
         "specialty":  "Shrimad Bhagwat Katha, Bhajan",
         "primaryCity":  "Vrindavan",
@@ -181,24 +287,42 @@
         "languages":  [
                           "Hindi"
                       ],
-        "bio":  "Young and widely followed kathavachak associated with BhaktiPath and devotional Bhagwat-centered pravachans.",
+        "bio":  "Young and widely followed Bhagwat Katha Vyas known for melodious Sankirtan-style narration and the Bhakti Path movement; emphasizes Gau Seva and youth-oriented cultural values.",
         "image":  "assets/images/indresh.png",
         "socials":  {
-                        "youtube":  "https://www.youtube.com/@BhaktiPath",
-                        "instagram":  "https://www.instagram.com/bhaktipath",
-                        "website":  "https://bhaktipaths.com"
+                        "youtube":  "https://www.youtube.com/channel/UCsjMAEPcv7-oNGHtRU9Vg6w",
+                        "instagram":  "https://www.instagram.com/bhaktipath/",
+                        "facebook":  "https://www.facebook.com/indreshjiofficial/?locale=hi_IN",
+                        "x":  "https://x.com/indreshji7",
+                        "website":  "https://indreshupadhyay.com"
                     },
-        "contact":  "https://bhaktipaths.com",
+        "ashram":  {
+                      "name":  "Bhakti Path Ashram (Bhakti Path Sewa Trust)",
+                      "address":  "Bhakti Path Sewa Trust, Near Vaishno Devi Temple, Parikrama Marg, Vrindavan, Mathura, Uttar Pradesh - 281121, India.",
+                      "mapsQuery":  "Bhakti Path Vrindavan"
+                  },
+        "links":  [
+                      {
+                          "label":  "SoundCloud",
+                          "href":  "https://soundcloud.com/indreshupadhyay"
+                      },
+                      {
+                          "label":  "Spotify",
+                          "href":  "https://open.spotify.com/artist/7mifmz6qmVuSmSjBOjJ3vx"
+                      }
+                  ],
+        "visitorNote":  "Vrindavan address is primarily a trust/office headquarters; he travels frequently for kathas. Check official Instagram for schedule before visiting.",
+        "contact":  "https://indreshupadhyay.com",
         "verified":  true
     },
     {
         "order":  9,
         "id":  "devkinandan",
-        "name":  "Pujya Devkinandan Thakur Ji Maharaj",
+        "name":  "Shri Devkinandan Thakur Ji Maharaj",
         "shortName":  "Devkinandan Ji",
-        "title":  "Bhagwat Kathavachak",
+        "title":  "Bhagwat Katha Vyas, Founder (VSSCT)",
         "tradition":  "Vrindavan Vaishnava",
-        "specialty":  "Shrimad Bhagwat Katha",
+        "specialty":  "Shrimad Bhagwat Katha, Bhajan",
         "primaryCity":  "Vrindavan",
         "statesCovered":  [
                               "Uttar Pradesh",
@@ -209,14 +333,22 @@
         "languages":  [
                           "Hindi"
                       ],
-        "bio":  "Popular Bhagwat speaker from Vrindavan known for large public kathas and dharmic awareness discourse.",
+        "bio":  "Prominent Bhagwat Katha narrator and founder of Vishwa Shanti Sewa Charitable Trust (VSSCT). Known for melodious kathas and strong public stance on Sanatan Dharma and social causes (Gau Raksha, cultural preservation).",
         "image":  null,
         "socials":  {
-                        "youtube":  "https://www.youtube.com/@DevkinandanThakurJi",
-                        "instagram":  "https://www.instagram.com/devkinandanthakurji",
-                        "website":  "https://www.devkinandan.in"
+                        "youtube":  "https://www.youtube.com/channel/UCHq7ZxlzRRXimaBmk5QAxSQ",
+                        "instagram":  "https://www.instagram.com/shridevkinandanthakurjimaharaj/",
+                        "facebook":  "https://www.facebook.com/shridevkinandanthakurjivssct/",
+                        "x":  "https://x.com/DN_Thakur_Ji",
+                        "website":  "https://vssct.com/"
                     },
-        "contact":  "https://www.devkinandan.in",
+        "ashram":  {
+                      "name":  "Shri Priya Kant Ju Mandir (Vishwa Shanti Sewa Charitable Trust)",
+                      "address":  "Shri Priya Kant Ju Mandir, Chhatikara Road, near Vaishno Devi Mandir, Vrindavan, Mathura, Uttar Pradesh - 281121, India.",
+                      "mapsQuery":  "Priya Kant Ju Mandir Vrindavan"
+                  },
+        "visitorNote":  "Temple complex is open daily. Maharaj Ji is often present during major festivals or scheduled katha events; accommodation (dharamshala) is also available on campus.",
+        "contact":  "https://vssct.com/",
         "verified":  true
     },
     {
@@ -231,75 +363,110 @@
         "statesCovered":  [
                               "All India"
                           ],
-        "languages":  [
-                          "Hindi"
-                      ],
-        "bio":  "Well-known spiritual speaker and social service promoter, with frequent large-scale katha events and digital outreach.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/@Aniruddhacharyaji",
-                        "instagram":  "https://www.instagram.com/aniruddhacharyajimaharaj",
-                        "website":  "https://aniruddhacharya.com"
-                    },
-        "contact":  "https://aniruddhacharya.com",
-        "verified":  true
-    },
-    {
-        "order":  13,
-        "id":  "rajanji",
-        "name":  "Pujya Rajan Ji Maharaj",
-        "shortName":  "Rajan Ji Maharaj",
-        "title":  "Ram Katha Vyas",
-        "tradition":  "Ram Bhakti Parampara",
-        "specialty":  "Musical Ram Katha, Bhajan",
-        "primaryCity":  "Varanasi",
-        "statesCovered":  [
-                              "Uttar Pradesh",
-                              "Madhya Pradesh",
-                              "Delhi",
-                              "All India"
-                          ],
-        "languages":  [
-                          "Hindi"
-                      ],
-        "bio":  "Ram Katha speaker known for musical delivery style and high-volume devotional program circuits across India.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/@pujyarajanjee",
-                        "instagram":  "https://www.instagram.com/pujyarajanjee",
-                        "website":  "https://pujyarajanjee.com"
-                    },
-        "contact":  "https://pujyarajanjee.com",
-        "verified":  true
-    },
-    {
-        "order":  17,
-        "id":  "chinmayanand_bapu",
-        "name":  "Sant Chinmayanand Bapu Ji",
-        "shortName":  "Chinmayanand Bapu",
-        "title":  "Kathavachak",
-        "tradition":  "Sanatan Katha Parampara",
-        "specialty":  "Hanumant Katha, Ram Katha, Bhagwat",
-        "primaryCity":  "Haridwar",
-        "statesCovered":  [
-                              "Uttarakhand",
-                              "Uttar Pradesh",
-                              "Delhi",
-                              "International (UK programs)"
-                          ],
-        "languages":  [
-                          "Hindi"
-                      ],
-        "bio":  "Kathavachak associated with Vishva Kalyan Mission Trust, conducting Hanumant and Ram Katha events in India and abroad.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/results?search_query=Chinmayanand+Bapu+live",
-                        "instagram":  null,
-                        "website":  "https://vishvakalyanmission.com"
-                    },
-        "contact":  "https://vishvakalyanmission.com",
-        "verified":  true
-    },
+	        "languages":  [
+	                          "Hindi"
+	                      ],
+	        "bio":  "Popular Bhagwat Katha orator known for simple, relatable explanations and seva work via Gauri Gopal Vridhashram (old age home).",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/channel/UCDe0DwkMVFfSIoiYdQUPQmQ",
+	                        "instagram":  "https://www.instagram.com/aniruddhacharyajimaharaj",
+	                        "facebook":  "https://www.facebook.com/Aniruddhacharyajimaharaj/",
+	                        "x":  "https://x.com/shrianiruddhaji",
+	                        "website":  "https://gaurigopal.org/"
+	                    },
+	        "ashram":  {
+	                      "name":  "Shri Gauri Gopal Ashram (Gauri Gopal Vridhashram)",
+	                      "address":  "Shri Gauri Gopal Ashram, Sant Colony, Parikrama Marg, Vrindavan, Mathura, Uttar Pradesh - 281121, India.",
+	                      "mapsQuery":  "Gauri Gopal Ashram Vrindavan"
+	                  },
+	        "visitorNote":  "Ashram is open to visitors. For donation/volunteering (Vridhashram/Gau Seva), inquire at the office; check official channels for travel and katha schedule.",
+	        "contact":  "https://gaurigopal.org/",
+	        "verified":  true
+	    },
+	    {
+	        "order":  13,
+	        "id":  "rajanji",
+	        "name":  "Pujya Rajan Ji Maharaj",
+	        "shortName":  "Rajan Ji Maharaj",
+	        "title":  "Ram Katha Vyas",
+	        "tradition":  "Ram Bhakti Parampara",
+	        "specialty":  "Musical Ram Katha, Bhajan",
+	        "primaryCity":  "Kolkata",
+	        "statesCovered":  [
+	                              "Uttar Pradesh",
+	                              "Madhya Pradesh",
+	                              "Delhi",
+	                              "West Bengal",
+	                              "All India"
+	                          ],
+	        "languages":  [
+	                          "Hindi"
+	                      ],
+	        "bio":  "Widely acclaimed Ram Katha narrator known for melodious, bhajan-led recitation of Ramcharitmanas and a strong focus on family values and maryada of Lord Rama.",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/channel/UCnr57tgVYDtD6G4u_oLqIBQ",
+	                        "instagram":  "https://www.instagram.com/pujya_rajan_jee/",
+	                        "facebook":  "https://www.facebook.com/pujyarajanjee/",
+	                        "x":  "https://x.com/pujyarajanjee",
+	                        "website":  "https://pujyarajanjee.com/"
+	                    },
+	        "ashram":  {
+	                      "name":  "Shri Ram Katha Prem Yagya Samiti (Office)",
+	                      "address":  "Shri Ram Katha Prem Yagya Samiti, 33, Chittaranjan Avenue (C.R. Avenue), Kolkata, West Bengal - 700012, India.",
+	                      "mapsQuery":  "Rajan Ji Maharaj Office Kolkata"
+	                  },
+	        "visitorNote":  "This is an administrative office; Rajan Ji tours for kathas and is rarely present here for darshan. Check official social channels for schedule and locations.",
+	        "contact":  "https://pujyarajanjee.com/",
+	        "verified":  true
+	    },
+	    {
+	        "order":  17,
+	        "id":  "chinmayanand_bapu",
+	        "name":  "Sant Chinmayanand Bapu Ji",
+	        "shortName":  "Chinmayanand Bapu",
+	        "title":  "Kathavachak",
+	        "tradition":  "Sanatan Katha Parampara",
+	        "specialty":  "Hanumant Katha, Ram Katha, Bhagwat",
+	        "primaryCity":  "Haridwar",
+	        "statesCovered":  [
+	                              "Uttarakhand",
+	                              "Uttar Pradesh",
+	                              "Delhi",
+	                              "International (UK programs)"
+	                          ],
+	        "languages":  [
+	                          "Hindi"
+	                      ],
+	        "bio":  "Renowned kathakar known for musical Ram Katha and Shrimad Bhagwat Katha. Core message: \"Manav Sewa Madhav Sewa\"; associated with Vishwa Kalyan Mission Trust and its humanitarian work (gaushala, education, leprosy care).",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/c/ShriChinmayanandBapuJi",
+	                        "instagram":  "https://www.instagram.com/shrichinmayanandbapuji/",
+	                        "facebook":  "https://www.facebook.com/shrichinmayanandbapuji/",
+	                        "x":  "https://x.com/chinmayanandji",
+	                        "website":  "https://vishvakalyanmission.com/"
+	                    },
+	        "ashram":  {
+	                      "name":  "Vishwa Kalyan Mission Trust (Chinmay Dham)",
+	                      "address":  "Vishwa Kalyan Mission Trust, Near Shankaracharya Chowk, Kankhal, Haridwar, Uttarakhand - 249408, India.",
+	                      "mapsQuery":  "Vishwa Kalyan Mission Haridwar"
+	                  },
+	        "links":  [
+	                      {
+	                          "label":  "YouTube (Channel ID)",
+	                          "href":  "https://www.youtube.com/channel/UCZ282JYCs2duBVBzprHuDuQ"
+	                      },
+	                      {
+	                          "label":  "Pinterest",
+	                          "href":  "https://in.pinterest.com/shrichinmayanandbapuji/chinmayanand-bapu-ji/"
+	                      }
+	                  ],
+	        "visitorNote":  "Ashram/trust in Haridwar is open for visitors and seva; Bapu Ji may be traveling for kathas. Check official social channels for schedule.",
+	        "contact":  "https://vishvakalyanmission.com/",
+	        "verified":  true
+	    },
     {
         "order":  18,
         "id":  "pradeepmishra",
@@ -354,222 +521,304 @@
         "contact":  "",
         "verified":  true
     },
-    {
-        "order":  20,
-        "id":  "prembhushan",
-        "name":  "Swami Prembhushan Ji Maharaj",
-        "shortName":  "Prembhushan Ji",
-        "title":  "Ram Katha Vyas",
-        "tradition":  "Ram Bhakti Parampara",
-        "specialty":  "Ram Katha, Bhajan",
-        "primaryCity":  "Kanpur",
-        "statesCovered":  [
-                              "Uttar Pradesh",
-                              "Madhya Pradesh",
-                              "All India"
-                          ],
-        "languages":  [
-                          "Hindi"
-                      ],
-        "bio":  "Prominent Ram Katha speaker known for devotional narration and musical bhakti style.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/c/PujyaPrembhushanjiMaharaj",
-                        "instagram":  null,
-                        "website":  null
-                    },
-        "contact":  "",
-        "verified":  true
-    },
-    {
-        "order":  21,
-        "id":  "rameshoza",
-        "name":  "Bhaishree Rameshbhai Oza",
-        "shortName":  "Ramesh Oza",
-        "title":  "Bhagwat Kathakar",
-        "tradition":  "Vaishnava",
-        "specialty":  "Shrimad Bhagwat, Gita, Bhakti Discourse",
-        "primaryCity":  "Porbandar",
-        "statesCovered":  [
-                              "Gujarat",
-                              "Maharashtra",
-                              "All India"
-                          ],
-        "languages":  [
-                          "Gujarati",
-                          "Hindi"
-                      ],
-        "bio":  "Respected Bhagwat kathakar and spiritual guide with broad national and international discourse presence.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/@PujyaBhaishriRameshbhaiOza",
-                        "instagram":  null,
-                        "website":  "https://www.sandipani.org"
-                    },
-        "contact":  "https://www.sandipani.org",
-        "verified":  true
-    },
-    {
-        "order":  22,
-        "id":  "rambhadracharya",
-        "name":  "Jagadguru Rambhadracharya",
-        "shortName":  "Rambhadracharya",
-        "title":  "Jagadguru Ramanandacharya",
-        "tradition":  "Ramanandi / Vaishnava",
-        "specialty":  "Ramayana, Vedanta, Sanskrit Scholarship",
-        "primaryCity":  "Chitrakoot",
-        "statesCovered":  [
-                              "Uttar Pradesh",
-                              "Madhya Pradesh",
-                              "All India"
-                          ],
-        "languages":  [
-                          "Hindi",
-                          "Sanskrit"
-                      ],
-        "bio":  "Renowned Jagadguru, scholar, and spiritual leader with major dharmic discourse influence.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/results?search_query=Jagadguru+Rambhadracharya+live",
-                        "instagram":  null,
-                        "website":  "https://jagadgururambhadracharya.org"
-                    },
-        "contact":  "https://jagadgururambhadracharya.org",
-        "verified":  true
-    },
-    {
-        "order":  23,
-        "id":  "srisri",
-        "name":  "Gurudev Sri Sri Ravi Shankar",
-        "shortName":  "Sri Sri",
-        "title":  "Spiritual Leader, Art of Living",
-        "tradition":  "Vedanta / Yoga",
-        "specialty":  "Meditation, Satsang, Dharma Outreach",
-        "primaryCity":  "Bengaluru",
-        "statesCovered":  [
-                              "All India"
-                          ],
-        "languages":  [
-                          "Hindi",
-                          "English"
-                      ],
-        "bio":  "Global spiritual teacher with large satsang and meditation programs across India and abroad.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/@SriSriRaviShankar",
-                        "instagram":  "https://www.instagram.com/gurudev",
-                        "website":  "https://www.artofliving.org"
-                    },
-        "contact":  "https://www.artofliving.org",
-        "verified":  true
-    },
-    {
-        "order":  24,
-        "id":  "sadhguru",
-        "name":  "Sadhguru Jaggi Vasudev",
-        "shortName":  "Sadhguru",
-        "title":  "Founder, Isha Foundation",
-        "tradition":  "Yoga / Shaiva",
-        "specialty":  "Spiritual Talks, Meditation, Inner Engineering",
-        "primaryCity":  "Coimbatore",
-        "statesCovered":  [
-                              "All India"
-                          ],
-        "languages":  [
-                          "English",
-                          "Hindi",
-                          "Tamil"
-                      ],
-        "bio":  "Spiritual teacher with large public discourse ecosystem and frequent satsang events.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/@sadhguru",
-                        "instagram":  "https://www.instagram.com/sadhguru",
-                        "website":  "https://isha.sadhguru.org"
-                    },
-        "contact":  "https://isha.sadhguru.org",
-        "verified":  true
-    },
-    {
-        "order":  25,
-        "id":  "gaurangdas",
-        "name":  "Gauranga Das Prabhu",
-        "shortName":  "Gauranga Das",
-        "title":  "ISKCON Leader and Spiritual Mentor",
-        "tradition":  "Gaudiya Vaishnava",
-        "specialty":  "Bhagavad Gita Talks, Youth Spiritual Guidance",
-        "primaryCity":  "Mumbai",
-        "statesCovered":  [
-                              "Maharashtra",
-                              "All India"
-                          ],
-        "languages":  [
-                          "English",
-                          "Hindi"
-                      ],
-        "bio":  "Senior ISKCON preacher known for practical youth-focused spiritual guidance and dharmic talks.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/results?search_query=Gauranga+Das+Prabhu+live",
-                        "instagram":  "https://www.instagram.com/gaurangadas",
-                        "website":  "https://www.iskcon.org"
-                    },
-        "contact":  "https://www.iskcon.org",
-        "verified":  true
-    },
-    {
-        "order":  26,
-        "id":  "radhanath_swami",
-        "name":  "Radhanath Swami",
-        "shortName":  "Radhanath Swami",
-        "title":  "ISKCON Sannyasi and Spiritual Teacher",
-        "tradition":  "Gaudiya Vaishnava (ISKCON)",
-        "specialty":  "Bhakti, Bhagavad Gita, Satsang",
-        "primaryCity":  "Mumbai",
-        "statesCovered":  [
-                              "Maharashtra",
-                              "All India"
-                          ],
-        "languages":  [
-                          "English",
-                          "Hindi"
-                      ],
-        "bio":  "Senior ISKCON spiritual teacher known for devotional talks, kirtan culture, and youth outreach.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/results?search_query=Radhanath+Swami+live",
-                        "instagram":  "https://www.instagram.com/radhanathswami",
-                        "website":  "https://radhanathswami.com"
-                    },
-        "contact":  "https://radhanathswami.com",
-        "verified":  true
-    },
-    {
-        "order":  27,
-        "id":  "gaurgopaldas",
-        "name":  "Gaur Gopal Das",
-        "shortName":  "Gaur Gopal Das",
-        "title":  "ISKCON Monk and Speaker",
-        "tradition":  "Gaudiya Vaishnava (ISKCON)",
-        "specialty":  "Practical Spiritual Guidance, Gita Talks",
-        "primaryCity":  "Mumbai",
-        "statesCovered":  [
-                              "All India"
-                          ],
-        "languages":  [
-                          "English",
-                          "Hindi"
-                      ],
-        "bio":  "Popular spiritual speaker known for practical dharmic life guidance and motivational satsang sessions.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/results?search_query=Gaur+Gopal+Das+live",
-                        "instagram":  "https://www.instagram.com/gaurgopaldas",
-                        "website":  "https://gaurgopaldas.com"
-                    },
-        "contact":  "https://gaurgopaldas.com",
-        "verified":  true
-    },
+	    {
+	        "order":  20,
+	        "id":  "prembhushan",
+	        "name":  "Pujya Shri Prem Bhushan Ji Maharaj",
+	        "shortName":  "Prem Bhushan Ji",
+	        "title":  "Ram Katha Vyas",
+	        "tradition":  "Ram Bhakti Parampara",
+	        "specialty":  "Ram Katha, Bhajan",
+	        "primaryCity":  "Ayodhya",
+	        "statesCovered":  [
+	                              "Uttar Pradesh",
+	                              "Madhya Pradesh",
+	                              "All India"
+	                          ],
+	        "languages":  [
+	                          "Hindi"
+	                      ],
+	        "bio":  "Widely respected Ram Katha narrator and bhajan singer known for simple, participatory satsang and samuhik sankirtan. Popular for the bhajan \"Hum Ram Ji Ke, Ram Ji Hamare Hain\" and the \"Hum Ram Ji Ke\" movement.",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/c/PujyaPrembhushanjiMaharaj",
+	                        "instagram":  "https://www.instagram.com/pujyaprembhushanjimaharaj",
+	                        "facebook":  "https://www.facebook.com/PujyaPrembhushanjiMaharaj",
+	                        "x":  "https://x.com/prembhushanjee",
+	                        "website":  "https://humramjike.com"
+	                    },
+	        "ashram":  {
+	                      "name":  "Shri Ram Kripa Dham (Hum Ram Ji Ke Trust)",
+	                      "address":  "Shri Ram Kripa Dham, Near Karsevakpuram, Ayodhya, Uttar Pradesh - 224123, India.",
+	                      "mapsQuery":  "Ram Kripa Dham Ayodhya"
+	                  },
+	        "links":  [
+	                      {
+	                          "label":  "Spotify",
+	                          "href":  "https://open.spotify.com/artist/6OfC40yyqKlQ3R2mqNXrQy"
+	                      }
+	                  ],
+	        "visitorNote":  "Ashram is near Karsevakpuram. Maharaj Ji travels frequently for kathas; check official site/social channels for schedule before visiting.",
+	        "contact":  "https://humramjike.com",
+	        "verified":  true
+	    },
+	    {
+	        "order":  21,
+	        "id":  "rameshoza",
+	        "name":  "Bhaishree Rameshbhai Oza",
+	        "shortName":  "Bhaishree",
+	        "title":  "Bhagwat Kathakar, Educationist",
+	        "tradition":  "Vaishnava",
+	        "specialty":  "Shrimad Bhagwat Katha, Vedic Scripture Exposition",
+	        "primaryCity":  "Porbandar",
+	        "statesCovered":  [
+	                              "Gujarat",
+	                              "Maharashtra",
+	                              "All India"
+	                          ],
+	        "languages":  [
+	                          "Gujarati",
+	                          "Hindi"
+	                      ],
+	        "bio":  "One of India's most senior and respected kathakars, known for intellectual and calm exposition of Shrimad Bhagwat rooted in Vedic scriptures. Founder of Sandipani Vidyaniketan (Porbandar), a large campus combining rishikul-style learning (Sanskrit, Vedas) with modern education, guided by the motto: Vidya Prapti, Sadbuddhi, and Seva.",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/c/SandipaniTV",
+	                        "instagram":  "https://www.instagram.com/ppbhaishri/",
+	                        "facebook":  "https://www.facebook.com/ppbhaishri/",
+	                        "x":  "https://x.com/PPBhaishri",
+	                        "website":  "https://sandipani.org/"
+	                    },
+	        "ashram":  {
+	                      "name":  "Sandipani Vidyaniketan",
+	                      "address":  "Sandipani Vidyaniketan, Maharshi Sandipani Marg, Near Porbandar Airport, Porbandar, Gujarat - 360577, India.",
+	                      "mapsQuery":  "Sandipani Vidyaniketan Porbandar"
+	                  },
+	        "visitorNote":  "The campus is open to visitors. Shri Hari Mandir is the central attraction for darshan; the atmosphere is disciplined and academic compared to typical ashrams.",
+	        "contact":  "https://sandipani.org/",
+	        "verified":  true
+	    },
+	    {
+	        "order":  22,
+	        "id":  "rambhadracharya",
+	        "name":  "Jagadguru Rambhadracharya",
+	        "shortName":  "Rambhadracharya",
+	        "title":  "Jagadguru Ramanandacharya",
+	        "tradition":  "Ramanandi / Vaishnava",
+	        "specialty":  "Ramayana, Vedanta, Sanskrit Scholarship",
+	        "primaryCity":  "Chitrakoot",
+	        "statesCovered":  [
+	                              "Uttar Pradesh",
+	                              "Madhya Pradesh",
+	                              "All India"
+	                          ],
+	        "languages":  [
+	                          "Hindi",
+	                          "Sanskrit",
+	                          "Awadhi",
+	                          "Maithili"
+	                      ],
+	        "bio":  "Profound Sanskrit scholar, educator, and founder of Tulsi Peeth (Chitrakoot). Jagadguru Ramanandacharya and a renowned shrutidhara, he has been blind since early infancy and is credited with authoring 100+ books. He is also associated with the Jagadguru Rambhadracharya Divyanga University (for the differently-abled) and received the Padma Vibhushan in 2015.",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/channel/UC_NrFqoEJROpYRY9Rm2RKfQ",
+	                        "facebook":  "https://www.facebook.com/JagadguruRambhadracharya",
+	                        "instagram":  "https://www.instagram.com/swami_rambhadracharaya_ji/",
+	                        "x":  "https://x.com/J_Rambhadracharya",
+	                        "website":  "https://jagadgururambhadracharya.org"
+	                    },
+	        "ashram":  {
+	                      "name":  "Tulsi Peeth (Tulsi School for the Blind)",
+	                      "address":  "Tulsi Peeth, Janki Kund, Chitrakoot, District Satna, Madhya Pradesh - 485334, India.",
+	                      "mapsQuery":  "Tulsi Peeth Chitrakoot"
+	                  },
+	        "visitorNote":  "Ashram is open to all. If you wish to meet Maharaj Ji, check his schedule beforehand as he travels frequently; he often spends significant time in Chitrakoot, especially during Chaturmas (typically July-October).",
+	        "contact":  "https://jagadgururambhadracharya.org",
+	        "verified":  true
+	    },
+	    {
+	        "order":  23,
+	        "id":  "srisri",
+	        "name":  "Gurudev Sri Sri Ravi Shankar",
+	        "shortName":  "Sri Sri",
+	        "title":  "Spiritual Leader, Art of Living",
+	        "tradition":  "Vedanta / Yoga",
+	        "specialty":  "Meditation, Satsang, Dharma Outreach",
+	        "primaryCity":  "Bengaluru",
+	        "statesCovered":  [
+	                              "All India"
+	                          ],
+	        "languages":  [
+	                          "Hindi",
+	                          "English"
+	                      ],
+	        "bio":  "Founder of the Art of Living Foundation, a volunteer-based humanitarian and educational NGO. Known for making Vedic wisdom practical for modern life and for introducing Sudarshan Kriya, a rhythmic breathing technique central to Art of Living courses worldwide. His vision emphasizes a stress-free, violence-free society and the spirit of Vasudhaiva Kutumbakam (One World Family), with peace and conflict-resolution initiatives in multiple regions.",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/SriSri",
+	                        "instagram":  "https://www.instagram.com/srisriravishankar",
+	                        "facebook":  "https://www.facebook.com/gurudev/",
+	                        "x":  "https://x.com/Gurudev",
+	                        "website":  "https://gurudev.artofliving.org/"
+	                    },
+	        "ashram":  {
+	                      "name":  "The Art of Living International Center",
+	                      "address":  "The Art of Living International Center, 21st KM, Kanakapura Road, Udayapura, Bengaluru, Karnataka - 560082, India.",
+	                      "mapsQuery":  "Art of Living International Center Bengaluru"
+	                  },
+	        "visitorNote":  "The ashram is open to visitors daily. You can take a guided tour, visit the goshala, or meditate in the Vishalakshi Mantap. Gurudev travels extensively; check the official site for schedule if you wish to see him in person.",
+	        "contact":  "https://gurudev.artofliving.org/",
+	        "verified":  true
+	    },
+	    {
+	        "order":  24,
+	        "id":  "sadhguru",
+	        "name":  "Sadhguru Jaggi Vasudev",
+	        "shortName":  "Sadhguru",
+	        "title":  "Founder, Isha Foundation",
+	        "tradition":  "Yoga / Shaiva",
+	        "specialty":  "Spiritual Talks, Meditation, Inner Engineering",
+	        "primaryCity":  "Coimbatore",
+	        "statesCovered":  [
+	                              "All India"
+	                          ],
+	        "languages":  [
+	                          "English",
+	                          "Hindi",
+	                          "Tamil"
+	                      ],
+	        "bio":  "Yogi and mystic, founder of the Isha Foundation, known for presenting yoga and meditation as practical technologies for well-being. Creator of Inner Engineering (including Shambhavi Mahamudra Kriya) and associated with large initiatives such as Project GreenHands, Rally for Rivers, and Save Soil. At Isha Yoga Center he consecrated the Dhyanalinga and established iconic spaces including the Adiyogi Shiva statue.",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/user/sadhguru",
+	                        "instagram":  "https://www.instagram.com/sadhguru",
+	                        "facebook":  "https://www.facebook.com/sadhguru",
+	                        "x":  "https://x.com/SadhguruJV",
+	                        "website":  "https://isha.sadhguru.org/in/en"
+	                    },
+	        "ashram":  {
+	                      "name":  "Isha Yoga Center",
+	                      "address":  "Isha Yoga Center, Velliangiri Foothills, Ishana Vihar Post, Coimbatore, Tamil Nadu - 641114, India.",
+	                      "mapsQuery":  "Isha Yoga Center Coimbatore"
+	                  },
+	        "visitorNote":  "The center is open to visitors daily. You can visit Dhyanalinga and Linga Bhairavi temples and see the Adiyogi statue. Teerthakunds (Suryakund for men, Chandrakund for women) are available for a dip; accommodation typically requires advance booking, especially around Mahashivratri.",
+	        "contact":  "https://isha.sadhguru.org/in/en",
+	        "verified":  true
+	    },
+	    {
+	        "order":  25,
+	        "id":  "gaurangdas",
+	        "name":  "Gauranga Das Prabhu",
+	        "shortName":  "Gauranga Das",
+	        "title":  "ISKCON Leader, Sustainability Advocate",
+	        "tradition":  "Gaudiya Vaishnava",
+	        "specialty":  "Vedic Wisdom for Leadership, Sustainability, Vedic Ecology",
+	        "primaryCity":  "Mumbai",
+	        "statesCovered":  [
+	                              "Maharashtra",
+	                              "All India"
+	                          ],
+	        "languages":  [
+	                          "English",
+	                          "Hindi"
+	                      ],
+	        "bio":  "ISKCON monk, leadership consultant, and social reformer known for blending modern technology and leadership with Vedic wisdom. IIT Bombay alumnus (B.Tech, Metallurgical Engineering). Director of Govardhan Ecovillage (GEV), an award-winning sustainable community, and associated with ISKCON leadership including roles with ISKCON Chowpatty. His work emphasizes rural development and Vedic Ecology, and he has represented India at ecology and peace forums.",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/channel/UCNdfrZjfMwP_FBKELSiuYyQ",
+	                        "instagram":  "https://www.instagram.com/officialgaurangadas",
+	                        "facebook":  "https://www.facebook.com/gaurangadasofficial",
+	                        "linkedin":  "https://www.linkedin.com/in/gaurangadasofficial",
+	                        "website":  "https://gaurangadas.com/"
+	                    },
+	        "ashram":  {
+	                      "name":  "Govardhan Ecovillage (ISKCON Wada)",
+	                      "address":  "Govardhan Ecovillage, At. Galtare, Post Hamrapur, Taluka Wada, District Palghar, Maharashtra - 421303, India.",
+	                      "mapsQuery":  "Govardhan Ecovillage"
+	                  },
+	        "visitorNote":  "Govardhan Ecovillage is a retreat center and eco-community open to visitors. Day tours and residential retreats (yoga, wellness, Ayurveda) can be booked via their website; it functions more like a holistic wellness and education campus than a typical temple.",
+	        "contact":  "https://gaurangadas.com/",
+	        "verified":  true
+	    },
+	    {
+	        "order":  26,
+	        "id":  "radhanath_swami",
+	        "name":  "Radhanath Swami",
+	        "shortName":  "Radhanath Swami",
+	        "title":  "ISKCON Guru, Author, Social Activist",
+	        "tradition":  "Gaudiya Vaishnava (ISKCON)",
+	        "specialty":  "Bhakti Yoga, Bhagavad Gita, Satsang",
+	        "primaryCity":  "Mumbai",
+	        "statesCovered":  [
+	                              "Maharashtra",
+	                              "All India"
+	                          ],
+	        "languages":  [
+	                          "English",
+	                          "Hindi"
+	                      ],
+	        "bio":  "Senior ISKCON monk and spiritual teacher known for bridging Eastern spirituality with global outreach. Born Richard Slavin (Chicago, 1950), his journey from a counter-culture youth to a Vaishnava monk is documented in his book The Journey Home. He inspires major service initiatives including Annamrita (midday meals for schoolchildren), Bhaktivedanta Hospital (holistic healthcare), and Govardhan Ecovillage (sustainability and rural development), while teaching Bhakti Yoga (the yoga of love and devotion).",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/user/radhanathswami",
+	                        "instagram":  "https://www.instagram.com/radhanathswami",
+	                        "facebook":  "https://www.facebook.com/radhanathswami",
+	                        "x":  "https://x.com/radhanathswami",
+	                        "website":  "https://radhanathswami.com"
+	                    },
+	        "ashram":  {
+	                      "name":  "Radha Gopinath Mandir (ISKCON Chowpatty)",
+	                      "address":  "Radha Gopinath Mandir (ISKCON Chowpatty), 7, KM Munshi Marg, Girgaon, Chowpatty, Mumbai, Maharashtra - 400007, India.",
+	                      "mapsQuery":  "ISKCON Chowpatty"
+	                  },
+	        "links":  [
+	                      {
+	                          "label":  "Govardhan Ecovillage",
+	                          "href":  "https://ecovillage.org.in"
+	                      },
+	                      {
+	                          "label":  "The Bhakti Center (New York)",
+	                          "href":  "https://bhakticenter.org"
+	                      }
+	                  ],
+	        "visitorNote":  "If you wish to hear him speak, ISKCON Chowpatty is often the best place to visit (especially during Sunday Feast or major festivals). Due to travel schedule, check the temple's daily program or official website before planning specifically to meet him.",
+	        "contact":  "https://radhanathswami.com",
+	        "verified":  true
+	    },
+	    {
+	        "order":  27,
+	        "id":  "gaurgopaldas",
+	        "name":  "Gaur Gopal Das",
+	        "shortName":  "Gaur Gopal Das",
+	        "title":  "ISKCON Monk, Author, Speaker",
+	        "tradition":  "Gaudiya Vaishnava (ISKCON)",
+	        "specialty":  "Practical Spiritual Guidance, Relationships, Purpose",
+	        "primaryCity":  "Mumbai",
+	        "statesCovered":  [
+	                              "All India"
+	                          ],
+	        "languages":  [
+	                          "English",
+	                          "Hindi"
+	                      ],
+	        "bio":  "ISKCON monk and widely followed motivational speaker known for wit and humor while conveying practical spiritual guidance. Trained in Electrical Engineering (COEP) and joined monastic life in 1996 after a brief corporate stint. Disciple of Radhanath Swami and author of Life's Amazing Secrets, sharing a practical framework for balancing life with devotion and values.",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/c/GaurGopalDas",
+	                        "instagram":  "https://www.instagram.com/gaurgopaldas",
+	                        "facebook":  "https://www.facebook.com/gaurgopald/",
+	                        "x":  "https://x.com/gaurgopald",
+	                        "website":  "https://gaurgopaldas.com"
+	                    },
+	        "ashram":  {
+	                      "name":  "Radha Gopinath Mandir (ISKCON Chowpatty)",
+	                      "address":  "Radha Gopinath Mandir (ISKCON Chowpatty), 7, KM Munshi Marg, Girgaon, Chowpatty, Mumbai, Maharashtra - 400007, India.",
+	                      "mapsQuery":  "ISKCON Chowpatty"
+	                  },
+	        "visitorNote":  "Although this is his base, he travels frequently for talks. For the best chance to hear him live, track official events and visit during major festivals; unscheduled personal meetings at the temple are unlikely.",
+	        "contact":  "https://gaurgopaldas.com",
+	        "verified":  true
+	    },
     {
         "order":  28,
         "id":  "amogh_lila_das",
@@ -597,32 +846,51 @@
         "contact":  "https://iskcondwarka.org",
         "verified":  true
     },
-    {
-        "order":  29,
-        "id":  "mukundananda",
-        "name":  "Swami Mukundananda",
-        "shortName":  "Mukundananda Ji",
-        "title":  "Bhakti Yoga Teacher",
-        "tradition":  "Vaishnava / Bhakti Yoga",
-        "specialty":  "Gita, Mind Management, Bhakti",
-        "primaryCity":  "Delhi",
-        "statesCovered":  [
-                              "All India"
-                          ],
-        "languages":  [
-                          "Hindi",
-                          "English"
-                      ],
-        "bio":  "Teacher of bhakti and self-development with regular Gita and spiritual upliftment programs.",
-        "image":  null,
-        "socials":  {
-                        "youtube":  "https://www.youtube.com/@SwamiMukundananda",
-                        "instagram":  "https://www.instagram.com/swamimukundananda",
-                        "website":  "https://www.jkyog.org"
-                    },
-        "contact":  "https://www.jkyog.org",
-        "verified":  true
-    },
+	    {
+	        "order":  29,
+	        "id":  "mukundananda",
+	        "name":  "Swami Mukundananda",
+	        "shortName":  "Mukundananda Ji",
+	        "title":  "JKYog Founder, Spiritual Teacher",
+	        "tradition":  "Vaishnava / Radha Krishna Bhakti",
+	        "specialty":  "Mind Management, Gita, Bhakti Yoga",
+	        "primaryCity":  "Cuttack",
+	        "statesCovered":  [
+	                              "All India",
+	                              "USA"
+	                          ],
+	        "languages":  [
+	                          "Hindi",
+	                          "English"
+	                      ],
+	        "bio":  "Founder of JKYog (Jagadguru Kripalu Yog) and senior disciple of Jagadguru Shree Kripalu Ji Maharaj. Known for teaching yoga for the body, mind, and soul, with a strong focus on mind management and practical, logic-based explanations of Vedic scriptures for professionals and youth. Has an engineering and management background (IIT Delhi, IIM Calcutta) and is associated with initiatives including the upcoming Jagadguru Kripalu University in Odisha.",
+	        "image":  null,
+	        "socials":  {
+	                        "youtube":  "https://www.youtube.com/c/SwamiMukundananda",
+	                        "instagram":  "https://www.instagram.com/swami_mukundananda",
+	                        "facebook":  "https://www.facebook.com/Swami.Mukundananda",
+	                        "x":  "https://x.com/Sw_Mukundananda",
+	                        "website":  "https://www.jkyog.org/"
+	                    },
+	        "ashram":  {
+	                      "name":  "JKYog Bhakti Ashram",
+	                      "address":  "JKYog Bhakti Ashram, Village Banara, Via Mundali Colony, Tehsil Damapada, District Cuttack, Odisha - 754006, India.",
+	                      "mapsQuery":  "JKYog Bhakti Ashram Banara"
+	                  },
+	        "links":  [
+	                      {
+	                          "label":  "USA HQ: Radha Krishna Temple of Dallas",
+	                          "href":  "https://www.google.com/maps/search/?api=1&query=Radha%20Krishna%20Temple%20of%20Dallas%201450%20N%20Watters%20Rd%20Allen%20TX%2075013"
+	                      },
+	                      {
+	                          "label":  "JKYog India",
+	                          "href":  "https://www.jkyog.in/"
+	                      }
+	                  ],
+	        "visitorNote":  "Swamiji travels extensively between India and the USA for Life Transformation Programs. He is often present at the Dallas temple or the Banara ashram during major retreats or festivals; check the Events section on his website for current location.",
+	        "contact":  "https://www.jkyog.org/",
+	        "verified":  true
+	    },
     {
         "order":  30,
         "id":  "baba_ramdev",
