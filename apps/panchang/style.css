@@ -216,11 +216,32 @@ html {
 
 body {
     font: var(--md-sys-typescale-body-medium);
-    background: var(--md-sys-color-surface);
+    background: var(--md-sys-color-surface-dim);
     color: var(--md-sys-color-on-surface);
     min-height: 100vh;
+    min-height: 100dvh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    justify-content: center;
+}
+
+/* ---- Mobile-Only Shell ---- */
+.app-shell {
+    width: 100%;
+    max-width: 420px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    background: var(--md-sys-color-surface);
+    overflow-x: hidden;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 420px) {
+    .app-shell {
+        box-shadow: none;
+    }
 }
 
 
@@ -677,11 +698,13 @@ body {
    ============================================================ */
 
 .modal-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
@@ -845,6 +868,7 @@ body {
     background: var(--md-sys-color-surface);
     border-bottom: 1px solid var(--md-sys-color-outline-variant);
     min-height: 64px;
+    max-width: 420px;
 }
 
 .header-actions {
@@ -1660,7 +1684,7 @@ body {
 
 /* Toast / Snackbar */
 .share-toast {
-    position: fixed;
+    position: absolute;
     bottom: 24px;
     left: 50%;
     transform: translateX(-50%) translateY(100px);
@@ -1682,7 +1706,7 @@ body {
 
 /* Skeleton Loading */
 .skeleton-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
