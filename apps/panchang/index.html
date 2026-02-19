@@ -122,7 +122,7 @@
                         <span class="tithi-label">Tithi</span>
                         <span class="tithi-name" id="tithi-name">—</span>
                         <span class="tithi-end" id="tithi-end">
-                            <span class="material-symbols-rounded" style="font-size:16px">schedule</span>
+                            <span class="material-symbols-rounded tithi-end-icon">schedule</span>
                             Loading…
                         </span>
                     </div>
@@ -173,6 +173,7 @@
                     <div class="status-info">
                         <span class="status-title" id="status-title">Loading…</span>
                         <span class="status-desc" id="status-desc"></span>
+                        <span class="status-countdown" id="status-countdown"></span>
                     </div>
                 </div>
 
@@ -185,7 +186,7 @@
                     </div>
                     <div class="timeline-now" id="timeline-now" aria-hidden="true">
                         <div class="now-marker"></div>
-                        <span class="now-label">Now</span>
+                        <span class="now-label" id="now-label">Now</span>
                     </div>
                 </div>
 
@@ -226,14 +227,14 @@
 
             <!-- Panchang Details (Expandable) -->
             <section class="details-section" id="details" aria-label="Panchang details">
-                <button class="expand-btn m3-state" id="expand-details"
-                        aria-expanded="false" aria-controls="details-content">
+                <button class="expand-btn m3-state" id="expand-details" aria-expanded="false"
+                    aria-controls="details-content">
                     <span id="label-more-details">More Details</span>
                     <span class="material-symbols-rounded">expand_more</span>
                 </button>
 
                 <div class="details-content" id="details-content" style="display:none" role="region"
-                     aria-label="Expanded panchang details">
+                    aria-label="Expanded panchang details">
                     <!-- Panchang Elements Grid -->
                     <div class="detail-group">
                         <h3>Panchang Elements</h3>
@@ -273,10 +274,10 @@
                     <div class="detail-group">
                         <h3>Choghadiya</h3>
                         <div class="choghadiya-tabs" role="tablist" aria-label="Choghadiya period selector">
-                            <button class="chog-tab m3-state active" data-period="day" role="tab"
-                                    aria-selected="true" aria-controls="choghadiya-list">Day</button>
-                            <button class="chog-tab m3-state" data-period="night" role="tab"
-                                    aria-selected="false" aria-controls="choghadiya-list">Night</button>
+                            <button class="chog-tab m3-state active" data-period="day" role="tab" aria-selected="true"
+                                aria-controls="choghadiya-list">Day</button>
+                            <button class="chog-tab m3-state" data-period="night" role="tab" aria-selected="false"
+                                aria-controls="choghadiya-list">Night</button>
                         </div>
                         <div class="choghadiya-list" id="choghadiya-list" role="tabpanel">
                             <div class="chog-item"><span class="chog-name">Loading…</span></div>
@@ -375,12 +376,14 @@
             </div>
         </div>
 
-        <!-- Scripts -->
+        <!-- CommonJS shim for astronomy-engine (compiled TS → CJS) -->
+        <script>var exports = {}; var module = { exports: exports };</script>
         <script src="lib/astronomy.js"></script>
+        <script>window.Astronomy = module.exports;</script>
         <script src="lib/vedic-engine.js"></script>
         <script src="lib/festival-calculator.js"></script>
         <script src="script.js"></script>
-</div>
+    </div>
 </body>
 
 </html>
