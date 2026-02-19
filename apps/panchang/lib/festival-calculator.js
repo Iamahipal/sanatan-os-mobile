@@ -438,19 +438,35 @@ const FestivalCalculator = (function () {
     }
 
     /**
+     * Convert JS Date to Julian Day Number
+     */
+    function dateToJD(date) {
+        const y = date.getFullYear();
+        const m = date.getMonth() + 1;
+        const d = date.getDate() + (date.getHours() + date.getMinutes() / 60) / 24;
+        let A, B, JD;
+        let yr = y, mo = m;
+        if (mo <= 2) { yr -= 1; mo += 12; }
+        A = Math.floor(yr / 100);
+        B = 2 - A + Math.floor(A / 4);
+        JD = Math.floor(365.25 * (yr + 4716)) + Math.floor(30.6001 * (mo + 1)) + d + B - 1524.5;
+        return JD;
+    }
+
+    /**
      * Find Makar Sankranti date (when Sun enters Capricorn)
      */
     function findMakarSankranti(year, engine, lat, lon) {
         // Sun typically enters Makara (Capricorn) around Jan 14-15
         for (let day = 13; day <= 16; day++) {
             const date = new Date(year, 0, day);
-            const jd = engine.dateToJD(date);
+            const jd = dateToJD(date);
 
             // Get sidereal sun position
-            const sunLong = getSiderealSunLong(jd, engine);
+            const sunLong = getSiderealSunLong(jd);
             const prevDate = new Date(year, 0, day - 1);
-            const prevJd = engine.dateToJD(prevDate);
-            const prevSunLong = getSiderealSunLong(prevJd, engine);
+            const prevJd = dateToJD(prevDate);
+            const prevSunLong = getSiderealSunLong(prevJd);
 
             // Check if Sun crossed into Makara (270° - 300°)
             if (prevSunLong < 270 && sunLong >= 270) {
@@ -464,9 +480,19 @@ const FestivalCalculator = (function () {
         return new Date(year, 0, 14); // Default
     }
 
-    function getSiderealSunLong(jd, engine) {
+    /**
+     * Lahiri ayanamsa approximation
+     */
+    function getLahiriAyanamsa(jd) {
+        const J2000 = 2451545.0;
+        const t = (jd - J2000) / 36525;
+        // Lahiri ayanamsa: ~23.85° at J2000, precessing ~50.3"/year
+        return 23.85 + (50.2564 / 3600) * t * 100;
+    }
+
+    function getSiderealSunLong(jd) {
         const tropicalSun = calculateTropicalSunLong(jd);
-        const ayanamsa = engine.getAyanamsa(jd, 'lahiri');
+        const ayanamsa = getLahiriAyanamsa(jd);
         let sidereal = tropicalSun - ayanamsa;
         if (sidereal < 0) sidereal += 360;
         return sidereal;
@@ -694,9 +720,7 @@ const FestivalCalculator = (function () {
         getFestivalsForMonth,
         findTithiDate,
         findMakarSankranti,
-        checkEkadashiViddhi,
-        getSunLongitude,
-        getMoonLongitude
+        checkEkadashiViddhi
     };
 })();
 

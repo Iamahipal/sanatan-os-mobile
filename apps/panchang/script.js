@@ -83,43 +83,51 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dynamically calculated using FestivalCalculator based on Tithi/Nakshatra
     function getNextFestivals() {
         if (typeof FestivalCalculator === 'undefined' || typeof VedicEngine === 'undefined') {
-            console.warn('FestivalCalculator or VedicEngine not loaded');
+            console.warn('[Panchang] FestivalCalculator or VedicEngine not loaded');
             return [];
         }
 
-        const festivals = [];
-        const start = new Date(currentDate);
-        let currentMonth = start.getMonth();
-        let currentYear = start.getFullYear();
+        try {
+            const festivals = [];
+            const start = new Date(currentDate);
+            let currentMonth = start.getMonth();
+            let currentYear = start.getFullYear();
 
-        // Scan next 6 months
-        for (let i = 0; i < 6; i++) {
-            const monthFestivals = FestivalCalculator.getFestivalsForMonth(
-                currentYear,
-                currentMonth,
-                VedicEngine,
-                userLocation.lat,
-                userLocation.lon
-            );
+            // Scan next 6 months
+            for (let i = 0; i < 6; i++) {
+                try {
+                    const monthFestivals = FestivalCalculator.getFestivalsForMonth(
+                        currentYear,
+                        currentMonth,
+                        VedicEngine,
+                        userLocation.lat,
+                        userLocation.lon
+                    );
+                    festivals.push(...monthFestivals);
+                } catch (monthErr) {
+                    console.warn(`[Panchang] Festival scan failed for ${currentYear}-${currentMonth}:`, monthErr.message);
+                }
 
-            festivals.push(...monthFestivals);
-
-            // Next month
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
+                // Next month
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
             }
+
+            // Filter: Only future festivals (including today)
+            const today = new Date(currentDate);
+            today.setHours(0, 0, 0, 0);
+
+            return festivals
+                .filter(f => f.gregorianDate >= today)
+                .sort((a, b) => a.gregorianDate - b.gregorianDate)
+                .slice(0, 7); // Show next 7 festivals
+        } catch (err) {
+            console.error('[Panchang] Festival loading failed:', err.message);
+            return [];
         }
-
-        // Filter: Only future festivals (including today)
-        const today = new Date(currentDate);
-        today.setHours(0, 0, 0, 0);
-
-        return festivals
-            .filter(f => f.gregorianDate >= today)
-            .sort((a, b) => a.gregorianDate - b.gregorianDate)
-            .slice(0, 7); // Show next 7 festivals
     }
 
     // === INIT ===
@@ -745,7 +753,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const todayEvents = document.getElementById('today-events');
         const upcomingList = document.getElementById('upcoming-festivals');
 
-        const upcoming = getCachedFestivals();
+        let upcoming;
+        try {
+            upcoming = getCachedFestivals();
+        } catch (err) {
+            console.error('[Panchang] Festival cache error:', err.message);
+            upcoming = [];
+        }
 
         // Today's events
         const today = new Date(currentDate);
@@ -779,17 +793,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (upcomingList) {
             if (futureEvents.length === 0) {
-                upcomingList.innerHTML = '<div class="no-events">No upcoming festivals in next 6 months</div>';
+                const lang = settings.language || 'en';
+                const msg = lang === 'hi'
+                    ? 'अगले 6 महीनों में कोई त्यौहार नहीं'
+                    : 'No upcoming festivals in next 6 months';
+                upcomingList.innerHTML = `<div class="no-events">${msg}</div>`;
             } else {
-                upcomingList.innerHTML = futureEvents.map(f => `
+                upcomingList.innerHTML = futureEvents.map(f => {
+                    const dayDiff = Math.round((f.gregorianDate - today) / 86400000);
+                    const lang = settings.language || 'en';
+                    let chip = '';
+                    if (dayDiff === 1) chip = `<span class="today-badge">${lang === 'hi' ? 'कल' : 'Tomorrow'}</span>`;
+                    else if (dayDiff <= 7) chip = `<span class="today-badge">${dayDiff} ${lang === 'hi' ? 'दिन में' : 'days'}</span>`;
+
+                    return `
                     <div class="upcoming-item">
                         <div class="upcoming-date">
                             <span class="upcoming-day">${f.gregorianDate.getDate()}</span>
                             <span class="upcoming-month">${f.gregorianDate.toLocaleDateString('en', { month: 'short' })}</span>
                         </div>
-                        <span class="upcoming-name">${f.icon || '🎉'} ${f.nameEn}</span>
+                        <div class="upcoming-info">
+                            <span class="upcoming-name">${f.icon || '🎉'} ${f.nameEn}</span>
+                            ${chip}
+                        </div>
                     </div>
-                `).join('');
+                `;
+                }).join('');
             }
         }
     }
