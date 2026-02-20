@@ -1,0 +1,3408 @@
+// @ts-nocheck
+// Bharat Sant Darshan - Saints Database
+// Focus: Sanatan Dharma (Hindu, Sikh, Jain traditions)
+
+export const TRADITIONS = {
+    hindu: {
+        id: 'hindu',
+        name: 'Hindu Saints',
+        nameHi: 'हिंदू संत',
+        icon: 'fa-om',
+        color: '#FF9933',
+        description: 'Bhakti and Vedantic saints across sampradayas'
+    },
+    sikh: {
+        id: 'sikh',
+        name: 'Sikh Gurus & Bhagats',
+        nameHi: 'सिख गुरु',
+        icon: 'fa-khanda',
+        color: '#1E90FF',
+        description: 'The Ten Gurus and the Bhagats of Guru Granth Sahib'
+    },
+    jain: {
+        id: 'jain',
+        name: 'Jain Tirthankaras',
+        nameHi: 'जैन तीर्थंकर',
+        icon: 'fa-hand',
+        color: '#FFD700',
+        description: 'The 24 ford-makers and great Acharyas'
+    },
+    buddhist: {
+        id: 'buddhist',
+        name: 'Buddhist Masters',
+        nameHi: 'बौद्ध आचार्य',
+        icon: 'fa-dharmachakra',
+        color: '#8B5CF6',
+        description: 'Buddha (9th Vishnu Avatar) and the great masters of Dharma'
+    }
+};
+
+export const SAINTS = [
+    // ========== HINDU - ALVARS ==========
+    {
+        id: 'nammalvar',
+        name: 'Nammalvar',
+        nameLocal: 'நம்மாழ்வார்',
+        nameHi: 'नम्मालवार',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '8th-9th century CE',
+        birthPlace: 'Alwarthirunagari, Tamil Nadu',
+        biography: 'Nammalvar is considered the greatest among the twelve Alvars, the Vaishnavite poet-saints of South India. His magnum opus, the Tiruvaymoli (4000 verses), is revered as the "Tamil Veda" and forms the theological foundation of Sri Vaishnavism. Born into a Shudra family, he spent his early life in meditative silence under a tamarind tree before composing his devotional hymns.',
+        teachings: ['Prapatti (surrender) to Vishnu', 'Bhakti transcends caste', 'God is both immanent and transcendent'],
+        works: ['Tiruvaymoli', 'Tiruviruttam', 'Thiruvasiriyam', 'Periya Thiruvandhadhi'],
+        quotes: ['"The Lord dwells in the heart of those who love Him."', '"Through devotion alone, the soul reaches the Supreme."'],
+        image: 'nammalvar.jpg'
+    },
+    {
+        id: 'andal',
+        name: 'Andal',
+        nameLocal: 'ஆண்டாள்',
+        nameHi: 'आण्डाल',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '8th century CE',
+        birthPlace: 'Srivilliputhur, Tamil Nadu',
+        biography: 'Andal is the only female Alvar and one of the most celebrated female saints in Hinduism. According to tradition, she was found as a baby under a tulsi plant by Periyalvar. She grew up composing passionate devotional poetry to Lord Vishnu, refusing to marry any mortal and considering herself the bride of Lord Ranganatha. Her Thiruppavai, sung during Margazhi month, remains immensely popular.',
+        teachings: ['Bridal mysticism in devotion', 'Complete surrender to God', 'Love as the path to liberation'],
+        works: ['Thiruppavai (30 verses)', 'Nachiar Thirumozhi (143 verses)'],
+        quotes: ['"I will not marry a mortal; I belong only to Narayana."'],
+        image: 'andal.jpg'
+    },
+    {
+        id: 'periyalvar',
+        name: 'Periyalvar',
+        nameLocal: 'பெரியாழ்வார்',
+        nameHi: 'पेरियाळ्वार',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '8th century CE',
+        birthPlace: 'Srivilliputhur, Tamil Nadu',
+        biography: 'Periyalvar (also called Vishnuchitta) was the father of Andal and one of the 12 Alvars. He won a debate at the Pandya court proving Vishnu as the Supreme and was honored by the king. Unique among Alvars, he approached God with parental love (Vatsalya Bhava), singing lullabies to Krishna. He composed the Tiruppallandu, which opens all Vaishnavite worship.',
+        teachings: ['Vatsalya Bhava (parental devotion)', 'Krishna as a child', 'Temple rituals'],
+        works: ['Tiruppallandu', 'Periyalvar Tirumoli'],
+        quotes: ['"Pallandu pallandu pallayirathandu!" (May you live forever!)'],
+        image: 'periyalvar.jpg'
+    },
+    {
+        id: 'kulasekhara',
+        name: 'Kulasekhara Alvar',
+        nameLocal: 'குலசேகர ஆழ்வார்',
+        nameHi: 'कुलशेखर आळ्वार',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '8th-9th century CE',
+        birthPlace: 'Thiruvanjikkulam, Kerala',
+        biography: 'Kulasekhara Alvar was the Chera king of Kerala who renounced his throne for devotion. His Perumal Tirumoli uniquely explores devotion through the perspectives of characters from epics - singing as Devaki missing Krishna, as Dasharatha longing for Rama. His Mukundamala is famous across India.',
+        teachings: ['Devotion through role-playing', 'Royal renunciation', 'Surrender to Vishnu'],
+        works: ['Perumal Tirumoli', 'Mukundamala'],
+        quotes: ['"O Mukunda, grant me devotion to your lotus feet."'],
+        image: 'kulasekhara.jpg'
+    },
+    {
+        id: 'thirumangai',
+        name: 'Thirumangai Alvar',
+        nameLocal: 'திருமங்கையாழ்வார்',
+        nameHi: 'तिरुमंगै आळ्वार',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '8th century CE',
+        birthPlace: 'Thirukurayalur, Tamil Nadu',
+        biography: 'Thirumangai Alvar, originally a chieftain named Kaliyan, is the most prolific Alvar with 1361 verses. Legend says he was a robber who converted after an encounter with Vishnu. He contributed six works to the Nalayira Divya Prabandham and is said to have built the walls of Srirangam temple using wealth from his earlier life.',
+        teachings: ['Redemption through devotion', 'Temple service', 'Poetic excellence'],
+        works: ['Periya Tirumoli', 'Tirukkurunthantakam', 'Tirunedunthantakam', 'Tiruvezhukurrirukkai', 'Siriya Tirumatal', 'Periya Tirumatal'],
+        quotes: ['"The Lord accepted even a robber like me."'],
+        image: 'thirumangai.jpg'
+    },
+    {
+        id: 'poigai',
+        name: 'Poigai Alvar',
+        nameLocal: 'பொய்கையாழ்வார்',
+        nameHi: 'पोयगै आळ्वार',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '7th century CE',
+        birthPlace: 'Kanchipuram, Tamil Nadu',
+        biography: 'Poigai Alvar is one of the Mudal Alvars (first three Alvars) who lived contemporaneously. According to legend, the three met on a stormy night in a tiny space, and as they squeezed together, they sensed a fourth divine presence - Vishnu. Poigai then lit the "lamp of earth with the sun as its flame" to see the Lord.',
+        teachings: ['Intuitive God-realization', 'Poetry as worship', 'Nature as divine manifestation'],
+        works: ['Mudal Tiruvandhadhi (100 verses)'],
+        quotes: ['"I lit the lamp of the earth with the sun, to see my Lord."'],
+        image: 'poigai.jpg'
+    },
+    {
+        id: 'bhutath',
+        name: 'Bhutath Alvar',
+        nameLocal: 'பூதத்தாழ்வார்',
+        nameHi: 'भूतत्ताळ्वार',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '7th century CE',
+        birthPlace: 'Mahabalipuram, Tamil Nadu',
+        biography: 'Bhutath Alvar (also Bhoothath) is the second of the Mudal Alvars. Present during the mystical night encounter, when Poigai lit the lamp of earth, Bhutath lit "the lamp of love with the mind as wick" to behold Vishnu. His 100 verses complement those of his companions.',
+        teachings: ['Love as the light to see God', 'Spontaneous devotion', 'Unity of the Alvars'],
+        works: ['Irandaam Tiruvandhadhi (100 verses)'],
+        quotes: ['"Love is the wick; the mind the lamp; I see my Lord."'],
+        image: 'bhutath.jpg'
+    },
+    {
+        id: 'pey',
+        name: 'Pey Alvar',
+        nameLocal: 'பேயாழ்வார்',
+        nameHi: 'पेय आळ्वार',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '7th century CE',
+        birthPlace: 'Mylapore, Chennai',
+        biography: 'Pey Alvar is the third of the Mudal Alvars. Completing the trio on that mystical night, he lit "the lamp of knowledge with devotion as the ghee." He describes the vision of Vishnu with Lakshmi appearing before the three saints. His name "Pey" (meaning madman) reflects his God-intoxicated state.',
+        teachings: ['Knowledge illumined by devotion', 'Ecstatic God-vision', 'Lakshmi-Narayana worship'],
+        works: ['Moondram Tiruvandhadhi (100 verses)'],
+        quotes: ['"I saw the Lord with the Goddess, standing before us three."'],
+        image: 'pey.jpg'
+    },
+    {
+        id: 'thirumazhisai',
+        name: 'Thirumazhisai Alvar',
+        nameLocal: 'திருமழிசையாழ்வார்',
+        nameHi: 'तिरुमळिसै आळ्वार',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '7th-8th century CE',
+        birthPlace: 'Thirumazhisai, Tamil Nadu',
+        biography: 'Thirumazhisai Alvar was unique for having explored Shaivism, Buddhism, and Jainism before finding truth in Vaishnavism. His philosophical depth earned him the title "Bhaktisara" (Essence of Devotion). He demonstrated that Narayana is the Supreme through reasoned argument and experience.',
+        teachings: ['Vishnu as Supreme through logic', 'Rejection of other paths', 'Philosophical devotion'],
+        works: ['Nanmugan Tiruvandhadhi', 'Tiruchanda Viruttam'],
+        quotes: ['"After searching all paths, I found peace only in Narayana."'],
+        image: 'thirumazhisai.jpg'
+    },
+    {
+        id: 'thondaradippodi',
+        name: 'Thondaradippodi Alvar',
+        nameLocal: 'தொண்டரடிப்பொடியாழ்வார்',
+        nameHi: 'तोंडरडिप्पोडि आळ्वार',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '8th century CE',
+        birthPlace: 'Mandangudi, Tamil Nadu',
+        biography: 'Thondaradippodi Alvar\'s name means "Dust at the feet of devotees." He served the Srirangam temple by maintaining a garden of tulsi for the Lord. His Tirumaalai is a deeply emotional work expressing longing for Ranganatha. Legend says he was once tempted away but returned with deeper humility.',
+        teachings: ['Humility before devotees', 'Tulsi seva', 'Emotional surrender'],
+        works: ['Tirumaalai', 'Tirupalliyezhuchi'],
+        quotes: ['"I am but the dust beneath the feet of the devotees."'],
+        image: 'thondaradippodi.jpg'
+    },
+    {
+        id: 'thiruppaan',
+        name: 'Thiruppaan Alvar',
+        nameLocal: 'திருப்பாணாழ்வார்',
+        nameHi: 'तिरुप्पाण आळ्वार',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '8th century CE',
+        birthPlace: 'Uraiyur, Tamil Nadu',
+        biography: 'Thiruppaan Alvar was born in the Panar (bard) community, considered untouchable. Though forbidden to enter temples, he stood outside Srirangam singing. One day, Lord Ranganatha commanded the temple priest to carry Thiruppaan inside on his shoulders. His Amalanaadhipiraan describes Vishnu from foot to head in 10 verses.',
+        teachings: ['Devotion transcends caste', 'God welcomes all', 'Beauty of divine form'],
+        works: ['Amalanaadhipiraan (10 verses)'],
+        quotes: ['"My eyes, having seen Ranganatha, shall not see anything else."'],
+        image: 'thiruppaan.jpg'
+    },
+    {
+        id: 'madhurakavi',
+        name: 'Madhurakavi Alvar',
+        nameLocal: 'மதுரகவியாழ்வார்',
+        nameHi: 'मधुरकवि आळ्वार',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: '7th century CE',
+        birthPlace: 'Thirukolur, Tamil Nadu',
+        biography: 'Madhurakavi Alvar is unique among Alvars for composing verses not to Vishnu directly, but to his guru Nammalvar. He discovered Nammalvar meditating under a tamarind tree and became his devoted disciple. His 11 verses, Kanninun Siruthambu, express pure devotion to a human guru.',
+        teachings: ['Guru bhakti', 'Devotion to a saint as path to God', 'Humility'],
+        works: ['Kanninun Siruthambu (11 verses)'],
+        quotes: ['"Nammalvar is my God; I know no other."'],
+        image: 'madhurakavi.jpg'
+    },
+    // ========== HINDU - NAYANARS ==========
+    {
+        id: 'appar',
+        name: 'Appar',
+        nameLocal: 'அப்பர்',
+        nameHi: 'अप्पर',
+        tradition: 'hindu',
+        sampradaya: 'Nayanar',
+        period: '7th century CE',
+        birthPlace: 'Tiruvamur, Tamil Nadu',
+        biography: 'Thirunavukkarasar, known as Appar, was one of the foremost Nayanar saints. Originally a Jain monk, he converted to Shaivism after a severe illness was cured by invoking Shiva. Despite persecution by the Pallava king (a Jain), he stood firm in his faith. His Tevaram hymns emphasize humble service (cleaning temple grounds) as true devotion.',
+        teachings: ['Service to Shiva through temple work', 'Devotion overcomes all suffering', 'True religion is felt in the heart'],
+        works: ['Tevaram (4th, 5th, 6th Thirumurais)'],
+        quotes: ['"Even if you do not love us, we shall love you, O Lord."'],
+        image: 'appar.jpg'
+    },
+    {
+        id: 'sambandar',
+        name: 'Thirugnana Sambandar',
+        nameLocal: 'திருஞானசம்பந்தர்',
+        nameHi: 'तिरुज्ञान संबंदर',
+        tradition: 'hindu',
+        sampradaya: 'Nayanar',
+        period: '7th century CE',
+        birthPlace: 'Sirkali, Tamil Nadu',
+        biography: 'A child prodigy, Sambandar is said to have been fed divine milk by Goddess Parvati at age three, after which he began composing hymns. He traveled extensively, performing miracles and debating Jain scholars. He is credited with reviving Shaivism in the Pandya kingdom. He composed over 4000 verses of the Tevaram.',
+        teachings: ['Shiva as the Supreme Reality', 'Power of Namasivaya mantra', 'Bhakti defeats all philosophies'],
+        works: ['Tevaram (1st, 2nd, 3rd Thirumurais)'],
+        quotes: ['"Those who chant Namasivaya have nothing to fear."'],
+        image: 'sambandar.jpg'
+    },
+    {
+        id: 'sundarar',
+        name: 'Sundarar',
+        nameLocal: 'சுந்தரர்',
+        nameHi: 'सुंदरर',
+        tradition: 'hindu',
+        sampradaya: 'Nayanar',
+        period: '8th century CE',
+        birthPlace: 'Tirunavalur, Tamil Nadu',
+        biography: 'Sundarar is the third of the Moovar (three chief Nayanars). Unlike other saints who approached Shiva as master or father, Sundarar related to Him as a friend (Sakha). He is famous for the Tiruthonda Thogai, which lists the names of the 63 Nayanars, becoming the basis for the Periya Puranam.',
+        teachings: ['Shiva as friend', 'Catalog of saints', 'Emotional devotion'],
+        works: ['Tevaram (7th Thirumurai)', 'Tiruthonda Thogai'],
+        quotes: ['"O Shiva, my friend, stand by me in my folly."'],
+        image: 'sundarar.jpg'
+    },
+    {
+        id: 'manikkavacakar',
+        name: 'Manikkavacakar',
+        nameLocal: 'மாணிக்கவாசகர்',
+        nameHi: 'माणिक्कवाचकर',
+        tradition: 'hindu',
+        sampradaya: 'Nayanar',
+        period: '9th century CE',
+        birthPlace: 'Thiruvathavur, Tamil Nadu',
+        biography: 'Manikkavacakar was a minister to the Pandya king who renounced everything after a divine encounter with Shiva at Tiruperunturai. His Tiruvasagam is considered the peak of Tamil devotional literature, known for its heart-melting pathos that says "Those whose hearts don\'t melt at Tiruvasagam won\'t melt at anything."',
+        teachings: ['Total surrender', 'Grace of Shiva', 'Emotional melting (urugaar)'],
+        works: ['Tiruvasagam', 'Tirukkovaiyar'],
+        quotes: ['"He who melts not at Tiruvasagam, his heart is made of stone."'],
+        image: 'manikkavacakar.jpg'
+    },
+    {
+        id: 'karaikkal',
+        name: 'Karaikkal Ammaiyar',
+        nameLocal: 'காரைக்கால் அம்மையார்',
+        nameHi: 'कारैक्काल अम्मैयार',
+        tradition: 'hindu',
+        sampradaya: 'Nayanar',
+        period: '6th century CE',
+        birthPlace: 'Karaikkal, Tamil Nadu',
+        biography: 'Karaikkal Ammaiyar is one of the earliest Nayanar saints and one of the few women among them. Originally a beautiful woman named Punitavati, she prayed to Shiva to take away her physical beauty so she could worship him without distraction. Shiva granted her wish, transforming her into a skeletal form. She worshipped Shiva in cremation grounds.',
+        teachings: ['Transcending physical beauty', 'Devotion in cremation grounds', 'Complete dedication'],
+        works: ['Arputha Thiruvandhadhi', 'Thiruirattai Manimaalai'],
+        quotes: ['"I chose divine ugliness over mortal beauty."'],
+        image: 'karaikkal.jpg'
+    },
+    {
+        id: 'kannappa',
+        name: 'Kannappa Nayanar',
+        nameLocal: 'கண்ணப்பர்',
+        nameHi: 'कण्णप्पर',
+        tradition: 'hindu',
+        sampradaya: 'Nayanar',
+        period: 'Mythological Era',
+        birthPlace: 'Uduppura (Kalahasti), Andhra Pradesh',
+        biography: 'Kannappa was a tribal hunter named Thinnan who discovered a Shiva Lingam in the forest. With no knowledge of rituals, he offered meat and water (carried in his mouth). When the Lingam\'s eyes bled, he tried to fix it by gouging out his own eyes. Shiva stopped him, declaring this innocent love supreme devotion.',
+        teachings: ['Innocence over ritual', 'True love offering', 'God accepts sincerity'],
+        works: ['His story in Periya Puranam'],
+        quotes: ['"What use are my eyes if my Lord\'s eyes bleed?"'],
+        image: 'kannappa.jpg'
+    },
+    // ========== HINDU - VARKARI ==========
+    {
+        id: 'dnyaneshwar',
+        name: 'Sant Dnyaneshwar',
+        nameLocal: 'संत ज्ञानेश्वर',
+        nameHi: 'संत ज्ञानेश्वर',
+        tradition: 'hindu',
+        sampradaya: 'Varkari',
+        period: '1275-1296 CE',
+        birthPlace: 'Apegaon, Maharashtra',
+        biography: 'Sant Dnyaneshwar (also Jnaneshwar) was a child prodigy who wrote the Dnyaneshwari, a Marathi commentary on the Bhagavad Gita, at age 15. Born to parents who had renounced worldly life and later returned, he faced social ostracism. Despite his short life of 21 years, he democratized Vedantic knowledge by writing in Marathi. He voluntarily entered Sanjivan Samadhi at Alandi.',
+        teachings: ['Knowledge and devotion are one', 'Spiritual wisdom for all castes', 'The world is a manifestation of Brahman'],
+        works: ['Dnyaneshwari', 'Amrutanubhav', 'Changdev Pasashti', 'Abhangas'],
+        quotes: ['"May the universe be blessed with peace and happiness." (Pasaydan)'],
+        image: 'dnyaneshwar.jpg'
+    },
+    {
+        id: 'namdev',
+        name: 'Sant Namdev',
+        nameLocal: 'संत नामदेव',
+        nameHi: 'संत नामदेव',
+        tradition: 'hindu',
+        sampradaya: 'Varkari',
+        period: '1270-1350 CE',
+        birthPlace: 'Narasi-Bamani, Maharashtra',
+        biography: 'Sant Namdev was a tailor (shimpi) by caste who became one of the pillars of the Varkari movement. He traveled across India spreading the message of bhakti, including to Punjab, where his hymns are included in the Guru Granth Sahib. He composed thousands of abhangs and played a key role in democratizing devotion to Vitthal.',
+        teachings: ['Name of God is the path', 'Caste is irrelevant in devotion', 'God dwells in every being'],
+        works: ['Abhangs', 'Gatha', '61 hymns in Guru Granth Sahib'],
+        quotes: ['"Nama says: In the Naam alone is liberation."'],
+        image: 'namdev.jpg'
+    },
+    {
+        id: 'tukaram',
+        name: 'Sant Tukaram',
+        nameLocal: 'संत तुकाराम',
+        nameHi: 'संत तुकाराम',
+        tradition: 'hindu',
+        sampradaya: 'Varkari',
+        period: '1608-1650 CE',
+        birthPlace: 'Dehu, Maharashtra',
+        biography: 'Sant Tukaram was a grocer (Shudra caste) who became the most beloved poet-saint of Maharashtra. After family tragedies, he turned entirely to devotion. His Gatha (collection of 4000+ abhangs) expresses devotion to Vitthal with simple yet profound poetry. He faced persecution from orthodox Brahmins who forced him to throw his manuscripts in the river, but they reportedly floated back.',
+        teachings: ['Simple heartfelt devotion', 'Equality before God', 'Renunciation of ego'],
+        works: ['Tukaram Gatha (4600+ Abhangs)'],
+        quotes: ['"Tuka says, this world is a dream, wake up and turn to God."'],
+        image: 'tukaram.jpg'
+    },
+    {
+        id: 'eknath',
+        name: 'Sant Eknath',
+        nameLocal: 'संत एकनाथ',
+        nameHi: 'संत एकनाथ',
+        tradition: 'hindu',
+        sampradaya: 'Varkari',
+        period: '1533-1599 CE',
+        birthPlace: 'Paithan, Maharashtra',
+        biography: 'Sant Eknath was a Brahmin householder who harmonized spiritual life with worldly duties. He edited and restored the Dnyaneshwari to preserve its authenticity. He wrote the Eknathi Bhagwat, a Marathi rendering of the 11th Skandha of Bhagavata Purana. He was known for serving Dalits and breaking caste barriers.',
+        teachings: ['Householder spirituality', 'Preservation of texts', 'Service to all castes'],
+        works: ['Eknathi Bhagwat', 'Bhavartha Ramayana', 'Abhangas', 'Bharuds'],
+        quotes: ['"God dwells in the heart of the pure, regardless of caste."'],
+        image: 'eknath.jpg'
+    },
+    {
+        id: 'chokhamela',
+        name: 'Sant Chokhamela',
+        nameLocal: 'संत चोखामेळा',
+        nameHi: 'संत चोखामेळा',
+        tradition: 'hindu',
+        sampradaya: 'Varkari',
+        period: '14th century CE',
+        birthPlace: 'Mehuna, Maharashtra',
+        biography: 'Sant Chokhamela was a Mahar (Dalit) saint who questioned the notions of purity and pollution. Though forbidden to enter the Pandharpur temple, he stood outside singing to Vitthal. His abhangs powerfully argue that God belongs to the downtrodden. He died while working on a forced labor project.',
+        teachings: ['God belongs to the oppressed', 'Caste is a social sin', 'Inner purity over birth'],
+        works: ['Abhangas'],
+        quotes: ['"I am impure by birth, but my mind is pure for you, Vitthal."'],
+        image: 'chokhamela.jpg'
+    },
+    {
+        id: 'janabai',
+        name: 'Sant Janabai',
+        nameLocal: 'संत जनाबाई',
+        nameHi: 'संत जनाबाई',
+        tradition: 'hindu',
+        sampradaya: 'Varkari',
+        period: '1263-1350 CE',
+        birthPlace: 'Gangakhed, Maharashtra',
+        biography: 'Sant Janabai was a maidservant in the household of Sant Namdev. Despite her status, she composed over 340 abhangas while grinding grain and doing household chores. Her poetry illustrates that every mundane task can become worship. She claimed that Vitthal himself would help her with her work.',
+        teachings: ['Work as worship', 'Devotion in daily chores', 'Women\'s spiritual equality'],
+        works: ['Janabai Gatha (340+ Abhangas)'],
+        quotes: ['"While I grind, Vitthal turns the stone with me."'],
+        image: 'janabai.jpg'
+    },
+    {
+        id: 'samarth',
+        name: 'Samarth Ramdas',
+        nameLocal: 'समर्थ रामदास',
+        nameHi: 'समर्थ रामदास',
+        tradition: 'hindu',
+        sampradaya: 'Varkari',
+        period: '1608-1681 CE',
+        birthPlace: 'Jamb, Maharashtra',
+        biography: 'Samarth Ramdas was a contemporary of Shivaji Maharaj and his spiritual guide. Unlike other Varkari saints who emphasized gentle devotion, Ramdas combined Bhakti with Shakti (power), inspiring the Maratha empire. He established maths (monasteries) across India and authored the Dasbodh, a comprehensive guide to spiritual and worldly life.',
+        teachings: ['Bhakti with Shakti', 'Self-reliance', 'Physical and spiritual strength', 'Service to motherland'],
+        works: ['Dasbodh', 'Manache Shlok', 'Karunashtakas'],
+        quotes: ['"Jay Jay Raghuveer Samarth!" (Victory to the mighty Rama!)'],
+        image: 'samarth.jpg'
+    },
+    // ========== HINDU - NORTH INDIA ==========
+    {
+        id: 'ramananda',
+        name: 'Swami Ramananda',
+        nameLocal: 'स्वामी रामानंद',
+        nameHi: 'स्वामी रामानंद',
+        tradition: 'hindu',
+        sampradaya: 'Nirguna Sant',
+        period: '14th-15th century CE',
+        birthPlace: 'Prayagraj, Uttar Pradesh',
+        biography: 'Swami Ramananda was the pivotal figure who brought the Bhakti movement from South India to the North. He broke caste barriers by accepting disciples from all backgrounds including Kabir (weaver), Ravidas (cobbler), Sena (barber), and Pipa (king). His Ram-bhakti focused on God as the inner self.',
+        teachings: ['Bhakti for all castes', 'Rama as inner self', 'Bridge between South and North'],
+        works: ['Hindi verses', 'Spiritual commentaries'],
+        quotes: ['"Caste and creed have no place in spirituality."'],
+        image: 'ramananda.jpg'
+    },
+    {
+        id: 'kabir',
+        name: 'Sant Kabir',
+        nameLocal: 'कबीर दास',
+        nameHi: 'संत कबीर',
+        tradition: 'hindu',
+        sampradaya: 'Nirguna Sant',
+        period: '1398-1518 CE',
+        birthPlace: 'Varanasi, Uttar Pradesh',
+        biography: 'Kabir was a weaver-mystic whose verses rejected both Hindu and Islamic orthodoxy in favor of direct experience of the formless Divine. Found as a baby on a lotus in a lake, he was raised by Muslim weavers but became a disciple of the Hindu saint Ramananda. His dohas and songs are shared by Hindus, Sikhs, and Muslims alike.',
+        teachings: ['God is formless (Nirguna)', 'Inner experience over ritual', 'Both Hindu and Muslim paths lead to one God'],
+        works: ['Bijak', 'Kabir Granthavali', 'Dohas/Sakhis', 'Hymns in Guru Granth Sahib'],
+        quotes: ['"Kabir says: Seek within; you carry the entire universe in you."'],
+        image: 'kabir.jpg'
+    },
+    {
+        id: 'ravidas',
+        name: 'Sant Ravidas',
+        nameLocal: 'गुरु रविदास',
+        nameHi: 'संत रविदास',
+        tradition: 'hindu',
+        sampradaya: 'Nirguna Sant',
+        period: '15th-16th century CE',
+        birthPlace: 'Varanasi, Uttar Pradesh',
+        biography: 'Sant Ravidas (Raidas) was a cobbler by caste who became one of the most influential saints of North India. A disciple of Ramananda, he taught that caste discrimination has no place in spirituality. He envisioned "Begumpura" – a city without sorrow where all are equal. His 41 hymns are included in the Guru Granth Sahib.',
+        teachings: ['Spiritual equality', 'Begumpura - casteless utopia', 'Devotion purifies the soul'],
+        works: ['Ravidasi Bani', '41 hymns in Guru Granth Sahib'],
+        quotes: ['"If the Creator dwells in all, why discriminate?"'],
+        image: 'ravidas.jpg'
+    },
+    {
+        id: 'tulsidas',
+        name: 'Goswami Tulsidas',
+        nameLocal: 'तुलसीदास',
+        nameHi: 'गोस्वामी तुलसीदास',
+        tradition: 'hindu',
+        sampradaya: 'Saguna Bhakti',
+        period: '1532-1623 CE',
+        birthPlace: 'Rajapur, Uttar Pradesh',
+        biography: 'Tulsidas is the author of the Ramcharitmanas, the retelling of the Ramayana in Awadhi that became the defining text of North Indian Hinduism. Abandoned at birth and raised by a sadhu, he later became obsessed with his wife, then redirected that love to Lord Rama. His works made the story of Rama accessible to common people.',
+        teachings: ['Rama as Supreme Lord', 'Devotion through story', 'Dharma in daily life'],
+        works: ['Ramcharitmanas', 'Hanuman Chalisa', 'Vinaya Patrika', 'Kavitavali'],
+        quotes: ['"As the fragrance is in the flower, so is God in the creation."'],
+        image: 'tulsidas.jpg'
+    },
+    {
+        id: 'meera',
+        name: 'Meera Bai',
+        nameLocal: 'मीराबाई',
+        nameHi: 'मीराबाई',
+        tradition: 'hindu',
+        sampradaya: 'Saguna Bhakti',
+        period: '1498-1546 CE',
+        birthPlace: 'Kudki, Rajasthan',
+        biography: 'Meera Bai was a Rajput princess who devoted her life entirely to Lord Krishna, whom she considered her true husband. Despite persecution by her royal in-laws (including poison attempts), she continued to sing and dance in temples. She eventually left the palace to wander as a bhakti saint, composing devotional songs that remain popular today.',
+        teachings: ['Divine love (Prem Bhakti)', 'Krishna as eternal beloved', 'Renunciation of worldly ties'],
+        works: ['Bhajans and Padas'],
+        quotes: ['"Mira is dyed in the color of Krishna."'],
+        image: 'meera.jpg'
+    },
+    {
+        id: 'chaitanya',
+        name: 'Chaitanya Mahaprabhu',
+        nameLocal: 'চৈতন্য মহাপ্রভু',
+        nameHi: 'चैतन्य महाप्रभु',
+        tradition: 'hindu',
+        sampradaya: 'Gaudiya Vaishnavism',
+        period: '1486-1534 CE',
+        birthPlace: 'Nabadwip, Bengal',
+        biography: 'Chaitanya Mahaprabhu founded Gaudiya Vaishnavism and popularized the public chanting of Hare Krishna (Sankirtan). Originally a scholar named Vishvambhar, he underwent a spiritual transformation and became an ecstatic devotee. He is considered by his followers to be an avatar of Krishna and Radha combined.',
+        teachings: ['Sankirtan (congregational chanting)', 'Radha-Krishna devotion', 'Acintya Bheda Abheda philosophy'],
+        works: ['Siksastakam (8 verses)'],
+        quotes: ['"Chant the names of the Lord and your life will be blessed."'],
+        image: 'chaitanya.jpg'
+    },
+    {
+        id: 'surdas',
+        name: 'Surdas',
+        nameLocal: 'सूरदास',
+        nameHi: 'सूरदास',
+        tradition: 'hindu',
+        sampradaya: 'Pushtimarga',
+        period: '1478-1583 CE',
+        birthPlace: 'Sihi, Haryana',
+        biography: 'Surdas was a blind poet-saint whose Sur Sagar (Ocean of Sur) contains over 100,000 verses describing the childhood and youth of Krishna. Despite (or because of) his blindness, his poetry is extraordinarily visual, capturing every detail of Krishna\'s lilas in Vrindavan. He was a disciple of Vallabhacharya and one of the Ashtachap poets.',
+        teachings: ['Krishna\'s childhood lilas', 'Pushti Marga (grace path)', 'Visual poetry despite blindness'],
+        works: ['Sur Sagar', 'Sur Saravali', 'Sahitya Lahiri'],
+        quotes: ['"The eyes that see not Krishna have seen nothing at all."'],
+        image: 'surdas.jpg'
+    },
+    {
+        id: 'narsinh',
+        name: 'Narsinh Mehta',
+        nameLocal: 'નરસિંહ મહેતા',
+        nameHi: 'नरसिंह मेहता',
+        tradition: 'hindu',
+        sampradaya: 'Saguna Bhakti',
+        period: '15th century CE',
+        birthPlace: 'Talaja, Gujarat',
+        biography: 'Narsinh Mehta is revered as the Adi Kavi (first poet) of Gujarati literature. His bhajan "Vaishnav Jan To" became the defining moral compass of modern India through Mahatma Gandhi, who made it his favorite prayer. Despite facing poverty and social ostracism, he composed hundreds of devotional songs to Krishna.',
+        teachings: ['True Vaishnava is one who feels others\' pain', 'Devotion over caste', 'Krishna bhakti'],
+        works: ['Vaishnav Jan To', 'Prabhatiya', 'Madhusudano Mari Naiya'],
+        quotes: ['"He is a true Vaishnava who feels the pain of others."'],
+        image: 'narsinh.jpg'
+    },
+    // ========== HINDU - SOUTH INDIA HARIDASA ==========
+    {
+        id: 'purandaradasa',
+        name: 'Purandara Dasa',
+        nameLocal: 'ಪುರಂದರದಾಸ',
+        nameHi: 'पुरंदर दास',
+        tradition: 'hindu',
+        sampradaya: 'Haridasa',
+        period: '1484-1564 CE',
+        birthPlace: 'Purandarapur, Karnataka',
+        biography: 'Purandara Dasa is revered as the "Pitamaha" (grandfather) of Carnatic music. Originally a wealthy merchant, he renounced everything after a divine transformation. He systematized the teaching of Carnatic music and composed 475,000 songs (of which 1000 survive). Every student of Carnatic music begins with his compositions.',
+        teachings: ['Music as devotion', 'Systematic learning of arts', 'Renunciation of wealth'],
+        works: ['Carnatic kritis', 'Keerthanas', 'Sarali Varisai method'],
+        quotes: ['"Jagadodharana, adisidale Yashoda - The protector of the world is rocked by Yashoda."'],
+        image: 'purandaradasa.jpg'
+    },
+    {
+        id: 'kanakadasa',
+        name: 'Kanaka Dasa',
+        nameLocal: 'ಕನಕದಾಸ',
+        nameHi: 'कनक दास',
+        tradition: 'hindu',
+        sampradaya: 'Haridasa',
+        period: '1509-1609 CE',
+        birthPlace: 'Bada, Karnataka',
+        biography: 'Kanaka Dasa was a shepherd (Kuruba) by caste who became one of the greatest Haridasa poets. When denied entry to the Udupi Krishna temple due to caste, he stood at the back – legend says the idol turned around to face him through a window (now called Kanakana Kindi). He composed philosophical and devotional works that questioned caste hierarchy.',
+        teachings: ['God sees devotion, not caste', 'Social equality', 'Krishna devotion'],
+        works: ['Nalacharitre', 'Mohanatarangini', 'Ramadhanya Charite', 'Keerthanas'],
+        quotes: ['"What is the caste of the soul? Tell me, O pundit!"'],
+        image: 'kanakadasa.jpg'
+    },
+    {
+        id: 'vyasatirtha',
+        name: 'Vyasatirtha',
+        nameLocal: 'ವ್ಯಾಸತೀರ್ಥ',
+        nameHi: 'व्यासतीर्थ',
+        tradition: 'hindu',
+        sampradaya: 'Haridasa',
+        period: '1460-1539 CE',
+        birthPlace: 'Bannur, Karnataka',
+        biography: 'Vyasatirtha (Vyasaraya) was the Rajaguru of the Vijayanagara Empire and a pivotal figure in the Haridasa movement. He patronized both Purandara Dasa and Kanaka Dasa, bridging the caste divide. He was the pontiff of the Madhva order and established numerous Krishna temples.',
+        teachings: ['Dvaita Vedanta', 'Patronage of arts', 'Unity across castes'],
+        works: ['Nyayamruta', 'Tarkatandava', 'Chandrika'],
+        quotes: ['"Devotion knows no boundary of birth or caste."'],
+        image: 'vyasatirtha.jpg'
+    },
+    {
+        id: 'raghavendra',
+        name: 'Raghavendra Swami',
+        nameLocal: 'ರಾಘವೇಂದ್ರ ಸ್ವಾಮಿ',
+        nameHi: 'राघवेंद्र स्वामी',
+        tradition: 'hindu',
+        sampradaya: 'Haridasa',
+        period: '1595-1671 CE',
+        birthPlace: 'Bhuvanagiri, Tamil Nadu',
+        biography: 'Raghavendra Swami was a Madhva saint known for his miracles and deep scholarship. He entered Brindavana (live burial in meditation) at Mantralaya, where his tomb remains a major pilgrimage site today. Thousands visit daily believing he still answers prayers from his Samadhi.',
+        teachings: ['Madhva philosophy', 'Miracles of faith', 'Service to devotees'],
+        works: ['Commentaries on Vedanta', 'Parimala'],
+        quotes: ['"I will continue to serve devotees from my Brindavana for 700 years."'],
+        image: 'raghavendra.jpg'
+    },
+    // ========== SIKH GURUS ==========
+    {
+        id: 'gurunanak',
+        name: 'Guru Nanak Dev Ji',
+        nameLocal: 'ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਜੀ',
+        nameHi: 'गुरु नानक देव जी',
+        tradition: 'sikh',
+        sampradaya: 'Gurus',
+        period: '1469-1539 CE',
+        birthPlace: 'Talwandi (Nankana Sahib), Punjab',
+        biography: 'Guru Nanak Dev Ji is the founder of Sikhism and the first of the Ten Gurus. After a divine experience at age 30, he traveled extensively (Udasis) across South Asia and the Middle East, teaching "There is no Hindu, there is no Muslim" – only seekers of Truth. He established the principles of Ik Onkar (One God), Naam Japna, Kirat Karni, and Vand Chakna.',
+        teachings: ['Ik Onkar - One God', 'Equality of all humans', 'Honest living and sharing', 'Naam Simran (remembrance of God)'],
+        works: ['Japji Sahib', 'Asa di Var', 'Sidh Gosht', 'Babar Vani'],
+        quotes: ['"Truth is the highest virtue, but higher still is truthful living."'],
+        image: 'gurunanak.jpg'
+    },
+    {
+        id: 'guruangad',
+        name: 'Guru Angad Dev Ji',
+        nameLocal: 'ਗੁਰੂ ਅੰਗਦ ਦੇਵ ਜੀ',
+        nameHi: 'गुरु अंगद देव जी',
+        tradition: 'sikh',
+        sampradaya: 'Gurus',
+        period: '1504-1552 CE',
+        birthPlace: 'Harike, Punjab',
+        biography: 'Guru Angad Dev Ji was the second Sikh Guru. Originally named Lehna, he became Guru Nanak\'s closest disciple and successor. He standardized and promoted the Gurmukhi script, making the Guru\'s teachings accessible. He also promoted physical fitness (Mal Akhara) and expanded the Langar tradition.',
+        teachings: ['Promotion of Gurmukhi script', 'Physical and spiritual discipline', 'Continuation of Langar'],
+        works: ['63 Saloks in Guru Granth Sahib'],
+        quotes: ['"If you want to play the game of love, come with your head on your palm."'],
+        image: 'guruangad.jpg'
+    },
+    {
+        id: 'guruamardas',
+        name: 'Guru Amar Das Ji',
+        nameLocal: 'ਗੁਰੂ ਅਮਰ ਦਾਸ ਜੀ',
+        nameHi: 'गुरु अमर दास जी',
+        tradition: 'sikh',
+        sampradaya: 'Gurus',
+        period: '1479-1574 CE',
+        birthPlace: 'Basarke Gillan, Punjab',
+        biography: 'Guru Amar Das Ji became the third Guru at age 73. He institutionalized the Langar, requiring even Emperor Akbar to sit on the floor to eat with commoners. He strongly opposed Sati and purdah, and established the Manji system for spreading Sikh teachings. He constructed the Baoli at Goindval.',
+        teachings: ['Institutionalized Langar', 'Women\'s equality', 'Opposition to Sati', 'Manji administration system'],
+        works: ['Anand Sahib', 'Hymns in Guru Granth Sahib'],
+        quotes: ['"True are the words of the Guru; Blessed is the heart that knows this."'],
+        image: 'guruamardas.jpg'
+    },
+    {
+        id: 'gururamdas',
+        name: 'Guru Ram Das Ji',
+        nameLocal: 'ਗੁਰੂ ਰਾਮ ਦਾਸ ਜੀ',
+        nameHi: 'गुरु राम दास जी',
+        tradition: 'sikh',
+        sampradaya: 'Gurus',
+        period: '1534-1581 CE',
+        birthPlace: 'Lahore, Punjab',
+        biography: 'Guru Ram Das Ji was the fourth Guru and founder of Amritsar (city of nectar). He excavated the sacred pool (Amrit Sarovar) that would later become the site of the Harmandir Sahib. He composed the Lavan, the hymn used in Sikh marriage ceremonies.',
+        teachings: ['Foundation of Amritsar', 'Lavan for Anand Karaj', 'Humility and service'],
+        works: ['Lavan', 'Hymns in Guru Granth Sahib'],
+        quotes: ['"The Guru is the boat to cross the ocean of darkness."'],
+        image: 'gururamdas.jpg'
+    },
+    {
+        id: 'guruarjan',
+        name: 'Guru Arjan Dev Ji',
+        nameLocal: 'ਗੁਰੂ ਅਰਜਨ ਦੇਵ ਜੀ',
+        nameHi: 'गुरु अर्जन देव जी',
+        tradition: 'sikh',
+        sampradaya: 'Gurus',
+        period: '1563-1606 CE',
+        birthPlace: 'Goindval, Punjab',
+        biography: 'Guru Arjan Dev Ji was the fifth Guru and the first Sikh martyr. He compiled the Adi Granth (first edition of Guru Granth Sahib), completed the Harmandir Sahib, and composed the most hymns of any Gurus. He was tortured and executed by Mughal Emperor Jahangir for refusing to convert.',
+        teachings: ['Compilation of Adi Granth', 'Completion of Harmandir Sahib', 'Martyrdom for faith'],
+        works: ['2218 hymns in Guru Granth Sahib', 'Sukhmani Sahib'],
+        quotes: ['"Sweet is Your will, O Lord; I ask only for the gift of Your Name."'],
+        image: 'guruarjan.jpg'
+    },
+    {
+        id: 'guruhargobind',
+        name: 'Guru Hargobind Ji',
+        nameLocal: 'ਗੁਰੂ ਹਰਿਗੋਬਿੰਦ ਜੀ',
+        nameHi: 'गुरु हरगोबिंद जी',
+        tradition: 'sikh',
+        sampradaya: 'Gurus',
+        period: '1595-1644 CE',
+        birthPlace: 'Guru Ki Wadali, Punjab',
+        biography: 'Guru Hargobind Ji was the sixth Guru and introduced the concept of Miri-Piri (temporal and spiritual authority). He wore two swords representing these dual powers. After his father\'s martyrdom, he militarized the Sikhs, built the Akal Takht, and fought several battles against Mughal forces.',
+        teachings: ['Miri-Piri concept', 'Self-defense as dharma', 'Akal Takht establishment'],
+        works: ['Oral teachings'],
+        quotes: ['"Arms are necessary for the defense of righteousness."'],
+        image: 'guruhargobind.jpg'
+    },
+    {
+        id: 'guruharrai',
+        name: 'Guru Har Rai Ji',
+        nameLocal: 'ਗੁਰੂ ਹਰਿ ਰਾਇ ਜੀ',
+        nameHi: 'गुरु हर राय जी',
+        tradition: 'sikh',
+        sampradaya: 'Gurus',
+        period: '1630-1661 CE',
+        birthPlace: 'Kiratpur Sahib, Punjab',
+        biography: 'Guru Har Rai Ji was the seventh Guru, known for his gentle nature and love for nature. He maintained an army but prioritized peace. He established a dispensary of Ayurvedic medicines and once reportedly healed Dara Shikoh, son of Shah Jahan.',
+        teachings: ['Compassion for all beings', 'Herbal medicine', 'Maintenance of peace'],
+        works: ['Oral teachings'],
+        quotes: ['"A broken heart can be bound, but a trampled flower never blooms again."'],
+        image: 'guruharrai.jpg'
+    },
+    {
+        id: 'guruharkrishan',
+        name: 'Guru Har Krishan Ji',
+        nameLocal: 'ਗੁਰੂ ਹਰਿ ਕ੍ਰਿਸ਼ਨ ਜੀ',
+        nameHi: 'गुरु हर कृष्ण जी',
+        tradition: 'sikh',
+        sampradaya: 'Gurus',
+        period: '1656-1664 CE',
+        birthPlace: 'Kiratpur Sahib, Punjab',
+        biography: 'Guru Har Krishan Ji was the eighth Guru and the youngest (became Guru at age 5). Called the "Child Guru," he served victims during a smallpox epidemic in Delhi, contracting the disease himself. Before passing at age 8, he indicated his successor with "Baba Bakale" (referring to Guru Tegh Bahadur).',
+        teachings: ['Service to the suffering', 'Divine wisdom transcends age'],
+        works: ['Oral teachings'],
+        quotes: ['"Blessed is the one who loses himself in service."'],
+        image: 'guruharkrishan.jpg'
+    },
+    {
+        id: 'guruteghbahadur',
+        name: 'Guru Tegh Bahadur Ji',
+        nameLocal: 'ਗੁਰੂ ਤੇਗ ਬਹਾਦਰ ਜੀ',
+        nameHi: 'गुरु तेग बहादुर जी',
+        tradition: 'sikh',
+        sampradaya: 'Gurus',
+        period: '1621-1675 CE',
+        birthPlace: 'Amritsar, Punjab',
+        biography: 'Guru Tegh Bahadur Ji was the ninth Guru and second Sikh martyr. Known as "Hind Di Chadar" (Shield of India), he sacrificed his life to protect the religious freedom of Kashmiri Pandits threatened with forced conversion by Aurangzeb. He was executed in Delhi after refusing to convert to Islam or perform miracles.',
+        teachings: ['Religious freedom for all', 'Fearlessness', 'Protection of the oppressed'],
+        works: ['115 hymns in Guru Granth Sahib', 'Saloks'],
+        quotes: ['"He who grieves not, nor is elated, who regards gold and dust alike..."'],
+        image: 'guruteghbahadur.jpg'
+    },
+    {
+        id: 'gurugobindsingh',
+        name: 'Guru Gobind Singh Ji',
+        nameLocal: 'ਗੁਰੂ ਗੋਬਿੰਦ ਸਿੰਘ ਜੀ',
+        nameHi: 'गुरु गोबिंद सिंह जी',
+        tradition: 'sikh',
+        sampradaya: 'Gurus',
+        period: '1666-1708 CE',
+        birthPlace: 'Patna, Bihar',
+        biography: 'Guru Gobind Singh Ji was the tenth and last human Guru of Sikhism. In 1699, he established the Khalsa Panth on Baisakhi, initiated the Five Ks, and created Sant-Sipahi (saint-soldier) identity. He fought against Aurangzeb\'s tyranny, losing his father and four sons. Before passing, he declared the Guru Granth Sahib as the eternal Guru.',
+        teachings: ['Creation of Khalsa', 'Five Ks (Kakars)', 'Granth Sahib as eternal Guru', 'Sant-Sipahi concept'],
+        works: ['Dasam Granth', 'Jap Sahib', 'Zafarnama'],
+        quotes: ['"When all other means have failed, it is righteous to draw the sword."'],
+        image: 'gurugobindsingh.jpg'
+    },
+    // ========== SIKH BHAGATS ==========
+    {
+        id: 'babafarid',
+        name: 'Baba Farid',
+        nameLocal: 'ਬਾਬਾ ਫਰੀਦ',
+        nameHi: 'बाबा फरीद',
+        tradition: 'sikh',
+        sampradaya: 'Bhagats',
+        period: '1173-1266 CE',
+        birthPlace: 'Kothewal, Punjab',
+        biography: 'Sheikh Fariduddin Ganjshakar, known as Baba Farid, was a Sufi saint whose 134 hymns are included in the Guru Granth Sahib. He was the first major poet of the Punjabi language. His emphasis on love, humility, and devotion influenced both Sikh and Sufi traditions. He was part of the Chishti Sufi order.',
+        teachings: ['Divine love', 'Humility', 'Detachment from worldly desires'],
+        works: ['Shaloks in Guru Granth Sahib'],
+        quotes: ['"Do not be angry with anyone; look within your own soul."'],
+        image: 'babafarid.jpg'
+    },
+    {
+        id: 'bhagattrilochan',
+        name: 'Bhagat Trilochan',
+        nameLocal: 'ਭਗਤ ਤ੍ਰਿਲੋਚਨ',
+        nameHi: 'भगत त्रिलोचन',
+        tradition: 'sikh',
+        sampradaya: 'Bhagats',
+        period: '13th century CE',
+        birthPlace: 'Maharashtra',
+        biography: 'Bhagat Trilochan was a Vaishya saint from Maharashtra whose four hymns are included in the Guru Granth Sahib. He was a contemporary of Sant Namdev. His compositions emphasize that one\'s last thoughts before death determine their next life, urging constant remembrance of God.',
+        teachings: ['Remembrance of God at death', 'Naam Simran', 'Detachment from maya'],
+        works: ['4 hymns in Guru Granth Sahib'],
+        quotes: ['"At the time of death, whatever you think of, that you become."'],
+        image: 'trilochan.jpg'
+    },
+    {
+        id: 'bhagatpipa',
+        name: 'Bhagat Pipa',
+        nameLocal: 'ਭਗਤ ਪੀਪਾ',
+        nameHi: 'भगत पीपा',
+        tradition: 'sikh',
+        sampradaya: 'Bhagats',
+        period: '14th-15th century CE',
+        birthPlace: 'Gagaraungarh, Rajasthan',
+        biography: 'Bhagat Pipa was a Rajput king who renounced his throne to become a disciple of Ramananda. His one hymn in the Guru Granth Sahib expresses the discovery of God within oneself. He is remembered for giving up royal power for spiritual pursuit.',
+        teachings: ['God dwells within', 'Renunciation of power', 'Inner realization'],
+        works: ['1 hymn in Guru Granth Sahib'],
+        quotes: ['"Within the body, within the mind, within the soul - I found the Lord."'],
+        image: 'pipa.jpg'
+    },
+    {
+        id: 'bhagatdhanna',
+        name: 'Bhagat Dhanna',
+        nameLocal: 'ਭਗਤ ਧੰਨਾ',
+        nameHi: 'भगत धन्ना',
+        tradition: 'sikh',
+        sampradaya: 'Bhagats',
+        period: '15th century CE',
+        birthPlace: 'Dhuan, Rajasthan',
+        biography: 'Bhagat Dhanna was a Jat farmer whose simple, innocent devotion is celebrated in his hymns in the Guru Granth Sahib. Legend says he worshipped a stone given by a Brahmin with such sincerity that God appeared before him. His poetry reflects the devotion of an unlettered farmer.',
+        teachings: ['Simple sincere devotion', 'God responds to innocence', 'Faith of the unlearned'],
+        works: ['4 hymns in Guru Granth Sahib'],
+        quotes: ['"O Lord, I am just a simple farmer - please accept my humble devotion."'],
+        image: 'dhanna.jpg'
+    },
+    {
+        id: 'bhagatsain',
+        name: 'Bhagat Sain',
+        nameLocal: 'ਭਗਤ ਸੈਣ',
+        nameHi: 'भगत सैण',
+        tradition: 'sikh',
+        sampradaya: 'Bhagats',
+        period: '15th century CE',
+        birthPlace: 'Rewa, Madhya Pradesh',
+        biography: 'Bhagat Sain was a barber by profession who served at the court of Raja Ram of Rewa. Despite his low social status, his devotion was so great that the Lord himself is said to have taken his form to serve the king while Sain was in meditation. His one hymn is included in the Guru Granth Sahib.',
+        teachings: ['Devotion transcends profession', 'Service and meditation', 'God protects devotees'],
+        works: ['1 hymn in Guru Granth Sahib'],
+        quotes: ['"The Lord Himself became my servant when I lost myself in His Name."'],
+        image: 'sain.jpg'
+    },
+    {
+        id: 'bhagatjaidev',
+        name: 'Bhagat Jaidev',
+        nameLocal: 'ਭਗਤ ਜੈਦੇਵ',
+        nameHi: 'भगत जयदेव',
+        tradition: 'sikh',
+        sampradaya: 'Bhagats',
+        period: '12th century CE',
+        birthPlace: 'Kindubilva, Bengal',
+        biography: 'Bhagat Jaidev was the author of the famous Gita Govinda and court poet of the Sena dynasty. Two of his compositions are included in the Guru Granth Sahib. His poetry describes the divine love between Radha and Krishna and the soul\'s longing for union with God.',
+        teachings: ['Divine love poetry', 'Radha-Krishna devotion', 'Soul\'s longing for God'],
+        works: ['Gita Govinda', '2 hymns in Guru Granth Sahib'],
+        quotes: ['"The Lord is the ocean of compassion, the remover of all suffering."'],
+        image: 'jaidev.jpg'
+    },
+    {
+        id: 'bhagatbhikhan',
+        name: 'Bhagat Bhikhan',
+        nameLocal: 'ਭਗਤ ਭੀਖਨ',
+        nameHi: 'भगत भीखन',
+        tradition: 'sikh',
+        sampradaya: 'Bhagats',
+        period: '15th-16th century CE',
+        birthPlace: 'Lucknow, Uttar Pradesh',
+        biography: 'Bhagat Bhikhan was a Muslim Sufi saint whose two hymns are included in the Guru Granth Sahib. His poetry emphasizes that true devotion requires inner transformation and that God is found through love, not mere ritual.',
+        teachings: ['Inner transformation', 'Love over ritual', 'Unity of God'],
+        works: ['2 hymns in Guru Granth Sahib'],
+        quotes: ['"What use is pilgrimage if the heart remains impure?"'],
+        image: 'bhikhan.jpg'
+    },
+    // ========== JAIN TIRTHANKARAS ==========
+    {
+        id: 'ajitanatha',
+        name: 'Ajitanatha',
+        nameLocal: 'अजितनाथ',
+        nameHi: 'अजितनाथ',
+        tradition: 'jain',
+        sampradaya: 'Tirthankara',
+        period: 'Mythological Era',
+        birthPlace: 'Ayodhya',
+        biography: 'Ajitanatha is the second Tirthankara of the current cosmic cycle. Like all Tirthankaras, he was born as a prince and achieved liberation through renunciation and meditation. His symbol is the elephant, and he is associated with the quality of invincibility (Ajita means unconquered).',
+        teachings: ['Invincibility through non-attachment', 'Path to liberation', 'Renunciation'],
+        works: ['Oral teachings'],
+        quotes: ['"True victory is over oneself, not over others."'],
+        image: 'ajitanatha.jpg'
+    },
+    {
+        id: 'rishabhanatha',
+        name: 'Rishabhanatha',
+        nameLocal: 'ऋषभनाथ',
+        nameHi: 'ऋषभनाथ (आदिनाथ)',
+        tradition: 'jain',
+        sampradaya: 'Tirthankara',
+        period: 'Mythological Era',
+        birthPlace: 'Ayodhya',
+        biography: 'Rishabhanatha (also called Adinatha) is the first Tirthankara of the current cosmic cycle (Avasarpini) in Jainism. According to Jain tradition, he taught humanity the arts of civilization including agriculture, cooking, writing, and crafts. He renounced his kingdom and attained Kevala Jnana after rigorous meditation.',
+        teachings: ['Ahimsa (non-violence)', 'Aparigraha (non-attachment)', 'Arts of civilization'],
+        works: ['Oral teachings'],
+        quotes: ['"Non-violence is the highest dharma."'],
+        image: 'rishabhanatha.jpg'
+    },
+    {
+        id: 'parshvanatha',
+        name: 'Parshvanatha',
+        nameLocal: 'पार्श्वनाथ',
+        nameHi: 'पार्श्वनाथ',
+        tradition: 'jain',
+        sampradaya: 'Tirthankara',
+        period: '8th century BCE',
+        birthPlace: 'Varanasi',
+        biography: 'Parshvanatha is the 23rd Tirthankara and the earliest historically attested figure in Jainism. Born as a prince, he renounced his throne at age 30 and attained Kevala Jnana after 83 days of meditation. He established the four-fold vows (Chaturyama) that became the foundation of Jain monastic practice.',
+        teachings: ['Four vows (Chaturyama)', 'Non-violence', 'Truthfulness', 'Non-stealing', 'Non-attachment'],
+        works: ['Oral teachings'],
+        quotes: ['"Kill not any living being."'],
+        image: 'parshvanatha.jpg'
+    },
+    {
+        id: 'neminatha',
+        name: 'Neminatha',
+        nameLocal: 'नेमिनाथ',
+        nameHi: 'नेमिनाथ',
+        tradition: 'jain',
+        sampradaya: 'Tirthankara',
+        period: 'Mythological Era',
+        birthPlace: 'Shauripur (Mathura region)',
+        biography: 'Neminatha is the 22nd Tirthankara and is said to be the cousin of Lord Krishna. On his wedding day, he saw animals being slaughtered for the feast and was so moved by compassion that he renounced the world immediately. Mount Girnar in Gujarat is associated with his liberation. He represents the connection between Jain and Hindu traditions.',
+        teachings: ['Compassion for all living beings', 'Renunciation at the height of worldly pleasure', 'Ahimsa'],
+        works: ['Oral teachings'],
+        quotes: ['"Hearing the cries of animals, I could not marry; I chose liberation instead."'],
+        image: 'neminatha.jpg'
+    },
+    {
+        id: 'mahavira',
+        name: 'Mahavira',
+        nameLocal: 'महावीर',
+        nameHi: 'भगवान महावीर',
+        tradition: 'jain',
+        sampradaya: 'Tirthankara',
+        period: '599-527 BCE',
+        birthPlace: 'Vaishali (modern Bihar)',
+        biography: 'Mahavira (Vardhamana) is the 24th and last Tirthankara of the current cosmic cycle. Born as a prince, he renounced worldly life at age 30 and practiced extreme austerities for 12 years before attaining Kevala Jnana. He reorganized the Jain Sangha and added the fifth vow of celibacy (brahmacharya) to the existing four.',
+        teachings: ['Five vows (Pancha Mahavratas)', 'Anekantavada (many-sidedness)', 'Syadvada (conditional assertion)', 'Ahimsa as supreme dharma'],
+        works: ['Oral teachings compiled as Agamas'],
+        quotes: ['"Do not injure, abuse, oppress, enslave, insult, torment, torture, or kill any living being."'],
+        image: 'mahavira.jpg'
+    },
+    {
+        id: 'kundakunda',
+        name: 'Acharya Kundakunda',
+        nameLocal: 'कुंदकुंद',
+        nameHi: 'आचार्य कुंदकुंद',
+        tradition: 'jain',
+        sampradaya: 'Digambara Acharya',
+        period: '2nd century CE',
+        birthPlace: 'South India',
+        biography: 'Acharya Kundakunda is one of the most revered Digambara Jain acharyas. His works form the doctrinal foundation of Digambara philosophy. The Samayasara (Essence of the Self) is considered his masterpiece, expounding the distinction between the self and non-self from a Nishchaya (ultimate) perspective.',
+        teachings: ['Distinction of self and non-self', 'Nishchaya and Vyavahara viewpoints', 'Soul\'s inherent purity'],
+        works: ['Samayasara', 'Pravachanasara', 'Niyamasara', 'Pancastikaya'],
+        quotes: ['"The soul is its own friend and its own enemy."'],
+        image: 'kundakunda.jpg'
+    },
+    {
+        id: 'hemachandra',
+        name: 'Acharya Hemachandra',
+        nameLocal: 'हेमचंद्र',
+        nameHi: 'आचार्य हेमचंद्र',
+        tradition: 'jain',
+        sampradaya: 'Shvetambara Acharya',
+        period: '1089-1172 CE',
+        birthPlace: 'Dhandhuka, Gujarat',
+        biography: 'Acharya Hemachandra was a Jain scholar, poet, and polymath called "Kalikalasarvajna" (omniscient of the Kali age). He served as advisor to the Solanki kings of Gujarat. He authored works on grammar, philosophy, yoga, and history. His Trishashti-Shalaka-Purusha-Charitra is a major Jain universal history.',
+        teachings: ['Integration of knowledge', 'Yoga and meditation', 'Universal history'],
+        works: ['Yogashastra', 'Trishashti-Shalaka-Purusha-Charitra', 'Siddha-Hema-Shabdanushasana', 'Dvatrimshatika'],
+        quotes: ['"Knowledge without proper conduct is like a lamp without oil."'],
+        image: 'hemachandra.jpg'
+    },
+    // ========== BUDDHIST MASTERS ==========
+    {
+        id: 'buddha',
+        name: 'Gautama Buddha',
+        nameLocal: 'गौतम बुद्ध',
+        nameHi: 'भगवान बुद्ध',
+        tradition: 'buddhist',
+        sampradaya: 'Founder',
+        period: '563-483 BCE',
+        birthPlace: 'Lumbini, Nepal',
+        biography: 'Siddhartha Gautama, known as the Buddha (The Awakened One), is revered in Hinduism as the 9th avatar of Lord Vishnu. Born a prince, he renounced worldly life after witnessing suffering. After years of ascetic practice, he attained enlightenment under the Bodhi tree at Bodh Gaya. His teachings of the Four Noble Truths and the Eightfold Path have influenced billions.',
+        teachings: ['Four Noble Truths', 'Noble Eightfold Path', 'Middle Way', 'Ahimsa and Compassion'],
+        works: ['Dhammapada', 'Suttas (oral teachings)'],
+        quotes: ['"Peace comes from within. Do not seek it without."', '"Three things cannot be hidden: the sun, the moon, and the truth."'],
+        image: 'buddha.jpg'
+    },
+    {
+        id: 'bodhidharma',
+        name: 'Bodhidharma',
+        nameLocal: 'बोधिधर्म',
+        nameHi: 'बोधिधर्म',
+        tradition: 'buddhist',
+        sampradaya: 'Zen/Chan',
+        period: '5th-6th century CE',
+        birthPlace: 'Kanchipuram, South India',
+        biography: 'Bodhidharma was an Indian Buddhist monk who traveled to China and founded Zen (Chan) Buddhism. A prince who became a monk, he is credited with bringing meditation practices to the Shaolin Temple and is considered the patriarch of Zen Buddhism. Legend says he meditated facing a wall for nine years.',
+        teachings: ['Direct pointing to the mind', 'Meditation as path to enlightenment', 'Zazen practice'],
+        works: ['Two Entrances and Four Practices', 'Bloodstream Sermon'],
+        quotes: ['"Not thinking about anything is Zen."', '"To find Buddha, all you have to do is see your own nature."'],
+        image: 'bodhidharma.jpg'
+    },
+    {
+        id: 'nagarjuna',
+        name: 'Acharya Nagarjuna',
+        nameLocal: 'नागार्जुन',
+        nameHi: 'आचार्य नागार्जुन',
+        tradition: 'buddhist',
+        sampradaya: 'Madhyamaka',
+        period: '150-250 CE',
+        birthPlace: 'Vidarbha, South India',
+        biography: 'Nagarjuna was one of the most influential Buddhist philosophers, founder of the Madhyamaka (Middle Way) school. A scholar at Nalanda University, his philosophy of Shunyata (emptiness) and the Two Truths doctrine became foundational to Mahayana Buddhism. The Dalai Lama considers him one of the 17 Nalanda Masters.',
+        teachings: ['Shunyata (Emptiness)', 'Two Truths doctrine', 'Dependent origination'],
+        works: ['Mulamadhyamakakarika', 'Suhrllekha', 'Vigrahavyavartani'],
+        quotes: ['"Whatever is dependently arisen is explained to be emptiness."'],
+        image: 'nagarjuna.jpg'
+    },
+    {
+        id: 'padmasambhava',
+        name: 'Padmasambhava',
+        nameLocal: 'पद्मसम्भव',
+        nameHi: 'गुरु रिनपोचे',
+        tradition: 'buddhist',
+        sampradaya: 'Vajrayana',
+        period: '8th century CE',
+        birthPlace: 'Oddiyana (Swat Valley)',
+        biography: 'Padmasambhava, known as Guru Rinpoche (Precious Master), is credited with bringing Vajrayana Buddhism to Tibet. Called the "Second Buddha" in Tibetan Buddhism, he subdued local deities and established the first Buddhist monastery in Tibet. He is said to have hidden treasure texts (termas) for future generations.',
+        teachings: ['Vajrayana practices', 'Terma tradition', 'Dzogchen'],
+        works: ['Bardo Thodol (Tibetan Book of Dead)', 'Hidden Termas'],
+        quotes: ['"My father is wisdom and my mother is emptiness."'],
+        image: 'padmasambhava.jpg'
+    },
+    {
+        id: 'milarepa',
+        name: 'Milarepa',
+        nameLocal: 'मिलारेपा',
+        nameHi: 'मिलारेपा',
+        tradition: 'buddhist',
+        sampradaya: 'Kagyu',
+        period: '1052-1135 CE',
+        birthPlace: 'Gungthang, Tibet',
+        biography: 'Milarepa is Tibet\'s most celebrated yogi and poet. After a tragic youth where he practiced black magic for revenge, he sought redemption through Buddhism. Under the harsh training of his teacher Marpa, he achieved enlightenment in one lifetime. His spontaneous songs of realization remain beloved.',
+        teachings: ['Achieving enlightenment in one lifetime', 'Devotion to guru', 'Cave meditation'],
+        works: ['Hundred Thousand Songs of Milarepa'],
+        quotes: ['"The affairs of the world will go on forever. Do not delay the practice of meditation."'],
+        image: 'milarepa.jpg'
+    },
+    {
+        id: 'atisha',
+        name: 'Atisha Dipankara',
+        nameLocal: 'अतीश दीपंकर',
+        nameHi: 'अतीश दीपंकर',
+        tradition: 'buddhist',
+        sampradaya: 'Kadampa',
+        period: '982-1054 CE',
+        birthPlace: 'Vikrampur, Bengal',
+        biography: 'Atisha was a great Indian Buddhist master who revived Buddhism in Tibet. A scholar at Vikramashila and Nalanda universities, he was invited to Tibet where he established the Kadampa tradition. His "Lamp for the Path to Enlightenment" became the model for all Lamrim (stages of the path) teachings.',
+        teachings: ['Lamrim (Stages of Path)', 'Lojong (Mind Training)', 'Bodhicitta'],
+        works: ['Lamp for the Path to Enlightenment', 'Bodhipathapradipa'],
+        quotes: ['"The greatest achievement is selflessness."'],
+        image: 'atisha.jpg'
+    },
+    // ========== VEDIC RISHIS ==========
+    {
+        id: 'valmiki',
+        name: 'Maharishi Valmiki',
+        nameLocal: 'वाल्मीकि',
+        nameHi: 'महर्षि वाल्मीकि',
+        tradition: 'hindu',
+        sampradaya: 'Vedic Rishi',
+        period: 'Treta Yuga',
+        birthPlace: 'Ancient India',
+        biography: 'Maharishi Valmiki is the author of the epic Ramayana, the first Sanskrit epic poem (Adi Kavya). According to tradition, he was originally a hunter who transformed through the chanting of Rama\'s name. He sheltered Sita during her exile and taught Lava and Kusha. He is revered as the Adi Kavi (first poet).',
+        teachings: ['Power of Rama Nama', 'Dharma through storytelling', 'Redemption through devotion'],
+        works: ['Ramayana (24,000 shlokas)', 'Yoga Vashishtha (attributed)'],
+        quotes: ['"Mara Mara" became "Rama Rama" - thus began my transformation."'],
+        image: 'valmiki.jpg'
+    },
+    {
+        id: 'vyasa',
+        name: 'Maharishi Vyasa',
+        nameLocal: 'व्यास',
+        nameHi: 'वेदव्यास',
+        tradition: 'hindu',
+        sampradaya: 'Vedic Rishi',
+        period: 'Dvapara Yuga',
+        birthPlace: 'Island in Yamuna River',
+        biography: 'Vyasa (Krishna Dvaipayana) is one of the most revered figures in Hindu tradition. He compiled and organized the four Vedas, authored the Mahabharata (the longest epic poem), composed the 18 Puranas, and wrote the Brahma Sutras. He is considered an avatar of Vishnu and one of the Chiranjeevis (immortals).',
+        teachings: ['Organization of Vedic knowledge', 'Dharma through narrative', 'Bhakti and Jnana'],
+        works: ['Mahabharata', 'Brahma Sutras', '18 Puranas', 'Vedic compilation'],
+        quotes: ['"From the sea of the great story, I extracted the essence of the Gita."'],
+        image: 'vyasa.jpg'
+    },
+    {
+        id: 'vashishta',
+        name: 'Rishi Vashishta',
+        nameLocal: 'वसिष्ठ',
+        nameHi: 'ऋषि वसिष्ठ',
+        tradition: 'hindu',
+        sampradaya: 'Vedic Rishi',
+        period: 'Vedic Era',
+        birthPlace: 'Mind-born son of Brahma',
+        biography: 'Rishi Vashishta is one of the Saptarshis (seven great sages) and the Rajguru (royal preceptor) of the Ikshvaku dynasty. He was the guru of Lord Rama and his brothers. He possessed Kamadhenu (wish-fulfilling cow) and his teachings form the Yoga Vashishtha, a profound philosophical text on Advaita.',
+        teachings: ['Self-realization', 'Non-dual wisdom', 'Dharmic kingship'],
+        works: ['Yoga Vashishtha', 'Vashishtha Dharma Sutra'],
+        quotes: ['"This world is neither real nor unreal; it is the projection of consciousness."'],
+        image: 'vashishta.jpg'
+    },
+    {
+        id: 'vishwamitra',
+        name: 'Rishi Vishwamitra',
+        nameLocal: 'विश्वामित्र',
+        nameHi: 'ऋषि विश्वामित्र',
+        tradition: 'hindu',
+        sampradaya: 'Vedic Rishi',
+        period: 'Vedic Era',
+        birthPlace: 'Kanyakubja',
+        biography: 'Vishwamitra was a powerful Kshatriya king who became a Brahmarishi through intense tapasya. He revealed the Gayatri Mantra to the world. He trained young Rama and Lakshmana in divine weapons. His rivalry with Vashishta and his determination to achieve the highest spiritual status are legendary tales.',
+        teachings: ['Gayatri Mantra', 'Power of tapasya', 'Transformation through will'],
+        works: ['Gayatri Mantra revelation', 'Vishwamitra Samhita'],
+        quotes: ['"By the power of tapas, even a king can become a Brahmarishi."'],
+        image: 'vishwamitra.jpg'
+    },
+    {
+        id: 'patanjali',
+        name: 'Maharishi Patanjali',
+        nameLocal: 'पतंजलि',
+        nameHi: 'महर्षि पतंजलि',
+        tradition: 'hindu',
+        sampradaya: 'Yoga',
+        period: '2nd century BCE',
+        birthPlace: 'Gondia, Maharashtra',
+        biography: 'Patanjali is the compiler of the Yoga Sutras, the foundational text of Yoga philosophy. He systematized the ancient practices of yoga into 196 sutras covering the eight limbs (Ashtanga) of yoga. He is also credited with works on Sanskrit grammar (Mahabhashya) and Ayurveda. He is depicted with a serpent form.',
+        teachings: ['Ashtanga Yoga (8 limbs)', 'Chitta Vritti Nirodha', 'Samadhi'],
+        works: ['Yoga Sutras', 'Mahabhashya'],
+        quotes: ['"Yoga is the cessation of the fluctuations of the mind."'],
+        image: 'patanjali.jpg'
+    },
+    {
+        id: 'narada',
+        name: 'Devarishi Narada',
+        nameLocal: 'नारद',
+        nameHi: 'देवर्षि नारद',
+        tradition: 'hindu',
+        sampradaya: 'Vedic Rishi',
+        period: 'Eternal',
+        birthPlace: 'Mind-born son of Brahma',
+        biography: 'Narada is the divine sage who travels between worlds spreading devotion to Vishnu. Always carrying his veena (Mahathi), he is known for his role in many cosmic events through seemingly mischievous interventions that ultimately lead to good. He authored the Narada Bhakti Sutras and is considered the foremost devotee.',
+        teachings: ['Para Bhakti (Supreme Devotion)', 'Divine music', 'Cosmic storytelling'],
+        works: ['Narada Bhakti Sutras', 'Narada Purana'],
+        quotes: ['"Devotion to God is the highest form of love - it is immortal and gives supreme bliss."'],
+        image: 'narada.jpg'
+    },
+    // ========== ACHARYAS & PHILOSOPHERS ==========
+    {
+        id: 'shankaracharya',
+        name: 'Adi Shankaracharya',
+        nameLocal: 'आदि शंकराचार्य',
+        nameHi: 'आदि शंकराचार्य',
+        tradition: 'hindu',
+        sampradaya: 'Advaita Vedanta',
+        period: '788-820 CE',
+        birthPlace: 'Kaladi, Kerala',
+        biography: 'Adi Shankaracharya was one of the greatest philosophers of India who consolidated the doctrine of Advaita Vedanta. In his short life of 32 years, he traveled across India, established four maths (Sringeri, Dwarka, Puri, Joshimath), composed numerous works, and revived Hinduism. He is considered an incarnation of Lord Shiva.',
+        teachings: ['Advaita (Non-duality)', 'Brahman alone is real', 'World is Maya', 'Atman is Brahman'],
+        works: ['Vivekachudamani', 'Atmabodha', 'Bhaja Govindam', 'Brahma Sutra Bhashya'],
+        quotes: ['"Brahman is the only truth, the world is illusion, and there is ultimately no difference between Brahman and individual self."'],
+        image: 'shankaracharya.jpg'
+    },
+    {
+        id: 'ramanujacharya',
+        name: 'Ramanujacharya',
+        nameLocal: 'रामानुजाचार्य',
+        nameHi: 'रामानुजाचार्य',
+        tradition: 'hindu',
+        sampradaya: 'Sri Vaishnavism',
+        period: '1017-1137 CE',
+        birthPlace: 'Sriperumbudur, Tamil Nadu',
+        biography: 'Ramanujacharya was the chief proponent of Vishishtadvaita (qualified non-dualism). He reformed Sri Vaishnavism, opened temple worship to all castes, and wrote important commentaries. He is believed to have lived 120 years and established 74 centers of his tradition.',
+        teachings: ['Vishishtadvaita', 'Prapatti (Surrender)', 'God has divine qualities', 'Bhakti as the path'],
+        works: ['Sri Bhashya', 'Vedarthasangraha', 'Gita Bhashya'],
+        quotes: ['"The soul is eternally related to God like a ray to the sun."'],
+        image: 'ramanujacharya.jpg'
+    },
+    {
+        id: 'madhvacharya',
+        name: 'Madhvacharya',
+        nameLocal: 'ಮಧ್ವಾಚಾರ್ಯ',
+        nameHi: 'मध्वाचार्य',
+        tradition: 'hindu',
+        sampradaya: 'Dvaita Vedanta',
+        period: '1238-1317 CE',
+        birthPlace: 'Pajaka, Karnataka',
+        biography: 'Madhvacharya founded the Dvaita (dualist) school of Vedanta, asserting an eternal distinction between God and souls. He established the Krishna temple at Udupi and is considered an incarnation of Vayu. His philosophy influenced the Haridasa movement in Karnataka.',
+        teachings: ['Dvaita (Dualism)', 'Five-fold difference', 'Vishnu as Supreme', 'Eternal souls'],
+        works: ['Brahma Sutra Bhashya', 'Gita Bhashya', 'Mahabharata Tatparya Nirnaya'],
+        quotes: ['"God is eternally different from souls and matter."'],
+        image: 'madhvacharya.jpg'
+    },
+    // ========== MODERN SAINTS ==========
+    {
+        id: 'ramakrishna',
+        name: 'Ramakrishna Paramahamsa',
+        nameLocal: 'রামকৃষ্ণ',
+        nameHi: 'रामकृष्ण परमहंस',
+        tradition: 'hindu',
+        sampradaya: 'Modern Saint',
+        period: '1836-1886 CE',
+        birthPlace: 'Kamarpukur, Bengal',
+        biography: 'Sri Ramakrishna was a 19th century mystic and saint who practiced and realized God through multiple religious paths including Hinduism, Islam, and Christianity. A priest at Dakshineswar Kali temple, he attracted a circle of disciples who later spread his message worldwide. His chief disciple was Swami Vivekananda.',
+        teachings: ['All religions lead to one God', 'Direct experience of the Divine', 'Jiva is Shiva'],
+        works: ['Gospel of Ramakrishna (recorded by disciples)'],
+        quotes: ['"As many faiths, so many paths."', '"God can be realized through all paths."'],
+        image: 'ramakrishna.jpg'
+    },
+    {
+        id: 'vivekananda',
+        name: 'Swami Vivekananda',
+        nameLocal: 'স্বামী বিবেকানন্দ',
+        nameHi: 'स्वामी विवेकानंद',
+        tradition: 'hindu',
+        sampradaya: 'Modern Saint',
+        period: '1863-1902 CE',
+        birthPlace: 'Kolkata, Bengal',
+        biography: 'Swami Vivekananda was the chief disciple of Ramakrishna who introduced Indian philosophies of Vedanta and Yoga to the Western world. His address at the 1893 World Parliament of Religions in Chicago made him famous. He founded the Ramakrishna Mission for social service and spiritual development.',
+        teachings: ['Practical Vedanta', 'Karma Yoga', 'Service to humanity is service to God', 'Arise, awake!'],
+        works: ['Raja Yoga', 'Jnana Yoga', 'Karma Yoga', 'Bhakti Yoga'],
+        quotes: ['"Arise, awake, and stop not till the goal is reached."', '"You cannot believe in God until you believe in yourself."'],
+        image: 'vivekananda.jpg'
+    },
+    {
+        id: 'ramanamaharshi',
+        name: 'Ramana Maharshi',
+        nameLocal: 'ரமண மகரிஷி',
+        nameHi: 'रमण महर्षि',
+        tradition: 'hindu',
+        sampradaya: 'Advaita',
+        period: '1879-1950 CE',
+        birthPlace: 'Tiruchuzhi, Tamil Nadu',
+        biography: 'Ramana Maharshi was a sage who achieved self-realization at age 16 through a spontaneous death-experience. He lived at Arunachala hill for 54 years, teaching through silence and the method of self-enquiry ("Who am I?"). He is considered one of the greatest sages of the 20th century.',
+        teachings: ['Atma Vichara (Self-enquiry)', 'Who am I?', 'The Self is always realized', 'Silence teachings'],
+        works: ['Who Am I?', 'Upadesa Saram', 'Ulladu Narpadu'],
+        quotes: ['"Your own Self-Realization is the greatest service you can render the world."', '"Silence is the true teaching."'],
+        image: 'ramanamaharshi.jpg'
+    },
+    {
+        id: 'yogananda',
+        name: 'Paramahansa Yogananda',
+        nameLocal: 'যোগানন্দ',
+        nameHi: 'परमहंस योगानंद',
+        tradition: 'hindu',
+        sampradaya: 'Kriya Yoga',
+        period: '1893-1952 CE',
+        birthPlace: 'Gorakhpur, Uttar Pradesh',
+        biography: 'Paramahansa Yogananda brought Kriya Yoga to the West. His "Autobiography of a Yogi" has introduced millions to Eastern spirituality. He founded the Self-Realization Fellowship (SRF) and Yogoda Satsanga Society. His body showed no signs of decay for 20 days after death.',
+        teachings: ['Kriya Yoga', 'Scientific meditation', 'Unity of religions', 'Direct perception of God'],
+        works: ['Autobiography of a Yogi', 'God Talks With Arjuna', 'The Second Coming of Christ'],
+        quotes: ['"The season of failure is the best time for sowing the seeds of success."'],
+        image: 'yogananda.jpg'
+    },
+    {
+        id: 'shirdisaibaba',
+        name: 'Shirdi Sai Baba',
+        nameLocal: 'शिर्डी साईबाबा',
+        nameHi: 'शिर्डी साईबाबा',
+        tradition: 'hindu',
+        sampradaya: 'Modern Saint',
+        period: '1838-1918 CE',
+        birthPlace: 'Unknown (lived in Shirdi, Maharashtra)',
+        biography: 'Shirdi Sai Baba was a spiritual master revered by both Hindus and Muslims. He lived in a mosque in Shirdi, kept a sacred fire (dhuni), and performed many miracles. His teachings of "Sabka Malik Ek" (One God for all) and "Shraddha Saburi" (faith and patience) continue to inspire millions.',
+        teachings: ['Sabka Malik Ek', 'Shraddha and Saburi', 'Love all, serve all', 'Unity of faiths'],
+        works: ['Shri Sai Satcharitra (biography by devotees)'],
+        quotes: ['"Why fear when I am here?"', '"I am ever living to help those who turn to me."'],
+        image: 'shirdisaibaba.jpg'
+    },
+    {
+        id: 'aurobindo',
+        name: 'Sri Aurobindo',
+        nameLocal: 'শ্রী অরবিন্দ',
+        nameHi: 'श्री अरबिंदो',
+        tradition: 'hindu',
+        sampradaya: 'Integral Yoga',
+        period: '1872-1950 CE',
+        birthPlace: 'Kolkata, Bengal',
+        biography: 'Sri Aurobindo was a philosopher, yogi, and nationalist who developed Integral Yoga for the evolution of human consciousness. Initially a freedom fighter, he later devoted himself to spiritual practice. Along with The Mother, he established the Sri Aurobindo Ashram in Pondicherry.',
+        teachings: ['Supramental evolution', 'Integral Yoga', 'Transformation of consciousness', 'Divine Life on Earth'],
+        works: ['The Life Divine', 'Savitri', 'Essays on the Gita', 'The Synthesis of Yoga'],
+        quotes: ['"All life is yoga."', '"The Divine is everywhere, in all and through all."'],
+        image: 'aurobindo.jpg'
+    },
+    {
+        id: 'sivananda',
+        name: 'Swami Sivananda',
+        nameLocal: 'स्वामी शिवानंद',
+        nameHi: 'स्वामी शिवानंद',
+        tradition: 'hindu',
+        sampradaya: 'Divine Life Society',
+        period: '1887-1963 CE',
+        birthPlace: 'Pattamadai, Tamil Nadu',
+        biography: 'Swami Sivananda was a doctor who became a saint. He founded the Divine Life Society in Rishikesh and wrote over 200 books on yoga, Vedanta, and spiritual practice. He trained many disciples who spread his teachings globally, including Swami Chinmayananda and Swami Satchidananda.',
+        teachings: ['Serve, Love, Give, Purify, Meditate, Realize', 'Practical spirituality', 'Integration of Yoga paths'],
+        works: ['Sadhana', 'Bliss Divine', 'Practice of Karma Yoga'],
+        quotes: ['"An ounce of practice is worth tons of theory."'],
+        image: 'sivananda.jpg'
+    },
+    {
+        id: 'prabhupada',
+        name: 'A.C. Bhaktivedanta Swami Prabhupada',
+        nameLocal: 'প্রভুপাদ',
+        nameHi: 'प्रभुपाद',
+        tradition: 'hindu',
+        sampradaya: 'Gaudiya Vaishnavism',
+        period: '1896-1977 CE',
+        birthPlace: 'Kolkata, Bengal',
+        biography: 'Srila Prabhupada founded the International Society for Krishna Consciousness (ISKCON) at age 69. He traveled to America in 1965 with little money and built a worldwide movement. He translated and commented on major Vaishnava texts and established 108 temples worldwide.',
+        teachings: ['Hare Krishna Maha Mantra', 'Bhakti Yoga', 'Krishna consciousness', 'Pure devotional service'],
+        works: ['Bhagavad Gita As It Is', 'Srimad Bhagavatam', 'Chaitanya Charitamrita'],
+        quotes: ['"Chant Hare Krishna and be happy."'],
+        image: 'prabhupada.jpg'
+    },
+    {
+        id: 'anandamayima',
+        name: 'Anandamayi Ma',
+        nameLocal: 'আনন্দময়ী মা',
+        nameHi: 'आनंदमयी मा',
+        tradition: 'hindu',
+        sampradaya: 'Modern Saint',
+        period: '1896-1982 CE',
+        birthPlace: 'Kheora, Bengal (now Bangladesh)',
+        biography: 'Anandamayi Ma (Blissful Mother) was one of the most prominent spiritual figures of 20th century India. She is said to have attained enlightenment spontaneously without formal training. She traveled across India and was visited by many notable figures including Mahatma Gandhi, Indira Gandhi, and Paramahansa Yogananda.',
+        teachings: ['Joyful surrender', 'All paths lead to the One', 'Constant God-remembrance'],
+        works: ['Teachings collected by devotees'],
+        quotes: ['"Joys and sorrows are time-born and cannot last."', '"Whatever path leads to God is good."'],
+        image: 'anandamayima.jpg'
+    },
+    // ========== WOMEN SAINTS ==========
+    {
+        id: 'akkamahadevi',
+        name: 'Akka Mahadevi',
+        nameLocal: 'ಅಕ್ಕ ಮಹಾದೇವಿ',
+        nameHi: 'अक्का महादेवी',
+        tradition: 'hindu',
+        sampradaya: 'Lingayat',
+        period: '12th century CE',
+        birthPlace: 'Udutadi, Karnataka',
+        biography: 'Akka Mahadevi was a 12th century Kannada poet and Bhakti saint devoted to Lord Shiva (Chenna Mallikarjuna). She rejected worldly life, including her marriage to a king, to pursue spiritual liberation. She wandered naked, covered only by her long hair, composing vachanas (prose poems).',
+        teachings: ['Complete devotion to Shiva', 'Rejection of materialism', 'Spiritual equality of women'],
+        works: ['Vachanas (430+ poems)'],
+        quotes: ['"I have fallen in love with the beautiful one, who has no death, no fear, no caste."'],
+        image: 'akkamahadevi.jpg'
+    },
+    {
+        id: 'lalded',
+        name: 'Lalleshwari (Lal Ded)',
+        nameLocal: 'लल्लेश्वरी',
+        nameHi: 'लल्लेश्वरी',
+        tradition: 'hindu',
+        sampradaya: 'Kashmir Shaivism',
+        period: '1320-1392 CE',
+        birthPlace: 'Pandrethan, Kashmir',
+        biography: 'Lalleshwari (Lal Ded) was a Kashmiri mystic and poet who composed vaakhs (spiritual verses) that are revered by both Hindus and Muslims. Despite facing abuse from her in-laws, she left home to wander as a spiritual teacher. Her poetry speaks of the inner spiritual journey.',
+        teachings: ['Inner spiritual search', 'Shiva in the heart', 'Unity of Hindu-Muslim teachings'],
+        works: ['Lal Vaakh (Verses)'],
+        quotes: ['"I searched for Shiva everywhere, finally found Him within myself."'],
+        image: 'lalded.jpg'
+    },
+    {
+        id: 'muktabai',
+        name: 'Sant Muktabai',
+        nameLocal: 'संत मुक्ताबाई',
+        nameHi: 'संत मुक्ताबाई',
+        tradition: 'hindu',
+        sampradaya: 'Varkari',
+        period: '1279-1297 CE',
+        birthPlace: 'Apegaon, Maharashtra',
+        biography: 'Muktabai was the youngest of the four siblings of the great Varkari family (Nivrutti, Dnyaneshwar, Sopan, and Muktabai). Despite her young age, she was spiritually advanced. She tamed the violent Changdev by demonstrating her powers. She authored profound abhangas.',
+        teachings: ['Detachment', 'Spiritual power', 'Devotion to Vitthal'],
+        works: ['Tatiche Abhang (40+ verses)'],
+        quotes: ['"The realized soul sees no difference between gold and dust."'],
+        image: 'muktabai.jpg'
+    },
+    // ========== REGIONAL SAINTS ==========
+    {
+        id: 'shankardev',
+        name: 'Srimanta Shankardev',
+        nameLocal: 'শঙ্কৰদেৱ',
+        nameHi: 'शंकरदेव',
+        tradition: 'hindu',
+        sampradaya: 'Ekasarana Dharma',
+        period: '1449-1568 CE',
+        birthPlace: 'Bordowa, Assam',
+        biography: 'Srimanta Shankardev was a 15th-16th century Assamese polymath who founded the Ekasarana Dharma (single refuge in Vishnu). He composed devotional songs (borgeet), created the Sattriya dance form, and established namghars (prayer halls). He translated the Bhagavata Purana into Assamese.',
+        teachings: ['Ekasarana (Single refuge in God)', 'Naam (Chanting)', 'Community worship'],
+        works: ['Kirtana Ghosa', 'Borgeets', 'Ankiya Naat'],
+        quotes: ['"Taking refuge in one God (Krishna) is the path to liberation."'],
+        image: 'shankardev.jpg'
+    },
+    {
+        id: 'basavanna',
+        name: 'Basavanna',
+        nameLocal: 'ಬಸವಣ್ಣ',
+        nameHi: 'बसवण्णा',
+        tradition: 'hindu',
+        sampradaya: 'Lingayat',
+        period: '1131-1167 CE',
+        birthPlace: 'Bagewadi, Karnataka',
+        biography: 'Basavanna was a 12th century philosopher, statesman, and social reformer who founded Lingayatism. He was prime minister of the Kalachuri dynasty. He rejected caste discrimination, promoted women\'s equality, and established the Anubhava Mantapa, a spiritual parliament where people of all backgrounds shared wisdom.',
+        teachings: ['Kayaka (Work is worship)', 'Rejection of caste', 'Equality of all devotees'],
+        works: ['Vachanas'],
+        quotes: ['"Work is worship. Earnings through honest work is temple of God."'],
+        image: 'basavanna.jpg'
+    },
+    {
+        id: 'thiruvalluvar',
+        name: 'Thiruvalluvar',
+        nameLocal: 'திருவள்ளுவர்',
+        nameHi: 'तिरुवल्लुवर',
+        tradition: 'hindu',
+        sampradaya: 'Tamil Poet-Saint',
+        period: '1st century BCE - 5th century CE',
+        birthPlace: 'Mylapore, Chennai (traditionally)',
+        biography: 'Thiruvalluvar was the author of the Thirukkural, a classic Tamil text on ethics, political and economic matters, and love. The work consists of 1330 couplets (kurals) organized into 133 chapters. His teachings on virtue, wealth, and love are considered universal wisdom.',
+        teachings: ['Dharma (Virtue)', 'Artha (Wealth)', 'Kama (Love)', 'Universal ethics'],
+        works: ['Thirukkural'],
+        quotes: ['"All beings are born equal. The only distinction is by their deeds."'],
+        image: 'thiruvalluvar.jpg'
+    },
+    {
+        id: 'swaminarayan',
+        name: 'Bhagwan Swaminarayan',
+        nameLocal: 'સ્વામિનારાયણ',
+        nameHi: 'स्वामीनारायण',
+        tradition: 'hindu',
+        sampradaya: 'Swaminarayan',
+        period: '1781-1830 CE',
+        birthPlace: 'Chhapaiya, Uttar Pradesh',
+        biography: 'Bhagwan Swaminarayan (Sahajanand Swami) founded the Swaminarayan Sampradaya. He traveled across India on foot, reformed many social evils, and built magnificent temples. His followers consider him a manifestation of God. The BAPS organization continues his work worldwide.',
+        teachings: ['Dharma, Bhakti, Jnana, Vairagya', 'Satsang', 'Moral living'],
+        works: ['Shikshapatri', 'Vachanamrut'],
+        quotes: ['"One should offer devotion to God, having an understanding of His greatness."'],
+        image: 'swaminarayan.jpg'
+    },
+    {
+        id: 'amma',
+        name: 'Mata Amritanandamayi',
+        nameLocal: 'അമ്മ',
+        nameHi: 'माता अमृतानंदमयी',
+        tradition: 'hindu',
+        sampradaya: 'Modern Saint',
+        period: 'Born 1953 CE',
+        birthPlace: 'Parayakadavu, Kerala',
+        biography: 'Mata Amritanandamayi, known as Amma (Mother), is called the "Hugging Saint" for her practice of embracing devotees. She has hugged over 40 million people worldwide. Her humanitarian organization, Embracing the World, runs hospitals, schools, and disaster relief programs. She teaches selfless love and compassion.',
+        teachings: ['Selfless love', 'Service (Seva)', 'Compassion for all beings'],
+        works: ['Numerous discourses compiled by devotees'],
+        quotes: ['"Love is our true essence."', '"In this universe, it is love that binds everything together."'],
+        image: 'amma.jpg'
+    },
+    // ========== ADDITIONAL SAINTS FROM RESEARCH ==========
+    {
+        id: 'dadudayal',
+        name: 'Dadu Dayal',
+        nameLocal: 'दादू दयाल',
+        nameHi: 'दादू दयाल',
+        tradition: 'hindu',
+        sampradaya: 'Nirguna Sant',
+        period: '1544-1603 CE',
+        birthPlace: 'Ahmedabad, Gujarat',
+        biography: 'Dadu Dayal was a prominent North Indian sant and poet who founded the Dadu Panth. A cotton carder by profession, he emphasized the formless (Nirguna) aspect of God and rejected caste distinctions, idol worship, and ritualism. His verses, collected in the Dadu Anubhav Vani, are sung across Rajasthan. He is considered one of the greatest Nirguna sants after Kabir.',
+        teachings: ['Formless God (Nirguna Bhakti)', 'Rejection of caste and ritual', 'Inner devotion', 'Unity of all religions'],
+        works: ['Dadu Anubhav Vani', 'Dadu Janm Lila'],
+        quotes: ['"Dadu says: God dwells in the heart; seek Him there, not in temples or mosques."'],
+        image: 'dadudayal.jpg'
+    },
+    {
+        id: 'nundrishi',
+        name: 'Nund Rishi (Sheikh Noor-ud-din)',
+        nameLocal: 'नुंद ऋषि',
+        nameHi: 'नुंद ऋषि',
+        tradition: 'hindu',
+        sampradaya: 'Rishi Order',
+        period: '1378-1440 CE',
+        birthPlace: 'Kaimuh, Kashmir',
+        biography: 'Nund Rishi, also known as Sheikh Noor-ud-din Wali, is the patron saint of Kashmir. He founded the Rishi Order which blended Shaivite and Sufi traditions unique to Kashmir. His poetry (shrukhs) in Kashmiri language speaks of inner spirituality, non-violence, and simple living. He is revered by both Hindus and Muslims.',
+        teachings: ['Inner spirituality', 'Non-violence (Ahimsa)', 'Simple living', 'Hindu-Muslim unity'],
+        works: ['Shrukhs (Kashmiri verses)'],
+        quotes: ['"That person alone is spiritually awake whose heart is awake."'],
+        image: 'nundrishi.jpg'
+    },
+    {
+        id: 'themother',
+        name: 'Mirra Alfassa (The Mother)',
+        nameLocal: 'द मदर',
+        nameHi: 'माता मीरा अल्फासा',
+        tradition: 'hindu',
+        sampradaya: 'Integral Yoga',
+        period: '1878-1973 CE',
+        birthPlace: 'Paris, France',
+        biography: 'Mirra Alfassa, known as "The Mother," was the spiritual collaborator and successor of Sri Aurobindo. She co-founded the Sri Aurobindo Ashram in Pondicherry and later established Auroville, an international township dedicated to human unity. She dedicated her life to Integral Yoga and the supramental transformation of humanity.',
+        teachings: ['Supramental transformation', 'Divine feminine (Mother) principle', 'Integral Yoga practice', 'Human unity'],
+        works: ['The Mother\'s Agenda', 'Prayers and Meditations', 'Collected Works'],
+        quotes: ['"Be simple. Be happy. Remain quiet. Do your work as perfectly as you can."'],
+        image: 'themother.jpg'
+    },
+    {
+        id: 'dayananda',
+        name: 'Swami Dayananda Saraswati',
+        nameLocal: 'दयानंद सरस्वती',
+        nameHi: 'स्वामी दयानंद सरस्वती',
+        tradition: 'hindu',
+        sampradaya: 'Arya Samaj',
+        period: '1824-1883 CE',
+        birthPlace: 'Tankara, Gujarat',
+        biography: 'Swami Dayananda Saraswati was a 19th-century reformer who founded the Arya Samaj. He advocated for a return to the Vedas as the sole authority, rejecting idol worship, caste discrimination, and child marriage. His work "Satyarth Prakash" (The Light of Truth) became the foundation of the Arya Samaj movement which emphasized education and social reform.',
+        teachings: ['Return to Vedic authority', 'Rejection of idol worship', 'Social reform', 'Equal education for all'],
+        works: ['Satyarth Prakash', 'Rigvedadi Bhashya Bhumika', 'Sanskar Vidhi'],
+        quotes: ['"Back to the Vedas!"', '"Righteousness is the root of happiness."'],
+        image: 'dayananda.jpg'
+    },
+    {
+        id: 'kashyapa',
+        name: 'Rishi Kashyapa',
+        nameLocal: 'कश्यप',
+        nameHi: 'ऋषि कश्यप',
+        tradition: 'hindu',
+        sampradaya: 'Vedic Rishi',
+        period: 'Vedic Era',
+        birthPlace: 'Mind-born son of Brahma',
+        biography: 'Rishi Kashyapa is one of the Saptarishis (seven great sages) and is considered the progenitor of all life forms. According to Puranic tradition, he married Aditi and Diti among his 13 wives, and his progeny includes the Devas, Asuras, Nagas, Garudas, and all creatures. He is the grandson of Brahma through his father Marichi. Kashyapa represents the cosmic creative principle and his teachings on the nature of existence have profoundly influenced Hindu cosmology.',
+        teachings: ['Cosmic principles of creation', 'Balance between divine and demonic natures', 'Dharma maintaining cosmic order', 'Unity in diversity of creation'],
+        works: ['Vedic hymns on creation', 'Kashyapa Samhita (Ayurvedic text)', 'Puranic teachings'],
+        quotes: ['"From unity emerges multiplicity; from one consciousness, infinite beings arise."'],
+        image: 'kashyapa.jpg'
+    },
+    {
+        id: 'yajnavalkya',
+        name: 'Maharishi Yajnavalkya',
+        nameLocal: 'යාജ്ഞവല്ക്ය',
+        nameHi: 'महर्षि याज्ञवल्क्य',
+        tradition: 'hindu',
+        sampradaya: 'Vedic Rishi',
+        period: 'c. 7th century BCE',
+        birthPlace: 'Mithila (Videha)',
+        biography: 'Yajnavalkya was a legendary sage of the Upanishadic era, credited with the Yajurveda and the Brihadaranyaka Upanishad. A disciple of Vaishampayana, he later received direct revelation from the Sun God (Surya). He is famous for his philosophical debates in the court of King Janaka, particularly with Gargi and his wife Maitreyi, where he expounded the doctrine of "Neti Neti" (not this, not this) to describe the nature of Brahman.',
+        teachings: ['Atman is Brahman', 'Neti Neti (Not this, not this)', 'Renunciation as path to immortality', 'Self is the dearest of all'],
+        works: ['Brihadaranyaka Upanishad', 'Shukla Yajurveda', 'Yajnavalkya Smriti'],
+        quotes: ['"The Self alone is to be loved, for in loving the Self, one loves all."'],
+        image: 'yajnavalkya.jpg'
+    },
+    {
+        id: 'vidyaranya',
+        name: 'Vidyaranya Swami',
+        nameLocal: 'विद्यारण्य',
+        nameHi: 'विद्यारण्य स्वामी',
+        tradition: 'hindu',
+        sampradaya: 'Advaita Vedanta',
+        period: '1331-1386 CE',
+        birthPlace: 'Pampakshera, Karnataka',
+        biography: 'Vidyaranya was the 12th Shankaracharya of Sringeri Peetham and a major Advaita Vedanta scholar. His magnum opus Panchadashi is a 15-chapter treatise that remains foundational for Advaita study. He also authored Sarvadarshana Sangraha, systematically presenting 16 schools of Indian philosophy. He played a key role in revitalizing Advaita during the medieval period.',
+        teachings: ['Advaita Vedanta - Brahman as sole reality', 'Maya as illusion', 'Three levels of reality', 'Knowledge as liberation'],
+        works: ['Panchadashi', 'Sarvadarshana Sangraha', 'Madhaviya Shankara Vijaya'],
+        quotes: ['"Brahman alone is real; the world is illusory; the individual soul is not different from Brahman."'],
+        image: 'vidyaranya.jpg'
+    },
+    {
+        id: 'gargi',
+        name: 'Gargi Vachaknavi',
+        nameLocal: 'गार्गी वाचक्नवी',
+        nameHi: 'गार्गी वाचक्नवी',
+        tradition: 'hindu',
+        sampradaya: 'Brahmavadini',
+        period: 'c. 800–500 BCE',
+        birthPlace: 'Mithila (Videha)',
+        biography: 'Gargi Vachaknavi was a renowned Vedic philosopher and Brahmavadini, celebrated for her intellectual boldness. In the Brihadaranyaka Upanishad, she challenged the sage Yajnavalkya in the court of King Janaka with profound metaphysical questions about the nature of reality and the Imperishable Brahman. She exemplifies the high status of women scholars in the Vedic age.',
+        teachings: ['Brahman is the Imperishable', 'Metaphysical inquiry into the nature of reality', 'Everything is woven across space, but space is woven across the Imperishable'],
+        works: ['Dialogues in Brihadaranyaka Upanishad'],
+        quotes: ['"Across what then, pray, is space woven, warp and woof?"', '"That, O Garry, is the Imperishable."'],
+        image: 'gargi.jpg'
+    },
+    {
+        id: 'ramprasadsen',
+        name: 'Ramprasad Sen',
+        nameLocal: 'রামপ্রসাদ সেন',
+        nameHi: 'रामप्रसाद सेन',
+        tradition: 'hindu',
+        sampradaya: 'Shakta',
+        period: 'c. 1718–1775 CE',
+        birthPlace: 'Halisahar, Bengal',
+        biography: 'Ramprasad Sen was a legendary Shakta poet and saint of Bengal, known for his intense devotional songs to Goddess Kali. Working as a clerk, he would fill his account books with songs to the Divine Mother. His distinctive musical style, "Ramprasadi," blends deep philosophical insight with the intimate, often petulant, relationship of a child demanding love from its mother.',
+        teachings: ['God as Divine Mother (Kali)', 'Intimate, personal bhakti', 'Worldly life as a play of the Digital Mother'],
+        works: ['Ramprasadi (Devotional songs)', 'Vidyasundar', 'Kali-kirtana'],
+        quotes: ['"I want no honor, I want no wealth, I want only your lotus feet."', '"Mind, you do not know how to farm! Fallow lies the field of your life."'],
+        image: 'ramprasadsen.jpg'
+    },
+    {
+        id: 'narayanaguru',
+        name: 'Narayana Guru',
+        "nameLocal": "ശ്രീനാരായണ ഗുരു",
+        "nameHi": "नारायण गुरु",
+        tradition: 'hindu',
+        sampradaya: 'Advaita / Social Reform',
+        period: '1856–1928 CE',
+        birthPlace: 'Chempazhanthy, Kerala',
+        biography: 'Narayana Guru was a spiritual leader and social reformer who led a reform movement against the injustice in the caste-ridden society of Kerala. He consecrated temples for the lower castes and emphasized specific ideals for social upliftment. His philosophy was rooted in Advaita Vedanta, stressing the oneness of humanity.',
+        teachings: ['One Caste, One Religion, One God for Man', 'Education for enlightenment', 'Organization for strength', 'Advaita in practice'],
+        works: ['Atmopadesa Satakam', 'Daiva Dasakam', 'Nirvrutti Panchakam'],
+        quotes: ['"One Caste, One Religion, One God for Man."', '"Whichever the religion, it suffices if it makes a better man."'],
+        image: 'narayanaguru.jpg'
+    },
+    {
+        id: 'nimbarka',
+        name: 'Nimbarkacharya',
+        nameLocal: 'निम्बार्क',
+        nameHi: 'निम्बार्काचार्य',
+        tradition: 'hindu',
+        sampradaya: 'Nimbarka Sampradaya',
+        period: '13th century CE',
+        birthPlace: 'Mathura region, Uttar Pradesh',
+        biography: 'Nimbarkacharya was a philosopher who founded the Nimbarka Sampradaya emphasizing Radha-Krishna worship. He formulated the Dvaitadvaita (dualistic-non-dualistic) philosophy, a middle path between Shankara\'s Advaita and Madhva\'s Dvaita. He introduced the concept that liberation comes through the grace of Radha-Krishna.',
+        teachings: ['Dvaitadvaita - dualistic non-dualism', 'Radha-Krishna as Supreme', 'Grace as means to liberation', 'World as real manifestation'],
+        works: ['Vedanta Parijata Saurabha', 'Dashasloki'],
+        quotes: ['"Through devotion to Radha-Krishna, the soul realizes its inseparable union with the divine."'],
+        image: 'nimbarka.jpg'
+    },
+    {
+        id: 'nabhadas',
+        name: 'Nabha Das (Nabhaji)',
+        nameLocal: 'नाभादास',
+        nameHi: 'नाभा दास',
+        tradition: 'hindu',
+        sampradaya: 'Ramanandi',
+        period: '1537-1600 CE',
+        birthPlace: 'Bhadrachalam, Telangana',
+        biography: 'Nabha Das was the author of the Bhaktamal, a comprehensive biographical chronicle of over 200 Hindu bhaktas across all traditions and centuries. Orphaned at age five, he was adopted by saints Agaradas and Keel Das. His work is the most reliable historical source on the Bhakti movement, preserving memories of saints who might otherwise be forgotten.',
+        teachings: ['Documentation of Bhakti tradition', 'Unity of all devotional paths', 'Historical preservation of spiritual heritage'],
+        works: ['Bhaktamal (1585 CE)'],
+        quotes: ['"The true devotee sees God in all beings and all beings in God."'],
+        image: 'nabhadas.jpg'
+    },
+    {
+        id: 'inayatkhan',
+        name: 'Hazrat Inayat Khan',
+        nameLocal: 'عنایت خان',
+        nameHi: 'हज़रत इनायत खान',
+        tradition: 'hindu',
+        sampradaya: 'Sufi Mysticism',
+        period: '1882-1927 CE',
+        birthPlace: 'Baroda, Gujarat',
+        biography: 'Hazrat Inayat Khan was a pioneering Indian Sufi mystic and musician who first systematically transmitted Sufism to the West. A master of the saraswati vina, he was initiated into four Sufi orders. He traveled to America and Europe, establishing the Sufi Order in London. His teachings synthesized Sufi mysticism with universal spirituality, emphasizing music as the purest path to divine experience.',
+        teachings: ['Oneness of God (Tawhid)', 'Universal harmony of all religions', 'Music as path to God-realization', 'Service to humanity'],
+        works: ['Complete Works of Hazrat Inayat Khan', 'The Art of Music'],
+        quotes: ['"Music is not merely an art; it is the language of the soul speaking directly to God."'],
+        image: 'inayatkhan.jpg'
+    },
+    {
+        id: 'premananda',
+        name: 'Swami Premananda',
+        nameLocal: 'স্বামী প্রেমানন্দ',
+        nameHi: 'स्वामी प्रेमानंद',
+        tradition: 'hindu',
+        sampradaya: 'Ramakrishna Mission',
+        period: '1861-1918 CE',
+        birthPlace: 'Antpur, Bengal',
+        biography: 'Swami Premananda (Baburam Ghosh) was one of the most beloved direct disciples of Ramakrishna Paramahamsa. His name means "joy of divine love," given by Vivekananda recognizing his profound capacity for love. He managed Belur Math from 1902-1916, creating an atmosphere of love that attracted hundreds of spiritual seekers.',
+        teachings: ['Selfless service and motherly love', 'Freedom from ego', 'Balance of devotion and action', 'Grace through presence'],
+        works: ['Spiritual guidance at Ramakrishna Mission', 'Recorded teachings'],
+        quotes: ['"What is wanted is freedom from selfishness - freedom from egotism."'],
+        image: 'premananda.jpg'
+    },
+    {
+        id: 'vijaya_dasa',
+        name: 'Vijaya Dasa',
+        nameLocal: 'ವಿಜಯ ದಾಸ',
+        nameHi: 'विजय दास',
+        tradition: 'hindu',
+        sampradaya: 'Haridasa',
+        period: '1682–1755 CE',
+        birthPlace: 'Chippagiri, Karnataka',
+        biography: 'Vijaya Dasa was a prominent Haridasa saint and scholar in Sanskrit and Kannada. A transformative dream of Purandara Dasa led him to dedicate his life to composing devotional songs. He traveled extensively, composing thousands of Ugabhogas and Suladis, which explain Dvaita philosophy in simple terms. He is credited with discovering the sacred site of Mantralayam.',
+        teachings: ['Surrender to Lord Hari', 'Grace of the guru is essential', 'Compose and sing glories in local language', 'Simplicity and honesty'],
+        works: ['Thousands of Ugabhogas and Suladis'],
+        quotes: ['"O Lord, you are the protector of the downtrodden. I have taken refuge in you."', '"Without the grace of the guru, even the name of Hari is difficult to attain."'],
+        image: 'vijaya_dasa.jpg'
+    },
+    {
+        id: 'annamacharya',
+        name: 'Tallapaka Annamacharya',
+        nameLocal: 'అన్నమాచార్య',
+        nameHi: 'अन्नमाचार्य',
+        tradition: 'hindu',
+        sampradaya: 'Bhakti Movement (Andhra)',
+        period: '1408–1503 CE',
+        birthPlace: 'Tallapaka, Andhra Pradesh',
+        biography: 'Annamacharya, the "Pada Kavita Pitamaha" of Telugu literature, was the earliest known musician to compose Sankirtanas in praise of Lord Venkateswara. He composed over 32,000 songs, of which about 12,000 survive on copper plates in Tirumala. His works cover devotional, philosophical, and social themes, systematizing the musical structure of Carnatic compositions.',
+        teachings: ['Surrender to Lord Venkateswara', 'True devotion through simple song', 'Wealth is obstacle to spiritual growth', 'God is accessible to all'],
+        works: ['Over 32,000 Sankirtanas', 'Venkateshwara Shastram', 'Sankirtana Lakshanam'],
+        quotes: ['"O Lord of the Seven Hills! You are the only refuge for this helpless soul."', '"What use is wealth? Only the name of the Lord is true wealth."'],
+        image: 'annamacharya.jpg'
+    },
+    {
+        id: 'shishunala_sharif',
+        name: 'Shishunala Sharif',
+        nameLocal: 'ಶಿಶುನಾಳ ಶರೀಫ್',
+        nameHi: 'शिशुनाल शरीफ',
+        tradition: 'hindu',
+        sampradaya: 'Sufi-Bhakti Syncretism',
+        period: '1819–1889 CE',
+        birthPlace: 'Shishuvinahala, Karnataka',
+        biography: 'Shishunala Sharif was a poet-saint who bridged Hindu and Islamic traditions. A disciple of Govinda Bhatta, his Kannada compositions ("Tatvapadas") blend Bhakti and Sufi concepts, preaching the oneness of God (Allah/Hari). He criticized rigid rituals and caste divisions, becoming a symbol of communal harmony in Karnataka.',
+        teachings: ['God is one (Allah/Hari)', 'True devotion is inner purity', 'Break barriers of caste and creed', 'Guru as guide to divine'],
+        works: ['Tatvapadas (Devotional songs)'],
+        quotes: ['"The one you call Allah and the one you call Hari are the same."', '"Why fight over caste? The same blood flows in all."'],
+        image: 'shishunala_sharif.jpg'
+    },
+    {
+        id: 'rupabhavani',
+        name: 'Rupa Bhavani',
+        nameLocal: 'रूपा भवानी',
+        nameHi: 'रूपा भवानी',
+        tradition: 'hindu',
+        sampradaya: 'Kashmiri Shaivism',
+        period: '1621–1721 CE',
+        birthPlace: 'Srinagar, Kashmir',
+        biography: 'Rupa Bhavani was a Kashmiri mystic and poetess, revered as an incarnation of Goddess Sharika. She chose a life of severe asceticism and meditation, attaining high spiritual states. Her mystical verses (Vakhs) express the non-dual philosophy of Kashmir Shaivism and her personal realization of the Shiva-Shakti unity.',
+        teachings: ['Ultimate reality is within (Self-realization)', 'Meditation over rituals', 'World as manifestation of consciousness', 'Renounce ego'],
+        works: ['Rupa Bhavani Vakhs'],
+        quotes: ['"I have dyed my consciousness in the color of the Infinite."', '"The body is the temple, the mind is the priest."'],
+        image: 'rupabhavani.jpg'
+    },
+    {
+        id: 'sadhu_vaswani',
+        name: 'Sadhu T. L. Vaswani',
+        nameLocal: 'साधु टी. एल. वासवानी',
+        nameHi: 'साधु टी. एल. वासवानी',
+        tradition: 'hindu',
+        sampradaya: 'Modern Saint',
+        period: '1879–1966 CE',
+        birthPlace: 'Hyderabad, Sindh',
+        biography: 'Sadhu T. L. Vaswani was a philosopher, educationalist, and humanitarian saint. Deeply influenced by Krishna, Buddha, and Christ, he founded the "Mira Movement in Education" emphasizing character building. After partition, he settled in Pune, dedicating his life to serving the poor and animal welfare. His birthday is celebrated as International Meatless Day.',
+        teachings: ['Education of head, heart, and hand', 'Serve poor and animals as God', 'Simplify life', 'Religion of love and service'],
+        works: ['The Secret of Asia', 'India in Chains', 'The Song of Life'],
+        quotes: ['"The true patriot is he who loves all children of God."', '"To serve the poor is to worship God."'],
+        image: 'sadhu_vaswani.jpg'
+    },
+    {
+        id: 'avvaiyar',
+        name: 'Avvaiyar',
+        nameLocal: 'அவ்வையார்',
+        nameHi: 'अव्वैयार',
+        tradition: 'hindu',
+        sampradaya: 'Tamil Bhakti / Sangam Poet',
+        period: 'c. 1st–2nd century CE',
+        birthPlace: 'Tamil Nadu',
+        biography: 'Avvaiyar was a revered female poet-saint of the Sangam period, known for her wisdom literature. Her works like Aathichoodi use simple aphorisms to teach righteous living. She embodies the ideal of the wise woman sage, advising kings and commoners alike.',
+        teachings: ['Virtue is the true ornament', 'Give generously', 'Wisdom is better than wealth'],
+        works: ['Aathichoodi', 'Konraiventhan', 'Mooturai'],
+        quotes: ['"Learn now; it will adorn you in youth."', '"The learned are respected everywhere."'],
+        image: 'avvaiyar.jpg'
+    },
+    {
+        id: 'andai_tiruvadi',
+        name: 'Andai Tiruvadi',
+        nameLocal: 'ஆண்டை திருவடி',
+        nameHi: 'आण्डै तिरुवडि',
+        tradition: 'hindu',
+        sampradaya: 'Alvar',
+        period: 'c. 9th century CE',
+        birthPlace: 'Tirukkurungudi, Tamil Nadu',
+        biography: 'Andai Tiruvadi was a female Alvar saint whose hymns express deep maternal love for Vishnu, imagining herself as Yasoda caring for baby Krishna. She represents the inclusion of feminine devotional voices in early medieval Vaishnavism.',
+        teachings: ['Motherly love for God purifies', 'Service to Divine Child', 'Humility in devotion'],
+        works: ['Hymns in Nalayira Divya Prabandham'],
+        quotes: ['"O Krishna, let me feed You!"', '"Your tiny feet are my refuge."'],
+        image: 'andai_tiruvadi.jpg'
+    },
+    {
+        id: 'ganga_bai',
+        name: 'Gangubai Haridasa',
+        nameLocal: 'ಗಂಗೂಬಾಯಿ ಹರಿದಾಸ',
+        nameHi: 'गंगूबाई हरिदास',
+        tradition: 'hindu',
+        sampradaya: 'Haridasa',
+        period: '18th century CE',
+        birthPlace: 'Dharwad, Karnataka',
+        biography: 'Gangubai Haridasa was a female Haridasa saint who composed devotional songs in Kannada. Born into a Lingayat family, she defied norms to become a wandering minstrel of Hari, emphasizing the pain of separation from God.',
+        teachings: ['Woman\'s devotion is potent', 'Sing God\'s name despite mockery', 'God hears the humble'],
+        works: ['Kirtanas (oral tradition)'],
+        quotes: ['"My song is my offering; my tears, my worship."'],
+        image: 'gangubai_haridasa.jpg'
+    },
+    {
+        id: 'akka_gundurao',
+        name: 'Akka Gundurao',
+        nameLocal: 'ಅಕ್ಕ ಗುಂಡುರಾವ್',
+        nameHi: 'अक्का गुंडुराव',
+        tradition: 'hindu',
+        sampradaya: 'Lingayat',
+        period: 'c. 12th century CE',
+        birthPlace: 'Karnataka',
+        biography: 'Akka Gundurao was a female Veerashaiva saint and contemporary of Akka Mahadevi. She composed vachanas expressing fierce devotion to Shiva and critique of patriarchal norms, affirming women\'s place in spiritual discourse.',
+        teachings: ['Shiva resides in every heart', 'Purity from inner conviction', 'Speak truth fearlessly'],
+        works: ['Vachanas'],
+        quotes: ['"I wear no jewels but the Ishtalinga!"', '"Let society call me mad—I am mad only for Shiva."'],
+        image: 'akka_gundurao.jpg'
+    },
+    {
+        id: 'sri_chand',
+        name: 'Sri Chand',
+        nameLocal: 'ਸ੍ਰੀ ਚੰਦ',
+        nameHi: 'श्री चंद',
+        tradition: 'sikh',
+        sampradaya: 'Udasi Sect',
+        period: '1494–1629 CE',
+        birthPlace: 'Sultanpur Lodhi, Punjab',
+        biography: 'Sri Chand, eldest son of Guru Nanak, founded the Udasi sect which emphasized renunciation. Though distinct from the mainstream Sikh householder path, he was respected by the Gurus and played a key role in preserving teachings during difficult times.',
+        teachings: ['Renunciation purifies the mind', 'Preserve the Guru\'s legacy', 'Detachment as foundation'],
+        works: ['Oral teachings in Udasi tradition'],
+        quotes: ['"The world is a dream; wake up through detachment."'],
+        image: 'sri_chand.jpg'
+    },
+    {
+        id: 'bhagat_sadhna',
+        name: 'Bhagat Sadhna',
+        nameLocal: 'ਸਧਨਾ',
+        nameHi: 'सधना',
+        tradition: 'sikh',
+        sampradaya: 'Bhagat',
+        period: 'c. 13th–14th century CE',
+        birthPlace: 'Sindh',
+        biography: 'Sadhna was a Muslim butcher-saint whose hymn in the Guru Granth Sahib critiques ritual purity. He taught that true cleanliness comes from inner devotion, challenging occupational stigma.',
+        teachings: ['God is in the heart', 'Honest labor is holy', 'Compassion dissolves boundaries'],
+        works: ['1 hymn in Guru Granth Sahib'],
+        quotes: ['"Wash the mind, not just the body."'],
+        image: 'sadhna.jpg'
+    },
+    {
+        id: 'jinaprabha',
+        name: 'Jinaprabha Suri',
+        nameLocal: 'जिनप्रभ सूरि',
+        nameHi: 'जिनप्रभ सूरि',
+        tradition: 'jain',
+        sampradaya: 'Svetambara',
+        period: '1261–1333 CE',
+        birthPlace: 'Gujarat',
+        biography: 'Jinaprabha Suri wrote the Vividha Tirtha Kalpa, a guide to Jain pilgrimage sites. He negotiated with Sultan Muhammad bin Tughlaq for the protection of Jain tirthas, exemplifying interfaith diplomacy.',
+        teachings: ['Pilgrimage purifies the soul', 'Dialogue protects dharma', 'Sacred places strengthen identity'],
+        works: ['Vividha Tirtha Kalpa'],
+        quotes: ['"A tirtha is not stone; it is memory of Jinas."'],
+        image: 'jinaprabha_suri.jpg'
+    },
+    {
+        id: 'yashovijaya',
+        name: 'Acharya Yashovijaya',
+        nameLocal: 'यशोविजय',
+        nameHi: 'यशोविजय',
+        tradition: 'jain',
+        sampradaya: 'Svetambara',
+        period: '1624–1688 CE',
+        birthPlace: 'Gujarat',
+        biography: 'Yashovijaya was a Jain logician who defended Anekantavada (mani-sidedness) in Mughal courts. He advocated for intellectual humility and studying scriptures in the vernacular.',
+        teachings: ['All views are conditionally true', 'Logic must serve liberation', 'Compassion in debate'],
+        works: ['Adhyatma Upanishad Bhashya', 'Jnanasara'],
+        quotes: ['"The wise do not cling to one view."'],
+        image: 'yashovijaya.jpg'
+    },
+    {
+        id: 'samantabhadra',
+        name: 'Acharya Samantabhadra',
+        nameLocal: 'समन्तभद्र',
+        nameHi: 'समन्तभद्र',
+        tradition: 'jain',
+        sampradaya: 'Digambara',
+        period: 'c. 2nd century CE',
+        birthPlace: 'South India',
+        biography: 'Samantabhadra was a Digambara acharya who bridged bhakti and logic. His works invoke reason to prove the omniscience of the Jinas and outline ethics for laypeople.',
+        teachings: ['Lay ethical progress', 'Reason supports faith', 'Devotion and logic are wings'],
+        works: ['Ratnakaranda Shravakachara', 'Aptamimamsa'],
+        quotes: ['"Doubt the doubter, not the Omniscient."'],
+        image: 'samantabhadra.jpg'
+    },
+    {
+        id: 'pushpadanta',
+        name: 'Acharya Pushpadanta',
+        nameLocal: 'पुष्पदन्त',
+        nameHi: 'पुष्पदन्त',
+        tradition: 'jain',
+        sampradaya: 'Digambara',
+        period: 'c. 1st century CE',
+        birthPlace: 'Mathura',
+        biography: 'Pushpadanta co-authored the Shatkhandagama and composed the Mahapurana section on Tirthankaras. His work preserves early Jain cosmology and history.',
+        teachings: ['Stories inspire right conduct', 'Human birth is rare', 'Renunciation is highest'],
+        works: ['Mahapurana (part)', 'Shatkhandagama commentary'],
+        quotes: ['"This life is brief; strive for liberation."'],
+        image: 'pushpadanta.jpg'
+    },
+    {
+        id: 'bhadrabahu',
+        name: 'Acharya Bhadrabahu',
+        nameLocal: 'भद्रबाहु',
+        nameHi: 'भद्रबाहु',
+        tradition: 'jain',
+        sampradaya: 'Digambara',
+        period: 'c. 4th century BCE',
+        birthPlace: 'India',
+        biography: 'Bhadrabahu was the last Shruta-kevalin and teacher of Chandragupta Maurya. He led the migration to South India during a famine, preserving the original ascetic vows.',
+        teachings: ['Asceticism must not compromise vows', 'Scriptural preservation', 'Renunciation of power'],
+        works: ['Kalpa Sutra', 'Niryuktis'],
+        quotes: ['"When earth dries, monks move, not their vows."'],
+        image: 'bhadrabahu.jpg'
+    },
+    {
+        id: 'buddhaghosa',
+        name: 'Buddhaghosa',
+        nameLocal: 'बुद्धघोष',
+        nameHi: 'बुद्धघोष',
+        tradition: 'buddhist',
+        sampradaya: 'Theravada',
+        period: 'c. 5th century CE',
+        birthPlace: 'India',
+        biography: 'Buddhaghosa compiled the Visuddhimagga (Path of Purification), the definitive manual of Theravada Buddhism. He systematized the Tipitaka commentaries in Pali.',
+        teachings: ['Three Trainings: Morality, Concentration, Wisdom', 'Meditation purifies the mind', 'Clarity prevents confusion'],
+        works: ['Visuddhimagga', 'Atthasalini'],
+        quotes: ['"Morality is the foundation; wisdom the roof."'],
+        image: 'buddhaghosa.jpg'
+    },
+    {
+        id: 'shantideva',
+        name: 'Shantideva',
+        nameLocal: 'शान्तिदेव',
+        nameHi: 'शान्तिदेव',
+        tradition: 'buddhist',
+        sampradaya: 'Mahayana',
+        period: 'c. 8th century CE',
+        birthPlace: 'Nalanda',
+        biography: 'Shantideva was a monk at Nalanda known for the Bodhicaryavatara. He taught that Bodhicitta (awakened mind) and patience are the keys to the Bodhisattva path.',
+        teachings: ['Bodhicitta is the heart', 'Patience antidotes anger', 'Equal wish for happiness'],
+        works: ['Bodhicaryavatara', 'Shikshasamuccaya'],
+        quotes: ['"All joy comes from wanting happiness for others."'],
+        image: 'shantideva.jpg'
+    },
+    {
+        id: 'chandrakirti',
+        name: 'Chandrakirti',
+        nameLocal: 'चन्द्रकीर्ति',
+        nameHi: 'चन्द्रकीर्ति',
+        tradition: 'buddhist',
+        sampradaya: 'Madhyamaka',
+        period: 'c. 7th century CE',
+        birthPlace: 'South India',
+        biography: 'Chandrakirti defended Nagarjuna\'s philosophy, establishing the Prasangika Madhyamaka school. He argued that emptiness is the ultimate truth while conventional reality is valid relatively.',
+        teachings: ['Emptiness does not negate convention', 'Reason deconstructs views', 'Compassion from selflessness'],
+        works: ['Madhyamakavatara', 'Prasannapada'],
+        quotes: ['"Ultimate truth is how the wise see."'],
+        image: 'chandrakirti.jpg'
+    },
+    {
+        id: 'kamalashila',
+        name: 'Kamalashila',
+        nameLocal: 'कमलशील',
+        nameHi: 'कमलशील',
+        tradition: 'buddhist',
+        sampradaya: 'Mahayana',
+        period: 'c. 8th century CE',
+        birthPlace: 'India',
+        biography: 'Kamalashila defended the gradual path of enlightenment in the Council of Lhasa, establishing Indian Mahayana in Tibet. He emphasized the cultivation of wisdom and compassion.',
+        teachings: ['Gradual enlightenment', 'Ethical discipline needed', 'Method and wisdom together'],
+        works: ['Bhavanakrama'],
+        quotes: ['"The path is step by step."'],
+        image: 'kamalashila.jpg'
+    },
+    {
+        id: 'buddhapalita',
+        name: 'Buddhapalita',
+        nameLocal: 'बुद्धपालित',
+        nameHi: 'बुद्धपालित',
+        tradition: 'buddhist',
+        sampradaya: 'Madhyamaka',
+        period: 'c. 5th-6th century CE',
+        birthPlace: 'South India',
+        biography: 'Buddhapalita pioneered the Prasangika method of reductio ad absurdum to interpret Nagarjuna. His approach became central to Tibetan Madhyamaka.',
+        teachings: ['Reveal contradictions in views', 'Emptiness is absence of inherent existence', 'Non-clinging'],
+        works: ['Prasannapada'],
+        quotes: ['"The wise do not cling to existence or non-existence."'],
+        image: 'buddhapalita.jpg'
+    },
+    {
+        id: 'vipashyana',
+        name: 'Vipashyana Master',
+        nameLocal: 'विपश्यन',
+        nameHi: 'विपश्यना आचार्य',
+        tradition: 'buddhist',
+        sampradaya: 'Early Buddhism',
+        period: 'c. 3rd century BCE',
+        birthPlace: 'Magadha',
+        biography: 'An early master (symbolizing the lineage) who helped spread Vipassana meditation under Ashoka. Taught mindfulness of impermanence.',
+        teachings: ['Impermanence (Anicca)', 'Suffering (Dukkha)', 'Non-self (Anatta)'],
+        works: ['Lineage of Insight'],
+        quotes: ['"Watch the truth unfold."'],
+        image: 'vipashyana.jpg'
+    },
+    {
+        id: 'upagupta',
+        name: 'Upagupta',
+        nameLocal: 'उपगुप्त',
+        nameHi: 'उपगुप्त',
+        tradition: 'buddhist',
+        sampradaya: 'Theravada',
+        period: 'c. 3rd century BCE',
+        birthPlace: 'Mathura',
+        biography: 'Upagupta was the spiritual teacher of Ashoka, guiding him from violence to Dharma. He is revered as a compassionate healer.',
+        teachings: ['Compassion heals', 'Monastic discipline', 'Dharma over sword'],
+        works: ['Stories in Ashokavadana'],
+        quotes: ['"The Dharma is the true wheel of law."'],
+        image: 'upagupta.jpg'
+    },
+    {
+        id: 'moggaliputta',
+        name: 'Moggaliputta Tissa',
+        nameLocal: 'मोग्गलिपुत्त तिस्स',
+        nameHi: 'मोग्गलिपुत्त तिस्स',
+        tradition: 'buddhist',
+        sampradaya: 'Theravada',
+        period: 'c. 3rd century BCE',
+        birthPlace: 'Pataliputra',
+        biography: 'Moggaliputta Tissa presided over the Third Buddhist Council and sent missionaries (including Mahendra) across Asia. He compiled the Kathavatthu.',
+        teachings: ['Guard Dharma from distortion', 'Compassionate debate', 'Missionary work for peace'],
+        works: ['Kathavatthu'],
+        quotes: ['"False views are thorns; remove them gently."'],
+        image: 'moggaliputta_tissa.jpg'
+    },
+    {
+        id: 'sister_nivedita',
+        name: 'Sister Nivedita',
+        nameLocal: 'सिस्टर निवेदिता',
+        nameHi: 'सिस्टर निवेदिता',
+        tradition: 'hindu',
+        sampradaya: 'Ramakrishna Mission',
+        period: '1867–1911 CE',
+        birthPlace: 'Ireland (Naturalized Indian)',
+        biography: 'Sister Nivedita (Margaret Noble) was a disciple of Swami Vivekananda who dedicated her life to India\'s awakening. She championed women\'s education, Indian art, and nationalism rooted in Dharma. Her books offer intimate portraits of Vivekananda.',
+        teachings: ['Education is birthright of women', 'Nationalism rooted in Dharma', 'Service to India is worship'],
+        works: ['The Master as I Saw Him', 'Kali the Mother'],
+        quotes: ['"I shall work for India till my last breath."', '"The nation is a divine being."'],
+        image: 'sister_nivedita.jpg'
+    },
+    {
+        id: 'neem_karoli_baba',
+        name: 'Neem Karoli Baba',
+        nameLocal: 'नीम करोली बाबा',
+        nameHi: 'नीम करोली बाबा',
+        tradition: 'hindu',
+        sampradaya: 'Bhakti',
+        period: 'c. 1900–1973 CE',
+        birthPlace: 'Uttar Pradesh',
+        biography: 'Neem Karoli Baba (Maharaj-ji) was a devotee of Hanuman known for his unconditional love and miracles. He taught through silence and service ("Seva"). He attracted many Western seekers, influencing the psychedelic generation towards spirituality.',
+        teachings: ['Love everyone, feed everyone', 'Ram Nam is the boat', 'Serve the poor as God'],
+        works: ['Teachings compiled in "Miracle of Love"'],
+        quotes: ['"Sub ek (All are one)."', '"Don\'t worry; be happy. Remember God."'],
+        image: 'neem_karoli_baba.jpg'
+    },
+    {
+        id: 'swami_ramdas',
+        name: 'Swami Ramdas (Papa)',
+        nameLocal: 'ಸ್ವಾಮಿ ರಾಮದಾಸ್',
+        nameHi: 'स्वामी रामदास',
+        tradition: 'hindu',
+        sampradaya: 'Modern Saint',
+        period: '1884–1963 CE',
+        birthPlace: 'Kerala',
+        biography: 'Swami Ramdas, known as Papa, attained God-vision through constant chanting of Ram Nam. He founded Anandashram in Kerala, a haven of universal love. His teachings emphasize absolute surrender to the Divine Will and seeing Ram in all.',
+        teachings: ['Surrender to Divine Will', 'See God in everyone', 'Love is the essence'],
+        works: ['In Quest of God', 'Bhakti Sagata'],
+        quotes: ['"I have no will of my own; Thy Will be done!"', '"The whole world is my family."'],
+        image: 'swami_ramdas.jpg'
+    },
+    {
+        id: 'mata_ammanniyamma',
+        name: 'Mata Ammanniyamma',
+        nameLocal: 'മാതാ അമ്മനിയമ്മ',
+        nameHi: 'माता अम्मनियम्मा',
+        tradition: 'hindu',
+        sampradaya: 'Kerala Folk Saint',
+        period: '19th–20th century CE',
+        birthPlace: 'Kerala',
+        biography: 'Mata Ammanniyamma was a Dalit saint revered for her healing powers and devotion to the Goddess. She challenged caste norms by performing rituals and serving all. Her life represents the power of folk spirituality.',
+        teachings: ['Goddess heals all', 'Caste cannot block grace', 'Serve the sick as God'],
+        works: ['Oral healing mantras'],
+        quotes: ['"Amma\'s grace flows like river water."', '"Fear forgetting the Mother, not illness."'],
+        image: 'mata_ammanniyamma.jpg'
+    },
+    {
+        id: 'sri_satchidananda',
+        name: 'Swami Satchidananda',
+        nameLocal: 'சச்சிதானந்தா',
+        nameHi: 'स्वामी सच्चिदानंद',
+        tradition: 'hindu',
+        sampradaya: 'Integral Yoga',
+        period: '1914–2002 CE',
+        birthPlace: 'Tamil Nadu',
+        biography: 'Swami Satchidananda was a yoga master who opened the Woodstock Festival. He founded Integral Yoga, promoting interfaith harmony and the synthesis of various yoga paths. He made yoga accessible to the West.',
+        teachings: ['Truth is one, paths are many', 'Yoga is unity', 'Peace begins within'],
+        works: ['Integral Yoga Hatha', 'The Golden Treasury'],
+        quotes: ['"The answer to everything is love, peace, understanding."', '"Live yoga."'],
+        image: 'satchidananda.jpg'
+    },
+    {
+        id: 'swami_chinmayananda',
+        name: 'Swami Chinmayananda',
+        nameLocal: 'സ്വാമി ചിന്മയാനന്ദ',
+        nameHi: 'स्वामी चिन्मयानंद',
+        tradition: 'hindu',
+        sampradaya: 'Vedanta',
+        period: '1916–1993 CE',
+        birthPlace: 'Kerala',
+        biography: 'Swami Chinmayananda revitalized Vedanta through his dynamic Geeta Jnana Yajnas. Founder of the Chinmaya Mission, he made the logic of scripture accessible to modern minds, emphasizing self-inquiry and cultural pride.',
+        teachings: ['Vedanta is practical psychology', 'Realize your divinity', 'Culture expresses spirituality'],
+        works: ['The Holy Geeta', 'Self Unfoldment'],
+        quotes: ['"Don\'t just believe in God; become godly."', '"Discover your divinity."'],
+        image: 'chinmayananda.jpg'
+    },
+    {
+        id: 'papaji',
+        name: 'Papaji (H.W.L. Poonja)',
+        nameLocal: 'ਪਾਪਾਜੀ',
+        nameHi: 'पापाजी',
+        tradition: 'hindu',
+        sampradaya: 'Neo-Advaita',
+        period: '1910–1997 CE',
+        birthPlace: 'Punjab',
+        biography: 'Papaji was a direct disciple of Ramana Maharshi who taught immediate self-realization. His satsangs in Lucknow attracted thousands. He emphasized that freedom is already here, requiring only recognition, not effort.',
+        teachings: ['You are already free', 'The seeker is the sought', 'Stop searching, just be'],
+        works: ['The Truth Is', 'Wake Up and Roar'],
+        quotes: ['"Be still and truth will find you."', '"The \'I\' that seeks is the \'I\' that is sought."'],
+        image: 'papaji.jpg'
+    },
+    {
+        id: 'nityananda',
+        name: 'Bhagawan Nityananda',
+        nameLocal: 'ಭಗವಾನ್ ನಿತ್ಯಾನಂದ',
+        nameHi: 'भगवान नित्यानंद',
+        tradition: 'hindu',
+        sampradaya: 'Avadhuta',
+        period: '1897–1961 CE',
+        birthPlace: 'South India',
+        biography: 'Bhagawan Nityananda was a mysterious saint of Ganeshpuri known for his silence and Shaktipat transmission. He rarely spoke but awakened thousands through his presence. He is the guru of Swami Muktananda.',
+        teachings: ['Guru\'s grace awakens Self', 'Silence is the language of God', 'Serve selflessly'],
+        works: ['Chidakasha Gita'],
+        quotes: ['"Be good, do good, be quiet."', '"The mind is the obstacle."'],
+        image: 'nityananda.jpg'
+    },
+    {
+        id: 'muktananda',
+        name: 'Swami Muktananda',
+        nameLocal: 'ಸ್ವಾಮಿ ಮುಕ್ತಾನಂದ',
+        nameHi: 'स्वामी मुक्तानंद',
+        tradition: 'hindu',
+        sampradaya: 'Siddha Yoga',
+        period: '1908–1982 CE',
+        birthPlace: 'Karnataka',
+        biography: 'Swami Muktananda founded Siddha Yoga, bringing the path of Shaktipat (energy transmission) to the world. He taught that God dwells within as the Self and can be realized through the Guru\'s grace and meditation.',
+        teachings: ['Shaktipat ignites Kundalini', 'Meditate on the Self', 'Honor your own Self'],
+        works: ['Play of Consciousness', 'I Am That'],
+        quotes: ['"God dwells within you as you."', '"Honor your Self."'],
+        image: 'muktananda.jpg'
+    },
+    {
+        id: 'gurumayi',
+        name: 'Gurumayi Chidvilasananda',
+        nameLocal: 'ಗುರುಮಯಿ',
+        nameHi: 'गुरुमायी',
+        tradition: 'hindu',
+        sampradaya: 'Siddha Yoga',
+        period: 'b. 1955 CE',
+        birthPlace: 'Mumbai',
+        biography: 'Gurumayi Chidvilasananda is the head of Siddha Yoga. A scholar and mystic, she teaches chanting and meditation as tools for inner transformation, continuing the lineage of Nityananda and Muktananda.',
+        teachings: ['Chanting purifies the mind', 'Seva is love in action', 'Guru is within'],
+        works: ['Kindle My Heart', 'Enlightenment'],
+        quotes: ['"Awaken the light within."', '"Your heart is the temple."'],
+        image: 'gurumayi.jpg'
+    },
+    {
+        id: 'sadhvi_bhagawati',
+        name: 'Sadhvi Bhagawati Saraswati',
+        nameLocal: 'साध्वी भगवती',
+        nameHi: 'साध्वी भगवती',
+        tradition: 'hindu',
+        sampradaya: 'Modern / Parmarth Niketan',
+        period: 'b. 1970 CE',
+        birthPlace: 'USA (Indian Soul)',
+        biography: 'Sadhvi Bhagawati Saraswati is a renounced ascetic living in Rishikesh. She leads humanitarian and environmental initiatives, bridging East and West. She emphasizes that spirituality must address global challenges.',
+        teachings: ['Spirituality for social change', 'Women\'s sacred voice', 'Interfaith harmony'],
+        works: ['Hollywood to the Himalayas'],
+        quotes: ['"We are remembering our oneness."', '"A woman\'s voice is sacred."'],
+        image: 'sadhvi_bhagawati.jpg'
+    },
+    {
+        id: 'sri_sri_ravi_shankar',
+        name: 'Sri Sri Ravi Shankar',
+        nameLocal: 'ಶ್ರೀ ಶ್ರೀ ರವಿಶಂಕರ್',
+        nameHi: 'श्री श्री रवि शंकर',
+        tradition: 'hindu',
+        sampradaya: 'Art of Living',
+        period: 'b. 1956 CE',
+        birthPlace: 'Tamil Nadu',
+        biography: 'Sri Sri Ravi Shankar founded the Art of Living and developed Sudarshan Kriya. His mission combines stress-relief techniques with social service and conflict resolution, emphasizing a celebration of life.',
+        teachings: ['Breath bridges body and mind', 'Service is highest yoga', 'Celebrate life'],
+        works: ['Celebrating Silence', 'God Loves Fun'],
+        quotes: ['"The remedy is a smile and deep breath."', '"You are the world."'],
+        image: 'sri_sri.jpg'
+    },
+    {
+        id: 'swami_chidananda',
+        name: 'Swami Chidananda',
+        nameLocal: 'ಸ್ವಾಮಿ ಚಿದಾನಂದ',
+        nameHi: 'स्वामी चिदानंद',
+        tradition: 'hindu',
+        sampradaya: 'Divine Life Society',
+        period: '1916–2008 CE',
+        birthPlace: 'Tamil Nadu',
+        biography: 'Swami Chidananda succeeded Sivananda as president of Divine Life Society. He was known for his saintly radiance and emphasis on Brahmacharya and service. He traveled globally, spreading the message of Yoga.',
+        teachings: ['Brahmacharya for spiritual power', 'Simple living', 'Work as worship'],
+        works: ['Light Fountain', 'Eternal Messages'],
+        quotes: ['"Serve all as God."', '"Health is wealth, peace is health."'],
+        image: 'swami_chidananda.jpg'
+    },
+    {
+        id: 'swami_abhedananda',
+        name: 'Swami Abhedananda',
+        nameLocal: 'স্বামী অভেদানন্দ',
+        nameHi: 'स्वामी अभेदानंद',
+        tradition: 'hindu',
+        sampradaya: 'Ramakrishna Mission',
+        period: '1866–1939 CE',
+        birthPlace: 'Kolkata',
+        biography: 'Swami Abhedananda was a scholar-disciple of Ramakrishna who preached Vedanta in the West. He engaged with Western intellectuals to prove the rationality of Hindu philosophy, bridging science and spirituality.',
+        teachings: ['Vedanta is science of self', 'Reincarnation explains life', 'Rational faith'],
+        works: ['How to be a Yogi', 'Life Beyond Death'],
+        quotes: ['"Death is but a change of garment."', '"The soul is immortal."'],
+        image: 'abhedananda.jpg'
+    },
+    {
+        id: 'swami_turiyananda',
+        name: 'Swami Turiyananda',
+        nameLocal: 'স্বামী তুরীয়ানন্দ',
+        nameHi: 'स्वामी तुरीयानंद',
+        tradition: 'hindu',
+        sampradaya: 'Ramakrishna Mission',
+        period: '1863–1922 CE',
+        birthPlace: 'Kolkata',
+        biography: 'Swami Turiyananda (Hari Maharaj) was a direct disciple of Ramakrishna known for his intense austerity and Vedantic knowledge. He taught that true renunciation is mental detachment.',
+        teachings: ['Detachment is freedom', 'Meditate on the Formless', 'Realization over scholarship'],
+        works: ['Spiritual Talks'],
+        quotes: ['"Brahman alone is real."', '"Renounce mentally."'],
+        image: 'turiyananda.jpg'
+    },
+    {
+        id: 'swami_shivananda_mahapurush',
+        name: 'Swami Shivananda (Mahapurush)',
+        nameLocal: 'স্বামী শিবানন্দ',
+        nameHi: 'स्वामी शिवानंद',
+        tradition: 'hindu',
+        sampradaya: 'Ramakrishna Mission',
+        period: '1854–1934 CE',
+        birthPlace: 'Bengal',
+        biography: 'Swami Shivananda was the second president of Ramakrishna Math. Known as Mahapurush Maharaj, he was a pillar of the order, emphasizing the harmony of work and worship and guiding monks with fatherly love.',
+        teachings: ['Balance knowledge and devotion', 'Work is worship', 'Kindness wins hearts'],
+        works: ['For Seekers of God'],
+        quotes: ['"Work is worship."', '"Be kind to all."'],
+        image: 'shivananda_ramakrishna.jpg'
+    },
+    {
+        id: 'swami_brahmananda',
+        name: 'Swami Brahmananda',
+        nameLocal: 'স্বামী ব্রহ্মানন্দ',
+        nameHi: 'स्वामी ब्रह्मानंद',
+        tradition: 'hindu',
+        sampradaya: 'Ramakrishna Mission',
+        period: '1863–1922 CE',
+        birthPlace: 'Bengal',
+        biography: 'Swami Brahmananda (Rakhal), regarded as the spiritual son of Ramakrishna, was the first president of the Order. A master of meditation, his mere presence induced spiritual states in others. He consolidated the Mission\'s foundation.',
+        teachings: ['Meditation is the soul', 'Guru-bhakti', 'Inner purity'],
+        works: ['The Eternal Companion'],
+        quotes: ['"Sit quietly; mind will settle."', '"Guru\'s feet are the boat."'],
+        image: 'brahmananda.jpg'
+    }
+    ,
+    {
+        "id": "akka_chandrabhaga",
+        "name": "Akka Chandrabhaga",
+        "nameLocal": "ಅಕ್ಕ ಚಂದ್ರಭಾಗಾ",
+        "nameHi": "अक्का चंद्रभागा",
+        "tradition": "hindu",
+        "sampradaya": "Veerashaiva / Lingayat",
+        "period": "c. 12th century CE",
+        "birthPlace": "Karnataka",
+        "biography": "Akka Chandrabhaga was a female Veerashaiva saint and contemporary of Akka Mahadevi in 12th-century Karnataka. Though fewer vachanas survive compared to her peers, she is remembered in oral tradition for her fierce devotion to Shiva and critique of patriarchal norms within religious spaces. She participated in the Anubhava Mantapa, the spiritual parliament founded by Basavanna, where women were granted equal voice in theological discourse. Her life exemplifies the radical gender equality embedded in early Lingayat thought, where spiritual merit—not birth or gender—determined one’s status. Akka Chandrabhaga represents the collective voice of women who shaped the Bhakti revolution through poetry and presence.",
+        "teachings": [
+            "Shiva sees no difference between male and female devotees.",
+            "True worship is inner purity, not ritual performance.",
+            "Speak your truth, even if your voice shakes."
+        ],
+        "works": [
+            "Vachanas (preserved in oral and manuscript traditions)"
+        ],
+        "quotes": [
+            "\"I am not a woman to you, O Shiva—I am Your own Self!\"",
+            "\"Let society call me mad; I am mad only for You.\""
+        ],
+        "image": "akka_chandrabhaga.jpg"
+    },
+    {
+        "id": "akka_lingamma",
+        "name": "Akka Lingamma",
+        "nameLocal": "ಅಕ್ಕ ಲಿಂಗಮ್ಮ",
+        "nameHi": "अक्का लिंगम्मा",
+        "tradition": "hindu",
+        "sampradaya": "Veerashaiva / Lingayat",
+        "period": "c. 12th century CE",
+        "birthPlace": "Karnataka",
+        "biography": "Akka Lingamma was another female vachanakara (poet-saint) of the 12th-century Veerashaiva movement. Her verses, though sparse in surviving records, emphasize the wearing of the Ishtalinga as a symbol of direct divine connection, rejecting temple intermediaries. She lived a life of renunciation, wandering with other sharanas (devotees), and challenged societal expectations of women’s roles. Her inclusion in Lingayat hagiographies affirms that the movement actively cultivated female spiritual leadership. Akka Lingamma’s legacy, like many women of her time, survives through community memory and devotional recitation rather than printed texts.",
+        "teachings": [
+            "The Ishtalinga on your neck is your true guru.",
+            "Renunciation is freedom from social bondage.",
+            "God is found in the company of fellow seekers."
+        ],
+        "works": [
+            "Vachanas (oral tradition)"
+        ],
+        "quotes": [
+            "\"This body is Yours, O Linga—do with it as You will.\"",
+            "\"I walk barefoot on the path of Shiva; what need have I for silks?\""
+        ],
+        "image": "akka_lingamma.jpg"
+    },
+    {
+        "id": "thalaparambil_mangalam",
+        "name": "Thalaparambil Mangalam",
+        "nameLocal": "തലപ്പരമ്പിൽ മംഗളം",
+        "nameHi": "थलपरम्बिल मंगलम",
+        "tradition": "hindu",
+        "sampradaya": "Kerala Folk Saint",
+        "period": "19th century CE",
+        "birthPlace": "Kozhikode, Kerala",
+        "biography": "Thalaparambil Mangalam was a Dalit woman mystic from Kerala revered for her trance states and healing rituals dedicated to the goddess Bhadrakali. Born into the Pulaya community, she defied caste restrictions by leading Theyyam performances—ritual dances where the performer becomes the deity—traditionally barred to lower castes. Her spiritual authority earned her respect across communities, and her shrine remains a site of folk healing. She embodies the syncretic folk spirituality of Kerala, where goddess worship empowers marginalized women as divine vessels.",
+        "teachings": [
+            "The Goddess speaks through the oppressed.",
+            "Ritual possession is divine communion.",
+            "Healing begins when caste walls fall."
+        ],
+        "works": [
+            "Oral mantras and Theyyam invocations"
+        ],
+        "quotes": [
+            "\"Amma enters me—caste vanishes in Her fire!\"",
+            "\"Do not fear spirits; fear injustice.\""
+        ],
+        "image": "thalaparambil_mangalam.jpg"
+    },
+    {
+        "id": "gurudev_kalicharan_brahmachari",
+        "name": "Gurudev Kalicharan Brahmachari",
+        "nameLocal": "गुरुदेव कालीचरण ब्रह्मचारी",
+        "nameHi": "गुरुदेव कालीचरण ब्रह्मचारी",
+        "tradition": "hindu",
+        "sampradaya": "Assamese Vaishnavism",
+        "period": "1899–1970 CE",
+        "birthPlace": "Sylhet, Assam (now Bangladesh)",
+        "biography": "Gurudev Kalicharan Brahmachari was a 20th-century Assamese saint, poet, and social reformer who revitalized Sankardeva’s Neo-Vaishnavite tradition. He composed over 500 borgeets (devotional songs) and established satras (monastic centers) to promote moral education and cultural preservation. A freedom fighter, he used bhakti as a tool for anti-colonial resistance and social unity. His ashram in Nagaon became a hub for interfaith dialogue and rural development. He emphasized that devotion must lead to service, making him a bridge between classical Vaishnavism and modern activism.",
+        "teachings": [
+            "Bhakti without social action is incomplete.",
+            "Preserve Assamese culture as spiritual duty.",
+            "Unity in diversity is Krishna’s true message."
+        ],
+        "works": [
+            "Borgeets",
+            "Namghosa Vyakhya (commentary)",
+            "Satra Dharma"
+        ],
+        "quotes": [
+            "\"Sing Krishna’s name, but also feed the hungry.\"",
+            "\"Our language, our songs, our faith—this is our dharma.\""
+        ],
+        "image": "kalicharan_brahmachari.jpg"
+    },
+    {
+        "id": "sri_sri_sita_ram_goswami",
+        "name": "Sita Ram Goswami",
+        "nameLocal": "सीताराम गोस्वामी",
+        "nameHi": "सीताराम गोस्वामी",
+        "tradition": "hindu",
+        "sampradaya": "Ramanandi Sampradaya",
+        "period": "19th century CE",
+        "birthPlace": "Ayodhya, Uttar Pradesh",
+        "biography": "Sita Ram Goswami was a 19th-century Ramanandi saint known for his scholarly defense of Rama worship during British colonial rule. He authored Sanskrit commentaries on the Ramayana and led public discourses that reinforced Hindu identity. His ashram in Ayodhya became a center for scriptural study and nationalist sentiment. He trained hundreds of sadhus in Vedic rituals and bhakti practices, ensuring the continuity of North Indian Vaishnavism amid social upheaval. His life reflects the quiet resilience of monastic orders in preserving dharma.",
+        "teachings": [
+            "Rama’s name is the shield of dharma in Kali Yuga.",
+            "Scriptural knowledge protects against cultural erosion.",
+            "Monastic discipline is the backbone of society."
+        ],
+        "works": [
+            "Ramayana Tika",
+            "Sitaram Stotram",
+            "Bhakti Prakash"
+        ],
+        "quotes": [
+            "\"Where Rama’s name is chanted, darkness flees.\"",
+            "\"A sadhu’s silence speaks louder than a king’s decree.\""
+        ],
+        "image": "sita_ram_goswami.jpg"
+    },
+    {
+        "id": "bhagat_punna",
+        "name": "Punna",
+        "nameLocal": "ਪੁੰਨਾ",
+        "nameHi": "पुन्ना",
+        "tradition": "sikh",
+        "sampradaya": "Bhagat / Nirguna Bhakti",
+        "period": "c. 14th century CE",
+        "birthPlace": "Multan, Punjab",
+        "biography": "Bhagat Punna was a 14th-century Muslim weaver-saint whose single hymn appears in the Guru Granth Sahib. His verse critiques ritual bathing in sacred rivers, arguing that true purity comes from inner devotion to the One God. As a contemporary of Sheikh Farid, he represents the urban artisan class that fueled the Nirguna Bhakti movement in medieval Punjab. His inclusion in Sikh scripture underscores the tradition’s commitment to universal devotion beyond religious labels.",
+        "teachings": [
+            "Ritual baths cannot cleanse a polluted heart.",
+            "God is near, not far in distant shrines.",
+            "Honest labor is worship when done with remembrance."
+        ],
+        "works": [
+            "1 hymn in Guru Granth Sahib"
+        ],
+        "quotes": [
+            "\"You bathe in the Ganges, but your mind is full of lies!\"",
+            "\"Wash your heart with the Name; that is the true river.\""
+        ],
+        "image": "punna.jpg"
+    },
+    {
+        "id": "bhagat_jaidev",
+        "name": "Jaidev",
+        "nameLocal": "जयदेव",
+        "nameHi": "जयदेव",
+        "tradition": "sikh",
+        "sampradaya": "Bhagat / Saguna Bhakti",
+        "period": "12th century CE",
+        "birthPlace": "Kenduli, Odisha",
+        "biography": "Jaidev was a 12th-century Odia poet-saint and author of the Gita Govinda, a lyrical masterpiece on Radha-Krishna love that influenced Bhakti movements across India. Two of his hymns are included in the Guru Granth Sahib, reflecting the pan-Indian reverence for his devotional poetry. A court poet of King Lakshman Sen, he later renounced royal life for Vrindavan. His work blends Sanskrit sophistication with emotional bhakti, shaping classical music and dance traditions like Odissi.",
+        "teachings": [
+            "Divine love is expressed through aesthetic rapture.",
+            "Radha’s separation is the soul’s longing for God.",
+            "Art is a valid path to spiritual realization."
+        ],
+        "works": [
+            "Gita Govinda",
+            "2 hymns in Guru Granth Sahib"
+        ],
+        "quotes": [
+            "\"O Krishna, Your flute calls the soul home!\"",
+            "\"In love’s pain, I find You.\""
+        ],
+        "image": "jaidev.jpg"
+    },
+    {
+        "id": "acharya_vadiraja",
+        "name": "Vadiraja Tirtha",
+        "nameLocal": "ವಾದಿರಾಜ ತೀರ್ಥ",
+        "nameHi": "वादिराज तीर्थ",
+        "tradition": "hindu",
+        "sampradaya": "Dvaita / Madhva",
+        "period": "1480–1600 CE",
+        "birthPlace": "Huvinakere, Karnataka",
+        "biography": "Vadiraja Tirtha was a 15th–16th century Dvaita philosopher, poet, and pontiff of the Sode Matha. A prolific writer, he composed polemical works against Advaita and Islam, devotional kirtanas, and travelogues like Tirtha Prabandha describing pilgrimage sites. He reformed temple administration and promoted Haridasa literature. His Teertha Prabandha is a valuable historical record of South Indian sacred geography. Vadiraja’s life blended intellectual rigor with devotional fervor, defending Dvaita while enriching Kannada culture.",
+        "teachings": [
+            "Vishnu is supreme; all else is dependent.",
+            "Pilgrimage purifies when done with right knowledge.",
+            "Debate must serve truth, not ego."
+        ],
+        "works": [
+            "Yukti Mallika",
+            "Tirtha Prabandha",
+            "Rukminisha Vijaya"
+        ],
+        "quotes": [
+            "\"Without Vishnu, the world is a desert.\"",
+            "\"The pen is my sword; truth is my shield.\""
+        ],
+        "image": "vadiraja_tirtha.jpg"
+    },
+    {
+        "id": "acharya_raghavendra_swami",
+        "name": "Raghavendra Swami",
+        "nameLocal": "ರಾಘವೇಂದ್ರ ಸ್ವಾಮಿ",
+        "nameHi": "राघवेन्द्र स्वामी",
+        "tradition": "hindu",
+        "sampradaya": "Dvaita / Madhva",
+        "period": "1595–1671 CE",
+        "birthPlace": "Bhuvanagiri, Tamil Nadu",
+        "biography": "Raghavendra Swami was a 17th-century Dvaita saint and successor in Madhvacharya’s lineage. Known for miracles and scholarship, he spent 13 years in meditation before becoming pontiff of Mantralayam Math. His Brindavana (samadhi) in Andhra Pradesh is a major pilgrimage site. He emphasized simple living, devotion to Hayagriva (horse-headed Vishnu), and accessibility of philosophy to common people. His life bridges Tamil and Telugu spiritual cultures, showing Dvaita’s pan-South Indian reach.",
+        "teachings": [
+            "Hayagriva grants wisdom to sincere seekers.",
+            "Miracles are grace, not siddhis for display.",
+            "Serve devotees; it pleases God most."
+        ],
+        "works": [
+            "Parimala (commentary on Jayatirtha’s works)",
+            "Sripadaraja Stotram"
+        ],
+        "quotes": [
+            "\"I am dust at the feet of Madhva’s followers.\"",
+            "\"Pray not for boons, but for devotion.\""
+        ],
+        "image": "raghavendra_swami.jpg"
+    },
+    {
+        "id": "acharya_jayatirtha",
+        "name": "Jayatirtha",
+        "nameLocal": "जयतीर्थ",
+        "nameHi": "जयतीर्थ",
+        "tradition": "hindu",
+        "sampradaya": "Dvaita / Madhva",
+        "period": "c. 1365–1388 CE",
+        "birthPlace": "Mangalwedha, Maharashtra",
+        "biography": "Jayatirtha, originally a Muslim ruler named Dhondupant, converted to Dvaita after debating Madhva scholars. Renamed Jayatirtha ('Victorious Pilgrim'), he became one of Madhva’s most brilliant commentators. His Nyaya Sudha and other works systematized Dvaita logic, earning him the title 'Teekacharya' (commentator par excellence). His life exemplifies how intellectual surrender can lead to spiritual transformation, bridging religious divides through reasoned devotion.",
+        "teachings": [
+            "Reason leads to faith when guided by grace.",
+            "Vishnu’s supremacy is provable by logic.",
+            "Conversion is not loss, but homecoming."
+        ],
+        "works": [
+            "Nyaya Sudha",
+            "Tattvaprakashika",
+            "Prameyadipika"
+        ],
+        "quotes": [
+            "\"I ruled a kingdom, but found truth at Madhva’s feet.\"",
+            "\"Logic is the ladder; devotion is the roof.\""
+        ],
+        "image": "jayatirtha.jpg"
+    },
+    {
+        "id": "acharya_padmanabha_tirtha",
+        "name": "Padmanabha Tirtha",
+        "nameLocal": "पद्मनाभ तीर्थ",
+        "nameHi": "पद्मनाभ तीर्थ",
+        "tradition": "hindu",
+        "sampradaya": "Dvaita / Madhva",
+        "period": "c. 1250–1320 CE",
+        "birthPlace": "Puntamba, Maharashtra",
+        "biography": "Padmanabha Tirtha was the direct disciple and successor of Madhvacharya, entrusted with spreading Dvaita philosophy beyond Karnataka. Originally a Advaita scholar named Shobhana Bhatta, he was defeated in debate by Madhva and converted. He wrote commentaries that clarified Madhva’s often terse sutras, making Dvaita accessible to wider audiences. His missionary work laid the foundation for Dvaita’s institutional growth across Maharashtra and Andhra.",
+        "teachings": [
+            "Guru’s word is the key to scripture.",
+            "Debate with humility opens the door to truth.",
+            "Dvaita is not dualism, but dependence on Vishnu."
+        ],
+        "works": [
+            "Commentaries on Madhva’s Brahma Sutra Bhashya",
+            "Sattarkavilasa"
+        ],
+        "quotes": [
+            "\"I came to refute, but stayed to serve.\"",
+            "\"Vishnu’s grace turns opponents into devotees.\""
+        ],
+        "image": "padmanabha_tirtha.jpg"
+    },
+    {
+        "id": "acharya_narahari_tirtha",
+        "name": "Narahari Tirtha",
+        "nameLocal": "नरहरि तीर्थ",
+        "nameHi": "नरहरि तीर्थ",
+        "tradition": "hindu",
+        "sampradaya": "Dvaita / Madhva",
+        "period": "c. 1243–1333 CE",
+        "birthPlace": "Odisha",
+        "biography": "Narahari Tirtha was a 13th–14th century Dvaita saint who served as a minister in the Eastern Ganga dynasty of Odisha before becoming a monk. He rescued ancient dance-drama manuscripts (precursors to Kuchipudi) and promoted temple arts as devotional practice. His political acumen helped protect Hindu institutions during Islamic incursions. He represents the rare blend of statesmanship and sainthood in medieval India, using power to preserve culture.",
+        "teachings": [
+            "Arts are offerings to Vishnu.",
+            "Power should serve dharma, not ego.",
+            "Preserve heritage as spiritual duty."
+        ],
+        "works": [
+            "Commentaries on Madhva’s works",
+            "Dance-drama reconstructions"
+        ],
+        "quotes": [
+            "\"A king’s throne is fleeting; a devotee’s heart is eternal.\"",
+            "\"Save the arts—they are Vishnu’s smile.\""
+        ],
+        "image": "narahari_tirtha.jpg"
+    },
+    {
+        "id": "buddhist_master_ratnamati",
+        "name": "Ratnamati",
+        "nameLocal": "रत्नमति",
+        "nameHi": "रत्नमति",
+        "tradition": "buddhist",
+        "sampradaya": "Yogachara / Mahayana",
+        "period": "c. 5th–6th century CE",
+        "birthPlace": "Magadha, Bihar",
+        "biography": "Ratnamati was a 5th–6th century Buddhist monk and translator who worked at the Shaolin Temple in China. He translated key Yogachara texts like the Dashabhumika Sutra from Sanskrit to Chinese, influencing East Asian Buddhism. A contemporary of Bodhidharma, he emphasized meditative absorption and bodhisattva ethics. His translations preserved Indian Mahayana thought during its decline in India, ensuring its survival abroad.",
+        "teachings": [
+            "Translation is dharma propagation.",
+            "The ten bhumis are stages of compassionate awakening.",
+            "Mind-only philosophy liberates from illusion."
+        ],
+        "works": [
+            "Chinese translation of Dashabhumika Sutra",
+            "Commentaries on Yogachara texts"
+        ],
+        "quotes": [
+            "\"Words are boats; cross the ocean, then leave them.\"",
+            "\"Compassion grows as self-grasping fades.\""
+        ],
+        "image": "ratnamati.jpg"
+    },
+    {
+        "id": "buddhist_master_paramartha",
+        "name": "Paramartha",
+        "nameLocal": "परमार्थ",
+        "nameHi": "परमार्थ",
+        "tradition": "buddhist",
+        "sampradaya": "Yogachara / Mahayana",
+        "period": "499–569 CE",
+        "birthPlace": "Ujjain, Madhya Pradesh",
+        "biography": "Paramartha was a 6th-century Indian Buddhist monk who traveled to China and translated over 60 texts, including Vasubandhu’s works. His rendering of the Mahayana-samparigraha-shastra introduced Yogachara to Chinese Buddhists. Despite political turmoil, he persisted in teaching, founding a school that influenced later Chan (Zen) thought. Paramartha’s life exemplifies the transnational mission of Indian Buddhist scholars to preserve and transmit dharma.",
+        "teachings": [
+            "True meaning (paramartha) transcends words.",
+            "Storehouse consciousness holds karmic seeds.",
+            "Translation requires both scholarship and devotion."
+        ],
+        "works": [
+            "Chinese translations of Yogachara texts",
+            "Commentaries on Abhidharma"
+        ],
+        "quotes": [
+            "\"The ultimate truth is silence; words point to it.\"",
+            "\"Even in exile, the Dharma flourishes.\""
+        ],
+        "image": "paramartha.jpg"
+    },
+    {
+        "id": "buddhist_master_vasumitra",
+        "name": "Vasumitra",
+        "nameLocal": "वसुमित्र",
+        "nameHi": "वसुमित्र",
+        "tradition": "buddhist",
+        "sampradaya": "Sarvastivada / Theravada",
+        "period": "c. 1st–2nd century CE",
+        "birthPlace": "Gandhara",
+        "biography": "Vasumitra was a 1st–2nd century Buddhist scholar who presided over the Fourth Buddhist Council under Kanishka. He defended Sarvastivada doctrine in the Mahavibhasa, a massive Abhidharma commentary. His work systematized Buddhist psychology and cosmology, influencing Central Asian Buddhism. Vasumitra represents the scholastic rigor of early Buddhist councils in preserving doctrinal unity.",
+        "teachings": [
+            "All dharmas exist in past, present, and future.",
+            "Abhidharma analysis reveals reality’s structure.",
+            "Councils protect the Dharma from fragmentation."
+        ],
+        "works": [
+            "Mahavibhasa (attributed)",
+            "Abhidharma treatises"
+        ],
+        "quotes": [
+            "\"The Dharma is a vast ocean; Abhidharma is its map.\"",
+            "\"Debate clarifies; compassion unites.\""
+        ],
+        "image": "vasumitra.jpg"
+    },
+    {
+        "id": "buddhist_master_ghosaka",
+        "name": "Ghosaka",
+        "nameLocal": "घोषक",
+        "nameHi": "घोषक",
+        "tradition": "buddhist",
+        "sampradaya": "Sarvastivada",
+        "period": "c. 1st century CE",
+        "birthPlace": "Kosambi, Uttar Pradesh",
+        "biography": "Ghosaka was a 1st-century Buddhist monk known for his generosity and scholarship. He built a monastery in Kosambi and contributed to Abhidharma literature. His life is recounted in the Ghosaka Jataka as a previous birth of the Buddha, highlighting his virtue. Ghosaka exemplifies the ideal lay-monastic patron who supports the Sangha through material and intellectual means.",
+        "teachings": [
+            "Generosity builds the foundation for wisdom.",
+            "Monasteries are gardens of dharma.",
+            "Scholarship serves liberation, not fame."
+        ],
+        "works": [
+            "Abhidharma commentaries (lost)"
+        ],
+        "quotes": [
+            "\"My wealth is for the Sangha; my mind is for the Dharma.\"",
+            "\"Build shelters for monks; they build shelters for truth.\""
+        ],
+        "image": "ghosaka.jpg"
+    },
+    {
+        "id": "buddhist_master_upali",
+        "name": "Upali",
+        "nameLocal": "उपालि",
+        "nameHi": "उपालि",
+        "tradition": "buddhist",
+        "sampradaya": "Theravada",
+        "period": "6th–5th century BCE",
+        "birthPlace": "Kapilavastu, Nepal",
+        "biography": "Upali was the Buddha’s barber who became the foremost expert on Vinaya (monastic discipline). At the First Buddhist Council, he recited the entire Vinaya Pitaka from memory, preserving the rules for monastic conduct. Born a Shudra, his mastery over discipline demonstrated that spiritual authority in Buddhism transcends caste. Upali’s legacy ensures ethical integrity in the Sangha across millennia.",
+        "teachings": [
+            "Discipline is the lifeblood of the Sangha.",
+            "Caste is irrelevant in the Dharma.",
+            "Memory preserves the Buddha’s words."
+        ],
+        "works": [
+            "Vinaya Pitaka (recited at First Council)"
+        ],
+        "quotes": [
+            "\"Rules are not chains; they are wings for liberation.\"",
+            "\"I was a barber; now I guard the Dharma.\""
+        ],
+        "image": "upali.jpg"
+    },
+    {
+        "id": "buddhist_master_ananda",
+        "name": "Ananda",
+        "nameLocal": "आनंद",
+        "nameHi": "आनंद",
+        "tradition": "buddhist",
+        "sampradaya": "Theravada",
+        "period": "6th–5th century BCE",
+        "birthPlace": "Kapilavastu, Nepal",
+        "biography": "Ananda was the Buddha’s cousin and personal attendant for 25 years. Known for his prodigious memory, he recited the Sutta Pitaka at the First Buddhist Council, preserving the Buddha’s discourses. He advocated for the ordination of women, leading to the establishment of the bhikkhuni sangha. Ananda’s humility and devotion made him beloved by all, embodying the ideal disciple who serves with love.",
+        "teachings": [
+            "Listening is the first step to wisdom.",
+            "Compassion includes advocating for the marginalized.",
+            "Service to the teacher is the highest learning."
+        ],
+        "works": [
+            "Sutta Pitaka (recited at First Council)"
+        ],
+        "quotes": [
+            "\"I have heard the Blessed One say...\"",
+            "\"Serve with love; learn through presence.\""
+        ],
+        "image": "ananda.jpg"
+    },
+    {
+        "id": "jain_acharya_silanka",
+        "name": "Silanka",
+        "nameLocal": "शीलांक",
+        "nameHi": "शीलांक",
+        "tradition": "jain",
+        "sampradaya": "Śvetāmbara Acharya",
+        "period": "c. 9th century CE",
+        "birthPlace": "Gujarat",
+        "biography": "Silanka was a 9th-century Śvetāmbara acharya who wrote the first complete commentary on the Ācārāṅga Sūtra, the oldest Jain text. His work preserved early monastic rules and ethical codes during a period of textual fragmentation. He emphasized non-violence in thought, word, and deed as the core of Jain practice. Silanka’s scholarship ensured the continuity of Śvetāmbara canon in medieval India.",
+        "teachings": [
+            "Non-violence begins in the mind.",
+            "Commentary protects scripture from misinterpretation.",
+            "Monastic discipline is the path to liberation."
+        ],
+        "works": [
+            "Commentary on Ācārāṅga Sūtra",
+            "Commentary on Sūtrakṛtāṅga"
+        ],
+        "quotes": [
+            "\"Even a thought of harm binds karma.\"",
+            "\"Scripture without understanding is a lamp without oil.\""
+        ],
+        "image": "silanka.jpg"
+    },
+    {
+        "id": "jain_acharya_devendra_suri",
+        "name": "Devendra Suri",
+        "nameLocal": "देवेन्द्र सूरि",
+        "nameHi": "देवेन्द्र सूरि",
+        "tradition": "jain",
+        "sampradaya": "Śvetāmbara Acharya",
+        "period": "c. 11th century CE",
+        "birthPlace": "Gujarat",
+        "biography": "Devendra Suri was an 11th-century Śvetāmbara scholar who wrote the Nandī-sūtra commentary and works on logic. He debated Buddhist and Hindu scholars, defending Jain epistemology. His emphasis on anekantavada (non-absolutism) promoted intellectual humility. Devendra Suri represents the golden age of Jain scholasticism in Gujarat, where monastic universities thrived.",
+        "teachings": [
+            "All views are partial; truth is multifaceted.",
+            "Logic must serve non-violence.",
+            "Debate with respect, not contempt."
+        ],
+        "works": [
+            "Nandī-sūtra commentary",
+            "Pramāṇa-naya-tattvālokālaṃkāra"
+        ],
+        "quotes": [
+            "\"The wise see many sides; the fool sees one.",
+            "\"Victory in debate is useless without compassion.\""
+        ],
+        "image": "devendra_suri.jpg"
+    },
+    {
+        "id": "jain_acharya_mallisena",
+        "name": "Mallisena",
+        "nameLocal": "मल्लिसेन",
+        "nameHi": "मल्लिसेन",
+        "tradition": "jain",
+        "sampradaya": "Digambara Acharya",
+        "period": "c. 13th century CE",
+        "birthPlace": "Karnataka",
+        "biography": "Mallisena was a 13th-century Digambara acharya who wrote the Syādvādamañjarī, a seminal work on Jain logic and anekantavada. He systematized the sevenfold predication (saptabhangi) to explain reality’s complexity. His work influenced later Indian philosophers across traditions. Mallisena’s life shows how Jain thought contributed to India’s broader intellectual heritage.",
+        "teachings": [
+            "Reality is indescribable in absolute terms.",
+            "Seven perspectives reveal truth’s depth.",
+            "Logic prevents dogmatism."
+        ],
+        "works": [
+            "Syādvādamañjarī",
+            "Commentaries on Kundakunda"
+        ],
+        "quotes": [
+            "\"To say ‘it is’ or ‘it is not’ is incomplete; truth is ‘somehow’.",
+            "\"The universe laughs at those who claim certainty.\""
+        ],
+        "image": "mallisena.jpg"
+    },
+    {
+        "id": "jain_acharya_prabhachandra",
+        "name": "Prabhachandra",
+        "nameLocal": "प्रभाचन्द्र",
+        "nameHi": "प्रभाचन्द्र",
+        "tradition": "jain",
+        "sampradaya": "Digambara Acharya",
+        "period": "c. 8th–9th century CE",
+        "birthPlace": "Karnataka",
+        "biography": "Prabhachandra was an 8th–9th century Digambara logician who wrote the Prameyakamalamartanda, a critique of Nyaya and Buddhist epistemology. He defended Jain omniscience and karma theory with rigorous dialectics. His work preserved Digambara thought during the rise of Advaita. Prabhachandra exemplifies the Jain commitment to rational defense of dharma.",
+        "teachings": [
+            "Omniscience is possible through karmic purification.",
+            "Critique others’ views fairly before refuting.",
+            "Knowledge without ethics is dangerous."
+        ],
+        "works": [
+            "Prameyakamalamartanda",
+            "Nyayakumudacandra"
+        ],
+        "quotes": [
+            "\"The Jina sees all; we see fragments.",
+            "\"Reason is the sword; compassion is the sheath.\""
+        ],
+        "image": "prabhachandra.jpg"
+    },
+    {
+        "id": "jain_acharya_vidyasagara",
+        "name": "Vidyasagara",
+        "nameLocal": "विद्यासागर",
+        "nameHi": "विद्यासागर",
+        "tradition": "jain",
+        "sampradaya": "Digambara Acharya",
+        "period": "1935–2023 CE",
+        "birthPlace": "Chittorgarh, Rajasthan",
+        "biography": "Acharya Vidyasagara was a 20th–21st century Digambara monk known for his extreme austerity, including kayotsarga (standing meditation) for hours. He revived interest in classical Jain texts and inspired thousands through his silent presence. His life demonstrated that ancient ascetic ideals remain viable in the modern world. He passed away in sallekhana (voluntary fasting unto death), upholding Jain principles to the end.",
+        "teachings": [
+            "Austerity purifies karma.",
+            "Silence is the highest teaching.",
+            "Live simply; desire nothing."
+        ],
+        "works": [
+            "Discourses on Tattvartha Sutra (oral)"
+        ],
+        "quotes": [
+            "\"I own nothing; not even this body.",
+            "\"Peace is found in letting go.\""
+        ],
+        "image": "vidyasagara.jpg"
+    },
+    {
+        "id": "tribal_saint_budhu_bhagat",
+        "name": "Budhu Bhagat",
+        "nameLocal": "बुधु भगत",
+        "nameHi": "बुधु भगत",
+        "tradition": "hindu",
+        "sampradaya": "Tribal Folk Saint",
+        "period": "1792–1832 CE",
+        "birthPlace": "Chotanagpur, Jharkhand",
+        "biography": "Budhu Bhagat was a tribal freedom fighter and spiritual leader of the Larka Kol tribe who led the 1831 Kol Rebellion against British land policies. Revered as a saint by his people, he combined indigenous nature worship with resistance to colonial exploitation. He declared himself a messenger of Singbonga (the Sun God) and mobilized tribes through spiritual oaths. His martyrdom made him a symbol of tribal dignity and eco-spiritual resistance.",
+        "teachings": [
+            "The forest is sacred; protect it.",
+            "Colonial laws violate divine order.",
+            "Unity among tribes is strength."
+        ],
+        "works": [
+            "Oral prophecies and war songs"
+        ],
+        "quotes": [
+            "\"Singbonga commands us to fight for our land!",
+            "\"Better to die free than live enslaved.\""
+        ],
+        "image": "budhu_bhagat.jpg"
+    },
+    {
+        "id": "tribal_saint_telanga_kharia",
+        "name": "Telanga Kharia",
+        "nameLocal": "तेलंगा खड़िया",
+        "nameHi": "तेलंगा खड़िया",
+        "tradition": "hindu",
+        "sampradaya": "Tribal Folk Saint",
+        "period": "1806–1880 CE",
+        "birthPlace": "Chotanagpur, Jharkhand",
+        "biography": "Telanga Kharia was a tribal leader and mystic who led the Kharia Rebellion (1850s–1860s) against British oppression. He established a parallel government based on tribal dharma and nature worship. Known for his charisma and strategic acumen, he united scattered tribes under a spiritual banner. His legacy lives in Jharkhand as a symbol of indigenous sovereignty and ecological spirituality.",
+        "teachings": [
+            "Land belongs to the earth, not the state.",
+            "Tribal law is divine law.",
+            "Resist injustice with courage."
+        ],
+        "works": [
+            "Oral codes of tribal governance"
+        ],
+        "quotes": [
+            "\"We are children of the soil; we will not be uprooted.",
+            "\"Our gods dwell in trees, not temples.\""
+        ],
+        "image": "telanga_kharia.jpg"
+    },
+    {
+        "id": "sant_gora_kumbhar",
+        "name": "Gora Kumbhar",
+        "nameLocal": "गोरा कुंभार",
+        "nameHi": "गोरा कुंभार",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 13th–14th century CE",
+        "birthPlace": "Satyapuri (Ter), Maharashtra",
+        "biography": "Gora Kumbhar was a 13th–14th century potter-saint of the Varkari tradition. A contemporary of Namdev, he tested Namdev’s devotion by breaking pots he had made, teaching him detachment. His abhangas emphasize seeing Vithoba in everyday work. As a Shudra artisan, his spiritual authority challenged caste hierarchies, proving that bhakti transcends occupation. His shrine in Ter remains a pilgrimage site for potters and devotees alike.",
+        "teachings": [
+            "Work is worship when offered to Vithoba.",
+            "Detachment is tested in daily life.",
+            "God is in the clay, the wheel, and the hand."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"I shape pots, but Vithoba shapes my soul.",
+            "\"Break my pots, but not my faith!\""
+        ],
+        "image": "gora_kumbhar.jpg"
+    },
+    {
+        "id": "sant_senaji",
+        "name": "Senaji",
+        "nameLocal": "सेनाजी",
+        "nameHi": "सेनाजी",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 13th century CE",
+        "birthPlace": "Maharashtra",
+        "biography": "Senaji was a 13th-century barber-saint of the Varkari tradition. His humble profession did not bar him from spiritual realization; his abhangas express deep devotion to Vithoba. He participated in the Pandharpur pilgrimage alongside Namdev and Jnaneswar. Senaji’s life affirms that in the Varkari path, caste and occupation are irrelevant before the grace of Vithoba.",
+        "teachings": [
+            "Shave egos, not just heads.",
+            "Vithoba’s name purifies all work.",
+            "Barber or Brahmin, all are equal at Pandharpur."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"My razor cuts hair; Vithoba’s grace cuts illusion.",
+            "\"I serve saints; that is my highest dharma.\""
+        ],
+        "image": "senaji.jpg"
+    },
+    {
+        "id": "sant_savata_mali",
+        "name": "Savata Mali",
+        "nameLocal": "सावता माळी",
+        "nameHi": "सावता माळी",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 13th–14th century CE",
+        "birthPlace": "Mangalwedha, Maharashtra",
+        "biography": "Savata Mali was a 13th–14th century gardener-saint of the Varkari tradition. His abhangas use gardening metaphors—watering, weeding, pruning—to describe spiritual practice. He taught that tending the garden of the heart with devotion yields the fruit of Vithoba’s grace. As a Mali (gardener), his inclusion in the Varkari canon highlights the movement’s embrace of all occupational groups.",
+        "teachings": [
+            "Water the heart with Vithoba’s name.",
+            "Uproot weeds of desire through discipline.",
+            "The garden of bhakti blooms in humility."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"I plant seeds of devotion; Vithoba gives the harvest.",
+            "\"A true gardener sees God in every leaf.\""
+        ],
+        "image": "savata_mali.jpg"
+    },
+    {
+        "id": "sant_kanhopatra",
+        "name": "Kanhopatra",
+        "nameLocal": "कान्होपात्रा",
+        "nameHi": "कान्होपात्रा",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 15th century CE",
+        "birthPlace": "Mangalvedhe, Maharashtra",
+        "biography": "Kanhopatra was a 15th-century Varkari saint born to a courtesan. Despite her social stigma, she attained spiritual fame through her abhangas dedicated to Vithoba. Legend says she merged with Vithoba’s idol at Pandharpur, achieving liberation. Her life challenges notions of purity and pollution, affirming that divine grace is available to all, regardless of birth or past. She is one of the few women in the Varkari tradition with a distinct hagiography.",
+        "teachings": [
+            "Vithoba’s grace erases all past sins.",
+            "Social shame cannot touch the soul’s purity.",
+            "Longing for God is the highest virtue."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"They call me fallen, but Vithoba lifts me high.",
+            "\"My body is theirs; my heart is Yours alone.\""
+        ],
+        "image": "kanhopatra.jpg"
+    },
+    {
+        "id": "sant_ukhande",
+        "name": "Ukhande",
+        "nameLocal": "उखंडे",
+        "nameHi": "उखंडे",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 14th century CE",
+        "birthPlace": "Maharashtra",
+        "biography": "Ukhande was a 14th-century Varkari saint from the Mang (Dalit) community. His abhangas speak of social oppression yet affirm Vithoba’s unconditional love. He walked the Pandharpur pilgrimage barefoot, singing of divine equality. Ukhande’s life, like Chokhamela’s, shows how the Varkari movement provided spiritual dignity to the marginalized.",
+        "teachings": [
+            "Vithoba’s feet are open to all castes.",
+            "Singing His name breaks chains of birth.",
+            "The road to Pandharpur is the path to freedom."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"They deny me water, but Vithoba gives me nectar.",
+            "\"My song is my weapon against injustice.\""
+        ],
+        "image": "ukhande.jpg"
+    },
+    {
+        "id": "sant_bhanudas",
+        "name": "Bhanudas",
+        "nameLocal": "भानुदास",
+        "nameHi": "भानुदास",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 15th–16th century CE",
+        "birthPlace": "Paithan, Maharashtra",
+        "biography": "Bhanudas was a 15th–16th century Varkari saint and great-grandfather of Eknath. He famously retrieved the Vithoba idol from Bidar, where it had been taken by a Muslim ruler, through devotion and diplomacy. His act preserved the central symbol of Varkari faith. His abhangas emphasize the importance of protecting sacred spaces. Bhanudas bridges the early and late Varkari periods, ensuring continuity of the tradition.",
+        "teachings": [
+            "Protect temples as centers of dharma.",
+            "Devotion can move rulers’ hearts.",
+            "Family lineage carries spiritual duty."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"Vithoba belongs to Pandharpur, not palaces.",
+            "\"Faith moves mountains—and idols.\""
+        ],
+        "image": "bhanudas.jpg"
+    },
+    {
+        "id": "sant_sopan",
+        "name": "Sopan",
+        "nameLocal": "सोपान",
+        "nameHi": "सोपान",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 13th century CE",
+        "birthPlace": "Apegaon, Maharashtra",
+        "biography": "Sopan was the younger brother of Jnaneswar and Muktabai, part of the saintly quartet of the Varkari tradition. Orphaned early, he composed abhangas expressing childlike devotion to Vithoba. His poetry is marked by simplicity and emotional depth. Sopan’s life, like his siblings’, exemplifies how familial bonds can become a crucible for collective spiritual realization.",
+        "teachings": [
+            "Childlike faith opens heaven’s gates.",
+            "Brotherhood in devotion is divine.",
+            "Vithoba is the father of orphans."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"I have no parents but Vithoba.",
+            "\"My brothers and sister are my path to God.\""
+        ],
+        "image": "sopan.jpg"
+    },
+    {
+        "id": "sant_narhari_soneri",
+        "name": "Narhari Soneri",
+        "nameLocal": "नरहरि सोनेरी",
+        "nameHi": "नरहरि सोनेरी",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 17th century CE",
+        "birthPlace": "Maharashtra",
+        "biography": "Narhari Soneri was a 17th-century goldsmith-saint of the Varkari tradition. His abhangas use metallurgical metaphors—melting, refining, molding—to describe the soul’s transformation through bhakti. He taught that just as gold is purified by fire, the heart is purified by devotion to Vithoba. His life shows how artisans integrated their craft into spiritual practice.",
+        "teachings": [
+            "Devotion is the fire that purifies the soul.",
+            "God is the goldsmith; we are the gold.",
+            "Work with integrity as offering to Vithoba."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"Melt my ego in the furnace of Your name.",
+            "\"I shape gold; You shape my destiny.\""
+        ],
+        "image": "narhari_soneri.jpg"
+    },
+    {
+        "id": "sant_ruhanbai",
+        "name": "Ruhanbai",
+        "nameLocal": "रुहानबाई",
+        "nameHi": "रुहानबाई",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 18th century CE",
+        "birthPlace": "Maharashtra",
+        "biography": "Ruhanbai was an 18th-century female Varkari saint whose abhangas express maternal love for Vithoba. Little is known of her life, but her poetry survives in oral tradition, emphasizing service and surrender. She represents the quiet continuity of women’s voices in the Varkari movement beyond the well-known figures like Janabai.",
+        "teachings": [
+            "Serve Vithoba as a mother serves her child.",
+            "Humility is the ornament of devotion.",
+            "The kitchen is a temple when cooked with love."
+        ],
+        "works": [
+            "Abhangas (oral tradition)"
+        ],
+        "quotes": [
+            "\"Let me feed You, O Vithoba, as a mother feeds her son.",
+            "\"My hands are rough, but my heart is soft for You.\""
+        ],
+        "image": "ruhanbai.jpg"
+    },
+    {
+        "id": "sant_tukaram_ii",
+        "name": "Tukaram II",
+        "nameLocal": "तुकाराम द्वितीय",
+        "nameHi": "तुकाराम द्वितीय",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 18th century CE",
+        "birthPlace": "Dehu, Maharashtra",
+        "biography": "Tukaram II was an 18th-century Varkari saint who claimed spiritual descent from the original Tukaram. He composed abhangas continuing the tradition of social critique and devotion. Though less famous, he represents the enduring legacy of Tukaram’s path, showing how saintly lineages inspire new generations of poets and reformers.",
+        "teachings": [
+            "Follow Tukaram’s path of fearless devotion.",
+            "Caste hypocrisy still exists; fight it with song.",
+            "Vithoba’s name is timeless."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"I am Tukaram’s shadow; his light guides me.",
+            "\"Sing for the poor; they are Vithoba’s favorites.\""
+        ],
+        "image": "tukaram_ii.jpg"
+    },
+    {
+        "id": "sant_yadavendra",
+        "name": "Yadavendra",
+        "nameLocal": "यादवेन्द्र",
+        "nameHi": "यादवेन्द्र",
+        "tradition": "hindu",
+        "sampradaya": "Varkari",
+        "period": "c. 19th century CE",
+        "birthPlace": "Maharashtra",
+        "biography": "Yadavendra was a 19th-century Varkari saint who revitalized the tradition during British rule. He organized Pandharpur pilgrimages and composed abhangas on moral living. His work ensured the Varkari path remained relevant in colonial times, adapting its message to new social challenges while preserving its core devotional essence.",
+        "teachings": [
+            "Pilgrimage unites the community in faith.",
+            "Colonialism cannot destroy dharma.",
+            "Sing Vithoba’s name with pride."
+        ],
+        "works": [
+            "Abhangas"
+        ],
+        "quotes": [
+            "\"The British rule the land, but Vithoba rules our hearts.",
+            "\"Walk to Pandharpur; it is our spiritual army.\""
+        ],
+        "image": "yadavendra.jpg"
+    },
+    {
+        "id": "sant_gajanan_maharaj",
+        "name": "Gajanan Maharaj",
+        "nameLocal": "गजानन महाराज",
+        "nameHi": "गजानन महाराज",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint",
+        "period": "1878–1910 CE",
+        "birthPlace": "Parner, Maharashtra",
+        "biography": "Gajanan Maharaj was a 19th–20th century saint known for his miraculous powers and synthesis of Advaita and Bhakti. He lived in Shegaon, where he performed tapasya and helped devotees regardless of caste. His life is shrouded in mystery, with accounts of bilocation and healing. He represents the modern mahatma who embodies both yogic siddhis and compassionate service.",
+        "teachings": [
+            "Advaita and Bhakti are two sides of one truth.",
+            "Help all who come to you, without judgment.",
+            "Miracles are grace, not for display."
+        ],
+        "works": [
+            "None authored; teachings in oral tradition"
+        ],
+        "quotes": [
+            "\"I am neither here nor there; I am everywhere.",
+            "\"Ask, and it shall be given—but ask with faith.\""
+        ],
+        "image": "gajanan_maharaj.jpg"
+    },
+    {
+        "id": "sant_sai_baba_of_shirdi",
+        "name": "Sai Baba of Shirdi",
+        "nameLocal": "शिर्डी के साईं बाबा",
+        "nameHi": "शिर्डी के साईं बाबा",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint",
+        "period": "c. 1838–1918 CE",
+        "birthPlace": "Unknown (possibly Maharashtra or Telangana)",
+        "biography": "Sai Baba of Shirdi was a 19th–20th century saint who blended Hindu and Muslim practices, lighting lamps in both mosques and temples. He taught the unity of all religions, emphasizing shraddha (faith) and saburi (patience). His simple life in Shirdi attracted devotees from all backgrounds. Though his origins are mysterious, his message of love and tolerance resonates globally. His samadhi in Shirdi is one of India’s most visited shrines.",
+        "teachings": [
+            "All religions lead to the same God.",
+            "Faith and patience overcome all obstacles.",
+            "Share what you have; hoarding is sin."
+        ],
+        "works": [
+            "None authored; teachings in 'Shri Sai Satcharita'"
+        ],
+        "quotes": [
+            "\"Why fear when I am here?",
+            "\"Hands that give are holier than lips that pray.\""
+        ],
+        "image": "sai_baba.jpg"
+    },
+    {
+        "id": "sant_upasani_maharaj",
+        "name": "Upasani Maharaj",
+        "nameLocal": "उपासनी महाराज",
+        "nameHi": "उपासनी महाराज",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint",
+        "period": "1870–1941 CE",
+        "birthPlace": "Satana, Maharashtra",
+        "biography": "Upasani Maharaj was a 20th-century saint and disciple of Sai Baba of Shirdi. Known for his unconventional behavior—living in a cow dung hut, speaking harshly to disciples—he taught that true spirituality lies beyond social norms. He founded the Sakori ashram, where he elevated women’s status by appointing female trustees. His life challenges conventional saintliness, emphasizing inner transformation over external piety.",
+        "teachings": [
+            "Spirituality is beyond good and bad.",
+            "Women are equal in spiritual capacity.",
+            "Shock the ego to awaken the soul."
+        ],
+        "works": [
+            "Discourses compiled in 'Upasani Vak Sudha'"
+        ],
+        "quotes": [
+            "\"I am not a saint; I am a mirror.",
+            "\"Break your concepts; truth is beyond them.\""
+        ],
+        "image": "upasani_maharaj.jpg"
+    },
+    {
+        "id": "sant_meher_baba",
+        "name": "Meher Baba",
+        "nameLocal": "मेहर बाबा",
+        "nameHi": "मेहर बाबा",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint",
+        "period": "1894–1969 CE",
+        "birthPlace": "Poona, Maharashtra",
+        "biography": "Meher Baba was a 20th-century mystic who took a vow of silence in 1925 and communicated via alphabet board and hand gestures. He claimed to be the Avatar of the Age and traveled globally, attracting followers from all walks of life. His teachings, compiled in 'God Speaks', describe the soul’s journey through reincarnation to God-realization. He emphasized love, truth, and the unity of all beings, leaving a lasting impact on global spirituality.",
+        "teachings": [
+            "Don’t worry; don’t do anything; everything is My concern.",
+            "Love is the essence of all creation.",
+            "The goal of life is God-realization."
+        ],
+        "works": [
+            "God Speaks",
+            "Discourses"
+        ],
+        "quotes": [
+            "\"You are eternally free; realize it.",
+            "\"My silence speaks louder than words ever could.\""
+        ],
+        "image": "meher_baba.jpg"
+    },
+    {
+        "id": "sant_nisargadatta_maharaj",
+        "name": "Nisargadatta Maharaj",
+        "nameLocal": "निसर्गदत्त महाराज",
+        "nameHi": "निसर्गदत्त महाराज",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint / Advaita",
+        "period": "1897–1981 CE",
+        "birthPlace": "Mumbai, Maharashtra",
+        "biography": "Nisargadatta Maharaj was a 20th-century householder and cigarette shop owner who taught radical non-duality. A disciple of Siddharameshwar Maharaj, he emphasized the sense 'I am' as the gateway to Self-realization. His talks, compiled in 'I Am That', influenced Western seekers like Maurice Frydman. He taught that the Self is already free; suffering arises from misidentification with the body-mind. His life proves that enlightenment is possible amidst worldly duties.",
+        "teachings": [
+            "Hold onto the 'I am' without words.",
+            "You are not the body; you are the witness.",
+            "Freedom is your natural state; just stop imagining bondage."
+        ],
+        "works": [
+            "I Am That",
+            "Seeds of Consciousness"
+        ],
+        "quotes": [
+            "\"Go back to the source of 'I am' and abide there.",
+            "\"The seeker is the sought; the search is the obstacle.\""
+        ],
+        "image": "nisargadatta_maharaj.jpg"
+    },
+    {
+        "id": "sant_siddharameshwar_maharaj",
+        "name": "Siddharameshwar Maharaj",
+        "nameLocal": "सिद्धारामेश्वर महाराज",
+        "nameHi": "सिद्धारामेश्वर महाराज",
+        "tradition": "hindu",
+        "sampradaya": "Inchegiri Sampradaya / Advaita",
+        "period": "1888–1936 CE",
+        "birthPlace": "Pathri, Maharashtra",
+        "biography": "Siddharameshwar Maharaj was a 20th-century Advaita master and guru of Nisargadatta Maharaj. He taught the 'Vihangam Marg' (bird’s path)—direct realization of the Self without prolonged practice. His concise instructions, compiled in 'Master of Self-Realization', cut through conceptual thinking. He emphasized that the Self is ever-present; effort only creates duality. His lineage continues to influence non-dual seekers worldwide.",
+        "teachings": [
+            "The bird’s path is immediate recognition.",
+            "No practice is needed; just be.",
+            "The 'I am' is the bridge to the Absolute."
+        ],
+        "works": [
+            "Master of Self-Realization",
+            "Adhyatma Jnanacha Yogakanda"
+        ],
+        "quotes": [
+            "\"You are already That; stop searching.",
+            "\"The mind is the thief; catch it in the act.\""
+        ],
+        "image": "siddharameshwar_maharaj.jpg"
+    },
+    {
+        "id": "sant_pandurang_shastri_athavale",
+        "name": "Pandurang Shastri Athavale",
+        "nameLocal": "पांडुरंग शास्त्री आठवले",
+        "nameHi": "पांडुरंग शास्त्री आठवले",
+        "tradition": "hindu",
+        "sampradaya": "Modern Saint / Swadhyaya Movement",
+        "period": "1920–2003 CE",
+        "birthPlace": "Roha, Maharashtra",
+        "biography": "Pandurang Shastri Athavale, or Dadaji, founded the Swadhyaya Movement, which promotes self-study of scriptures as a tool for social transformation. Rejecting charity, he inspired 'devotional farming' and 'fishermen’s temples' where communities work collectively as worship. Awarded the Templeton Prize, he showed that Vedic values could address poverty without dependency. His life bridges ancient wisdom and modern development.",
+        "teachings": [
+            "Self-study (swadhyaya) leads to self-transformation.",
+            "Work as worship builds self-reliant communities.",
+            "God resides in collective labor done with devotion."
+        ],
+        "works": [
+            "Discourses on Bhagavad Gita and Upanishads"
+        ],
+        "quotes": [
+            "\"Don’t give fish; teach fishing as worship.",
+            "\"Society changes when individuals change.\""
+        ],
+        "image": "athavale.jpg"
+    },
+    {
+        "id": "sant_swami_tapaswananda",
+        "name": "Swami Tapaswananda",
+        "nameLocal": "स्वामी तपस्वानंद",
+        "nameHi": "स्वामी तपस्वानंद",
+        "tradition": "hindu",
+        "sampradaya": "Ramakrishna Mission",
+        "period": "1904–1991 CE",
+        "birthPlace": "Tamil Nadu",
+        "biography": "Swami Tapaswananda was a 20th-century Ramakrishna monk and scholar who served as vice-president of the Ramakrishna Order. He translated major Sanskrit texts like the Bhagavata Purana into English, making them accessible globally. His commentaries on Vedanta emphasized practical application in daily life. He bridged traditional scholarship and modern education, ensuring the relevance of Hindu philosophy in the academic world.",
+        "teachings": [
+            "Scriptural translation is seva to humanity.",
+            "Vedanta is not escape, but engaged wisdom.",
+            "Scholarship must lead to humility."
+        ],
+        "works": [
+            "English translation of Bhagavata Purana",
+            "Essentials of Hinduism",
+            "Sri Ramakrishna and His Unique Message"
+        ],
+        "quotes": [
+            "\"The Gita is a manual for living, not just dying.",
+            "\"Translate not just words, but spirit.\""
+        ],
+        "image": "tapaswananda.jpg"
+    },
+    {
+        "id": "sant_swami_gambhirananda",
+        "name": "Swami Gambhirananda",
+        "nameLocal": "स्वामी गंभीरानंद",
+        "nameHi": "स्वामी गंभीरानंद",
+        "tradition": "hindu",
+        "sampradaya": "Ramakrishna Mission",
+        "period": "1897–1981 CE",
+        "birthPlace": "West Bengal",
+        "biography": "Swami Gambhirananda was a 20th-century Ramakrishna monk and president of the Ramakrishna Order. A meticulous scholar, he edited critical editions of Vivekananda’s works and wrote histories of the Ramakrishna Movement. His administrative acumen stabilized the organization’s global expansion. He embodied the ideal of the scholar-administrator who serves dharma through quiet dedication.",
+        "teachings": [
+            "Accuracy in scholarship honors the guru.",
+            "Organization is necessary for dharma’s spread.",
+            "Lead with humility, not authority."
+        ],
+        "works": [
+            "History of the Ramakrishna Math and Mission",
+            "Editor of Complete Works of Swami Vivekananda"
+        ],
+        "quotes": [
+            "\"Preserve the legacy with care; it is not ours to own.",
+            "\"Service through administration is also yoga.\""
+        ],
+        "image": "gambhirananda.jpg"
+    },
+    {
+        "id": "sant_swami_vireswarananda",
+        "name": "Swami Vireswarananda",
+        "nameLocal": "स्वामी वीरेश्वरानंद",
+        "nameHi": "स्वामी वीरेश्वरानंद",
+        "tradition": "hindu",
+        "sampradaya": "Ramakrishna Mission",
+        "period": "1891–1985 CE",
+        "birthPlace": "West Bengal",
+        "biography": "Swami Vireswarananda was a 20th-century Ramakrishna monk who served as president of the Ramakrishna Order. He expanded the mission’s educational and relief work, establishing schools and hospitals across India. His leadership during post-independence challenges ensured the organization’s growth. He emphasized that service to humanity is the living expression of Vedanta.",
+        "teachings": [
+            "Education is empowerment through dharma.",
+            "Relief work is worship in action.",
+            "Adapt methods, but never compromise principles."
+        ],
+        "works": [
+            "Administrative reports and letters"
+        ],
+        "quotes": [
+            "\"Feed the hungry; that is your puja.",
+            "\"Build institutions that outlive you.\""
+        ],
+        "image": "vireswarananda.jpg"
+    }
+];
+
+// Removed CommonJS exports
