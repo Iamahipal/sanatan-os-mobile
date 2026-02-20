@@ -5,7 +5,7 @@
         MagnifyingGlass,
         BookOpen,
         User,
-    } from "@phosphor-icons/svelte";
+    } from "phosphor-svelte";
     import { cn } from "$lib/utils";
 
     // Determine active tab based on current route

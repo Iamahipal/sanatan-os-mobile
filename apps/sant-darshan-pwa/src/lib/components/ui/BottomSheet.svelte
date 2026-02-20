@@ -2,7 +2,7 @@
     import { cn } from "$lib/utils";
     import { fade, fly } from "svelte/transition";
     import type { Snippet } from "svelte";
-    import { X } from "@phosphor-icons/svelte";
+    import { X } from "phosphor-svelte";
 
     let {
         open = $bindable(false),

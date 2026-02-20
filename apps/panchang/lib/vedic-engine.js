@@ -158,16 +158,26 @@ const VedicEngine = (function () {
         'रुधिरोद्गारी', 'रक्ताक्षी', 'क्रोधन', 'अक्षय'
     ];
 
-    // === AYANAMSA - Using Lahiri (Chitrapaksha) ===
-    // Lahiri Ayanamsa as of J2000.0 = 23°51'11" = 23.85305556°
-    // Precession rate = 50.2564" per year
+    // === AYANAMSA - Multiple Systems ===
+    // All values: base at J2000.0 epoch, linear precession model
+    // Sources: Lahiri (Indian Astronomical Ephemeris), KP, Raman, Yukteshwar
+    const AYANAMSA_SYSTEMS = {
+        lahiri: { base: 23 + 51 / 60 + 11 / 3600, rate: 50.2564 / 3600 }, // 23°51'11" IAE
+        krishnamurti: { base: 23 + 45 / 60 + 0 / 3600, rate: 50.2564 / 3600 }, // 23°45'00" KP
+        raman: { base: 22 + 24 / 60 + 25 / 3600, rate: 50.2564 / 3600 }, // 22°24'25" BV Raman
+        yukteshwar: { base: 22 + 27 / 60 + 37.7 / 3600, rate: 50.2564 / 3600 } // 22°27'37.7"
+    };
+    let _selectedAyanamsa = 'lahiri';
 
-    function getAyanamsa(date) {
+    function setAyanamsa(system) {
+        if (AYANAMSA_SYSTEMS[system]) _selectedAyanamsa = system;
+    }
+
+    function getAyanamsa(date, system) {
+        const sys = AYANAMSA_SYSTEMS[system || _selectedAyanamsa] || AYANAMSA_SYSTEMS.lahiri;
         const J2000 = new Date('2000-01-01T12:00:00Z');
         const yearsSinceJ2000 = (date - J2000) / (365.25 * 24 * 60 * 60 * 1000);
-        const lahiriJ2000 = 23 + 51 / 60 + 11 / 3600; // 23°51'11" at J2000
-        const precessionRate = 50.2564 / 3600; // arcsec to degrees per year
-        return lahiriJ2000 + precessionRate * yearsSinceJ2000;
+        return sys.base + sys.rate * yearsSinceJ2000;
     }
 
     // === ASTRONOMY-ENGINE WRAPPERS ===
@@ -513,15 +523,55 @@ const VedicEngine = (function () {
 
     // === HINDU CALENDAR ===
 
-    function calculateHinduMonth(date) {
+    // Amanta lunar month: determined by the Sun's sidereal rashi at the
+    // most recent Amavasya (end of tithi 30). We approximate by searching
+    // backwards for the date where Sun-Moon elongation last crossed 0°.
+    // Purnimanta mode: lunar month starts at Purnima (tithi 15 end).
+    function calculateHinduMonth(date, mode) {
+        mode = mode || 'amanta';
         const siderealSun = getSiderealSun(date);
         const solarMonthIndex = Math.floor(siderealSun / 30);
-        const lunarMonthIndex = solarMonthIndex;
+        const SOLAR_NAMES = ['मेष', 'वृषभ', 'मिथुन', 'कर्कट', 'सिंह', 'कन्या', 'तुला', 'वृश्चिक', 'धनु', 'मकर', 'कुम्भ', 'मीन'];
+
+        // Search backwards for last Amavasya (elongation ≈ 0°)
+        // Tithi cycle is ~29.53 days, so search back up to 30 days
+        let searchDate = new Date(date);
+        let prevElong = getSunMoonElongation(searchDate);
+        let amavasyaDate = null;
+        for (let i = 0; i < 32; i++) {
+            searchDate = new Date(searchDate.getTime() - 24 * 60 * 60 * 1000);
+            const elong = getSunMoonElongation(searchDate);
+            // Amavasya: elongation crosses from >350° to <10° (wraps through 0)
+            if (prevElong < 15 && elong > 345) {
+                amavasyaDate = new Date(searchDate.getTime() + 12 * 60 * 60 * 1000); // approximate
+                break;
+            }
+            prevElong = elong;
+        }
+
+        let lunarMonthIndex;
+        if (amavasyaDate) {
+            const sunAtAmavasya = getSiderealSun(amavasyaDate);
+            lunarMonthIndex = Math.floor(sunAtAmavasya / 30);
+        } else {
+            // Fallback: use solar month
+            lunarMonthIndex = solarMonthIndex;
+        }
+
+        // Purnimanta: month starts at Purnima, so shift by 1 in Krishna paksha
+        if (mode === 'purnimanta') {
+            const elong = getSunMoonElongation(date);
+            const tithiIndex = Math.floor(elong / 12);
+            if (tithiIndex >= 15) { // Krishna paksha
+                lunarMonthIndex = (lunarMonthIndex + 1) % 12;
+            }
+        }
 
         return {
-            solar: { name: ['मेष', 'वृषभ', 'मिथुन', 'कर्कट', 'सिंह', 'कन्या', 'तुला', 'वृश्चिक', 'धनु', 'मकर', 'कुम्भ', 'मीन'][solarMonthIndex], index: solarMonthIndex },
+            solar: { name: SOLAR_NAMES[solarMonthIndex], index: solarMonthIndex },
             lunar: CHANDRA_MONTHS[lunarMonthIndex],
-            lunarIndex: lunarMonthIndex
+            lunarIndex: lunarMonthIndex,
+            mode: mode
         };
     }
 
@@ -598,16 +648,27 @@ const VedicEngine = (function () {
         };
     }
 
-    function calculateAuspiciousMuhurats(sunTimes) {
-        // Brahma Muhurta: 1hr 36min before sunrise
-        const brahmaMuhurtaStart = sunTimes.sunrise - 1.6;
-        const brahmaMuhurtaEnd = sunTimes.sunrise - 0.8;
+    function calculateAuspiciousMuhurats(sunTimes, dayOfWeek) {
+        // Dynamic muhurta based on actual day/night durations
+        // Day muhurta = dayDuration / 15 (in hours)
+        // Night muhurta = nightDuration / 15 (in hours)
+        const dayMuhurta = sunTimes.dayDuration / 15;
+        const nightDuration = 24 - sunTimes.dayDuration;
+        const nightMuhurta = nightDuration / 15;
 
-        // Abhijit Muhurta: 24 min around noon
-        const abhijitStart = sunTimes.solarNoon - 0.4;
-        const abhijitEnd = sunTimes.solarNoon + 0.4;
+        // Brahma Muhurta: 14th muhurta of the night (2 muhurtas before sunrise)
+        // = [sunrise - 2*nightMuhurta, sunrise - nightMuhurta]
+        const brahmaMuhurtaStart = sunTimes.sunrise - 2 * nightMuhurta;
+        const brahmaMuhurtaEnd = sunTimes.sunrise - nightMuhurta;
 
-        // Godhuli: 24 min before sunset
+        // Abhijit Muhurta: 8th muhurta of the day (centered at solar noon)
+        // = 1 muhurta centered at noon = [noon - muhurta/2, noon + muhurta/2]
+        // Wednesday exception: traditionally not observed
+        const isWednesday = dayOfWeek === 3;
+        const abhijitStart = sunTimes.solarNoon - dayMuhurta / 2;
+        const abhijitEnd = sunTimes.solarNoon + dayMuhurta / 2;
+
+        // Godhuli: ~24 min before sunset (cow-dust time)
         const godhuliStart = sunTimes.sunset - 0.4;
         const godhuliEnd = sunTimes.sunset;
 
@@ -622,14 +683,18 @@ const VedicEngine = (function () {
                 start: abhijitStart,
                 end: abhijitEnd,
                 startTime: hoursToTime(abhijitStart),
-                endTime: hoursToTime(abhijitEnd)
+                endTime: hoursToTime(abhijitEnd),
+                notObserved: isWednesday,
+                reason: isWednesday ? 'Not observed on Wednesday' : null
             },
             godhuliMuhurta: {
                 start: godhuliStart,
                 end: godhuliEnd,
                 startTime: hoursToTime(godhuliStart),
                 endTime: hoursToTime(godhuliEnd)
-            }
+            },
+            dayMuhurtaDuration: dayMuhurta,
+            nightMuhurtaDuration: nightMuhurta
         };
     }
 
@@ -726,8 +791,7 @@ const VedicEngine = (function () {
     }
 
     function hoursToTime(hours) {
-        if (hours < 0) hours += 24;
-        if (hours >= 24) hours -= 24;
+        hours = ((hours % 24) + 24) % 24; // proper modulo wrap
         const h = Math.floor(hours);
         const m = Math.floor((hours - h) * 60);
         return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
@@ -785,7 +849,7 @@ const VedicEngine = (function () {
             const karana = calculateKarana(sunriseDate);
 
             // Calendar elements
-            const hinduMonth = calculateHinduMonth(sunriseDate);
+            const hinduMonth = calculateHinduMonth(sunriseDate, options.monthMode || 'amanta');
             const ayana = calculateAyana(sunriseDate);
             const samvatsara = calculateSamvatsara(dateObj.getFullYear());
 
@@ -793,7 +857,7 @@ const VedicEngine = (function () {
             const rahuKalam = calculateRahuKalam(sunTimes, dayOfWeek);
             const yamagandam = calculateYamagandam(sunTimes, dayOfWeek);
             const gulikaKalam = calculateGulikaKalam(sunTimes, dayOfWeek);
-            const auspiciousMuhurats = calculateAuspiciousMuhurats(sunTimes);
+            const auspiciousMuhurats = calculateAuspiciousMuhurats(sunTimes, dayOfWeek);
 
             // Choghadiya
             const choghadiya = calculateChoghadiya(sunTimes, dayOfWeek);
@@ -847,7 +911,7 @@ const VedicEngine = (function () {
 
                 // Ayanamsa used
                 ayanamsa: getAyanamsa(sunriseDate),
-                ayanamsaSystem: 'Lahiri'
+                ayanamsaSystem: _selectedAyanamsa
             };
         } catch (error) {
             console.error('Panchang calculation error:', error);
@@ -858,21 +922,33 @@ const VedicEngine = (function () {
     // === PUBLIC API ===
     return {
         getPanchang,
+        setAyanamsa,
+        getAyanamsa,
         getSunLongitude,
         getMoonLongitude,
-        getAyanamsa,
+        getSiderealSun,
+        getSiderealMoon,
+        getSunMoonElongation,
         calculateSunTimes,
         calculateMoonTimes,
         calculateTithi,
         calculateNakshatra,
+        calculateYoga,
+        calculateKarana,
+        calculateHinduMonth,
+        calculateAuspiciousMuhurats,
+        calculateRahuKalam,
+        calculateYamagandam,
+        calculateGulikaKalam,
         getMoonIllumination,
+        hoursToTime,
         NAKSHATRAS,
         TITHIS,
         YOGAS,
         KARANAS,
         VARAS,
-        getSunLongitude,
-        getMoonLongitude
+        CHANDRA_MONTHS,
+        AYANAMSA_SYSTEMS
     };
 
 })();

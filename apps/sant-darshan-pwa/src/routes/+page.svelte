@@ -12,7 +12,7 @@
         BookOpen,
         Trophy,
         Star,
-    } from "@phosphor-icons/svelte";
+    } from "phosphor-svelte";
 
     // Select daily saint based on the current date string
     let dailySaint = $state<Saint | null>(null);
@@ -31,10 +31,8 @@
 
     // Greeting logic based on hour
     const hour = new Date().getHours();
-    let greeting = "Namaste";
-    if (hour < 12) greeting = "Suprabhat";
-    else if (hour < 18) greeting = "Shubh Dophar";
-    else greeting = "Shubh Sandhya";
+    const greeting =
+        hour < 12 ? "Suprabhat" : hour < 18 ? "Shubh Dophar" : "Shubh Sandhya";
 
     const quickActions = [
         {
@@ -143,7 +141,9 @@
                                 alt={dailySaint.name.en}
                                 class="w-full h-full object-cover"
                                 onerror={(e) => {
-                                    e.currentTarget.style.display = "none";
+                                    (
+                                        e.currentTarget as HTMLImageElement
+                                    ).style.display = "none";
                                 }}
                             />
                             <!-- Fallback if no image -->

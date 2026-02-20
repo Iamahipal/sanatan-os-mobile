@@ -4,7 +4,7 @@
     import { searchEngine } from "$lib/services/SearchService";
     import { saints, traditions } from "$lib/data";
     import type { Saint } from "$lib/domain/types";
-    import { MagnifyingGlass, Funnel, MapPin } from "@phosphor-icons/svelte";
+    import { MagnifyingGlass, Funnel, MapPin } from "phosphor-svelte";
     import Card from "$lib/components/ui/Card.svelte";
 
     let query = $state("");
@@ -115,7 +115,9 @@
                                 alt={saint.name.en}
                                 class="w-full h-full object-cover"
                                 onerror={(e) => {
-                                    e.currentTarget.style.display = "none";
+                                    (
+                                        e.currentTarget as HTMLImageElement
+                                    ).style.display = "none";
                                 }}
                             />
                             {#if !saint.image}

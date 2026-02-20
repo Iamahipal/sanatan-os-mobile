@@ -79,6 +79,76 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // === PANCHANG EXPLAINERS (Beginner Education) ===
+    const PANCHANG_EXPLAINERS = {
+        tithi: {
+            term: 'Tithi (तिथि)',
+            what: 'The lunar day — based on the angle between the Sun and Moon.',
+            why: 'Each tithi carries specific energy. Some favor new beginnings (Pratipada), others favor completion (Purnima) or reflection (Amavasya).',
+            fact: 'There are 30 tithis in a lunar month: 15 in Shukla Paksha (waxing) and 15 in Krishna Paksha (waning).'
+        },
+        nakshatra: {
+            term: 'Nakshatra (नक्षत्र)',
+            what: 'The lunar mansion — the constellation the Moon occupies right now.',
+            why: 'Ancient seers mapped 27 nakshatras along the Moon\'s path. Each has a ruling deity and specific qualities that influence the day.',
+            fact: 'The Moon spends roughly 1 day in each of the 27 nakshatras.'
+        },
+        yoga: {
+            term: 'Yoga (योग)',
+            what: 'A calculation based on the combined longitude of the Sun and Moon.',
+            why: 'Some yogas are naturally auspicious (Siddhi, Shubha) while others signal caution (Vyatipata). This helps you pick the right day for important decisions.',
+            fact: 'There are 27 yogas. They cycle roughly once every 24 hours.'
+        },
+        karana: {
+            term: 'Karana (करण)',
+            what: 'Half of a tithi — each tithi has two karanas.',
+            why: 'Karanas fine-tune your timing. Some are good for trade (Bava), others for travel (Balava), and some signal caution (Vishti/Bhadra).',
+            fact: 'There are 11 karanas: 4 fixed and 7 rotating.'
+        },
+        choghadiya: {
+            term: 'Choghadiya (चौघड़िया)',
+            what: 'A time-division system that splits day and night into 8 slots each.',
+            why: 'Quick way to check if the current moment is auspicious (Shubh, Labh, Amrit) or inauspicious (Rog, Kaal, Udveg) without complex calculations.',
+            fact: '16 slots per day (8 daytime + 8 nighttime), named after their ruling planet\'s quality.'
+        },
+        hora: {
+            term: 'Hora (होरा)',
+            what: 'The planetary hour — each hour of the day is ruled by a different planet.',
+            why: 'Choosing the right hora amplifies your activity. Sun hora for authority, Venus hora for creativity, Jupiter hora for wisdom.',
+            fact: '24 horas per day, cycling through the 7 classical planets.'
+        },
+        rahuKalam: {
+            term: 'Rahu Kalam (राहु काल)',
+            what: 'A 90-minute inauspicious window each day ruled by shadow planet Rahu.',
+            why: 'Starting new ventures, signing contracts, or beginning travel during Rahu Kalam is traditionally avoided. Ongoing activities are fine.',
+            fact: 'The timing shifts daily based on sunrise and the day of the week.'
+        },
+        ayana: {
+            term: 'Ayana (अयन)',
+            what: 'The Sun\'s apparent journey between north (Uttarayana) and south (Dakshinayana).',
+            why: 'Uttarayana (Jan–Jul) is considered auspicious for beginnings. Dakshinayana (Jul–Jan) favors spiritual practices.',
+            fact: '2 ayanas per year, each lasting approximately 6 months.'
+        },
+        samvatsara: {
+            term: 'Samvatsara (संवत्सर)',
+            what: 'The Hindu year in a 60-year cycle, each with a unique name and character.',
+            why: 'The samvatsara influences the overall tone of the year — prosperity, challenges, or transformation.',
+            fact: '60 samvatsaras in a full cycle (e.g., Prabhava, Vibhava, Shukla…).'
+        },
+        panchang: {
+            term: 'Panchang (पञ्चाङ्ग)',
+            what: 'Literally "five limbs" — Tithi, Nakshatra, Yoga, Karana, and Vara (weekday).',
+            why: 'The Panchang is the ancient Indian system for understanding cosmic time. It tells you WHEN to act, WHEN to wait, and WHAT energy surrounds you today.',
+            fact: 'Used continuously for over 3,000 years across India.'
+        },
+        dishaShool: {
+            term: 'Disha Shool (दिशा शूल)',
+            what: 'A direction considered inauspicious for travel on a particular day.',
+            why: 'Each weekday has one direction to avoid for new journeys. Traveling in that direction is believed to bring obstacles.',
+            fact: 'Monday = East, Tuesday = North, Wednesday = North, Thursday = South, Friday = West, Saturday = East, Sunday = West.'
+        }
+    };
+
     // === UPCOMING FESTIVALS ===
     // Dynamically calculated using FestivalCalculator based on Tithi/Nakshatra
     function getNextFestivals() {
@@ -814,6 +884,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div class="upcoming-info">
                             <span class="upcoming-name">${f.icon || '🎉'} ${f.nameEn}</span>
+                            ${f.significance ? `<span class="upcoming-significance">${f.significance}</span>` : ''}
                             ${chip}
                         </div>
                     </div>
@@ -1362,7 +1433,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeAllModals() {
         document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+        const sheet = document.getElementById('info-sheet-overlay');
+        if (sheet) sheet.classList.remove('active');
     }
+
+    // === INFO BOTTOM SHEET ===
+    function showExplainer(key) {
+        const data = PANCHANG_EXPLAINERS[key];
+        if (!data) return;
+        const title = document.getElementById('sheet-title');
+        const body = document.getElementById('sheet-body');
+        const overlay = document.getElementById('info-sheet-overlay');
+        if (!title || !body || !overlay) return;
+
+        title.textContent = data.term;
+        body.innerHTML = `
+            <div class="sheet-section">
+                <div class="sheet-section-label">What is it?</div>
+                <div class="sheet-section-text">${data.what}</div>
+            </div>
+            <div class="sheet-section">
+                <div class="sheet-section-label">Why does it matter?</div>
+                <div class="sheet-section-text">${data.why}</div>
+            </div>
+            <div class="sheet-section">
+                <div class="sheet-section-label">Quick fact</div>
+                <div class="sheet-section-text">${data.fact}</div>
+            </div>
+        `;
+        overlay.classList.add('active');
+    }
+
+    // Info button click delegation
+    document.addEventListener('click', (e) => {
+        const infoBtn = e.target.closest('.info-btn');
+        if (infoBtn) {
+            e.stopPropagation();
+            showExplainer(infoBtn.dataset.explain);
+            return;
+        }
+        const overlay = e.target.closest('#info-sheet-overlay');
+        if (overlay && !e.target.closest('.bottom-sheet')) {
+            overlay.classList.remove('active');
+        }
+    });
 
     // === FESTIVAL CACHE ===
     let festivalCache = { key: null, data: null };

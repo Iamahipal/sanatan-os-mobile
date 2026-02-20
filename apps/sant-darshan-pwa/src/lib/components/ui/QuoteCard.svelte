@@ -4,7 +4,7 @@
         DownloadSimple,
         ShareNetwork,
         Quotes,
-    } from "@phosphor-icons/svelte";
+    } from "phosphor-svelte";
     import type { Saint } from "$lib/domain/types";
 
     let { quote, saint }: { quote: string; saint: Saint } = $props();

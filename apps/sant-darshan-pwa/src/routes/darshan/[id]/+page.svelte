@@ -11,7 +11,8 @@
         MapPin,
         Quotes,
         HandsPraying,
-    } from "@phosphor-icons/svelte";
+        BookOpen,
+    } from "phosphor-svelte";
     import Button from "$lib/components/ui/Button.svelte";
     import Card from "$lib/components/ui/Card.svelte";
 
@@ -104,7 +105,8 @@
                     alt={saint.name.en}
                     class="w-full h-full object-cover"
                     onerror={(e) => {
-                        e.currentTarget.style.display = "none";
+                        (e.currentTarget as HTMLImageElement).style.display =
+                            "none";
                     }}
                 />
                 <div

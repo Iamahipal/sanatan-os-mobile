@@ -86,6 +86,7 @@
 
                 <!-- Daily Guidance -->
                 <section class="guidance-section" id="guidance" aria-label="Daily guidance">
+                    <p class="section-subtitle">What energy surrounds you today</p>
                     <!-- Vara Card -->
                     <div class="vara-card">
                         <span class="vara-icon" id="vara-icon">☀️</span>
@@ -176,6 +177,7 @@
                         <span class="material-symbols-rounded">schedule</span>
                         <span id="label-right-now">Right Now</span>
                     </h2>
+                    <p class="section-subtitle">Ancient time-slots tell you when to act and when to pause</p>
 
                     <!-- Status Banner -->
                     <div class="status-banner good" id="current-status" role="status" aria-live="polite">
@@ -229,6 +231,7 @@
                         <span class="material-symbols-rounded">celebration</span>
                         <span id="label-coming-up">Coming Up</span>
                     </h2>
+                    <p class="section-subtitle">Hindu festivals follow the Moon — dates shift each year</p>
                     <div id="today-events"></div>
                     <div class="upcoming-list" id="upcoming-festivals">
                         <div class="no-events">Loading festivals…</div>
@@ -247,25 +250,56 @@
                         aria-label="Expanded panchang details">
                         <!-- Panchang Elements Grid -->
                         <div class="detail-group">
-                            <h3>Panchang Elements</h3>
+                            <h3>
+                                Panchang Elements
+                                <button class="info-btn m3-state" data-explain="panchang"
+                                    aria-label="What is Panchang?">
+                                    <span class="material-symbols-rounded">info</span>
+                                </button>
+                            </h3>
+                            <p class="section-subtitle">The five limbs of Vedic time</p>
                             <div class="detail-grid">
                                 <div class="detail-item">
-                                    <span class="detail-label">Tithi</span>
+                                    <span class="detail-label">
+                                        Tithi
+                                        <button class="info-btn m3-state" data-explain="tithi"
+                                            aria-label="What is Tithi?">
+                                            <span class="material-symbols-rounded">info</span>
+                                        </button>
+                                    </span>
                                     <span class="detail-value" id="d-tithi">—</span>
                                     <span class="detail-time" id="d-tithi-time"></span>
                                 </div>
                                 <div class="detail-item">
-                                    <span class="detail-label">Nakshatra</span>
+                                    <span class="detail-label">
+                                        Nakshatra
+                                        <button class="info-btn m3-state" data-explain="nakshatra"
+                                            aria-label="What is Nakshatra?">
+                                            <span class="material-symbols-rounded">info</span>
+                                        </button>
+                                    </span>
                                     <span class="detail-value" id="d-nakshatra">—</span>
                                     <span class="detail-time" id="d-nakshatra-time"></span>
                                 </div>
                                 <div class="detail-item">
-                                    <span class="detail-label">Yoga</span>
+                                    <span class="detail-label">
+                                        Yoga
+                                        <button class="info-btn m3-state" data-explain="yoga"
+                                            aria-label="What is Yoga?">
+                                            <span class="material-symbols-rounded">info</span>
+                                        </button>
+                                    </span>
                                     <span class="detail-value" id="d-yoga">—</span>
                                     <span class="detail-time" id="d-yoga-time"></span>
                                 </div>
                                 <div class="detail-item">
-                                    <span class="detail-label">Karana</span>
+                                    <span class="detail-label">
+                                        Karana
+                                        <button class="info-btn m3-state" data-explain="karana"
+                                            aria-label="What is Karana?">
+                                            <span class="material-symbols-rounded">info</span>
+                                        </button>
+                                    </span>
                                     <span class="detail-value" id="d-karana">—</span>
                                     <span class="detail-time" id="d-karana-time"></span>
                                 </div>
@@ -282,7 +316,13 @@
 
                         <!-- Choghadiya -->
                         <div class="detail-group">
-                            <h3>Choghadiya</h3>
+                            <h3>
+                                Choghadiya
+                                <button class="info-btn m3-state" data-explain="choghadiya"
+                                    aria-label="What is Choghadiya?">
+                                    <span class="material-symbols-rounded">info</span>
+                                </button>
+                            </h3>
                             <div class="choghadiya-tabs" role="tablist" aria-label="Choghadiya period selector">
                                 <button class="chog-tab m3-state active" data-period="day" role="tab"
                                     aria-selected="true" aria-controls="choghadiya-list">Day</button>
@@ -296,7 +336,12 @@
 
                         <!-- Hora -->
                         <div class="detail-group">
-                            <h3>Current Hora</h3>
+                            <h3>
+                                Current Hora
+                                <button class="info-btn m3-state" data-explain="hora" aria-label="What is Hora?">
+                                    <span class="material-symbols-rounded">info</span>
+                                </button>
+                            </h3>
                             <div class="hora-display" id="hora-display"></div>
                         </div>
 
@@ -383,6 +428,15 @@
                             </select>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Info Bottom Sheet -->
+            <div class="bottom-sheet-overlay" id="info-sheet-overlay">
+                <div class="bottom-sheet" id="info-sheet" role="dialog" aria-modal="true" aria-label="Term explanation">
+                    <div class="sheet-handle"></div>
+                    <h3 class="sheet-title" id="sheet-title"></h3>
+                    <div class="sheet-body" id="sheet-body"></div>
                 </div>
             </div>
 

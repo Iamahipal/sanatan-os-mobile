@@ -7,7 +7,7 @@
         XCircle,
         ArrowRight,
         BookOpen,
-    } from "@phosphor-icons/svelte";
+    } from "phosphor-svelte";
     import Button from "$lib/components/ui/Button.svelte";
     import Card from "$lib/components/ui/Card.svelte";
 

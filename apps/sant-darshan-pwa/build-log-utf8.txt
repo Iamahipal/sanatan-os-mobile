@@ -1,0 +1,185 @@
+﻿
+> sant-darshan-pwa@0.0.1 build
+> vite build
+
+[36mvite v7.3.1 [32mbuilding ssr environment for production...[36m[39m
+transforming...
+node.exe : 11:16:21 pm 
+[vite-plugin-svelte] 
+src/routes/+page.svelte:34:8 `greeting` 
+is updated, but is not declared with 
+`$state(...)`. Changing its value will 
+not correctly trigger updates
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" 
+"C:\Users\shrih\AppData\Roaming\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecif 
+   ied: (11:16:21 pm [vi...trigger upd  
+  ates:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCom 
+   mandError
+ 
+https://svelte.dev/e/non_reactive_update
+32:     // Greeting logic based on hour
+33:     const hour = new 
+Date().getHours();
+34:     let greeting = "Namaste";
+                    ^
+35:     if (hour < 12) greeting = 
+"Suprabhat";
+36:     else if (hour < 18) greeting = 
+"Shubh Dophar";
+11:16:21 pm [vite-plugin-svelte] 
+src/routes/journal/+page.svelte:213:16 
+A form label must be associated with a 
+control
+https://svelte.dev/e/a11y_label_has_asso
+ciated_control
+211:             <!-- Link to Saint -->
+212:             <div>
+213:                 <label
+                      ^
+214:                     class="block 
+text-sm font-semibold text-gray-700 
+dark:text-gray-300 mb-2"
+215:                     >Link a Saint 
+(Optional)</label
+11:16:21 pm [vite-plugin-svelte] 
+src/routes/journal/+page.svelte:230:16 
+A form label must be associated with a 
+control
+https://svelte.dev/e/a11y_label_has_asso
+ciated_control
+228:             <!-- Editor -->
+229:             <div class="flex-1 
+min-h-[200px] flex flex-col">
+230:                 <label
+                      ^
+231:                     class="block 
+text-sm font-semibold text-gray-700 
+dark:text-gray-300 mb-2"
+232:                     >Your 
+Thoughts</label
+Error: Cannot apply unknown utility 
+class `bg-zinc-100`. Are you using CSS 
+modules or similar and missing 
+`@reference`? https://tailwindcss.com/do
+cs/functions-and-directives#reference-di
+rective
+    at onInvalidCandidate (C:\SanatanOS\
+apps\sant-darshan-pwa\node_modules\tailw
+indcss\dist\lib.js:21:1314)
+    at Ee (C:\SanatanOS\apps\sant-darsha
+n-pwa\node_modules\tailwindcss\dist\lib.
+js:16:37066)
+    at C:\SanatanOS\apps\sant-darshan-pw
+a\node_modules\tailwindcss\dist\lib.js:2
+1:355
+    at Pr (C:\SanatanOS\apps\sant-darsha
+n-pwa\node_modules\tailwindcss\dist\lib.
+js:3:1733)
+    at _ (C:\SanatanOS\apps\sant-darshan
+-pwa\node_modules\tailwindcss\dist\lib.j
+s:3:1377)
+    at Te (C:\SanatanOS\apps\sant-darsha
+n-pwa\node_modules\tailwindcss\dist\lib.
+js:21:172)
+    at pn (C:\SanatanOS\apps\sant-darsha
+n-pwa\node_modules\tailwindcss\dist\lib.
+js:38:294)
+    at async dn (C:\SanatanOS\apps\sant-
+darshan-pwa\node_modules\tailwindcss\dis
+t\lib.js:38:631)
+    at async Xr (C:\SanatanOS\apps\sant-
+darshan-pwa\node_modules\@tailwindcss\no
+de\dist\index.js:10:3417)
+    at async N (C:\SanatanOS\apps\sant-d
+arshan-pwa\node_modules\@tailwindcss\pos
+tcss\dist\index.js:10:3979)
+[32mΓ£ô[39m 3045 modules transformed.
+
+PWA v1.2.0
+mode      generateSW
+precache  1 entries (0.00 KiB)
+files generated
+  .svelte-kit/output/server/sw.js
+  .svelte-kit/output/server/workbox-8c29f6e4.js
+warnings
+  One of the glob patterns doesn't 
+match any files. Please remove or fix 
+the following: {
+  "globDirectory": "C:/SanatanOS/apps/sa
+nt-darshan-pwa/.svelte-kit/output",
+  "globPattern": "client/**/*.{js,css,ic
+o,png,svg,webp,webmanifest}",
+  "globIgnores": [
+    "server/**",
+    "server/sw.js",
+    "server/workbox-*.js"
+  ]
+}
+  One of the glob patterns doesn't 
+match any files. Please remove or fix 
+the following: {
+  "globDirectory": "C:/SanatanOS/apps/sa
+nt-darshan-pwa/.svelte-kit/output",
+  "globPattern": 
+"prerendered/**/*.{html,json}",
+  "globIgnores": [
+    "server/**",
+    "server/sw.js",
+    "server/workbox-*.js"
+  ]
+}
+
+[31mΓ£ù[39m Build failed in 22.01s
+[31merror during build:
+[31m[vite:css] [postcss] tailwindcss: C
+:/SanatanOS/apps/sant-darshan-pwa/src/ap
+p.css:1:1: Cannot apply unknown utility 
+class `bg-zinc-100`. Are you using CSS 
+modules or similar and missing 
+`@reference`? https://tailwindcss.com/do
+cs/functions-and-directives#reference-di
+rective[31m
+file: [36mC:/SanatanOS/apps/sant-darsha
+n-pwa/src/app.css:1:0[31m
+    at Input.error (C:\SanatanOS\apps\sa
+nt-darshan-pwa\node_modules\postcss\lib\
+input.js:135:16)
+    at Root.error (C:\SanatanOS\apps\san
+t-darshan-pwa\node_modules\postcss\lib\n
+ode.js:146:32)
+    at Object.Once (C:\SanatanOS\apps\sa
+nt-darshan-pwa\node_modules\@tailwindcss
+\postcss\dist\index.js:10:6913)
+    at async LazyResult.runAsync (C:\San
+atanOS\apps\sant-darshan-pwa\node_module
+s\postcss\lib\lazy-result.js:293:11)
+    at async runPostCSS (file:///C:/Sana
+tanOS/apps/sant-darshan-pwa/node_modules
+/vite/dist/node/chunks/config.js:30145:1
+9)
+    at async compilePostCSS (file:///C:/
+SanatanOS/apps/sant-darshan-pwa/node_mod
+ules/vite/dist/node/chunks/config.js:301
+29:6)
+    at async compileCSS (file:///C:/Sana
+tanOS/apps/sant-darshan-pwa/node_modules
+/vite/dist/node/chunks/config.js:30059:2
+6)
+    at async Object.handler (file:///C:/
+SanatanOS/apps/sant-darshan-pwa/node_mod
+ules/vite/dist/node/chunks/config.js:295
+92:54)
+    at async transform (file:///C:/Sanat
+anOS/apps/sant-darshan-pwa/node_modules/
+rollup/dist/es/shared/node-entry.js:2124
+6:16)
+    at async 
+ModuleLoader.addModuleSource (file:///C:
+/SanatanOS/apps/sant-darshan-pwa/node_mo
+dules/rollup/dist/es/shared/node-entry.j
+s:21474:36)[39m

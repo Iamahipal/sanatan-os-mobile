@@ -5,7 +5,7 @@
     import { toast } from "$lib/stores/toast";
     import { saints } from "$lib/data";
     import { JOURNAL_PROMPTS } from "$lib/data/phase2-data";
-    import { BookOpen, Calendar, Plus, PenNib } from "@phosphor-icons/svelte";
+    import { BookOpen, Calendar, Plus, PenNib } from "phosphor-svelte";
     import Card from "$lib/components/ui/Card.svelte";
     import Button from "$lib/components/ui/Button.svelte";
     import BottomSheet from "$lib/components/ui/BottomSheet.svelte";
@@ -211,10 +211,12 @@
             <!-- Link to Saint -->
             <div>
                 <label
+                    for="saint-select"
                     class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
                     >Link a Saint (Optional)</label
                 >
                 <select
+                    id="saint-select"
                     bind:value={relatedSaintId}
                     class="w-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary/50 outline-none appearance-none font-medium"
                 >
@@ -228,10 +230,12 @@
             <!-- Editor -->
             <div class="flex-1 min-h-[200px] flex flex-col">
                 <label
+                    for="journal-entry"
                     class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
                     >Your Thoughts</label
                 >
                 <textarea
+                    id="journal-entry"
                     bind:value={entryText}
                     class="w-full flex-1 min-h-[150px] bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary/50 outline-none resize-none"
                     placeholder="Write your reflections here..."

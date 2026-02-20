@@ -1,0 +1,46 @@
+﻿
+> sant-darshan-pwa@0.0.1 check
+> svelte-kit sync && svelte-check --tsconfig ./tsconfig.json
+
+Loading svelte-check in workspace: c:\SanatanOS\apps\sant-darshan-pwa
+Getting Svelte diagnostics...
+
+c:\SanatanOS\apps\sant-darshan-pwa\[32msrc\lib\components\ReloadPrompt.svelte[39m:2:35
+[31mError[39m: Cannot find module 'virtual:pwa-register/svelte' or its corresponding type declarations. (ts)
+[36m<script lang="ts">
+    import { useRegisterSW } from [35m"virtual:pwa-register/svelte"[36m;
+    import { Refresh, X } from "phosphor-svelte";[39m
+
+c:\SanatanOS\apps\sant-darshan-pwa\[32msrc\lib\components\ReloadPrompt.svelte[39m:3:14
+[31mError[39m: Module '"phosphor-svelte"' has no exported member 'Refresh'. (ts)
+[36m    import { useRegisterSW } from "virtual:pwa-register/svelte";
+    import { [35mRefresh[36m, X } from "phosphor-svelte";
+    import { cn } from "$lib/utils";[39m
+
+c:\SanatanOS\apps\sant-darshan-pwa\[32msrc\routes\+page.svelte[39m:144:53
+[31mError[39m: Property 'style' does not exist on type 'EventTarget & Element'. (ts)
+[36m                                onerror={(e) => {
+                                    e.currentTarget.[35mstyle[36m.display = "none";
+                                }}[39m
+
+c:\SanatanOS\apps\sant-darshan-pwa\[32msrc\routes\darshan\[id]\+page.svelte[39m:107:41
+[31mError[39m: Property 'style' does not exist on type 'EventTarget & Element'. (ts)
+[36m                    onerror={(e) => {
+                        e.currentTarget.[35mstyle[36m.display = "none";
+                    }}[39m
+
+c:\SanatanOS\apps\sant-darshan-pwa\[32msrc\routes\darshan\[id]\+page.svelte[39m:247:34
+[31mError[39m: Cannot find name 'BookOpen'. (ts)
+[36m                            <Card class="p-4 flex items-center gap-3">
+                                <[35mBookOpen[36m
+                                    class="w-5 h-5 text-primary"[39m
+
+c:\SanatanOS\apps\sant-darshan-pwa\[32msrc\routes\explore\+page.svelte[39m:118:53
+[31mError[39m: Property 'style' does not exist on type 'EventTarget & Element'. (ts)
+[36m                                onerror={(e) => {
+                                    e.currentTarget.[35mstyle[36m.display = "none";
+                                }}[39m
+
+====================================
+[31msvelte-check found 6 errors and 0 warnings in 4 files
+[39m

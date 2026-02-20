@@ -1,6 +1,7 @@
 <script lang="ts">
+    // @ts-ignore
     import { useRegisterSW } from "virtual:pwa-register/svelte";
-    import { Refresh, X } from "@phosphor-icons/svelte";
+    import { ArrowsClockwise as Refresh, X } from "phosphor-svelte";
     import { cn } from "$lib/utils";
 
     // Check for updates every hour

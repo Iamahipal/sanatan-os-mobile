@@ -1,7 +1,7 @@
 <script lang="ts">
     import { toast } from "$lib/stores/toast";
     import { fly } from "svelte/transition";
-    import { CheckCircle, Info, XCircle } from "@phosphor-icons/svelte";
+    import { CheckCircle, Info, XCircle } from "phosphor-svelte";
 </script>
 
 <div
