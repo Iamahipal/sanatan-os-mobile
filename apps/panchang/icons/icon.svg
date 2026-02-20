@@ -1,14 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
+    <!-- Background gradient: deep saffron -->
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FF9933"/>
-      <stop offset="100%" style="stop-color:#E67300"/>
+      <stop offset="0%" stop-color="#FF9933"/>
+      <stop offset="50%" stop-color="#F27D1A"/>
+      <stop offset="100%" stop-color="#E06600"/>
     </linearGradient>
+    <!-- Moon glow -->
+    <radialGradient id="glow" cx="50%" cy="40%" r="35%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.25)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <!-- Star glow -->
+    <filter id="starGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Moon crescent -->
-  <circle cx="260" cy="220" r="100" fill="white" opacity="0.95"/>
-  <circle cx="300" cy="200" r="85" fill="url(#bg)"/>
-  <!-- Om symbol approximation -->
-  <text x="256" y="400" text-anchor="middle" font-family="serif" font-size="120" fill="white" opacity="0.9">ॐ</text>
+
+  <!-- Background with rounded corners -->
+  <rect width="1024" height="1024" rx="224" fill="url(#bg)"/>
+
+  <!-- Subtle radial glow behind moon -->
+  <circle cx="512" cy="380" r="360" fill="url(#glow)"/>
+
+  <!-- Crescent Moon: two overlapping circles -->
+  <circle cx="480" cy="350" r="165" fill="#FFFFFF" opacity="0.95"/>
+  <circle cx="545" cy="310" r="145" fill="url(#bg)"/>
+
+  <!-- Star -->
+  <g filter="url(#starGlow)" transform="translate(620,220)">
+    <polygon points="0,-22 6,-7 22,-7 10,4 14,20 0,12 -14,20 -10,4 -22,-7 -6,-7" fill="#FFFFFF" opacity="0.9"/>
+  </g>
+
+  <!-- Small decorative stars -->
+  <circle cx="380" cy="200" r="3" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="660" cy="160" r="2.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="710" cy="300" r="2" fill="#FFFFFF" opacity="0.35"/>
+
+  <!-- Lotus flower: stylized 5-petal -->
+  <g transform="translate(512,700)" opacity="0.85">
+    <!-- Center petal (vertical) -->
+    <ellipse cx="0" cy="-55" rx="28" ry="65" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Left petals -->
+    <ellipse cx="-55" cy="-30" rx="26" ry="60" fill="#FFFFFF" opacity="0.75" transform="rotate(-30, -55, -30)"/>
+    <ellipse cx="-90" cy="0" rx="22" ry="50" fill="#FFFFFF" opacity="0.55" transform="rotate(-55, -90, 0)"/>
+    <!-- Right petals -->
+    <ellipse cx="55" cy="-30" rx="26" ry="60" fill="#FFFFFF" opacity="0.75" transform="rotate(30, 55, -30)"/>
+    <ellipse cx="90" cy="0" rx="22" ry="50" fill="#FFFFFF" opacity="0.55" transform="rotate(55, 90, 0)"/>
+    <!-- Inner glow circle -->
+    <circle cx="0" cy="-10" r="14" fill="#FFFFFF" opacity="0.6"/>
+  </g>
+
+  <!-- Subtle bottom arc: horizon line -->
+  <path d="M200,820 Q512,780 824,820" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.2"/>
 </svg>

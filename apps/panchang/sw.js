@@ -3,13 +3,17 @@
  * Strategy: Stale-While-Revalidate (fresh content when online, cached when offline)
  */
 
-const CACHE_NAME = 'panchang-v4-features';
+const CACHE_NAME = 'panchang-v5';
 const ASSETS = [
     './',
     './index.html',
     './style.css',
     './script.js',
     './manifest.json',
+    './icons/icon.svg',
+    './icons/icon-96.png',
+    './icons/icon-192.png',
+    './icons/icon-512.png',
     './lib/astronomy.js',
     './lib/vedic-engine.js',
     './lib/festival-calculator.js'
@@ -36,18 +40,32 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Fetch - Stale-While-Revalidate
-// Serve from cache immediately, but also fetch from network to update cache
+// Fetch - Stale-While-Revalidate for own assets, Cache-First for fonts
 self.addEventListener('fetch', (event) => {
     // Skip non-GET requests
     if (event.request.method !== 'GET') return;
 
-    // Skip external fonts (they have their own caching)
-    if (event.request.url.includes('fonts.googleapis.com') ||
-        event.request.url.includes('fonts.gstatic.com')) {
+    const url = new URL(event.request.url);
+
+    // Google Fonts: Cache-First (fonts rarely change)
+    if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
+        event.respondWith(
+            caches.open(CACHE_NAME).then(cache => {
+                return cache.match(event.request).then(cached => {
+                    if (cached) return cached;
+                    return fetch(event.request).then(response => {
+                        if (response && response.status === 200) {
+                            cache.put(event.request, response.clone());
+                        }
+                        return response;
+                    });
+                });
+            })
+        );
         return;
     }
 
+    // Own assets: Stale-While-Revalidate
     event.respondWith(
         caches.open(CACHE_NAME).then(cache => {
             return cache.match(event.request).then(cachedResponse => {
