@@ -1016,8 +1016,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!container || !VedicEngine) return;
 
         // Use SIDEREAL positions (subtract ayanamsa)
-        const sunLong = VedicEngine.getSiderealSun(currentDate);
-        const moonLong = VedicEngine.getSiderealMoon(currentDate);
+        const ayanamsa = currentPanchang.ayanamsa || 0;
+        const sunLong = VedicEngine.getSunLongitude(currentDate) - ayanamsa;
+        const moonLong = VedicEngine.getMoonLongitude(currentDate) - ayanamsa;
 
         const getRashi = (lon) => {
             const normLon = ((lon % 360) + 360) % 360;
