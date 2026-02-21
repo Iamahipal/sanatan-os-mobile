@@ -1,60 +1,87 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <!-- Background gradient: deep saffron -->
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+    <!-- Rich Saffron Gradient Background -->
+    <linearGradient id="bgSaffron" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FF9933"/>
-      <stop offset="50%" stop-color="#F27D1A"/>
-      <stop offset="100%" stop-color="#E06600"/>
+      <stop offset="50%" stop-color="#E87C1E"/>
+      <stop offset="100%" stop-color="#CC5D00"/>
     </linearGradient>
-    <!-- Moon glow -->
-    <radialGradient id="glow" cx="50%" cy="40%" r="35%">
-      <stop offset="0%" stop-color="rgba(255,255,255,0.25)"/>
-      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+
+    <!-- Sunburst / Divine Glow Effect -->
+    <radialGradient id="divineGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(255, 230, 200, 0.4)"/>
+      <stop offset="60%" stop-color="rgba(255, 180, 100, 0.1)"/>
+      <stop offset="100%" stop-color="rgba(255, 153, 51, 0)"/>
     </radialGradient>
-    <!-- Star glow -->
-    <filter id="starGlow">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+
+    <!-- Drop shadow for the Om symbol to lift it off the gradient -->
+    <filter id="omShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#7A3800" flood-opacity="0.4"/>
     </filter>
   </defs>
 
-  <!-- Background with rounded corners -->
-  <rect width="1024" height="1024" rx="224" fill="url(#bg)"/>
+  <!-- Base App Icon Shape (Rounded Square) -->
+  <rect width="1024" height="1024" rx="224" fill="url(#bgSaffron)"/>
 
-  <!-- Subtle radial glow behind moon -->
-  <circle cx="512" cy="380" r="360" fill="url(#glow)"/>
+  <!-- Centered Burst Glow -->
+  <circle cx="512" cy="512" r="480" fill="url(#divineGlow)"/>
 
-  <!-- Crescent Moon: two overlapping circles -->
-  <circle cx="480" cy="350" r="165" fill="#FFFFFF" opacity="0.95"/>
-  <circle cx="545" cy="310" r="145" fill="url(#bg)"/>
-
-  <!-- Star -->
-  <g filter="url(#starGlow)" transform="translate(620,220)">
-    <polygon points="0,-22 6,-7 22,-7 10,4 14,20 0,12 -14,20 -10,4 -22,-7 -6,-7" fill="#FFFFFF" opacity="0.9"/>
+  <!-- High-Fidelity Om (ॐ) Symbol -->
+  <!-- Hand-crafted classical geometry for the sacred Om -->
+  <g transform="translate(512, 530) scale(4.8)" filter="url(#omShadow)">
+    <path fill="#FFFFFF" d="
+      M -22.3 -4.2
+      C -30.5 -10.5, -34.8 -18.2, -34.8 -27.3
+      C -34.8 -37.2, -28.5 -44.8, -19.3 -44.8
+      C -11.5 -44.8, -6.8 -39.8, -4.2 -33.5
+      C -1.5 -27.2, -3.2 -18.8, -10.5 -12.5
+      C -6.8 -10.5, -2.5 -9.2, 2.8 -9.2
+      C 15.2 -9.2, 24.8 -15.8, 24.8 -25.5
+      C 24.8 -36.2, 17.5 -41.5, 9.8 -41.5
+      C 6.5 -41.5, 3.2 -39.8, 1.5 -38.2
+      L 3.5 -34.2
+      C 5.2 -35.2, 7.8 -36.5, 10.5 -36.5
+      C 15.5 -36.5, 18.8 -32.5, 18.8 -25.5
+      C 18.8 -18.2, 11.2 -14.2, 2.5 -14.2
+      C -3.5 -14.2, -8.2 -15.8, -12.2 -19.5
+      C -7.5 -23.5, -5.2 -30.2, -8.5 -35.5
+      C -11.2 -40.2, -16.2 -41.2, -19.8 -41.2
+      C -26.5 -41.2, -30.5 -35.2, -30.5 -27.5
+      C -30.5 -20.2, -26.8 -14.2, -20.5 -9.8
+      C -18.5 -8.5, -16.8 -7.5, -14.5 -6.2
+      C -17.2 -3.5, -19.8 -0.8, -21.5 2.5
+      C -25.2 8.5, -26.5 16.5, -24.8 23.5
+      C -22.5 32.5, -16.5 38.5, -8.5 40.5
+      C 1.5 43.5, 12.5 39.5, 19.8 32.5
+      L 16.8 29.5
+      C 10.5 35.5, 2.5 38.5, -5.5 35.5
+      C -11.5 33.5, -17.5 27.5, -19.5 20.5
+      C -21.5 13.5, -20.5 6.5, -16.5 1.5
+      C -14.5 -1.2, -12.2 -3.5, -9.5 -5.5
+      C -6.8 -7.5, -3.5 -8.8, 0.5 -8.8
+      C 4.5 -8.8, 8.5 -7.5, 11.5 -5.5
+      C 17.5 -1.5, 21.5 6.5, 21.5 14.5
+      C 21.5 24.5, 15.5 34.5, 4.5 38.5
+      L 6.5 42.5
+      C 19.5 38.5, 26.5 26.5, 26.5 14.5
+      C 26.5 4.5, 21.5 -5.2, 14.5 -10.5
+      C 9.8 -14.2, 4.5 -15.8, -1.5 -15.8
+      C -6.8 -15.8, -11.5 -14.2, -15.8 -11.5
+      L -22.3 -4.2 Z
+      
+      M -15.5 -59.5
+      C -10.5 -65.5, -2.5 -68.5, 6.5 -68.5
+      C 15.5 -68.5, 23.5 -65.5, 28.5 -59.5
+      L 25.5 -56.5
+      C 21.5 -61.5, 14.5 -64.5, 6.5 -64.5
+      C -1.5 -64.5, -8.5 -61.5, -12.5 -56.5
+      L -15.5 -59.5 Z
+      
+      M 6.5 -78.5
+      C 3.5 -78.5, 0.5 -76.5, 0.5 -73.5
+      C 0.5 -70.5, 3.5 -68.5, 6.5 -68.5
+      C 9.5 -68.5, 12.5 -70.5, 12.5 -73.5
+      C 12.5 -76.5, 9.5 -78.5, 6.5 -78.5 Z
+    "/>
   </g>
-
-  <!-- Small decorative stars -->
-  <circle cx="380" cy="200" r="3" fill="#FFFFFF" opacity="0.5"/>
-  <circle cx="660" cy="160" r="2.5" fill="#FFFFFF" opacity="0.4"/>
-  <circle cx="710" cy="300" r="2" fill="#FFFFFF" opacity="0.35"/>
-
-  <!-- Lotus flower: stylized 5-petal -->
-  <g transform="translate(512,700)" opacity="0.85">
-    <!-- Center petal (vertical) -->
-    <ellipse cx="0" cy="-55" rx="28" ry="65" fill="#FFFFFF" opacity="0.9"/>
-    <!-- Left petals -->
-    <ellipse cx="-55" cy="-30" rx="26" ry="60" fill="#FFFFFF" opacity="0.75" transform="rotate(-30, -55, -30)"/>
-    <ellipse cx="-90" cy="0" rx="22" ry="50" fill="#FFFFFF" opacity="0.55" transform="rotate(-55, -90, 0)"/>
-    <!-- Right petals -->
-    <ellipse cx="55" cy="-30" rx="26" ry="60" fill="#FFFFFF" opacity="0.75" transform="rotate(30, 55, -30)"/>
-    <ellipse cx="90" cy="0" rx="22" ry="50" fill="#FFFFFF" opacity="0.55" transform="rotate(55, 90, 0)"/>
-    <!-- Inner glow circle -->
-    <circle cx="0" cy="-10" r="14" fill="#FFFFFF" opacity="0.6"/>
-  </g>
-
-  <!-- Subtle bottom arc: horizon line -->
-  <path d="M200,820 Q512,780 824,820" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.2"/>
 </svg>

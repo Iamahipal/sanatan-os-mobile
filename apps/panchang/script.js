@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let settings = { ayanamsa: 'lahiri', language: 'en' };
     let currentPanchang = null;
 
+    // Set initial structural language
+    document.documentElement.lang = settings.language;
+
     // === CITY DATABASE ===
     const CITIES = {
         delhi: { lat: 28.6139, lon: 77.2090, name: 'Delhi' },
@@ -370,6 +373,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const parsed = JSON.parse(saved);
             userLocation = parsed.location || userLocation;
             settings = parsed.settings || settings;
+
+            // Apply loaded language immediately
+            if (settings.language) {
+                document.documentElement.lang = settings.language;
+            }
         }
     }
 
@@ -1292,6 +1300,14 @@ document.addEventListener('DOMContentLoaded', () => {
             settings.ayanamsa = e.target.value;
             saveSettings();
             updateDisplay();
+        });
+
+        // Language change
+        document.getElementById('language-select')?.addEventListener('change', (e) => {
+            settings.language = e.target.value;
+            document.documentElement.lang = settings.language; // Instantly trigger font-swap
+            saveSettings();
+            updateDisplay(); // Re-render text strings
         });
     }
 

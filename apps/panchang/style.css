@@ -72,10 +72,25 @@
     --md-custom-timeline-rahu: #7B1FA2;
     --md-custom-timeline-neutral: var(--md-sys-color-outline);
 
-    /* — Typography — */
+    /* — Typography Defaults (Fallback) — */
     --md-ref-typeface-plain: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --md-ref-typeface-brand: 'Noto Sans Devanagari', 'Inter', sans-serif;
+}
 
+/* — Language Specific Typography — */
+/* English strictly uses Inter */
+:root[lang="en"] {
+    --md-ref-typeface-plain: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --md-ref-typeface-brand: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Hindi strictly uses Noto Sans Devanagari */
+:root[lang="hi"] {
+    --md-ref-typeface-plain: 'Noto Sans Devanagari', sans-serif;
+    --md-ref-typeface-brand: 'Noto Sans Devanagari', sans-serif;
+}
+
+:root {
     /* M3 Type Scale */
     --md-sys-typescale-display-large: 600 57px/64px var(--md-ref-typeface-brand);
     --md-sys-typescale-display-medium: 600 45px/52px var(--md-ref-typeface-brand);
@@ -254,6 +269,20 @@ body {
     position: sticky;
     top: 0;
     z-index: 9999;
+}
+
+.brand-lockup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--md-sys-shape-corner-small);
+    box-shadow: var(--md-sys-elevation-level1);
+    flex-shrink: 0;
 }
 
 .location-chip {

@@ -1,9 +1,9 @@
 /**
- * Panchang Service Worker - Offline Support
- * Strategy: Stale-While-Revalidate (fresh content when online, cached when offline)
+ * Panchang App - Service Worker
+ * Handles offline caching and PWA functionality
  */
 
-const CACHE_NAME = 'panchang-v7';
+const CACHE_NAME = 'panchang-v8'; // Bumped for Typography and Om Icon
 const ASSETS = [
     './',
     './index.html',
