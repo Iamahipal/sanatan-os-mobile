@@ -483,13 +483,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === VARA & DAY QUALITY (First Principles: What should I do today?) ===
     const VARA_DATA = {
-        0: { icon: '☀️', deity: 'Lord Surya', deityHi: 'सूर्य देव', goodFor: 'Government work, Leadership, Health', avoid: 'Starting new ventures' },
-        1: { icon: '🌙', deity: 'Lord Shiva', deityHi: 'शिव', goodFor: 'Meditation, Fasting, Travel', avoid: 'Major purchases' },
-        2: { icon: '🔴', deity: 'Lord Hanuman', deityHi: 'हनुमान', goodFor: 'Property, Land deals, Sports', avoid: 'Starting journeys' },
-        3: { icon: '🟢', deity: 'Lord Vishnu', deityHi: 'विष्णु', goodFor: 'Education, Business, Communication', avoid: 'Nothing specific' },
-        4: { icon: '🟡', deity: 'Lord Brihaspati', deityHi: 'गुरु', goodFor: 'Weddings, Learning, Religious acts', avoid: 'Lending money' },
-        5: { icon: '⚪', deity: 'Goddess Lakshmi', deityHi: 'लक्ष्मी', goodFor: 'Shopping, Entertainment, Romance', avoid: 'Starting construction' },
-        6: { icon: '🔵', deity: 'Lord Shani', deityHi: 'शनि', goodFor: 'Oil massage, Iron work, Charity', avoid: 'New beginnings, Travel' }
+        0: { cssClass: 'vara-sun', deity: 'Lord Surya', deityHi: 'सूर्य देव', goodFor: 'Government work, Leadership, Health', avoid: 'Starting new ventures' },
+        1: { cssClass: 'vara-moon', deity: 'Lord Shiva', deityHi: 'शिव', goodFor: 'Meditation, Fasting, Travel', avoid: 'Major purchases' },
+        2: { cssClass: 'vara-mars', deity: 'Lord Hanuman', deityHi: 'हनुमान', goodFor: 'Property, Land deals, Sports', avoid: 'Starting journeys' },
+        3: { cssClass: 'vara-mercury', deity: 'Lord Vishnu', deityHi: 'विष्णु', goodFor: 'Education, Business, Communication', avoid: 'Nothing specific' },
+        4: { cssClass: 'vara-jupiter', deity: 'Lord Brihaspati', deityHi: 'गुरु', goodFor: 'Weddings, Learning, Religious acts', avoid: 'Lending money' },
+        5: { cssClass: 'vara-venus', deity: 'Goddess Lakshmi', deityHi: 'लक्ष्मी', goodFor: 'Shopping, Entertainment, Romance', avoid: 'Starting construction' },
+        6: { cssClass: 'vara-saturn', deity: 'Lord Shani', deityHi: 'शनि', goodFor: 'Oil massage, Iron work, Charity', avoid: 'New beginnings, Travel' }
     };
 
     function updateGuidance() {
@@ -497,7 +497,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const varaInfo = VARA_DATA[vara.index];
 
         // Update Vara display
-        setText('vara-icon', varaInfo.icon);
+        const varaIconEl = document.getElementById('vara-icon');
+        if (varaIconEl) {
+            varaIconEl.className = `vara-icon ${varaInfo.cssClass}`;
+            varaIconEl.innerHTML = ''; // Remove simple emoji
+        }
+
         setText('vara-name', vara.name);
 
         const lang = settings.language || 'en';
@@ -567,13 +572,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (moonShadow) {
             const pct = moonIllumination.percentage;
             if (moonIllumination.isWaxing) {
-                moonShadow.style.width = `${100 - pct}%`;
-                moonShadow.style.right = '0';
-                moonShadow.style.left = 'auto';
-            } else {
+                // Waxing: Light grows on the right. Shadow covers the left side and shrinks.
                 moonShadow.style.width = `${100 - pct}%`;
                 moonShadow.style.left = '0';
                 moonShadow.style.right = 'auto';
+            } else {
+                // Waning: Light shrinks from the right. Shadow grows on the right side.
+                moonShadow.style.width = `${100 - pct}%`;
+                moonShadow.style.right = '0';
+                moonShadow.style.left = 'auto';
             }
         }
 
@@ -1227,6 +1234,43 @@ document.addEventListener('DOMContentLoaded', () => {
             calendarModal?.classList.add('active');
         });
 
+        // --- SHARE FEATURE ---
+        document.getElementById('share-btn')?.addEventListener('click', async () => {
+            if (!currentPanchang) return;
+
+            const dateStr = currentDate.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            const shareText =
+                `📅 Today's Panchang - ${userLocation.city}
+(${dateStr})
+            
+🌞 Sunrise: ${currentPanchang.sunrise ? formatTime(currentPanchang.sunrise) : 'N/A'}
+🌙 Tithi: ${currentPanchang.tithi.name}
+⭐ Nakshatra: ${currentPanchang.nakshatra.name}
+✨ Yoga: ${currentPanchang.yoga.name}
+
+Get the full daily energy on Panchang App`;
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: `Panchang - ${userLocation.city}`,
+                        text: shareText
+                    });
+                } catch (err) {
+                    if (err.name !== 'AbortError') console.error('Error sharing:', err);
+                }
+            } else {
+                // Fallback to clipboard
+                try {
+                    await navigator.clipboard.writeText(shareText);
+                    showToast('Panchang copied to clipboard!');
+                } catch (err) {
+                    showToast('Unable to share or copy.');
+                }
+            }
+        });
+
         document.getElementById('close-calendar')?.addEventListener('click', () => {
             calendarModal?.classList.remove('active');
         });
@@ -1421,6 +1465,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         grid.innerHTML = html;
 
+        // Hide details panel on month change
+        const detailsPanel = document.getElementById('calendar-details');
+        if (detailsPanel) detailsPanel.classList.add('hidden');
+
         // Add click listeners & tabindex for keyboard nav
         const dayEls = grid.querySelectorAll('.cal-day:not(.empty)');
         dayEls.forEach((el, idx) => {
@@ -1439,7 +1487,57 @@ document.addEventListener('DOMContentLoaded', () => {
         const newD = new Date(el.dataset.date);
         currentDate = newD;
         updateDisplay();
-        document.getElementById('calendar-modal').classList.remove('active');
+
+        // Update Calendar Details Panel
+        const detailsPanel = document.getElementById('calendar-details');
+        if (!detailsPanel) return;
+
+        try {
+            // Calculate panchang for clicked date
+            const calcDate = new Date(newD);
+            calcDate.setHours(12, 0, 0, 0); // stable midday
+            const panchang = VedicEngine.getPanchang(calcDate, userLocation.lat, userLocation.lon);
+
+            // Calculate Sunrise/Sunset
+            const observer = new Astronomy.Observer(userLocation.lat, userLocation.lon, 0);
+            const rts = Astronomy.SearchRiseSet('Sun', observer, '+1', calcDate, 1);
+
+            let sunriseStr = 'N/A';
+            let sunsetStr = 'N/A';
+            if (rts) {
+                if (rts.rise) sunriseStr = formatTime(rts.rise.date);
+                if (rts.set) sunsetStr = formatTime(rts.set.date);
+            }
+
+            const dateTitle = newD.toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric' });
+
+            detailsPanel.innerHTML = `
+                <div class="cd-header">
+                    <span class="cd-date">${dateTitle}</span>
+                </div>
+                <div class="cd-row">
+                    <span class="cd-label">Tithi</span>
+                    <span class="cd-value">${panchang.tithi.name}</span>
+                </div>
+                <div class="cd-row">
+                    <span class="cd-label">Nakshatra</span>
+                    <span class="cd-value">${panchang.nakshatra.name}</span>
+                </div>
+                <div class="cd-row">
+                    <span class="cd-label">Sunrise &bull; Sunset</span>
+                    <span class="cd-value">🌅 ${sunriseStr} &nbsp;&bull;&nbsp; 🌇 ${sunsetStr}</span>
+                </div>
+            `;
+            detailsPanel.classList.remove('hidden');
+
+            // Update selected visual state in grid
+            document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('selected'));
+            el.classList.add('selected');
+
+        } catch (e) {
+            console.warn('Error calculating details for calendar day:', e);
+            detailsPanel.classList.add('hidden');
+        }
     }
 
     function handleCalendarKeydown(e, dayEls, currentIdx) {

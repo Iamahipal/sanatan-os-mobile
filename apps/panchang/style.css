@@ -1193,36 +1193,40 @@ body {
     border-radius: var(--md-sys-shape-corner-full);
     position: relative;
     overflow: hidden;
-    background: radial-gradient(circle at 35% 35%,
-            #FAFAFA 0%, #E8E8E8 25%, #C0C0C0 50%, #989898 75%, #707070 100%);
+    background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e6ecf2 40%, #b0c0d0 80%, #7d90a6 100%);
     box-shadow:
-        inset -8px -8px 20px rgba(0, 0, 0, 0.5),
-        inset 4px 4px 12px rgba(255, 255, 255, 0.25),
-        0 0 30px rgba(255, 255, 255, 0.1);
+        inset -8px -8px 16px rgba(40, 50, 70, 0.6),
+        inset 3px 3px 10px rgba(255, 255, 255, 0.9),
+        0 8px 16px rgba(100, 120, 150, 0.2);
+}
+
+.moon-3d::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-image:
+        radial-gradient(circle at 65% 75%, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.1) 8%, transparent 12%),
+        radial-gradient(circle at 25% 45%, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.08) 10%, transparent 16%),
+        radial-gradient(circle at 75% 30%, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 6%, transparent 10%);
+    mix-blend-mode: multiply;
 }
 
 .moon-surface {
-    width: 100%;
-    height: 100%;
-    border-radius: var(--md-sys-shape-corner-full);
-    background:
-        radial-gradient(circle at 22% 28%, transparent 6%, rgba(0, 0, 0, 0.08) 8%, transparent 10%),
-        radial-gradient(circle at 58% 18%, transparent 3%, rgba(0, 0, 0, 0.06) 5%, transparent 7%),
-        radial-gradient(circle at 72% 42%, transparent 5%, rgba(0, 0, 0, 0.07) 7%, transparent 9%),
-        radial-gradient(circle at 38% 65%, transparent 8%, rgba(0, 0, 0, 0.06) 10%, transparent 12%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, transparent 45%);
+    /* Removed old flat surface */
+    display: none;
 }
 
 .moon-shadow {
     position: absolute;
     top: -2px;
     height: calc(100% + 4px);
-    background: linear-gradient(90deg,
-            var(--md-sys-color-surface) 0%,
-            var(--md-sys-color-surface) 70%,
-            transparent 100%);
+    background: rgba(10, 15, 25, 0.95);
     transition: all 600ms var(--md-sys-motion-easing-emphasized);
-    border-radius: var(--md-sys-shape-corner-full);
+    /* For a true crescent, we apply a curved box shadow on the edge of the mask rather than a linear gradient */
+    box-shadow: 0 0 15px 10px rgba(10, 15, 25, 0.95);
+    border-radius: 5px;
+    /* So it's not totally round on the terminator edge */
 }
 
 .moon-info {
@@ -1337,6 +1341,8 @@ body {
 /* ---- Timing Section ---- */
 .timing-section {
     padding: 24px 16px;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
 }
 
 /* ---- Time Blocks ---- */
@@ -1416,6 +1422,8 @@ body {
 /* ---- Upcoming Section ---- */
 .upcoming-section {
     padding: 24px 16px;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 400px;
 }
 
 .upcoming-list {
@@ -1488,6 +1496,8 @@ body {
 /* ---- Details Section ---- */
 .details-section {
     padding: 20px 16px 60px;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 600px;
 }
 
 .details-content {
@@ -1755,37 +1765,11 @@ body {
     animation: sun-pulse 3s ease-in-out infinite alternate;
 }
 
-/* --- 3D Moon Icon --- */
-.moon-3d {
+/* --- 3D Moon Icon Universal Config --- */
+.graha-item .moon-3d {
     width: 48px;
     height: 48px;
-    border-radius: 50%;
     margin-bottom: 8px;
-    background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e6ecf2 40%, #b0c0d0 80%, #7d90a6 100%);
-    box-shadow:
-        inset -8px -8px 16px rgba(40, 50, 70, 0.6),
-        inset 3px 3px 10px rgba(255, 255, 255, 0.9),
-        0 8px 16px rgba(100, 120, 150, 0.2),
-        0 0 16px rgba(255, 255, 255, 0.15);
-    position: relative;
-    overflow: hidden;
-    /* Keep craters inside */
-}
-
-/* Moon texture / craters using layered radial gradients */
-.moon-3d::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50%;
-    background-image:
-        radial-gradient(circle at 65% 75%, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.1) 8%, transparent 12%),
-        radial-gradient(circle at 25% 45%, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.08) 10%, transparent 16%),
-        radial-gradient(circle at 75% 30%, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 6%, transparent 10%);
-    mix-blend-mode: multiply;
 }
 
 @keyframes sun-pulse {
@@ -1798,6 +1782,51 @@ body {
         transform: scale(1.1);
         opacity: 0.9;
     }
+}
+
+/* --- 7 Premium Planetary Day Icons --- */
+.vara-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.vara-sun {
+    background: radial-gradient(circle at 30% 30%, #fff200 0%, #ff9900 40%, #cc3300 80%, #a02000 100%);
+    box-shadow: inset -6px -6px 12px rgba(100, 0, 0, 0.6), inset 4px 4px 10px rgba(255, 255, 255, 0.8), 0 6px 14px rgba(204, 51, 0, 0.3), 0 0 15px rgba(255, 153, 0, 0.5);
+}
+
+.vara-moon {
+    background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e6ecf2 40%, #b0c0d0 80%, #7d90a6 100%);
+    box-shadow: inset -8px -8px 16px rgba(40, 50, 70, 0.6), inset 3px 3px 10px rgba(255, 255, 255, 0.9), 0 8px 16px rgba(100, 120, 150, 0.2);
+}
+
+.vara-mars {
+    background: radial-gradient(circle at 30% 30%, #ff6b6b 0%, #d63031 40%, #8b0000 80%, #4a0000 100%);
+    box-shadow: inset -6px -6px 14px rgba(50, 0, 0, 0.8), inset 4px 4px 10px rgba(255, 150, 150, 0.8), 0 6px 14px rgba(214, 48, 49, 0.4);
+}
+
+.vara-mercury {
+    background: radial-gradient(circle at 30% 30%, #55efc4 0%, #00b894 40%, #006b52 80%, #003d2e 100%);
+    box-shadow: inset -6px -6px 14px rgba(0, 40, 30, 0.8), inset 4px 4px 10px rgba(150, 255, 200, 0.8), 0 6px 14px rgba(0, 184, 148, 0.4);
+}
+
+.vara-jupiter {
+    background: radial-gradient(circle at 30% 30%, #ffeaa7 0%, #fdcb6e 40%, #e17055 80%, #b33939 100%);
+    box-shadow: inset -6px -6px 14px rgba(80, 20, 0, 0.8), inset 4px 4px 10px rgba(255, 250, 200, 0.8), 0 6px 14px rgba(253, 203, 110, 0.4);
+}
+
+.vara-venus {
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #dfe6e9 40%, #81ecec 80%, #00cec9 100%);
+    box-shadow: inset -6px -6px 14px rgba(0, 100, 100, 0.6), inset 4px 4px 12px rgba(255, 255, 255, 1), 0 6px 14px rgba(129, 236, 236, 0.4);
+}
+
+.vara-saturn {
+    background: radial-gradient(circle at 30% 30%, #a29bfe 0%, #6c5ce7 40%, #302677 80%, #150f42 100%);
+    box-shadow: inset -6px -6px 14px rgba(10, 5, 30, 0.8), inset 4px 4px 10px rgba(200, 190, 255, 0.8), 0 6px 14px rgba(108, 92, 231, 0.4);
 }
 
 .graha-icon {
@@ -2189,6 +2218,55 @@ body {
 .cal-day-dot.dark {
     background: #424242;
     border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Calendar Built-in Detail Panel */
+.calendar-details {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--md-sys-color-surface-container-high);
+    border-radius: var(--md-sys-shape-corner-medium);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transform-origin: top;
+    transition: all 0.3s var(--md-sys-motion-easing-standard);
+}
+
+.calendar-details.hidden {
+    display: none;
+    opacity: 0;
+    transform: scaleY(0.9);
+}
+
+.cd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+}
+
+.cd-date {
+    font: var(--md-sys-typescale-title-medium);
+    color: var(--md-sys-color-primary);
+}
+
+.cd-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cd-label {
+    font: var(--md-sys-typescale-body-medium);
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.cd-value {
+    font: var(--md-sys-typescale-title-small);
+    color: var(--md-sys-color-on-surface);
 }
 
 /* ---- Responsive ---- */
