@@ -3,7 +3,7 @@
  * Strategy: Stale-While-Revalidate (fresh content when online, cached when offline)
  */
 
-const CACHE_NAME = 'panchang-v5';
+const CACHE_NAME = 'panchang-v6';
 const ASSETS = [
     './',
     './index.html',
