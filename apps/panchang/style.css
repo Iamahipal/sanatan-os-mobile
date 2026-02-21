@@ -239,6 +239,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
     display: flex;
     justify-content: center;
+    overscroll-behavior-y: none;
+    /* Prevent bounce lag */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth iOS scroll */
 }
 
 /* ---- Mobile-Only Shell ---- */
@@ -250,7 +254,11 @@ body {
     position: relative;
     background: var(--md-sys-color-surface);
     overflow-x: hidden;
+    overflow-y: auto;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    /* GPU Hardware Acceleration */
+    transform: translateZ(0);
+    will-change: scroll-position, transform;
 }
 
 @media (max-width: 420px) {
@@ -317,26 +325,29 @@ body {
 }
 
 .icon-btn {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: none;
-    background: transparent;
+    background: var(--md-sys-color-surface-container-high);
     color: var(--md-sys-color-on-surface-variant);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s, color 0.2s, transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .icon-btn:hover {
-    background: var(--md-sys-color-surface-container-high);
-    color: var(--md-sys-color-on-surface);
+    background: var(--md-sys-color-surface-container-highest);
+    color: var(--md-sys-color-primary);
+    transform: scale(1.05);
 }
 
 .icon-btn .material-symbols-rounded {
-    font-size: 24px;
+    font-size: 22px;
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
 
@@ -1714,6 +1725,81 @@ body {
     text-align: center;
 }
 
+/* --- 3D Sun Icon --- */
+.sun-3d {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    background: radial-gradient(circle at 30% 30%, #fff200 0%, #ff9900 40%, #cc3300 80%, #a02000 100%);
+    box-shadow:
+        inset -6px -6px 12px rgba(100, 0, 0, 0.6),
+        inset 4px 4px 10px rgba(255, 255, 255, 0.8),
+        0 6px 14px rgba(204, 51, 0, 0.3),
+        0 0 20px rgba(255, 153, 0, 0.4);
+    position: relative;
+    /* Divine Aura Glow */
+    isolation: isolate;
+}
+
+.sun-3d::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 200, 0, 0.4) 0%, transparent 65%);
+    z-index: -1;
+    animation: sun-pulse 3s ease-in-out infinite alternate;
+}
+
+/* --- 3D Moon Icon --- */
+.moon-3d {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e6ecf2 40%, #b0c0d0 80%, #7d90a6 100%);
+    box-shadow:
+        inset -8px -8px 16px rgba(40, 50, 70, 0.6),
+        inset 3px 3px 10px rgba(255, 255, 255, 0.9),
+        0 8px 16px rgba(100, 120, 150, 0.2),
+        0 0 16px rgba(255, 255, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+    /* Keep craters inside */
+}
+
+/* Moon texture / craters using layered radial gradients */
+.moon-3d::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background-image:
+        radial-gradient(circle at 65% 75%, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.1) 8%, transparent 12%),
+        radial-gradient(circle at 25% 45%, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.08) 10%, transparent 16%),
+        radial-gradient(circle at 75% 30%, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 6%, transparent 10%);
+    mix-blend-mode: multiply;
+}
+
+@keyframes sun-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 0.9;
+    }
+}
+
 .graha-icon {
     font-size: 22px;
     margin-bottom: 4px;
@@ -2080,6 +2166,29 @@ body {
     color: var(--md-sys-color-on-surface-variant);
     display: block;
     margin-top: 2px;
+}
+
+/* Event Dots for Calendar */
+.cal-day-dot {
+    position: absolute;
+    bottom: 4px;
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.cal-day-dot.green {
+    background: #4caf50;
+}
+
+.cal-day-dot.gold {
+    background: #ffc107;
+}
+
+.cal-day-dot.dark {
+    background: #424242;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* ---- Responsive ---- */

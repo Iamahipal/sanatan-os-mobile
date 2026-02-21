@@ -1051,13 +1051,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         container.innerHTML = `
             <div class="graha-item">
-                <span class="graha-icon">☀️</span>
+                <div class="sun-3d"></div>
                 <span class="graha-name">Sun</span>
                 <span class="graha-rashi">${sun.name}</span>
                 <span class="graha-degree">${sun.deg}°</span>
             </div>
             <div class="graha-item">
-                <span class="graha-icon">🌙</span>
+                <div class="moon-3d"></div>
                 <span class="graha-name">Moon</span>
                 <span class="graha-rashi">${moon.name}</span>
                 <span class="graha-degree">${moon.deg}°</span>
@@ -1212,20 +1212,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // --- SINGLE SETTINGS MODAL ---
-        const settingsModal = document.getElementById('settings-modal');
-
-        // Open modal: Settings button OR location chip
-        document.getElementById('settings-btn')?.addEventListener('click', () => {
-            // Populate settings
-            const langSelect = document.getElementById('language-select');
-            if (langSelect) langSelect.value = settings.language;
-            settingsModal?.classList.add('active');
-        });
+        // --- Location Tracking ---
         document.getElementById('location-chip')?.addEventListener('click', () => {
-            const langSelect = document.getElementById('language-select');
-            if (langSelect) langSelect.value = settings.language;
-            settingsModal?.classList.add('active');
+            requestLocation();
         });
 
         // --- CALENDAR MODAL ---
@@ -1311,6 +1300,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // === NATIVE GEOLOCATION ===
+    async function requestLocation() {
+        const chip = document.getElementById('location-chip');
+        const citySpan = document.getElementById('current-city');
+
+        if (!navigator.geolocation) {
+            showToast('Geolocation is not supported by your browser', 'error');
+            return;
+        }
+
+        const originalText = citySpan.innerText;
+        citySpan.innerText = 'Locating...';
+        chip.style.opacity = '0.7';
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+
+                try {
+                    // Reverse geocode using OpenStreetMap Nominatim
+                    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&accept-language=en`);
+                    const data = await response.json();
+
+                    let cityName = data.address.city || data.address.town || data.address.village || data.address.county || 'Current Location';
+
+                    // Save and refresh
+                    userLocation = { lat, lon, city: cityName };
+                    saveSettings();
+                    updateDisplay();
+                    showToast(`Location updated to ${cityName}`);
+
+                } catch (err) {
+                    console.error('Reverse geocoding failed:', err);
+                    showToast('Could not determine city name, but coordinates updated.');
+                    userLocation = { lat, lon, city: 'Current Location' };
+                    saveSettings();
+                    updateDisplay();
+                } finally {
+                    chip.style.opacity = '1';
+                }
+            },
+            (error) => {
+                console.warn('Geolocation error:', error);
+                citySpan.innerText = originalText;
+                chip.style.opacity = '1';
+                let msg = 'Location access denied.';
+                if (error.code === 2) msg = 'Location unavailable.';
+                if (error.code === 3) msg = 'Location request timed out.';
+                showToast(msg, 'error');
+            },
+            { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+        );
+    }
+
     // === CALENDAR LOGIC ===
     function renderCalendar(date) {
         const grid = document.getElementById('calendar-grid');
@@ -1334,23 +1378,44 @@ document.addEventListener('DOMContentLoaded', () => {
             html += '<div class="cal-day empty"></div>';
         }
 
-        // Days
+        // Days with real Panchang Calculation
         for (let d = 1; d <= daysInMonth; d++) {
             const dayDate = new Date(year, month, d);
-            // Check if selected
             const isSelected = dayDate.toDateString() === currentDate.toDateString();
             const isToday = dayDate.toDateString() === new Date().toDateString();
-
-            // Simple data check (mock for now, ideally fetch panchang for each day)
-            // For V1, just show basic numbers. Can add dots for Ekadashi/Purnima if cache available.
 
             const classes = ['cal-day'];
             if (isSelected) classes.push('selected');
             if (isToday) classes.push('today');
 
+            let dotHtml = '';
+
+            // Calculate panchang for this specific day using user's location
+            try {
+                // Set to sunrise or a stable midday time for tithi calculation
+                const calcDate = new Date(dayDate);
+                calcDate.setHours(12, 0, 0, 0);
+
+                const panchang = VedicEngine.getPanchang(calcDate, userLocation.lat, userLocation.lon);
+                const tithiName = panchang.tithi.name.toLowerCase();
+
+                if (tithiName.includes('ekadashi')) {
+                    classes.push('ekadashi-day');
+                    dotHtml = '<div class="cal-day-dot green"></div>';
+                } else if (tithiName.includes('purnima')) {
+                    classes.push('purnima-day');
+                    dotHtml = '<div class="cal-day-dot gold"></div>';
+                } else if (tithiName.includes('amavasya')) {
+                    classes.push('amavasya-day');
+                    dotHtml = '<div class="cal-day-dot dark"></div>';
+                }
+            } catch (err) {
+                console.warn('Calendar calc error for day', d, err);
+            }
+
             html += `<div class="${classes.join(' ')}" data-date="${dayDate.toISOString()}">
                 <span class="cal-day-num">${d}</span>
-                <!-- <div class="cal-day-dot"></div> -->
+                ${dotHtml}
             </div>`;
         }
 

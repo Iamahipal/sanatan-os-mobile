@@ -56,9 +56,6 @@
                     <button id="theme-toggle" class="icon-btn m3-state" aria-label="Toggle theme">
                         <span class="material-symbols-rounded">light_mode</span>
                     </button>
-                    <button id="settings-btn" class="icon-btn m3-state" aria-label="Settings">
-                        <span class="material-symbols-rounded">settings</span>
-                    </button>
                 </div>
             </header>
 
@@ -362,7 +359,20 @@
                         <!-- Graha Sthiti -->
                         <div class="detail-group">
                             <h3>Graha Sthiti</h3>
-                            <div class="graha-grid" id="graha-sthiti"></div>
+                            <div class="graha-grid" id="graha-sthiti">
+                                <div class="graha-item">
+                                    <div class="sun-3d"></div>
+                                    <span class="graha-name" id="g-sun-name">Sun</span>
+                                    <span class="graha-sign" id="g-sun-sign">...</span>
+                                    <span class="graha-deg" id="g-sun-deg">...</span>
+                                </div>
+                                <div class="graha-item">
+                                    <div class="moon-3d"></div>
+                                    <span class="graha-name" id="g-moon-name">Moon</span>
+                                    <span class="graha-sign" id="g-moon-sign">...</span>
+                                    <span class="graha-deg" id="g-moon-deg">...</span>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Daily Mantra -->
@@ -397,49 +407,6 @@
                         </div>
                         <div id="calendar-grid" class="calendar-grid" role="grid" aria-label="Calendar days">
                             <!-- Populated by JS -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings Modal -->
-            <div class="modal-overlay" id="settings-modal" role="dialog" aria-modal="true" aria-label="Settings">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>Settings</h3>
-                        <button class="icon-btn m3-state" id="close-settings" aria-label="Close settings">
-                            <span class="material-symbols-rounded">close</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <button class="location-auto-btn m3-state" id="detect-location" aria-label="Detect my location">
-                            <span class="material-symbols-rounded">my_location</span>
-                            Detect My Location
-                        </button>
-
-                        <div class="setting-item">
-                            <label>Select a city:</label>
-                            <div class="city-grid" id="city-grid">
-                                <!-- Cities populated dynamically by JS -->
-                            </div>
-                        </div>
-
-                        <div class="setting-item">
-                            <label for="language-select">Language</label>
-                            <select id="language-select" class="setting-input">
-                                <option value="en">English</option>
-                                <option value="hi">Hindi (हिंदी)</option>
-                            </select>
-                        </div>
-
-                        <div class="setting-item advanced">
-                            <label>Ayanamsa System</label>
-                            <select id="ayanamsa-select" class="setting-input" aria-label="Ayanamsa system">
-                                <option value="lahiri" selected>Lahiri (Chitrapaksha)</option>
-                                <option value="krishnamurti">Krishnamurti (KP)</option>
-                                <option value="raman">B.V. Raman</option>
-                                <option value="yukteshwar">Sri Yukteshwar</option>
-                            </select>
                         </div>
                     </div>
                 </div>
