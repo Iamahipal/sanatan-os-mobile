@@ -895,8 +895,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateDetails() {
-        const { tithi, nakshatra, yoga, karana, samvatsara, hinduMonth, ayana, sunTimes } = currentPanchang;
+        const { vara, tithi, nakshatra, yoga, karana, samvatsara, hinduMonth, ayana, sunTimes } = currentPanchang;
 
+        // Vara (Weekday)
+        const varaInfo = VARA_DATA[vara.index];
+        const lang = settings.language || 'en';
+        let lordName = lang === 'hi' ? varaInfo.deityHi : varaInfo.deity;
+        let dayName = lang === 'hi' ? vara.name : vara.nameEn;
+
+        setText('d-vara', dayName);
+        setText('d-vara-lord', lordName);
+
+        // Core Limbs
         setText('d-tithi', tithi.fullName);
         setText('d-tithi-time', `Till ${tithi.endTime}`);
         setText('d-nakshatra', nakshatra.name);
