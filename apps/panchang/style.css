@@ -249,7 +249,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 16px;
+    padding: 20px 16px 12px;
     background: var(--md-sys-color-surface);
     position: sticky;
     top: 0;
@@ -529,7 +529,7 @@ body {
 /* ---- Status Banner ---- */
 .status-banner {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
     padding: 16px 20px;
     border-radius: var(--md-sys-shape-corner-large);
@@ -1090,7 +1090,7 @@ body {
 .quality-row {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 24px;
 }
 
 .quality-icon {
@@ -1515,7 +1515,7 @@ body {
     font: var(--md-sys-typescale-label-small);
     color: var(--md-sys-color-on-secondary-container);
     background: var(--md-sys-color-secondary-container);
-    padding: 4px 10px;
+    padding: 3px 10px 5px;
     border-radius: var(--md-sys-shape-corner-small);
 }
 
