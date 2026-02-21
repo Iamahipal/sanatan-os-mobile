@@ -3,7 +3,7 @@
  * Handles offline caching and PWA functionality
  */
 
-const CACHE_NAME = 'panchang-v8'; // Bumped for Typography and Om Icon
+const CACHE_NAME = 'panchang-v9'; // Bumped for Info Icon layout fix
 const ASSETS = [
     './',
     './index.html',

@@ -1509,6 +1509,7 @@ body {
     background: var(--md-sys-color-surface-container);
     border-radius: var(--md-sys-shape-corner-medium);
     border: 1px solid var(--md-sys-color-surface-container-high);
+    position: relative;
 }
 
 .detail-label {
@@ -1518,12 +1519,18 @@ body {
     font: var(--md-sys-typescale-label-medium);
     color: var(--md-sys-color-on-surface-variant);
     margin-bottom: 8px;
+    padding-right: 24px;
+    /* Prevent text overlap with absolute button */
 }
 
-.detail-label .info-btn {
-    padding: 2px;
+.detail-item .info-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    margin: 0;
     width: 24px;
     height: 24px;
+    padding: 2px;
 }
 
 .detail-label .info-btn .material-symbols-rounded {
